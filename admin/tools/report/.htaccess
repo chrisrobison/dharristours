@@ -1,0 +1,8 @@
+AuthUserFile   /www/auth/admin.pimp.net.pw
+AuthGroupFile  /dev/null
+AuthName       'DNS Administration'
+AuthType       Basic
+
+<limit GET POST>
+require valid-user
+</limit>

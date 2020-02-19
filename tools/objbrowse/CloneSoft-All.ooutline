@@ -1,0 +1,597 @@
+{
+    Columns = ({Identifier = 1; OOPlainTextExportWidthKey = 72; Title = Topic; }); 
+    Expanded = YES; 
+    OutlineColumn = 1; 
+    "Root Item" = {
+        Children = (
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Embryo Production}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Surgery}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Ova IsoMat-R}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Ova IsoMat-P}"
+                ); 
+            }, 
+            {
+                Children = (
+                    {
+                        Children = (
+                            {
+                                Children = (
+                                    {
+                                        Cols = (
+                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ovature Interaction Ends}"
+                                        ); 
+                                    }
+                                ); 
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ovaries Needed?}"
+                                ); 
+                                Expanded = YES; 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Login to Ovatureresearch.com}"
+                        ); 
+                        Expanded = YES; 
+                    }, 
+                    {
+                        Children = (
+                            {
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ovaries Needed?}"
+                                ); 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Dial in 800-OVATURE}"
+                        ); 
+                        Expanded = YES; 
+                    }
+                ); 
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Wired?}"
+                ); 
+                Expanded = YES; 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Ovary Collection & Shipping}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs18 \\cf0 (Spayship)}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Gene Bank}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs82 \\cf0 Animal \\\nCare}"
+                ); 
+            }, 
+            {
+                Children = (
+                    {
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Cell Line Cryopreservation}"
+                        ); 
+                    }
+                ); 
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Tissue Received From Vet}"
+                ); 
+                Expanded = YES; 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Cell Growth Yes}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Order Supplies}"
+                ); 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs18 \\cf0 (ET, Spay)}"
+                ); 
+            }, 
+            {
+                Children = (
+                    {
+                        Children = (
+                            {
+                                Children = (
+                                    {
+                                        Children = (
+                                            {
+                                                Cols = (
+                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 CT Prep}"
+                                                ); 
+                                            }
+                                        ); 
+                                        Cols = (
+                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 MP Assessment Donor Cells}"
+                                        ); 
+                                        Expanded = YES; 
+                                    }, 
+                                    {
+                                        Cols = (
+                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                                        ); 
+                                    }
+                                ); 
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Growth}"
+                                ); 
+                                Expanded = YES; 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Cell Line Thawed from Cryopreservation}"
+                        ); 
+                        Expanded = YES; 
+                    }
+                ); 
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Cloning Order Initiated}"
+                ); 
+                Expanded = YES; 
+            }, 
+            {
+                Children = (
+                    {
+                        Children = (
+                            {
+                                Children = (
+                                    {
+                                        Cols = (
+                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 System Generates Label}"
+                                        ); 
+                                    }, 
+                                    {
+                                        Children = (
+                                            {
+                                                Children = (
+                                                    {
+                                                        Children = (
+                                                            {
+                                                                Children = (
+                                                                    {
+                                                                        Children = (
+                                                                            {
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                                                                                ); 
+                                                                            }, 
+                                                                            {
+                                                                                Children = (
+                                                                                    {
+                                                                                        Children = (
+                                                                                            {
+                                                                                                Cols = (
+                                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Continue Research, send to ET?}"
+                                                                                                ); 
+                                                                                            }
+                                                                                        ); 
+                                                                                        Cols = (
+                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Experiment Assessment}"
+                                                                                        ); 
+                                                                                        Expanded = YES; 
+                                                                                    }
+                                                                                ); 
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Group Maturation}"
+                                                                                ); 
+                                                                                Expanded = YES; 
+                                                                            }, 
+                                                                            {
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Single Maturation}"
+                                                                                ); 
+                                                                            }
+                                                                        ); 
+                                                                        Cols = (
+                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Viable Ova available}"
+                                                                        ); 
+                                                                        Expanded = YES; 
+                                                                    }
+                                                                ); 
+                                                                Cols = (
+                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ova Isolation}"
+                                                                ); 
+                                                                Expanded = YES; 
+                                                            }
+                                                        ); 
+                                                        Cols = (
+                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ovary assessment and prep and dice}"
+                                                        ); 
+                                                        Expanded = YES; 
+                                                    }, 
+                                                    {
+                                                        Children = (
+                                                            {
+                                                                Children = (
+                                                                    {
+                                                                        Children = (
+                                                                            {
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                                                                                ); 
+                                                                            }, 
+                                                                            {
+                                                                                Children = (
+                                                                                    {
+                                                                                        Children = (
+                                                                                            {
+                                                                                                Children = (
+                                                                                                    {
+                                                                                                        Children = (
+                                                                                                            {
+                                                                                                                Children = (
+                                                                                                                    {
+                                                                                                                        Children = (
+                                                                                                                            {
+                                                                                                                                Children = (
+                                                                                                                                    {
+                                                                                                                                        Children = (
+                                                                                                                                            {
+                                                                                                                                                Children = (
+                                                                                                                                                    {
+                                                                                                                                                        Children = (
+                                                                                                                                                            {
+                                                                                                                                                                Children = (
+                                                                                                                                                                    {
+                                                                                                                                                                        Cols = (
+                                                                                                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Recovery}"
+                                                                                                                                                                        ); 
+                                                                                                                                                                    }
+                                                                                                                                                                ); 
+                                                                                                                                                                Cols = (
+                                                                                                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Surgery}"
+                                                                                                                                                                ); 
+                                                                                                                                                                Expanded = YES; 
+                                                                                                                                                            }
+                                                                                                                                                        ); 
+                                                                                                                                                        Cols = (
+                                                                                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 MP Assessment Embryo Cleavage }"
+                                                                                                                                                        ); 
+                                                                                                                                                        Expanded = YES; 
+                                                                                                                                                    }
+                                                                                                                                                ); 
+                                                                                                                                                Cols = (
+                                                                                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Culture}"
+                                                                                                                                                ); 
+                                                                                                                                                Expanded = YES; 
+                                                                                                                                            }
+                                                                                                                                        ); 
+                                                                                                                                        Cols = (
+                                                                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Activation}"
+                                                                                                                                        ); 
+                                                                                                                                        Expanded = YES; 
+                                                                                                                                    }
+                                                                                                                                ); 
+                                                                                                                                Cols = (
+                                                                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 MP Assesment Couplets-Post Fusion}"
+                                                                                                                                ); 
+                                                                                                                                Expanded = YES; 
+                                                                                                                            }
+                                                                                                                        ); 
+                                                                                                                        Cols = (
+                                                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Fusion}"
+                                                                                                                        ); 
+                                                                                                                        Expanded = YES; 
+                                                                                                                    }
+                                                                                                                ); 
+                                                                                                                Cols = (
+                                                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Cell Transfer}"
+                                                                                                                ); 
+                                                                                                                Expanded = YES; 
+                                                                                                            }
+                                                                                                        ); 
+                                                                                                        Cols = (
+                                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Enucleation}"
+                                                                                                        ); 
+                                                                                                        Expanded = YES; 
+                                                                                                    }, 
+                                                                                                    {
+                                                                                                        Cols = (
+                                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl}\n{\\colortbl;\\red255\\green255\\blue255;}\n}"
+                                                                                                        ); 
+                                                                                                    }
+                                                                                                ); 
+                                                                                                Cols = (
+                                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 MP Assessment MII Ova }"
+                                                                                                ); 
+                                                                                                Expanded = YES; 
+                                                                                            }
+                                                                                        ); 
+                                                                                        Cols = (
+                                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 To Embryo Production}"
+                                                                                        ); 
+                                                                                        Expanded = YES; 
+                                                                                    }
+                                                                                ); 
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Group Maturation}"
+                                                                                ); 
+                                                                                Expanded = YES; 
+                                                                            }, 
+                                                                            {
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Single Maturation}"
+                                                                                ); 
+                                                                            }
+                                                                        ); 
+                                                                        Cols = (
+                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Viable Ova available}"
+                                                                        ); 
+                                                                        Expanded = YES; 
+                                                                    }
+                                                                ); 
+                                                                Cols = (
+                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ova Isolation}"
+                                                                ); 
+                                                                Expanded = YES; 
+                                                            }
+                                                        ); 
+                                                        Cols = (
+                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ovary assessment and prep and dice}"
+                                                        ); 
+                                                        Expanded = YES; 
+                                                    }
+                                                ); 
+                                                Cols = (
+                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Ship to System Designated Destination}"
+                                                ); 
+                                                Expanded = YES; 
+                                            }
+                                        ); 
+                                        Cols = (
+                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Manually Create Label}"
+                                        ); 
+                                        Expanded = YES; 
+                                    }
+                                ); 
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Wired?}"
+                                ); 
+                                Expanded = YES; 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Pack MoveOva Box when target number is reached}"
+                        ); 
+                        Expanded = YES; 
+                    }, 
+                    {
+                        Children = (
+                            {
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Clinic spays ovary donors}"
+                                ); 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Clinic collects data on ovary donors}"
+                        ); 
+                        Expanded = YES; 
+                    }
+                ); 
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 MoveOva Box target reached?}"
+                ); 
+                Expanded = YES; 
+            }, 
+            {
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Spay, In-Vivo or ET?}"
+                ); 
+            }, 
+            {
+                Children = (
+                    {
+                        Children = (
+                            {
+                                Children = (
+                                    {
+                                        Children = (
+                                            {
+                                                Children = (
+                                                    {
+                                                        Children = (
+                                                            {
+                                                                Cols = (
+                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Deliver Clone}"
+                                                                ); 
+                                                            }, 
+                                                            {
+                                                                Cols = (
+                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Retire to Animal Adoption}"
+                                                                ); 
+                                                            }
+                                                        ); 
+                                                        Cols = (
+                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Customer Clone Order?}"
+                                                        ); 
+                                                        Expanded = YES; 
+                                                    }
+                                                ); 
+                                                Cols = (
+                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Newborn Care through weaning}"
+                                                ); 
+                                                Expanded = YES; 
+                                            }, 
+                                            {
+                                                Children = (
+                                                    {
+                                                        Children = (
+                                                            {
+                                                                Cols = (
+                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Pregnancy Care}"
+                                                                ); 
+                                                            }
+                                                        ); 
+                                                        Cols = (
+                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Check vitals, test for Pregnancy for }"
+                                                        ); 
+                                                        Expanded = YES; 
+                                                    }, 
+                                                    {
+                                                        Children = (
+                                                            {
+                                                                Children = (
+                                                                    {
+                                                                        Children = (
+                                                                            {
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Surgery Prep}"
+                                                                                ); 
+                                                                            }
+                                                                        ); 
+                                                                        Cols = (
+                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Animal Check In}"
+                                                                        ); 
+                                                                        Expanded = YES; 
+                                                                    }, 
+                                                                    {
+                                                                        Children = (
+                                                                            {
+                                                                                Cols = (
+                                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Back to Animal Colony}"
+                                                                                ); 
+                                                                            }
+                                                                        ); 
+                                                                        Cols = (
+                                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 More than 7 days of Estrus Monitoring?}"
+                                                                        ); 
+                                                                        Expanded = YES; 
+                                                                    }
+                                                                ); 
+                                                                Cols = (
+                                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 In Estrus?}"
+                                                                ); 
+                                                                Expanded = YES; 
+                                                            }
+                                                        ); 
+                                                        Cols = (
+                                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Monitor for Estrus up to 1 week}"
+                                                        ); 
+                                                        Expanded = YES; 
+                                                    }
+                                                ); 
+                                                Cols = (
+                                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Post Surgery?}"
+                                                ); 
+                                                Expanded = YES; 
+                                            }
+                                        ); 
+                                        Cols = (
+                                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Surrogate or Newborn?}"
+                                        ); 
+                                        Expanded = YES; 
+                                    }
+                                ); 
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Animal Received}"
+                                ); 
+                                Expanded = YES; 
+                            }, 
+                            {
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Necropsy Analysis}"
+                                ); 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Live Birth?}"
+                        ); 
+                        Expanded = YES; 
+                    }, 
+                    {
+                        Children = (
+                            {
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 C-Section & Spay}"
+                                ); 
+                            }, 
+                            {
+                                Cols = (
+                                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 C-Section Only}"
+                                ); 
+                            }
+                        ); 
+                        Cols = (
+                            "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Was 2nd ET?}"
+                        ); 
+                        Expanded = YES; 
+                    }
+                ); 
+                Cols = (
+                    "{\\rtf1\\mac\\ansicpg10000\\cocoartf102\n{\\fonttbl\\f0\\fswiss\\fcharset77 Helvetica;}\n{\\colortbl;\\red255\\green255\\blue255;}\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\n\n\\f0\\fs20 \\cf0 Delivery: Natural or C-Section?}"
+                ); 
+                Expanded = YES; 
+            }
+        ); 
+        Expanded = YES; 
+    }; 
+    Version = 6; 
+}

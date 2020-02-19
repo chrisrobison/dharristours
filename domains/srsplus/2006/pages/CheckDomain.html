@@ -1,0 +1,108 @@
+<html>
+   <head>
+      <title>Domain Name Lookup</title>
+      <script language="JavaScript">
+         var sync = new Array();
+         var NIC = new Array();
+         #NICInfo#
+
+         function doTransfer() {
+            parent.frames["personal"].document.forms[0].NICSync.checked = false;
+            for (i in NIC) {
+               eval("parent.frames['personal'].document.forms[0]."+i+".value = '"+NIC[i]+"';");
+            }
+            return true;
+         }
+         
+         function doSubmit() {
+            if (document.forms[0].DomainName.value=='') {
+               alert("No domain name specified.\n\nPlease enter a valid domain name to check.");
+               return false;
+            }
+            var re = /[^a-z0-9\-]/i
+            var domain = document.forms[0].DomainName.value;
+            
+            BAD = re.test(domain);
+            if (BAD == true) {
+               alert("Invalid characters in domain name.\nValid characters are A-Z, 0-9, and '-'.\n\nPlease enter a valid domain name and try again.");
+               return false;
+            } else {   
+               setTimeout("document.forms[0].submit()", 50);
+               return true;
+            }
+         }
+         function doModify() {
+            document.forms[0].modify.value = "1";
+            return true;
+         }
+      </script>
+      <style type="text/css">
+         BODY {
+            margin: 0px;
+            padding: 0px;
+            font-family: Arial, Helvetica, SansSerif;
+            font-size: 12px;
+            color: #000000;
+         }
+         all.MAIN {
+            font-size: 11px;
+            font-family: Arial,Helvetica,SansSerif;
+            color: #000000;
+         }
+         all.SMALL {
+            font-size: 9px;
+            font-family: Arial,Helvetica,SansSerif;
+            color: #000000;
+         }
+         all.WIDGET {
+            background-color: #dddddd;
+            font-size: 12px;
+            font-family: Arial,Helvetica,SansSerif;
+            color: #000000;
+         }
+         .TBLFIELD {
+            text-align: right;
+            font-weight: bold;
+         }
+         .TBLVAL {
+            text-align: left;
+         }
+         .section {
+            border: 0px;
+
+         }
+      </style>      
+   </head>
+   <body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#000099" alink="#ff0066" onload="#alert#">
+      <form method="POST" action="ckdomain.cgi" name="domain" target='results'>
+         <input type="HIDDEN" name="REG_SOURCE" value="#REG_SOURCE#">
+         <input type="HIDDEN" name="Page" value="pages/domain.html">
+         <input type="HIDDEN" name="Section" value="domain">
+         <input type="HIDDEN" name="Results" value="#Results#">
+         <input type="HIDDEN" name="AcctID" value="#AcctID#">
+         <input type="HIDDEN" name="flag" value="">
+         <input type="HIDDEN" name="modify" value="">
+         
+            <table border=0 cellpadding=0 cellspacing=0 width=100%>
+               <tr>
+                  <td colspan=5><font size=3 face="Arial,Helvetica,SansSerif"><b>Domain Availability</b></span></td>
+               </tr>
+               <tr>
+                  <td colspan=10 bgcolor="#000000"><img src="img/1.gif" height='4' width='100%'></td>
+               </tr>
+               <tr>
+                  <td><img name="Signal" src="#signal#" alt="#Result#" height='35' width='65' border='0' align='left' vspace='0' hspace='0' class='MAIN'></td>
+                  <td class='TBLFIELD'><span class='TBLFIELD'>Domain Name: </span><span class='MAIN'><b>www.</span></td>
+                  <td colspan='2' class='TBLVAL'>
+                     <input type=TEXT name="DomainName" value="#DomainName#" size=26 onChange="doModify();" maxlength='26' class='MAIN'>
+                     <select name='tld' MULTI><option>.com</option><option>.net</option><option>.org</option><option>.biz</option><option>.cc</option><option>.tv</option><option>.name</option><option>.info</option><option>.com.mx</option><option>.at</option><option>.be</option><option>.bz</option><option>.de</option><option>.gs</option><option>.ms</option><option>.tc</option><option>.us</option><option>.vg</option><option>.ws</option><option>.net.au</option><option>.com.au</option><option>.co.nz</option><option>.co.uk</option><option>.me.uk</option><option>.org.uk</option></select>
+                 </td>
+                  <td align='right'><span class='MAIN'><b>Type: </b><select name="DomainSetup" onChange="doModify();"><option value="NEW"#DomainSetup_NEW#>New Domain Registration</option><option value="TRANSFER"#DomainSetup_TRANSFER#>Transfer Existing Domain</option><option value="REDO"#DomainSetup_REDO#>Setup locally with no registration</option></select></span></td>
+                  <td align='right' colspan='3'><span class='SMALL'><input type="BUTTON" value="Check Availability" onClick="doSubmit();"></span></td>
+               </tr>
+            </table>
+      </form>
+      <iframe width='100%' height='100%' id='results' name='results' border='2' class='section'>
+      </iframe>
+   </body>
+</html>

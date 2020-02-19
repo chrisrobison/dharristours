@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+
+# create the object
+$srs_client = new DotSRS_Client;
+
+$cid = shift @ARGV;
+print "Lookup ContactID: $cid\n";
+
+$ref = $srs_client->get_contact_info( { 'CONTACTID' => $cid } );
+
+use Data::Dumper;
+print Dumper($ref);
+
+foreach $key (keys %{ $ref }) {
+   print "$key : ", $ref->{$key},"\n";
+}
+

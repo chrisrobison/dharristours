@@ -1,0 +1,14 @@
+TODO
+Makefile$
+Makefile.old$
+blib
+pm_to_blib
+.swp$
+~$
+.tmp$
+.bak$
+.git/
+.gitignore$
+.shipit$
+test/random_seed$
+test/trustdb.gpg$

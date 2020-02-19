@@ -1,0 +1,22 @@
+
+my $categories = $data->{'dbh'}->selectcol_arrayref("select distinct(Category) from Product where Upsell!=0 order by ProductID");
+
+foreach my $cat (@{$categories}) {
+   $dat{'Services'} .= "<tr><td colspan='3' class='productHead'><span class='productHeading'>$cat Hosting</span></td></tr>\n";
+
+   my $hth = $data->{'dbh'}->prepare("select * from Product where Category='$cat' and Active=1 order by ProductID");
+   $hth->execute();
+   
+   $type = ($hth->rows > 1) ? 'radio' : 'checkbox';
+   while (my $product = $hth->fetchrow_hashref) {
+      $dat{'Services'} .= "<tr><td class='productItem'><span class='productItem'><input type='$type' name='${cat}Hosting' value='$product->{'ProductID'}' class='productCheck'>$product->{'Product'}</span>";
+#      $dat{'Services'} .= "<td class='productDesc'><span class='productDesc'>$product->{'Description'}</span></td>";
+      $dat{'Services'} .= "<span class='productDesc' style='padding-left:5px;' onmouseover=\"showTip(this,".$dbh->quote($product->{'Details'}).");\" onmouseout='hideTip();'><img src=\"/img/helptip.png\" height='10' width='15'></span></td>";
+      $dat{'Services'} .= "<td class='productPrice'><span class='productPrice'>\$$product->{'Price'} </span></td>";
+      $dat{'Services'} .= "<td class='productDesc'><span class='productDesc'> / $product->{'TermMeasure'}</span></td></tr>\n";
+   }
+}
+
+
+1;
+

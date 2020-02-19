@@ -1,0 +1,40 @@
+
+if ($in{'RegType'} =~ /hosting/i) {
+   $in{'WizardID'} = $wizard->{'NextID'};
+   $in{'Choice'} = 'next';
+   $wizard = $data->get_record('Wizard', $in{'WizardID'}, { 'key' => 'WizardID' } );
+} elsif ($in{'RegType'} =~ /transfer/i) {
+   $in{'WizardID'} = $wizard->{'NextID'};
+   $in{'Choice'} = 'next';
+   $wizard = $data->get_record('Wizard', $in{'WizardID'}, { 'key' => 'WizardID' } );
+} else {
+   my $results = checkDomain($in{'Domain'}, $in{'TLD'});
+
+   if (($results->{'DOMAIN STATUS'} =~ /UNAVAILABLE/) || (!$results->{'DOMAIN STATUS'})) {
+      $in{'status'} = 'Error: '.$in{'Domain'}.'.'.$in{'TLD'}.' is unavailable';
+   } 
+}
+$dbh->do("insert into Signup (SignupID, Domain, RegType, TLD) values (null, '$in{'Domain'}', '$in{'RegType'}', '$in{'TLD'}')");
+$in{'SignupID'} = $dat{'SignupID'} = $dbh->{mysql_insertid};
+
+sub checkDomain {
+   my $domain = shift @_;
+   my $tld = shift @_;
+
+   my $dbr = $dbh->selectrow_hashref("select * from Cache where Domain='$domain' and TLD='$tld'");
+   if ($dbr->{'Domain'} eq $domain) {
+      return $dbr;
+   } else {
+      use DotSRS_Client;
+      
+      ($domain, $tld) = split(/\./, $domain) if ($domain =~ /\./);
+      $tld =~ s/^\.//;
+
+      my $srs_client = new DotSRS_Client;
+      my $ref = $srs_client->domain_info($domain, $tld);
+      
+      return $ref;
+   }
+}
+
+

@@ -1,0 +1,71 @@
+BODY {font-family: Optima,"Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;font-size: 12px;margin: 0px;padding: 0px;background-color: #ffffff;}
+A#titlebarAnchor:link {text-decoration: none;color: #909090;}
+A#titlebarAnchor:visited {text-decoration: none;color: #909090;}
+A#titlebarAnchor:hover {text-decoration: none;color: #909090;}
+#bug_div:hover {background-color: #ffffcc;outline: 1px dotted #0000ff;-moz-outline: 1px dotted #0000ff;}
+#map:hover {background-color: #ffff00;-moz-outline: 1px dotted #0000ff;outline: 1px dotted #0000ff;}
+.module:hover {font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;background-color: rgb(255,255,255);background-image: url("/img/treeBranchClosedSelected.gif");background-repeat: no-repeat;background-position: 6px 5px; }
+.proc:hover {background-color: #ffffff;}
+.nodeOpen:hover {background-color: #ffffcc;}
+.action:hover {background-color: #ffffff;}
+.fonteg {font-family: Verdana;font-size: 2em;}
+H1 {font-size: 16px;font-family: Optima,'Gill Sans','Gill Sans MT',Verdana,Arial,Helvetica,sans-serif;font-weight: normal;}
+INPUT {font-family: Optima,'Gill Sans','Gill Sans MT',Verdana,Arial,Helvetica,sans-serif;border:1px inset #a0a0a0;font-size:12px;}
+INPUT:focus {background-color: #ffffd0;}
+#help:hover {background-color: #ffff00;outline: 1px dotted #0000ff;-moz-outline: 1px dotted #ffff00;}
+.abtn:hover {background-color: #ffffcc;color: #0000ff;text-decoration: underline;}
+SELECT {font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,sans-serif;}
+.cvs0:hover {background-color: #ffffdd;cursor: default;}
+.cvs1:hover {background-color: #ffffdd;cursor: default;}
+H2 {font-family: Optima,'Gill Sans','Gill Sans MT',Verdana,Arial,Helvetica,sans-serif;font-size: 14px;padding: 1em 0px 4px 4px;margin: 0px;background-color: white;font-weight: 300;}
+TEXTAREA.boxValue {width: 80%;}
+TABLE.boxTable > TR {}
+DIV.heading {font-size: 16px;color: black;font-weight: bold;padding: 0px;margin: 0px;background-color: #e0e0e0;}
+HR.sep {height:1px;border-top:1px solid #a0a0a0;margin: 0px;}
+H2.heading {color: black;font-family:'Optima', 'Gill Sans','Gill Sans MT',Verdana,Tahoma,Arial,Helvetica,sans-serif;}
+.viewChart:hover {text-decoration: underline;color: #000099;background-color: #ffff99;}
+.boxTable {position: relative;width: 100%;}
+TABLE.asset {position: absolute;margin-left: auto;margin-right: auto;border: 1px solid #909090;}
+TH.asset {color: #ffffff;background-color: #002288;font-weight: bold;font-size: 1.2em;}
+TD.asset {border-right: 1px solid #a0a0a0;text-align: left;}
+.row0 { border-bottom: 1px solid #b0b0b0;background-color: #f0f0f0; }
+.row1 { border-bottom: 1px solid #c0c0c0;background-color: #ffffff; }
+TD.thumb {text-align: center;vertical-align: middle;}
+IMG.thumb {text-align: center;position: relative;margin: auto;}
+#assets {position: absolute;top: 26px;left: 0px;bottom: 200px;right: 0px;border-top: 1px solid #000000;overflow: scroll;overflow-y: scroll;overflow-x: hidden;overflow: -moz-scrollbars-vertical;font-family: Optima, "Gill Sans", "Gill Sans MT", Verdana, Helvetica, sans-serif;font-size: 11px;}
+.size {text-align: right;}
+#size {text-align: right;}
+TD.thumb {text-align: center;vertical-align: middle;}
+IMG.thumb {text-align: center;position: relative;margin: auto;}
+.thumbWrap {position: relative;height: 32px;width: 32px;text-align: center;margin: auto;}
+.current {background-color: #ffffcc;}
+#timeclock {position: relative;height: 350px;border-bottom: 1px solid #000000;}
+.panelRight {float: right;width: 150px;position: relative;border-left: 1px solid #a0a0a0;background-color: #f0f0f0;height: 350px;padding-top: 1em;}
+.panelLeft {float: left;position: relative;width: 150px;height: 350px;border-right: 1px solid #a0a0a0;background-color: #f0f0f0;text-align: center;padding-top: 1em;}
+.clockButtons {position: relative;top: 20px;z-index: 9999;}
+.panelCenter {position: relative;padding-top: 2em;}
+#timesheet {}
+.ts_table {position: relative;border: 1px solid #000000;background-color:#ffffff;}
+.ts_head {background-color: #000000;color: #f0f0f0;}
+.ts_cell {font-size:12px;position:relative;width:4em;empty-cells:show;border-right: 1px solid #c0c0c0;padding: 2px 1em 2px 1em;white-space: nowrap;}
+.ts_label {padding-right: 3px;}
+#clockDiv {position: relative;float: left;width: 250px;height: 323px;top: 30px;left: 30px;}
+#clockWrap {position: absolute;top: -8px;height: 160px;width: 185px;border: 2px outset #a0a0a0;background-color: #f0f0f0;}
+#clockDate {position: absolute;float: left;top: -10px;left: 10px;font-size: 32px;font-weight: bold;font-family: Helvetica,Arial,sans-serif;margin: .5em 0px .5em 0px;}
+#workedLabel {position: absolute;top: 90px;left: 10px;font-family: Helvetica,Arial,sans-serif;font-size: 20px;font-weight: normal;white-space: nowrap;}
+#clockLabel {white-space: nowrap;position: absolute;top: 50px;left: 10px;font-family: Helvetica,Arial,sans-serif;font-size: 20px;font-weight: normal;}
+.workedTime {position: absolute;top: 75px;left: 170px;font-family: Helvetica,Arial,sans-serif;font-size: 26px;font-weight: bold;margin: .5em 0px .5em 0px;}
+.clockTime {position: absolute;top: 35px;left: 170px;font-family: Helvetica,Arial,sans-serif;font-size: 26px;font-weight: bold;margin: .5em 0px .5em 0px;}
+#workedTime1 {display: none;}
+#workedTime0 {display: none;}
+#timeWrap {top: 1em;position: relative;float: left;}
+.btnDisabled {-moz-opacity: .4;opacity: .4;filter: progid: DXImageTransform.Microsoft.Alpha(opacity=40);cursor: default;}
+.btnEnabled {}
+.ts_row11 {background-color: #f0f0f0;color: #000000;}
+.ts_row010 {background-color: #f3f3f3;color: #000000;}
+.ts_row111 {background-color: #e8e8e8;color: #000000;}
+.instructions {font-size: 12px;text-align: left;margin: 1em;}
+HR {height: 1px;border: 0px;border-bottom: 1px solid #a0a0a0;}
+.hoursLabel {text-align: right;position: relative;font-weight: bold;left: 4px;width: 5.5em;float: left;white-space: nowrap;padding-right: 4px;margin-right: 4px;}
+.myhours {font-size: 1.1em;text-align: left;white-space: nowrap;}
+

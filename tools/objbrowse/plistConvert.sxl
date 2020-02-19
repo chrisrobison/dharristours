@@ -1,0 +1,78 @@
+
+<?xml version='1.0'?>
+<xsl:stylesheet xmlns:xsl  ="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output method="xml" indent="yes"/>
+
+<xsl:template match="/plist">
+  <propertylist>
+   <xsl:apply-templates/>
+  </propertylist>
+</xsl:template>
+
+<xsl:template match="dict">
+  <dict>
+   <xsl:for-each select="key">
+     <xsl:variable name='n1' select='translate(., " ", "_")'/>
+     <xsl:variable name='pName'>
+       <xsl:choose>
+           <!-- Need to do this because number tags like <0> are not valid?! -->
+         <xsl:when test='contains("0123456789", substring($n1, 1, 1))'>
+           <xsl:value-of select='concat("number_", $n1)'/>
+         </xsl:when>
+         <xsl:otherwise>
+           <xsl:value-of select='$n1'/>
+         </xsl:otherwise>
+       </xsl:choose>
+     </xsl:variable>
+
+     <xsl:element name="{$pName}">
+       <xsl:for-each select='following-sibling::*[1]'>
+         <xsl:choose>
+           <xsl:when test='name() = "dict"'>
+             <xsl:apply-templates select='.'/>
+           </xsl:when>
+
+           <xsl:when test='name() = "array"'>
+             <xsl:attribute name="array">collection</xsl:attribute>
+             <xsl:apply-templates/>
+           </xsl:when>
+
+           <xsl:when test='name() = "string"'>
+             <xsl:value-of select='.'/>
+           </xsl:when>
+
+           <xsl:when test='name() = "integer"'>
+<!--              <xsl:attribute name="type">integer</xsl:attribute> -->
+             <xsl:value-of select='.'/>
+           </xsl:when>
+
+           <xsl:when test='name() = "date"'>
+<!--              <xsl:attribute name="type">date</xsl:attribute> -->
+             <xsl:value-of select='.'/>
+           </xsl:when>
+
+           <xsl:when test='name() = "true"'>True</xsl:when>
+           <xsl:when test='name() = "false"'>False</xsl:when>
+           <xsl:when test='name() = "real"'>
+             <xsl:value-of select='.'/>
+           </xsl:when>
+           <xsl:when test='name() = "data"'>
+             <xsl:value-of select='.'/>
+           </xsl:when>
+          
+           <xsl:otherwise>
+             <xsl:message>pListConverter: <xsl:value-of select='name()'/> not implemented!
+             </xsl:message>
+           </xsl:otherwise>
+         </xsl:choose>
+       </xsl:for-each>
+     </xsl:element>
+   </xsl:for-each>
+  </dict>
+</xsl:template>
+
+<!-- don't pass text thru -->
+<xsl:template match="text()|@*">
+</xsl:template>
+
+</xsl:stylesheet>

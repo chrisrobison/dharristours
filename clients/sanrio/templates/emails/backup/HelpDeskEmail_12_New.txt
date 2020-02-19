@@ -1,0 +1,36 @@
+Date: #RFCDate#
+To: Sanrio HelpDesk Team <ITDept@sanrio.com>
+Reply-to: Sanrio HelpDesk Support <ITDept@sanrio.com>
+Cc: #CreatedBy#
+Bcc: sanrio@simplesoftwaresf.com
+From: Help Desk System <ITDept@sanrio.com>
+Subject: [HelpDesk] New '#RequestType#' Requestor: '#CreatedBy#'
+
+A new helpdesk request titled '#HelpDesk#' has been submitted.  
+You may view or update this helpdesk request online at:
+
+#URL#
+
+Helpdesk may create a new 'Purchase Order' at:
+http://#Host#/apps/?pid=22
+
+To update this ticket:
+http://#Host#/apps/?pid=15&rsc=#rsc#&id=#id#
+
+Once created, relate the purchase order to the following:
+    Help Desk ID:  #HelpDeskID#
+       
+        Category:  #Category#
+     Description:  #Description#
+        Severity:  #Severity#
+         
+         Created:  #Created#
+      Created By:  #CreatedBy#
+     
+           Notes:  #Notes#
+
+
+Thank you,
+
+   Sanrio Help Desk System
+

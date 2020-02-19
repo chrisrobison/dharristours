@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use Data::Dumper;
+
+my $srs = new DotSRS_Client;
+
+while (my $domain = shift @ARGV) {
+	 
+	my $results = $srs->get_nameserver_info('1', {'DNS SERVER NAME' => $domain});
+
+	print Dumper($results);
+}
+

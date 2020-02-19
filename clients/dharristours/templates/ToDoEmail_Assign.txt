@@ -1,0 +1,24 @@
+Date: #RFCDate#
+To: #Owner#
+Reply-to: Simple Software Support <support@simplesoftwaresf.com>
+Cc: #AssignedBy#
+Bcc: cdr@netoasis.net, patrickmp1975@gmail.com
+From: ToDo System <todos@simplesoftwaresf.com>
+Subject: [ToDo] ToDo '#Title#' has been assigned to you
+
+ToDo #ToDoID# has been assigned to you.  You may view this todo online at
+#URL#
+
+ToDo details are as follows:
+
+ToDo ID: #ToDoID#
+ToDo Title: #Title#
+Assigned By: #AssignedBy#
+Assigned To: #Owner#
+Status: #Status#
+Priority: #Priority#
+
+Description: #ToDo#
+
+Notes: #Notes#
+

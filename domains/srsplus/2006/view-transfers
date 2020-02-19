@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+
+open(STDERR, ">/tmp/view-transfers.srs");
+
+my $srs = new DotSRS_Client();
+
+# INBOUND or OUTBOUND
+my $result = $srs->view_pending_transfers(2, 'INBOUND');
+
+my @keys = sort(keys(%{$result}));
+my $cnt = int($#keys / 3);
+
+print "Pending INBOUND Transfers: [$cnt]\n";
+
+if ($cnt > 0) {
+	foreach my $c (1..$cnt) {
+		print "\t".$result->{"DOMAIN $c"}.".".$result->{"TLD $c"}.': '.localtime($result->{"DATE LOGGED $c"})."\n";
+	}
+} else {
+	print "\tThere are NO pending INBOUND domain transfers.\n";
+}
+
+my $result = $srs->view_pending_transfers(2, 'OUTBOUND');
+
+my @keys = sort(keys(%{$result}));
+my $cnt = int($#keys / 3);
+
+print "\nPending OUTBOUND Transfers: [$cnt]\n";
+
+if ($cnt > 0) {
+	foreach my $c (1..$cnt) {
+		print "\t".$result->{"DOMAIN $c"}.".".$result->{"TLD $c"}.': '.localtime($result->{"DATE LOGGED $c"})."\n";
+	}
+} else {
+	print "\tThere are NO pending OUTBOUND domain transfers.\n";
+}
+

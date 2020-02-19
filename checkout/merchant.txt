@@ -1,0 +1,11 @@
+Production
+===========================================
+Google Merchant ID:  353124695651838
+Google Merchant Key: E0zoomAR89jkXxWHJIzT0A
+
+Sandbox
+===========================================
+Google Merchant ID:  736721936226616
+Google Merchant Key: T9DQADKHuBYJF66qcqowKA
+
+

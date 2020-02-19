@@ -1,0 +1,471 @@
+#!/usr/bin/perl
+#
+# importdb [-q] [-h HOST] [-d DB] [-u USER] [-p PASSWORD] [-s SEPARATOR] file1 file2 ...
+#
+$| = 1;
+showHelp() if ((!$ARGV[0]) || ($ARGV[0] =~ /\-\-?help/gi));
+
+use DBI;
+
+$in = readArgs(\@ARGV);
+$in = (%{$in}, readConf($in));
+
+# Setup database connection info
+my %dbconf = (	'user'    => $in->{'u'},
+					'passwd'  => $in->{'p'},
+					'host'    => $in->{'h'},
+					'dbdrv'   => 'mysql',
+					'db'      => 'mysql');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+if (!$quiet) {
+   print "Using the following settings for import:\n";
+   foreach $i (keys %in) {
+      print "\t$i: ".$in{$i}."\n";
+   }
+}
+print "="x40,"\n";
+
+while ($txtdb = shift @{$in{'files'}}) {
+   @list = ();
+   print "Opening $txtdb for importing..." if (!$quiet);
+   open(TXT, $txtdb) or die "Error opening $txtdb for reading: $!";
+      while ($t = <TXT>) {
+         next if ($t !~ /\w/);
+	 push(@txtrow, $t);
+      }	 
+   close TXT;
+   
+   print "Done.\n$#txtrow records read.  Analysing record structure...";
+   
+   $fields = shift @txtrow;
+   
+   chop $fields;
+
+   # First try to find the separator
+   if (!$in{'s'}) {
+      @del = ('\|', '\t', '\:', '\,', '\t'); 
+      foreach $d (@del) {
+         @tmpfields = split(/$d/, $fields);
+         if ($#tmpfields > $#fields) {
+            @fields = @tmpfields;
+            $delimiter = $d;
+         }
+      }
+      if ($#fields < 2) {
+	       $delimiter = '';
+			 while (!$delimiter) {
+            print "Unable to find delimiter. Please enter the delimiter to use: ";
+				 chomp($delimiter = <STDIN>);
+				 if ($delimiter =~ /tab/i) {
+					 $delimiter = '\t';
+					 $showdel = "<TAB>";
+				 } elsif ($delimiter =~ /space/) {
+					 $delimiter = ' ';
+					 $showdel = "<SPACE>";
+				 } else {
+					 $showdel = $delimiter;
+				 }
+			 }   
+         @fields = split(/$delimiter/, $fields);
+      } else {
+         $showdel = $delimiter;
+      }
+      $showdel =~ s/\\//g;
+   } else {
+      $delimiter = $in{'s'};
+      $showdel = $delimiter;
+      @fields = split(/$in{'s'}/, $fields);
+   }
+	@fields = split(/$delimiter/, $fields);
+   print "Done.\n\nFound the following fields using $showdel as the delimiter:\n\t" if (!$quiet);
+   print join("\n\t", @fields)."\n\n" if (!$quiet);
+   print "Modifying field names for SQL..." if (!$quiet);
+
+   foreach $f (@fields) { 
+      $f =~ s/\-/_/g;
+      $f =~ s/\W//g;
+      push(@newfields, $f);
+      $size{$f} = 1; 
+   }
+   print "Done.\n\nFinal field names:\n\t" if (!$quiet);
+   print join("\n\t", @newfields)."\n\n" if (!$quiet);
+
+   @fields = @newfields;
+   %db = ();
+   $in{'l'} = $#txtrow if (!$in{'l'});
+   @s = ('\|', '/', '-', '\\');
+   $s = 0;
+   $bs = "\cH";
+
+   print "Analysing table structure. Please be patient as this may take awhile...\n" if (!$quiet);
+   
+   $progcnt = (int($#txtrow) > 10000) ? int($#txtrow / 100) : int($#txtrow);
+
+   foreach $f (0..$#fields) {
+      $unique{$fields[$f]} = 1;
+      if (!$keyfield) {
+         $keyfield = $f if (($fields[$f] eq "oid") || ($fields[$f] =~ /^id$/i));
+      }
+   }
+
+   foreach $r (0..($in{'l'})) {
+      $row = $txtrow[$r];
+      ++$progress;
+      
+      chop $row;
+      next if (!$row);
+      
+		my @vals = split(/$delimiter/, $row);
+      my $len = 0; 
+		my $fn;
+
+      foreach $f (0..$#fields) {
+			print "$fields[$f]: $vals[$f]\n" if ($in{'v'});
+			$fn = $fields[$f];
+
+         $db{$r}{$fn} = $vals[$f];
+			$current{$fn} = $vals[$f];
+			
+			# Increase field size if value is larger than stored value
+			$len = length $vals[$f];	
+			$size{$fn} = ( $size{$fn} < length $vals[$f] ) ? $len : $size{$fn};
+			
+			if ($vals[$f] ) {
+				
+				# Grab random sampling of data for later reference
+				$eg{$fn} = $vals[$f] if (!$eg{$fn} || int(rand(2)));
+			
+				# Perform data sampling for type analysis if we don't have a type for this field
+				if ( !$type{$fn}) {
+					
+					# Append value to our data sampling for this field
+					$sample{$fn} .= $vals[$f];
+				
+					# If sample length exceeds 1Mb
+					if ( ( length $sample{$fn} > 1048576 ) || ( $r == $in{'l'} ) ) {
+						@split = split(/\./, $vals[$f]);
+
+						# Analyze sampled data for numeric types first
+						if ( $vals[$f] =~ /[^0-9\.]/ ) {
+                     if ((length($vals[$f])>150) || ($fn=~/Notes/i)) {
+                        $type{$fn} = "TEXT";
+                        print "Assigning type $type{$fn} for $fn\n" if ( $in{'v'} );	
+                     } else {
+                        $type{$fn} = "VARCHAR";
+                        print "Assigning type $type{$fn} for $fn\n" if ( $in{'v'} );	
+					      }	
+						} elsif ($#split == 1) {
+							
+							if ( $vals[$f] !~ /[^0-9\.]/ ) {
+
+								my ($whole, $frac) = split( /\./, $vals[$f], 2 );
+                        # if (length($frac) > length($whole)) { $whole = $frac; }
+								$type{$fn} = "DECIMAL(" . ( length($vals[$f]) + 1 ) . "," . ( length($frac) ) . ")";
+								print "Assigning type $type{$fn} for $fn\n" if ( $in{'v'} );
+
+							}
+						} else {
+
+							if ( $vals[$f] !~ /[^0-9]/) {
+                        $l = length($eg{$fn} + 2);
+                        $l = 100 if ($l > 100);
+								$type{$fn} = "INT(".(length($eg{$fn} + 2)).")";
+								print "Assigning type $type{$fn} for $fn\n" if ( $in{'v'} );
+							} elsif (length($vals[$f]) > 150) {
+                        $type{$fn} = 'TEXT';
+                        print "Assigning type $type{$fn} for $fn\n" if ($in{'v'});
+                     } else {
+                        $type{$fn} = "VARCHAR";
+                        print "Assigning type $type{$fn} for $fn\n" if ( $in{'v'} );
+                     }
+						}
+                  if ($vals[$f] =~ /true|false/i) {
+                     $type{$fn} = "BOOL";
+                     print "Assigning type $type{$fn} for $fn\n" if ($in{'v'});
+                  }
+						$isDate = checkDate($eg{$fn});
+						$type{$fn} = $isDate if ($isDate);
+						$type{$fn} = 'VARCHAR' if (!$type{$fn});
+					}
+
+					$unique{$fn} = "" if ($vals[$f] eq $test{$fn});
+					$test{$fn} = $vals[$f] if ((!$test{$fn}) || ($test{$fn}{$vals[$f]}));
+					$test{$fn}{$vals[$f]} = 1;
+				}
+			}
+      }
+		print "_"x78,"\n" if ($in{'v'});
+   }
+   print "Done.\nProcessed $#txtrow records.\n\n";
+   
+	$size{'ID'} = $size{'oid'} = 20;
+		
+   my ($newdb, $ext) = split(/\./, $txtdb);
+	my @mktbl = ();
+
+   foreach my $i (@fields) {
+      $n = $size{$i};
+      $size{$i} = $n + 49 - ($n - 1) % 50;
+      # $size{$i} = ($size{$i} + 1) if ($size{$i} < 240);
+      if (($i =~ /ID$/i) && ($sample{$i} !~ /[a-zA-Z_]/) && (!$prikey)) {
+         push(@mktbl, "$i INT($size{$i}) NOT NULL AUTO_INCREMENT PRIMARY KEY");
+			$prikey = $i;
+      } elsif (($i =~ /ID$/i) && ($sample{$i} =~ /\d/) && ($prikey)) {
+         $size{$i} = 100 if ($size{$i} > 100);
+         push(@mktbl, "$i INT($size{$i}) DEFAULT '0' NOT NULL");
+      } elsif (($i =~ /ID$/i) && (!$prikey)) {
+         push(@mktbl, "$i CHAR($size{$i}) DEFAULT '' NOT NULL PRIMARY KEY");
+			$prikey = $i;
+      } elsif ( $type{$i} ) {
+			if ($type{$i} =~ /CHAR/i) {
+				if ($size{$i} > 150) {
+					push(@mktbl, $i.' TEXT');
+				} else {
+					push(@mktbl, $i.' '.$type{$i}.'('.$size{$i}.") NOT NULL DEFAULT ''");
+				}
+			} else {
+				push(@mktbl, $i.' '.$type{$i}.' NOT NULL');
+			}
+		} else {
+         if ($size{$i} > 150) {
+            push(@mktbl, $i.' TEXT');
+         } else {
+	         push(@mktbl, $i.' CHAR('.$size{$i}.') NOT NULL');
+         }
+      }
+   }
+
+   if (!$prikey) {
+      print "Uh-oh!  I couldn't figure out what the primary key is. Please specify a field \nname for your key or enter nothing to have an autoincrementing primary key \ncreated for you: [".join("\,", @fields)."]: ";
+      chomp($prikey = <STDIN>);
+      if ($prikey !~ /\w/) {
+         $mktbl .= "${newdb}ID INT(8) NOT NULL AUTO_INCREMENT,\nPRIMARY KEY(${newdb}ID),\n";
+         unshift(@mktbl, "${newdb}ID INT(8) NOT NULL AUTO_INCREMENT","PRIMARY KEY(${newdb}ID)");
+         $prikey = $newdb."ID";
+      }
+   }	 
+
+   $mktbl = "CREATE TABLE $newdb (\n\t".join(",\n\t", @mktbl).")\n";
+   
+   open(SQL, "> $newdb.tbl");
+      print SQL $mktbl."\n";
+   close SQL;
+   
+   print "Table definition:\n";
+   print "_" x 70,"\n\n";
+   print $mktbl."\n";
+   print "_" x 70,"\n\n";
+   
+   print "host: $in{'h'}\nDB: $in{'d'}\nUser: $in{'u'}\nPasswd: $in{'p'}\n\n";
+	$dbh->do("use $in{'d'}");
+	@mytables = @{$dbh->selectcol_arrayref("show tables")};
+
+   foreach $ck (@mytables) {
+      if ($ck eq $newdb) {
+         $exist = 1;
+      }
+   }
+   
+   if ($exist) {
+      print "Whoa there!  A table called $newdb already exists in the $in{'d'} database.\n";
+      while (!$ans) {
+         print "Would you like me to [r]emove the $newdb table, [d]elete all records, or [N]othing? [Ndr] ";
+	 
+         chomp($ans = <STDIN>);
+         if (($ans eq "") || ($ans =~ /n/i)) {
+				print "\n\nWise choice.  Rename your flat text file and try again.\n\n";
+				exit;
+			} elsif ($ans =~ /r/i) {
+				$dbh->do("drop table $newdb");
+         } elsif ($ans =~ /d/i) {
+				$dbh->do("delete from $newdb");
+				print "All existing records removed from $newdb.  Existing table definition kept.\n";
+			} else {
+				$ans = "";
+			}   
+      }
+   }   
+   print "\n\nCreating table..." if (!$quiet);
+	$dbh->do($mktbl);
+   sleep(3);
+
+   print "Done.\nAdding records...\n" if (!$quiet);
+   $progress = 0;
+   $bs = "\cH";
+   @prop = ('|','/','-','\\');  $prop = 0;
+   $cnt = 0;
+   foreach $list (keys %db) {
+      print $prop[$prop];
+      my @vals = ();
+      foreach $fld (@fields) {
+         if ($db{$list}{$fld}) {
+            if ($type{$fld} eq "BOOL") {
+               push(@vals, $db{$list}{$fld});
+            } else {
+               push(@vals, $dbh->quote($db{$list}{$fld}));
+            }
+         } else {
+            push(@vals, "''");
+         }
+      }
+      $out = "INSERT INTO $newdb (".join("\, ", @fields).") VALUES (".join("\, ", @vals).")";
+      print $out."\n","_"x78,"\n\n" if ($in{'v'});
+      $dbh->do($out);
+      ++$prop; $prop = 0 if ($prop > $#prop);
+      print $bs;
+      ++$cnt;
+   }
+}
+print "Done.\n\nCreated table $newdb in database $in{'d'} on $in{'h'} with the following SQL:\n\t" if (!$quiet);
+print $mktbl if (!$quiet);
+print "\n and added $cnt records.\n\n" if (!$quiet);
+
+
+sub showHelp {
+print <<EOT;
+importdb [-q] [--host|-h] HOST [--db|-d] DATABASE [--user|-u] USER [--passwd|-p] PASSWD [--sep|-s] SEPARATOR file1... 
+Reads passed ASCII text delimited data files into specified Mysql database
+on HOST, accessing the DB as USER / PASSWD.  importdb will analyze your text
+file and generate a table with the appropriate fields sizes and names (which
+must be provided on the first line of the text file).  Records are delimited
+by a \\n and fields can be separated with either a pipe ('|'), a comma (','),
+a colon (':'), or a tab ('\\t').  The table will be named whatever the text
+file's name was, minus any .xxx extensions.  To suppress progress output,
+specify the '-q' (for quiet) option.
+
+\t-h or --host	 =  Host where Mysql DB lives
+\t-d or --db	 =  Database to use 
+\t-u or --user	 =  Username to connect as
+\t-p or --passwd =  Password for USERNAME **
+\t-s or --sep 	 =  Use this separator instead of guessing
+
+** If no password is specified, you will be prompted for one.  This is
+   the preferred login method as it does not display your plain text
+   password in the process table.
+
+Example:
+
+\timportdb -h localhost -d mydb -u cdr -s '\\\|' addressbook.txt
+
+This would import the pipe \['\|'\] delimited text file 'addressbook.txt'
+into the database 'mydb' as user 'cdr'.  The table created would be named
+'addressbook' after the files name.  Be sure to escape any field separator
+characters that would be interpreted by the shell (e.g.: \!\$\&\*\%, etc)
+
+EOT
+exit;
+}
+
+
+sub readConf {
+	my $in = shift @_;
+	my ($client, $cnf);
+	my $conf = {};
+	if (-e "$ENV{'HOME'}/.my.cnf") {
+		open(CNF, "$ENV{'HOME'}/.my.cnf");
+			while ($cnf = <CNF>) {
+				$client = 1 if ($cnf =~ /client/i);
+				next if ((!$client) || ($cnf =~ /client/i));
+
+				if ($cnf =~ /(.)(.+?)=(.*)/gi) {
+					$conf->{$1.$2} = $3;
+					$conf->{$1} = $3;
+					print "Found \($1\) $1$2 \[$3\]\n";
+				}
+			}	 
+		close CNF;
+	}
+	return $conf;
+}
+
+sub readArgs {
+	my $argv = shift @_;
+	my ($opt, $key, $k, $val, $quiet, @files);
+	
+	my @files = ();
+	
+	while ($opt = shift @{$argv}) {
+      if ($opt =~ /^\-(\w+)$/) {
+         @switches = split(//, $1);
+         foreach $switch (@switches) {
+            if ($ARGV[0]!~/^\-/) {
+               $in{$switch} = shift @ARGV;
+            } else {
+               $in{$switch} = 1;
+            }
+         }
+      } elsif ($opt =~ /^\-\-(\w)(\w*)=(.*)/) {
+			$key = $1.$2;
+			$k = $1;
+			$val = $3;
+			$in{$key} = $val;
+			$in{$k} = $val;
+		} elsif ($opt =~ /^\-\-?(.)(.*)/) {
+			$key = $1;
+			if ($key =~ /q/i) {
+				$quiet = 1;
+				next;
+			} elsif ($key eq "v") {
+            $in{'v'} = 1;
+            next;
+         }
+         $in{$key} = shift @ARGV;
+		} else {
+			push(@files, $opt);
+		}
+	}
+	$in{'u'} = $ENV{'LOGNAME'} if (!$in{'u'});
+	$in{'h'} = "localhost" if (!$in{'h'});
+	$in{'files'} = \@files;
+	return(\%in);
+} 
+
+sub checkDate {
+	my $val = shift @_;
+	my $result = '';
+
+	# Populate month and day name arrays
+	my @days = ('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+	my @months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+	foreach $m (@months) { push(@mos, substr($m, 0, 3)); }
+
+	# Predefine regex patterns for time, date, and datetime
+	my $re_time = '((\d+\:\d+\:\d+)|(\d+\:\d+\s?(a|p)m?))';
+	my $re_date = '(\d+[\/\-]\d\d[\/\-]\d+)|((\w+)\s(\d+)\,\s?(\d\d\d\d))';
+
+	$re_datetime = '('.join('|', @days).')\s('.join('|', @mos).')\s(\d+)\s(\d+\:\d+\:\d+)\s(\w+)\s(\d*)';
+
+	# Clear success flags
+	my $gotDate = 0;
+	my $gotTime = 0;
+
+   if (($val =~ /$re_datetime/) || ($val =~ /$re_date\s$re_time/)) {
+	   $gotDate = $gotTime = 1;
+   }
+	$gotTime = ($val =~ /$re_time/);
+	$gotDate = ($val =~ /$re_date/);
+	
+	if (($gotDate) && ($gotTime)) {
+		$result = 'DATETIME';
+	} elsif ($gotDate) {
+		$result = 'DATE';
+	} elsif ($gotTime) {
+		$result = 'TIME';
+	}
+
+	if ($result) {
+		print "\nFinal assessment for value '$val': $result\n" if ($in{'v'});
+		return($result);
+	} else {
+		return 0;
+	}
+}
+
+

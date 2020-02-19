@@ -1,0 +1,9 @@
+Simple Software is a provider of cloud-based business applications
+that enable small and medium-sized businesses (SMBs) worldwide to 
+set-up, grow and manage their businesses profitably and competitively. 
+Simple Software offers the Simple Software Suite, a flexible suite of 
+tools, utilities and applications built using proven open source technologies 
+to deliver enterprise-class business information management capabilities for SMB's. 
+The Simple Software Suite is built on a unique cloud services platform and is offered 
+as an on-demand service through an integrated web interface that enables a unified 
+user experience and a common administration console.

@@ -1,0 +1,67 @@
+						Small Business Sales Package
+
+TimeSheet & Payroll Reporting - 
+Their need:	Small businesses spend a lot of time and money calculating payroll. The American Payroll Association (www.americanpayroll.org) reports that average payroll hour calculation totals have an error rate between 1% – 8% of actual time worked. They also state that it generally takes up to 7 minutes to process a weekly time card for a single employee. For companies that do not utilize a time clock system the APA estimates an average of 23 to 49 minutes a day per employee are lost due to employees taking long lunches, breaks, early departures, etc.
+
+The solution:	Timeclock is a proven application that has saved a lot of time and money for many businesses. We can have a site up instantly and after adding a login for each employee, they no longer need to worry about payroll. Their employees can start clocking their time immediately and their managers will run payroll as needed.
+
+----------------------------------------------------------------------------------------
+----------------------		Sales	--------------------------------
+----------------------------------------------------------------------------------------
+
+	!!!!!!!It doesn't do any good to pitch a product you're not familiar with!!!!!
+
+Please review our website at www.simplesoftwaresf.com and go through our demo site to familiarize yourself with the product and framework. 
+Remember, this is an online tool so any company in the world is a potential client. The only limitation is your ability to sell. 
+
+Commission:	Currently, the $5/per month, per employee is absorbed by the company for hardware/software maintenance. The initial sales commission is to be provided by the initial $250 setup cost. Once the discounted period is over, the customer will be charged $10 per employee per month. $2 per employee, per month will be paid to the salesperson that manages the account. The salesperson is expected to maintain contact with the customer and help with any issues outside of technical problems due to bugs in the software. This model is used to maintain customer satisfaction past the initial sale. We believe that once customers are familiar with our product and trust us as a company, they will inevitably want to move more of their applications and processes to our site. Keep this in mind when managing your customers.
+
+----------------------------------------------------------------------------------------
+----------------------	Steps to Take             --------------------------------
+----------------------------------------------------------------------------------------
+
+Tasks:
+1) Use http://www.yellowpages.com/state-ca (replace 'ca' with your state if you are not in California) to find businesses in your area. Since you will be pitching them and meeting with them, keep this in mind before calling.
+2) Enter business information into Business page in admin app.
+3) Call business and track responses in. This will help eliminate customers that should not be contacted again. It will also ensure you get credit for the portions of the sale you make.
+4) If a time was established to meet in person, please use Calendar in admin app.
+5) If a sale has been made, add a record to the client table and login in to the customers site using the default login.
+6) Add a Login and Employee record for each person that should have access to the site. Give each user access to Timeclock and test their login.
+7) Submit a Sales Record and email chris@simplesoftwaresf.com and patrick@simplesoftwaresf.com. This will ensure you receive your commission. You will be paid after we receive payment from the customer.
+
+
+------------------------------------------------------------------------------------
+----------------- 	Phone Pitch 	----------------------------
+------------------------------------------------------------------------------------
+
+Hi my name is ___. I am calling from Simple Software Co. of San Francisco. We are currently offering our online payroll applications at 50% off to new customers. 
+	"Points to Cover"
+1)	May I ask what your company uses for payroll?
+	-----
+
+2)	How many emloyees do you have?
+	-----
+
+3)	How much time do you spend  doing payroll? This includes calculating timecards and doing payroll.
+	-----
+
+4)	How much approximately does your company make a year?
+	-----
+
+5)	Do you have Internet service? In order to use our service, you need a computer with internet access. This is so your employees can clock in to our system.
+	-----
+
+Ok, well you sound like a perfect candidate for our Timeclock application. Do you have time this week to meet with a representative from Simple Software?
+
+Customer FAQ
+Q - How much does TimeClock cost?
+A - Since we are a new company, we are practically giving Timeclock away. There is a $250 one-time setup fee, and a  monthly fee of $5 per employee, for the first six months. After six months, the price will go to $10 a month per employee. However, our sales representatives are authorized to give discounts under certain conditions. For instance; you have over 25 employees; you want other products. It's best that you speak to our sales representative before 
+
+Q - How much is it after 6 months? 
+A - This is usually based on the number of employees that you have. The average is about $10 a month per employee. 
+
+Q - How does it calculate Payroll?
+A - Each of your employees will have a login with personal information including their rate. They will login using a secure website from any internet ready computer or phone. Once logged in they can either 'Clock In/Out' or use the Timecard page to manually add their time. Running payroll is as simple as selecting the date range, and pushing a button. A spreadsheet is opened and you can view everyone's payroll.
+
+If you'd like to see a demo, go to www.simplesoftwaresf.com and click on applications/timesheet & payroll reporting. There is also a return on investment calculator that will help you see the amount of money you will be saving using this product.
+

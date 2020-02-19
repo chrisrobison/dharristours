@@ -1,0 +1,11 @@
+
+Big list of SaaS companies at http://www.saas-showplace.com/
+
+Actual company profile[s] located at:
+http://www.saas-showplace.com/get_company.php?key=1948
+
+NOTES:   Apparently, 'key' is the profile's ID and it has a range
+         between 1 and 1948 (as of 1/3/2011).
+
+TODO:         Should be pretty easy to scrape the data and import into db for research and ideas.
+

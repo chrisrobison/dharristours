@@ -1,0 +1,589 @@
+#!/usr/bin/perl
+#
+#
+use DBI;
+use CDR::Input;
+use Data::Dumper;
+
+# Setup client headers and input if we are in HTTP environment
+$| = 1; print "Content-type: text/html\n\n" if ($ENV{'HTTP_HOST'});
+
+# Collect any form input passed in
+*in = getInput() if (($ENV{'HTTP_HOST'}) || (@ARGV));
+%dat = %in;
+
+# Setup database connection info
+my %dbconf = (	'user'    => 'pimp',
+		'passwd'  => 'pimpin',
+		'host'    => 'localhost',
+		'dbdrv'   => 'mysql',
+		'db'      => 'hosting');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+$sth = $dbh->prepare("select * from Signup where DoSetup='1'");
+$sth->execute();
+
+my ($rec, $user, $contact);
+
+while ($rec = $sth->fetchrow_hashref) {
+   $rec->{'FQDN'} = $rec->{'Domain'}.$rec->{'TLD'};
+   #
+   # First create new user account and/or grab user details
+   #
+   if (($rec->{'NewUser'}) && (!getpwnam($rec->{'NewUser'}))) {
+		print "Creating new user $rec->{'NewUser'}\n";
+      newUser($rec);
+      $rec->{'User'} = $rec->{'NewUser'} if (!$rec->{'User'});
+      $user = getUser($rec->{'User'});
+   } elsif ($rec->{'User'}) {
+      $user = getUser($rec->{'User'});
+   }
+
+   #
+   # Verify user directories and create if necessary
+   #
+   checkDir($user->{'Dir'});
+   checkDir($user->{'Maildir'});
+   checkDir($user->{'Dir'}.'/domains');
+   
+	#######################################################
+	#
+	# Bitwise flag definitions:
+	#	1		-	Create account
+	#	2		-	Create Contact record
+	#	4		-	Create new SRSContact
+	#	8		-	Register domain 
+	#	16		-	Transfer domain 
+	#	32		-	Register nameservers
+	#	64		-	DoSRS
+	#	128	-	Setup DNS
+	#	256	-	Setup Web Space
+	#	512	-	Setup Email for domain
+	#	1024	-	Setup Database
+	#
+	#######################################################
+   #
+   # Create Contact (local/SRS)
+   #
+	if ($rec->{'SetupFlags'} & 2) {
+		#
+		# First check if we have an existing contact for this user
+		#
+   	$contact = $dbh->selectrow_hashref("select * from hosting.Contact where User='$rec->{'User'}'");
+
+		#
+		# Create new entry if lookup did not return valid record
+		#
+	   $rec->{'ContactID'} = newContact($rec) if (!$contact->{'ContactID'});
+	}
+
+	if (($rec->{'SetupFlags'} & 4) && (!$contact->{'SRSID'})) {
+		# Grab contact record for user
+   	$contact = $dbh->selectrow_hashref("select * from hosting.Contact where User='$rec->{'User'}'");
+	   $rec->{'SRSID'} = $contact->{'SRSID'} = newSRSContact($rec) if (!$contact->{'SRSID'});
+	}
+
+   #
+   # Register Domain
+   #
+   ($regid, $ref) = registerDomain($rec) if (($rec->{'SetupFlags'} & 8) && ($rec->{'SetupFlags'} & 64));
+
+   #
+   # Transfer Domain
+   #
+   ($regid, $ref) = transferDomain($rec) if (($rec->{'SetupFlags'} & 16) && ($rec->{'SetupFlags'} & 64));
+   
+   #
+   # Setup DNS
+   #
+   setupDNS($rec) if (($rec->{'DNSHosting'}) && ($rec->{'SetupFlags'} & 128));
+   
+   #
+   # Setup Web Hosting 
+   #
+   setupWeb($rec) if (($rec->{'WebHosting'}) && ($rec->{'SetupFlags'} & 256));
+
+   #
+   # Setup Email
+   #
+   setupEmail($rec) if (($rec->{'EmailHosting'}) && ($rec->{'SetupFlags'} & 512));
+
+   #
+   # Setup DB
+   #
+   setupDB($rec) if (($rec->{'DBHosting'}) && ($rec->{'SetupFlags'} & 1024));
+
+   #
+   # Clear 'DoSetup' flag and set SetupDate to current date
+   #
+   $dbh->do("update Signup set DoSetup='0', SetupFlags='', SetupDate=now() where SignupID='$rec->{'SignupID'}'");
+
+}
+
+exit 0;
+
+sub getNextUID {
+   my($uid, $pw);
+   
+   open(PW, "/etc/passwd") or die "Error opening pw for reading: $!";
+      while ($pw = <PW>) { }
+      if ($pw =~ /\:(\d+)\:/) {
+         $uid = $1;
+      }
+   close PW;
+
+   return ++$uid;
+}
+
+sub getUser {
+   my $username = shift @_;
+
+   my $user = {
+               %{$dbh->selectrow_hashref("select * from hosting.User where User='$username'")}, 
+               %{$dbh->selectrow_hashref("select * from mail.user where user='$username'")}
+               };
+   my @fields = ('name','passwd','uid','gid','quota','comment','gcos','dir','shell','expire');
+   my @vals = getpwnam($username);
+   foreach (0..$#fields) {
+      $user->{$_} = $vals[$_];
+   }
+  
+   return(\%user);
+}
+
+sub checkDir {
+   my $dir = shift @_;
+   my $uid = shift @_;
+   my $gid = shift @_;
+   my $desc = shift @_;
+
+   eval {
+      die "No directory specified" if (!$dir);
+
+      if (!-e $dir) {
+         print STDERR "$desc: $dir does not exist!  Creating...\n";
+         my @path = split(/\//, $dir);
+         my $path = '';
+         foreach my $p (@path) {
+            $path .= "/".$p;
+            next if (-e $path);
+            mkdir $path, 0775 or warn "Error creating $path: $!";
+            chown $uid, $gid, $path;
+         }
+      }
+      ($diruid, $dirgid) = (stat($dir))[4-5];
+      chown $uid, $gid, $dir if (($diruid != $uid) || ($dirgid != $gid));
+   };
+
+   return 1;
+}   
+
+sub newUser {
+   my $rec = shift @_;
+   
+   $rec->{'User'} = $rec->{'NewUser'} if (!$rec->{'User'});
+   $rec->{'ID'} = $rec->{'User'}.'@'.$rec->{'Domain'};
+   $rec->{'Crypted'} = crypt($rec->{'Passwd'}, 'N0');
+   $rec->{'Dir'} = "/export/home/".$rec->{'User'};
+   $rec->{'Maildir'} = $rec->{'Dir'}."/Maildir";
+   $rec->{'Shell'} = "/bin/date" if (!$rec->{'Shell'});
+   $rec->{'Name'} = $rec->{'Fname'}.' '.$rec->{'Lname'};
+   
+   my @nfields = ('UID','GID','Domain','User','ID','Passwd','Crypted','Type','Quota','Dir','Maildir','Shell','Name','AltEmail');
+   my @ofields = ('uid','gid','domain','user','id','passwd','crypted','type','quota','dir','maildir','shell','name','alt_email');
+   my @nvals = ();
+   my @ovals = ();
+
+   foreach my $f (0..$#nfields) {
+      if ($rec->{$nfields[$f]}) {
+         push(@nvals, $dbh->quote($rec->{$nfields[$f]}));
+         push(@ovals, $dbh->quote($rec->{$nfields[$f]}));
+      } else {
+         push(@nvals, "''");
+         push(@ovals, "''");
+      }
+   }
+
+   my $check = $dbh->selectrow_hashref("select * from hosting.User where User='$rec->{'User'}'");
+   if (!$check->{'UserID'}) {
+      my $nins = "insert into hosting.User (".join(',', @nfields).") values (".join(',', @nvals).")";
+      print STDERR $nins."\n";
+      $dbh->do($nins);
+   }
+   
+   if (!getpwnam($rec->{'User'})) {
+      my $cmd = "/usr/sbin/useradd -o -d $rec->{'Dir'} -g 1000 -m -s $rec->{'Shell'} $rec->{'User'}";
+      system($cmd);
+      print STDERR $cmd."\n";
+   }
+   return 1;
+}
+
+sub newContact {
+   my $rec = shift @_;
+
+   my $fields = $dbh->selectcol_arrayref("desc Contact");
+   my @vals = ();
+
+   foreach (@{$fields}) {
+      push(@vals, ($rec->{$_}) ? $dbh->quote($rec->{$_}) : "''");
+   }
+   my $ins = "insert into Contact (".join(',', @{$fields}).") values (".join(',', @vals).")";
+   print STDERR $ins."\n";
+   $dbh->do($ins);
+   my $cid = $dbh->{'mysql_insertid'};
+   $dbh->do("update Signup set ContactID='$cid' where SignupID='$rec->{'SignupID'}'");
+
+   return($cid);
+}
+
+sub newSRSContact {
+   my $rec = shift @_;
+	
+	$rec->{'COUNTRY'} = 'us' if (!$rec->{'COUNTRY'});
+   use DotSRS_Client;
+   my $srs_client = new DotSRS_Client;
+   my $contact_ref = {
+   'TLD' => $rec->{'TLD'},
+   'FNAME' => $rec->{'Fname'},
+   'LNAME' => $rec->{'Lname'},
+   'ORGANIZATION' => $rec->{'Organization'},
+   'EMAIL' => $rec->{'Email'},
+   'ADDRESS1' => $rec->{'Address1'},
+   'ADDRESS2' => $rec->{'Address1'},
+   'CITY' => $rec->{'City'},
+   'PROVINCE' => $rec->{'Province'},
+   'POSTAL CODE' => $rec->{'PostalCode'},
+   'COUNTRY' => $rec->{'Country'},
+   'PHONE' => $rec->{'Phone'}
+   };
+   
+   my $xid = logSRSTransaction({'ContactID' => $rec->{'ContactID'}, 'DomainID' => $rec->{'DomainID'} });
+                                              # create_contact($transactionID, $contact_reference)
+   my ($contact_id, $request_id) = $srs_client->create_contact( $rec->{'SignupID'}, $contact_ref );
+   if ($contact_id) {
+      print STDERR "Successfully created SRS Contact: contactID=$contact_id\trequestID=$request_id\n";
+      logSRSTransaction({
+                           'TransactionID'=>$xid,
+                           'Transaction' => 'create_contact',
+                           'Status' => 'Success',
+                           'RequestID' => $request_id,
+                           'ContactID' => $rec->{'ContactID'},
+                           'Results' => 'SRS Contact ID '.$contact_id.' created'
+                        });
+		$dbh->do("update Signup set SRSID='$contact_id' where SignupID='$rec->{'SignupID'}'");
+   } else {
+      # 'error' member of client has descriptive error string(s)
+      print STDERR "Error(s) creating contact:\t".$srs_client->{'error'}."\n";
+
+      logSRSTransaction({
+                           'TransactionID'=>$xid, 
+                           'Transaction' => 'create_contact',
+                           'Status' => 'ERROR',
+                           'Results' => $srs_client->{'error'},
+                           'RequestID' => $request_id,
+                           'ContactID' => $rec->{'ContactID'}
+                        });
+   }
+   return $contact_id;
+
+}
+
+sub transferDomain {
+	my $rec = shift @_;
+
+	eval {
+		use DotSRS_Client;
+		use CDR::Whois;
+		my $whois = new CDR::Whois;
+		$rec->{'TLD'} =~ s/^\.//;
+		$whois->{'domain'} = $rec->{'Domain'}.'.'.$rec->{'TLD'};
+
+		my $srs_client = new DotSRS_Client;
+		$rec->{'SRSID'} = newSRSContact($rec) if (!$rec->{'SRSID'});
+    	
+		$whois->lookupContacts();
+
+	  	my $tld = uc($rec->{'TLD'});
+		
+		$ref = {
+			'DOMAIN' => $rec->{'Domain'},
+			'TLD' => $tld,
+			'CURRENT ADMIN EMAIL' =>  $whois->{'Contact'}->{'Admin'},
+			# END REQUIRED ATTRIBUTES
+			'RESPONSIBLE PERSON'	 =>  $rec->{'SRSID'},
+			'ADMIN CONTACT'	 	 =>  $rec->{'SRSID'},
+			'TECHNICAL CONTACT'	 =>  '0'
+		};
+		if ($tld =~ /^biz$/i) {
+			$ref->{'AUTH_CODE'} = $rec->{'AuthCode'};
+		}
+use Data::Dumper;
+print Dumper($ref);
+      my $xid = logSRSTransaction({'ContactID' => $rec->{'ContactID'}, 'DomainID' => $rec->{'DomainID'}});
+		my ($reqID, $response) = $srs_client->request_transfer($xid, $ref);
+print "\$ref:\n\t",Dumper($ref);
+print "\$response:\n\t",Dumper($response);
+      
+		if ($reqID) {
+			logSRSTransaction({
+				'TransactionID'=>$xid,
+				'Transaction' => 'transfer_domain',
+				'Status' => 'ok',
+				'RequestID' => $reqID,
+				'Results' => $dbh->quote($response)
+			});
+		} else {
+			logSRSTransaction({
+				'TransactionID'=>$xid,
+				'Transaction' => 'transfer_domain',
+				'Status' => 'ERROR',
+				'RequestID' => $reqID,
+				'Results' => "Error initiating domain transfer: ".$dbh->quote($response)
+			});
+		}
+	};
+	
+}
+
+sub registerDomain {
+   my $rec = shift @_;
+
+   eval {
+      use DotSRS_Client;
+      my $srs_client = new DotSRS_Client;
+      my $tld = uc($rec->{'TLD'});
+      $tld =~ s/^\.//;
+		
+		die "No domain specified" if ($rec->{'Domain'} !~ /\w/);
+		die "Invalid characters in domain specified \[$1\]" if ($rec->{'Domain'} =~ /([^a-zA-Z0-9\-])/);
+		
+		$rec->{'NameServers'} = "ns.netoasis.net,ns2.netoasis.net" if (!$rec->{'NameServers'});
+		my @nameservers = split(/\,/, $rec->{'NameServers'});
+
+      my $domain_ref = {
+         'DOMAIN' => $rec->{'Domain'},
+         'TLD' => $tld,
+         'TERM YEARS' => 1,
+         'RESPONSIBLE PERSON' => $rec->{'SRSID'},
+         'TECHNICAL CONTACT' => 0,
+         'PRICE' => '7.95',
+      };
+      my $scnt = 0;
+		foreach my $ns (@nameservers) {
+			++$scnt;
+			$domain_ref->{"DNS SERVER NAME $scnt"} = $ns;
+		}
+		
+		$dbh->do("insert into Domain (Domain, Owner, ResponsiblePerson, TechnicalContact, BillingContact, AdminContact, Term, Price, DNS, Mail, WebSpace, Active, Expires, Created) values ('$rec->{'Domain'}$rec->{'TLD'}', '$rec->{'User'}', '$rec->{'ContactID'}', '0', '$rec->{'ConactID'}', '0', '1', '7.95','$rec->{'DNSHosting'}','$rec->{'EmailHosting'}','100M','1','$ref->{'EXPIRATION DATE'}', now())");
+		$rec->{'DomainID'} = $dbh->{'mysql_insertid'};
+         
+      my $xid = logSRSTransaction({'ContactID' => $rec->{'ContactID'}, 'DomainID' => $rec->{'DomainID'}});
+      # print Dumper($domain_ref)."\n";
+
+      ($request_id, $ref) = $srs_client->register_domain( $xid, $domain_ref );
+      # print Dumper($ref)."\n";
+      
+      if ( $request_id ) {
+         logSRSTransaction({
+                           'TransactionID'=>$xid,
+                           'Transaction' => 'register_domain',
+                           'Status' => 'Success',
+                           'RequestID' => $request_id,
+                           'Results' => 'Registered domain '.$rec->{'Domain'}.$rec->{'TLD'}.' created'
+                        });
+
+         print "requestID = $request_id\n";
+      } else {
+         logSRSTransaction({
+                           'TransactionID'=>$xid,
+                           'Transaction' => 'register_domain',
+                           'Status' => 'ERROR',
+                           'RequestID' => $request_id,
+                           'Results' => 'Error registering domain '.$rec->{'Domain'}.$rec->{'TLD'}
+                        });
+
+         print "register_domain failed.\n";
+      }
+   };
+   return($request_id, $ref);
+
+}
+
+sub logSRSTransaction {
+   my $xact = shift @_;
+   my $trans;
+
+   my @fields = ('TransactionID', 'Transaction','DomainID','ContactID','RequestID','Status','Results');
+   my @vals = ();
+   my $query = '';
+   my $tid = $xact->{'TransactionID'} || undef;
+
+   if ($xact->{'TransactionID'}) {
+      $trans = $dbh->selectrow_hashref("select * from Transaction where TransactionID='$xact->{'TransactionID'}'");
+      if ($trans->{'TransactionID'}) {
+         foreach my $f (@fields) {
+            if (($xact->{$f}) && ($xact->{$f} ne $trans->{$f})) {
+               push(@vals, $f.'='.$dbh->quote($xact->{$f}));
+            }
+         }
+         $query = "update Transaction set ".join(',', @vals).", LastModified=now() where TransactionID='$xact->{'TransactionID'}'";
+         print STDERR $query."\n";
+         $dbh->do($query);
+      }
+   } else {
+      foreach my $f (@fields) {
+         push( @vals, ($xact->{$f}) ? $dbh->quote($xact->{$f}) : "''" );
+      }
+      push(@fields, "Created");
+      push(@vals, "now()");
+      
+      $query = "insert into Transaction (".join(',', @fields).") values (".join(',', @vals).")";
+      print STDERR $query."\n";
+      $dbh->do($query);
+      $tid = $xact->{'TransactionID'} = $dbh->{'mysql_insertid'};
+   }
+      
+   return($tid);
+}
+
+sub setupDNS {
+   my $rec = shift @_;
+
+   require("lib/dns-lib.pl");
+   new_zone($rec);
+   open(FLAG, ">/www/.sysupdate/dns.www") or die "Error creating /www/.sysupdate/dns.www"; print FLAG "$$"; close FLAG;
+   open(FLAG, ">/www/.sysupdate/dns.ns") or die "Error creating /www/.sysupdate/dns.ns"; print FLAG "$$"; close FLAG;
+
+}
+
+sub setupWeb {
+   my $rec = shift @_;
+   $rec->{'Host'} = 'www';
+
+   my $newdom = {
+      'Domain'       => $rec->{'FQDN'},
+      'Host'         => 'www',
+      'user'         => $rec->{'User'},
+      'IP'           => '*',
+      'Port'         => '80',
+      'ServerType'   => 'standard',
+      'ServerRoot'   => "/export/home/$rec->{'User'}/domains/$rec->{'Domain'}$rec->{'TLD'}/$rec->{'Host'}",
+      'DocumentRoot' => 'www',
+      'ScriptAlias'  => '',
+      'LogType'      => 'combined',
+      'CustomLog'    => 'logs/access_log',
+      'ErrorLog'     => 'logs/error_log',
+      'ServerAdmin'  => 'webmaster@'.$rec->{'Domain'}.$rec->{'TLD'},
+      'Modified'     => '1',
+      'Active'       => '1'
+   };
+   # Check for existing host.Domain in db
+   $cth = $dbh->prepare("select * from sys.Domain where Host='www' and Domain='$rec->{'Domain'}$rec->{'TLD'}'");          
+   $cth->execute();
+   
+   # Stuff alert with error if Domain exists, otherwise create new site                                       
+   if ($cth->rows) {
+      $dat{'alert'} = "alert('The website \\'$rec->{'Domain'}$rec->{'TLD'}\\' already exists. \\nNot creating new site.');";
+   } else {
+      my @vals = ();                                                                                          
+      my $val = '';
+      my @fields = @{$dbh->selectcol_arrayref("desc sys.Domain")};
+
+      # Prepare data for insert, use default if no data provided.                                                  
+      # Use DBI quote utility to make values safe for insert
+      foreach my $f (@fields) {
+         $val = $newdom->{$f};
+         push(@vals, ($val)?$dbh->quote($val):"''");
+      }     
+      $insert = "insert into sys.Domain (".join(", ", @fields).") values (".join(", ", @vals).")";
+      print $insert."\n";
+      $dbh->do($insert) or $dat{'alert'} = "alert('Error creating record for $rec->{'Host'}.$rec->{'Domain'}$rec->{'TLD'}:\\n".$dbh->errstr."\\n');" and $err = 1;  
+       
+      if (!$err) {                                                                                                 
+         # Record new DomainID                                                                                     
+        $rec->{'DomainID'} = $dbh->{'mysql_insertid'};
+
+        $dbh->do("insert into sys.server_alias (DomainID, alias) values ($rec->{'DomainID'}, '$rec->{'Domain'}$rec->{'TLD'}')"); 
+      }     
+   }
+
+   open(FLAG, ">/www/.sysupdate/http.www") or die "Error creating /www/.sysupdate/http.www"; print FLAG "$$"; close FLAG;
+}
+
+sub setupEmail {
+   my $rec = shift @_;
+   my $d = $rec->{'Domain'}.$rec->{'TLD'};
+
+   my $ins = "insert into mail.domain (domain,parent,client,type,virus,spam,adminuser,userdir,mailhost,active) values ".
+             "('$d','$d','$rec->{'User'}','local','true','5.0','$rec->{'User'},cdr,dali',".
+             "'/export/home/$rec->{'User'}/domains/$d/users','mail', '1')";
+   print "Email Setup:\n\t".$ins."\n";
+   $dbh->do($ins);
+   
+   my $ins = "insert into mail.domain (domain,parent,client,type,virus,spam,adminuser,userdir,mailhost,active) values ".
+             "('mail.$d','$d','$rec->{'User'}','local','true','5.0','$rec->{'User'},cdr,dali',".
+             "'/export/home/$rec->{'User'}/domains/$d/users','mail', '1')";
+   $dbh->do($ins);
+   
+   my $acctid = 0;
+   if ($rec->{'NewUser'}) {
+      my @v = ();
+      my @f = @{$dbh->selectcol_arrayref("desc mail.account")};
+      
+      foreach my $f (@f) { push(@v, ($rec->{$f})?$dbh->quote($rec->{$f}):"''"); }
+      my $ins = "insert into mail.account(".join(',', @f).") values (".join(',', @v).")";
+      print $ins."\n";
+      $dbh->do($ins);
+      $acctid = $dbh->{'mysql_insertid'};
+   }
+
+   my $user = getUser($rec->{'User'});
+   $acctid = $user->{'uid'} if (!$acctid);
+
+   my $acct = {
+               'accountID'=> $acctid,
+               'client' => $rec->{'User'},
+               'uid'    => $user->{'uid'},
+               'gid'    => '1000',
+               'domain' => $d,
+               'user'   => $rec->{'User'},
+               'id'     => $rec->{'User'}.'@'.$d,
+               'passwd' => $rec->{'Passwd'},
+               'crypted'=> crypt($rec->{'Passwd'}, 'cR'),
+               'type'   => 'maildir',
+               'quota'  => '5',
+               'dir'    => '/export/home/'.$rec->{'User'}.'/domains/'.$d.'/users/'.$rec->{'User'},
+               'maildir'=> '/export/home/'.$rec->{'User'}.'/domains/'.$d.'/users/'.$rec->{'User'}.'/Maildir',
+               'shell'  => '/bin/date',
+               'name'   => $rec->{'Fname'}.' '.$rec->{'Lname'},
+               'alt_email'=> $rec->{'Email'}
+              };
+   my @v = ();
+   my @f = keys %{$acct};
+
+   foreach my $f (@f) { push(@v, ($acct->{$f})?$dbh->quote($acct->{$f}):"''"); }
+   my $ins = "insert into mail.user (".join(',', @f).") values (".join(',', @v).")";
+   print $ins."\n";
+   $dbh->do($ins);
+  
+}
+
+sub setupDB {
+   my $rec = shift @_;
+
+   $dbh->do("create database $rec->{'User'}");
+   $dbh->do("GRANT ALL PRIVILEGES ON $rec->{'User'}.* TO $rec->{'User'}\@localhost IDENTIFIED BY '$rec->{'Passwd'}'");
+   $dbh->do("GRANT ALL PRIVILEGES ON $rec->{'User'}.* TO $rec->{'User'}\@\"\%\" IDENTIFIED BY '$rec->{'Passwd'}'");
+
+}
+
+sub getAdminContact {
+
+}

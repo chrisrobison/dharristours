@@ -1,0 +1,17 @@
+CREATE TABLE WebfleetLocation (
+	WebfleetLocationID INT(8) NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(WebfleetLocationID),
+	Vehicle VARCHAR(50) NOT NULL DEFAULT '',
+	StartDate INT(13) NOT NULL,
+	EndDate INT(13) NOT NULL,
+	StartTime INT(8) NOT NULL,
+	EndTime INT(8) NOT NULL,
+	AddressNo CHAR(50) NOT NULL,
+	Location VARCHAR(75) NOT NULL DEFAULT '',
+	Driver CHAR(50) NOT NULL,
+	Vehicle2 VARCHAR(50) NOT NULL DEFAULT '',
+	Latitude INT(8) NOT NULL,
+	Longitude VARCHAR(50) NOT NULL DEFAULT '',
+	Duration INT(6) NOT NULL,
+	Odometer VARCHAR(50) NOT NULL DEFAULT '')
+

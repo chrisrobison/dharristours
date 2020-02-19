@@ -1,0 +1,2 @@
+BusLineID	BusLine	Description	Created	CreatedBy	LastModified	LastModifiedBy	Notes	Stop1	Stop2
+1	SF Parks Conservancy Line 1		2012-01-09 10:56:45	lee3f@aol.com	2012-01-09 10:56:45	lee3f@aol.com	-- Updated by lee3f@aol.com on 1/9/2012 at 10:56:48 AM\n	Presidio	

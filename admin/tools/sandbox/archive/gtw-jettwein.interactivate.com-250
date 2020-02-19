@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	userpass	personal	extras	ServerAdmin	check	cvs	LastModified
+250	interactivate.com	gtw-jettwein.interactivate.com	jettwein		htdocs	standard	192.168.1.7	80				1	logs/gtw-jettwein.interactivate.com.access_log	logs/gtw-jettwein.interactivate.com.error_log	combined	/u1/jettwein/projects/gtw-jettwein.interactivate.com		0		hostmaster@interactivate.com	1		20030620091706

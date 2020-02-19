@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	develop_dir	develop_host	staging_dir	staging_host	personal	ServerAdmin	cvs	LastModified
+149	interactivate.com	cdr-pro	cdr		htdocs	standard	192.168.1.7	80				1	logs/cdr-pro.access_log	logs/cdr-pro.error_log	combined	/u1/cdr/projects/cdr-pro					0	hostmaster@interactivate.com		20030522225318

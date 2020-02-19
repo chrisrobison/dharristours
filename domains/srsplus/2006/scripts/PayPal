@@ -1,0 +1,81 @@
+#!/usr/bin/perl
+my $signup = $data->get_record('Signup', $in{'SignupID'}, { 'key' => 'SignupID' } ) if (!$signup);
+
+my @items = ('RegisterDomain', 'DNSHosting','WebHosting','EmailHosting','DiskSpace','DBHosting');
+$signup->{'RegisterDomain'} = '1';
+
+foreach my $i (@items) {
+   next if (!$signup->{$i});
+   my $item = $data->get_record('Product', $signup->{$i}, { 'key' => 'ProductID' } );
+   my $pid = sprintf("%04d", $item->{'ProductID'});
+
+   $dat{'Recurring'} += $item->{'Price'};
+   $dat{'SetupTotal'} += $item->{'SetupFee'};
+   $dat{'Total'} += $item->{'Price'} + $item->{'SetupFee'};
+                                                                                 
+}
+
+$cfields = {
+           };
+
+#
+# Subscription and transaction fields [Outgoing]
+#
+$obj = {'cmd'          => '_xclick-subscriptions',
+               'business'     => 'dali@pimp.net',
+               'item_name'    => 'Domain Registration and Hosting Services',
+               'item_number'  => $in{'SignupID'},
+               'image_url'    => 'http://'.$ENV{'HTTP_HOST'}.'/img/smlogo.png,
+               'no_shipping'  => '1',
+               'return'       => 'http://'.$ENV{'HTTP_HOST'}.'/wizard/index.cgi',
+               'rm'           => '2',
+               'cancel_return'=> 'http://'.$ENV{'HTTP_HOST'}.'/wizard/index.cgi?pp=cancel',
+               'a1'           => $dat{'Total'},
+               'p1'           => '1',
+               't1'           => 'M',
+               'a2'           => '',   # Trial amount 2
+               'p2'           => '',   # Trial period 2
+               't2'           => '',   # Trial period 2 units (D,W,M,Y)
+               'a3'           => $dat{'Recurring'},   # Regular Rate
+               'p3'           => '1',   # Regular Billing Cycle
+               't3'           => 'M',   # Regular Billing Cycle Units
+               'src'          => '1',  # Recurring Payments (1=yes, missing or 0=no)
+               'sra'          => '1',  # Reattempt on failure
+               'no_note'      => '1',  
+               'custom'       => '',   # Pass through id's and stuff here
+               'invoice'      => '',   # Must be unique invoice ID (grab from mysql)
+#               'usr_manage'   => '1',  # Paypal generates username/password for user
+               'cs'           => '0',  # Payment bgcolor (0=white 1=black)
+               'currency_code'=> 'USD',
+               'modify'       => '2',  # 0=new subscriptions only, 1=update existing only, 2=create or modify subscriptions
+               'notify_url'   => 'http://'.$ENV{'HTTP_HOST'}.'/ipn.cgi',
+               'first_name'   => $signup->{'Fname'},
+               'last_name'    => $signup->{'Lname'},
+               'address1'	=> $signup->{'Address1'},
+               'address2'	=> $signup->{'Address2'},
+               'city'	=> $signup->{'City'},
+               'state'	=> $signup->{'Province'},
+               'zip'	=> $signup->{'PostalCode'},
+               'night_phone_a'	=> $signup->{'Phone'},
+               'day_phone_a'	=> $signup->{'DayPhone'}
+};
+
+use Business::PayPal;
+my $paypal = Business::PayPal->new;
+my $dat{'PayPalButton'} = $paypal->button($obj);
+$dat{'PayPalID'} = $paypal->id;
+
+
+
+
+
+#
+# IPN returned fields [Incoming]
+#
+@transaction_fields = ('invoice','custom','memo','payment_status','pending_reason','reason_code','payment_date','txn_id','txn_type','payment_type',
+
+@currency_fields = ('mc_gross','mc_fee','mc_currency','settle_amount','settle_currency','exchange_rate','payment_gross','payment_fee');
+
+@payer_fields = ('first_name','last_name','payer_business_name','address_name','address_street','address_city','address_state','address_zip','address_country','address_status','payer_email','payer_id','payer_status');
+
+

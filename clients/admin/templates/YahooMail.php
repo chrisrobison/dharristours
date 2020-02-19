@@ -1,0 +1,1 @@
+<script src="http://www.gmodules.com/ig/ifr?url=http://gingagadgets.com/lib2/gadget%3Fcaller%3Dymail_n_if&amp;up_title=Yahoo%20eMail&amp;up_gadget_height=350&amp;synd=open&amp;w=1100&amp;h=700&amp;title=YMail&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>

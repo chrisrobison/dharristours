@@ -1,0 +1,28 @@
+
+<mockup version="1.0" skin="sketch" measuredW="1338" measuredH="968" mockupW="1338" mockupH="968">
+	<controls>
+		<control controlID="0" controlTypeID="com.balsamiq.mockups::TabBar" w="803" h="593" measuredH="593" measuredW="803" x="127" y="92" zOrder="0" isInGroup="-1" locked="false" >
+			<controlProperties>
+				<text>Home,Blog,About</text>
+				<selectedIndex>0</selectedIndex>
+			</controlProperties>
+		</control>
+		<control controlID="1" controlTypeID="com.balsamiq.mockups::TextArea" w="307" h="146" measuredH="146" measuredW="307" x="562" y="432" zOrder="1" isInGroup="-1" locked="false" >
+			<controlProperties>
+				<text>Text Area</text>
+				<size>16</size>
+				<align>left</align>
+			</controlProperties>
+		</control>
+		<control controlID="2" controlTypeID="com.balsamiq.mockups::Image" w="200" h="200" measuredH="200" measuredW="200" x="199" y="390" zOrder="2" isInGroup="-1" locked="false" >
+		</control>
+		<control controlID="3" controlTypeID="com.balsamiq.mockups::MenuBar" w="663" h="53" measuredH="53" measuredW="663" x="267" y="205" zOrder="3" isInGroup="-1" locked="false" >
+			<controlProperties>
+				<text>Home,Blog,About</text>
+				<size>16</size>
+				<selectedIndex>0</selectedIndex>
+				<align>left</align>
+			</controlProperties>
+		</control>
+	</controls>
+</mockup>

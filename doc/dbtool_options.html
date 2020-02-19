@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+      <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+      <link href='/lib/css/core.css' rel='stylesheet' type='text/css'>
+      <style>
+         ul { list-style-type: none; max-width:20em; }
+         li { margin-left:0; }
+         li.collapse::before { margin-left:-.9em; content: "\25b8" " "; }
+         li.collapsed::before { margin-left:-.9em; content: "\25be" " "; }
+         ul li ul { font-size:.9em; font-weight:200; }
+         li.divider { border-bottom:2px ridge #eee; }
+         #ContextMenu { margin:1em; padding:1em; background-color:#f0f0f0; line-height:1.5em;width:20em;box-shadow:1em 1em 1em rgba(0,0,0,.35); }
+      </style>
+  </head>
+   <body>
+      <div id='main'>
+         <div id='ContextMenu' style='display:block'>
+            <ul>
+               <li><img src='/img/dbtool/icon_newTable.png'> New Table</li>
+               <li class='collapse collapsible' title="Have radio option in dialog to 'Create New Table' or 'Update Existing Table'"><img src='/img/dbtool/icon_importTable.png'> Import from...</li>
+               <li> 
+                  <ul>
+                     <li>Other Table</li>
+                     <li>SQL</li>
+                     <li>Delimited Text</li>
+                     <li>JSON</li>
+                     <li>XML</li>
+                  </ul>
+               </li>
+               <li class='collapse collapsible'><img src='/img/dbtool/icon_exportTable.png'> Export to...</li>
+               <li>
+                  <ul>
+                     <li>Other Table</li>
+                     <li>SQL</li>
+                     <li>Delimited Text</li>
+                     <li>JSON</li>
+                     <li>XML</li>
+                  </ul>
+               </li>
+               <li class='divider'></li>
+               <li><img src='/img/dbtool/icon_renameTable.png'> Rename</li>
+               <li><img src='/img/dbtool/icon_truncateTable.png'> Truncate</li>
+               <li><img src='/img/dbtool/icon_copyTable.png'> Copy</li>
+               <li class='divider'></li>
+               <li><img src='/img/dbtool/icon_dropTable.png'> Drop Table</li>
+            </ul>
+         </div>
+      </div>
+   </body>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   <script type="text/javascript" src="/lib/js/jquery.contextmenu.js"></script>
+   <script type='text/javascript'>
+      $(document).ready(function() {
+         $(".collapsible").next("li").hide();
+         $(".collapsible").click(function() {
+            $(this).toggleClass("collapse").toggleClass("collapsed").next("li").toggle(50);
+         });
+      });
+   </script>
+</html>

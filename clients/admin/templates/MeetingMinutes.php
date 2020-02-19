@@ -1,0 +1,24 @@
+<div class='tableGroup'>
+   <div class='boxHeading'> MeetingMinutes ID: <?php print $current->MeetingMinutesID; ?></div>
+   <div class='fieldcontainer'>
+      <span class='fieldcolumn fieldfloater'>
+         <div class='contentField'><span class='fieldLabel'>Meeting Minutes</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][MeetingMinutes]' id='MeetingMinutes' value='<?php print $current->MeetingMinutes; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Notes</span><textarea name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][Notes]' id='Notes' class='textBox' style='width:41em;height:5em;'><?php print $current->Notes; ?></textarea></div>
+         <div class='contentField'><span class='fieldLabel'>Project Name</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][ProjectName]' id='ProjectName' value='<?php print $current->ProjectName; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Meeting Name</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][MeetingName]' id='MeetingName' value='<?php print $current->MeetingName; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Date</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][Date]' id='Date' value='<?php print $current->Date; ?>' size='10' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Time</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][Time]' id='Time' value='<?php print $current->Time; ?>' size='10' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Location</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][Location]' id='Location' value='<?php print $current->Location; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Confernece Call Number</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][ConferneceCallNumber]' id='ConferneceCallNumber' value='<?php print $current->ConferneceCallNumber; ?>' size='50' class='boxValue' /></div>
+      </span>
+      <span class='fieldcolumn'>
+         <div class='contentField'><span class='fieldLabel'>Phone</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][Phone]' id='Phone' value='<?php print $current->Phone; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Access Code</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][AccessCode]' id='AccessCode' value='<?php print $current->AccessCode; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Meeting Objectives</span><textarea name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][MeetingObjectives]' id='MeetingObjectives' class='textBox' style='width:41em;height:5em;'><?php print $current->MeetingObjectives; ?></textarea></div>
+         <div class='contentField'><span class='fieldLabel'>Next Meeting</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][NextMeeting]' id='NextMeeting' value='<?php print $current->NextMeeting; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Next Date</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][NextDate]' id='NextDate' value='<?php print $current->NextDate; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Next Time</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][NextTime]' id='NextTime' value='<?php print $current->NextTime; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Next Location</span><input type='text' name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][NextLocation]' id='NextLocation' value='<?php print $current->NextLocation; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Business ID</span><select name='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][BusinessID]' id='MeetingMinutes[<?php print $current->MeetingMinutesID; ?>][BusinessID]' class='genSelect'><option value='4'>Sanrio Inc.</option></select></div>      </span>
+   </div>
+</div>

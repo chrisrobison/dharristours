@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	userpass	personal	extras	ServerAdmin	check	cvs	LastModified
+152	interactivate.com	jettwein-pin	jettwein		htdocs	standard	192.168.1.7	80				1	logs/jettwein-pin.access_log	logs/jettwein-pin.error_log	combined	/u1/jettwein/projects/jettwein-pin		0		hostmaster@interactivate.com	1		20030522225318

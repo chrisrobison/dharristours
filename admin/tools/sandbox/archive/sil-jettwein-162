@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	develop_dir	develop_host	staging_dir	staging_host	personal	ServerAdmin
+162	interactivate.com	sil-jettwein	jettwein		htdocs	standard	192.168.1.7	80				1	logs/sil-jettwein.access_log	logs/sil-jettwein.error_log	combined	/projects/sil-jettwein					0	hostmaster@interactivate.com

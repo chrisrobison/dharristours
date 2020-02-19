@@ -1,0 +1,517 @@
+/*
+	Copyright (c) 2004-2009, The Dojo Foundation
+	All Rights Reserved.
+
+	Licensed under the Academic Free License version 2.1 or above OR the
+	modified BSD license. For more information on Dojo licensing, see:
+
+		http://dojotoolkit.org/book/dojo-book-0-9/introduction/licensing
+*/
+
+/*
+	Author: unscriptable
+	Date: Dec 13, 2008
+	dojocal Calendar Widget
+*/
+
+.dojocal {
+	position: relative;
+	overflow: hidden;
+	cursor: default;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.dojocal TD {
+	padding: 0;
+}
+
+.dojocal .monthView,
+.dojocal .dayView,
+.dojocal .weekView {
+	/* needed for animations */
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.dojocalHeaderWrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2em;
+	background: url(images/dojocalHeaderNullBg.png) center bottom #ffffff repeat-x;
+	z-index: 1; /* needed for dojocalShadow */
+	overflow: visible; /* needed for dojocalShadow */
+	border-bottom: 1px solid #cccccc;
+}
+
+.dojocalHeader {
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+}
+
+.dojocalHeaderTableOuter {
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background: url(images/dojocalHeaderBg.png) center top #e7e7e7 repeat-x;
+	border-collapse: collapse; /* not all browsers cascade this, so repeat it here */
+}
+
+.dj_ie7 .dojocalWeekColumn {
+	height: 100%; /* IE 7 needs this */
+}
+
+.dojocalHeaderTable {
+	border-right: 1px solid #cccccc;
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background: url(images/dojocalHeaderBg.png) center top #e7e7e7 repeat-x;
+	border-collapse: collapse; /* not all browsers cascade this, so repeat it here */
+}
+
+.dojocalDateLeader {
+	/* border, padding, width, and margin have to be exactly the same as .dojocalTimeColumn */
+	width: 4.5em;
+	background: url(images/dojocalHeaderBg.png) center top #e7e7e7 repeat-x;
+}
+
+.dojocalDateCell {
+	/* border, padding, width, and margin have to be exactly the same as .dojocalDayColumn */
+	border: 0;
+	padding: 0;
+	border-left: 1px solid #cccccc;
+	text-align: center;
+	vertical-align: middle;
+	width: 14.29%;
+	cursor: pointer;
+}
+
+.monthView .dojocalDateLeader {
+	width: 2em;
+}
+
+.dayView .dojocalDateCell {
+	width: 100%;
+}
+
+.dojocalDateCellText {
+	display: block;
+	overflow: hidden;
+	font-size: 87.5%; /* 14px */
+	font-weight: bold;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.monthView .dojocalDateLeader .dojocalDateCellText {
+	font-size: 62.5%;
+}
+
+.dojocalDateCellFirst {
+	/* style as needed */
+}
+
+.dojocalDateCellLast {
+	/* style as needed */
+}
+
+.dojocalShadow {
+	/*
+	 * IE needs this DIV because it can't seem to place a background image correctly in the .dojocalContainer element
+	 * we need to make the z-index of the .dojocalHeaderWrap greater than the .dojocalContainer, though for the shadow to appear
+	 */
+	background: url(images/dojocalContainerShadow.png) scroll top center repeat-x;
+	position: absolute;
+	width: 100%;
+	top: 100%;
+	left: 0;
+	height: 5px;
+	cursor: default; /* shadow is above grid, so we need to indicate to user that they can not click here */
+}
+
+.dojocalTimeColumn .dojocalShadow {
+	top: 0;
+}
+
+.dj_ie7.dj_iequirks .dojocalShadow,
+.dj_ie6 .dojocalShadow {
+	background: ;
+	font-size: 1px; /* Prevents IE 6 from making div too tall */
+	line-height: 1px; /* Prevents IE 6 from making div too tall */
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/dojocalContainerShadow.png', sizingMethod='scale')
+}
+
+.dojocalContainer {
+	position: absolute;
+	top: 2em; /* same as height of .dojocalHeaderWrap */
+	left: 0;
+	bottom: 80px; /* matches height of dojocalFooterWrap */
+	right: 0;
+	background-color: #ffffff;
+	overflow-y: scroll;
+	overflow-x: hidden; /* never, ever show a horiz scroll bar! */
+	z-index: 0;
+}
+
+.monthView .dojocalContainer {
+	bottom: 0; /* no need ot reserve room for the splitter */
+	overflow-y: hidden;
+}
+
+.dj_ie7.dj_iequirks .dojocalContainer,
+.dj_ie6 .dojocalContainer {
+	height: expression(offsetParent.offsetHeight - offsetTop - 80 + "px"); /* 80px matches height of dojocalFooterWrap */
+	width: 100%;
+	bottom: ; /* must clear this out for IE 6 to use the width/height */
+	right: ; /* must clear this out for IE 6 to use the width/height */
+}
+
+.dj_ie7.dj_iequirks .monthView .dojocalContainer,
+.dj_ie6 .monthView .dojocalContainer {
+	height: expression(offsetParent.offsetHeight - offsetTop + "px"); /* no need ot reserve room for the splitter */
+}
+
+.dojocalBody {
+	position: relative;
+	/* height: 96em; this is set inline in the HTML so that it may be easily obtained in Javascript */
+	font-size: 100%; /* this needs to be set here so that all elements below here use the same em height */
+	cursor: pointer;
+}
+
+.monthView .dojocalBody {
+	height: 100%;
+}
+
+.dojocalTableOuter {
+	position: relative;
+	z-index: 1; /* keep it above the dojocalDayRowsContainer horizontal lines (week view) */
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-collapse: collapse; /* not all browsers cascade this, so repeat it here */
+}
+
+.dojocalTable {
+	position: relative;
+	z-index: 1; /* keep it above the dojocalDayRowsContainer horizontal lines (day view) */
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-right: 1px solid #cccccc;
+	border-collapse: collapse; /* not all browsers cascade this, so repeat it here */
+}
+
+.dj_ie7.dj_iequirks .dojocalTable,
+.dj_ie6 .dojocalTable {
+	margin-bottom: -4px; /* fixes IE 6's bogus table sizing */
+}
+
+.dojocalTimeColumn {
+	/* border, padding, width, and margin have to be exactly the same as .dojocalDateLeader */
+	height: 100%;
+	width: 4.5em;
+	padding: 0;
+	background-color: #f9f9f9;
+}
+
+.dojocalTimeLayout {
+	position: relative;
+	height: 100%;
+}
+
+.dojocalWeekSelectorColumn {
+	width: 2em;
+	background-color: #f9f9f9;
+}
+
+.dojocalDayColumn {
+	/* border, padding, width, and margin have to be exactly the same as .dojocalDateCell */
+	width: 13.5%;
+	height: 100%;
+	border: 0;
+	border-left: 1px solid #cccccc;
+	padding: 0;
+	margin: 0;
+}
+
+.dayView .dojocalDayColumn {
+	width: 94.5%;  7 x weekly .dojocalDayColumn width
+}
+
+.dojocalDayColumn TR {
+	/* is this really needed? */
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.dj_ie .dojocalDayColumn {
+	width: 14.29%  /* friggin IE tables have their own rules (as usual) */
+}
+
+.dj_ie .dayView .dojocalDayColumn {
+	width: 100%;  /* 7 x weekly .dojocalDayColumn width */
+}
+
+.dojocalDayColumnLayout {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+}
+
+.dojocalDayColumnFirst {
+	/* style as needed */
+}
+
+.dojocalDayColumnLast {
+	/* style as needed */
+}
+
+.monthView .dojocalDayCell {
+	height: 16.6667%; /* there could be up to 6 rows in a month view */
+	border-left: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
+}
+
+.monthView .dojocalDayCellFirst {
+	/* style as needed */
+}
+
+.monthView .dojocalDayCellLast {
+	/* style as needed */
+}
+
+.monthView .dojocalDayCellOutOfMonth {
+	background: url(images/day-highlight-selected.png) repeat;
+	background: rgba(191, 191, 191, 0.13);
+}
+
+.monthView .dojocalDayCellHeader {
+	height: 1.5em;
+	line-height: 1.5em;
+	padding: 0 2px;
+	text-align: right;
+	vertical-align: baseline;
+	font-size: 75%;
+	font-weight: normal;
+	background-color: #eeeeee;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.dojocalDay-selected {
+	background: url(images/day-highlight-selected.png) repeat;
+	background: rgba(191, 191, 191, 0.13);
+}
+
+.dojocalDay-today {
+	background: url(images/day-highlight-today.png) repeat;
+	background: rgba(0, 53, 173, 0.13);
+}
+
+.dj_ie6 .dojocalDay-selected {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/day-highlight-selected.png", sizingMethod="scale");
+}
+
+.dj_ie6 .dojocalDay-today {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/day-highlight-today.png", sizingMethod="scale");
+}
+
+.dojocalTimeMarker {
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	overflow: visible;
+	background: url(images/time-highlight-bar.png) repeat-x left center;
+	z-index: 0;
+}
+
+.dojocalTimeMarkerInner {
+	position: relative;
+	top: -3px;
+	left: -7px;
+	height: 7px;
+	width: 7px;
+	display: block;
+	background: url(images/time-highlight-bulb.png) no-repeat left center;
+}
+
+.dj_ie6 .dojocalTimeMarker {
+	/* fixes increased height caused by extra text node */
+	font-size: 1px;
+	line-height: 1px;
+}
+
+.dojocalDayRowsContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.dojocalDayRow {
+	position: absolute;
+	width: 100%;
+	right: 0;
+	height: 1px;
+	overflow: hidden;
+	border-top: 1px dotted #cccccc;
+	padding: 0;
+}
+
+.dojocalDayRowHourly {
+	border-top: 1px solid #cccccc;
+}
+
+.dojocalTimeCell {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	vertical-align: top;
+}
+
+.dj_ie .dojocalTimeCell {
+	word-wrap: normal; /* IE needs this so it won't insert a line at the top when cell is too thin! */
+}
+
+.dojocalTimeCellText {
+	border-top: 1px solid #cccccc;
+	font-size: 75%;
+	padding: 2px 0.9em 2px 2px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+/* All Day Footer */
+.dojocalFooterWrap {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-top: 1px solid #cccccc;
+	background-color: #f9f9f9;
+	/* this must be in px for the IE hack, .dj_ie6 .dojocalContainer */
+	/* 72 = 80 (default height) - 1px border - 7px for splitter */
+	height: 72px;
+}
+
+.dojocalSplitter {
+	position: absolute;
+	top: -8px;
+	width: 100%;
+	height: 5px;
+	border-top: 1px solid #cccccc;
+	background-color: #ffffff;
+	cursor: n-resize;
+	cursor: row-resize;
+}
+
+.dojocalSplitterThumb {
+	margin: 0 auto; /* TODO: IE6 hack for this */
+	width: 19px;
+	height: 1px;
+	padding-top: 1px;
+	border-bottom: 2px solid #999999;
+}
+
+.dojocalSplitterWillCollapse {
+	color: #cccccc;
+}
+
+.dojocalSplitterWillCollapse .dojocalTableOuter {
+	background-color: #f0f0f0;
+}
+
+.dojocalFooter {
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+	background-color: #ffffff;
+}
+
+.dayView .dojocalFooter {
+	border-right: 1px solid #cccccc;
+}
+
+.dj_ie6 .dojocalFooter {
+	height: expression(offsetParent.offsetHeight - offsetTop + "px");
+}
+
+.dojocalTableOuter {
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse; /* not all browsers cascade this, so repeat it here */
+}
+
+.dojocalAllDayTimeColumn {
+	text-align: right;
+	vertical-align: middle;
+}
+
+.dojocalAllDayText {
+	font-size: 75%;
+	padding: 2px 0.9em 2px 2px;
+	white-space: nowrap;
+}
+
+.dojocalFooterCollapseDetector {
+	position: absolute;
+	height: 100%;
+	visibility: hidden;
+	/* IE 6 needs this so it doesn't expand the box with a phantom text node */
+	overflow: visible;
+}
+
+/* animation helper classes */
+
+.dojocal.animating .dojocalSplitterThumb {
+	visibility: hidden;
+}
+
+.dojocal.animating .dayView .dojocalDateLeader,
+.dojocal.animating .dayView .dojocalTimeColumn {
+	display: none;
+	width: 0; /* IE needs this since display:none isn't enough to collapse the column! */
+}
+
+.dojocal.animating .dayView .dojocalContainer {
+	overflow: hidden;
+}
+
+.dojocal.animating .dayView .dojocalBody {
+	width: 100%; /* IE needs this or it will still display space where the scrollbar was! */
+}
+
+.dojocal.animating .dayView .dojocalDayColumn {
+	border-width: 0 1px;
+}
+
+.dojocal.animating .dayView .dojocalFooterWrap {
+	padding-right: 0;
+}
+
+.dojocal .draggableEvent {
+	cursor: move;
+}

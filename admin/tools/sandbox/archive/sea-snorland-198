@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	userpass	personal	extras	ServerAdmin	check	cvs	LastModified
+198	interactivate.com	sea-snorland	snorland	SEA	htdocs	standard	192.168.1.7	80				1	logs/sea-snorland.access_log	logs/sea-snorland.error_log	combined	/u1/snorland/projects/sea-snorland		0		hostmaster@interactivate.com	1		20030527161327

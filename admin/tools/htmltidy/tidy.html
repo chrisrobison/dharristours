@@ -1,0 +1,83 @@
+<html>
+   <head>
+      <title>HTML Tidy</title>
+      <script language="JavaScript">
+
+      </script>
+      <style type="text/css">
+            BODY {
+               font-size:12px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .MAIN {
+               font-size:12px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIXED {
+               font-size:12px;
+               font-family:Courier New,Courier,LucidaConsole,Fixedsys;
+               color:#000000;
+            }
+            .optionname {
+               font-size: 9px;
+               font-family: Arial,Helvetica,SansSerif;
+            }
+            .options {
+               font-size: 9px;
+               font-family: Arial,Helvetica,SansSerif;
+            }
+      </style>
+   </head>
+   <body background="" bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#000099" alink="#ff0000" onLoad="">
+      <form name="tidy" action="index.cgi" method="POST">
+         <div id='tidyheading' class='heading'>HTML Tidy</div>
+         <div id='tidytagline' class='tagline'>Analyze, Validate and Cleanup your HTML and make it compliant</div>
+         <hr>
+         <div class='MAIN' style='padding-left: 24px; padding-right:24px;'>
+            <p>
+               HTML Tidy is a tool that will analyze an HTML/XHTML/XML document for compliance with 
+               current standards and either correct the problem or, if the system cannot discern a 
+               fix, warn you about the problem.  This tool will also "cleanup" your document, 
+               reformatting the content into a visually pleasing node indented format.  HTML Tidy 
+               is careful not to make any modifications which would change the visual layout or 
+               display of the content from it's original look and feel.  HTML Tidy will also cleanup
+               your PHP or Javascript code.  HTML Tidy will change your page replacing depracated or
+               proprietary elements with the Standards Compliant equivalents (e.g. all <tt>&lt;FONT..&gt;</tt> tags
+               are replaced with the CSS equivalent The only thing it cannot do is validate and cleanup
+               content which is generated from PHP or Javascript.  If you output a 
+               &quot;<span style='color:#aa0000;font-family:"Courier New",Courier,LucidaConsole,Fixedsys;'>
+               &lt;FONT COLOR=RED&gt;...&lt;/FONT&gt;</span>&quot; tag from your PHP or Javascript code, 
+               HTML Tidy will *NOT* be able to fix it.  
+            </p>
+            <hr>
+            <p>
+               <table border='1' cellspacing='1' cellpadding='4' class='options'><span class='options'>
+                  <tr><td class='options'><span class='optionname'>indent</span></td><td class='options'><span class='options'>indent element content</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>wrap</span></td><td class='options'><span class='options'>wrap text at the specified <column> (default is 68)</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>upper</span></td><td class='options'><span class='options'>force tags to upper case (default is lower case)</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>clean</span></td><td class='options'><span class='options'>replace FONT, NOBR and CENTER tags by CSS</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>bare</span></td><td class='options'><span class='options'>strip out smart quotes and em dashes, etc.</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>numeric</span></td><td class='options'><span class='options'>output numeric rather than named entities</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>errors</span></td><td class='options'><span class='options'>only show errors</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>quiet</span></td><td class='options'><span class='options'>suppress nonessential output</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>omit</span></td><td class='options'><span class='options'>omit optional end tags</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>xml</span></td><td class='options'><span class='options'>specify the input is well formed XML</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>asxml</span></td><td class='options'><span class='options'>convert HTML to well formed XHTML</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>asxhtml</span></td><td class='options'><span class='options'>convert HTML to well formed XHTML</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>ashtml</span></td><td class='options'><span class='options'>force XHTML to well formed HTML</span></td></tr>
+                  <tr><td class='options'><span class='optionname'>access</span></td><td class='options'><span class='options'>do additional accessibility checks (<level> = 1, 2, 3)</span></td></tr>
+               </table>
+            <br>
+            Enter a URL or paste your HTML content:
+            <br>
+            <textarea cols='100' rows='25' name='content' class='MAIN'></textarea>
+            </p>
+         </div>
+
+
+      </form>
+   </body>
+</html>
+

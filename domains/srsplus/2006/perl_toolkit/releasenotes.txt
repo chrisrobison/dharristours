@@ -1,0 +1,157 @@
+Perl API for Linux Toolkit Release Notes
+
+API Version: 4.1
+Release Date: August 2009
+
+(Documentation last updated: February, 2008)
+
+This is a new version (4.0) of the Perl API for Linux.
+It is suggested that you upgrade to this version of
+the API as time permits, especially if you would like
+to implement any new features.
+
+
+NEW FEATURES:
+-------------
+New API function to resubmit an failed transfer. Partners can now re-submit an existing transfers from the account without proceeding from the first step. Mandatory parameter is the transfer ID. Domain and Tld cannot be resubmitted. Current Admin email, auth code can be resubmitted.
+
+ 
+HOW TO UPGRADE:
+---------------
+1) Stop any services that may be using the DotSRS_Client.pm file
+2) Rename the existing DotSRS_Client.pm file to something like
+DotSRS_Client_3_3.pm.  You will need to copy your configuration
+information from it.
+3) Copy the new DotSRS_Client.pm file to the same location as the
+old one.
+4) Copy your configuration information from the old file to the
+new file.
+
+PREVIOUS RELEASE NOTES:
+----------------------
+Changes in version 4.0 (September 2009):
+---------------------------------------
+Provision for registering domains with .ar.com, .gd, .cx tlds added
+
+1)Ability to register .ar.com, .gd, .cx domains through API.
+2)Ability to perform operations on .ar.com, .gd, .cx domains through API.
+
+
+Changes in version 3.9 (February 2008):
+---------------------------------------
+Provision for IN and ES (.in, .co.in, .net.in, .org.in, .firm.in, .gen.in, .ind.in, .es, .com.es, .org.es, .nom.es) tlds added
+
+1)Ability to register IN and ES (.in, .co.in, .net.in, .org.in, .firm.in, .gen.in, .ind.in, .es, .com.es, .org.es, .nom.es) domains through API.
+2)Ability to perform operations on IN and ES(.in, .co.in, .net.in, .org.in, .firm.in, .gen.in, .ind.in, .es, .com.es, .org.es, .nom.es) domains through API.
+
+Changes in version 3.8 (December 2007):
+---------------------------------------
+Provision for CentralNIC Phase II(br.com,cn.com,gb.com,gb.net,hu.com,jpn.com,kr.com,no.com,qc.com,ru.com,sa.com,se.com,se.net,uk.net,uy.com,za.com) tlds added
+
+1)Ability to register CentralNIC Phase II(br.com,cn.com,gb.com,gb.net,hu.com,jpn.com,kr.com,no.com,qc.com,ru.com,sa.com,se.com,se.net,uk.net,uy.com,za.com) domains through API.
+2)Ability to perform operations on CentralNIC Phase II(br.com,cn.com,gb.com,gb.net,hu.com,jpn.com,kr.com,no.com,qc.com,ru.com,sa.com,se.com,se.net,uk.net,uy.com,za.com) domains through API.
+
+
+Changes in version 3.7 (September 2007):
+---------------------------------------
+
+Provision for CentralNIC(us.com,uk.com,de.com,eu.com & .la) and .AM/.FM tlds added
+
+1)Ability to register CentralNIC(us.com,uk.com,de.com,eu.com & .la) and AM/FM domains through API.
+2)Ability to perform operations on CentralNIC(us.com,uk.com,de.com,eu.com & .la) and AM/FM domains through API.
+
+
+
+Changes in version 3.6 (April 2007):
+---------------------------------------
+
+Provision for .MOBI tld added
+
+1)Ability to register .MOBI domains through API.
+2)Ability to perform operations on .MOBI domains through API.
+
+Changes in version 3.5 (October 2006):
+---------------------------------------
+
+COM/NET EPP Upgrade
+
+1)Ability to request authcode for domains.
+2)Ability to perform operations on COM/NET domains through EPP.
+
+
+Changes in version 3.4 (November 2005):
+---------------------------------------
+
+Support added for Advanced DNS (ADNS)
+
+1) Register ADNS info (A, MX, CNAME) for a domain through
+   'Register Domain/MultiDomain' request.
+2) Query ADNS info (A, MX, CNAME) through 'Whois' request.
+3) Modify ADNS info (A, MX, CNAME) through 'Change Domain' request.
+4) Register, Query, Modify, and Delete nameservers.
+
+
+
+Changes in version 3.3 (January 2005):
+---------------------------------------
+1) Partners now have the ability to manage private registration
+to domains registered through their API.
+
+2) Please refer to section 4.7 in the updated Developer's guide
+for details of implementation.
+
+
+Changes in version 3.2 (October 2002):
+---------------------------------------
+1)Support for .name domains was added (i.e., support for 
+domain parameters with two levels).
+
+2)The documentation has been updated to reflect item #1 and
+changes in the referral link program.  In addition, various
+errors have been corrected and some sections have been enhanced
+in an effort to make the integration process even more clear
+and straightforward.
+
+
+
+Additions in version 3.1 (January 2002):
+---------------------------------------
+The request_transfer function has been changed.
+It has different parameters and required fields.
+See the updated Developer's Guide for more
+information.
+
+The documentation has been updated.
+
+
+
+Additions in version 3.0 (August 2001):
+---------------------------------------
+New get_contact_info method for retrieving all fields of a
+contact record given the contact_id.
+
+New Transfer commands to support com/net/org domains:
+
+	request_transfer
+	outbound_transfer_response
+	view_pending_transfers
+
+See the updated Developer's Guide for more information about
+these commands.
+
+
+
+Additions in version 2.0 (April 2001):
+--------------------------------------
+New NameServer functions for querying, registering and releasing
+.tv name servers:
+
+	register_nameserver
+	release_nameserver
+	get_nameserver_info
+
+The example script provided doubles as the certification test
+script.  You no longer need to create a separate test script 
+of your own!
+
+Fixed bug where self->{'error'} was not being set appropriately

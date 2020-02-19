@@ -1,0 +1,64 @@
+#!/usr/local/bin/php
+<?php
+$base = ($_SERVER['DOCUMENT_ROOT']) ?  $_SERVER['DOCUMENT_ROOT'] : "/simple";
+require($base . '/lib/boss_class.php'); 
+require 'Services/Twilio.php';
+
+array_shift($argv);
+$host = ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : array_shift($argv);
+$boss= new boss($host);
+$in = $_REQUEST;
+
+if ($in['Notify']) {
+   $store['Notify'] = $in['Notify'];
+   $newid = $boss->storeObject($store);
+}
+
+// Set our AccountSid and AuthToken
+$sid = 'AC715921a3209c46399873e89058f0666d';
+$token = '90781d3c3844396b0c38c933a8c583ca';
+
+// Get list of phone numbers
+// $numbers = $_REQUEST['phone'];
+$n = $boss->getObject("Notify", "`When`<=now()");
+$notify = $n->Notify;
+
+// Instantiate a client to Twilio's REST API
+$client = new Services_Twilio($sid, $token);
+print "<pre>";
+foreach ($notify as $key=>$item) {
+   if (!preg_match("/^_/", $key)) {
+      if (($item->Attempts >= $item->MaxAttempts) && ($item->BackupVoice)) {
+         $number = $item->BackupVoice;
+      } else {
+         $number = $item->Voice;
+      }
+
+      if ($item->Voice) {
+         try {
+            $call = $client->account->calls->create(
+               $item->Caller, // Added for upgraded clients
+               $number,
+               "https://$host/apps/notify/notify.php?id={$item->NotifyID}"
+            );
+
+            file_put_contents("/tmp/notify.log",$number.' | ' . "https://$host/apps/notify/notify.php?id={$item->NotifyID}\n", FILE_APPEND);
+            print "Call trans-op [$number]: $call->sid\n";
+
+         } catch (Exception $e) {
+
+            print 'Error starting phone call: ' . $e->getMessage() . "\n";
+         }
+      }
+
+      if ($notify[$key]->SMS) {
+      
+      }
+
+      if ($notify[$key]->Email) {
+
+      }
+   }
+}
+print "</pre>";
+?>

@@ -1,0 +1,205 @@
+#!/usr/bin/perl
+
+my $opts = { 'v' => 'verbose',
+				 'o' => 'owner permissions',
+				 'g' => 'group permissions',
+				 's' => 'safer permissions',
+				 'q' => 'quick permissions'
+			  };
+
+my @files = ();
+while ($arg = shift @ARGV) {
+   if ($arg =~ /^\-\-(\w)(\w+?)=(.*)/) {
+      $in{$1} = $3;
+      $in{$1.$2} = $3;
+   } elsif ($arg =~ /^\-(\w)/) {
+      $in{$1} = 1;
+   } else {
+		push(@files, $arg);
+	}
+}
+
+if ((!@files) || ($in{'help'} || $in{'h'} || $in{'?'})) {
+   my @o = keys %{$opts};
+   print "Usage: $0 [-".join("] [-", @o)."] FILE|DIR [FILE|DIR]...\n\n";
+   print "\tSafely change permissions recursively for files and directorys.\n\n\tSafer permissions ('s') is slower but checks file type more reliably (uses 'file' command).\n\tQuick permissions ['q'] is faster but only checks file extensions for file type\n\tusing execute permissions by default to avoid breaking scripts sans extension (sh/perl/etc)\n\n\tOptions:\n";
+   foreach $o (@o) {
+      print "\t$o: $opts->{$o}\n";
+   }
+   print "\n";
+   exit;
+}
+
+# my @files = (@files, @ARGV);
+$in{'q'} = 1 if (!$in{'Q'} && !$in{'s'});
+$in{'g'} = 1 if (!$in{'o'} && !$in{'G'});
+
+print "Executing with options: \n";
+foreach $k (keys %in) {
+	print "\t".$opts->{$k}."\n" if ($opts->{$k});
+}
+print "\n";
+
+if ($in{'s'}) {
+   $default_dir = 0775;
+   $default_exec = 0755;
+   $default_data = 0664;
+} elsif ($in{'g'}) {
+   $default_dir = 0775;
+   $default_exec = 0775;
+   $default_data = 0664;
+} else {
+   $default_dir = 0755;
+   $default_exec = 0755;
+   $default_data = 0644;
+}
+($mime, $mimetypes) = getTypes('/usr/local/etc/apache22/mime.types');
+
+($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell,$expire) = getpwnam($in{'user'}) if ($in{'user'});
+my $gid = 20;
+my $cnt = 0;
+my $fixed = 0;
+my $done = 0;
+while (my $file = shift @files) {
+	++$cnt;
+	$file =~ s/\/\//\//g;
+	if (($file =~ /^(\/bin|\/usr|\/etc|\/var|\/dev|\/proc|\/sbin)/) || ($file =~ /^(\/)$/)) {
+		die "Illegal directory $1 specified.  Exiting.\n";
+	}
+	my @path = split(/\//, $file);
+	my $fn = pop @path;
+
+   next if ($fn =~ /^\./);
+   next if (-l $file);
+	$curmode = getPerms($file);
+
+   if (-d $file) {
+		if ($curmode != $default_dir) {
+         $uid = (stat($file))[4];
+			chmod $default_dir, $file;
+			chown $uid, $gid, $file if ($uid);
+
+			print "chmod ".sprintf("%04o", $default_dir)." $file \[DIRECTORY\]\n" if ($in{'v'});
+		} else {
+			print "Directory $file permissions already set.  Skipping...\n" if ($in{'v'});
+		}
+      opendir(D, "$file");
+         while (my $newfile = readdir D) {
+            next if ($newfile =~ /^\./);
+            my($newmode, $type) = getType("$file/$newfile");
+            push(@files, "$file/$newfile");
+         }
+      closedir D;
+   } else {
+      $curowner = (stat($file))[4];
+      my($newmode, $type) = getType($file);
+		if ($curmode == $newmode) {
+			print "$file permissions already set.  Skipping...\n";
+			next;
+		}
+      $uid = (stat($file))[4];
+		print "chmod ".sprintf("%04o", $newmode)." $file \[$type\]\n" if ($in{'v'});
+      chmod $newmode, "$file" if ($newmode != $curmode);
+      chown $uid, $gid, $file if ($uid);
+   }
+}
+
+print "Permissions reset for ".(($in{'g'}) ? '-GROUP-' : '-OWNER-')." access on $cnt files.\n";
+
+sub getPerms {
+   my $file = shift @_;
+
+   my $mode = (stat($file))[2];
+   my $perms = sprintf("%04o", $mode & 07777);
+   
+   return $perms;
+}
+
+sub getType {
+   my $file = shift @_;
+   
+   $file =~ s/\\//g;
+   $file =~ s/\"/\\\"/g;
+#   $file =~ s/(\s)/\\$1/g;
+   if ($file =~ /[^\w\-\/\.\"\s\\]/) { $file =~ s/([^\w\-\/\.\"\s\\])/\\$1/g; }
+	
+	my $type = '';
+	my $mode = '';
+	
+	if ($in{'q'}) {
+		my @parts = split(/\./, $file);
+		my $ext = pop @parts;
+		
+		if ($mime->{$ext}) {
+			$type = $mime->{$ext};
+			$mode = $mimetypes->{$ext};
+		} elsif ($file =~ /CVS/) {
+			$type = $default_data;
+			$mode = "DATA [CVS File]";
+		} else {
+			$type = $default_exec;
+			$mode = "EXECUTABLE [best guess]";
+		}
+# 		elsif ($file =~ /\.(pl|sh|cgi)/i) {
+# 			$type = $default_exec;
+# 			$mode = 'EXECUTABLE';
+# 		} else {
+# 			$type = $default_data;
+# 			$mode = 'DATA FILE';
+# 		}
+	} else {
+		if (!-d $file) {
+			$f = `/usr/bin/file "$file"`;
+			chomp($f);
+
+			if ($f =~ /exec/i) {
+				$type = $default_exec;
+				$mode = 'EXECUTABLE';
+			} else {
+				$type = $default_data;
+				$mode = 'DATA FILE';
+			}
+		} else {
+			$type = $default_exec;
+			$mode = "DIRECTORY";
+		}
+	}
+   return $type, $mode;
+}
+sub fileType {
+	my $file = shift;
+
+	my $f = `/usr/bin/file "$file"`;
+	chomp($f);
+
+	if ($f =~ /exec/i) {
+		$type = $default_exec;
+		$mode = 'EXECUTABLE [file]';
+	} else {
+		$type = $default_data;
+		$mode = 'DATA FILE [file]';
+	}
+	return($type, $mode);
+}
+sub getTypes {
+	my $mimefile = shift;
+	my %mime;
+	my %mimetypes;
+
+	open(MIME, $mimefile) or die "Error opening $mimefile for reading: $!";
+		while (my $line = <MIME>) {
+			$line =~ s/\#.*//;
+			chomp $line;
+			next if ($line !~ /\w/);
+			my @items = split(/\s+/, $line);
+			my $type = shift @items;
+			foreach (@items) {
+				$mime{$_} = ($type =~ /application/) ? $default_exec : $default_data;
+				$mimetypes{$_} = $type;
+			}
+		}
+	close MIME;
+
+	return(\%mime, \%mimetypes);
+}
+

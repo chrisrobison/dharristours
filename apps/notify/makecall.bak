@@ -1,0 +1,52 @@
+<?php
+require($_SERVER['DOCUMENT_ROOT'] . '/lib/boss_class.php'); 
+require 'Services/Twilio.php';
+
+$boss= new boss($_SERVER['HTTP_HOST']);
+$in = $_REQUEST;
+
+// Set our AccountSid and AuthToken
+$sid = 'AC715921a3209c46399873e89058f0666d';
+$token = '90781d3c3844396b0c38c933a8c583ca';
+
+// Get list of phone numbers
+// $numbers = $_REQUEST['phone'];
+$n = $boss->getObject("Notify");
+$notify = $n->Notify;
+
+// Instantiate a client to Twilio's REST API
+$client = new Services_Twilio($sid, $token);
+
+foreach ($notify as $key=>$item) {
+
+   if (!preg_match("/^_/", $key)) {
+
+// I added a NotifyHistory table for moving out of table
+// We should perform cleanup before making call 
+// if MaxAttempts=Attempts, call BackupVoice with message
+
+      if ($item->Voice) {
+         try {
+            $call = $client->account->calls->create(
+               $item->Caller, // Added for upgraded clients
+               $item->Voice,
+               'http://'.$_SERVER['HTTP_HOST'].'/apps/notify/notify.php?id=' . $item->NotifyID
+            );
+            $out['Notify'][$item->NotifyID]['Attempts'] = $item->Attempts + 1;
+            $boss->storeObject($out);
+
+            file_put_contents("/tmp/notify.log",$item->Voice.' | ' . 'http://'.$_SERVER['HTTP_HOST'].'/apps/notify/notify.php?id=' . $item->NotifyID ."\n", FILE_APPEND);
+            print "<pre>Call trans-op [$number]: $call->sid</pre>\n";
+
+         } catch (Exception $e) {
+
+            print 'Error starting phone call: ' . $e->getMessage() . "\n";
+         }
+      }
+
+      if ($notify[$key]->SMS) {
+
+      }
+   }
+}
+?>

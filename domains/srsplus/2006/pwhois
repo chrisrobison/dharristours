@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+
+my @attr = ('FNAME', 'LNAME', 'ORGANIZATION', 'ADDRESS1', 'CITY', 'PROVINCE', 'POSTAL CODE', 'COUNTRY', 'PHONE', 'EMAIL');
+my @types = ('RESPONSIBLE PERSON', 'BILLING CONTACT', 'ADMIN CONTACT', 'TECHNICAL CONTACT');
+
+while ($dom = shift @ARGV) {
+	my $client = new DotSRS_Client;
+   
+	my ($name, $ext) = split(/\./, $dom, 2);
+
+	my ($ref) = $client->whois($name, $ext);
+   
+	foreach my $type (@types) {
+		print "\n".$type.": ".$ref->{$type}."\n",'_'x78,"\n\n";
+		delete $ref->{$type};
+		foreach my $attr (@attr) {
+			print "\t$attr: ".$ref->{$attr.' '.$type}."\n";
+			delete $ref->{$attr.' '.$type};
+		}
+	}
+	foreach $k (sort(keys(%{$ref}))) {
+		print "$k: $ref->{$k}\n";
+	}
+}
+

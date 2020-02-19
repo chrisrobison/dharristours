@@ -1,0 +1,135 @@
+--_000_A86BF79E41E99842AA13D60FC87B589E6BBB0064GGPDENEX01Parks_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hi there, Joe and Rashida.
+
+I keep forgetting that SFUSD is requiring teachers to submit for bussing transportation requests now, so I actually can't make the bus reservation for Friday. Below are the reservation details:
+
+# Passengers: 34
+Date: Friday, February 21
+Total Reservation Time: 9:30am-2:30pm
+
+Pickup time: 9:30am
+Pickup Location: John Muir Elementary, 380 Webster, San Francisco
+Destination Drop-off: 1199 East Beach, San Francisco
+
+Destination Pickup time: 2pm
+Destination Pickup Address: 1199 East Beach, San Francisco
+Return to school Drop-off Address: John Muir Elementary, 380 Webster, San Francisco
+Final Drop-off Time: 2:30pm
+
+I'm cc'ing D'Harris Tours so they can put a hold if they have a bus available. Apologies again, but I'm still not accustomed to going through the school to make reservations.
+
+
+Best,
+
+PaHoua Lee
+Pronouns:  she, her, they, them
+Manager, Community Services and Programs
+Crissy Field Center | Golden Gate National Parks Conservancy
+1199 East Beach, Presidio
+San Francisco, CA  94129
+tel: (415) 561-7764 | fax: (415) 561-7695
+http://www.parksconservancy.org/programs/crissy-field-center/
+
+Crissy Field Center encourages new generations to become bold leaders for thriving parks, healthy communities and an environmentally just society.
+
+P A R K S  F O R  A L L  F O R E V E R
+
+
+--_000_A86BF79E41E99842AA13D60FC87B589E6BBB0064GGPDENEX01Parks_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<meta name="Generator" content="Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Helvetica;
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext="edit" spidmax="1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext="edit">
+<o:idmap v:ext="edit" data="1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang="EN-US" link="#0563C1" vlink="#954F72">
+<div class="WordSection1">
+<p class="MsoNormal">Hi there, Joe and Rashida.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal">I keep forgetting that SFUSD is requiring teachers to submit for bussing transportation requests now, so I actually can&#8217;t make the bus reservation for Friday. Below are the reservation details:<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b># Passengers</b>: 34<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Date</b>: Friday, February 21<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Total Reservation Time</b>: 9:30am-2:30pm<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Pickup time</b>: 9:30am<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Pickup Location</b>: John Muir Elementary, 380 Webster, San Francisco<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Destination Drop-off</b>: 1199 East Beach, San Francisco<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Destination Pickup time</b>: 2pm<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Destination Pickup Address</b>: 1199 East Beach, San Francisco<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Return to school Drop-off Address</b>: John Muir Elementary, 380 Webster, San Francisco<o:p></o:p></p>
+<p class="MsoNormal" style="margin-left:.5in"><b>Final Drop-off Time</b>: 2:30pm<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal">I&#8217;m cc&#8217;ing D&#8217;Harris Tours so they can put a hold if they have a bus available. Apologies again, but I&#8217;m still not accustomed to going through the school to make reservations.<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal">Best,<o:p></o:p></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class="MsoNormal"><b><span style="color:black">PaHoua Lee</span></b><span style="color:black">&nbsp;</span><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><i><span style="color:black">Pronouns:&nbsp; she, her, they, them</span></i><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black">Manager, Community Services and Programs</span><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black">Crissy Field Center | Golden Gate National Parks Conservancy<br>
+1199 East Beach, Presidio</span><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black">San Francisco, CA&nbsp; 94129</span><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black">tel: (415) 561-7764 | fax: (415) 561-7695
+<br>
+</span><span style="color:#26282A"><a href="http://www.parksconservancyorg/programs/crissy-field-center/" target="_blank"><span style="color:blue">http://www.parksconservancy.org/programs/crissy-field-center/</span></a><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="color:black">&nbsp;</span><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><b><i><span style="color:#E36C0A">Crissy Field Center encourages new generations to become bold leaders for thriving parks, healthy communities and an environmentally just society.</span></i></b><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><b><span style="color:#E36C0A">&nbsp;</span></b><span style="color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><b><span style="font-family:&quot;Arial&quot;,sans-serif;color:#E36C0A">P A R K S&nbsp; F O R&nbsp; A L L&nbsp; F O R E V E R</span></b><span style="font-family:&quot;Helvetica&quot;,sans-serif;color:#26282A"><o:p></o:p></span></p>
+<p class="MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_A86BF79E41E99842AA13D60FC87B589E6BBB0064GGPDENEX01Parks_--

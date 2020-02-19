@@ -1,0 +1,111 @@
+body {  font-family:"Helvetica Neue",Optima,'Gill Sans','Gill Sans MT',Verdana,Arial,Helvetica,sans-serif;font-size:14px;background-color:#f0f0f0;}
+UL.filetree {
+	font-family: Verdana, sans-serif;
+	font-size: 11px;
+	line-height: 1.8em;
+	padding: 0px;
+	margin: 0px;
+}
+
+UL.filetree LI {
+	list-style: none;
+	padding: 0px;
+	padding-left: 20px;
+	margin: 0px;
+	white-space: nowrap;
+}
+
+/* Core Styles */
+.filetree LI.directory { background: url(/img/icons/files/directory.png) left top no-repeat; }
+.filetree LI.expanded { background: url(/img/icons/files/folder_open.png) left top no-repeat; }
+.filetree LI.file { background: url(/img/icons/files/file.png) left top no-repeat; }
+.filetree LI.wait { background: url(/img/icons/files/spinner.gif) left top no-repeat; }
+/* File Extensions*/
+.filetree LI.ext_3gp { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_afp { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_afpa { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_asp { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_aspx { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_avi { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_bat { background: url(/img/icons/files/application.png) left top no-repeat; }
+.filetree LI.ext_bmp { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_c { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_cfm { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_cgi { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_com { background: url(/img/icons/files/application.png) left top no-repeat; }
+.filetree LI.ext_cpp { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_css { background: url(/img/icons/files/css.png) left top no-repeat; }
+.filetree LI.ext_doc { background: url(/img/icons/files/doc.png) left top no-repeat; }
+.filetree LI.ext_exe { background: url(/img/icons/files/application.png) left top no-repeat; }
+.filetree LI.ext_gif { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_fla { background: url(/img/icons/files/flash.png) left top no-repeat; }
+.filetree LI.ext_h { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_htm { background: url(/img/icons/files/html.png) left top no-repeat; }
+.filetree LI.ext_html { background: url(/img/icons/files/html.png) left top no-repeat; }
+.filetree LI.ext_jar { background: url(/img/icons/files/java.png) left top no-repeat; }
+.filetree LI.ext_jpg { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_jpeg { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_js { background: url(/img/icons/files/script.png) left top no-repeat; }
+.filetree LI.ext_lasso { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_log { background: url(/img/icons/files/txt.png) left top no-repeat; }
+.filetree LI.ext_m4p { background: url(/img/icons/files/music.png) left top no-repeat; }
+.filetree LI.ext_mov { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_mp3 { background: url(/img/icons/files/music.png) left top no-repeat; }
+.filetree LI.ext_mp4 { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_mpg { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_mpeg { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_ogg { background: url(/img/icons/files/music.png) left top no-repeat; }
+.filetree LI.ext_pcx { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_pdf { background: url(/img/icons/files/pdf.png) left top no-repeat; }
+.filetree LI.ext_php { background: url(/img/icons/files/php.png) left top no-repeat; }
+.filetree LI.ext_png { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_ppt { background: url(/img/icons/files/ppt.png) left top no-repeat; }
+.filetree LI.ext_psd { background: url(/img/icons/files/psd.png) left top no-repeat; }
+.filetree LI.ext_pl { background: url(/img/icons/files/script.png) left top no-repeat; }
+.filetree LI.ext_py { background: url(/img/icons/files/script.png) left top no-repeat; }
+.filetree LI.ext_rb { background: url(/img/icons/files/ruby.png) left top no-repeat; }
+.filetree LI.ext_rbx { background: url(/img/icons/files/ruby.png) left top no-repeat; }
+.filetree LI.ext_rhtml { background: url(/img/icons/files/ruby.png) left top no-repeat; }
+.filetree LI.ext_rpm { background: url(/img/icons/files/linux.png) left top no-repeat; }
+.filetree LI.ext_ruby { background: url(/img/icons/files/ruby.png) left top no-repeat; }
+.filetree LI.ext_sql { background: url(/img/icons/files/db.png) left top no-repeat; }
+.filetree LI.ext_swf { background: url(/img/icons/files/flash.png) left top no-repeat; }
+.filetree LI.ext_tif { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_tiff { background: url(/img/icons/files/picture.png) left top no-repeat; }
+.filetree LI.ext_txt { background: url(/img/icons/files/txt.png) left top no-repeat; }
+.filetree LI.ext_vb { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_wav { background: url(/img/icons/files/music.png) left top no-repeat; }
+.filetree LI.ext_wmv { background: url(/img/icons/files/film.png) left top no-repeat; }
+.filetree LI.ext_xls { background: url(/img/icons/files/xls.png) left top no-repeat; }
+.filetree LI.ext_xml { background: url(/img/icons/files/code.png) left top no-repeat; }
+.filetree LI.ext_zip { background: url(/img/icons/files/zip.png) left top no-repeat; }
+#main { position:absolute;top:0px;bottom:0px;left:0px;right:0px; }
+#toolbar { width:auto;height:2.5em;padding:2px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAsCAMAAACT+SJTAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGBQTFRFAgICREREBAMDBgYGEhMTTU5NT1BQHR0eCAgJFRUVMzQ0UlJSAQIBLi4uERARDQwMCgoLNjY2Dw4OJSUkPT09QUBBODg5HR0dISAhKioqS0pLGhoaU1NTVFRUSEhIGBgYPzFKlAAAAEpJREFUeNoMy1sSgjAURMEWFPEFQgQTjbL/XXLr/E312HydZUnxcLV6WRz8fZx0bqpfVGOZQpSQKXz2jufm4mgwGz312qjBfRdgAJM2AwGJNoxsAAAAAElFTkSuQmCC") repeat-x scroll 0 0 #000000;}
+#fileTree { position:absolute;top:2.8em;bottom:0px;left:10px;width:363px;padding:10px 10px 10px 20px;border-right:2px ridge #666666; overflow-x:auto;overflow-y:auto; }
+#browser { position:absolute;top:0px;bottom:4px;left:405px;right:4px;border-left:outset 2px #cccccc; background-color: #eeeeee; }
+#browserFrame { position:absolute;top:0px;bottom:4px;left:0px;right:4px;background-color:#fff; }
+#toolbar { white-space:nowrap; }
+#toolbar ul { list-style: none;margin:0;padding:0;}
+#toolbar li { display:inline-block;height:25px; min-width:50px; vertical-align:middle;text-align:center;}
+#toolbar a {cursor:pointer;}
+#toolbar li:hover, .hover { cursor: pointer; outline: 1px outset #b0b0b0; }
+.tool { position: relative; padding: 1em;height: 45px; width: 50px; cursor: pointer; }
+.selected { background-color:#aaccff; }
+#treeRoot { position:relative;left:-1em; } 
+#toggleFilePane { 
+   -moz-border-radius:0 !important;
+   -webkit-border-radius:0 !important;
+   border-radius:0 !important;
+   -moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none;
+   height:28px !important;
+   right:1px;
+   margin:0px !important;
+   padding:.7em 0 0 0 !important;
+   position:absolute;
+   top:0px;
+   width:16px; 
+   z-index:9999;
+   border-width:1px;
+}
+#mainPane { position:relative;height:100%;width:405px;background-color:#fff; }
+/* input[name="userfile"] { left:-200px !important; } */

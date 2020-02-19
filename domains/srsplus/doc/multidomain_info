@@ -1,0 +1,31 @@
+#!/usr/bin/perl 
+use DotSRS_Client; 
+
+$domain_ref = { };
+$domain_cnt = 1;
+
+while ($domain = shift @ARGV) {
+   print "Adding domain: $domain\n" if ($debug);
+   if ($domain =~ /(.+?)\.([^\.]*)/) {
+      $dom = $1;
+      $tld = $2;
+   } else {
+      ($dom, $tld) = split(/\./, $domain, 2);
+   }
+   print "Name: $dom\tTLD: $tld\n\n" if ($debug);
+
+   $domain_ref->{'DOMAIN '.$domain_cnt} = $dom;
+   $domain_ref->{'TLD '.$domain_cnt} = $tld;
+   $domain_cnt++;
+}
+
+# create the object 
+$srs_client = new DotSRS_Client; 
+
+($ref) = $srs_client->multidomain_info($domain_ref); 
+
+foreach $idx (1..$domain_cnt-1) {
+   print $domain_ref->{'DOMAIN '.$idx}.'.'.$domain_ref->{'TLD '.$idx}.":\t";
+   print $ref->{'DOMAIN STATUS '.$idx}."\n";
+}
+

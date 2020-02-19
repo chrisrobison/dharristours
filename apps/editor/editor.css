@@ -1,0 +1,27 @@
+
+body {
+   margin: 0px;
+   padding: 0px;
+	font-size: 12px;
+	font-family: Arial, Verdana, Sans-Serif;
+}
+
+td, input, select, textarea {
+	font-size: 12px;
+	font-family: Arial, Verdana, Sans-Serif;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 180%;
+	margin-bottom: 10px;
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+iframe {
+   height: 95%;
+}

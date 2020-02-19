@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+$path = "/usr/local/bin";
+$prod = "admin.simpsf.com";
+$dev  = "dev.simpsf.com";
+$auth = "-upimp -ppimpin";
+
+while ($client = shift @ARGV) {
+   $client =~ s/\W//g;
+   $client =~ s/^SS_//;
+   $db = "SS_".ucfirst($client);
+   
+   $results = `$path/mysqlshow -h$dev $auth | grep $db`;
+
+   if ($results) {
+      print "$db exists in development. Archiving...\n";
+      $time = time();
+      $results = `$path/mysqldump -ER --triggers --compact -h$dev $auth $db > /simple.dev/clients/.archives/$db.$time.sql`;
+      $results = `$path/mysqladmin -f -h$dev $auth drop $db`;
+   } 
+
+   $results = `$path/mysqladmin -h$dev $auth create $db`;
+   $results = `$path/mysqldump -ER --compact -h$prod $auth $db | $path/mysql -h$dev $auth $db`;
+}
+

@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use CDR::Input;
+$| = 1;
+my $srs = new DotSRS_Client;
+my $dom = shift @ARGV;
+my $email = shift @ARGV;
+
+die "No domain specified for registration." if (!$dom);
+use Data::Dumper;
+
+($domain, $tld) = split(/\./, $dom);
+
+print "Requesting registration of domain [$domain.$tld]\n\n";
+
+# Verify domain availability
+$ref = $srs->domain_info( $domain, $tld) or die "Error retrieving domain information for $domain.$tld\n";
+
+print Dumper($ref);
+if ($ref->{'DOMAIN STATUS'} eq 'FIXED') {
+   $price = $ref->{'PRICE'};     # Grab the price
+   print "$domain.$tld is available for \$$price\n";
+} else {
+   die "Domain does not appear to be available.  Exiting...\n";
+}
+
+$domain_ref = {   
+    'DOMAIN'            => $domain,
+    'TLD'               => $tld,
+    'TERM YEARS'        => 1,
+    'RESPONSIBLE PERSON'=> 0,
+    'TECHNICAL CONTACT' => 0,
+    'DNS SERVER NAME 1' => 'ns.netoasis.net',
+    'DNS SERVER NAME 2' => 'ns2.netoasis.net',
+    'PRICE'             => $price
+};
+
+print "Proceed? [Yn] ";
+my $ans = getKey('y', 1);
+chomp $ans;
+
+if (($ans eq '') || ($ans =~ /y/i)) {
+   my ( $reqid, $ref ) = $srs->register_domain( 1, $domain_ref );
+
+	if ( $ref ){
+      print "\tREQUESTID:  $request_id\n";
+		foreach $key (keys %{ $ref }) {
+			print "$key : ", $ref->{$key},"\n";
+		}
+      print "Successfully registered domain $domain.$tld\n\n";
+	} else {
+      print "Error registering domain: ".$srs->{'error'}."\n";
+		die "Domain registration failed\n";
+	}
+} else {
+	print "\nDomain registration aborted.\n";
+}
+

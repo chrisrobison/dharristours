@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+while (<>) {
+   chomp;
+
+   print "Checking domain: $_\n" if $debug;
+   $dom = $_;
+
+   open(H, "/usr/local/bin/host -t ns $_ 66.181.15.84 |");
+      @ns = ();
+      while ($l = <H>) {
+         next if ($l !~ /$dom/);
+         if ($l =~ /name\sserver\s(.*)$/) {
+            $chk = $1;
+            if ($chk =~ /(netoasis|pimp|modns)/i) {
+               push(@ns, $1);
+            }
+         }
+      }
+   close H;
+   
+   if ($#ns < 0) {
+      print "delete from DNSRecord where Zone like '\%$dom\%';\n";
+   }
+   print "\t".join("\n\t", @ns)."\n\n" if $debug;
+
+}

@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	develop_dir	develop_host	staging_dir	staging_host	personal	ServerAdmin	cvs	LastModified
+192	interactivate.com	mag-cdr	cdr	MAG	htdocs	standard	192.168.1.7	80				1	logs/mag-cdr.access_log	logs/mag-cdr.error_log	combined	/u1/cdr/projects/mag-cdr					0	hostmaster@interactivate.com		20030524012305

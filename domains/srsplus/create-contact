@@ -1,0 +1,33 @@
+#!/usr/bin/perl 
+# 
+# usage:    ./createContact.pl --TLD=tv --FNAME=Patrick --LNAME=Peterson --ORGANIZATION="Simple Software, Inc." --EMAIL=patrick@simpsf.com --ADDRESS1="1232 Market Street, #120" --ADDRESS2= --CITY="San Francisco" --PROVINCE="CA" --POSTAL CODE=94114 --COUNTRY=US --PHONE="415-555-1212"
+#
+use lib qw ( /usr/local/www/perl-libs ); 
+use DotSRS_Client;
+use JSON;
+
+$in = {};
+while ($arg = shift @ARGV) {
+   if ($arg =~ /^--(\w+)=(.*)/) {
+      $in->{$1} = $2; 
+   } elsif ($arg =~ /^--(\w+)/) {
+      $last = $1;
+      $tmp = shift @ARGV;
+
+      if ($tmp =~ /(\w+)=(.*)/) {
+         $key = $last.' '.$1;
+         $in->{$key} = $2;
+      }
+   }
+}
+
+#print encode_json $in;
+
+# create the object 
+$srs_client = new DotSRS_Client; 
+($contact_id, $request_id) =  $srs_client->create_contact( 1, $in ); 
+if ($contact_id) { 
+    print '{"SRSID":'. $contact_id .', "RequestID": '. $request_id . ', "Status": "OK" }'; 
+} else { 
+    print '{"Status":"ERROR", "Error": "' . $srs_client->{'error'} . '"}'; 
+}

@@ -1,0 +1,45 @@
+<?php
+   require($_SERVER['DOCUMENT_ROOT'] . '/lib/boss_class.php'); 
+   require 'Services/Twilio.php';
+	require 'Services/Twilio/Twiml.php';
+   
+   $boss= new boss($_SERVER['HTTP_HOST']);
+   $in = $_REQUEST;
+   
+	$digit = isset($_REQUEST['Digits']) ? $_REQUEST['Digits'] : null;
+	$choices = array(
+		'1' => 'Yes',
+		'2' => 'No'
+	);
+   
+   $notify = $boss->getObject("Notify", $in['id']);
+   $parts = preg_split("/\s*\,\s*/", $notify->Choice);
+   foreach ($parts as $part) {
+      list($key, $val) = preg_split("/\=/", $part);
+      $choices[$key] = $val;
+   }
+
+	if ($choices[$digit]) {
+      $out['Notify'][$in['id']]['Response'] = $digit;
+      $boss->storeObject($out);
+
+      file_put_contents("/tmp/notify.log", "Recorded response of '$digit' or '{$choices[$digit]}' for Notify ID {$in['id']}\n", FILE_APPEND);
+      $say = 'Thank you. Your response of ' . $digit . ' or '. $choices[$digit] . ' has been noted.';
+	} else {
+		$notify = $boss->getObject('Notify', $_GET['id']);
+      $notify->Attempts++;
+      $notify->Response = $digit;
+
+      $out['Notify'][$in['id']] = $notify;
+      $boss->storeObject($out);
+      file_put_contents("/tmp/notify.log", "Invalid response '$digit' for Notify ID {$in['id']}\n", FILE_APPEND);
+      $say = "I find your inability to follow instructions disturbing and have noted your behavior. I may give you one more chance and call you back.";
+	}
+	
+   $response = new Services_Twilio_Twiml();
+	$response->say($say);
+	$response->hangup();
+	header('Content-Type: text/xml');
+	print $response;
+	
+?>

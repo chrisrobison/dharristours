@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AllowSystem</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>Calendar</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.widget.calendar</string>
+	<key>CFBundleName</key>
+	<string>Calendar</string>
+	<key>CFBundleShortVersionString</key>
+	<string>4.0.3</string>
+	<key>CFBundleVersion</key>
+	<string>18</string>
+	<key>CloseBoxInsetX</key>
+	<integer>6</integer>
+	<key>CloseBoxInsetY</key>
+	<integer>3</integer>
+	<key>Height</key>
+	<integer>163</integer>
+	<key>MainHTML</key>
+	<string>Calendar.html</string>
+	<key>Plugin</key>
+	<string>Calendar.widgetplugin</string>
+	<key>Width</key>
+	<integer>333</integer>
+</dict>
+</plist>

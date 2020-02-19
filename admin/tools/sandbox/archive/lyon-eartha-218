@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	userpass	personal	extras	ServerAdmin	check	cvs	LastModified
+218	interactivate.com	lyon-eartha	eartha	LYON	htdocs	standard	192.168.1.7	80				1	logs/lyon-eartha.access_log	logs/lyon-eartha.error_log	combined	/u1/eartha/projects/lyon-eartha		0		hostmaster@interactivate.com	1		20030611125841

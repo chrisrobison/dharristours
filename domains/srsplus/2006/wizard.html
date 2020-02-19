@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Domain Setup Wizard</title>
+  <link rel="stylesheet" href="default.css" type="text/css">
+  <script language="JavaScript" src='default.js' type="text/javascript"> </script>
+</head>
+
+<body class="MAIN" onload="#alert#">
+  <form name="wizard" action="index.cgi" method="post">
+    <input type="hidden" name="Choice" value=""> 
+    <input type="hidden" name="Modified" value=""> 
+    <input type="hidden" name="WizardID" value="#WizardID#"> 
+    <input type="hidden" name="u" value="#SignupID#">
+
+    <center>
+      <div id='wizardFrame' class="MAIN">
+        <table cellspacing="0" cellpadding='0' class='TBLMAIN' hspace='0' vspace='0'>
+          <tr>
+            <td colspan='2' class='TBLTITLE'><span class='HEADER' style='color:#ffffff;'>#Title#</span></td>
+          </tr>
+
+          <tr>
+            <td valign='top' width='160' style='width:160px;'>
+              <table border='0' cellpadding='2' cellspacing='0' width='160'>
+                <tr>
+                  <td valign='top'><div id='wizardImage'><div id='wizardIcon'><img src="img/wizard3.png" height='300' width='150' hspace='4' vspace='4' border='0'></div><div id='wizardAni'><img src="img/ani-road.gif" width='26' height='27' border='0' hspace='0' vspace='0'></div</td>
+                </tr>
+              </table>
+            </td>
+
+            <td align='left' valign='top' style="padding: 4px;" width='640'>
+              <table border='0' cellpadding='3' cellspacing='2' style='height:19em;width:100%;' hspace='0' vspace='0'>
+                <tr>
+                  <td align='left'><span class='HEADER'>#Heading#</span><hr></td>
+
+                </tr>
+                <tr>
+                  <td valign='top' height='100%'>
+                     <div id='wizardDesc' class='MAIN' style='font-size:.70em;'>
+                        #Desc# #Description#
+                     </div>
+                  </td>
+                </tr>
+                <tr><td valign='top' height='100%'><hr style='padding:0px;margin:0px;'></td></tr>
+                <tr>
+                  <td valign='top' height='100%'>
+                     <div id='wizardForm' class='MAIN'>
+                        #Form#
+                     </div>
+                  </td>
+                </tr>
+              </table>
+              <hr style='padding:0px;margin:0px;'>
+              <table border="0" width="100%" cellpadding="4" cellspacing="1" class='TBLBTNS'>
+                <tr>
+                  <td colspan='2' align='right' width='100%'>
+                    <div id='recbtns' style='width:100%;text-align:right;'>
+                      <span id='BackBtnWrap' class='BTNS'><input tabindex='16' type='button' id='BackBtn' value='&lt; Back' onclick="doBack();" class='btnbtn'></span>
+                      <span id='NextBtnWrap' class= 'BTNS'><input tabindex='15' type='button' id='NextBtn' value='Next &gt;' onclick="doNext();" class='btnbtn'></span>&nbsp;&nbsp;
+                    </div>
+                  </td>
+
+<!--                  <td align='right' style='background-color:#d0d0d0;' colspan='3'>
+                    <div id='recbtns' style='width:50%;background-color:#d0d0d0;'>
+                      <span id='CancelBtnWrap' class='btn'><input type='button' id='CancelBtn' value='Cancel' style='width:72px;' onclick="doCancel();" class='btnbtn'></span>
+                    </div>
+                  </td>
+-->
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <input type='text' name='debug' onchange='eval(this.value)' style='display:none;'>
+      </div>
+    </center>
+  </form>
+</body>
+</html>

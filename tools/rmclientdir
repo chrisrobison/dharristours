@@ -1,0 +1,15 @@
+#!/bin/sh
+
+CLIENTSDIR=/simple.dev/clients
+      
+cd $CLIENTSDIR
+
+for CLIENT in $*; do
+   if [ -d "${CLIENTSDIR}/${CLIENT}" ]; then
+      echo "Archiving ${CLIENT} to ${CLIENT}.tgz"
+      /usr/bin/tar -zcvf "${CLIENT}.tgz" "${CLIENT}"
+      echo "Removing ${CLIENT} directory ${CLIENTSDIR}/${CLIENT}"
+      rm -R "${CLIENTSDIR}/${CLIENT}"
+   fi
+done
+

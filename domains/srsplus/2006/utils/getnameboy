@@ -1,0 +1,77 @@
+#!/usr/bin/perl
+
+
+my $names = getNames(@ARGV);
+
+#use Data::Dumper;
+#print Dumper($names);
+foreach my $dom (sort(keys(%{$names}))) {
+   foreach my $tld (sort(keys(%{$names->{$dom}}))) {
+		print "$dom.$tld: $names->{$dom}->{$tld}\n";
+	}
+
+}
+
+
+sub getNames {
+   my $url = shift @_;
+   my $url2 = shift @_;
+
+   my ($dom, $tld, $avail, $i);
+   my $domain = { };
+
+   use WWW::Mechanize;
+   my $agent = WWW::Mechanize->new();
+   $agent->agent("Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.5) Gecko/20030916");
+   $agent->get("http://www.nameboy.com/");
+   $agent->form(1);
+   my $html = $agent->current_form();
+
+   $agent->field('primary', $url);
+   $agent->field('secondary', $url2) if ($url2);
+
+   my $clicked = 0;
+   eval {
+      $results = $agent->click('go nameboy go!');
+      $clicked = 1;
+   };
+   $results = $agent->click() if ($clicked != 1);
+
+   while ($results->{'_rc'} == 302) {
+      $results = $agent->get($results->{_headers}->{location});   
+   }
+   
+   $x = $$;
+   open(TMP, ">/tmp/$x.html");
+      print TMP $results->{'_content'};
+   close TMP;
+   open(WWW, "/usr/local/bin/lynx -width 220 -dump /tmp/$x.html |");
+      while (my $www = <WWW>) {
+         next if ($www !~ /com|net|org/);
+         next if ($www !~ /biz/);
+         $www =~ s/^\s*//;
+         if ($www =~ /^(\w+)\s+/) {
+            $dom = $1;
+         }
+         $domain->{$dom} = { };
+         @items = split(/\s\s+/, $www);
+         foreach $i (@items) {
+            if ($i =~ /\[\d+\](\w+)/) {
+               $tld = $1;
+               $avail = 0;
+            } elsif ($i =~ /(\w+)\s\[_\]/) {
+               $tld = $1;
+               $avail = 1;
+            }
+            next if (($tld eq 'Intl'));
+            
+            $domain->{$dom}->{$tld} = $avail;
+         }
+      }
+   close WWW;
+   
+   unlink("/tmp/$$.html");
+   
+   return $domain;
+}
+

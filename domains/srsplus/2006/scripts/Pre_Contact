@@ -1,0 +1,21 @@
+
+if ($dat{'AcctType'} eq 'login') {
+   my $contact = $data->{'dbh'}->selectrow_hashref("select * from Contact where User='$in{'User'}'");
+   if ($contact->{'ContactID'}) {
+      %dat = (%dat, %{$contact});
+   }
+}
+
+my $cth = $dbh->prepare("select * from Countries order by priority");
+$cth->execute();
+
+while (my $country = $cth->fetchrow_hashref) {
+	$s = ($dat{'Country'} eq $country->{'Code'}) ? ' SELECTED' : '';
+   $dat{'Countries'} .= "<option value='$country->{'Code'}'$s>$country->{'Country'}</option>\n";
+}
+
+$dat{'Fname'} = "First Name" if (!$dat{'Fname'});
+$dat{'Lname'} = "Last Name" if (!$dat{'Lname'});
+
+1;
+

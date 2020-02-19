@@ -1,0 +1,37 @@
+--00000000000015c0a0059e64be1d
+Content-Type: text/plain; charset="UTF-8"
+
+Hello,
+
+*Please provide a price quote for the following trip*
+
+Leave Date: June 2, 2020 - pick up time 7:30am
+Return Date: June 3, 2020 - pick up time 3:15am
+
+*Disneyland Park*
+*1313 Disneyland Drive*
+*Anaheim, Ca 92802*
+
+55 Passenger bus
+
+--
+*Pattie Newsome*
+
+
+*Main Office Administrative Assistant*
+
+*John O'Connell HS*
+
+*2355 Folsom Street*
+
+*San Francisco, Ca 94110*
+
+*(415) 695-5370 ext 3*
+
+--00000000000015c0a0059e64be1d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir="ltr"><div class="gmail_default" style="font-family:verdana,sans-serif">Hello,</div><div class="gmail_default" style="font-family:verdana,sans-serif"><br></div><div class="gmail_default" style="font-family:verdana,sans-serif"><b>Please provide a price quote for the following trip</b></div><div class="gmail_default" style="font-family:verdana,sans-serif"><br></div><div class="gmail_default" style="font-family:verdana,sans-serif">Leave Date: June 2, 2020 - pick up time 7:30am</div><div class="gmail_default" style="font-family:verdana,sans-serif">Return Date: June 3, 2020 - pick up time 3:15am</div><div class="gmail_default" style="font-family:verdana,sans-serif"><br></div><div class="gmail_default" style="font-family:verdana,sans-serif"><b>Disneyland Park</b></div><div class="gmail_default" style="font-family:verdana,sans-serif"><b>1313 Disneyland Drive</b></div><div class="gmail_default" style="font-family:verdana,sans-serif"><b>Anaheim, Ca 92802</b></div><div class="gmail_default" style="font-family:verdana,sans-serif"><br></div><div class="gmail_default" style="font-family:verdana,sans-serif">55 Passenger bus</div><div><br></div>-- <br><div dir="ltr" class="gmail_signature" data-smartmail="gmail_signature"><div dir="ltr"><div><div dir="ltr"><div><div dir="ltr"><div dir="ltr"><div><div><div><div><div><span style="background-color:rgb(243,243,243)"><font size="6"><i><font face="georgia, serif" color="#0000ff">Pattie Newsome</font></i></font></span></div><div><span style="background-color:rgb(243,243,243)"><i><font face="georgia, serif" size="2" color="#0000ff"><br></font></i></span></div><span style="background-color:rgb(243,243,243)"><i><font face="verdana, sans-serif" color="#0000ff">Main Office Administrative Assistant<br></font></i></span></div><span style="background-color:rgb(243,243,243)"><i><font face="verdana, sans-serif" color="#0000ff">John O&#39;Connell HS<br></font></i></span></div><span style="background-color:rgb(243,243,243)"><i><font face="verdana, sans-serif" color="#0000ff">2355 Folsom Street<span></span><br></font></i></span></div><span style="background-color:rgb(243,243,243)"><i><font face="verdana, sans-serif" color="#0000ff">San Francisco, Ca 94110<br></font></i></span></div><i><span style="background-color:rgb(243,243,243)"><font face="verdana, sans-serif" color="#0000ff">(415) 695-5370 ext 3</font></span><br></i><div><div><div><div><i><br></i></div></div></div></div></div></div></div></div></div></div></div></div>
+
+--00000000000015c0a0059e64be1d--

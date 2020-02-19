@@ -1,0 +1,20 @@
+Date: #RFCDate#
+To: juanaharrisdht@att.net
+Cc: #ModifiedBy#, #CreatedBy#
+Bcc: patrick@simplesoftwaresf.com,cdr@netoasis.net
+From: Email System <no-reply@simplesoftwaresf.com>
+Subject: [Quote] Quote '#QuoteID#' has been updated
+
+Quote ID #QuoteID# has been updated.  Current quote details are as follows:  
+
+      Quote ID: #QuoteID#
+    Updated By: #LastModifiedBy#
+
+          Date: #Date#
+Pickup Address: #Pickup#
+    Start Time: #StartTime#
+
+  Contact Name: #ContactName#
+ Contact Phone: #ContactPhone#
+
+#URL#

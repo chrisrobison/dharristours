@@ -1,0 +1,93 @@
+/*
+	Copyright (c) 2004-2009, The Dojo Foundation
+	All Rights Reserved.
+
+	Licensed under the Academic Free License version 2.1 or above OR the
+	modified BSD license. For more information on Dojo licensing, see:
+
+		http://dojotoolkit.org/book/dojo-book-0-9/introduction/licensing
+*/
+
+/*
+	Author: unscriptable
+	Date: Dec 13, 2008
+*/
+
+.dojocalEvent {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	font-size: 75%;
+	overflow: hidden;
+	z-index: 10;
+}
+
+.dojocalEventTime {
+	position: relative; /* to keep it above the background */
+	margin: 2px 4px 0 4px;
+	white-space: nowrap;
+}
+
+.dojocalEventTimeText {
+	line-height: 1.25em;
+	font-weight: bold;
+}
+
+.dojocalEventTitle {
+	position: relative; /* to keep it above the background */
+	margin: 0 4px;
+}
+
+.dojocalEventTitleText {
+	line-height: 1.25em;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.dojocalEventBorder {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #777777;
+}
+
+.dojocalEventBackground {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	opacity: 0.4;
+	-moz-opacity: 0.4;
+	filter: Alpha(opacity=40);
+	background-color: #000;
+}
+
+.dj_ie7.dj_iequirks .dojocalEventBorder,
+.dj_ie7.dj_iequirks .dojocalEventBackground,
+.dj_ie6 .dojocalEventBorder,
+.dj_ie6 .dojocalEventBackground {
+	right: ;
+	bottom: ;
+	width: expression(offsetParent.offsetWidth + 'px');
+	height: expression(offsetParent.offsetHeight + 'px');
+}
+
+.dojocalEvent-selected {
+	z-index: 20;
+}
+
+.dojocalEvent-selected .dojocalEventBackground {
+	opacity: 0.85;
+	-moz-opacity: 0.85;
+	filter: Alpha(opacity=85);
+}
+

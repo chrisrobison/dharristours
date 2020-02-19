@@ -1,0 +1,12 @@
+#!/usr/local/bin/php
+<?php
+   $buses = array( 2302, 2502, 2503, 2802, 3301, 3601, 3801, 4001, 4402 );
+
+   $tpl = file_get_contents("showwhere_template.html");
+
+   foreach ($buses as $bus) {
+      $html = preg_replace("/\#\#Bus\#\#/", $bus, $tpl);
+      file_put_contents($bus.".html", $html);
+      print "Wrote $bus.html\n";
+   }
+?>

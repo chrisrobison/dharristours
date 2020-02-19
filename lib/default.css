@@ -1,0 +1,200 @@
+BODY {
+   font-family: Verdana,Arial,Helvetica,sans-serif;
+   font-size: 11px;
+   margin:0;
+   padding:0;
+}
+
+.tableDiv {
+   position: absolute;
+   border: 1px solid black;
+   width: 20em;
+   height: auto;
+   -moz-box-shadow: 3px 5px 6px rgba(0,0,0,.35);
+   -webkit-box-shadow: 3px 5px 6px rgba(0,0,0,.35);
+   box-shadow: 3px 5px 6px rgba(0,0,0,.35);
+}
+
+.transparent {
+   -moz-opacity:.70;
+   -khtml-opacity:.70;
+   filter: progid: DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+
+.tableHeading {
+   position: relative;
+   height: 14px;
+   background-color: #000099;
+   color: white;
+   font-weight: bold;
+   padding: 2px;
+   cursor: default;
+}
+
+.fieldContainer {
+   top: 20px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+}
+
+.tableField {
+   position: relative;
+   right: 0px;
+   left: 0px;
+   padding: 3px 4px 3px 22px;
+   border-bottom: 1px solid #ccddff;
+   background-color: white;
+   cursor: default;
+   margin: 0px;
+}
+
+.tableField:hover {
+   background-color: #ffffcc;
+}
+
+.fieldDef {
+   float: right;
+   font-size: .9em;
+}
+#colname {
+   position: relative;
+   width: 10em;
+   font-size: .9em;
+   border: 1px inset #a0a0a0;
+   z-index: 1001;
+}
+#coltypes {
+   position: absolute;
+   z-index: 100;
+   top: 202px;
+   left: 25px;
+   display: none;
+   z-index: 1001;
+}
+#colattr {
+   font-size: .9em;
+   position: relative;
+   border: 1px inset #a0a0a0;
+   width: 2em;
+   z-index: 1001;
+}
+#coltype[type=button] {
+  border: outset 1px rgb(204, 204, 204);
+  background-color: #ffff00;
+  background-image:url("/apps/dbedit/img/btn_arrow_open.png");
+  background-repeat:no-repeat;
+  background-position:center;
+  width:16px;
+  height:16px;
+  -moz-border-radius:0px;
+}
+
+.typelist {
+   text-align: right;
+   font-size: .9em;
+   width: 8em;
+   height: 16px;
+   position: relative;
+   z-index: 1001;
+   top: 1px;
+   border: 0px;
+}
+.newField {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   width: 12px;
+   height: 1em;
+   border-left: 1px solid #f0f0f0;
+   border-top: 1px solid #f0f0f0;
+   border-bottom: 1px solid #909090;
+   border-right: 1px solid #909090;
+   vertical-align: sub;
+   font-size: 1.4em;
+   padding: 0px;
+   background-color: #d0d0d0;
+}
+.primaryKey { background-image: url('/apps/dbedit/img/primary_key.png'); background-repeat: no-repeat; }
+.multiKey { background-image: url('/apps/dbedit/img/multi_key.png'); background-repeat: no-repeat; }
+
+.tableCol0 { left: 1em; }
+.tableCol1 { left: 22em; }
+.tableCol2 { left: 44em; }
+.tableCol3 { left: 66em; }
+
+.tableRow0 { top: 1em; }
+.tableRow1 { top: 20em; }
+.tableRow2 { top: 38em; }
+.tableRow3 { top: 56em; }
+.tableRow4 { top: 74em; }
+.tableRow5 { top: 92em; }
+.tableRow6 { top: 110em; }
+.tableRow7 { top: 128em; }
+.tableRow8 { top: 146em; }
+
+#debug {
+   position:absolute;
+   top:0px;
+   right:0px;
+   width:30em;
+   height:100%;
+   border:2px inset #909090;
+   background-color:#ffffc0;
+   display: none;
+}
+
+.toggleBtn {
+   position: absolute;
+   background-image: url("/apps/dbedit/img/btn_arrow_open.png");
+   top: 2px;
+   right: 0px;
+   height: 16px;
+   width: 16px;
+   padding: 0px;
+   margin: 0px;
+   float:right;
+}
+
+.toggleUp {
+   position: absolute;
+   background-image: url("/apps/dbedit/img/btn_arrow_close.png");
+   top: 2px;
+   right: 0px;
+   height: 16px;
+   width: 16px;
+   padding: 0px;
+   margin: 0px;
+   float:right;
+}
+
+#save {
+  float:left;top:1px;padding-right:1px;position:relative; 
+}
+#toolbar span {
+   font-size:1.1em;
+   font-weight: bold;
+   margin: .2em 1em;
+}
+#tblbtn { 
+   font-size: 1.2em; 
+   -moz-text-shadow: 1px 1px 1px rgba(255,255,255,.7);
+}
+.newtbl {
+   font-weight: bold;
+   margin-top: .2em;
+   height: 24px;
+   position: relative;
+}
+#toolbar {
+   position: relative;
+   height: 2.5em;
+   border-bottom: 2px outset #777;
+   -moz-box-shadow: 4px 4px 4px rgba(0,0,0,.5);
+   -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,.5);
+   -box-shadow: 4px 4px 4px rgba(0,0,0,.5);
+   background: #999;
+   -moz-opacity: .8;
+   -webkit-opacity: .8;
+   opacity: .8;
+}

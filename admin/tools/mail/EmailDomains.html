@@ -1,0 +1,35 @@
+                    <table border='0' cellpadding='3' cellspacing='1'>
+                       <tr>
+                     <td align="right" class="MAIN"><span class='FIELD'>View:</span></td>
+                          <td valign="top" colspan='2'>
+                             <select name="view" onChange="checkChanges('change_table') && setTimeout('document.forms[0].submit();', 150);" style='width:175px;' class='MAIN'>
+                               <option value='all'>All Domains</option>
+                               <option value='my'>My Domains</option>
+                             </select>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td valign="top" align="right" class="MAIN" NOWRAP><span class='FIELD'>Domains:</span></td>
+                          <td valign="top">
+                             <select name="domainID" size="20" onChange="checkChanges('lookup') && setTimeout('document.forms[0].submit();', 150);" class='LIST' style='width:175px;'>
+                                #domains#
+                             </select>
+                          </td>
+                       </tr>
+                    </table>
+                 </td>
+                <td valign='top'>
+         <table border='0' cellpadding='3' cellspacing='1'>
+            <tr><td class='TBLFIELD' colspan='2' style="padding-bottom:8px;border-bottom:1px solid #808080;"><span class='HEADING'>Mail Server Configuration for #domain#</span></td></tr>	  
+            <tr><td class='TBLFIELD' colspan='2' style="height:5px;padding:0px;margin:0px;border-top:1px solid #ffffff"><span class='myHR' style='height:1px;padding:0px;margin:0px;border-top:1px solid #ffffff; width:100%;'> &nbsp;</span></td></tr>	  
+            <tr><td align='right' class='TBLFIELD'><span class='FIELD'>Domain ID:</span></td><td class='MAIN'><span id='curKey' class='STATIC'>#domainID#</span></td></tr>	  
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Email Domain:</span></td><td class='MAIN'><input type='text' name='domain' size='35' value='#domain#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Parent Domain:</span></td><td class='MAIN'><input type='text' name='parent' size='50' value='#parent#' class='DATA' onChange='doChange();'> <span class='MAIN'>[Optional]</span></td></tr>
+
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Owner Account:</span></td><td class='MAIN'><input type='text' name='client' size='13' value='#client#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Server Type:</span></td><td class='MAIN'><select name='type' size='1' class='MAIN'><option value='local'#type_local#>Local</option><option value='enhanced'#type_enhanced#>Enhanced</option><option value='virtual'#type_virtual#>Virtual</option><option value='forward'#type_forward#>Forward Only</option></select></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Administrators:</span></td><td class='MAIN'><input type='text' name='adminuser' size='50' value='#adminuser#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Spam Threshold:</span></td><td class='MAIN'><input type='text' name='spam' size='25' value='#spam#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'>&nbsp;</td><td class='MAIN'><input type='checkbox' name='virus' value='true' class='DATA' onChange='doChange();'#virus#><span class='FIELD'>Virus Protection</span><span class='FIELD' style='padding-left: 28px;'><input type='checkbox' name='active' value='true' class='DATA' onChange='doChange();'#active#><span class='FIELD'>Account Active</span></span></td></tr>
+
+         </table>

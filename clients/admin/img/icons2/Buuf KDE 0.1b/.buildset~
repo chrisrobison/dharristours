@@ -1,0 +1,198 @@
+#!/bin/bash
+
+# (C) Nick Bargnesi nbargnesi at den-4.com
+# This script is distributed under the GPL.  See the file GPL.
+# If you make any improvements, feel free to email me any changes. nbargnesi at den-4.com
+
+#Updated By: 	Guppetto (guppetto@msn.com)
+#Updated On: 	09/11/2004
+#Version:	buildset 1.1
+#Changes: 	Mandrake kmenu Icon creation code added, Error Messages were updated,
+#		Kmenu icon creation message was updated, index.desktop update comment was added	 
+
+# modified by HaMMeR=GoM= for better functionality with Aqua_Project ( 03/07/2007 )
+
+# PACKAGENAME is the final tarred, compressed, iconset.
+PACKAGENAME="Buuf_for_KDE_0.1"
+REQUIRED_SIZES="32x32 22x22 16x16"
+
+# DEFINE NEW SIZES HERE
+#	These are sizes for everything except the actions folder, which contains
+#	menu and toolbar related stuff for KDE.  Add or remove a size here, I
+#	would recommend not removing the 32, 22, and 16 sizes.
+#
+#	Note:
+#	If you add additional sizes, you must update your index.desktop file to 
+#	access the additional icons. I've added the non-standard 56x56 category 
+#	as an example.
+ 
+SIZES="128x128 96x96 72x72 64x64 48x48 $REQUIRED_SIZES"
+DIRS="actions apps devices filesystems mimetypes" # no actions directory needed, its hardcoded
+
+CONVERT_PATH=
+TAR_PATH=
+COMPRESSOR=
+function checkCompressor() {
+	echo -ne "Checking for bzip2... "
+	FOUND=`which bzip2`
+	if [ "$FOUND" != "" ]; then
+		echo -ne "found $FOUND\n"
+		COMPRESSOR=$FOUND
+		return
+	else
+		echo -ne " no.\n"
+		echo -ne "Checking for gzip... "
+		FOUND=`which gzip`
+		if [ "$FOUND" != "" ]; then
+			echo -ne "found $FOUND\n"
+			COMPRESSOR=$FOUND
+			return
+		else
+			echo -ne " no.\n"
+			echo -ne "\nNo compressor found (bzip2 | gzip).\n"
+			exit 1
+		fi
+	fi
+}
+function checkNeeded() {
+	echo -ne "Checking for tar... "
+	FOUND=`which tar`
+	if [ "$FOUND" != "" ]; then
+		echo -ne " found $FOUND\n"
+		TAR_PATH=$FOUND
+		echo -ne "Checking for convert... "
+		FOUND=`which convert`
+		if [ "$FOUND" != "" ]; then
+			echo -ne " found $FOUND\n"
+			CONVERT_PATH=$FOUND
+			return
+		else
+			echo -ne " no.\n"
+			echo -ne "\nNo convert found in path.\n"
+			exit 1
+		fi
+	else
+		echo -ne " no.\n"
+		echo -ne "\nNo tar found in path.\n"
+		exit 1
+	fi
+}
+function printFound() {
+	echo -ne "\nDependencies met - this script is using:\n"
+	echo -ne "\t\t$COMPRESSOR as compressor\n"
+	echo -ne "\t\t$TAR_PATH as tar path\n"
+	echo -ne "\t\t$CONVERT_PATH as convert path\n"
+}
+
+echo -ne "This script builds an installable KDE iconset using bash and convert.\n"
+echo -ne "Change what you want, add additional sizes, whatever... :)\n"
+echo
+
+checkCompressor
+checkNeeded
+printFound
+echo
+#echo -ne "You get your choice of kmenu icons. If your distribution uses a special naming "
+#echo -ne "convention for the kmenu icon (i.e. Mandrake) you should add the special name for the "
+#echo -ne "kmenu icon to the build script and submit the updated script to nbargnesi@den-4.com, "
+#echo -ne "u_nbargnesi@umassd.edu, or guppetto@msn.com. Hopefully in the future this script will be  "
+#echo -ne "able to create the correct Kmenu icon for every distribution (I can dream cant I). Check "
+#echo -ne "the 128x128/apps/ directory for alternate icons that can be selected as the kmenu icon \n"
+#echo -ne "\nSelect a kmenu icon from the following choices: \n"
+#echo -ne "\n\tkmenu_apple,kmenu_appleb,kmenu_apple-gball_blue,kmenu_apple-gball_red,kmenu_baghira,kmenu_mdk,kmenu_mdk2, kmenu_redhat,kmenu_suse,kmenu_tux_apple,kmenu_tux,kmenu_happy, and enter it now (case sensitive - dont put (.png) at the end of your selection): "
+#read KMENU_ICON
+#echo -ne "\nUsing the $KMENU_ICON.png icon as your kmenu icon.\n"
+
+# Add your distributions kmenu specific icon name below. 
+# The line cp -f 128x128/apps/$KMENU_ICON.png 128x128/apps/menuk-mdk.png
+# was added to create the required icon for Mandrake Linux.
+
+#if test -f 128x128/apps/$KMENU_ICON.png
+#	then
+#		cp -f 128x128/apps/$KMENU_ICON.png 128x128/apps/kmenu.png
+#		cp -f 128x128/apps/$KMENU_ICON.png 128x128/apps/go.png
+#		
+#	Mandrake Specific Kmenu Icon to create
+#
+#		cp -f 128x128/apps/$KMENU_ICON.png 128x128/apps/menuk-mdk.png
+#
+#	Distribution Specific Kmenu Icon to create
+#
+#	else
+#		echo -ne "Invalid selection ($KMENU_ICON), the $KMENU_ICON icon was not found in the .128x128/apps/ directory....exiting...\n"
+#		exit 1
+#fi
+echo -ne "Ready to go!  Converting all icons! (about 10 minutes on an Athlon 64)\n"
+echo
+
+#Loop directory creation according to SIZES specified at startup
+for size in $SIZES
+do
+	for dir in $DIRS
+	do
+		mkdir -p $size/$dir
+	done
+done
+
+# Required sizes for actions
+#mkdir -p 32x32/actions 22x22/actions 16x16/actions
+
+# Mmmm... loops...
+for dir in $DIRS
+do
+	cd 128x128/$dir
+	for icon in *
+	do
+		# Loop the specified sizes
+		for size in $SIZES
+		do
+			convert "$icon" -resize $size ../../$size/$dir/"$icon"
+		done
+	done
+	# Move from 128x128/$directory to toplevel
+	cd ../../
+done
+
+# Move from 128x128/ to 32x32/
+#cd 128x128/actions
+#for icon in *
+#do
+#	convert "$icon" -resize 32x32 ../../32x32/actions/"$icon"
+#	convert "$icon" -resize 22x22 ../../22x22/actions/"$icon"
+#	convert "$icon" -resize 16x16 ../../16x16/actions/"$icon"
+#done
+
+# Move to top directory
+#cd ../../
+
+mkdir $PACKAGENAME
+cp -R 128x128 $PACKAGENAME # the user should still be able to edit the icon set, so we don't move but just copy th 128x128 folder
+#cp -R 32x32 $PACKAGENAME
+cp index.desktop $PACKAGENAME
+#cp README $PACKAGENAME
+cp buildset $PACKAGENAME
+#cp GPL $PACKAGENAME
+#cp CHANGELOG $PACKAGENAME
+
+# Move/Remove the created directories so the user can rebuild if needed.
+#rm -fr 32x32/apps 32x32/devices 32x32/mimetypes 32x32/filesystems
+for size in $SIZES
+do
+	if [ "$size" != "128x128" ]; then # Already did the 128x128 size above
+		mv $size $PACKAGENAME
+	fi
+done
+
+echo -ne "\nDone with conversions.\n"
+echo -ne "Tarring and compressing.\n"
+if test -f $COMPRESSOR
+	then
+		tar cf $PACKAGENAME.tar $PACKAGENAME && $COMPRESSOR $PACKAGENAME.tar
+		echo -ne "\nThe $PACKAGENAME icon set has been built.  Use kcontrol to install the icon set.\n"
+		echo && ls -sh $PACKAGENAME.tar* && echo
+fi
+echo -ne "Removing all temporary directories...\n"
+rm -fr $PACKAGENAME
+
+echo -ne "\nAll done. ;)\n"
+

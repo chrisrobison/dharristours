@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+opendir(D, '.');
+   while ($file = readdir D) {
+      if ($file !~ /^\./) {
+         ($newname = $file) =~ s/gnome-mime-//;
+         rename $file, $newname;
+         print "Renamed $file to $newname\n";
+      }
+   }
+closedir D;

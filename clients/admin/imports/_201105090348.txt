@@ -1,0 +1,5 @@
+ImportTestID	ImportTest	TestField	MoreData
+1	Test record 1	This is my test field	and more data!
+2	Test record 2	This is my second test field	and even more data!
+3	Test record 3	This is my third test field    and even more more data!
+4	Test record 4	This is my fourth test field	and even more more more data!

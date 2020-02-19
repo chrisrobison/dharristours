@@ -1,0 +1,35 @@
+BODY { font-size: .73em; font-family: Verdana,Arial,Helvetica,SansSerif; color:#000000; }
+.HEADING { font-size: .95em; font-weight: bold; color:#000000; }
+.HEADER { font-size: 1.15em; font-weight: bold; color:#000000; }
+.FIELD { padding-left: .68em; font-size: 11px; color:#000000; }
+.TBLHEAD { background-color: #bbbbbb; color: black; font-weight: bold; font-size: .78em; }
+.TBLHEAD2 { background-color: #bbbbbb; color: black; font-size: .74em; }
+.TBLMAIN { border-bottom: 3px outset #a0a0a0; border-right: 3px outset #404040; width: 700px; background-color: #cccccc; border-style: groove; }
+.TBLTITLE { font-size: .9em; font-weight: bold; color:#ffffff; background-color: #005577; border-style: groove; padding: 2px; }
+.CHANGED { font-size: 12px; background-color: #aa0000; font-weight: bold; width: 60px; color: #ffffff; }
+.SAVE { font-size: 12px; background-color: #d0d0d0; font-weight: bold; width: 60px; color: #000000; }
+STATIC { background-color:#dedede; border-style:inset; border-width:.15em; padding:0px 35px 0px 3px; }   
+.btnbtn { font-size: .78em; width: 8em; color: #000000; }
+.BTNS { font-size: .78em; color:#000000; visibility: visible; }
+.NOBTNS { font-size: .72em; color:#000000; visibility: hidden; }
+.productCheck { font-size: .78em; font-weight: bold; }
+.productHead { font-size: .78em; font-weight: bold; color:#000000; border-bottom: 2px solid black; }
+.productItem { padding-left: 16px; font-size: .78em; font-weight: bold; color:#000000; }
+.productDesc { font-size: .78em; color:#000000; }
+.productPrice { text-align: right; font-size: .78em; color:#000000; }
+.DATA { font-size: .70em; background-color: #ffffff; color:#000000; }
+.LIST { font-size: .74em; background-color: #ffffff; color:#000000; }
+.MAIN { font-size: .74em; color:#000000; }
+.FIXED { font-size: .72em; color: #000000; }
+#wizardImage { position: relative; }
+#wizardAni { position: absolute; top: 153px; left: 60px; height: 43px; width: 54px; }
+#wizardIcon { position: absolute; top: 0px; left: 0px; height: 300px; width: 150px; }
+.mkvisible { visibility: visible; }
+.invisible { visibility: hidden; }
+.invoice { font-size: .73em; background-color: #ffffff; color: #000000; }
+.yearlyfee { text-align: right; font-size: .73em; background-color: #ffffff; color: #000000; border-right: 1px solid black; }
+.setupfee { text-align: right; font-size: .73em; background-color: #ffffff; color: #000000; border-right: 1px solid black; }
+.cost { text-align: right; font-size: .73em; background-color: #ffffff; color: #000000; border-right: 1px solid black; }
+.term { font-size: .73em; background-color: #ffffff; color: #000000; border-right: 1px solid black; }
+.remove { font-size: .73em; background-color: #ffffff; color: #000000; }
+.helptxt { font-size: 9px; }

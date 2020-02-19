@@ -1,0 +1,71 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+
+my $srs = new DotSRS_Client;
+my $domain = shift @ARGV;
+my $email = shift @ARGV;
+
+die "No domain specified for transfer." if (!$domain);
+
+if (!$email) {
+	my $line;
+	open(PWHOIS, "/usr/local/scripts/pwhois $domain |");
+      while ($line = <PWHOIS>) {
+			if ($line =~ /(\S+\@\S+)/) {
+				$email = $1 if (!$email);
+				$emails{$1} = $1;
+				print "Found $1\n";
+			}
+		}
+	close PWHOIS;
+	my @emails = keys %emails;
+	if ($#emails > 0) {
+		print "Multiple email addresses found.  Please choose admin contact:\n";
+		foreach $i (0..$#emails) {
+			print "\t".($i + 1).". ".$emails[$i]."\n";
+		}
+		print "\nAdmin contact? [1] ";
+
+		my $choice;
+		while (!$choice) {
+			$choice = <STDIN>;
+			chomp $choice;
+			$choice = 1 if (!$choice);		# Default option
+			if (!$emails[$choice-1]) {
+				$choice = '';
+			} else {
+				$email = $emails[$choice-1];
+			}
+		}
+	} elsif (!$email) {
+		print "Unable to discern admin contact email.\nAdmin contact email: ";
+		chomp($email = <STDIN>);
+	}
+}
+
+my ($dom, $tld) = split(/\./, uc($domain));
+
+my $info = {	'DOMAIN' => $dom,
+					'TLD'		=> $tld,
+					'CURRENT ADMIN EMAIL' => $email
+			  };
+print "Requesting transfer of domain [$info->{'DOMAIN'}], TLD [$info->{'TLD'}], with email [$info->{'CURRENT ADMIN EMAIL'}]\n\n";
+print "Proceed? [Yn]";
+my $ans = <STDIN>;
+chomp $ans;
+if (($ans eq '') || ($ans =~ /y/i)) {
+	my ( $reqid, $ref ) = $srs->request_transfer( 1, $info );
+
+	if ( $ref ){
+		foreach $key (keys %{ $ref }) {
+			print "$key : ", $ref->{$key},"\n";
+		}
+	} else {
+		die "request_transfer failed\n";
+	}
+} else {
+	print "\nTransfer request aborted.\n";
+}
+
+

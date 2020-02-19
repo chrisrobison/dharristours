@@ -1,0 +1,1 @@
+NewTableID	NewTable	Description	Created	CreatedBy	LastModified	LastModifiedBy	Notes	Amount	Quantity	Size1	test1	test2	8/21/14 22:17	patrick@simplesoftwaresf.com	8/21/14 22:17	patrick@simplesoftwaresf.com	\n-- Updated by patrick@simplesoftwaresf.com on 8/21/2014 at 10:17:53 PM	65.76	4	who cares

@@ -1,0 +1,7 @@
+
+
+open(FLAG, ">/www/.sysupdate/domain.www");
+   print FLAG $$;
+close FLAG;
+
+

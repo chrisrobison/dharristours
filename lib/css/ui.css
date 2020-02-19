@@ -1,0 +1,657 @@
+BODY {
+   font-family: Optima,"Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   margin: 0px;
+   padding: 0px;
+}
+
+#titlebar {
+   font-size: 2.2em;
+   font-family: Optima,"RotisSemiSerif",Times,"Times New Roman",serif;
+   position: absolute;
+   height: 65px;
+   left: 0px;
+   top: 0px;
+   width: 100%;
+   background-color: #ffffff;
+   color: #909090;
+   letter-spacing: .2em;
+}
+
+#versionInfo {
+   vertical-align: sub;
+   font-size: 40%;
+   letter-spacing: 1px;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   float: right;
+}
+
+#titlebarAnchor {
+   float:left;
+	position:relative;
+	z-index:999;
+	padding-left:-2px;
+}
+
+A#titlebarAnchor:link {
+   text-decoration: none;
+   color: #909090;
+}
+
+A#titlebarAnchor:visited {
+   text-decoration: none;
+   color: #909090;
+}
+
+A#titlebarAnchor:hover {
+   text-decoration: none;
+   color: #909090;
+}
+
+#chat {
+   position: absolute;
+   width: 28px;
+   height: 24px;
+   top: 30px;
+   right: 80px;
+   z-index: 9999999;
+   cursor: pointer;
+}
+
+.chat {
+   background-image: url("/img/chat.png");
+}
+
+.chatAlert {
+   background-image: url("/img/chat_ani.gif");
+}
+
+#bug_div {
+   position: absolute;
+   width:20px; 
+   height:20px; 
+   z-index:1; 
+   right: 2px;
+   top: 31px;
+   background-image: url("/img/sm_bug.gif");
+   cursor: pointer;
+   z-index: 9999999;
+}
+
+#bug_div:hover {
+   background-color: #ffffcc;
+   outline: 1px dotted #0000ff;
+   -moz-outline: 1px dotted #0000ff;
+}
+
+#map {
+   position: absolute;
+   width:24px; 
+   height:24px; 
+   z-index:1000; 
+   right: 52px;
+   top: 29px;
+   background-image: url("/img/map_icon.png");
+   cursor: pointer;
+}
+
+#map:hover {
+   background-color: #ffff00;
+   -moz-outline: 1px dotted #0000ff;
+   outline: 1px dotted #0000ff;
+}
+
+#loginInfo {
+   font-family: "Gill Sans","Gill Sans MT",Arial,Helvetica,sans-serif;
+   font-style: oblique;
+   font-size: 11px;
+   position: absolute;
+   float: left;
+   height:24px; 
+   z-index:100000; 
+   left: 24px;
+   bottom: 4px;
+}
+.loginInfoName {
+   font-family: Arial,Helvetica,sans-serif;
+   color: blue;
+}
+
+.bug_buttons { 
+   position: absolute; 
+   width:auto; 
+   height:25px; 
+   right: 15px; 
+   bottom: 10px;
+   z-index: 999999;
+   margin: 0px;
+   padding: 0px;
+}
+
+#bugMain {
+   position: absolute;
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   overflow: hidden;
+}
+
+#moduleThing {
+   position: absolute;
+   top: 0px;
+   left: 212px;
+   z-index: 10000;
+}
+
+#modules {
+   position: absolute;
+   top: 112px;
+   left: 0px;
+   bottom: 0px;
+   width: 220px;
+   background-color: #f3f3f3;
+   border-bottom: 1px solid #000000;
+   border-top: 1px solid #a0a0a0;
+   white-space: nowrap;
+   overflow: auto;
+}
+
+#process {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   width: 243px;
+   bottom: 253px;
+   font-size: 1.2em;
+   border-right: 2px solid #c0c0c0;
+   -moz-border-right-colors: #ffffff #c0c0c0;
+   border-bottom: 1px solid #a0a0a0;
+   border-top: 1px solid #606060;
+   /* 
+   background-image: url("/img/gsc_logo_bg5.png"); 
+   background-position: 50% 90%;
+   background-repeat: no-repeat;
+   */
+   z-index: 99000;
+}
+
+#processFrame {
+   background-color: #e0e0e0;
+   z-index: 100;
+   position: absolute;
+   left: 220px;
+   top: 0px;
+   width: 6px;
+   bottom: 0px;
+   right: 0px;
+   cursor: e-resize;
+   background-image: url("/img/frame_vert.png");
+   border-left: 1px solid #a0a0a0;
+   background-position: -1px;
+}
+#processButton {
+   position:absolute;
+   margin-top:auto;
+   margin-bottom:auto;
+   left:0px;
+   width:6px;
+   top:40%;
+   height: 22px;
+   z-index: 999999;
+   background-image: url("/img/frame_vert_handle.png");
+   background-position: -1px;
+   cursor: pointer;
+}
+#interfaceHome {
+   position: absolute;
+   top: 50px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+   border-top: 1px solid #606060;
+   border-left: 1px solid #a0a0a0;
+   border-bottom: 1px solid #a0a0a0;
+   background-color: #ffffff;
+}
+#interface {
+   position: absolute;
+   top: 0px;
+   left: 226px;
+   right: 0px;
+   bottom: 0px;
+   border-top: 1px solid #606060;
+   border-left: 1px solid #a0a0a0;
+   border-bottom: 1px solid #a0a0a0;
+   background-color: #ffffff;
+}
+
+#content {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+   border: 0px;
+   z-index: 100;
+}
+
+#nav {
+   position: absolute;
+   bottom: 0px;
+   height: 250px;
+   border-top: 1px solid #a0a0a0;
+   right: 0px;
+   left: 0px;
+   overflow: hidden;
+}
+
+#flowchart {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   width: 3665px;
+   height: 1168px;
+   cursor: move;
+}
+
+#centerWrap {
+   position: absolute;
+   top:  0px;
+   left: 300px;
+   right: 0px;
+   bottom: 0px;
+   border-bottom: 1px solid #ffffff;
+   background-color: yellow;
+}
+
+#ui {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+   padding: 1em;
+   font-family: 'Gill Sans','Gill Sans MT',Eurostile,Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 1.4em;
+   background-color: #ffffff;
+}
+
+.module {
+   line-height: 22px;
+   border-left: 1px solid #ffffff;
+   border-top: 1px solid #ffffff;
+   border-bottom: 1px solid #e0e0e0;
+   top: 0px;
+   cursor: pointer;
+   padding: 2px 1em 0px 24px;
+   color: #715555;
+   background-color: #f9f9f9;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   text-decoration: none;
+   position: relative;
+   background-image: url("/img/tree_branch_closed.png");
+   background-repeat: no-repeat;
+   background-position: 6px 5px; 
+   width: 182px;
+   z-index: 999999;
+}
+.moduleClosed {
+   line-height: 22px;
+   border-left: 1px solid #ffffff;
+   border-top: 1px solid #ffffff;
+   border-bottom: 1px solid #e0e0e0;
+   top: 0px;
+   cursor: pointer;
+   padding: 2px 1em 0px 24px;
+   color: #715555;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   text-decoration: none;
+   position: relative;
+   background-image: url("/img/tree_branch_closed.png");
+   background-repeat: no-repeat;
+   background-position: 6px 5px; 
+   width: 182px;
+   z-index: 999999;
+}
+
+.moduleOpen {
+   line-height: 22px;
+   border-left: 1px solid #ffffff;
+   border-top: 1px solid #ffffff;
+   border-bottom: 1px solid #e0e0e0;
+   top: 0px;
+   cursor: default;
+   padding: 2px 1em 0px 24px;
+   color: #715555;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   text-decoration: none;
+   position: relative;
+   background-image: url("/img/tree_branch_open.png");
+   background-repeat: no-repeat;
+   background-position: 6px 5px; 
+   width: 182px;
+   z-index: 999999;
+}
+.moduleSelected {
+   line-height: 22px;
+   border-left: 1px solid #f0f0f0;
+   border-top: 1px solid #f0f0f0;
+   border-bottom: 1px solid #e0e0e0;
+   top: 0px;
+   cursor: pointer;
+   padding: 2px 1em 0px 24px;
+   color: #715555;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   text-decoration: none;
+   position: relative;
+   background-image: url("/img/tree_branch_open_selected.png");
+   background-repeat: no-repeat;
+   background-color: #fcfcdc;
+   background-position: 6px 5px; 
+   width: 182px;
+   z-index: 999999;
+}
+.moduleSelectedOpen {
+   line-height: 22px;
+   border-left: 1px solid #f0f0f0;
+   border-top: 1px solid #f0f0f0;
+   border-bottom: 1px solid #e0e0e0;
+   top: 0px;
+   cursor: pointer;
+   padding: 2px 1em 0px 24px;
+   color: #715555;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   text-decoration: none;
+   position: relative;
+   background-image: url("/img/tree_branch_open_selected.png");
+   background-repeat: no-repeat;
+   background-color: #fefefe;
+   background-position: 6px 5px; 
+   width: 182px;
+   z-index: 999999;
+}
+.moduleSelectedClosed {
+   line-height: 22px;
+   border-left: 1px solid #f0f0f0;
+   border-top: 1px solid #f0f0f0;
+   border-bottom: 1px solid #e0e0e0;
+   top: 0px;
+   cursor: pointer;
+   padding: 2px 1em 0px 24px;
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   text-decoration: none;
+   position: relative;
+   background-color: #fefefe;
+   background-image: url("/img/tree_branch_closed_selected.png");
+   background-repeat: no-repeat;
+   background-position: 6px 5px; 
+   width: 182px;
+   z-index: 999999;
+}
+
+.module:hover {
+   font-family: "Gill Sans","Gill Sans MT",Verdana,Arial,Helvetica,sans-serif;
+   background-color: rgb(255,255,255);
+   background-image: url("/img/tree_branch_closed_selected.png");
+   background-repeat: no-repeat;
+   background-position: 6px 5px; 
+
+   /*
+   outline: 1px inset #a0a0a0;
+   -moz-outline: 1px outset #a0a0a0;
+   */
+}
+
+.module_children {
+   position: relative;
+   display: none;
+   padding-bottom: 6px;
+   background-color: #f9f9f9;
+   border-bottom: 1px solid #a0a0a0;
+}
+
+.proc {
+   position: relative;
+   padding-left: 18px;
+   cursor: pointer;
+   color: #715555;
+   line-height: 14px;
+}
+
+.proc:hover {
+   background-color: #ffffffc
+}
+.nodeOpen {
+   background-image: url("/img/tree_node_selected.png");
+   background-repeat: no-repeat;
+   background-position: 18px 5px; 
+   background-color: #fcfccc;
+   padding: 4px 1em 0px 36px;
+   /*
+   -moz-outline: 1px dotted black;
+   outline: 1px dotted black;
+   */
+}
+.nodeOpen:hover {
+   background-color: #ffffff;
+   /* -moz-outline: 1px dotted black; */
+}
+.nodeClosed {
+   background-image: url("/img/tree_node.png");
+   background-repeat: no-repeat;
+   background-position: 18px 5px; 
+   background-color: transparent;
+   padding: 4px 1em 0px 36px;
+}
+
+.branchOpen {
+   background-image: url("/img/tree_branch_open_selected.png");
+}
+
+.node {
+   background-image: url("/img/tree_node.png");
+   background-repeat: no-repeat;
+   background-position: 18px 5px; 
+   background-color: transparent;
+   padding: 4px 1em 0px 36px;
+}
+.branch {
+   background-image: url("/img/tree_branch_closed.png");
+}
+.parent {
+   margin-left: 16px;
+   display: none;
+}
+
+.action {
+   height: 1em;
+   margin-left: 16px;
+   padding-left: 16px;
+   background-image: url("/img/tree/arrow_closed_grey.png");
+   background-repeat: no-repeat;
+   cursor: pointer;
+   font-size: .8em;
+}
+
+.actionComplete {
+   margin-left: 16px;
+   padding-left: 16px;
+   background-image: url("/img/tree/arrow_closed_grey.png");
+   background-repeat: no-repeat;
+   cursor: pointer;
+   font-size: .8em;
+}
+
+.action:hover {
+   background-color: #ffffff;
+}
+
+.content {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+}
+
+#currentModule {
+   position: relative;
+   font-family: Optima,"RotisSemiSerif","Gill Sans MT", Times,"Times New Roman",serif;
+   font-size: 1.3em;
+   text-transform: uppercase;
+   top: 0px;
+   height: 20px;
+   line-height: 20px;
+   left: 0px;
+   right: 0px;
+   padding-top: 2px;
+   padding-left: 4px;
+   margin-bottom: 6px;
+   border-bottom: 1px outset #909090;
+   background-image: url("/img/process_title.png"); 
+   cursor: pointer;
+   overflow: hidden;
+}
+
+H1 {
+   font-size: 20px;
+   font-weight: bold;
+   position: relative;
+   left: -.5em;
+}
+.sortField {
+   border: 1px inset #a0a0a0;
+   background-color: #c0c0c0;
+}
+#searchField {
+   float: right;
+}
+
+.cvsHead {
+   text-align: center;
+   background-image: url("/img/modules_bg_orange.png"); 
+   border-top: 1px solid #000000;
+   border-bottom: 1px outset #909090;
+   height: 22px;
+   padding: 2px;
+}
+.cvsCell {
+   vertical-align: top;
+   /* border-right: 1px solid #a0a0a0; */
+   font-size:12px;
+}
+.cvsHeadLeft {
+   border-left: 1px solid #a0a0a0;
+}
+.cvsHeadRight {
+   border-right: 1px solid #303030;
+}
+.cvsCellLeft {
+   padding: 4px 4px 4px 4px;
+   border-left: 1px solid #a0a0a0;
+}
+.cvsCellRight {
+   border-right: 1px solid #303030;
+}
+.cvsCenter {
+   text-align: center;
+   border-left: 1px solid #a0a0a0;
+   padding: 4px .5em 4px .5em;
+}
+#buttonToolbar {
+   background-color: #e0e0e0;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   height: 28px;
+   padding-left: 4px;
+   border-bottom: 1px outset #a0a0a0;
+   margin-bottom: .5em;
+   background-image: url("/img/modules_bg.png"); 
+}
+.buttonWrap {
+   position: relative;
+   float: left;
+   background-image: url('/img/btn_center.png');
+   top:0px;
+   width: auto;
+   height: 22px;
+   margin: 2px 8px 0px 8px;
+   cursor: default;
+}
+.buttonMiddle {
+   position: relative;
+   font-family: Optima,'Gill Sans','Gill Sans MT',Verdana,sans-serif;
+   font-size: 11px;
+   text-align: center;
+   background-repeat: repeat-x;
+   top: 4px;
+   left: 7px;
+   right: 6px;
+   height: 21px;
+   padding: 6px 14px 0px 0px;
+   cursor: default;
+   text-align: center;
+}
+.buttonLeft {
+   position: absolute;
+   top:0px;
+   left: -7px;
+   width: 7px;
+   height: 21px;
+   background-color: inherit;
+   background-image: url('/img/btn_left.png');
+}
+.buttonRight {
+   position: absolute;
+   top: 0px;
+   right: -6px;
+   width: 6px;
+   height: 21px;
+   background-color: inherit;
+   background-image: url('/img/btn_right.png');
+}
+#chatThing {
+   position: absolute;
+   bottom: 245px;
+   left: 0px;
+   background-image: url('/img/frame_horiz.png');
+   height: 9px;
+   border: 0px;
+   z-index: 999999;
+}
+#mainHelp {
+   margin: 1em;
+   padding: 1em;
+}
+#dataStatus {
+   position: absolute;
+   width:60%; 
+   height:21px; 
+   z-index:1; 
+   left: 250px;
+   top: 30px;
+}
+.rtop,.artop{display:block}
+.rtop *,.artop *{display:block;height:1px;overflow:hidden;font-size:1px}
+.artop *{border-style: solid;border-width:0 1px}
+.r1,.rl1,.re1,.rel1{margin-left:5px}
+.r1,.rr1,.re1,.rer1{margin-right:5px}
+.r2,.rl2,.re2,.rel2,.ra1,.ral1{margin-left:3px}
+.r2,.rr2,.re2,.rer2,.ra1,.rar1{margin-right:3px}
+.r3,.rl3,.re3,.rel3,.ra2,.ral2,.rs1,.rsl1,.res1,.resl1{margin-left:2px}
+.r3,.rr3,.re3,.rer3,.ra2,.rar2,.rs1,.rsr1,.res1,.resr1{margin-right:2px}
+.r4,.rl4,.rs2,.rsl2,.re4,.rel4,.ra3,.ral3,.ras1,.rasl1,.res2,.resl2{margin-left:1px}
+.r4,.rr4,.rs2,.rsr2,.re4,.rer4,.ra3,.rar3,.ras1,.rasr1,.res2,.resr2{margin-right:1px}
+.rx1,.rxl1{border-left-width:5px}
+.rx1,.rxr1{border-right-width:5px}
+.rx2,.rxl2{border-left-width:3px}
+.rx2,.rxr2{border-right-width:3px}
+.re2,.rel2,.ra1,.ral1,.rx3,.rxl3,.rxs1,.rxsl1{border-left-width:2px}
+.re2,.rer2,.ra1,.rar1,.rx3,.rxr3,.rxs1,.rxsr1{border-right-width:2px}
+.rxl1,.rxl2,.rxl3,.rxl4,.rxsl1,.rxsl2,.ral1,.ral2,.ral3,.ral4,.rasl1,.rasl2{border-right-width:0}
+.rxr1,.rxr2,.rxr3,.rxr4,.rxsr1,.rxsr2,.rar1,.rar2,.rar3,.rar4,.rasr1,.rasr2{border-left-width:0}
+.r4,.rl4,.rr4,.re4,.rel4,.rer4,.ra4,.rar4,.ral4,.rx4,.rxl4,.rxr4{height:2px}
+.rer1,.rel1,.re1,.res1,.resl1,.resr1{border-width:1px 0 0;height:0px !important;height /**/:1px}

@@ -1,0 +1,41 @@
+                    <table border='0' cellpadding='3' cellspacing='1'>
+                       <tr>
+                          <td align="right" class="MAIN"><span class='FIELD'>Domain:</span></td>
+                          <td valign="top" colspan='2'>
+                             <select name="domainID" id="domainID" onChange="checkChanges('change_table') && setTimeout('document.forms[0].submit();', 150);" class='MAIN' style='width:200px;'>
+                                #domains#
+                             </select>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td valign="top" align="right" class="MAIN"><span class='FIELD'>Accounts:</span></td>
+                          <td valign="top">
+                             <select name="userID" id="userID" size="20" onChange="checkChanges('lookup') && setTimeout('document.forms[0].submit();', 150);" class='LIST' style='width:200px;border:1px inset black;'>
+                                #users#
+                             </select>
+                          </td>
+                       </tr>
+                   </table>
+                </td>
+                <td valign='top'>
+                <table border='0' cellpadding='5' cellspacing='1'>
+            <tr><td class='TBLFIELD' colspan='4' style="padding-bottom:8px;border-bottom:1px solid #808080;"><span class='HEADING'>Mail Accounts for #domain#</span></td><td rowspan='20' style='width:30px;'>&nbsp;</td></tr>        
+            <tr><td class='TBLFIELD' colspan='4' style="height:5px;padding:0px;margin:0px;border-top:1px solid #ffffff"><span class='myHR' style='height:1px;padding:0px;margin:0px;border-top:1px solid #ffffff; width:100%;'> &nbsp;</span></td></tr>   
+            <tr><td align='right' class='TBLFIELD' NOWRAP><span class='FIELD'>User ID:</span></td><td colspan='3' class='MAIN'><span class='STATIC'>#userID#</span></td></tr>	  
+            <tr><td align='right' valign='top' class='TBLFIELD' NOWRAP><span class='FIELD'>Full Name:</span></td><td class='MAIN' colspan='3'><input type='text' name='name' id='name' size='50' value='#user#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Username:</span></td><td class='MAIN' colspan='3'><input type='text' name='user' id='user' size='50' value='#user#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Domain:</span></td><td class='MAIN' colspan='3'><input type='text' name='domain' id='domain' size='50' value='#domain#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Account:</span></td><td class='MAIN' colspan='3'><input type='text' name='id' id='id' size='50' value='#id#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Password:</span></td><td class='MAIN'><input type='password' name='passwd' id='passwd' size='13' value='#passwd#' class='DATA' onChange='doChange();'></td>
+            <td class='MAIN' colspan='2' rowspan='2' valign='middle' align='right' NOWRAP><input type='checkbox' name='system' id='system' value='true' class='DATA' onChange='doChange();'><span class='FIELD'>Create System Account</span></td>
+            </tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Verify:</span></td><td class='MAIN'><input type='password' name='verify' id='verify' size='13' value='#verify#' class='DATA' onChange='doChange();'></td></tr>
+            <tr>
+               <td align='right' valign='top' class='TBLFIELD' NOWRAP><span class='FIELD'>System UID:</span></td><td class='MAIN'><input type='text' name='uid' id='uid' size='6' value='#uid#' class='DATA' onChange='doChange();'></td>
+               <td align='right' valign='top' class='TBLFIELD' NOWRAP><span class='FIELD'>System GID:</span></td><td class='MAIN'><input type='text' name='gid' id='gid' size='6' value='#gid#' class='DATA' onChange='doChange();'></td>
+            </tr>
+            <tr>
+               <td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Type:</span></td><td class='MAIN'><select name='type' id='type' size='1' class='MAIN'><option value='standard'#type_standard#>Standard</option><option value='maildir'#type_maildir#>Maildir</option><option value='virtual'#type_virtual#>Virtual</option></select></td>
+               <td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Quota:</span></td><td class='MAIN'><input type='text' name='quota' id='quota' size='6' value='#quota#' class='DATA' onChange='doChange();'>MB</td>
+            </tr>
+         </table>

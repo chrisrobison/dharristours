@@ -1,0 +1,53 @@
+Origin	FirstName	LastName	Email	AltEmail	Phone	Address
+Dharris Tours	Margarita	Mino	margaritamino@hotmail.com		510-685-4257	1214 Promane St. Hercules
+Dharris Tours	Richard	Maddax			707-849-1115	344 Sea Mist Dr. Vallejo Ca 94591
+Dharris Tours	Lee	Clark	lclarksd@cox.net		619-665-5321	
+Dharris Tours	Peter	Davis	peter.davis@ucsf.edu			
+Dharris Tours	Andrew	Grillo	Andrew.Grill-Hill@ucsf.edu	agrillo-hill@sep.ucsf.edu		
+Dharris Tours	Carrie	Sullivan	carries@sfjcf.org			
+Dharris Tours	Tony	Nogueira	bramertours@earthlink.net			
+Dharris Tours	Danny	Finale	dannyf@bauersit.com			
+Dharris Tours	David	Ojakian	dojakian@yahoo.com			
+Dharris Tours	Deborra	Lay	dlay@ci.fremont.ca.us			
+Dharris Tours	Eddie	Arias	edward_arias@nps.gov			
+Dharris Tours	Ellen	Fisher	efisher@eastbayspca.org			
+Dharris Tours	Evelyne	Garat	pierresautobody@sbcglobal.net			
+Dharris Tours	Fatima	Colindress	fatima_colindress@nps.gov			
+Dharris Tours	Gerardo	Martine	gerardo.martin32@yahoo.com			
+Dharris Tours	Jesse	Warr	jwarr3@gmail.com			
+Dharris Tours	Kevin	Sherrill	kevin@earthteam.net			
+Dharris Tours	Joe	Kilmaier	jkillmaier@gatewayhigh.org			
+Dharris Tours	Julie	Paul	julie-paul@extranomical.com			
+Dharris Tours	Karlson	Ugn	karlsonung@citizenschools.org			
+Dharris Tours	Laura 	Rivera	Laura.Rivera@autodesk.com			
+Dharris Tours	Lisa	Huffman	Lhuffman@biolink.ucsf.edu			
+Dharris Tours	Wanda	Blake	divisadero285@yahoo.com			
+Dharris Tours	Lola	Sims	atala34@yahoo.com			
+Dharris Tours	Lolita	Ramos	Lolita.sfminibus@gmail.com			
+						
+Dharris Tours	Mark	Martin	mvmartin@ccsf.edu	mark.martin@design4x.com		
+Dharris Tours	Marlene	Sanchez	leneisagoddess@aol.com			
+Dharris Tours	Miguel	Gutierrez	Mgutierrez@ParkConservancy.org			
+Dharris Tours	Myesha	Williams	mwilliams@rosefdn.org			
+Dharris Tours	Noa	Turgeman	NoaT@sfjcf.org			
+Dharris Tours	Sandra	Medina	SandraM@sfjcf.org			
+Dharris Tours	Sandy	Spring	sandyspring@sbcglobal.net			
+Dharris Tours	Stephanie	Vielman	stephanievielman@gmail.com			
+Dharris Tours	Tina	Riggins	triggins@berkeley.edu			
+Dharris Tours	Teresa	Chan	Chant@sfusd.edu			
+Dharris Tours	Sonya	Reddick	reddicks@sfusd.edu			
+Dharris Tours	Gabby	Denton	gdenton@quarrylane.org			
+Dharris Tours	Philip	Harr	pharr@quarrylane.org			
+Dharris Tours	Eve	Herdell	eherdell@sthelena.k12.ca.us			
+Dharris Tours	Rosa	Moreno	rmoreno@wccusd.net			
+Dharris Tours	Ben	Lichtman	ben@eventswest.us			
+Dharris Tours	Heidi	Crist	heidi.crist@ucsfmedctr.org			
+Dharris Tours	Josh	Gannis	jgannis@parksconservancy.org			
+Dharris Tours	Louis	Quindlen	lquindlen@peralta.edu		510-464-3444	
+Dharris Tours	Katherine	Jung	katherine.jung@ucsfmedctr.org			
+Dharris Tours	Hany	Limo	hany55@sprint.blackberry.net			
+Dharris Tours	Justine	Saunder	Justine.Saunders@edd.ca.gov			
+Dharris Tours	Nicole	Jung	Nicole_Jung@nps.gov			
+Dharris Tours	Rachael	Tan	ytan@ccsf.edu			
+Dharris Tours	Sue	Cork	TrudyWbm@aol.com			
+Dharris Tours	Trudy	Washburn	trudywashburn@comcast.net			

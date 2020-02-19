@@ -1,0 +1,80 @@
+BODY { font-family: Verdana,Tahoma,Arial,Helvetica; font-size: 11px; }
+DIV#tree { 
+   position:absolute;
+	 top: 0px;
+	 left: 0px;
+	 width: 500px;
+	 margin:0px;
+    overflow: scroll;
+}
+A {
+   text-decoration: none;
+   color: #000000;
+}
+A:hover {
+   color: #0000cc;
+   text-decoration: underline;
+}
+.node { position: relative; padding-left:36px; height:16px; vertical-align:bottom; }
+.node:hover { cursor: default; background-color: #ffffcc; }
+
+.nodeOpen { background: url('/~cdr/objtree/tree/node-open.gif') no-repeat top left; }
+.nodeOpenEnd { background: url('/~cdr/objtree/tree/node-open-end.gif') no-repeat top left; }
+
+.nodeClosed { background: url('/~cdr/objtree/tree/node-closed.gif') no-repeat top left; }
+.nodeClosedEnd { background: url('/~cdr/objtree/tree/node-closed-end.gif') no-repeat top left; }
+
+.branchOpen { background: url('/~cdr/objtree/tree/branch-open.gif') no-repeat top left; }
+.branchOpenEnd { background: url('/~cdr/objtree/tree/branch-open-end.gif') no-repeat top left; }
+
+.branchClosed { background: url('/~cdr/objtree/tree/branch-closed.gif') no-repeat top left; }
+.branchClosedEnd { background: url('/~cdr/objtree/tree/branch-closed-end.gif') no-repeat top left; }
+
+.nodeParent {
+   position: relative;
+   background: url('/~cdr/objtree/tree/chain.gif') repeat-y top left;
+   padding: 0px 0px 0px 2em;
+}
+.nodeParentEnd {
+   position: relative;
+   margin: 0px 0px 0px 2em;
+}
+ 
+.unread {
+   position: absolute;
+   right: 3em;
+   top: 0px;
+   width: 4em;
+   padding: 0px;
+   margin: 0px;
+   font-size: 8px;
+   font-family: Verdana, Tahoma, Arial, Helvetica, SansSerif;
+}
+
+.total {
+   position: absolute;
+   right: -1em;
+   top: 0px;
+   width: 4em;
+   padding: 0px;
+   margin: 0px;
+   font-size: 8px;
+   font-family: Verdana, Tahoma, Arial, Helvetica, SansSerif;
+}
+.val {
+   position: absolute;
+   right: 1em;
+   width: 20em;
+   text-align:right;
+   top:0px;
+   color: #b0b0b0;
+   font-size: .9em;
+   overflow:  hidden;
+   white-space: nowrap;
+}
+#srccode {
+   left: 20em;
+   position: absolute;
+   top: 0px;
+   width: 100%;
+}

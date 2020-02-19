@@ -1,0 +1,11 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<p>
+			Your time is limited, so don&rsquo;t waste it living someone else&rsquo;s life. Don&rsquo;t be trapped by dogma &ndash; which is living with the results of other people&rsquo;s thinking. Don&rsquo;t let the noise of other&rsquo;s opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary.</p>
+		<p>
+			Chris Robison</p>
+	</body>
+</html>

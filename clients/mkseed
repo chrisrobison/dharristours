@@ -1,0 +1,27 @@
+#!/usr/local/bin/php
+<?php
+   array_shift($argv);
+   if ($argv[0]) $ver = $newver = $argv[0];
+   
+   if (!$ver) {
+      $files = glob("seed_v*");
+      $newver = 0;
+      foreach ($files as $file) {
+         $v = preg_replace("/^seed_v([\.0-9]+)\.tar/", "$1", $file);
+         $vers[] = $v;
+         if ($newver < $v) $newver = $v;
+      }
+      $newver += .1;
+   }
+   
+   print "Creating seed tar version $newver as seed_v$newver.tar\n"; 
+   chdir("seed");
+   $results = `tar --exclude CVS -cf ../seed_v$newver.tar *`;
+   chdir("..");
+   print "Removing old seed.tar symlink...\n";
+   unlink("seed.tar");
+   print "Creating seed.tar symlink to seed_v$newver.tar\n";
+   $results = `ln -s seed_v$newver.tar seed.tar`;
+   
+   print "Done. New seed deployed.\n";
+?>

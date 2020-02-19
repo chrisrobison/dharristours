@@ -1,0 +1,151 @@
+<html>
+   <head>
+      <title>Inter@ctivate Data Query Tool</title>
+      <script language="JavaScript">
+      </script>
+      <style type="text/css">
+            BODY {
+               font-size:9pt;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .HEADER {
+               font-size:12pt;
+	       font-weight:bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIELD {
+               font-size:10pt;
+	       font-weight:bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+	    .MAIN {
+               font-size: 11px;
+               font-family: "Sans Serif",Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIXED {
+               font-size:9pt;
+               font-family:Courier New,Courier,LucidaConsole,Fixedsys;
+               color:#000000;
+            }
+      </style>
+   </head>
+   <body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#000099" alink="#ff0000" class="MAIN" onLoad="#alert#">
+      <form name="query" action="index.cgi" method="POST">
+         <input type="hidden" name="exec" value="">
+         <input type="hidden" name="REMOTE_USER" value="#REMOTE_USER#">
+	 <br>
+         <center>
+           <table border="1" cellpadding="4" cellspacing="1" bgcolor="#d0d0d0">
+	      <tr>
+	         <td colspan='2' bgcolor="#eeeeee"><!--<img src="/img/bulb-logo.gif" align='left'>--><span class='HEADER'>Inter@ctivate Database Query Tool</span></td>
+	      </tr>
+	      <tr>
+	         <td valign='top'>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+		       <tr>
+	                  <td align="right" class="MAIN"><span class='FIELD'>Queries:</span></td>
+		          <td valign="top">
+		             <select name="queryID" onChange="document.query.exec.value='lookup_query'; setTimeout('document.query.submit();', 150);" class='MAIN' size="25">
+			        #queries#
+		             </select>
+		          </td>
+               	          <td valign="top"><input type="button" value="   New   " onClick="doNew();" class='MAIN'><br>
+			  <input type='button' value=' Delete ' onClick="doDelete();" class='MAIN'>	     
+			  </td>   
+		       </tr>
+		    </table>
+		 </td>
+		 <td valign='top'>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Query Name:</span></td>
+			  <td valign='top' class='MAIN'>
+			     <table border='0' cellpadding='3' cellspacing='1'>
+			        <tr>
+		                   <td class="MAIN"><input type="text" name="query" value="#query#" size="35" class='MAIN'></td>
+		                   <td align="right" class="MAIN"><span class='FIELD'>User:</span></td>
+		                   <td class="MAIN"><input type="text" name="user" value="#user#" size="18" class='MAIN'></td>
+				</tr>
+			     </table>	
+			  </td>   
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Description:</span></td>
+		          <td class="MAIN"><input type="text" name="description" value="#description#" size="65" class='MAIN'></td>
+                       </tr>
+	               <tr>
+                       </tr>
+		       <tr><td colspan='2'><hr></td></tr>	  
+	               <tr><td class="MAIN" colspan='2'><span class='HEADER'>Table Detail</span></td></tr>	  
+		       <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Base Table:</span></td>
+			  <td valign='top' class="MAIN"><select name="table" onChange="updateTable(this.options[this.selectedIndex].value);">#tables#</select></td>
+		       </tr>
+		       <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Join Table:</span></td>
+		          <td valign='top' class='MAIN'>
+			     <table border='0' cellpadding='3' cellspacing='0'>
+			        <tr>
+				   <td valign='top' class="MAIN"><select name="table_name_join_1" class='MAIN'>#tables#</select></td>
+				   <td valign='top' align='right' class='MAIN'><span class='FIELD'>.</span></td>
+				   <td valign='top' class='MAIN'><select name="table_key_join_1" class='MAIN'>#fields#</select></td>
+				   <td valign='top' align='right' class='MAIN'><span class='FIELD'>=</span></td>
+				   <td valign='top' class="MAIN"><select name="link_table_join_1" class='MAIN'>#tables#</select></td>
+				   <td valign='top' align='right' class='MAIN'><span class='FIELD'>.</span></td>
+				   <td valign='top' class='MAIN'><select name="link_key_join_1" class='MAIN'>#fields#</select></td>
+				</tr>
+		             </table>
+			  </td>   
+                       </tr>
+		       <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Join Table:</span></td>
+		          <td valign='top' class='MAIN'>
+			     <table border='0' cellpadding='3' cellspacing='0'>
+			        <tr>
+				   <td valign='top' class="MAIN"><select name="table_name_join_1" class='MAIN'>#tables#</select></td>
+				   <td valign='top' align='right' class='MAIN'><span class='FIELD'>.</span></td>
+				   <td valign='top' class='MAIN'><select name="table_key_join_1" class='MAIN'>#fields#</select></td>
+				   <td valign='top' align='right' class='MAIN'><span class='FIELD'>=</span></td>
+				   <td valign='top' class="MAIN"><select name="link_table_join_1" class='MAIN'>#tables#</select></td>
+				   <td valign='top' align='right' class='MAIN'><span class='FIELD'>.</span></td>
+				   <td valign='top' class='MAIN'><select name="link_key_join_1" class='MAIN'>#fields#</select></td>
+				</tr>
+		             </table>
+			  </td>   
+                       </tr>
+		       <tr><td colspan='2'><hr></td></tr>	  
+	               <tr><td class="MAIN" colspan='2'><span class='HEADER'>Condition</span></td></tr>	  
+	               <tr>
+		          <td valign='top' class="MAIN" align='right'>
+			     <span class='FIELD'>Where </span>
+			  </td>
+			  <td class='MAIN'>
+			     <select name="field_1" class='MAIN'>#fields_1#</select>
+			     <select name="condition_1" class='MAIN'>#conditions_1#</select>
+			     <input type="text" name="value_1" value="#value_1#" size="20" class='MAIN'>
+			  </td>
+                       </tr>
+	               <tr>
+		          <td>&nbsp;</td>
+		          <td valign='top' class="MAIN">
+			     <select name="field_2" class='MAIN'>#fields_2#</select>
+			     <select name="condition_2" class='MAIN'>#conditions_2#</select>
+			     <input type="text" name="value_2" value="#value_2#" size="20" class='MAIN'>
+			  </td>
+                       </tr>
+	               <tr>
+		          <td align="right" colspan="2"><!--<input type="button" value=" New " onClick="doNew();" class='MAIN'>--><input type="button" value="Save" onClick="doSave();" class='MAIN'>&nbsp;&nbsp;&nbsp;<!--<input type='button' value='Delete' onClick="doDelete();" class='MAIN'>--></td>
+                       </tr>
+                    </table>
+		 </td>
+	      </tr>
+           </table>
+	 </center>   
+      </form>
+   </body>
+</html>
+

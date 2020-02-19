@@ -1,0 +1,31 @@
+Date: #RFCDate#
+To: #LastModifiedBy# 
+Cc: #AssignedTo#
+From: Simple System <#LastModifiedBy#>
+Subject: [To Do] #ToDo#: Requestor: '#CreatedBy#'
+
+You may view or update this to do online at:
+
+#URL#
+
+        To Do ID:  #ToDoID#
+       
+           To Do:  #ToDo#
+       Completed:  #Completed#
+
+        Priority:  #Priority#
+         
+        Due Date:  #CompleteByDate#
+     Assigned To:  #AssignedTo#
+
+         Created:  #Created#
+              By:  #CreatedBy#
+   Last Modified:  #LastModified#
+              By:  #LastModifiedBy#
+     
+           Notes:  #Notes#
+
+
+Thank you,
+
+   The Simple Software Email Notification System

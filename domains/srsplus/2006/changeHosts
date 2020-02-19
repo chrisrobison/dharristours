@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use Data::Dumper;
+
+my $srs = new DotSRS_Client;
+
+while (my $domain = shift @ARGV) {
+	my ($dom, $tld) = split(/\./, $domain, 2);
+	
+	my $obj = { 'DOMAIN' => $dom,
+					'TLD' => $tld,
+					'DNS SERVER NAME 1' => 'ns.netoasis.net',
+					'DNS SERVER NAME 2' => 'ns2.netoasis.net',
+					'DNS SERVER NAME 3' => 'ns3.netoasis.net' };
+
+	my $results = $srs->change_domain(1, $obj);
+
+	print Dumper($results);
+}
+

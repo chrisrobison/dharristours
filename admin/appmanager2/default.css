@@ -1,0 +1,150 @@
+BODY {
+   font-family: "Gill Sans",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   background-color: #f0f0f0;
+}
+
+#recordForm {
+   position: absolute;
+   top: 2em;
+   left: 25em;
+   right: 0px;
+   bottom: 0px;
+}
+
+#resultset {
+   position: absolute;
+   top: 2em;
+   left: 4px;
+   right: 15em;
+   bottom: 0px;
+}
+
+#resultLabel {
+   position: absolute;
+   top: 2em;
+   left: 4px;
+   text-align: right;
+}
+.parentlistlabel {
+   width: 5em;
+   position:relative;
+   text-align: right;
+}
+.parentlist {
+   font-family: "Gill Sans",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   margin: 4px 0px 4px 0px;
+   position: relative;
+   left: 4px;
+}
+.resultBox {
+   position:relative;
+   left: 4em;
+   font-family: "Gill Sans",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   width: 20em;
+}
+
+.formrow {
+   position: relative;
+   padding: 2px 2px 2px 2px;
+   clear: left;
+   display: block;
+}
+
+.label {
+   float: left;
+   position: relative;
+   width: 8em;
+   text-align: right;
+   padding: 4px 4px 0px 0px;
+   background-color: #f0f0f0;
+}
+
+.data {
+   float: left;
+}
+
+.chkbox {
+   position: relative;
+   left: 8em;
+}
+
+.check {
+   position: relative;
+   top: 2px;
+   border: 1px inset #a0a0a0;
+   margin: 4px 0px 4px 4px;
+}
+TEXTAREA.data,INPUT.data {
+   border: 1px inset #a0a0a0;
+}
+
+#btns {
+   position: absolute;
+   top: 26em;
+   height: 24px;
+   left: 4.25em;
+   width: auto;
+   z-index: 9999;
+}
+
+#formWrap {
+   position: absolute;
+   top: 32px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+   z-index: 500;
+}
+
+.btn {
+   font-family: Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   margin-top: 1px;
+   height: 22px;
+   width: 60px;
+}
+
+.btn2 {
+   font-family: Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   height: 24px;
+   float: right;
+}
+#tabbar {
+   position: absolute;
+   top: 0px;
+   left: -14px;
+   right:0em;
+   height: 32px;
+   background-color: #999999;
+   padding-right: 4em;
+   padding-left: 2em;
+   border-bottom: 2px groove #303030;
+/*   background-image: url("/cdrmail2/cal/img/tabs/alt-line.png"); */
+   z-index: 1000;
+}
+.tab {
+   position: relative;
+   left: 0px;
+   top: 2em;
+   height: 30px;
+}
+#debug {
+   position: absolute;
+   background-color: #ffffcc;
+   right: 0px;
+   width: 40em;
+   top: 0px;
+   bottom: 0px;
+   z-index: 5000;
+   overflow: scroll;
+   display: none;
+}

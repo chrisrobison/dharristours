@@ -1,0 +1,232 @@
+<div class="dojocal">
+
+	<!-- month view -->
+	<div dojoAttachPoint="monthViewNode" class="monthView" style="z-index: 1; xvisibility: hidden;">
+
+		<!-- header -->
+		<div class="dojocalScrollbarPaddingH dojocalHeaderWrap" dojoAttachPoint="monthHeaderWrapper"><!-- wrapper accounts for scroll bar width -->
+			<div class="dojocalHeader" dojoAttachPoint="monthHeader"><!-- header -->
+				<table class="dojocalHeaderTableOuter" dojoAttachPoint="monthHeaderTable">
+					<tbody>
+						<tr>
+							<td class="dojocalDateLeader"><span class="dojocalDateCellText"></span></td>
+							<td style="height: 100%;">
+								<table class="dojocalHeaderTable" dojoAttachPoint="monthHeaderTable" dojoAttachEvent="click:_onHeaderDateClick,dblclick:_onHeaderDateDblClick"><!-- dates across top -->
+									<tbody>
+										<tr>
+											<td class="dojocalDateCell dojocalDateCellFirst" day="0"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="1"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="2"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="3"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="4"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="5"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell dojocalDateCellLast" day="6"><span class="dojocalDateCellText"></span></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="dojocalShadow"></div>
+		</div>
+
+		<!-- calendar body -->
+		<div class="dojocalContainer" dojoAttachPoint="monthContainerNode"><!-- scrollable container -->
+			<div class="dojocalBody" dojoAttachPoint="monthBodyNode"><!-- scrolled container. -->
+				<table class="dojocalTableOuter">
+					<tbody>
+						<tr>
+							<td class="dojocalWeekSelectorColumn"><div dojoAttachPoint="weekSelectorLayoutContainer" class="dojocalWeekSelectorLayout"></div></td>
+							<td class="dojocalMonthColumn">
+								<table class="dojocalTable" dojoAttachPoint="monthTableNode" dojoAttachEvent="click:_onDayLayoutClick"><!-- actual calendar day cells -->
+									<tbody>
+										<!-- rows are added via template -->
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<!-- end month view -->
+
+	<!-- week view -->
+	<div dojoAttachPoint="weekViewNode" class="weekView" style="z-index: 0;">
+
+		<!-- header -->
+		<div class="dojocalScrollbarPaddingH dojocalHeaderWrap" dojoAttachPoint="weekHeaderWrapper"><!-- wrapper accounts for scroll bar width -->
+			<div class="dojocalHeader" dojoAttachPoint="weekHeader"><!-- header -->
+				<table class="dojocalHeaderTableOuter" dojoAttachPoint="weekHeaderTable">
+					<tbody>
+						<tr>
+							<td class="dojocalDateLeader"><span class="dojocalDateCellText"></span></td>
+							<td style="height: 100%;">
+								<table class="dojocalHeaderTable" dojoAttachPoint="weekHeaderTable" dojoAttachEvent="click:_onHeaderDateClick,dblclick:_onHeaderDateDblClick"><!-- dates across top -->
+									<tbody>
+										<tr>
+											<td class="dojocalDateCell dojocalDateCellFirst" day="0"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="1"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="2"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="3"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="4"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell" day="5"><span class="dojocalDateCellText"></span></td>
+											<td class="dojocalDateCell dojocalDateCellLast" day="6"><span class="dojocalDateCellText"></span></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="dojocalShadow"></div>
+		</div>
+
+		<!-- calendar body -->
+		<div class="dojocalContainer" dojoAttachPoint="weekContainerNode"><!-- scrollable container -->
+			<div class="dojocalBody" dojoAttachPoint="weekBodyNode" style="height:96em;"><!-- scrolled container.  Note: height set here for easy manipulation from Javascript! -->
+				<table class="dojocalTableOuter">
+					<tbody>
+						<tr>
+							<td class="dojocalTimeColumn"><div dojoAttachPoint="weekTimeLayoutContainer" class="dojocalTimeLayout"></div></td>
+							<td class="dojocalWeekColumn">
+								<table class="dojocalTable" dojoAttachPoint="weekTableNode" dojoAttachEvent="click:_onDayLayoutClick"><!-- actual calendar day cells -->
+									<tbody>
+										<tr>
+											<td class="dojocalDayColumn dojocalDayColumnFirst">
+												<div class="dojocalDayColumnLayout dojocalLayout" day="0"></div>
+												<div dojoAttachpoint="weekColumnTimeMarker" class="dojocalTimeMarker" style="display: none;"><span class="dojocalTimeMarkerInner"></span></div>
+											</td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="1"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="2"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="3"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="4"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="5"></div></td>
+											<td class="dojocalDayColumn dojocalDayColumnLast"><div class="dojocalDayColumnLayout dojocalLayout" day="6"></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="dojocalDayRowsContainer" dojoAttachPoint="weekRowsContainerNode"></div>
+			</div>
+		</div>
+
+		<!-- calendar footer (all day events) -->
+		<div class="dojocalScrollbarPaddingH dojocalFooterWrap" dojoAttachPoint="weekFooterWrapper"><!-- wrapper accounts for scroll bar width -->
+			<div class="dojocalSplitter" dojoAttachPoint="weekSplitter"><div class="dojocalSplitterThumb"></div></div>
+			<div class="dojocalFooter" dojoAttachPoint="weekFooterNode">
+				<table class="dojocalTableOuter">
+					<tbody>
+						<tr>
+							<td class="dojocalTimeColumn dojocalAllDayTimeColumn"><span dojoAttachPoint="weekAllDayTimeLabel" class="dojocalAllDayText">${allDayEventAreaLabel}</span></td>
+							<td class="dojocalWeekColumn">
+								<table class="dojocalTable" dojoAttachPoint="weekAllDayTableNode"><!-- actual calendar day cells -->
+									<tbody>
+										<tr>
+											<td class="dojocalDayColumn dojocalDayColumnFirst"><div class="dojocalDayColumnLayout dojocalLayout" day="0"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="1"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="2"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="3"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="4"></div></td>
+											<td class="dojocalDayColumn"><div class="dojocalDayColumnLayout dojocalLayout" day="5"></div></td>
+											<td class="dojocalDayColumn dojocalDayColumnLast"><div class="dojocalDayColumnLayout dojocalLayout" day="6"></div></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="dojocalFooterCollapseDetector" dojoAttachPoint="weekFooterCollapseDetector"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<!-- end week view -->
+
+
+	<!-- day view -->
+	<div dojoAttachPoint="dayViewNode" class="dayView" style="z-index: 0; visibility: hidden;">
+
+		<!-- header -->
+		<div class="dojocalScrollbarPaddingH dojocalHeaderWrap" dojoAttachPoint="dayHeaderWrapper"><!-- wrapper accounts for scroll bar width -->
+			<div class="dojocalHeader" dojoAttachPoint="dayHeader"><!-- header -->
+				<table class="dojocalHeaderTable" dojoAttachPoint="dayHeaderTable" dojoAttachEvent="click:_onHeaderDateClick"><!-- date on top -->
+					<tbody>
+						<tr>
+							<td class="dojocalDateLeader"><span class="dojocalDateCellText"></span></td>
+							<td class="dojocalDateCell dojocalDateCellFirst dojocalDateCellLast"><span class="dojocalDateCellText" dojoAttachPoint="dayHeaderDateNode"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="dojocalShadow"></div>
+		</div>
+
+		<!-- calendar body -->
+		<div class="dojocalContainer" dojoAttachPoint="dayContainerNode"><!-- scrollable container -->
+			<div class="dojocalBody" dojoAttachPoint="dayBodyNode" style="height:96em;"><!-- scrolled container.  Note: height set here for easy manipulation from Javascript! -->
+				<table class="dojocalTable" dojoAttachPoint="dayTableNode" dojoAttachEvent="click:_onDayLayoutClick"><!-- actual calendar day cells -->
+					<tbody>
+						<tr>
+							<td class="dojocalTimeColumn" dojoAttachPoint="dayTimeColumnNode"><div dojoAttachPoint="dayTimeLayoutContainer" class="dojocalTimeLayout"></div></td>
+							<td class="dojocalDayColumn dojocalDayColumnFirst dojocalDayColumnLast">
+								<div dojoAttachpoint="dayColumnLayout" class="dojocalDayColumnLayout dojocalLayout dojocalDay-selected"></div>
+								<div dojoAttachpoint="dayColumnTimeMarker" class="dojocalTimeMarker" style="display: none;"><span class="dojocalTimeMarkerInner"></span></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="dojocalDayRowsContainer" dojoAttachPoint="dayRowsContainerNode"></div>
+			</div>
+		</div>
+
+		<!-- calendar footer (all day events) -->
+		<div class="dojocalScrollbarPaddingH dojocalFooterWrap" dojoAttachPoint="dayFooterWrapper"><!-- wrapper accounts for scroll bar width -->
+			<div class="dojocalSplitter" dojoAttachPoint="daySplitter"><div class="dojocalSplitterThumb"></div></div>
+			<div class="dojocalFooter" dojoAttachPoint="dayFooterNode">
+				<table class="dojocalTableOuter">
+					<tbody>
+						<tr>
+							<td class="dojocalTimeColumn dojocalAllDayTimeColumn"><span dojoAttachPoint="dayAllDayTimeLabel" class="dojocalAllDayText">${allDayEventAreaLabel}</span></td>
+							<td class="dojocalDayColumn dojocalDayColumnFirst dojocalDayColumnLast"><div class="dojocalDayColumnLayout dojocalLayout" day="0" dojoAttachPoint="dayFooterColumnLayout"></div></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="dojocalFooterCollapseDetector" dojoAttachPoint="dayFooterCollapseDetector"></div>
+			</div>
+		</div>
+
+	</div>
+	<!-- end day view -->
+
+	<!-- templates -->
+	<div style="display:none" dojoAttachPoint="templates">
+
+		<div dojoAttachPoint="timeCellTemplate" class="dojocalTimeCell"><div class="dojocalTimeCellText"></div></div>
+		<div dojoAttachPoint="dayRowTemplate" class="dojocalDayRow"></div>
+		<table>
+			<tbody>
+				<tr dojoAttachPoint="monthRowTemplate" class="dojocalMonthRow">
+					<td class="dojocalDayCell dojocalDayCellFirst"><div class="dojocalDayColumnLayout dojocalLayout" day="0"><div class="dojocalDayCellHeader"></div></div></td>
+					<td class="dojocalDayCell"><div class="dojocalDayColumnLayout dojocalLayout" day="1"><div class="dojocalDayCellHeader"></div></div></td>
+					<td class="dojocalDayCell"><div class="dojocalDayColumnLayout dojocalLayout" day="2"><div class="dojocalDayCellHeader"></div></div></td>
+					<td class="dojocalDayCell"><div class="dojocalDayColumnLayout dojocalLayout" day="3"><div class="dojocalDayCellHeader"></div></div></td>
+					<td class="dojocalDayCell"><div class="dojocalDayColumnLayout dojocalLayout" day="4"><div class="dojocalDayCellHeader"></div></div></td>
+					<td class="dojocalDayCell"><div class="dojocalDayColumnLayout dojocalLayout" day="5"><div class="dojocalDayCellHeader"></div></div></td>
+					<td class="dojocalDayCell dojocalDayCellLast"><div class="dojocalDayColumnLayout dojocalLayout" day="6"><div class="dojocalDayCellHeader"></div></div></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</div>

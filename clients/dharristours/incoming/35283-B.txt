@@ -1,0 +1,36 @@
+--000000000000f875c9059e525f4e
+Content-Type: text/plain; charset="UTF-8"
+
+Date of trip: 3/31/20
+Number of passengers: 40
+     # of Adults: 3
+     # of Kids (Grade K-3):
+     # of Kids (Grade 4-12): 40
+Type of Vehicle: School Bus or Motor Coach: School Bus
+Pick up Destination: San Leandro High School
+Pick up Address: 2100 Bancroft Ave, San Leandro
+Pick Up time: 8:30
+Destination: Chabot Community College
+Destination Address: 25555 Hesperian Blvd, Hayward, CA 94545
+Departure time from Destination: 12pm
+Return Time Back to School: 2:30pm
+Any additional pickups or destinations: stop at Hometown Buffet in the
+Southland Mall 704 Southland Mall, Hayward, CA 94545
+Contact Name: Jessica Ortiz
+Phone: 510-618-4600 x2210
+
+--
+Jessica Ortiz
+SPED Department Co-Chair
+SDC Teacher/Case Manager
+San Leandro High School
+Phone: 510.618.4600 x2219
+Fax: 510.614.0986
+
+--000000000000f875c9059e525f4e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir="ltr"><div class="gmail_default" style="font-family:verdana,sans-serif"><div style="font-family:Arial,Helvetica,sans-serif;font-size:12.8px"><font color="#000000" face="verdana, sans-serif">Date of trip: 3/31/20<br>Number of passengers: 40<br>     # of Adults: 3<span style="color:rgb(80,0,80)"><br>     # of Kids (Grade K-3):</span></font></div><div style="font-family:Arial,Helvetica,sans-serif;font-size:12.8px"><font face="verdana, sans-serif"><font color="#000000">     </font><span style="color:rgb(0,0,0)"># of Kids (Grade 4-12): 40</span><font color="#000000"><br>Type of Vehicle: School Bus or Motor Coach: School Bus<br>Pick up Destination: San Leandro High School</font></font></div><div style="font-family:Arial,Helvetica,sans-serif;font-size:12.8px"><font color="#000000" face="verdana, sans-serif">Pick up Address: 2100 Bancroft Ave, San Leandro <br>Pick Up time: 8:30<br><font color="#000000">Destination: Chabot Community College </font></font></div><div style="font-family:Arial,Helvetica,sans-serif;font-size:12.8px"><font color="#000000" face="verdana, sans-serif">Destination Address: </font><span style="font-family:Roboto,arial,sans-serif;font-size:small">25555 Hesperian Blvd, Hayward, CA 94545</span></div><div style="font-family:Arial,Helvetica,sans-serif;font-size:12.8px"><font color="#000000" face="verdana, sans-serif"><font color="#000000">Departure time from Destination: 12pm<br>Return Time Back to School: 2:30pm<br>Any additional pickups or destinations: stop at Hometown Buffet in the Southland Mall </font></font><span style="font-family:Roboto,arial,sans-serif;font-size:small">704 Southland Mall, Hayward, CA 94545</span><font color="#000000" face="verdana, sans-serif"><font color="#000000"><br>Contact Name: Jessica Ortiz <br>Phone: 510-618-4600 x2210</font></font></div></div><div><br></div>-- <br><div dir="ltr" class="gmail_signature" data-smartmail="gmail_signature"><div dir="ltr"><div><div dir="ltr"><div><div dir="ltr"><div><div dir="ltr"><div><div dir="ltr"><div><div dir="ltr"><div><div dir="ltr"><div><div><div><div><span style="color:rgb(255,0,0)"><span style="background-color:rgb(255,255,255)">Jessica Ortiz <br></span></span></div><div><span style="color:rgb(255,0,0)"><span style="background-color:rgb(255,255,255)">SPED Department Co-Chair </span></span></div><span style="color:rgb(255,0,0)"><span style="background-color:rgb(255,255,255)">SDC Teacher/Case Manager<br></span></span></div><span style="color:rgb(255,0,0)"><span style="background-color:rgb(255,255,255)">San Leandro High School<br></span></span></div><span style="color:rgb(255,0,0)"><span style="background-color:rgb(255,255,255)">Phone: <span style="color:rgb(0,0,255)">510.618.4600 x2219</span><br></span></span></div><span style="color:rgb(255,0,0)"><span style="background-color:rgb(255,255,255)">Fax: <span style="color:rgb(0,0,255)">510.614.0986</span></span></span></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div>
+
+--000000000000f875c9059e525f4e--

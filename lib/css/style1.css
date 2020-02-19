@@ -1,0 +1,22 @@
+body {
+	margin: 0pt;
+	padding: 0pt;
+}
+
+div.outer_div {
+	-moz-background-inline-policy: continuous;
+	background: none repeat scroll 0pt 0pt yellow;
+	margin: 4px;
+	padding: 2px;
+	-moz-border-radius: 1em 1em 1em 1em;
+	border: 1em solid rgb(0, 153, 0);
+}
+
+div.inner_div {
+	-moz-background-inline-policy: continuous;
+	background: none repeat scroll 0pt 0pt rgb(242, 242, 242);
+	border: 1px solid rgb(204, 204, 204);
+	margin: 2px;
+	padding: 4px;
+}
+

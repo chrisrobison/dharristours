@@ -1,0 +1,55 @@
+#!/usr/local/bin/php
+<?php
+   $base = ($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple.dev';
+   
+   include($base . "/lib/boss_class.php");
+   
+   $boss = new boss();
+   $sys = new obj('SS_System', 'pimp', 'pimpin', 'localhost');
+   
+   $sys->addResource("App");
+   
+   $prog = array_shift($argv);
+
+   while ($id = array_shift($argv)) {
+      if (is_numeric($id)) {
+         print "Looking up app via AppID [$id]\n";
+         $sys->App->get($id);
+      } else {
+         print "Looking up app via Hostname [$id]\n";
+         $sys->App->get($id, "Host");
+      }
+      print_r($sys);
+      $app = $sys->App->App[0];
+
+      if (($app->AppID == $id) || ($app->Host == $id)) {
+         // First backup record into logfile
+         $path = $base.$boss->App->Assets;
+         $bakdir = $path.'/archive';
+         $dbdir = $path.'/data';
+         $db = $app->DB;
+         
+         if (!file_exists($bakdir)) {
+            print "Directory $bakdir does not exist. Creating...\n";
+            mkdir($bakdir, 0775);
+            print "Created directory $bakdir for client " . $app->App . "\n";
+         }
+         if (!file_exists($dbdir)) {
+            print "Directory $dbdir does not exist. Creating...\n";
+            mkdir($dbdir, 0775);
+            print "Created directory $dbdir for client " . $app->App . "\n";
+         }
+
+         $out = `/usr/local/bin/mysqldump -upimp -ppimpin -hlocalhost $db > $dbdir/snapshot_$date.sql`;
+         print "Archived DB $db for client {$app->App} in $dbdir/snapshot_$date.sql\n";
+
+         chdir($path);
+         
+         print "Archiving client file tree: $path to $bakdir/snapshot_$date.tgz...";
+         $out = `/usr/bin/tar --exclude=CVS --exclude=archive/* -czf $bakdir/snapshot_$date.tgz *`;
+         print "Success!\n";
+         
+         file_put_contents("/tmp/simpledb.log", date("Y-m-d H:i:s")."|Archived ".$bak->App." [AppID:$id]|".$_SESSION['Email']."\n", FILE_APPEND);
+      }
+   }
+?>

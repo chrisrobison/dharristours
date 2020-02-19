@@ -1,0 +1,21 @@
+[27-Feb-2017 11:44:11 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[27-Feb-2017 11:44:12 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8
+[22-Mar-2017 09:39:51 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[22-Mar-2017 09:39:52 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8
+[03-May-2017 17:20:42 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[03-May-2017 17:20:45 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8
+[03-May-2017 17:22:06 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[03-May-2017 17:22:07 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8
+[23-May-2017 12:54:05 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[23-May-2017 12:54:07 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8
+[06-Jun-2017 13:23:47 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[06-Jun-2017 13:23:49 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8
+[07-Jun-2017 09:22:35 America/Denver] Boss class using server: sanrio.simpsf.com
+
+[07-Jun-2017 09:22:36 America/Denver] PHP Fatal error:  Call to undefined function mssql_connect() in /home/cdr/simple/clients/sanrio/sql/ctl.php on line 8

@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+
+open(CVS, "/usr/bin/cvs -d /cvsroot co -c |");
+   @mods = sort(<CVS>);
+close CVS;
+chomp(@mods);
+
+while ($mod = shift @mods) {
+   chomp $mod;
+   if ($mod =~ /([\w\.\-]+)\s+\-a\s(.*)/) {
+      $modmap{$2} = $1;
+   } else {
+      ($modnm, $modloc) = split(/\s+/, $mod);
+      $module{$modnm} = $modloc;
+   }  
+}
+
+foreach $mod (sort(keys(%module))) {
+   $dat{'modules'} .= "<option value='$mod'>\[$mod\] $modmap{$mod}</option>\n";
+   $done{$mod} = 1;
+}
+
+foreach $mod (sort(keys(%module))) {
+   next if (defined $done{$mod});
+   $dat{'modules'} .= "<option value='$mod'>$mod</option>\n";
+}
+
+
+print "$dat{'modules'}\n";
+

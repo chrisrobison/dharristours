@@ -1,0 +1,45 @@
+body {
+   margin:0;
+   padding:0;
+   font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+a {
+   text-decoration: none;
+   color: #666;
+}
+.containerobj div {
+   padding-left: 4px;
+}
+.containerobj {
+   height: 10em;
+}
+#edit {
+   position: absolute;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   height: 58%;
+}
+#editFrame {
+   border: 1px solid #ddd;
+}
+.toolbtn {
+   width: 24px;
+   height: 24px;
+   font-size: 1.3em;
+   font-weight: 900;
+   float: left;
+   background-color: #eee;
+   border: 2px outset #999;
+   text-align: center;
+}
+#toolbar {
+   position: relative;
+   width: 100%;
+   background-color: #dddddd;
+   border-bottom: 2px outset #ccc;
+   height: 26px;
+}
+#finder {
+   clear: left;
+}

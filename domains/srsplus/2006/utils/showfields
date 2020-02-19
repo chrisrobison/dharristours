@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+#
+#
+use DBI;
+
+$db = shift @ARGV;
+
+# Setup database connection info
+my %dbconf = (	'user'    => 'mail',
+		'passwd'  => 'activate',
+		'host'    => 'localhost',
+		'dbdrv'   => 'mysql',
+		'db'      => $db);
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+while ($tbl = shift @ARGV) {
+   $sth = $dbh->prepare("select * from $tbl limit 1");
+   $sth->execute();
+   
+   $fields = $sth->{NAME};
+   print "$tbl:'".join("','", @{$fields})."'\n";
+}
+
+exit 0;
+

@@ -1,0 +1,28 @@
+body { margin:0;padding:0;font-size:14px;font-family: "Helvetica Neue", Optima, Verdana, sans-serif; }
+h1, h2, h3, h4, h5 { font-family: Quicksand, "Helvetica Neue", Optima, Verdana, sans-serif; }
+a { text-decoration:none;color:#00c; }
+a:hover { text-decoration:underline; }
+a:visited { color:#006; }
+a:active { color:#e00;display:inline-block;top:2px; }
+#main { margin:1em; cursor: default; }
+ul { list-style-type: none; padding-left:1em; }
+li:before, .knob:before {
+   font-family: "Open Sans",Helvetica,Verdana,Arial,sans-serif;
+   font-size:12px;
+   padding:2px 1px 1px 1px;
+   margin:-2px 6px 0px 0px;
+   line-height:.5em;
+   text-align:center;
+   border: 1px solid #666;
+   display: inline-block;
+   width: 7px;
+   height: 7px;
+   position: relative;
+   background-color:#666; color:#eee;
+   font-weight:300;
+}
+li.closed:before { content: "+"; }
+li.open:before { padding-top:0px;height:9px;top:-2px;content: "\2013"; }
+li.closed + ul { display: none; }
+li.open + ul { display: block; }
+

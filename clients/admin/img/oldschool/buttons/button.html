@@ -1,0 +1,19 @@
+<html><head><title>Button Test</title>
+<script>
+
+function Click() {
+   document.images[0].src = "buttonx-done.gif";
+   ru = window.setTimeout("Unclick();", 150);
+}
+
+function Unclick() {
+   document.images[0].src="button-done.gif";
+}
+
+</script></head><body>
+<a href="#" onClick="Click();"><img src="button-done.gif" border="0" WIDTH="80" HEIGHT="26"></a>
+<form name="hello">
+<input type="Submit" value="Done">
+</form>
+
+</body></html>

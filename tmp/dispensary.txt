@@ -1,0 +1,42 @@
+ClubID	Club	Address	CrossStreets	Phone	Hours
+1	Alternative Herbal Health Services	442 Haight Street	between Fillmore/Webster	415.864.1300	 11am-8pm M-Sat 12pm-5pm Sun
+2	Alternative Patient Caregivers	953 Mission Street, #40	between 5 th/6th St	415.618.0680	12pm-6pm M-F 11am-5pm Sat Closed Sun 
+3	Alternative Relief Co-Op	1944 Ocean Avenue 	btwn Fairfield/Keystone	415.239.4766	12pm-7pm M-Sat 
+4	Bernal Heights Dispensary	33 29 th Street	at Mission Street	415.642.4702 bhdispensary@yahoo.com	10am-9pm M-Sat 12pm-7pm Sun 
+5	CannaMed Care Center (CMC)	1211 Sutter Street 	at Polk St, lower level	415.885.8007 info@cannamedcare.com www.cannamedcare.com	2pm-9pm M-Sat 2pm-8pm Sun 
+6	Compassion and Care Center #1 (Tenth Street)	122 10 th Street	btwn Mission/Howard	415.626.4781	11am-7pm M-W 10am-8pm Thu-Sat 11am-6pm Sun 
+7	Compassion and Care Center #2 (Church Street)	194 Church Street	nr Market & 14 th St	415.865.9714	11am-7pm M-F 11am-5pm Sat, Sun 
+8	Chronic Candy Confectionery edibles, candy, sweets, etc.		415.559.9393	Contact: Max Leung, Distributor 
+9	The Dispensary	425 S. Van Ness Avenue 	nr 15 th Street	415.368.1645	10am-7pm M-Sat 11pm-6pm Sun 
+11	The Divinity Tree	958 Geary Street	btwn Larkin & Polk	415.292.6052 divinitytree@sbcglobal.net	11am-7pm W-M Closed Sun 
+12	Emmalyn's California Cannabis Clinic	1597 Howard Street, Ste A	at 12 th Street	415.345.8248 800.588.4218	10am-9pm Sun-Sat 
+13	Golden Triangle	1334 Haight Street	btwn Masonic/Central	415.291.8654	medical420@comcast.net	9am-9pm Sun-Sat 
+14	Good Fellows Smoke Shop	473 Haight Street	nr Fillmore Street	415.255.1323	10am-10pm Sun-W 10am-11pm Thu-Sat 
+15	Grass Roots	1077 Post Street 	nr Polk Street	415.346.4338 www.grassrootssf.com	10am-8pm Sun-Sat 
+16	The Green Cross	3420 22 nd Street 	nr Guerrero Street	415.648.4420 staff@thegreencross.org www.thegreencross.org	10am-8pm Sun-Sat
+17	The Green Door	843 Howard Street	btwn 4 th & 5th Street	415.541.9590 415.541.9525/FAX www.greendoorinfo.com	11:30am-8pm Sun-Th 10am-9pm F-Sat 
+18	420 Green Room	1054 Market Street	nr 6th Street	415.724.3476	11am-3pm W-Sat 
+20	Happy Days Herbal Relief	607 Divisadero Street	at Hayes Street	415.359.9927	(Happy Hr 8pm-9pm) 12pm-10pm M-Thu 12pm-12am F-Sat 10am-9pm Sun 
+21	Health and Wellness Center	935 Howard Street	btwn 5 th & 6th Street	415.512-7800	11am-7pm M-Sat 
+22	Herbal Relief Center	1545 Ocean Avenue	btwn Capital/Miramar	415.587.2599	11am-7pm M-F 1pm-6pm Sat, Sun 
+23	Hope Net Co-Op	223 9 th Street at Tehama	btwn Folsom/Howard	415.863.4399	12pm-7pm M-F 12pm-5pm Sat 
+25	Ketama Collective	14 Valencia Street	at Market Street	415.706.2679	11am-8pm M-Sat 12pm-6pm Sun 
+26	The Kind Sanctuary (inside Golden Triangle)	1334 Haight Street	btwn Masonic/Central	415.431.6764	10:30am-9pm M-Sat 12pm-8pm Sun 
+28	Love Shack	502 14 th Street 	at Guerrero Street	415.552.5121 www.lssf.com	10am-7pm M-Sat 10am-5pm Sun 
+29	Mason Street Dispensary	124 Mason Street	btwn Eddy & Ellis St	415.433.4420 masonstreet@gmail.com www.masondispensary.com	9am-9pm Sun-Sat 
+31	Medical Cannabis Center (MCC)	722 Columbus Street	nr Filbert Street	415.296.7614	11am-6pm M-Sat 11am-5pm Sun 
+32	Mendocino Healing Alternatives (MendoHealing)	96 Lafayette Street	off Howard, between 10 th & 11th Streets	415.864.4600 415.864.4654/FAX	11am-7pm Sun-Sat
+33	Mission Street Caregivers (Open 365 Days/Year)	1760 Mission Street	nr Duboce Avenue	415.553.7780	8am-8pm Sun-Sat 
+34	Mr. Nice Guy Medical Cannabis Dispensary	178 Valencia Street	nr Duboce Avenue		8am-8pm Sun-Sat 
+35	Patient and Caregivers Collective	1935 Mission Street	nr Duboce Avenue	415.701.9537	4pm-7pm M-Sat 
+36	Patient and Caregivers Services of San Francisco	644 Hyde Street	btwn Geary & Post St	415.292.9091	
+37	Patients Helping Patients Home Delivery Service		by bicycle	415.240.7190	3pm - 9pm Sun-Sat 
+38	Patient Place (formerly The Hemp Center)	4811 Geary Blvd	at 12 th Ave, nr Funston	415.386.HEMP 415.386.4367	11am-5pm M-F 12pm-5pm Sat Closed Sun 
+39	Purple Heart	1345 Grove Street	nr Divisadero Street	415.441.4244	12pm-10pm Sun-Sat 
+40	Rainbow Organic Medicine Collective Home Delivery Service			415.661.9911 420meds@myway.com	11am-7pm Tue-Sat 
+41	Re-Leaf Herbal Center	2980 21 st Street	nr Folsom Street	415.235.3307	1pm-8pm M-Sat 
+42	San Francisco ACT-UP	1884 Market Street	nr Octavia Street	415.864.6686 www.actupsf.com	12pm-7pm Tue-Sun 
+43	San Francisco City Patient Caregiver Collective	1095 Market St, #515	nr 7 th Street	415.724.3476 pcssf@yahoo.com	11am-5pm F-Sat www.sfprc.org 
+44	San Francisco Patients' Cooperative	350 Divisadero Street	at Oak Street	415.552.8653 415.552.8648/FAX sfpatients@aol.com	11am-5:30pm Sat-Mon 11pm-7:30pm Tue-Fri
+45	Sanctuary	669 O'Farrell Street	nr Hyde Street	415.885.4420	2pm-8pm Sun-Sat 
+47	The Vapor Room (Herbal Center	609A Haight Street	at Steiner Street	415.436.9063	10:30am-8:30pm M-F 12pm-8pm Sat, Sun www.vaporroom.com 

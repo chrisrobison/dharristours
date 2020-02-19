@@ -1,0 +1,51 @@
+CustomerID	Customer	Created	CreatedBy	LastModified	LastModifiedBy	Notes
+1	The Fresh Market 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+2	Grocery Outlet 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+3	Fareway Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+4	Woodman's Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+5	Lowe's Market 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+6	Bodega Latina 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+7	Redner's Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+8	King Kullen Grocery Co. 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+9	Northgate Gonzalez Market 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+10	Rouses Enterprises 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+11	Cardenas Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+12	Jerry's Enterprises 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+13	Niemann Foods 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+14	Foodland Super Market 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+15	Dierbergs Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+16	Lewis Food Town 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+17	Vallarta Supermarkets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+18	Haggen Inc. 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+19	Festival Foods 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+20	Roche Bros. Supermarkets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+21	Cosentino's Food Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+22	Glass Gardens 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+23	Harps Food Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+24	Pyramid Foods 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+25	Homeland Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+26	Lund Food Holdings 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+27	Kings Food Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+28	Balls Food Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+29	Martin's Super Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+30	Sunflower Farmers Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+31	Sedano's 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+32	Fred W. Albrecht Grocery Co. 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+33	C&K Market 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+34	Dahl's Foods 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+35	Brown's Super Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+36	Harmons 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+37	Heinen's 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+38	Reasor's 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+39	Gelson's Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+40	Rosauers Supermarkets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+41	Mi Pueblo Food Centers 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+42	Perlmart 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+43	All American Quality Foods 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+44	Miner's 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+45	Ronetco 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+46	Stew Leonard's 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+47	Pro's Ranch Markets 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+48	Tawa Supermarket 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+49	K.V. Mart 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	
+50	B&R Stores 	10/8/2012 13:51	clarksunpacific@hotmail.com	10/8/2012 13:51	clarksunpacific@hotmail.com	

@@ -1,0 +1,30 @@
+ExpenseTypeID	ExpenseType	Description
+1	Gas	"Car, delivery & travel"
+2	Office Supplies	Supplies (office & oper.)
+3	Food	Meals & Entertainment
+4	Lodging	"Car, delivery & travel"
+5	Car Rental	"Car, delivery & travel"
+6	Golf	Meals & Entertainment
+7	Parking	"Car, delivery & travel"
+8	Cash Withdrawal	Owners' Withdrawal
+9	Purchases (merchandise)	Purchases (merchandise)
+10	Gross wages (exact withdrawal)	Gross wages (exact withdrawal)
+11	"Payroll expenses (taxes, etc.)"	"Payroll expenses (taxes, etc.)"
+12	Outside services	Outside services
+14	Repairs & maintenance	Repairs & maintenance
+15	Advertising	Advertising
+16	"Car, delivery & travel"	"Car, delivery & travel"
+17	Accounting & legal	Accounting & legal
+18	Rent	Rent
+19	Telephone	Telephone
+20	Utilities	Utilities
+21	Insurance	Insurance
+22	"Taxes (real estate, etc.)"	"Taxes (real estate, etc.)"
+23	Interest	Interest
+24	Other expenses (specify)	Other expenses (specify)
+25	Miscellaneous	Miscellaneous
+26	Loan principal payment	Loan principal payment
+27	Capital purchase (specify)	Capital purchase (specify)
+28	Other startup costs	Other startup costs
+29	Reserve and/or Escrow	Reserve and/or Escrow
+30	Owners' Withdrawal	Owners' Withdrawal
