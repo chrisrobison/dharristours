@@ -1,0 +1,23 @@
+Date: #RFCDate#
+To: c.robison@newdle.com
+Cc: j.munne@newdle.com
+Bcc: cdr@netoasis.net
+From: Bug System <bugs@simplesoftwaresf.com>
+Subject: [Bug] New Bug '#Title#' has been submitted
+
+A new bug titled '#Title#' has been submitted.  Please review
+the following details and do whatever is necessary to remedy the problem.
+You may view this bug online at:
+#URL#
+
+Bug ID: #BugID#
+Bug Title: #Title#
+Assigned By: #AssignedBy#
+Assigned To: #Owner#
+Status: #Status#
+Priority: #Priority#
+
+Description: #Bug#
+
+Notes: #Notes#
+

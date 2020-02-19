@@ -1,0 +1,327 @@
+BODY {
+   font-family: "Helvetica Neue","Gill Sans",Verdana,Arial,Helvetica,sans-serif;
+   font-size: 14px;
+   margin: 0px;
+   padding: 0px;
+   overflow-x:hidden;
+}
+
+#finder {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   width: 1600px;
+   height: 99%;
+   background-color: #ffffff;
+   white-space: nowrap;
+}
+
+.panel {
+   display: relative;
+   white-space: nowrap;
+   top:0px;
+   bottom: 0px;
+   width: 250px;
+   background-color: #ffffff;
+   border-right: 1px solid #d0d0d0;
+   border-left: 1px solid #a0a0a0;
+   margin: 0px 1px 0px 1px;
+}
+
+.framed {
+   height: 98%;
+   width: 250px;
+   white-space: nowrap;
+}
+#EditFrame {
+   width: 40em;
+}
+.selectedList {
+   position: relative;
+   left: 0px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   background-color: #ffffcc;
+   font-size: 14px;
+   margin-right: 3px;
+   cursor: default;
+}
+
+.listItem {
+   position: relative;
+   left: 0px;
+   margin-right: 3px;
+   top: 0px;
+   text-decoration: none;
+   color: black;
+   font-size: 14px;
+   cursor: default;
+}
+
+.listRow {
+   position: relative;
+   left: -2px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   padding-left: 16px;
+   background-image: url("/admin/appmanager/img/arrow_closed.png");
+   background-repeat: no-repeat;
+   margin-right: 3px;
+   cursor: pointer;   
+   background-color: transparent;
+}
+
+.listRowSelected {
+   position: relative;
+   left: -2px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   padding-left: 16px;
+   background-image: url("/admin/appmanager/img/arrow_closed.png");
+   background-repeat: no-repeat;
+   margin-right: 3px;
+   cursor: pointer;   
+   -moz-outline: 1px dotted #303030;
+   background-color: #ffffcc;
+}
+
+.unfocusedRow {
+   position: relative;
+   left: -2px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   padding-left: 16px;
+   background-image: url("/admin/appmanager/img/arrow_closed.png");
+   background-repeat: no-repeat;
+   font-size: 14px;
+   margin-right: 3px;
+   cursor: pointer;   
+   background-color: #d0d0d0;
+}
+
+#recordForm {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+}
+
+#resultset {
+   position: absolute;
+   top: 1em;
+   left: 4px;
+   right: 15em;
+   bottom: 0px;
+}
+
+#resultLabel {
+   position: absolute;
+   top: 1em;
+   left: 4px;
+   text-align: right;
+}
+.parentlistlabel {
+   width: 5em;
+   position:relative;
+   text-align: right;
+}
+.parentlist {
+   margin: 4px 0px 4px 0px;
+   position: relative;
+   left: 4px;
+}
+.resultBox {
+   position:relative;
+   left: 4em;
+   width: 20em;
+}
+
+.formrow {
+   position: relative;
+   padding: 2px 2px 2px 2px;
+   clear: left;
+   display: block;
+}
+.label {
+   /* float: left; */
+   display:inline-block;
+   position: relative;
+   width: 8em;
+   text-align: right;
+   padding: 0px 4px 0px 0px;
+}
+.label:after {
+   content: ": ";
+}
+
+.data {
+   /* float: left; */
+}
+
+.dataList {
+   width: 13em;
+   border: 1px inset #aaa;
+}
+
+.chkbox {
+   position: relative;
+   left: 8em;
+}
+
+.chkopt {
+   position:relative;padding-left:1em;width:20%;float:left;
+}
+.options { margin:0 2em;font-size:.8em;white-space:nowrap; }
+.optionrow { margin:.5em 0; }
+.check {
+   position: relative;
+   top: 2px;
+   border: 1px inset #a0a0a0;
+   margin: 4px 0px 4px 4px;
+}
+TEXTAREA.data,INPUT.data {
+   border: 1px inset #a0a0a0;
+}
+
+#btns {
+   position: absolute;
+   top: 26em;
+   height: 24px;
+   left: 4.25em;
+   width: auto;
+   z-index: 9999;
+}
+
+#formWrap {
+   position: absolute;
+   top:40px;
+   left: 4px;
+   right: 0px;
+   bottom: 0px;
+   z-index: 500;
+}
+
+.btn {
+   background-image: url(/img/shinybg.png);
+   font-size: 14px;
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   border-radius: 6px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   margin-top: 1px;
+   height: 28px;
+   width: 60px;
+}
+
+.btn2 {
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   height: 24px;
+   float: right;
+}
+
+#edit {
+   right: 0px;
+   width: 40em;
+}
+#mainWrap {
+   position:relative;
+   top:40px;
+}
+.heading {
+   overflow:hidden;
+   font-size: 18px;
+   background-color: #000;
+   position: fixed;
+   z-index:999;
+   top:0px;
+   width:100%;
+   height: 28px;
+   border-bottom: 2px outset #b0b0b0;
+   box-shadow: 0px 2px 3px rgba(0,0,0,.4);
+   -moz-box-shadow: 0px 2px 3px rgba(0,0,0,.4);
+   -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,.4);
+   text-align: center;
+   padding-top: 5px;
+   font-weight:bold;
+   color:#fff;
+   font-family: "Helvetica Neue","Gill Sans","Gill Sans MT",Optima,Verdana,Arial,Helvetica,sans-serif;
+   background-image: url("/img/toolbar_bg.png");
+}
+
+.footer {
+   position: fixed;
+   bottom: 0px;
+   background-color: #e0e0e0;
+   border-top: 1px solid #909090;
+   height: 32px;
+   background-image: url(/img/toolbar_bg.png);
+   background-repeat: repeat-x;
+   right:0px;
+   left:0px;
+   padding-left:4px;
+}
+.footerButton {
+   border-radius: 1em;
+   font-weight:bold;
+   -webkit-border-radius: 1em;
+   -moz-border-radius: 1em;
+   background-image: url(/img/shinybg.png);
+   border: 1px outset #000;
+   box-shadow: 2px 2px 3px rgba(0,0,0,.4);
+   -moz-box-shadow: 2px 2px 3px rgba(0,0,0,.4);
+   -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,.4);
+   margin-top: 2px;
+   height: 26px;
+   position: relative;
+   z-index: 5000;
+   background-color:#e0e0e0;
+}
+
+.itemID {
+   position: absolute;
+   top: 0px;
+   right: 4px;
+   z-index: 1000;
+   float: right;
+   color: #ccc;
+}
+.navIcon {
+    background-color: #EEEEEE;
+    border: 3px solid #000000;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.35);
+    color: #C0C0C0;
+    display: inline-block;
+    font-size: 2em;
+    font-weight: bold;
+    height: 24px;
+    margin-right: 6px;
+    padding: 2px 2px 8px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    width: 32px;
+}
+input.simpleButton {
+   height:auto !important;
+}
+.disabled { 
+   color:#ccc;
+}

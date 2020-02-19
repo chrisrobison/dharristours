@@ -1,0 +1,29 @@
+------=_Part_2893935_266858306.1582022503264
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Automatically created report
+
+daily report: Trip report CSV (detailed)
+Period: 2/17/20 - 2/18/20
+WEBFLEET account: harris-tours
+
+The report does not contain any data for the above mentioned period!
+
+*** This is an automatically generated email, please do not reply. ***
+If you have a question about our products and solutions, you can find your answer on our website under "frequently asked questions" or under "user guides".
+If you need to contact our Customer Support, please use our online contact form.
+Kind regards,
+Webfleet Solutions
+*** Let's drive business. Further. www.webfleet.com ***
+------=_Part_2893935_266858306.1582022503264
+Content-Type: text/csv; charset=UTF-8;
+	name="Trip_report_CSV_(detailed)_DAILY_20200218.csv"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="Trip_report_CSV_(detailed)_DAILY_20200218.csv"
+
+Vehicle,Day,Start time,End time,Duration,Standstill,Start odometer,End odometer,Distance,Driver,Start location,End location,Fuel consumption,Average fuel consumption,+/- Reference (absolute),+/- Reference (relative),Business mileage,Duration,Driving time
+,,,,,,,,,,,,,,,,,,
+
+------=_Part_2893935_266858306.1582022503264--

@@ -1,0 +1,16 @@
+Date: #RFCDate#
+To: #Owner#
+Reply-to: Sanrio HelpDesk Team <ITDept@sanrio.com>
+Cc: #LastModifiedBy#
+Bcc: sanrio@simplesoftwaresf.com
+From: Simple Support <root@cloud.simpsf.com>
+Subject: [HelpDesk] '#RequestType#' Assigned To: '#Owner#'
+
+Help desk request #HelpDesk# (ID: #HelpDeskID#) has been assigned to you.  You may view this request online at
+
+#URL#
+
+Thank you,
+
+   Sanrio Help Desk System
+

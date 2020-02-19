@@ -1,0 +1,1 @@
+<script src="http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/104342096967082496017/multipurpose-all-in-one-gadget.xml&amp;synd=open&amp;w=1100&amp;h=900&amp;title=All+in+One+Mail&amp;border=http%3A%2F%2Fwww.gmodules.com%2Fig%2Fimages%2F&amp;output=js"></script>

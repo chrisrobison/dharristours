@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Realtime Bus Locations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .labels { 
+         background-color:#ffffff;
+         padding:.25em;
+         display:inline-block;
+         border:.5em solid yellow;
+      }
+      .time {
+         text-align:right;
+      }
+      .details {
+         border-collapse: collapse;
+         border:1px solid #ccc;
+         width:100%;
+      }
+      td, th {
+         padding:.5em;
+
+      }
+      th {
+         background-color:#000099;
+         color:#ffffff;
+         font-weight:bold;
+      }
+    </style>
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+   <script defer src="init-firebase.js"></script>  
+   <script>
+      /**
+      * Starting point for running the program. Authenticates the user.
+      * @param {function()} onAuthSuccess - Called when authentication succeeds.
+      */
+      function initAuthentication(onAuthSuccess) {
+        firebase.auth().signInAnonymously().catch(function(error) {
+          console.log(error.code + ', ' + error.message);
+        }, {remember: 'sessionOnly'});
+
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // data.sender = user.uid;
+            onAuthSuccess();
+          } else {
+            // User is signed out.
+          }
+        });
+      }
+
+      function initFirebase() {
+         var startTime = new Date().getTime() - (60 * 10 * 1000);
+         
+         var buses = firebase.database().ref('bus/');
+         buses.on('value', function(snapshot) {
+            var val = snapshot.val()
+            console.dir(val);
+            updateBuses(val);
+         });
+      }
+      function addBuses(buses) {
+         console.dir(buses);
+         for (var i = 0; i < buses.length; i++) {
+            markers[i] = new google.maps.Marker({
+               position: new google.maps.LatLng((buses[i].latitude_mdeg / 1000000), (buses[i].longitude_mdeg / 1000000)),
+               icon: 'bus2.png',
+               map: map
+            });
+         };
+
+      }
+      var infoWindows = [];
+      var markers = [];
+      var iconPath = '/where/img/';
+       function updateBuses(buses) {
+         console.dir(buses);
+         var bounds = new google.maps.LatLngBounds ();
+         if (buses && buses.length) {
+            for (var i = 0; i < buses.length; i++) {
+               if (!markers[i] && (buses[i].objectno=="2802")) {
+                  markers[i] = new google.maps.Marker({
+                     position: new google.maps.LatLng((buses[i].latitude_mdeg / 1000000), (buses[i].longitude_mdeg / 1000000)),
+                     icon: {
+                        url: iconPath + 'bus10.png',
+                        labelOrigin: new google.maps.Point(60,20),
+                        size: new google.maps.Size(150, 100)
+                     },
+                     map: map,
+                     labelClass: 'labels',
+                     label: {
+                        text: buses[i].objectno,
+                        color: '#ffff00',
+                        fontSize: '18px',
+                        fontWeight: 'normal'
+                     }
+
+                     
+                  });
+                  markers[i].bus = buses[i];
+                  bounds.extend (markers[i].position);
+		  var iw;
+                  markers[i].infowin = iw = new google.maps.InfoWindow({ 
+                     content: '<h1>Bus #' + buses[i]['objectno'] + '</h1><div>' + buses[i]['postext'] + '</div>'
+                  });
+		  
+		  let url = 'https://dharristours.simpsf.com/where/businfo.php?bus=' + buses[i]['objectno'];
+                  let bus = buses[i];
+		  let mark = markers[i];
+
+                  if (buses[i]['ignition'] == '1') {
+
+		      fetch(url).then(res => res.json())
+		      .then((out) => {
+		           mark.infowin.setContent("<h2>Bus #" + bus['objectno'] + "</h2><h2>" + out.Job + "</h2>\n" +
+			       "<h2><span style='font-weight:normal'>Driver: </span>" + out.Driver + "</h2>\n" + 
+			       "<h2><span style='font-weight:normal'>Job ID: </span><a href='https://dharristours.simpsf.com/grid/view.php?pid=335&rsc=Job&id=" + out.JobID + "' target='_blank'>"+out.JobID+"</a></h2>\n" + 
+			       "<table class='details'><tr><th></th><th>Location</th><th>Time</th></tr>" + 
+			       "<tr><th>Pickup</th><td>" + out.PickupFrom + "</td><td class='time'>" + out.PickupTime + "</td></tr>\n" +
+			       "<tr><th>Drop Off</th><td>" + out.DropoffTo + "</td><td class='time'>" + out.DropoffTime + "</td></tr>\n" +
+			       "</table><br/>\n");
+			       console.log('Checkout this JSON! ', out);
+		      })
+		      .catch(err => { throw err });
+                  }
+                  markers[i].addListener('click', function() {
+                     this.infowin.open(map, this);
+                  });
+
+               } else if (buses[i].objectno == "2802") {
+                  markers[i].setPosition(new google.maps.LatLng((buses[i].latitude_mdeg / 1000000), (buses[i].longitude_mdeg / 1000000)));
+                  bounds.extend (markers[i].position);
+               }
+            };
+
+            map.fitBounds(bounds);
+         } else {
+            console.log("Tried to update buses but they're missing!!");
+         }
+      }
+
+      function createInfoWindow(bus) {
+         var infoWin = new google.maps.InfoWindow({ 
+            content: '<h1>' + bus['objectno'] + ' - ' + bus['description'] + '</h1>'
+         });
+         return infoWin;
+      }
+   </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(
+            document.getElementById('map'),
+            {center: new google.maps.LatLng(37.852435,-122.0864287), zoom: 11, mapTypeId: 'hybrid' });
+
+        var iconBase = 'img/';
+
+        var icons = {
+          bus: {
+            icon: iconBase + 'bus.png'
+          },
+          bus2: {
+            icon: iconBase + 'bus2.png'
+          },
+          bus3: {
+            icon: iconBase + 'bus3.png'
+          },
+          marker: {
+            icon: iconBase + 'bus-marker.png'
+          },
+          marker2: {
+            icon: iconBase + 'bus-marker2.png'
+          }
+        };
+
+        var features = [
+          {
+            position: new google.maps.LatLng(37.91721, -122.22630),
+            type: 'bus'
+          }, {
+            position: new google.maps.LatLng(37.91666, -122.23468),
+            type: 'bus2'
+          }, {
+            position: new google.maps.LatLng(37.916988, -122.233640),
+            type: 'bus2'
+          }, {
+            position: new google.maps.LatLng(37.91662347903106, -122.22879464019775),
+            type: 'bus'
+          }, {
+            position: new google.maps.LatLng(37.91727341958453, -122.23348314155578),
+            type: 'bus2'
+          }
+        ];
+        
+
+        initAuthentication(initFirebase.bind(undefined, ''));
+      }
+      var markers = [];
+      function createMarkers(items) {
+         for (var i = 0; i < items.length; i++) {
+            markers.push(new google.maps.Marker({
+               position: new google.maps.LatLng((items[i].latitude_mdeg / 1000000), (items[i].longitude_mdeg / 1000000)),
+               icon: 'bus.png',
+               map: map
+            }));
+         };
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script>
+  </body>
+</html>
+

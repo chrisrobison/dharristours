@@ -1,0 +1,93 @@
+BODY {
+    font-size: 10px;
+    font-family: Arial,Helvetica,SansSerif;
+    color:#000000;
+}
+.HEADER {
+   font-size: 14px;
+   font-weight: bold;
+   font-family: Arial,Helvetica,SansSerif;
+   color:#000000;
+}
+.FIELD {
+   padding-left: 8px;
+   font-size: 11px;
+   font-family: Arial,Helvetica,SansSerif;
+   color:#000000;
+}
+.TBLMAIN {
+   background-color: #cccccc;
+   border-style: groove;
+}
+.TBLTITLE {
+   font-size: 14px;
+   font-weight: bold;
+   font-family: Arial,Helvetica,SansSerif;
+   color:#ffffff;
+   background-color: #005577;
+   border-style: groove;
+}
+.CHANGED {
+   font-size: 12px;
+   font-family: Arial,Helvetica,SansSerif;
+   background-color: #aa0000;
+   font-weight: bold;
+   width: 60px;
+   color: #ffffff;
+}
+.SAVE {
+   font-size: 12px;
+   font-family: Arial,Helvetica,SansSerif;
+   background-color: #d0d0d0;
+   font-weight: bold;
+   width: 60px;
+   color: #000000;
+}
+.STATIC {
+   background-color:#dedede; 
+   font-family: Arial,Helvetica,SansSerif;
+   border-style:inset; 
+   border-width:.15em; 
+   padding:0px 35px 0px 3px;
+}   
+.BTN {
+   font-size: 12px;
+   font-family: SansSerif,Arial,Helvetica;
+   background-color: #d0d0d0;
+   width: 60px;
+   color: #000000;
+}
+.BTNS {
+   font-size: 11px;
+   font-family: Arial,Helvetica,SansSerif;
+   color:#000000;
+   visibility: visible;
+}
+.NOBTNS {
+   font-size: 11px;
+   font-family: Arial,Helvetica,SansSerif;
+   color:#000000;
+   visibility: hidden;
+}
+.DATA {
+   font-size: 11px;
+   font-family: Arial,Helvetica,SansSerif;
+   background-color: #ffffff;
+   color:#000000;
+}
+.LIST {
+   font-size: 11px;
+   font-family: Arial,Helvetica,SansSerif;
+   background-color: #ffffff;
+   color:#000000;
+}
+.MAIN {
+   font-size: 11px;
+   font-family: Arial,Helvetica,SansSerif;
+   color:#000000;
+}
+.FIXED {
+   font-size: 10px;
+   font-family: Courier New,Courier,LucidaConsole,Fixedsys;
+   color: #000000;
+}

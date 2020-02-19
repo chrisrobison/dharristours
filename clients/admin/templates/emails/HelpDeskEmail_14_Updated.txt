@@ -1,0 +1,27 @@
+Date: #RFCDate#
+To: #CreatedBy#
+Reply-to: Sanrio HelpDesk Team <ITDept@sanrio.com>
+Cc: #LastModifiedBy#
+Bcc: sanrio@simplesoftwaresf.com
+From: Help Desk System <sanrio@simplesoftwaresf.com>
+Subject: [HelpDesk] '#RequestType#' Request Updated: [ID: #HelpDeskID#]
+
+'#HelpDesk#' has been updated by #LastModifiedBy#:
+
+         Status: #RequestStatus#
+
+          Domain:  #Domain#
+       Acct Type:  #OnlineAcctType#
+    Company Name:  #Name#
+     Company Num:  #Number#
+
+     Online User:  #OnlineUser#
+        Password:  #OnlinePasswd#
+     
+           Notes:  #Notes#
+
+
+Thank you,
+
+   The Simple Software Email Notification System
+

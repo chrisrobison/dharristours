@@ -1,0 +1,11 @@
+#!/usr/local/bin/php
+<?php
+   array_shift($argv);
+   while ($file = array_shift($argv)) {
+     print "Minimizing $file...";
+     $results = `djpeg $file | cjpeg -quality 50 > tmp.jpg`;
+     print "done.\n"; 
+      $results = `mv tmp.jpg $file`;
+
+   }
+?>

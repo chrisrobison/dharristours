@@ -1,0 +1,75 @@
+<script language='JavaScript' type='text/javascript'>
+
+function showLogin(obj) {
+   var sel = document.forms[0].AcctType.value;
+
+   if (obj.value == 'new') {
+      document.getElementById('newacct').style.visibility='visible';
+      document.getElementById('loginacct').style.visibility='hidden';
+      document.forms[0].User.value = '';
+      document.forms[0].Passwd.value = '';
+      setTimeout('document.forms[0].NewUser.focus();', 150);
+   } else {
+      document.getElementById('loginacct').style.visibility='visible';
+      document.getElementById('newacct').style.visibility='hidden';
+      document.forms[0].NewUser.value = '';
+      document.forms[0].NewPasswd.value = '';
+      document.forms[0].verify.value = '';
+      setTimeout('document.forms[0].User.focus();', 150);
+   }
+}
+
+</script>
+<table border='0' cellpadding='4' cellspacing='0' vspace='0' hspace='0'>
+   <tr>
+      <td colspan='2'><span class='HEADING'><input type='radio' name='AcctType' value='login' onclick="showLogin(this);">Existing Account</span></td>
+      <td colspan='2' rowspan='2' valign='top'>
+         <div id='loginacct' style='visibility:hidden;'>
+            <table border='0' cellpadding='4' cellspacing='0' hspace='0' vspace='0'>
+               <tr>
+                  <td align='right'><span class='field'>Username:</span></td>
+                  <td><span class='MAIN'><input class='MAIN' type='text' name="User" value="#user#" size='20' tabindex='1'></span></td>
+               </tr>
+               <tr>
+                  <td align='right'><span class='field'>Password:</span></td>
+                  <td><span class='MAIN'><input class='MAIN' type='password' name="Passwd" value="#passwd#" size='20' tabindex='2'></span></td>
+               </tr>
+            </table>
+         </div>
+      </td>
+   </tr>
+   <tr>
+      <td colspan='2' valign='top'><span style='font-size:.70em;' class='MAIN'>If you already have an account
+         with us, login with your account username and password: </span></td>
+   </tr>
+   <tr><td colspan='4'><hr></td></tr>
+   <tr>
+      <td colspan='2'><span class='HEADING'><input type='radio' name='AcctType' value='new' onclick="showLogin(this);">New Account</span></td>
+      <td valign='top' rowspan='2' colspan='2'>
+         <div id='newacct' style='visibility:hidden;'>
+            <table border='0' cellpadding='4' cellspacing='0' hspace='0' vspace='0'>
+               <tr>
+                  <td align='right'><span class='field'>Username:</span></td>
+                  <td><span class='MAIN'><input class='MAIN' type='text' name="NewUser" value="#user#" size='20' tabindex='1'></span></td>
+               </tr>
+               <tr>
+                  <td align='right'><span class='field'>Password:</span></td>
+                  <td><span class='MAIN'><input class='MAIN' type='password' name="NewPasswd" value="#passwd#" size='20' tabindex='2'></span></td>
+               </tr>
+               <tr>
+                  <td align='right'><span class='field'>Verify:</span></td>
+                  <td><span class='MAIN'><input class='MAIN' type='password' name="verify" value="#passwd#" size='20' tabindex='3'></span></td>
+               </tr>
+            </table>
+         </div>
+      </td>
+   </tr>
+   <tr>
+      <td valign='top' colspan='2' style='padding-left:16px;'>
+         <span class='MAIN' style='font-size:.70em;'>
+            To create a new account, pick a username between 3 and 12 lowercase alpha-numeric characters [a-z, 0-9]
+            and a password (enter twice for verification). 
+         </span>
+      </td>
+   </tr>
+</table>   

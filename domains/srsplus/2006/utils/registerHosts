@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use Data::Dumper;
+
+my $srs = new DotSRS_Client;
+my $hosts = { 'ns.netoasis.net'  => '66.181.7.2',
+				  'ns2.netoasis.net' => '66.181.7.12',
+				  'ns3.netoasis.net' => '66.181.7.5' };
+
+foreach my $h (keys %{$hosts}) {
+	my $host =	{	'DNS SERVER NAME' => $h,
+						'DNS SERVER IP'	=> $hosts->{$h}
+					};
+	print "Registering host $h \[$hosts->{$h}\]\n";
+	my $results = $srs->register_nameserver('1', $host);
+
+	print Dumper($results);
+}
+

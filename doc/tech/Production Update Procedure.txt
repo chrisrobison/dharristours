@@ -1,0 +1,27 @@
+Steps for updating production
+
+System Update
+	Core
+ - Update Production /Base excluding clients dir
+	Client Specific
+ - Update specific client in production with files, schema, but no data
+ - Prompts to address data movement across system;
+	existing table: move data
+	new tables: move data to prod
+
+taking snapshot of prod for purpose of moving data/forms from development
+	DB
+ - full db backup
+ - truncate login table
+ - execute dev to prod push
+   - if data move, is login included
+   - schema changes, no data
+   - new tables added to dev, include data?
+ - if failure, rollback
+	files
+ - backup clients/*
+ - execute dev to prod push
+ - if failure, rollback
+	system start
+ - reload login table from backup after execution if not moved
+

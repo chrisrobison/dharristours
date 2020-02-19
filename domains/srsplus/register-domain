@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use CDR::Input;
+$| = 1;
+my $srs = new DotSRS_Client;
+my $dom = shift @ARGV;
+my $srsid = shift @ARGV;
+
+die "No domain specified for registration." if (!$dom);
+use Data::Dumper;
+
+($domain, $tld) = split(/\./, $dom);
+
+print "Requesting registration of domain [$domain.$tld]\n\n";
+
+# Verify domain availability
+$ref = $srs->domain_info( $domain, $tld) or die "Error retrieving domain information for $domain.$tld\n";
+
+print Dumper($ref);
+if ($ref->{'DOMAIN STATUS'} eq 'FIXED') {
+   $price = $ref->{'PRICE'};     # Grab the price
+   print "$domain.$tld is available for \$$price\n";
+} else {
+   die "Domain does not appear to be available.  Exiting...\n";
+}
+
+$domain_ref = {   
+    'DOMAIN'            => $domain,
+    'TLD'               => $tld,
+    'TERM YEARS'        => 1,
+    'RESPONSIBLE PERSON'=> $srsid,
+    'BILLING CONTACT'   => $srsid,
+    'ADMIN CONTACT'     => $srsid,
+    'TECHNICAL CONTACT' => 7568954,
+    'DNS SERVER NAME 1' => 'ns.modns.com',
+    'DNS SERVER NAME 2' => 'ns2.modns.com',
+    'PRICE'             => $price
+};
+
+my ( $reqid, $ref ) = $srs->register_domain( 1, $domain_ref );
+
+$out = "";
+
+if ( $ref ){
+   $out .= '{"RequestID": ' . $reqid . ',';
+   foreach $key (keys %{ $ref }) {
+      $out .= '"' . $key . '": "' . $ref->{$key} . '",';
+   }
+   chop($out);
+   $out .= "}";
+   
+   print $out;
+} else {
+   print '{"Status":"ERROR", "Message":"Error registering domain: '.$srs->{'error'} . '"}';
+}

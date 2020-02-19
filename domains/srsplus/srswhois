@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use JSON;
+use Data::Dumper;
+
+my $srs = new DotSRS_Client;
+my $now = time;
+
+while (my $domain = shift @ARGV) {
+	my ($dom, $tld) = split(/\./, $domain, 2);
+
+	my $results = $srs->whois($dom, $tld);
+
+	print encode_json $results;
+}
+
+print time - $now . " seconds\n";
+

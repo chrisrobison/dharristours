@@ -1,0 +1,29 @@
+Date: #RFCDate#
+To: #CreatedBy#
+Reply-to: Sanrio HelpDesk Team <ITDept@sanrio.com>
+Cc: #LastModifiedBy#
+Bcc: sanrio@simplesoftwaresf.com
+From: Simple Support <root@cloud.simpsf.com>
+Subject: [HelpDesk] [ID: #HelpDeskID#] '#RequestType#' Status Updated: '#RequestStatus#'
+
+Help desk request 'Status' has been updated:
+         Status: #RequestStatus#
+    Modified By: #LastModifiedBy#
+
+       Help Desk:  #HelpDesk#
+       
+        Category:  #Category#
+     Description:  #Description#
+   User Severity:  #User_Severity#
+     IT Severity:  #Severity#
+         
+         Created:  #Created#
+      Created By:  #CreatedBy#
+	Assigned:  #Owner#
+     
+           Notes:  #Notes#
+
+Thank you,
+
+   Sanrio Help Desk System
+

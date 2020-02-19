@@ -1,0 +1,2 @@
+[27-Feb-2017 15:37:49 America/Denver] PHP Warning:  require_once(boss_class.php): failed to open stream: No such file or directory in /home/cdr/simple/admin/login.php on line 2
+[27-Feb-2017 15:37:49 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'boss_class.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/cdr/simple/admin/login.php on line 2

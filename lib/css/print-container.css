@@ -1,0 +1,7 @@
+#prt-container table {
+    border-collapse:collapse;
+}
+#prt-container th,
+#prt-container td {
+    border:1px solid black;
+}

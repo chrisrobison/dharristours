@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swim</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      $(function(){
+        
+        var win = $(window);
+        var winWidth, winHeight;
+        var body = $("body");
+        var TWO_PI = Math.random() * Math.PI * 2;
+        
+        function Mover(){
+          this.init();
+        }
+        
+        Mover.prototype = {
+          init : function(){
+            this.x = 200;
+            this.y = 200;
+            this.rad = Math.random() * 6 + 3;
+            
+            this.vx = this.vy = 0;
+            this.rot = Math.random() * TWO_PI;
+            this.theta = 0;
+            this.damp = 24;
+            this.graphics = $("<div class='mover'>").css({opacity : 0.8});
+            
+            this.update();
+            body.append(this.graphics);
+          },
+          run : function(){
+            
+            if (parseInt(Math.random() * 10) == 1){
+              this.theta += Math.random() * 2 - 1;
+            }
+            
+            this.vx += (this.rad * Math.cos(this.theta) - this.vx) / this.damp;
+            this.vy += (this.rad * Math.sin(this.theta) - this.vy) / this.damp;
+            
+            this.rot += (this.theta / Math.PI * 180 - this.rot) / this.damp;
+   
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            if (this.x < left){
+             this.x = right; 
+            }else if (this.x > right){
+              this.x = left;
+            }
+            if (this.y < top){
+             this.y = bottom; 
+            }else if (this.y > bottom){
+              this.y = top;
+            }
+            this.update();
+          },
+          update : function(){
+            
+            this.graphics.css({
+              "-webkit-transform" : "translate3D("+this.x+"px, "+this.y+"px, 0px) rotateZ("+this.rot+"deg)"
+            });
+          }
+          
+        };
+        
+        var movers = [];
+        var NUM = 30;
+        for (var i = 0; i<NUM; i++){
+          movers[i] = new Mover();
+        } 
+        
+        var interval = 1000/60;
+        
+        var left = -50, top = -50, right, bottom;
+        
+        setInterval(function(){
+          winWidth = win.width();
+          winHeight = win.height();
+          right = winWidth + 50;
+          bottom = winHeight + 50;
+          
+          for (var i = 0; i<NUM; i++){
+            movers[i].run();
+          }
+        }, interval);
+        
+      });
+    </script>
+    <style>
+      .mover{
+        position : absolute;
+        background-color :  #ff00ff;
+        width : 50px;
+        height :20px;
+        border-radius:10px;
+        -webkit-box-shadow : 0px 0px 10px #7e9fc2;
+      }
+    </style>
+  </head>
+  
+  <body></body>
+</html>

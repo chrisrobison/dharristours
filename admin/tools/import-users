@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+#
+#
+use DBI;
+
+my %dbconf = (	'user'    => 'pimp',
+		'passwd'  => 'pimpin',
+		'host'    => 'localhost',
+		'dbdrv'   => 'mysql',
+		'db'      => 'mail');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+my $user = {};
+my @pwfields = ('user','passwd','uid','gid', 'quota','comment','name','dir','shell');
+while (my @values = getpwent()) {
+   foreach my $f (0..$#pwfields) {
+      $user->{$values[0]}->{$pwfields[$f]} = $values[$f];
+      $tmp{$pwfields[$f]} = $values[$f];
+   }
+   $ins = "insert into user (uid, gid, domain, user, id, crypted, type, quota, dir, maildir, shell, name) values ($tmp{'uid'}, $tmp{'gid'}, 'pimp.net', '$tmp{'user'}', '$tmp{'user'}\@pimp.net', '$tmp{'passwd'}', 'standard', '100', '$tmp{'dir'}', '$tmp{'dir'}/Maildir', '$tmp{'shell'}', '$tmp{'name'}')";
+   $dbh->do($ins);
+   $ins = "insert into user (uid, gid, domain, user, id, crypted, type, quota, dir, maildir, shell, name) values ($tmp{'uid'}, $tmp{'gid'}, 'netoasis.net', '$tmp{'user'}', '$tmp{'user'}\@netoasis.net', '$tmp{'passwd'}', 'standard', '100', '$tmp{'dir'}', '$tmp{'dir'}/Maildir', '$tmp{'shell'}', '$tmp{'name'}')";
+   $dbh->do($ins);
+   print $ins."\n";
+   
+}
+
+exit 0;
+

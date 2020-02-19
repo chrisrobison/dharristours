@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <title>Live Textile Preview</title>
+      <script type="text/javascript" src='lib/textile.js'> </script>
+      <script type="text/javascript">
+         //<![CDATA[
+         <!--
+
+         function reloadPreviewDiv() { 
+            var commentString = document.getElementById('message').value;
+            var con = textile(commentString);
+            document.getElementById('livecode').value = con;
+            var c = document.getElementById('previewcomment');
+            c.innerHTML = con;
+         }
+
+         //-->
+         //]]>
+      </script>
+   </head>
+   <body>
+      <h1>Live Textile Translation</h1>
+      <table width="100%"  border="0" cellpadding="5" cellspacing="0">
+         <tr valign="top">
+            <td width="325">
+               <h2>Textiled Text</h2>
+               <p>
+                  <textarea cols="50" rows="8" id="message" onKeyUp="reloadPreviewDiv()">
+h1. heading 1
+
+h2. heading 2
+
+h3. heading 3
+
+h4. heading 4
+
+h5. heading 5
+
+h6. heading 6
+
+*bold text*
+*bold* *bold* *bold*
+_italic text_
+_italic_ _italic_ _italic_
+_italic_ *bold* _italic_ *bold*
+regular text
+single break of lines
+
+double breaks as well
+
+* lists
+* are
+* simple enough
+* *plus* _formatting_ in lists works too
+
+# and then there are number lists
+# which are great
+# for counting things.
+
+??cited text??
+
+-deleted text-
+
++inserted text+
+~subscript~ and ^superscript^
+
+@fixed width@
+
+"Links work":http://www.netoasis.net
+"Links with title text!(title text)":http://www.google.com
+
+Images work too:
+!http://www.creatimation.net/images/16_tons_256.gif!
+
+                  </textarea>
+                  <em>(To get started, click in the box above and type anything.)</em>
+               </p>
+                  
+               <h2>HTML Output</h2>
+               <p><textarea cols="50" rows="8" id="livecode"></textarea></p>
+            </td>
+            <td>
+               <h2>Live Preview!</h2>
+               <div id="previewcomment"></div>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>

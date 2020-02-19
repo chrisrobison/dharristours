@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+#use lib qw ( /usr/local/www/perl-libs );
+use DotSRS_Client;
+
+while ($dom = shift @ARGV) {
+   if ($dom =~ /^\-\-term=(.*)/i) {
+      $term = $1;
+      next;
+   }
+   ($domain, $tld) = split(/\./, $dom);
+   
+   $term = 1 if (!$term);
+
+   # create the object
+   $srs_client = new DotSRS_Client;
+   $domain_ref = {
+         'DOMAIN' => $domain,
+         'TLD' => $tld,
+         'TERM YEARS' => $term,
+         'PRICE' => 7.95
+      };
+   
+   print "Renewing domain: $domain.$tld for $term years\n";
+
+   ($request_id,$ref) = $srs_client->renew_domain( 1, $domain_ref );
+
+   if( $request_id ){
+      $s = ($term>1) ? 's' : '';
+      print "Success!  Domain: $dom has been renewed for $term year$s\n";
+      print "requestID = $request_id\n";
+
+      foreach $key (keys %{ $ref }) {
+         print "$key : ", $ref->{$key},"\n";
+      }
+
+   } else {
+      print "renew_domain failed.\n";
+   }
+}

@@ -1,0 +1,204 @@
+<html>
+   <head>
+      <title>Inter@ctivate Incident Reporting Tool</title>
+      <script src="date.js" language="JavaScript"> </script>
+      
+      <script language="JavaScript">
+         today = getDate();
+         function doSave() {
+            frm = document.forms[0];
+	    cur = frm.exec.value;
+
+	    if (cur != 'new') {
+	       frm.exec.value = 'update';
+	    }
+	    setTimeout('document.forms[0].submit();', 150);
+	 }
+         
+	 function sendReport() {
+            var frm = document.forms[0];
+	    frm.exec.value = 'send';
+	    setTimeout('document.forms[0].submit();', 150);
+	 }
+	 function doNew() {
+	    var frm = document.forms[0];
+	    var fields = new Array('Incident','Fix','Cause','Solution','Clients','Hosts','Services','Downtime','Time','TimeFixed','NotifiedBy','NotifiedAt','FixedBy','Severity');
+	    for (i in fields) {
+	       frm[fields[i]].value = '';
+	    }
+	    document.forms[0].exec.value = 'new';
+
+	    return true;
+	 }
+
+      </script>
+      <style type="text/css">
+            BODY {
+               font-size:10px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .HEADER {
+               font-size:12px;
+               text-shadow: 3px 3px 5px red;
+               font-weight:normal;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#ffffff;
+            }
+            .FIELD {
+               font-size:11px;
+	       font-weight:bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+	    .BTN {
+	       width: 70px;
+	       border-width: 2px;
+	       font-size:11px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000; 
+	       background-color: #dddddd;
+	       border-style: ridge;
+            }
+	    .MAIN {
+	       font-size:10px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000; 
+            }
+	    .CANVAS {
+               background-color: #d0d0d0;
+	       border-style: groove;
+	    }
+            .FIXED {
+               font-size:9px;
+               font-family:Courier New,Courier,LucidaConsole,Fixedsys;
+               color:#000000;
+            }
+	    .TITLEBAR {
+                background-color: #993366;
+		font-color: white;
+		line-height: 10px;
+	    }
+	    #DIV {
+	       cursor: crosshair;
+	    }   
+      </style>
+   </head>
+   <body bgcolor="#000000" text="#000000" link="#0000ff" vlink="#000099" alink="#ff0000" class="MAIN" onLoad="#alert#">
+      <form name="hosts" action="index.cgi" method="POST">
+         <input type="hidden" name="exec" value="">
+         <input type="hidden" name="REMOTE_USER" value="#REMOTE_USER#">
+         <center>
+           <table border="1" cellpadding="4" cellspacing="1" class='CANVAS'>
+	      <tr class='TITLEBAR'>
+	         <td colspan='2' class='TITLEBAR'><!--<img src="/img/bulb-logo.gif" align='left'>--><div class='HEADER' id='DIV'>Inter@ctivate Incident Reporting Tool</div></td>
+	      </tr>
+	      <tr>
+	         <td valign='top'>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+		       <tr>
+	                  <td align="right" class="MAIN"><span class='FIELD'>View:</span></td>
+		          <td valign="top" colspan='2'>
+		             <select name="view" onChange="document.hosts.exec.value='lookup'; setTimeout('document.hosts.submit();', 150);" class='MAIN'>
+		                <option value='all'#view_all#>View all incidents</option>
+				<option value='recent'#view_recent#>View recent incidents</option>
+		             </select>
+		          </td>
+		       </tr>
+		       <tr>
+	                  <td valign="top" align="right" class="MAIN"><span class='FIELD'>Incidents:</span></td>
+		          <td valign="top">
+		             <select name="incidentID" size="25" onChange="document.hosts.submit();" class='MAIN'>
+		                #incidents#
+		             </select>
+		          </td>
+			  <!--<input type='button' value=' Delete ' onClick="doDelete();" class='MAIN'>-->
+			  </td>
+		       </tr>
+		    </table>
+		 </td>
+		 <td valign='top'>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+		       <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Incident:</span></td>
+		          <td class="MAIN"><input type='text' name='Incident' value='#Incident#' size='80' class='MAIN'></td>
+                       </tr>
+                       <tr>
+		          <td align="right" class="MAIN" valign='top'><span class='FIELD'>Fix:</span></td>
+		          <td class="MAIN"><textarea name='Fix' rows='3' cols='80' class='MAIN'>#Fix#</textarea></td>
+                       </tr>
+                       <tr>
+		          <td align="right" class="MAIN" valign='top'><span class='FIELD'>Cause:</span></td>
+		          <td class="MAIN"><textarea name='Cause' rows='3' cols='80' class='MAIN'>#Cause#</textarea></td>
+                       </tr>
+                       <tr>
+		          <td align="right" class="MAIN" valign='top'><span class='FIELD'>Solution:</span></td>
+		          <td class="MAIN"><textarea name='Solution' rows='3' cols='80' class='MAIN'>#Solution#</textarea></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Impacted Clients:</span></td>
+		          <td class="MAIN"><input type="text" name="Clients" value="#Clients#" size='80' class='MAIN'></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Services Affected:</span></td>
+		          <td class="MAIN"><input type="text" name="Services" value="#Services#" size='80' class='MAIN'></td>
+                       </tr>
+                       <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Affected Hosts:</span></td>
+		          <td class="MAIN"><input type="text" name="Hosts" value="#Hosts#" size='80' class='MAIN'></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Downtime:</span></td>
+			  <td rowspan=4>
+			     <table border='0' cellpadding='2' cellspacing='0'>
+			        <tr>
+		                   <td class="MAIN"><input type="text" name="Downtime" value="#Downtime#" size="20" class='MAIN'></td>
+				   <td class='MAIN' align='right'><span class='FIELD'>Status:</span></td>
+				   <td class='MAIN'><select name='Status' class='MAIN'><option value='Open'#Status_Open#>Open</option><option value='Development'#Status_Development#>In technical development</option><option value='Hold'#Status_Hold#>On hold</option><option value='Closed'#Status_Closed#>Closed</option></select></td>
+				</tr>
+				<tr>
+		                   <td class="MAIN"><input type="text" name="Time" value="#Time#" size="20" class='MAIN'></td>
+				   <td class='MAIN' align='right'><span class='FIELD'>Severity:</span></td>
+				   <td><input type='text' name='Severity' value='#Severity#' class='MAIN' size='2'></td>
+				</tr>
+				<tr>
+		                   <td class="MAIN"><input type="text" name="NotifiedBy" value="#NotifiedBy#" size="25" class='MAIN'></td>
+				   <td class='MAIN' align='right'><span class='FIELD'>Notified At:</span></td>
+				   <td class='MAIN'><input type='text' name='NotifiedAt' value='#NotifiedAt#' class='MAIN' size='20'></td>
+				</tr>
+				<tr>
+		                   <td class="MAIN"><input type="text" name="FixedBy" value="#FixedBy#" size="25" class='MAIN'></td>
+				   <td class='MAIN' align='right'><span class='FIELD'>Fixed At:</span></td>
+				   <td class='MAIN'><input type='text' name='TimeFixed' value='#TimeFixed#' class='MAIN' size='20'></td>
+				</tr>
+		             </table>
+			  </td>   
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Incident Time:</span></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Notified By:</span></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Fixed By:</span></td>
+                       </tr>
+		    </table>
+		 </td>
+	      </tr>
+	      <tr>
+	         <td colspan='2'>
+		    <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+	               <tr>
+               	          <td><input type="button" value="   New   " onClick="doNew();" class='BTN'></td>
+		          <td align="right" colspan="2"><!--<input type="button" value=" New " onClick="doNew();" class='MAIN'>--><input type="button" value="Save" onClick="doSave();" class='BTN'> <input type='button' value='Send Report' onClick="sendReport();" class='BTN'></td>
+                       </tr>
+                    </table>
+		 </td>
+	      </tr>
+           </table>
+	 </center>
+      </form>
+   </body>
+</html>
+

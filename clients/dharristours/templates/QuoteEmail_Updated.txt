@@ -1,0 +1,35 @@
+Date: #RFCDate#
+To: #CreatedBy#, juanaharrisdht@att.net
+Cc: #LastModifiedBy#
+Bcc: patrick@simplesoftwaresf.com,cdr@netoasis.net
+From: D' Harris Tours <no-reply@simplesoftwaresf.com>
+Reply-To: Juana Harris <juanaharrisdht@att.net>
+Subject: Updated: Q(#QuoteID#) Pax: (#NumberOfPassengers#) For: (#Date#)
+
+Your Quote has been updated by D' Harris Tours. 
+
+To reserve your trip, simply reply to this email. We will notify you once your job is available for review.
+You may then confirm the details, or make any necessary changes.
+Thank you for your business!
+--------
+Quote:   $#Quote#
+--------
+      Quote ID: #QuoteID#
+          Date: #Date#
+    Passengers: #NumberOfPassengers#
+  Contact Name: #ContactName#
+ Contact Phone: #ContactPhone#
+Pickup Address: #Pickup#
+      Drop off: #DropOff#
+    Round Trip: #RoundTrip# (0=No, 1=Yes)
+    Start Time: #StartTime#
+      End Time: #EndTime#
+         Hours: #Hours#
+Special Instructions - #SpecialInstructions#
+
+Sincerely,
+
+Juana Harris
+D' Harris Tours
+415-902-8542
+juanaharrisdht@att.net

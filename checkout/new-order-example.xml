@@ -1,0 +1,80 @@
+<new-order-notification xmlns="http://checkout.google.com/schema/2" serial-number="337581504905092-00001-7">
+  <buyer-billing-address>
+    <email>patrickmp1975@gmail.com</email>
+    <contact-name>Patrick Peterson</contact-name>
+    <company-name></company-name>
+    <address1>621 Holloway Ave.</address1>
+    <address2></address2>
+    <phone></phone>
+    <fax></fax>
+    <country-code>US</country-code>
+    <city>San Francisco</city>
+    <region>CA</region>
+    <postal-code>94112</postal-code>
+  </buyer-billing-address>
+  <timestamp>2012-06-21T07:41:39.386Z</timestamp>
+  <google-order-number>337581504905092</google-order-number>
+  <shopping-cart>
+    <items>
+      <item>
+        <digital-content>
+          <key>S/N: casosf.com_301d7e1eab3dfb6b443ba7e561eff164</key>
+          <description>Launch your Simple Domain Manager</description>
+          <url>https://admin.dev.sscsf.com/welcome.php?d=casosfcom</url>
+        </digital-content>
+        <item-name>Year Domain Registration: casosf.com</item-name>
+        <item-description>2 year domain registration for "casosf.com"</item-description>
+        <unit-price currency="USD">15.0</unit-price>
+        <quantity>2</quantity>
+      </item>
+      <item>
+        <digital-content>
+          <key>S/N: casosf.org_301d7e1eab3dfb6b443ba7e561eff164</key>
+          <description>Launch your Simple Domain Manager</description>
+          <url>https://admin.dev.sscsf.com/welcome.php?d=casosforg</url>
+        </digital-content>
+        <item-name>Year Domain Registration: casosf.org</item-name>
+        <item-description>2 year domain registration for "casosf.org"</item-description>
+        <unit-price currency="USD">14.0</unit-price>
+        <quantity>2</quantity>
+      </item>
+      <item>
+        <digital-content>
+          <key>S/N: casosf.net_301d7e1eab3dfb6b443ba7e561eff164</key>
+          <description>Launch your Simple Domain Manager</description>
+          <url>https://admin.dev.sscsf.com/welcome.php?d=casosfnet</url>
+        </digital-content>
+        <item-name>Year Domain Registration: casosf.net</item-name>
+        <item-description>2 year domain registration for "casosf.net"</item-description>
+        <unit-price currency="USD">15.0</unit-price>
+        <quantity>2</quantity>
+      </item>
+    </items>
+    <merchant-private-data>domains:casosf.com,casosf.org,casosf.net</merchant-private-data>
+  </shopping-cart>
+  <order-adjustment>
+    <merchant-codes />
+    <total-tax currency="USD">0.0</total-tax>
+    <adjustment-total currency="USD">0.0</adjustment-total>
+  </order-adjustment>
+  <buyer-id>717326519072428</buyer-id>
+  <buyer-shipping-address>
+    <email>patrickmp1975@gmail.com</email>
+    <contact-name>Patrick Peterson</contact-name>
+    <company-name></company-name>
+    <address1>621 Holloway Ave.</address1>
+    <address2></address2>
+    <phone></phone>
+    <fax></fax>
+    <country-code>US</country-code>
+    <city>San Francisco</city>
+    <region>CA</region>
+    <postal-code>94112</postal-code>
+  </buyer-shipping-address>
+  <buyer-marketing-preferences>
+    <email-allowed>true</email-allowed>
+  </buyer-marketing-preferences>
+  <order-total currency="USD">88.0</order-total>
+  <fulfillment-order-state>NEW</fulfillment-order-state>
+  <financial-order-state>REVIEWING</financial-order-state>
+</new-order-notification>

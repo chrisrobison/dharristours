@@ -1,0 +1,23 @@
+CREATE TABLE WebfleetTripDetail (
+	WebfleetTripDetailID INT(8) NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(WebfleetTripDetailID),
+	Vehicle VARCHAR(50) NOT NULL DEFAULT '',
+	Day DATE NOT NULL,
+	Starttime INT(8) NOT NULL,
+	Endtime INT(8) NOT NULL,
+	Duration INT(7) NOT NULL,
+	Standstill INT(7) NOT NULL,
+	Startodometer INT(5) NOT NULL,
+	Endodometer INT(5) NOT NULL,
+	Distance DECIMAL(5,1) NOT NULL,
+	Driver CHAR(50) NOT NULL,
+	Startlocation VARCHAR(75) NOT NULL DEFAULT '',
+	Endlocation VARCHAR(75) NOT NULL DEFAULT '',
+	Fuelconsumption CHAR(50) NOT NULL,
+	Averagefuelconsumption CHAR(50) NOT NULL,
+	_Referenceabsolute CHAR(50) NOT NULL,
+	_Referencerelative CHAR(50) NOT NULL,
+	Businessmileage CHAR(50) NOT NULL,
+	Duration2 INT(7) NOT NULL,
+	Drivingtime VARCHAR(50) NOT NULL DEFAULT '')
+

@@ -1,0 +1,27 @@
+Date: #RFCDate#
+To: #Email#
+Cc: #CC#
+Bcc: #BCC#
+From: #ReplyTo#
+Reply-To: #ReplyTo#
+Subject: #Subject#
+
+Attention:   #Business#
+
+#Body#
+
+Thank you for considering us for your next trip!
+Your driver is currently #Employee#.
+
+              JobID: #JobID#
+            JobDate: #JobDate#
+         PickupTime: #PickupTime#
+        DropOffTime: #DropOffTime#
+     PickupLocation: #PickupLocation#
+    DropOffLocation: #DropOffLocation#
+      NumberOfItems: #NumberOfItems#
+SpecialInstructions: #SpecialInstructions#
+               SPAB: #SPAB#
+         WheelChair: #WheelChair#
+        ContactName: #ContactName#
+       ContactPhone: #ContactPhone#

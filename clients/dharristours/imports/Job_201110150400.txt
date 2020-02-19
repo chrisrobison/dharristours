@@ -1,0 +1,3 @@
+JobID	Job	JobDate	BusinessLocation
+0	Importing Data using <TAB> separated values, Zero ID for new record!	2011-12-31	
+1615			This will update record 1615. Empty columns will not be Modified. 

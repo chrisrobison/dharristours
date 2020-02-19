@@ -1,0 +1,5 @@
+#!/usr/local/bin/php
+<?php
+   $lines = file_get_contents("http://admin.dev.sscsf.com/apps/notify/makecall.php");
+   print $lines;
+?>

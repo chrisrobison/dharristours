@@ -1,0 +1,19 @@
+CREATE TABLE WebfleetTripSummary (
+	WebfleetTripSummaryID INT(8) NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY(WebfleetTripSummaryID),
+	Driver VARCHAR(50) NOT NULL DEFAULT '',
+	Date INT(13) NOT NULL,
+	Starttime INT(8) NOT NULL,
+	Endtime INT(8) NOT NULL,
+	Vehicle VARCHAR(125) NOT NULL DEFAULT '',
+	UsageTime CHAR(50) NOT NULL,
+	Duration INT(8) NOT NULL,
+	Drivingtime INT(8) NOT NULL,
+	Standstill INT(8) NOT NULL,
+	Startodometer INT(5) NOT NULL,
+	Endodometer INT(6) NOT NULL,
+	Distance DECIMAL(6,1) NOT NULL,
+	Startlocation VARCHAR(75) NOT NULL DEFAULT '',
+	Endlocation VARCHAR(75) NOT NULL DEFAULT '',
+	Driver VARCHAR(75) NOT NULL DEFAULT '')
+

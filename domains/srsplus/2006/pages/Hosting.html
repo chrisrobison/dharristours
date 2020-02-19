@@ -1,0 +1,44 @@
+<div style='display:none;position:absolute;top:300px;left:300px;' id='helptip'><div style='position:absolute;top:0px;left:0px;'><img id='popup' src='/img/popup_help.png' height='300' width='300'></div><div id='helpContent' style='position:absolute;top:10px;left:30px; width:240px;'>Help is on the way</div></div>
+
+<script language='JavaScript' type='text/javascript'>
+   var ie = (document.getElementById && document.all);
+   var ns = (!document.all && document.getElementById);
+   var curX = 0;
+   var curY = 0;
+
+   function showTip(obj, txt) {
+      /* var d = '';
+      for (i in e) {
+         d = d + i + ": " + e[i] + "<br>\n";
+      }
+      document.getElementById('debug').innerHTML = d;
+      */
+
+      var tip = document.getElementById('helpContent');
+      tip.innerHTML = "<span class='helptxt'>" + txt + "</span>";
+      document.getElementById('helptip').style.display = 'block';
+      document.getElementById('helptip').style.top = (parseInt(curY) - 3) + 'px';
+      document.getElementById('helptip').style.left = (parseInt(curX) + 3) + 'px';
+      var ewy = document.getElementById('helpContent').scrollHeight;
+
+ 
+//      var d = ''; for (i in ewy) { d = d + i + ': ' + ewy[i] +"\n"; }
+//      document.forms[0].abc.value = d;
+      document.getElementById('popup').height = ewy + 30;
+   }
+   function hideTip() {
+      document.getElementById('helptip').style.display = 'none';
+
+   }
+   function mousemove(e) {
+      curX = ns?e.clientX:event.clientX;
+      curY = ns?e.clientY:event.clientY;
+   }
+   document.onmousemove = mousemove;
+</script>
+<div id='debug'>
+
+</div>
+<table border='0' cellpadding='0' cellspacing='0' hspace='0' vspace='0' width='100%' style='border:0px;margin:0px;padding:0px;'>
+#Services#
+</table>

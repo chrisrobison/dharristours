@@ -1,0 +1,29 @@
+#logoImage { -moz-transition: all 1s ease-in-out 0s; }
+#logoImage:hover {
+   -webkit-animation-name: spinner;
+   -webkit-animation-timing-function: linear;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-duration: 1s;
+
+   -moz-animation-name: spinner;
+   -moz-animation-timing-function: linear;
+   -moz-animation-iteration-count: infinite;
+   -moz-animation-duration: 1s;
+}
+#logoWrap { overflow:hidden; padding-top:5px; }
+
+@-moz-keyframes spinner {
+  from {
+      -moz-transform: rotate(0deg);
+  } to { 
+      -moz-transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes spinner {
+  from {
+      -webkit-transform: rotate(0deg);
+  } to { 
+      -webkit-transform: rotate(-360deg);
+  }
+}
+

@@ -1,0 +1,11 @@
+If you are a new customer, you'll need an account on our system.  The username and password you 
+choose will be used to access and configure all aspects of your domain.  Any email accounts, web 
+space, databases, and other options for your new domain will be associated with, or children of, 
+this account.  Please choose a username between 3 and 12 characters using lowercase 
+alphanumeric characters [a-z, 0-9] and enter it into the username field below.  Then pick a 
+password longer than 4 characters which is easy for you to remember but is not a common word or
+ID (names, dates, and government ID's are all bad passwords).  An easy way to create a good 
+password is to think of a sentance between 5 and 8 words and use the first or second letter from
+each word.  Enter your password choice in the field below and enter it again in the 'Verify' field
+to ensure there are no typos.
+

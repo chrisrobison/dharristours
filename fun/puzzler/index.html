@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<title>Puzzler</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+      <script type="text/javascript" src="Puzzler.js"></script>
+      <script>
+         $(function() {
+            $("#grid").on("click", ".ball", function() {
+               var $this = $(this),
+                   id = $this.attr("id"),
+                   rowcol = id.split(/_/);
+
+               click(rowcol[0], rowcol[1]);
+            });
+         });
+      </script>
+		<link rel="stylesheet" href="Puzzler.css" type="text/css" />
+      <style>
+         p { text-align: justify; text-justify: inter-word; }
+      </style>
+</head>
+<body onload="setup();">
+	<div id="container">
+	<table border="0" cellspacing="0" cellpadding="0" id="grid">
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+   <div class="toolbar">
+      <span class='left'><label>Score:</label> <span id='score'></span></span>
+      <span class='right'><label>Rows:</label> <input type='text' size='3' value='8' id='rows'> <label>Cols:</label> <input type='text' size='3' value='8' id='cols'></span>
+	   <input class="format" type="button" value="Reset" onclick="setup();" />
+   </div> 
+      
+   <hr>
+   <h1>Puzzler</h1>
+   <p>"Puzzler" is a simple yet challenging game.</p><p>To play, click on any ball that is horizontally or vertically adjacent to a ball of the same color; the matching balls will turn grey; click any of the grey balls to remove the selection; click elsewhere to unselect the balls.  The goal is to clear all of the balls from the playfield.</p>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+Date: #RFCDate#
+To: juanaharrisdht@att.net
+Cc: #LastModifiedBy#, #ContactEmail#
+Bcc: patrick@simplesoftwaresf.com,cdr@netoasis.net
+From: Simple Software <no-reply@simplesoftwaresf.com>
+Reply-To: Juana Harris <juanaharrisdht@att.net>
+Subject: CHANGE: Q(#QuoteID#) Pax: (#NumberOfPassengers#) For: (#Date#)
+
+D' Harris may view this at:
+http://#Host#/apps/?pid=248&rsc=#rsc#&id=#id#
+
+      Quote ID: #QuoteID#
+       Created: #Created#
+          Date: #Date#
+    Passengers: #NumberOfPassengers#
+  Contact Name: #ContactName#
+ Contact Phone: #ContactPhone#
+Pickup Address: #Pickup#
+      Drop off: #DropOff#
+    Round Trip: #RoundTrip# (0=No, 1=Yes)
+    Start Time: #StartTime#
+      End Time: #EndTime#
+         Hours: #Hours#
+ Special Instructions -
+ #SpecialInstructions#
+ 
+ Modified by #LastModifiedBy#
+ #LastModified#

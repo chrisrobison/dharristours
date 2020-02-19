@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+
+   my $signup = $data->get_record('Signup', $in{'SignupID'}, { 'key' => 'SignupID' } ) if (!$signup);
+
+   my @items = ('RegisterDomain', 'DNSHosting','WebHosting','EmailHosting','DiskSpace','DBHosting');
+   $signup->{'RegisterDomain'} = '1' if ($dat{'RegType'} =~ /new|transfer/);
+   
+   foreach my $i (@items) {
+      next if (!$signup->{$i});
+      my $item = $data->get_record('Product', $signup->{$i}, { 'key' => 'ProductID' } );
+      
+      my $pid = sprintf("%04d", $item->{'ProductID'});
+      
+      $dat{'product'} .= <<EOT;
+<tr>
+   <td class='term'><span class='invoice'>p$pid</span></td>
+   <td class='term'><span class='invoice'>$item->{'Product'}</span></td>
+   <td class='setupfee'><span class='invoice'>\$$item->{'SetupFee'}</span></td>
+   <td class='cost'><span class='invoice'>\$$item->{'Price'}</span></td>
+   <td class='term'><span class='invoice'>per $item->{'TermMeasure'}</span></td>
+   <td align='center' class='remove'><span class='invoice' style='text-align:center;'><input type='checkbox' name='remove' value='$item->{'ProductID'}'></span></td>
+</tr>
+EOT
+      $dat{'Recurring'} += $item->{'Price'} if ($item->{'TermMeasure'} =~ /month/i);
+      $dat{'YearlyFee'} += $item->{'Price'} if ($item->{'TermMeasure'} =~ /year/i);
+      $dat{'SetupTotal'} += $item->{'SetupFee'};
+      $dat{'Total'} += $item->{'Price'} + $item->{'SetupFee'};
+      
+   }
+   $dat{'Recurring'} = sprintf('%0.02f', $dat{'Recurring'});
+   $dat{'YearlyFee'} = sprintf('%0.02f', $dat{'YearlyFee'});
+   $dat{'SetupTotal'} = sprintf('%0.02f', $dat{'SetupTotal'});
+
+   $data->update_record('Signup', $in{'SignupID'}, {'SetupFee' => $dat{'SetupTotal'}, 'MonthlyFee'=>$dat{'Recurring'}, 'YearlyFee'=>$dat{'YearlyFee'} } );
+$dat{'invoice'} .= <<EOT;
+<tr style='border-top: 1px solid black;'>
+   <td class='yearlyfee'><span class='invoice'>\$$dat{'YearlyFee'}</span></td>
+   <td class='setupfee'><span class='invoice'>\$$dat{'SetupTotal'}</span></td>
+   <td class='cost'><span class='invoice'>\$$dat{'Recurring'}</span></td>
+   <td align='right' class='term'><span class='invoice'>\$$dat{'Total'}</span></td>
+</tr>
+EOT
+
+$dat{'detail'} = <<EOT;
+<table border='0' cellpadding='4' cellspacing='0' vspace='0' hspace='0' width='100%' bgcolor='white' style='border: 1px solid black;'>
+   <tr style='background-color:#bbbbbb;color:black;font-weight:bold;border:1px solid #606060;'>
+      <th align='center' NOWRAP><span class='TBLHEAD'>Product ID</span></th>
+      <th align='center' NOWRAP><span class='TBLHEAD'>Product</span></th>
+      <th align='center' NOWRAP><span class='TBLHEAD'>Setup Fee</span></th>
+      <th align='center' NOWRAP><span class='TBLHEAD'>Price</span></th>
+      <th align='center' NOWRAP><span class='TBLHEAD'>Term</span></th>
+      <th align='center' NOWRAP><span class='TBLHEAD'>Remove</span></th>
+   </tr>
+$dat{'product'}
+</table>
+EOT
+

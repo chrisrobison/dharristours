@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+
+while (@u = getpwent()) {
+   print "_"x78,"\n";
+   print join("\n", @u)."\n";
+}

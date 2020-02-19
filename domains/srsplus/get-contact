@@ -1,0 +1,15 @@
+#!/usr/bin/perl 
+
+use DotSRS_Client; 
+
+# create the object 
+$srs_client = new DotSRS_Client; 
+
+while ($arg = shift @ARGV) {
+   $ref = $srs_client->get_contact_info( { "CONTACTID" => $arg } ); 
+
+   foreach $key (keys %{ $ref }) { 
+      print "$key : ", $ref->{$key},"\n"; 
+   } 
+}
+

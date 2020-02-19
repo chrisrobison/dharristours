@@ -1,0 +1,173 @@
+
+Inter@ctivate Host Information
+
+____________________________________________________________
+
+icg.interactivate.com
+
+              hostID: 1
+                host: icg
+              domain: interactivate.com
+            location: hosting.com
+                  IP: 216.120.59.226
+           IPaliases: 216.120.59.224/27,216.120.60.1/27
+                  gw: 216.120.59.225
+                  os: FreeBSD
+            services: mysql,httpd,ssh,domain
+               notes: Main web server
+____________________________________________________________
+
+amail.activatemail.com
+
+              hostID: 2
+                host: amail
+              domain: activatemail.com
+            location: hosting.com
+                  IP: 216.120.59.231
+                  gw: 216.120.59.225
+                  os: linux
+            services: mysql,httpd,smtp,ssh,domain,auth,sunrpc,lpd,cvspserver
+____________________________________________________________
+
+www.avocado.org
+
+              hostID: 3
+                host: www
+              domain: avocado.org
+            location: hosting.com
+                  IP: 216.120.104.18
+                  gw: 216.120.104.1
+                  os: FreeBSD
+            services: mysql,sunrpc,httpd,smtp,ssh
+____________________________________________________________
+
+mail.interactivate.com
+
+              hostID: 4
+                host: mail
+              domain: interactivate.com
+            location: office
+                  IP: 65.212.133.182
+                  gw: 65.212.133.160
+                  os: Linux
+            services: httpd,smtp,pop,jabber,imap,ssh,pop3s,domain,imaps,auth,mys
+____________________________________________________________
+
+heimdall.interactivate.com
+
+              hostID: 5
+                host: heimdall
+              domain: interactivate.com
+            location: office
+                  IP: 65.212.133.162
+           IPaliases: 65.212.133.163-181,65.212.133.183,65.212.133.185-190
+                  gw: 65.212.133.160
+                  os: FreeBSD
+            services: ssh
+               notes: Main firewall on MCI T1 for internal network
+____________________________________________________________
+
+gw.interactivate.com
+
+              hostID: 6
+                host: gw
+              domain: interactivate.com
+            location: office
+                  IP: 68.15.28.85
+                  gw: 68.15.28.64
+                  os: Solaris 8
+            services: ssh
+               notes: Main gateway/firewall for Cox Cable Modem connection for i
+____________________________________________________________
+
+gw2.interactivate.com
+
+              hostID: 7
+                host: gw2
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.2
+                  gw: 192.168.1.1
+                  os: Solaris 8
+            services: ssh
+               notes: Replacement gw/firewall for heimdall.  To be placed on MCI
+____________________________________________________________
+
+dev.interactivate.com
+
+              hostID: 8
+                host: dev
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.7
+           IPaliases: 65.212.133.190
+                  gw: 192.168.1.1
+                  os: FreeBSD
+            services: mysql,sunrpc,httpd,cvspserver,ssh
+               notes: Development server.  Inside firewall with dedicated NAT to
+____________________________________________________________
+
+cooper.interactivate.com
+
+              hostID: 9
+                host: cooper
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.28
+                  gw: 192.168.1.1
+                  os: FreeBSD
+            services: smb,nmb,ssh,domain
+               notes: Current primary file server.  Migrating users to utilize N
+____________________________________________________________
+
+gpc.interactivate.com
+
+              hostID: 10
+                host: gpc
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.91
+                  gw: 192.168.1.1
+                  os: Linux
+            services: mysql,sunrpc,ssh,domain
+               notes: Redundant server for dns, mysql replication, and temporary
+____________________________________________________________
+
+beaver.interactivate.com
+
+              hostID: 11
+                host: beaver
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.9
+                  gw: 192.168.1.1
+                  os: Linux
+            services: smb,nmb,httpd,smtp,ssh,domain
+               notes: Server for testing new software version releases, etc.  No
+____________________________________________________________
+
+wolf.interactivate.com
+
+              hostID: 12
+                host: wolf
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.6
+                  gw: 192.168.1.1
+                  os: Linux
+            services: smb,nmb,httpd,ssh
+               notes: 900GB NAS which constitutes the core of our file storage.
+____________________________________________________________
+
+maui.interactivate.com
+
+              hostID: 13
+                host: maui
+              domain: interactivate.com
+            location: office
+                  IP: 192.168.1.166
+                  gw: 192.168.1.1
+                  os: SnapOS
+               notes: 300GB NAS - Alternate file storage space.
+____________________________________________________________
+

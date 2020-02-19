@@ -1,0 +1,161 @@
+Origin	FirstName	LastName	Email	AltEmail	Phone	AltPhone	Address	Company	Title
+Patrick Peterson	Justin	Ghirardi	jjghirardi@yahoo.com					Confidential	Personal Shopper and Prada women's RTW
+Patrick Peterson	Emmanuel	Cassimatis	e.cassimatis@gmail.com					Goodwizz.com	Founder
+Patrick Peterson	Basil	Mavrovitis	mavrovitis@optonline.net					Omnicom Media Group	Chief Credit Officer
+Patrick Peterson	Jeremy	Mollet	jeremy.mollet@sapphire.com					Sapphire Technologies	Account Manager
+Patrick Peterson	John	Eby	jeby@mrcopy.com					Mr. Copy/ A Xerox Company	Solutions Specialist
+Patrick Peterson	Marc	Manahan	mmanahan@univision.net					Univision Communications	SVP Financial Planning & Analysis and Corporate CFO Television Networks
+Patrick Peterson	John	Ricci	johnr@basn.org					Miller-Gold	Partner
+Patrick Peterson	Mary	Kornblum	mary@marystudio.com					Mary Kornblum Studio	"Graphic & Web Designer, Fine Artist"
+Patrick Peterson	Tomas	Lebovic	tlebovic@UNIVISION.net					Univision Communications	"Director, Database Services"
+Patrick Peterson	Brett	Larsen	brett01@berkeley.edu					UC Berkeley	Programmer Analyst
+Patrick Peterson	Frank	Gutierrez	fegutierrez@charter.net						
+Patrick Peterson	Heath	Kornblum	heathkornblum@hotmail.com					Mediaplex	Software Engineer
+Patrick Peterson	Justin	Seagraves	jseagraves57@hotmail.com					"Univision Radio, Inc."	Vice President Business and Traffic Operations
+Patrick Peterson	Jeff	Hinson	jeff@youplusmedia.com					YouPlus Media LLC	President
+Patrick Peterson	Andres	Alvarez	angalvarez@univision.net					Univision Communications	Systems Administrator
+Patrick Peterson	Patrick	Emmons	pemmons@sbcglobal.net					Paydayone	DBA
+Patrick Peterson	Janice	Jaraicie	jjaraicie@yahoo.com					Gentex Fashions Inc.	Designer
+Patrick Peterson	Ray	Marneris	rjmarn@att.net					Trinity Solutions Incorporated	CFO / Controller
+Patrick Peterson	John	Tony	johntony@live.com						
+Patrick Peterson	Brian	Traudt	briantraudt@gmail.com					Bypass	Director
+Patrick Peterson	Betty	Lynn	blynn1@optonline.net					Univision Communications	Director of Enterprise Business Intelligence/Data Warehousing
+Patrick Peterson	Florencio	Enriquez	burger_chili@hotmail.com					The California Endowment	Network Support Analyst
+Patrick Peterson	Antonio	Cafaro	antoniocafaro@gmail.com					Better Builders & Design	Operations & Development
+Patrick Peterson	Pat	Gannon	PatrickJosephGannon@yahoo.com					North Bay .NET User Group	Co-Founder
+Patrick Peterson	Joseph	Idler	joseph.idler@gmail.com					Univision Communications Inc.	Senior Director Business Improvement
+Patrick Peterson	Lauren	O'Neill	loneill777@gmail.com					Andiamo! Group	Technical Recruiter
+Patrick Peterson	David	Harr	DHarr@Univision.net					Univision Communications Inc.	Systems Administrator
+Patrick Peterson	Eduardo	Toyoda	toyoda2k@gmail.com					Sanrio do Brasil	E-commerce / Web Project Manager
+Patrick Peterson	Scott	Brown	sbrown4746@yahoo.com					IMC2	Senior Database Administrator
+Patrick Peterson	Tony	Rivera	tonyr4music@gmail.com					Live Nation	Sr. Software Developer
+Patrick Peterson	Chris	Derby	chris.derby@gmail.com					Univision Communications	Senior Systems Engineer
+Patrick Peterson	Jorge	Delgado	jorgehdv@mac.com					ValueSat LLC	Founder
+Patrick Peterson	Yadira	Rosas	yadi.29@gmail.com					Univision Communications	National Sales Associate
+Patrick Peterson	Tim	Acker	acker.tim@gmail.com					Emory University	Graduate Student
+Patrick Peterson	Heriberto A.	Ruiz	hruiz@UNIVISION.NET					Univision Communications	MIS - IT Regional Manager
+Patrick Peterson	Kelli	Watson	kwatson@UNIVISION.NET					Univision Television Group	Director of Traffic Services
+Patrick Peterson	Geoffrey	Kemp	gke565@msn.com					Univision	Manager MIS
+Patrick Peterson	Christopher	Robison	cdr@netoasis.net					Mediaplex	Rich Media Architect
+Patrick Peterson	Crystal	Koenig	crystalek412@yahoo.com					Crystal Koenig	DJ in training
+Patrick Peterson	vito	griseta	vito.griseta@coralridgecc.com					Coral Ridge Country Club	Executive Sous Chef
+Patrick Peterson	Victor	Broughton	victor_broughton@hotmail.com						
+Patrick Peterson	Stephanie J.	Neill	stephaneill@gmail.com					Simple Software Co. of San Francisco	Product Management Consultant
+Patrick Peterson	Roneil	Icatar	roneil@icatar.com					Univision	IT Regional Manager
+Patrick Peterson	Wanda	Lim	wlim@sanrio.com					Nakajima USA	IT Support and Liason
+Patrick Peterson	Bashir	Kalisa	bashir@bankshire.com					Qatar Telecom (Qtel)	"Sr. Manager, International and Investor Relations"
+Patrick Peterson	Megan	Schmidt	megansf415@gmail.com						
+Patrick Peterson	Betsy	Perez	MsBetsyP@optonline.net					Univision Communications	"Sr. Manager, Cash Management & Forecasting"
+Patrick Peterson	Benoit	Marsot	benoitmarsot@hotmail.com					Advent software inc	Senior Developer
+Patrick Peterson	Alvin	Garcia	agarcia@sanrio.com	alvgarcia23@gmail.com					
+Patrick Peterson	Amandeep	Bhatia	amabhatia@deloitte.com			(240) 477-2635			OIC Technical Lead
+Patrick Peterson	Andres	Alvarez	angalvarez@univision.net		(310) 410-5668	(310) 686-1567		Univision Management Company	Systems Engineer
+Patrick Peterson	Arnold	Cabrera	arnoldc@datasafe.com		(650) 875-3800 x3266				
+Patrick Peterson	Artie	Pagan	apagan@univision.net		972-394-5296	(214) 251-5019		UNIVISION Radio	Intranet Manager
+Patrick Peterson	Astrid	Juarez	asjuarez@UNIVISION.NET		415-538-8061			Univision Management Company	Human Resources Manager
+Patrick Peterson	Brian	Bruns	babruns5@gmail.com						
+Patrick Peterson	Basil	Mavrovitis	mavrovitis@optonline.net		201-722-9558	(551) 486-5075		Univision Management Company	Director of Corporate Credit
+Patrick Peterson	Betsy	Perez	bperez@UNIVISION.net		(201) 287-4227	2012896951		Univision Management Company	"Mgr, SSO Revenue Accounting"
+Patrick Peterson	Bill	Loftin	wtloftin@inter-linc.net		(417) 779-8415	(417) 598-0699			
+Patrick Peterson	Billy	Harris	wfhharris@cs.com						
+Patrick Peterson	Brett	Larsen	beacon.dues@gmail.com						
+Patrick Peterson	Brett	Larsen	brett01@berkeley.edu	beacon_dues@yahoo.com	5108084138	15103882443			IST Desktop Support
+Patrick Peterson	Brian	Traudt	briantraudt@gmail.com		(512) 923-5223				
+Patrick Peterson	Carla	Martorell	cmartorell78@hotmail.com			(787) 645-3628			
+Patrick Peterson	Cathy	Viscarra	cviscarra@sanrio.com						
+Patrick Peterson	Chris	Brown	cdbrown@univision.net		(713) 965-2607	(713) 858-5440		UVN Texas L.P.	V.P./ Controller
+Patrick Peterson	Chris	Derby	cderby@UNIVISION.NET		310-410-5665	310-650-6066		Univision Management Company	Sr Systems Engineer
+Patrick Peterson	Chris	Robison	christopher.robison@gmail.com	cdr@netoasis.net		4157302336			
+Patrick Peterson	Chris	Spetter	cspetter@gmail.com		(214) 758-2475	(214) 893-7725		UNIVISION Radio	Network Administrator
+Patrick Peterson	Chris	Weller	chrishw1980@gmail.com			(415) 871-5811			
+Patrick Peterson	Claudio	Saldaña	csald9999@yahoo.com		310-798-9350	310-654-7005		Univision Management Company	Sr. Systems Engineer
+Patrick Peterson	Colin	Wadman	colinwadman@msn.com						
+Patrick Peterson	Danica	San Martin	smdanicasm@yahoo.com		4158833468				
+Patrick Peterson	Danielle	Herschend	dherschend@sanrio.com						
+Patrick Peterson	Darryl	Holley	dholley@univision.net		(214) 758-2455	(214) 882-7331		UVN Texas L.P.	System Administrator
+Patrick Peterson	David	Harr	dharr@univision.net		(214) 758-2473	(214) 498-3283		UNIVISION Radio	Network Administrator
+Patrick Peterson	Debbie	Pilgrim	dpilgrim@univision.net		(214) 758-2471	(214) 394-7726		UNIVISION Radio	Network Administrator
+Patrick Peterson	Doris	Battaglia	dabreu@univision.net		201-287-4359	2014780176		Univision Management Company	Database Applications Programmer
+Patrick Peterson	Doug	Horngrad	horngrad@sbcglobal.net	pstutz@sbcglobal.net		(415) 397-9509	"1736 Stockton St., San Francisco, CA"	Criminal	Lawyer
+Patrick Peterson	Drew	Whittle	dwhittle@univision.net		(972) 394-8776	(214) 392-7739		UNIVISION Radio	Senior Network Administrator
+Patrick Peterson	Edgar	Chiriff	EChiriff@UNIVISION.net		201-287-4250	201-675-6754		Univision Management Company	Billing Manager
+Patrick Peterson	eileen	dunn	Eileen.DUNN@danone.com		(626) 351-7829			Danone Waters	
+Patrick Peterson	Erica	Schaefer	eSchaefer@atlastinc.com						
+Patrick Peterson	Eugene	Breymeyer	eugen_breymeyer@web.de					Russia	
+Patrick Peterson	Frank	Gutierrez	fegutierrez@charter.net		(310) 410-5664	(310) 902-8976		Univision Management Company	Regional Manager - West
+Patrick Peterson	Gabby	Denton	gdenton@quarrylane.org						
+Patrick Peterson	Geoffrey	Kemp	gkemp@univision.net		(972) 642-4058	(214) 641-7749		UNIVISION Radio	IT Director
+Patrick Peterson	Gordon	Guerra	cajn97@aol.com		(972) 907-9700	(214) 529-0936			
+Patrick Peterson	Doug	Horngrad	horngrad@att.blackberry.net						
+Patrick Peterson	Doug	Horngrad	horngrad@speakeasy.net						
+Patrick Peterson	Imam	Shiek	imam888@hotmail.com			(650) 450-0710	"15 hawthorne way, #302, San Jose, CA 95110"		
+Patrick Peterson	Isabel	SEVERO	isabel.severo@danone.com						
+Patrick Peterson	Israel	Rodriguez	irodriguez@UNIVISION.NET		(310) 410-5669			Univision Management Company	Systems Engineer
+Patrick Peterson	James	Duperry	james@largethought.com			2142570361			
+Patrick Peterson	Janice	Jaraicie	jjaraicie@yahoo.com						
+Patrick Peterson	Jason	Duplissis	jduplissis@deloitte.com						
+Patrick Peterson	Jason	Reed	jareed@deloitte.com			(310) 709-5435			
+Patrick Peterson	Jennifer	Moody	jmoody@sanrio.com						
+Patrick Peterson	Jeremy	Mollett	jeremy.mollet@sapphire.com		415-788-8488			Sapphire Technologies	
+Patrick Peterson	Jessica	Silipan	jrabbyt888@gmail.com		8315880510				
+Patrick Peterson	Joe	Mccarley	joemccarley@hotmail.com			(469) 360-7602			
+Patrick Peterson	Jon	Eby	JEby@xeroxagents.com	jeby1975@hotmail.com	(858) 484-4033	831-325-8247			
+Patrick Peterson	Jonathan	Smith	jonathan_smith@charter.net		(817) 563-1093	(817) 808-7557		Etalk	
+Patrick Peterson	Joseph	Idler	jidler@univision.net		201-287-4321	917-301-7293		Univision Management Company	Technology Manager
+Patrick Peterson	Juan	Rivera	Tonyr4music@hotmail.com	Tonyr4music@yahoo.com		323-377-3759			Sr. Systems Architect
+Patrick Peterson	Juana	Harris	juanaharris@sbcglobal.net		(707) 554-9853	(415) 902-8542			Mom
+Patrick Peterson	Justin	Giardi	lesliaisonsdangereuses73@yahoo.com			(972) 369-9201			
+Patrick Peterson	Justin	Seagraves	jseagraves@univision.net		214-525-7798	214-621-9966		"Univision Radio, Inc."	Vice President of Business and Traffic Operations
+Patrick Peterson	Kajsa	Bohman	kajsabohman@sbcglobal.net						
+Patrick Peterson	Katharina	Wurm	griasti2000@yahoo.com		203 570 8679		"3059 Market St., San Francisco, CA"		
+Patrick Peterson	Kelli	Watson	kwatson@univision.net		(415) 538-6442	(408) 595-9378		Univision Management Company	Director Traffic Service
+Patrick Peterson	Kenneth	Klein	KKlein@UNIVISION.NET		(310) 348-3684			Univision	"Vice President, Special Projects"
+Patrick Peterson	Kevin	Duffy	Marxduffy@aol.com	Kevin@marxandduffy.com	415 567 4111			Civil	Lawyer
+Patrick Peterson	Khalid	Qurashi	kqurashi@univision.net		(201) 287-4373	(201) 218-2782		Univision Management Company	Director of Financial & Corporate Applications
+Patrick Peterson	Kristina	Kelley	dimentionsunlimited@yahoo.com		19722219328	4694646773			
+Patrick Peterson	Lauren		77lashes@gmail.com						
+Patrick Peterson	Linda	Thomas	lthomas@sanrio.com						
+Patrick Peterson	Megan	Schmidt	megansf415@gmail.com						
+Patrick Peterson	Linda	Piazza	lpiazza@sanrio.com						
+Patrick Peterson	Louana	Nuti	louanan@hotmail.com		(650) 922-5043	(650) 515-9595			
+Patrick Peterson	Manuel	Sanches	chez100s@hotmail.com						
+Patrick Peterson	Mari	Sanchez	Mari_d_sanchez@hotmail.com			(214) 394-0133			
+Patrick Peterson	Mark	Piesanen	mpiesanen@deloitte.com					Deloitte	
+Patrick Peterson	Marlene	Sanchez	msanchez@connetics.com						
+Patrick Peterson	Martin	Sacks	martin.sacks@humanconcepts.com						
+Patrick Peterson	Marva	Cadle	mcadle@UNIVISION.NET		415-538-8060			Univision Management Company	Credit Manager
+Patrick Peterson	Mary	Mohrenweiser	Mmohrenweiser@univision.net		(201) 287-4334	(201) 562-4852		Univision Management Company	Project Manager - Finance Applications
+Patrick Peterson	Matthew	Szczepanski	mszczepanski@nakajimausa.com						
+Patrick Peterson	Michael	Anderson	mianderson@deloitte.com			(415) 412-7459			OIC Commission Plans Logic
+Patrick Peterson	Michael	Wallace	michaelwallace22@gmail.com			(214) 264-2637			
+Patrick Peterson	Naga	Giddaluru	ngiddaluru@deloitte.com		(201) 836-0600 x1212	(201) 287-4319			
+Patrick Peterson	Nathan - Law	Horngrad	nategarr@sbcglobal.net						
+Patrick Peterson	Oscar	Espinoza	espinoza.oscar@gmail.com						
+Patrick Peterson	Patrick	Emmons	pemmons@msn.com	pemmons@sbcglobal.com		(817) 713-8591			
+Patrick Peterson	Patrick	Gannon	patrickjosephgannon@yahoo.com			(310) 467-3272			
+Patrick Peterson	Patti	Willey	pattiwilley@judgefite.com		+1 (972) 780-5380 x385			Century 21	Office Manager
+Patrick Peterson	Paul	Calocino	pcalocino@UNIVISION.net		201-287-4225			Univision Management Company	"Manager, Corporate Administration"
+Patrick Peterson	Paula	Giacometti	pmgia@hotmail.com		(925) 487-7190	(925) 487-7190			
+Patrick Peterson	Peter	Salmeri	psalmeri@univision.net		(212) 455-5357			Univision	Systems Engineer
+Patrick Peterson	Phillip	Caruthers	p.j.carruthers@talk21.com						
+Patrick Peterson	Remy		Remyjaypeace@hotmail.com			19729658255			
+Patrick Peterson	Rene	Perez	jrperezc@msn.com		(818) 897-5324	(818) 497-5818			
+Patrick Peterson	Richard	Harben	richard@harben.org			(858) 229-9641			
+Patrick Peterson	Roneil	Icatar	ricatar@UNIVISION.net		(203) 299-0792	(203) 451-3257	"15 Prowitt St., Norwalk CT"	Univision Management Company	Senior Systems Engineer
+Patrick Peterson	Scott	Brown	sbrown4746@yahoo.com	sbrown4746@hotmail.com	(972) 370-3336	214-548-9276			
+Patrick Peterson	Sean	Coker	shawncoker@verizon.net			(817) 235-5215		Neighborhood Partners	
+Patrick Peterson	Shams		idjshams@yahoo.com		18172016613	4694463439			
+Patrick Peterson	Shirin	Sohrabi	ssohrabi@UNIVISION.NET		559 285 0839				
+Patrick Peterson	Silvio	Migliaccio	s1lv1o@hotmail.com		0039 3349 4567 25				
+Patrick Peterson	Stephen	Ely	sely@atlastinc.com						
+Patrick Peterson	Steve	Dominguez	scampos@mrcopy.com			(858) 945-8383			
+Patrick Peterson	Steve	Monas	steve@fastagency.com	smonas@gmail.com	6196841241	3109261127			
+Patrick Peterson	Susan	Beard	suzesf@hotmail.com			(415) 421-7047		Elks	
+Patrick Peterson	Ted	Callaghun	ted.callaghan@ihrco.com	wcb972@yahoo.com	14697776130	(469) 531-1378			
+Patrick Peterson	Tom	Lebovic	tlebovic@univision.net		(914) 764-5131	(646) 715-2091	"19 Buck Hill Lane, Pound Ridge, NY 10576"	Univision	Applications Manager
+Patrick Peterson	Trey	Wilder	twilder@fujikoki.com	wilderrocks@hotmail.com	(214) 321-7115	(214) 770-9222			
+Patrick Peterson	Vincent	Coloyan	vcoloyan@sanrio.com	vincent.coloyan@gmail.com					
+Patrick Peterson	Wallace	Francis	wallace@wallacefrancis.com		+1 (707) 544-1134	(707) 953-7516		Lawyer	
+Patrick Peterson	Wanda	Lim	wlim@sanrio.com		(650) 616-3213	(415) 819-8396		Sanrio	IT Director
+Patrick Peterson	William	Harris	wfharris@sbcglobal.net			17073429853			
+Patrick Peterson	Jim	Studer	jstuder@univision.net					Univision	Chief Information Officer

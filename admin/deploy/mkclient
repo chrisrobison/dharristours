@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+while ($client = shift @ARGV) {
+   $client =~ s/\W//g;
+   $lcclient = lc($client);
+   $ucclient = ucfirst($client);
+   system("/usr/local/bin/mysqladmin -upimp -ppimpin create SS_$ucclient && /usr/local/bin/mysqldump --compact -upimp -ppimpin SS_Seed | /usr/local/bin/mysql -upimp -ppimpin SS_$ucclient");
+   print "Setup SS_$ucclient\nCreating login for $client\n";
+   system("/simple.dev/clients/addlogin.php $client");
+   if (!-e "/simple.dev/clients/$client") {
+      mkdir("/simple.dev/clients/".$lcclient, 0775);
+      system("/usr/bin/tar -C /simple.dev/clients/$lcclient -xvf /simple.dev/clients/seed.tar 2>/dev/null");
+      print "Created Simple DB & folder for client.\nDB: SS_$client\nPath: /simple.dev/clients/$lcclient\n";
+      system("/simple.dev/tools/cvsadd.php /simple.dev/clients");
+      system("/usr/sbin/chown -R ponce:employees /simple.dev/clients/$lcclient");
+      # system("cvs ci -m 'Addition of new client directory $lcclient' /simple.dev/clients/$lcclient");
+   }
+}
+

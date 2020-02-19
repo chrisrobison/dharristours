@@ -1,0 +1,44 @@
+#!/usr/bin/perl
+
+my $res = undef;
+my @tld = ('com','net','org','biz','info','cc','tv','ws');
+
+while (my $d = shift @ARGV) {
+   $res = checkDomain($d);
+   my ($n, $e) = split(/\./, $d);
+
+   for my $t (@tld) {
+      print "$n.$t:\t".$res->{"$n.$t"}."\n";
+   }
+}
+
+sub checkDomain {
+   my $domain = shift @_;
+   use Net::DLookup;
+
+   my @tld = ('com','net','org','biz','info','cc','tv','ws');
+   my @result = ('AVAILABLE', 'UNAVAILABLE');
+
+   #
+   # Initialize Net::DLookup object
+   #
+   my $lookup = Net::DLookup->new;
+   my $domains = {};
+
+   my($dom, $tld) = split(/\./, $domain);
+
+   foreach my $t (@tld) {
+      #
+      # Check domain name validity and assign it to the object
+      #
+      @errors = $lookup->IsValid($dom.'.'.$t);
+
+      #
+      # Store availability in hashref
+      #
+      @response = $lookup->DoWhois(0);
+      $domains->{$dom.'.'.$t} = $result[$response[0]];
+   }
+
+   return $domains;
+}

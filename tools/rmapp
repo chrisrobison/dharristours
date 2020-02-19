@@ -1,0 +1,32 @@
+#!/usr/local/bin/php
+<?php
+   require("/simple.dev/lib/boss_class.php");
+
+   $boss = new boss("api.dev.sscsf.com");
+
+   $boss->db->dbobj->execute("use SS_System");
+   $boss->db->dbobj->db = "SS_System";
+
+   array_shift($argv);
+
+   while ($arg = array_shift($argv)) {
+      $found = $boss->getObject("App", "App=".$boss->q($arg));
+      $app = $apps[] = $found->App[0];
+      
+      if ($app->App == $arg) {
+         $boss->db->dbobj->execute("delete from App where AppID={$app->AppID}");
+         
+         if (!preg_match("/SS_System|SS_Seed|SS_Master|SS_Api/", $app->DB ) ) {
+            if (preg_match("/^SS_\w+/", $app->DB)) {
+               $results = `/usr/local/bin/mysqladmin -f -upimp -ppimpin drop {$app->DB}`;
+            }
+         }
+         if (preg_match("/^\/\w+/", $app->Assets)) {
+            $results = `/bin/rm -Rf /simple.dev{$app->Assets}`;
+         }
+      }
+      print "Permanently removed Application `$arg` files, data and application configurations.\n";
+
+   }
+
+?>

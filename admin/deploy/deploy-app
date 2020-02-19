@@ -1,0 +1,19 @@
+#!/usr/local/bin/php
+<?php
+   array_shift($argv);
+   
+   while ($appid = array_shift($argv)) {
+      $sql = `/usr/local/bin/mysqldump -hlocalhost -upimp -ppimpin -y --skip-opt -t -c -N --compact -w AppID="$appid" SS_System App`;
+      $sql = preg_replace("/VALUES\s\(\d+/", "VALUES (NULL", $sql);
+      $sql = preg_replace("/dev.sscsf.com/", "simpsf.com", $sql);
+      $sql = preg_replace("/freetrial/", "current", $sql);
+
+      $tmpfile = "/tmp/deploy".uniqid().".sql";
+
+      file_put_contents($tmpfile, $sql);
+      $results = `/usr/local/bin/mysql -hadmin.simpsf.com -upimp -ppimpin SS_System < $tmpfile`;
+
+      unlink($tmpfile);
+   }
+
+?>

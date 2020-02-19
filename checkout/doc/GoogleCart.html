@@ -1,0 +1,4144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- Generated with PHPDoc v1.5, http://www.phpdoc.de -->
+<html>
+<head>
+	<title>PEAR Repository -  - Class: GoogleCart</title>
+	<link href="phpdoc.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0">
+	<tr>
+		<td align="left" valign="top" bgcolor="#B0BAFF">			
+			<table width="100%">
+				<tr>
+					<td align="left" valign="top"><a href="phpdoc_packagelist.html">Packageindex</a></td>
+					<td align="left" valign="top"><a href="phpdoc_classtree.html">Classtrees</a></td>
+					<td align="left" valign="top"><a href="phpdoc_modulegroup.html">Modulegroups</a></td>
+					<td align="left" valign="top"><a href="phpdoc_elementlist.html">Elementlist</a></td>
+					<td align="left" valign="top"><a href="phpdoc_warnings.html">Report</a></td>
+					<td align="left" valign="top"><a href="phpdoc_xmlfiles.html">XML Files</a></td>
+				</tr>
+			</table>	
+		</td>
+	</tr>
+	<tr>	
+		<td height="20" align="left" valign="top"><hr></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">			
+			<h6></h6>
+			<h1>GoogleCart</h1>
+			<pre>GoogleCart<br></pre>
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">
+			<h4>private    class GoogleCart </h4>
+			 to the google checkout sandbox or production environment  Refer demo/cartdemo.php for different use case scenarios for this code
+			<p>
+			<table>
+				
+				
+				
+				
+				
+				
+				
+				
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td height="10" align="left" valign="top">&nbsp;</td>
+	</tr>
+	
+	<tr>
+		<td height="20" align="left" valign="top"><hr></td>
+	</tr>
+	
+	
+	<tr>
+		<td align="left" valign="top">		
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Public Method Summary</h2></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_GoogleCart()" class="head">GoogleCart(string $id, string $key, [ string $server_type, string $currency ])</a><br />Has all the logic to build the cart's xml (or html) request to be<br /></td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="left" valign="top">		
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Private Method Summary</h2></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetCartExpiration()" class="head">SetCartExpiration(string $cart_expire)</a><br />Sets the cart's expiration date<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetMerchantPrivateData()" class="head">SetMerchantPrivateData(object which $data)</a><br />Sets the merchant's private data.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetEditCartUrl()" class="head">SetEditCartUrl(string $url)</a><br />Sets the url where the customer can edit his cart.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetContinueShoppingUrl()" class="head">SetContinueShoppingUrl(string $url)</a><br />Sets the continue shopping url, which allows the customer to return<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetRequestBuyerPhone()" class="head">SetRequestBuyerPhone(bool $req)</a><br />Sets whether the customer must enter a phone number to complete an order.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetMerchantCalculations()" class="head">SetMerchantCalculations(string $url, [ string $tax_option, string $coupons, string $gift_cert ])</a><br />Sets the information about calculations that will be performed by the<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddItem()" class="head">AddItem(object that $google_item)</a><br />Add an item to the cart.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddShipping()" class="head">AddShipping(object [unknown] $ship)</a><br />Add a shipping method to the cart.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddDefaultTaxRules()" class="head">AddDefaultTaxRules(object that $rules)</a><br />Add a default tax rule to the cart.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddAlternateTaxTables()" class="head">AddAlternateTaxTables(object that $tax)</a><br />Add an alternate tax table to the cart.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddRoundingPolicy()" class="head">AddRoundingPolicy(string $mode, string $rule)</a><br />Set the policy to be used to round monetary values.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetAnalyticsData()" class="head">SetAnalyticsData(string $data)</a><br />Set the google analytics data.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddGoogleAnalyticsTracking()" class="head">AddGoogleAnalyticsTracking(string $GA_id)</a><br />Add a google analytics tracking id.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddThirdPartyTracking()" class="head">AddThirdPartyTracking( $url, array $tracking_param_types)</a><br />Add third-party tracking to the cart<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_GetXML()" class="head">GetXML()</a><br />Builds the cart's xml to be sent to Google Checkout.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_SetButtonVariant()" class="head">SetButtonVariant(bool $variant)</a><br />Set the Google Checkout button's variant.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">array</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CheckoutServer2Server()" class="head">CheckoutServer2Server(array $proxy, string $certPath)</a><br />Submit a server-to-server request.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CheckoutServer2ServerButton()" class="head">CheckoutServer2ServerButton(string $url, [ string $size, boolean $variant, string $loc, boolean $showtext, string $style ])</a><br />Get the Google Checkout button's html to be used in a server-to-server<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CheckoutButtonCode()" class="head">CheckoutButtonCode([ string $size, boolean $variant, string $loc, boolean $showtext, string $style ])</a><br />Get the Google Checkout button's html.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CheckoutHTMLButtonCode()" class="head">CheckoutHTMLButtonCode([ string $size, boolean $variant, string $loc, boolean $showtext, string $style ])</a><br />Get the Google Checkout button's html to be used with the html api.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_xml2html()" class="head">xml2html( $data, string $path,  &$rta)</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_is_associative_array()" class="head">is_associative_array( $var)</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_isChildOf()" class="head">isChildOf(string $path, array $parents)</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CheckoutAcceptanceLogo()" class="head">CheckoutAcceptanceLogo([ integer $type ])</a><br />Get the Google Checkout acceptance logos html<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CalcHmacSha1()" class="head">CalcHmacSha1(string $data)</a><br />Calculates the cart's hmac-sha1 signature, this allows google to verify<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions__GetBooleanValue()" class="head">_GetBooleanValue( $value,  $default)</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions__SetBooleanValue()" class="head">_SetBooleanValue( $string,  $value,  $default)</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions__recursiveAdd()" class="head">_recursiveAdd( &$xml_data,  $data)</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_MerchantPrivateData()" class="head">MerchantPrivateData([ mixed $data ])</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_MerchantPrivateItemData()" class="head">MerchantPrivateItemData([ mixed $data ])</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_CheckoutButtonNowCode()" class="head">CheckoutButtonNowCode(string $size, boolean $variant, string $loc, boolean $showtext, string $style)</a><br />Warning: documentation is missing.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_MerchantPrivate()" class="head">MerchantPrivate()</a><br />Warning: documentation is missing.<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">void</td>
+					<td align="left" valign="top" width="100%"><a href="#functions_AddMerchantPrivateToXML()" class="head">AddMerchantPrivateToXML( &$xml_data)</a><br />Warning: documentation is missing.<br /></td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="left" valign="top">		
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Private Field Summary</h2></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">array</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$multiple_tags" class="head">$multiple_tags</a><br />used when using the html api<br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$merchant_id" class="head">$merchant_id</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$merchant_key" class="head">$merchant_key</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">boolean</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$variant" class="head">$variant</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$currency" class="head">$currency</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$server_url" class="head">$server_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$schema_url" class="head">$schema_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$base_url" class="head">$base_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$checkout_url" class="head">$checkout_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$checkout_diagnose_url" class="head">$checkout_diagnose_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$request_url" class="head">$request_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$request_diagnose_url" class="head">$request_diagnose_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$cart_expiration" class="head">$cart_expiration</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$merchant_private_data" class="head">$merchant_private_data</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$edit_cart_url" class="head">$edit_cart_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$continue_shopping_url" class="head">$continue_shopping_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$request_buyer_phone" class="head">$request_buyer_phone</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$merchant_calculated_tax" class="head">$merchant_calculated_tax</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$merchant_calculations_url" class="head">$merchant_calculations_url</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$accept_merchant_coupons" class="head">$accept_merchant_coupons</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$accept_gift_certificates" class="head">$accept_gift_certificates</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$rounding_mode" class="head">$rounding_mode</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$rounding_rule" class="head">$rounding_rule</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$analytics_data" class="head">$analytics_data</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$item_arr" class="head">$item_arr</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$shipping_arr" class="head">$shipping_arr</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$default_tax_rules_arr" class="head">$default_tax_rules_arr</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$alternate_tax_tables_arr" class="head">$alternate_tax_tables_arr</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$xml_data" class="head">$xml_data</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">boolean</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$googleAnalytics_id" class="head">$googleAnalytics_id</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">boolean</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$thirdPartyTackingUrl" class="head">$thirdPartyTackingUrl</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">array</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$thirdPartyTackingParams" class="head">$thirdPartyTackingParams</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">array</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$ignore_tags" class="head">$ignore_tags</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">unknown</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$data" class="head">$data</a><br /><br /></td>
+				</tr>
+				
+				<tr>
+					<td align="right" valign="top">string</td>
+					<td align="left" valign="top" width="100%"><a href="#variables_$type" class="head">$type</a><br /><br /></td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td align="left" valign="top" colspan=3><h2>Private Constant Summary</h2></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top"><a href="#consts_MAX_DIGITAL_DESC">MAX_DIGITAL_DESC</a></td>
+					<td align="left" valign="top">>><code>1024</code><<</td>
+					<td align="left" valign="top" width="100%">Warning: documentation is missing.</td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td align="left" valign="top" colspan=2><h2>Included files Summary, Type: require_once</h2></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top"><a href="#uses_dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php'">dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php'</a></td>
+					<td align="left" valign="top" width="100%"><a href="#uses_dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php'">Warning: documentation is missing.</a></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top"><a href="#uses_dirname(__FILE__).'/googlerequest.php'">dirname(__FILE__).'/googlerequest.php'</a></td>
+					<td align="left" valign="top" width="100%"><a href="#uses_dirname(__FILE__).'/googlerequest.php'">Warning: documentation is missing.</a></td>
+				</tr>
+				
+				<tr>
+					<td align="left" valign="top"><a href="#uses_dirname(__FILE__).'/xml-processing/gc_xmlparser.php'">dirname(__FILE__).'/xml-processing/gc_xmlparser.php'</a></td>
+					<td align="left" valign="top" width="100%"><a href="#uses_dirname(__FILE__).'/xml-processing/gc_xmlparser.php'">Warning: documentation is missing.</a></td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Public Method Details</h2></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_GoogleCart()"><h4>GoogleCart</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>public    void GoogleCart(string $id, string $key, [ string $server_type, string $currency ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 posted to google's servers.
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$id</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the merchant id</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$key</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the merchant key</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$server_type</td>
+								<td align="left" valign="top"><code>= >>&quot;sandbox&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the server type of the server to be used, one 
+                            of 'sandbox' or 'production'.
+                            defaults to 'sandbox'</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$currency</td>
+								<td align="left" valign="top"><code>= >>&quot;USD&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the currency of the items to be added to the cart
+                         , as of now values can be 'USD' or 'GBP'.
+                         defaults to 'USD'</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+			</table>
+	</tr>
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Private Method Details</h2></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetCartExpiration()"><h4>SetCartExpiration</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetCartExpiration(string $cart_expire)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$cart_expire</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">a string representing a date in the 
+         iso 8601 date and time format: {</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_good-until-date" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_good-until-date</a> - , <a href="http://www.w3.org/TR/NOTE-datetime}" target="_blank">http://www.w3.org/TR/NOTE-datetime}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetMerchantPrivateData()"><h4>SetMerchantPrivateData</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetMerchantPrivateData(object which $data)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   Google Checkout will return this data in the   and the    for the order.    GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">object which</td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">contains the data to be 
+                                  sent as merchant-private-data</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_merchant-private-data" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_merchant-private-data</a> - <merchant-private-data>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetEditCartUrl()"><h4>SetEditCartUrl</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetEditCartUrl(string $url)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$url</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the merchant's site edit cart url</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_edit-cart-url" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_edit-cart-url</a> - <edit-cart-url>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetContinueShoppingUrl()"><h4>SetContinueShoppingUrl</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetContinueShoppingUrl(string $url)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 to the merchant's site after confirming an order.    GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$url</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the merchant's site continue shopping url</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_continue-shopping-url" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_continue-shopping-url</a> - <continue-shopping-url>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetRequestBuyerPhone()"><h4>SetRequestBuyerPhone</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetRequestBuyerPhone(bool $req)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 If set to true, the customer must enter a number, which Google Checkout  will return in the new order notification for the order.    GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">bool</td>
+								<td align="left" valign="top">$req</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true if the customer's phone number is *required*
+                  to complete an order.
+                  defaults to false.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_request-buyer-phone-number" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_request-buyer-phone-number</a> - <request-buyer-phone-number>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetMerchantCalculations()"><h4>SetMerchantCalculations</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetMerchantCalculations(string $url, [ string $tax_option, string $coupons, string $gift_cert ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 merchant.    GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$url</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the merchant calculations callback url</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$tax_option</td>
+								<td align="left" valign="top"><code>= >>&quot;false&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true if the merchant has to do tax calculations.
+                         defaults to false.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$coupons</td>
+								<td align="left" valign="top"><code>= >>&quot;false&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true if the merchant accepts discount coupons.
+                         defaults to false.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$gift_cert</td>
+								<td align="left" valign="top"><code>= >>&quot;false&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true if the merchant accepts gift certificates.
+                         defaults to false.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_merchant-calculations" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_merchant-calculations</a> - <merchant-calculations>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddItem()"><h4>AddItem</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddItem(object that $google_item)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">object that</td>
+								<td align="left" valign="top">$google_item</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">represents an item 
+                                (defined in googleitem.php)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_item" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_item</a> - <item>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddShipping()"><h4>AddShipping</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddShipping(object [unknown] $ship)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">object [unknown]</td>
+								<td align="left" valign="top">$ship</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">an object that represents a shipping method, must be 
+                     one of the methods defined in googleshipping.php</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_shipping-methods" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_shipping-methods</a> - <shipping-methods>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddDefaultTaxRules()"><h4>AddDefaultTaxRules</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddDefaultTaxRules(object that $rules)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">object that</td>
+								<td align="left" valign="top">$rules</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">represents a default
+                                    tax rule (defined in googletax.php)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_default-tax-rule" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_default-tax-rule</a> - <default-tax-rule>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddAlternateTaxTables()"><h4>AddAlternateTaxTables</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddAlternateTaxTables(object that $tax)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   GC tag: {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">object that</td>
+								<td align="left" valign="top">$tax</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">represents an 
+                                     alternate tax table 
+                                     (defined in googletax.php)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#tag_alternate-tax-table" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_alternate-tax-table</a> - <alternate-tax-table>}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddRoundingPolicy()"><h4>AddRoundingPolicy</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddRoundingPolicy(string $mode, string $rule)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 Rounding policy explanation here:  {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$mode</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">one of "UP", "DOWN", "CEILING", "HALF_DOWN" 
+                     or "HALF_EVEN", described here: {</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$rule</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">one of "PER_LINE", "TOTAL"</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/Google_Checkout_Rounding_Policy.html}" target="_blank">http://code.google.com/apis/checkout/developer/Google_Checkout_Rounding_Policy.html}</a> - , <a href="http://code.google.com/apis/checkout/developer/index.html#tag_rounding-policy" target="_blank">http://code.google.com/apis/checkout/developer/index.html#tag_rounding-policy</a> - , <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/math/RoundingMode.html}" target="_blank">http://java.sun.com/j2se/1.5.0/docs/api/java/math/RoundingMode.html}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetAnalyticsData()"><h4>SetAnalyticsData</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetAnalyticsData(string $data)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the analytics data</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/checkout_analytics_integration.html" target="_blank">http://code.google.com/apis/checkout/developer/checkout_analytics_integration.html</a> - info on Checkout and Analytics integration}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddGoogleAnalyticsTracking()"><h4>AddGoogleAnalyticsTracking</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddGoogleAnalyticsTracking(string $GA_id)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$GA_id</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the google analytics id</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/checkout_analytics_integration.html" target="_blank">http://code.google.com/apis/checkout/developer/checkout_analytics_integration.html</a> - info on Checkout and Analytics integration}</td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddThirdPartyTracking()"><h4>AddThirdPartyTracking</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddThirdPartyTracking( $url, array $tracking_param_types)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   Described here:  {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$url</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">array</td>
+								<td align="left" valign="top">$tracking_param_types</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/checkout_analytics_integration.html#googleCheckoutAnalyticsIntegrationAlternate}" target="_blank">http://code.google.com/apis/checkout/developer/checkout_analytics_integration.html#googleCheckoutAnalyticsIntegrationAlternate}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_GetXML()"><h4>GetXML</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    string GetXML()</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>string <p>the cart's xml</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_SetButtonVariant()"><h4>SetButtonVariant</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void SetButtonVariant(bool $variant)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">bool</td>
+								<td align="left" valign="top">$variant</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true for an enabled button, false for a 
+                      disabled one</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}" target="_blank">http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CheckoutServer2Server()"><h4>CheckoutServer2Server</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    array CheckoutServer2Server(array $proxy, string $certPath)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 Creates a GoogleRequest object (defined in googlerequest.php) and sends   it to the Google Checkout server.    more info:  {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">array</td>
+								<td align="left" valign="top">$proxy</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$certPath</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>array <p>with the returned http status code (200 if OK) in index 0 
+               and the redirect url returned by the server in index 1</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#alternate_technique}" target="_blank">http://code.google.com/apis/checkout/developer/index.html#alternate_technique}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CheckoutServer2ServerButton()"><h4>CheckoutServer2ServerButton</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    string CheckoutServer2ServerButton(string $url, [ string $size, boolean $variant, string $loc, boolean $showtext, string $style ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 request.    {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$url</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the merchant's site url where the form will be posted 
+                    to</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$size</td>
+								<td align="left" valign="top"><code>= >>&quot;large&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the size of the button, one of 'large', 'medium' or
+                     'small'.
+                     defaults to 'large'</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$variant</td>
+								<td align="left" valign="top"><code>= >>true<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true for an enabled button, false for a 
+                      disabled one. defaults to true. will be ignored if
+                      SetButtonVariant() was used before.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$loc</td>
+								<td align="left" valign="top"><code>= >>&quot;en_US&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the locale of the button's text, the only valid value
+                    is 'en_US' (used as default)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$showtext</td>
+								<td align="left" valign="top"><code>= >>true<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">whether to show Google Checkout text or not, 
+                       defaults to true.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$style</td>
+								<td align="left" valign="top"><code>= >>&quot;trans&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the background style of the button, one of 'white'
+                      or 'trans'. defaults to "trans"</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>string <p>the button's html</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}" target="_blank">http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CheckoutButtonCode()"><h4>CheckoutButtonCode</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    string CheckoutButtonCode([ string $size, boolean $variant, string $loc, boolean $showtext, string $style ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$size</td>
+								<td align="left" valign="top"><code>= >>&quot;large&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the size of the button, one of 'large', 'medium' or
+                     'small'.
+                     defaults to 'large'</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$variant</td>
+								<td align="left" valign="top"><code>= >>true<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true for an enabled button, false for a 
+                      disabled one. defaults to true. will be ignored if
+                      SetButtonVariant() was used before.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$loc</td>
+								<td align="left" valign="top"><code>= >>&quot;en_US&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the locale of the button's text, the only valid value
+                    is 'en_US' (used as default)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$showtext</td>
+								<td align="left" valign="top"><code>= >>true<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">whether to show Google Checkout text or not, 
+                       defaults to true.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$style</td>
+								<td align="left" valign="top"><code>= >>&quot;trans&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the background style of the button, one of 'white'
+                      or 'trans'. defaults to "trans"</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>string <p>the button's html</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}" target="_blank">http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CheckoutHTMLButtonCode()"><h4>CheckoutHTMLButtonCode</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    string CheckoutHTMLButtonCode([ string $size, boolean $variant, string $loc, boolean $showtext, string $style ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$size</td>
+								<td align="left" valign="top"><code>= >>&quot;large&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the size of the button, one of 'large', 'medium' or
+                     'small'.
+                     defaults to 'large'</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$variant</td>
+								<td align="left" valign="top"><code>= >>true<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">true for an enabled button, false for a 
+                      disabled one. defaults to true. will be ignored if
+                      SetButtonVariant() was used before.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$loc</td>
+								<td align="left" valign="top"><code>= >>&quot;en_US&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the locale of the button's text, the only valid value
+                    is 'en_US' (used as default)</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$showtext</td>
+								<td align="left" valign="top"><code>= >>true<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">whether to show Google Checkout text or not, 
+                       defaults to true.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$style</td>
+								<td align="left" valign="top"><code>= >>&quot;trans&quot;<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the background style of the button, one of 'white'
+                      or 'trans'. defaults to "trans"</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>string <p>the button's html</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}" target="_blank">http://code.google.com/apis/checkout/developer/index.html#google_checkout_buttons}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_xml2html()"><h4>xml2html</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void xml2html( $data, string $path,  &$rta)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$path</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">&$rta</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_is_associative_array()"><h4>is_associative_array</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void is_associative_array( $var)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$var</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_isChildOf()"><h4>isChildOf</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void isChildOf(string $path, array $parents)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$path</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">array</td>
+								<td align="left" valign="top">$parents</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CheckoutAcceptanceLogo()"><h4>CheckoutAcceptanceLogo</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    string CheckoutAcceptanceLogo([ integer $type ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						   {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">integer</td>
+								<td align="left" valign="top">$type</td>
+								<td align="left" valign="top"><code>= >>1<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the acceptance logo type, valid values: 1, 2, 3</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>string <p>the logo's html</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://checkout.google.com/seller/acceptance_logos.html}" target="_blank">http://checkout.google.com/seller/acceptance_logos.html}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CalcHmacSha1()"><h4>CalcHmacSha1</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    string CalcHmacSha1(string $data)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						 that the cart hasn't been tampered by a third-party.    {
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">the cart's xml</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>string <p>the cart's signature (in binary format)</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Links</td>
+					<td align="left" valign="top"><a href="http://code.google.com/apis/checkout/developer/index.html#create_signature}" target="_blank">http://code.google.com/apis/checkout/developer/index.html#create_signature}</a></td>
+				</tr>
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions__GetBooleanValue()"><h4>_GetBooleanValue</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void _GetBooleanValue( $value,  $default)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$value</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$default</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions__SetBooleanValue()"><h4>_SetBooleanValue</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void _SetBooleanValue( $string,  $value,  $default)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$string</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$value</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$default</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions__recursiveAdd()"><h4>_recursiveAdd</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void _recursiveAdd( &$xml_data,  $data)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">&$xml_data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_MerchantPrivateData()"><h4>MerchantPrivateData</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void MerchantPrivateData([ mixed $data ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">mixed</td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code>= >>array()<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">a string with the data that will go in the 
+                    merchant-private-data tag or an array that will
+                    be mapped to xml, formatted like (e.g.):
+                    array('my-order-id' => 34234,
+                          'stuff' => array('registered' => 'yes',
+                                           'category' => 'hip stuff'))
+                    this will map to:
+                    
+                      
+                        yes
+                        hip stuff
+                      
+                    </td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_MerchantPrivateItemData()"><h4>MerchantPrivateItemData</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void MerchantPrivateItemData([ mixed $data ])</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">mixed</td>
+								<td align="left" valign="top">$data</td>
+								<td align="left" valign="top"><code>= >>array()<<</code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">a string with the data that will go in the 
+                    merchant-private-item-data tag or an array that will
+                    be mapped to xml, formatted like:
+                    array('my-item-id' => 34234,
+                          'stuff' => array('label' => 'cool',
+                                           'category' => 'hip stuff'))
+                    this will map to:
+                    
+                      
+                        cool
+                        hip stuff
+                      
+                    </td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_CheckoutButtonNowCode()"><h4>CheckoutButtonNowCode</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void CheckoutButtonNowCode(string $size, boolean $variant, string $loc, boolean $showtext, string $style)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						Warning: documentation is missing.
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$size</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$variant</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$loc</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">boolean</td>
+								<td align="left" valign="top">$showtext</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top">string</td>
+								<td align="left" valign="top">$style</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_MerchantPrivate()"><h4>MerchantPrivate</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void MerchantPrivate()</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						Warning: documentation is missing.
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="functions_AddMerchantPrivateToXML()"><h4>AddMerchantPrivateToXML</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private    void AddMerchantPrivateToXML( &$xml_data)</b><p>
+					</td>
+				</tr>
+				<tr>
+					<td width="10" align="left" valign="top">&nbsp;</td>
+					<td align="left" valign="top">
+						
+						<p>
+						Warning: documentation is missing.
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">Parameter</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="left" valign="top">						
+						<table>
+							<tr>
+								<td align="left" valign="top"></td>
+								<td align="left" valign="top">&$xml_data</td>
+								<td align="left" valign="top"><code></code></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2" align="left" valign="top">Warning: documentation is missing.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<td align="left" valign="top">Returns</td>
+					<td>void <p></td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+			</table>
+	</tr>
+		
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Private Field Details</h2></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$multiple_tags"><h4>$multiple_tags</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   array $multiple_tags</b>
+						<p>
+						>><code>array(
+                          'flat-rate-shipping' =&gt; array(), 
+                          'merchant-calculated-shipping' =&gt; array(), 
+                          'pickup' =&gt; array(), 
+                          'parameterized-url' =&gt; array(), 
+                          'url-parameter' =&gt; array(), 
+                          'item' =&gt; array(), 
+                          'us-state-area' =&gt; array('tax-area'), 
+                          'us-zip-area' =&gt; array('tax-area'), 
+                          'us-country-area' =&gt; array('tax-area'), 
+                          'postal-area' =&gt; array('tax-area'), 
+                          'alternate-tax-table' =&gt; array(), 
+                          'world-area' =&gt; array('tax-area'),                      
+                          'default-tax-rule' =&gt; array(), 
+                          'alternate-tax-rule' =&gt; array(), 
+                          'gift-certificate-adjustment' =&gt; array(), 
+                          'coupon-adjustment' =&gt; array(), 
+                          'coupon-result' =&gt; array(), 
+                          'gift-certificate-result' =&gt; array(), 
+                          'method' =&gt; array(), 
+                          'anonymous-address' =&gt; array(), 
+                          'result' =&gt; array(), 
+                          'string' =&gt; array(), 
+                          )</code><<
+						<p>
+						 tags that can be used more than once, so they need to be numbered  ("-#" suffix)
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$merchant_id"><h4>$merchant_id</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $merchant_id</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$merchant_key"><h4>$merchant_key</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $merchant_key</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$variant"><h4>$variant</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   boolean $variant</b>
+						<p>
+						>><code>false</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$currency"><h4>$currency</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $currency</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$server_url"><h4>$server_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $server_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$schema_url"><h4>$schema_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $schema_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$base_url"><h4>$base_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $base_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$checkout_url"><h4>$checkout_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $checkout_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$checkout_diagnose_url"><h4>$checkout_diagnose_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $checkout_diagnose_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$request_url"><h4>$request_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $request_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$request_diagnose_url"><h4>$request_diagnose_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $request_diagnose_url</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$cart_expiration"><h4>$cart_expiration</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $cart_expiration</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$merchant_private_data"><h4>$merchant_private_data</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $merchant_private_data</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$edit_cart_url"><h4>$edit_cart_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $edit_cart_url</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$continue_shopping_url"><h4>$continue_shopping_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $continue_shopping_url</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$request_buyer_phone"><h4>$request_buyer_phone</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $request_buyer_phone</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$merchant_calculated_tax"><h4>$merchant_calculated_tax</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $merchant_calculated_tax</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$merchant_calculations_url"><h4>$merchant_calculations_url</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $merchant_calculations_url</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$accept_merchant_coupons"><h4>$accept_merchant_coupons</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $accept_merchant_coupons</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$accept_gift_certificates"><h4>$accept_gift_certificates</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $accept_gift_certificates</b>
+						<p>
+						>><code>&quot;&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$rounding_mode"><h4>$rounding_mode</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $rounding_mode</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$rounding_rule"><h4>$rounding_rule</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $rounding_rule</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$analytics_data"><h4>$analytics_data</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $analytics_data</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$item_arr"><h4>$item_arr</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $item_arr</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$shipping_arr"><h4>$shipping_arr</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $shipping_arr</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$default_tax_rules_arr"><h4>$default_tax_rules_arr</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $default_tax_rules_arr</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$alternate_tax_tables_arr"><h4>$alternate_tax_tables_arr</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $alternate_tax_tables_arr</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$xml_data"><h4>$xml_data</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $xml_data</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$googleAnalytics_id"><h4>$googleAnalytics_id</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   boolean $googleAnalytics_id</b>
+						<p>
+						>><code>false</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$thirdPartyTackingUrl"><h4>$thirdPartyTackingUrl</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   boolean $thirdPartyTackingUrl</b>
+						<p>
+						>><code>false</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$thirdPartyTackingParams"><h4>$thirdPartyTackingParams</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   array $thirdPartyTackingParams</b>
+						<p>
+						>><code>array()</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$ignore_tags"><h4>$ignore_tags</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   array $ignore_tags</b>
+						<p>
+						>><code>array(
+                        'xmlns' =&gt; true,
+                        'checkout-shopping-cart' =&gt; true,
+                        // Dont know how to translate these tag yet
+                        'merchant-private-data' =&gt; true,
+                        'merchant-private-item-data' =&gt; true,
+    )</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$data"><h4>$data</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   unknown $data</b>
+						<p>
+						>><code></code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="variables_$type"><h4>$type</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>private   string $type</b>
+						<p>
+						>><code>&quot;Abstract&quot;</code><<
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+			</table>
+	</tr>
+		
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Private Constant Details</h2></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<a name="consts_MAX_DIGITAL_DESC"><h4>MAX_DIGITAL_DESC</h4></a>
+						<code>define( MAX_DIGITAL_DESC, >>1024<< )</code><br>
+						Case: default: case sensitive
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+			</table>
+	</tr>
+	
+	
+	<tr>
+		<td align="left" valign="top">
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2" align="left" valign="top"><h2>Included Files, Type: require_once</h2></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="uses_dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php'"><h4>dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php'</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>require_once( dirname(__FILE__).'/xml-processing/gc_xmlbuilder.php' )</b>
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="uses_dirname(__FILE__).'/googlerequest.php'"><h4>dirname(__FILE__).'/googlerequest.php'</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>require_once( dirname(__FILE__).'/googlerequest.php' )</b>
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+				<tr><td colspan="2" align="left" valign="top"><a name="uses_dirname(__FILE__).'/xml-processing/gc_xmlparser.php'"><h4>dirname(__FILE__).'/xml-processing/gc_xmlparser.php'</h4></a></td></tr>
+				<tr>
+					<td colspan="2" align="left" valign="top">
+						<b>require_once( dirname(__FILE__).'/xml-processing/gc_xmlparser.php' )</b>
+						<p>
+						
+					</td>
+				</tr>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<tr>
+					<td colspan="2" align="left" valign="top"><hr></td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	
+	<tr>
+		<td height="10" align="left" valign="top"><hr></td>
+	</tr>
+	<tr>
+		<td align="left" valign="top" bgcolor="#C0C0C0">			
+			<table width="100%">
+				<tr>
+					<td align="left" valign="top"><a href="phpdoc_packagelist.html">Packageindex</a></td>
+					<td align="left" valign="top"><a href="phpdoc_classtree.html">Classtrees</a></td>
+					<td align="left" valign="top"><a href="phpdoc_modulegroup.html">Modulegroups</a></td>
+					<td align="left" valign="top"><a href="phpdoc_elementlist.html">Elementlist</a></td>
+					<td align="left" valign="top"><a href="phpdoc_warnings.html">Report</a></td>
+					<td align="left" valign="top"><a href="phpdoc_xmlfiles.html">XML Files</a></td>
+				</tr>
+			</table>	
+		</td>
+	</tr>
+	<tr>
+		<td align="left" valign="top">Generated on Sun, 10 Jun 2012 14:00:08 -0700 by PHPDoc v1.5 <a href="http://www.phpdoc.de/">www.phpdoc.de</a</td>
+	</tr>
+</table>
+
+</body>
+</html>

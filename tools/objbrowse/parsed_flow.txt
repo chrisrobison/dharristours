@@ -1,0 +1,109 @@
+All Other Surgery Types
+   Single Maturation
+   Group Maturation
+Viable Ova available
+Ova Isolation
+Ovary assessment and prep and dice
+
+Cloning Order Initiated
+Research Ova From OvaIsoMat-R
+   Experiment Assessment
+   Continue Research, send to ET?
+
+Single Maturation
+   Surrogate Returns to Colony
+   Necropsy Analysis
+   
+   C-Section Only
+   C-Section & Spay
+   C-Section
+   
+   Was 2nd ET?
+   Natural
+   Newborn
+   Live Birth?
+   Delivery: Natural or C-Section?
+   Back to Animal Colony
+   More than 7 days of Estrus Monitoring?
+In Estrus?
+Monitor for Estrus up to 1 week
+(ET, Spay)
+Post Surgery?
+Order Supplies
+Tissue Received From Vet
+Cell Line Cryopreservation
+Group Maturation
+Animal Received
+Retire to Animal Adoption
+Weenie
+Customer Clone Order?
+Deliver Clone
+Newborn
+Newborn Care through weaning
+Surrogate
+Pregnancy Care
+Pregnant
+Check vitals, test for Pregnancy for 
+Surrogate or Newborn?
+Animal \Care
+Good Condensed
+Growth
+Gene Bank
+Cell Line Thawed from Cryopreservation
+In From Spayship
+In From Spayship
+In-Vivo Ova from Surgery
+In-Vivo
+Spay, In-Vivo or ET?
+Viable Ova available
+(Spayship)
+Ovary Collection & Shipping
+Wired?
+MoveOva Box target reached?
+Ovature Interaction Ends
+Wired?
+Ovaries Needed?
+Ship to System Designated Destination
+Manually Create Label
+System Generates Label
+Pack MoveOva Box when target number is reached
+Ovaries Needed?
+Dial in 800-OVATURE
+Login to Ovatureresearch.com
+Bad
+MII Ova From OvaIsoMat-P
+Ova IsoMat-P
+To Embryo Production
+Ova IsoMat-R
+Ova Isolation
+Ovary assessment and prep and dice
+Surgery
+Recovery
+Surgery
+Surgery Prep
+Animal Check In
+Embryo Production
+Cleaved Embryos for ET
+Cleaved Embryos from Embryo Production
+Bad
+Lyse
+CT Prep
+Lyse
+Unfused
+Lyse
+Lyse
+Bad
+Zygotes
+Good Fused
+Good
+Good Couplets
+Good Enucleated Ova
+Good
+Culture
+Activation
+Fusion
+Cell Transfer
+Enucleation
+MP Assesment Couplets-Post Fusion
+MP Assessment Embryo Cleavage 
+MP Assessment MII Ova 

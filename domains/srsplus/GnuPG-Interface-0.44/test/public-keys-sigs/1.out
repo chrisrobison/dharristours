@@ -1,0 +1,31 @@
+test/pubring.gpg
+----------------
+pub   1024D/F950DA9C 2000-02-06
+sig    R     F950DA9C 2001-01-01  GnuPG test key (for testing purposes only)
+uid                  GnuPG test key (for testing purposes only)
+sig 3        F950DA9C 2007-04-20  GnuPG test key (for testing purposes only)
+sig          260C4FA3 2000-03-16  Frank J. Tobin <ftobin@neverending.org>
+sig 3        F950DA9C 2000-02-06  GnuPG test key (for testing purposes only)
+uid                  Foo Bar (1)
+sig 3        F950DA9C 2007-04-20  GnuPG test key (for testing purposes only)
+sig          260C4FA3 2000-03-16  Frank J. Tobin <ftobin@neverending.org>
+sig 3        F950DA9C 2000-03-16  GnuPG test key (for testing purposes only)
+sub    768g/2E854A6B 2000-02-06
+sig          F950DA9C 2007-04-20  GnuPG test key (for testing purposes only)
+
+pub   1024D/260C4FA3 1999-04-22 [expired: 2001-04-21]
+uid                  Frank J. Tobin <ftobin@neverending.org>
+sig 3        260C4FA3 1999-07-02  Frank J. Tobin <ftobin@neverending.org>
+sig          164BDBAE 1999-11-16  [User ID not found]
+uid                  Frank J. Tobin <ftobin@bigfoot.com>
+sig 3        260C4FA3 1999-04-22  Frank J. Tobin <ftobin@neverending.org>
+sig          F40EB65E 1999-04-22  [User ID not found]
+sig          164BDBAE 1999-11-16  [User ID not found]
+uid                  Dekan
+sig 3        260C4FA3 1999-04-22  Frank J. Tobin <ftobin@neverending.org>
+sig          F40EB65E 1999-04-22  [User ID not found]
+sig          164BDBAE 1999-11-16  [User ID not found]
+uid                  Frank J. Tobin <ftobin@uiuc.edu>
+sig 3        260C4FA3 1999-06-29  Frank J. Tobin <ftobin@neverending.org>
+sig          164BDBAE 1999-11-16  [User ID not found]
+

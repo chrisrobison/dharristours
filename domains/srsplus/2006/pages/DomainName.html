@@ -1,0 +1,69 @@
+<script language='JavaScript'>
+   var yled = new Image(37, 35);
+   yled.src = "/img/yellow_led_ani.gif";
+   
+   var gled = new Image(37, 35);
+   gled.src = "/img/green_led.png";
+
+   function init(evt) {
+      document.getElementById("BackBtn").disabled = true;
+      document.getElementById("BackBtnWrap").display = 'none';
+
+      document.getElementById("Domain").focus();
+      
+      return true;
+   }
+   function checkAvail() {
+      document.lookupImg.src = yled.src;
+      var frm = document.forms[0];
+      var domain = frm.Domain.value + frm.TLD.options[frm.TLD.selectedIndex].text;
+      setTimeout("document.lookupImg.src = 'lookup.cgi?n="+domain+"'", 250);
+   }
+   window.onload = init;
+</script>
+<table style='border:0px;margin:0px;padding:0px;'>
+   <tr>
+      <td align='right'><span class='FIELD'>Domain Name:</span></td>
+      <td><span class='MAIN'>www.</span></td>
+      <td NOWRAP><span class='MAIN'><input tabindex='1' id='Domain' type='text' name='Domain' value='#Domain#' size='30' class='MAIN'>
+         <select tabindex='2' name='TLD' class='LIST'>
+            <option>.com</option>
+            <option>.net</option>
+            <option>.org</option>
+            <option>.biz</option>
+            <option>.info</option>
+            <option>.name</option>
+<!--            <optgroup label="ccTLD's" style='font-size:1em;'> -->
+<!--            <option value='' style='color:#606060;background-color:#ddddff;'>  ccTld's [Country TLD's]</option>
+-->
+            <option>.cc</option>
+            <option>.tv</option>
+            <option>.at</option>
+            <option>.be</option>
+            <option>.bz</option>
+            <option>.de</option>
+            <option>.gs</option>
+            <option>.ms</option>
+            <option>.tc</option>
+            <option>.us</option>
+            <option>.vg</option>
+            <option>.ws</option>
+            <option>.com.mx</option>
+            <option>.com.au</option>
+            <option>.net.au</option>
+            <option>.co.nz</option>
+            <option>.co.uk</option>
+            <option>.me.uk</option>
+            <option>.org.uk</option>
+            <!--</optgroup>-->
+         </select></span>
+      </td>
+      <td><input tabindex='3' type='button' style='padding:1px;width:110px;' onclick='checkAvail();' value='Check Availability' class='MAIN'></td>
+   </tr>
+   <tr>
+      <td align='right'><span class='FIELD'>Registration Type:</span></td>
+      <td>&nbsp;</td>
+      <td><span class='MAIN'><select tabindex='4' name='RegType' class='LIST'><option value='new'>New Domain Registration</option><option value='transfer'>Transfer Existing Domain</option><option value='hosting'>Hosting Only - No Domain Registration</option></select></span></td>
+      <td><div id='LED' style='position: relative;top:0px;left:0px;width:100%;text-align:right;'><img src="/img/grey.png" height='35' width='37' hspace='0' vspace='0' border='0' id='lookupImg' name='lookupImg'></div></td>
+   </tr>
+</table>

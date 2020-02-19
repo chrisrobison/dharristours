@@ -1,0 +1,45 @@
+<h1 class='heading'>Sanrio Query Reporting Tool</h1>
+<form target='report' action='/files/reports/report.php' method='POST'>
+   <table>
+      <tbody>
+         <tr>
+            <th>Database</th>
+            <td>
+               <select id='db' name='db'></select>
+               <button>Execute</button>
+            </td>
+         </tr>
+         <tr>
+            <th>Report Query</th>
+            <td><textarea id='sql' name='sql' rows='4' cols='80'></textarea></td>
+         </tr>
+         <tr>
+            <th>Report</th>
+            <td>
+               <iframe name='report' id='report' style="width:100%;height:700px;border:1px inset #ccc;"></iframe>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</form>
+<script type='text/javascript'>
+$(document).ready(function() {
+   $.getJSON("/files/query/dblist.json", function(data) {
+      var items = [];
+      $.each(data, function(key, val) {
+         items.push("<option value='" + val + "'>" + val + "</option>");
+      });
+      $("#db").append(items.join(''));
+   });
+   
+   $("form").submit(function(e) {
+      /*
+      $.post("report.php", { db: $("#db").val(), sql: $("#query").val() }, function(data) {
+         $("#report").html(data);
+      });
+      return false;
+      */
+   });
+});
+</script>
+

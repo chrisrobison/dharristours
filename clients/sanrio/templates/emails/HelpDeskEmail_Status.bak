@@ -1,0 +1,46 @@
+Date: #RFCDate#
+To: #Owner#
+Reply-to: Simple Software Support <support@simplesoftwaresf.com>
+Cc: #CreatedBy#
+Bcc: chris@simplesoftwaresf.com, patrick@simplesoftwaresf.com
+From: Help Desk System <helpdesk@simplesoftwaresf.com>
+Subject: [HelpDesk] Request Updated: '#HelpDesk#'
+
+Help desk request '#HelpDesk#' [ID: #HelpDeskID#] has been updated.  
+
+You may view this request online at:
+
+#URL#
+
+Request details are as follows:
+
+    Help Desk ID:  #HelpDeskID#
+       
+       Help Desk:  #HelpDesk#
+    Request Type:  #RequestType#
+        Category:  #Category#
+            
+            Name:  #Name#
+          Number:  #Number#
+      Department:  #Department#
+        
+        Severity:  #Severity#
+   User Severity:  #User_Severity#
+         
+          Status:  #RequestStatus#
+         
+         Created:  #Created#
+      Created By:  #CreatedBy#
+
+   Last Modified:  #LastModified#
+Last Modified By:  #LastModifiedBy#
+     
+     Description:  #Description#
+     
+           Notes:  #Notes#
+
+
+Thank you,
+
+   The Simple Software Email Notification System
+

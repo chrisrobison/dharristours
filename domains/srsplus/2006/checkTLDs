@@ -1,0 +1,78 @@
+#!/usr/bin/perl
+
+use DBI;
+use CDR::Input;
+use DotSRS_Client;
+
+my $debug = 0;
+
+#open(STDERR, ">>/tmp/srsplus-err.log");
+$| = 1; print "Content-type: text/html\n\n" if $debug;
+
+# Setup database connection info
+my %dbconf = (  'user'    => 'pimp',
+                'passwd'  => 'pimpin',
+                'host'    => 'localhost',
+                'dbdrv'   => 'mysql',
+                'db'      => 'hosting');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+        or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+# Collect any form input passed in
+*in = getInput() if (($ENV{'HTTP_HOST'}) || (@ARGV));
+%dat = %in;
+
+my ($domain, $results);
+my $domchk = {};
+my $isodate = isodate();
+my $cnt = 0;
+
+my $tlds = $dbh->selectcol_arrayref("select TLD from TLD where AutoCheck!=0 order by AutoCheck, Priority");
+print "TLDs:\n\t".join("\n\t", @{$tlds})."\n\n";
+
+my $sth = $dbh->prepare("select * from Cache where Domain='$in{'Domain'}'");
+$sth->execute();
+
+while (my $cache = $sth->fetchrow_hashref) {
+   if (($isodate - $cache->{'Lookup'}) > 3000) {
+      $dbh->do("delete from Cache where CacheID='$cache->{'CacheID'}'");
+      next;
+   }
+   
+   foreach my $tld (@{$tlds}) {
+      $tld =~ s/^\.//;
+      next if ($tld eq $cache->{'TLD'});
+      ++$cnt;
+      $domchk->{"DOMAIN $cnt"} = $cache->{'Domain'};
+      $domchk->{"TLD $cnt"} = $tld;
+   }
+}
+
+my $srs_client = new DotSRS_Client;
+my $ref = $srs_client->multidomain_info($domchk);
+
+foreach my $c (0..$cnt) {
+   $results = {'Domain'    => $ref->{'DOMAIN '.$c},
+               'TLD'       => $ref->{'TLD '.$c},
+               'Status'    => $ref->{'DOMAIN STATUS '.$c},
+               'Price'     => $ref->{'PRICE '.$c},
+               'Cost'      => $ref->{'EFFECTIVE PRICE '.$c}
+              };
+   $dbh->do("insert into Cache (CacheID, Domain, TLD, Price, Cost, Status, Lookup) values (null, '$results->{'Domain'}', '$results->{'TLD'}', '$results->{'Price'}', '$results->{'Cost'}', '$results->{'Status'}', null)") or die "Error inserting domain cache info: ".$dbh->errstr;
+   
+}
+
+exit 0;
+
+sub isodate {
+   my @t = localtime;
+   ++$t[4]; $t[5] += 1900;
+
+   return(sprintf('%04d%02d%02d%02d%02d%02d', reverse(splice(@t, 0, 6))));
+}
+__END__

@@ -1,0 +1,11 @@
+**/log
+**/logs
+*.zip
+*.gz
+*.tgz
+spool
+*.eml
+*.log
+**/src/
+src
+CVS

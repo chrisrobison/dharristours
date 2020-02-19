@@ -1,0 +1,16 @@
+Welcome to the Perl API for Linux Toolkit
+Version 3.9
+February 2008
+
+Directory Contents:
+
+keys   - Contains the SRS public keys for importing into GnuPG
+
+docs   - Contains PDF files of the Developer's Guide and 
+	 Perl API for Linux Reference documents
+
+source - Contains the DotSRS_Client.pm module to be installed on your system
+
+examples - Contains the script certify.pl which is used to perform the suite
+	   of certification tests
+

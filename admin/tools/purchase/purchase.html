@@ -1,0 +1,205 @@
+<html>
+   <head>
+      <title>Interactivate Development Website Administration</title>
+      <script language="JavaScript">
+         function doSave() {
+            frm = document.purchases;
+	    cur = frm.exec.value;
+
+	    if (cur != 'new') {
+	       frm.exec.value = 'update';
+	    }
+	    setTimeout('document.forms[0].submit();', 150);
+	 }
+	 function doDelete() {
+	    var OK = confirm("Are you sure you want to delete this purchase request?");
+	    if (OK) {
+	       document.forms[0].exec.value = 'delete';
+	       setTimeout("document.forms[0].submit();", 150);
+	       return true;
+	    } else {
+	       return false;
+	    }
+	 }   
+         function doNew() {
+            frm = document.purchases;
+	    frm.exec.value = 'new';
+
+	    frm.cost.value = '0.00';
+	    frm.requestedOn.value = isodate();
+	    frm.approvedOn.value = '0000-00-00 00:00:00';
+	    frm.approved.checked = false;
+	    
+	    el = new Array('purchase', 'description','reason','notes','vendor','client','URL','status','PONumber','requestedBy','approvedBy');
+            
+	    for (i in el) {
+	       var field = el[i];
+	       if ((frm[field].type == 'text') || (frm[field].type == 'textarea')) {
+	          document.forms[0][field].value = '';
+	       }	  
+            }
+
+//	    setTimeout('document.forms[0].purchase.focus();', 1000);
+	    return true;
+	 }
+
+	 function isodate() {
+	    var now = new Date();
+	    var day = now.getDate();
+	    var yr = now.getFullYear();
+	    var hr = now.getHours();
+	    var min = now.getMinutes();
+	    var mon = now.getMonth();
+	    mon++;
+	    if (day < 10) {
+	       day = '0'+day;
+	    }
+	    if (mon < 10) {
+	       mon = '0'+mon;
+	    }
+	    if (hr < 10) {
+	       hr = '0'+hr;
+	    }
+	    if (min < 10) {
+	       min = '0'+min;
+	    }   
+	    var isodate = yr+"-"+mon+"-"+day+" "+hr+":"+min+":00";
+
+	    return isodate;
+	 }   
+
+      </script>
+      <style type="text/css">
+            BODY {
+               font-size:9pt;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .HEADER {
+               font-size:12pt;
+	       font-weight:bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIELD {
+               font-size:10pt;
+	       font-weight:bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+	    .MAIN {
+               font-size:9pt;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIXED {
+               font-size:9pt;
+               font-family:Courier New,Courier,LucidaConsole,Fixedsys;
+               color:#000000;
+            }
+      </style>
+   </head>
+   <body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#000099" alink="#ff0000" class="MAIN" onLoad="#alert#">
+      <form name="purchases" action="index.cgi" method="POST">
+         <input type="hidden" name="exec" value="">
+         <input type="hidden" name="REMOTE_USER" value="#REMOTE_USER#">
+	 <br>
+         <center>
+           <table border="1" cellpadding="4" cellspacing="1" bgcolor="#d0d0d0">
+	      <tr>
+	         <td colspan='2' bgcolor="#eeeeee"><!--<img src="/img/bulb-logo.gif" align='left'>--><span class='HEADER'>Inter@ctivate IT Purchase Requests [#REMOTE_USER#]</span></td>
+	      </tr>
+	      <tr>
+	         <td valign='top'>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+		       <tr>
+	                  <td align="right" class="MAIN"><span class='FIELD'>View:</span></td>
+		          <td valign="top" colspan='2'>
+		             <select name="view" onChange="document.purchases.exec.value='lookup'; setTimeout('document.purchases.submit();', 150);" class='MAIN'>
+		                <option value='all'#view_all#>View all requests</option>
+				<option value='pending'#view_pending#>View pending requests</option>
+				<option value='pending'#view_closed#>View closed requests</option>
+		             </select>
+		          </td>
+		       </tr>	  
+		       <tr>
+	                  <td valign="top" align="right" class="MAIN"><span class='FIELD'>Requests:</span></td>
+		          <td valign="top">
+		             <select name="purchaseID" size="25" onChange="document.purchases.submit();" class='MAIN'>
+		                #purchases#
+		             </select>
+		          </td>
+               	          <td valign="top"><input type="button" name="btn_new" value="   New   " onClick="doNew();" class='MAIN'><br>
+			  <input type='button' name="btn_delete" value=' Delete ' onClick="doDelete();" class='MAIN'>	     
+			  </td>   
+		       </tr>
+		    </table>
+		 </td>
+		 <td valign='top'>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+		       <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Purchase:</span></td>
+		          <td class="MAIN"><input type='text' name='purchase' size='78' value='#purchase#' class='MAIN'></td>
+                       </tr>
+	               <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Description:</span></td>
+		          <td class="MAIN"><textarea name='description' rows='5' cols='80' class='MAIN'>#description#</textarea></td>
+                       </tr>
+	               <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Reason:</span></td>
+		          <td class="MAIN"><textarea name='reason' rows='5' cols='80' class='MAIN'>#reason#</textarea></td>
+                       </tr>
+       	               <tr>
+		          <td align="right" valign='top' class="MAIN"><span class='FIELD'>Notes:</span></td>
+		          <td class="MAIN"><textarea name='notes' rows='3' cols='80' class='MAIN'>#notes#</textarea></td>
+                       </tr>
+                       <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Status:</span></td>
+		          <td class="MAIN"><input type="text" name="status" value="#status#" size="35" class='MAIN'>&nbsp;&nbsp;&nbsp;&nbsp;<span class='FIELD'>Cost:</span>&nbsp;&nbsp;<input type='text' name='cost' size='10' value='#cost#' class='MAIN'></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>URL:</span></td>
+		          <td class="MAIN"><input type="text" name="URL" value="#URL#" size="78" class='MAIN'></td>
+                       </tr>
+	               <tr>
+		          <td align="right" class="MAIN"><span class='FIELD'>Vendor:</span></td>
+		          <td class="MAIN" rowspan='4'>
+			     <table border='0' cellpadding='3' cellspacing='1'>
+			        <tr>
+				   <td class='MAIN'><input type="text" name="vendor" value="#vendor#" size="25" class='MAIN'></td>
+                                   <td align="right" class="MAIN"><span class='FIELD'>Client:</span></td>
+				   <td class='MAIN'><input type="text" name="client" value="#client#" size="25" class='MAIN'></td>
+				</tr>
+			        <tr>
+				   <td class='MAIN'><input type="text" name="PONumber" value="#PONumber#" size="25" class='MAIN'></td>
+				   <td class='MAIN' align='right'><input type="checkbox" name="approved" value="1"#approved#></td>
+				   <td class='MAIN'><span class='FIELD'>Approved</span></td>
+				</tr>
+			        <tr>
+				   <td class='MAIN'><input type="text" name="requestedBy" value="#requestedBy#" size="25" class='MAIN'></td>
+                                   <td align="right" class="MAIN"><span class='FIELD'>Approved By:</span></td>
+				   <td class='MAIN'><input type="text" name="approvedBy" value="#ApprovedBy#" size="25" class='MAIN'></td>
+				</tr>
+			        <tr>
+				   <td class='MAIN'><input type="text" name="requestedOn" value="#requestedOn#" size="25" class='MAIN'></td>
+                                   <td align="right" class="MAIN"><span class='FIELD'>Approved On:</span></td>
+				   <td class='MAIN'><input type="text" name="approvedOn" value="#approvedOn#" size="25" class='MAIN'></td>
+				</tr>
+			     </table>
+			  </td>   
+                       </tr>
+                       <tr><td align="right" class="MAIN"><span class='FIELD'>P.O. Number:</span></td>
+	               <tr><td align="right" class="MAIN"><span class='FIELD'>Requested By:</span></td></tr>
+	               <tr><td align="right" class="MAIN"><span class='FIELD'>Requested On:</span></td></tr>
+	               <tr>
+		          <td align="right" colspan="2"><!--<input type="button" value=" New " onClick="doNew();" class='MAIN'>--><input type="button" value="Save" onClick="doSave();" class='MAIN'>&nbsp;&nbsp;&nbsp;<!--<input type='button' value='Delete' onClick="doDelete();" class='MAIN'>--></td>
+                       </tr>
+                    </table>
+		 </td>
+	      </tr>
+           </table>
+	 </center>   
+      </form>
+   </body>
+</html>
+

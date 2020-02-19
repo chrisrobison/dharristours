@@ -1,0 +1,48 @@
+.body {
+}
+.interface {
+   font-size:11px;
+}
+.content {
+   padding-top:10px;
+}
+.snippetContent {
+   overflow:hidden;
+   line-height: .7em;
+   margin-top: 1em;
+}
+.snippet {
+   margin-left:6px;
+}
+.nav {
+   width:796px;
+   margin-right:2px;
+}
+.snippet h1 {
+   padding-top:6px;
+}
+.navUser {
+   margin-left:10px;
+}
+.userLeft {
+   top:170px;
+}
+fieldset {
+margin-top:0px;
+}
+legend {
+   color:#555555;
+   margin-bottom: 10px;
+}
+.hud label {
+   width:235px;
+}
+label {
+   width: 150px;
+}
+label.custom{
+   width: 86px;
+}
+label.custom2 {
+   width: 394px;
+}

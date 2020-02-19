@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteCond   %{HTTP_HOST}                 ^([^.]+)\.simpsf\.com$
+   RewriteRule   ^files(.*)                        /clients/%1$1
+   RewriteRule   ^share(.*)                        /clients/%1/share$1
+   # RewriteRule   ^([^.]+)\.dev\.sscsf\.com(.*) /clients/$1$2
+</IfModule>

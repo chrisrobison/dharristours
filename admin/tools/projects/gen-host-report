@@ -1,0 +1,58 @@
+#!/usr/bin/perl
+#
+#
+use DBI;
+use CDR::Input;
+
+# Setup client headers and input if we are in HTTP environment
+$| = 1; print "Content-type: text/html\n\n" if ($ENV{'HTTP_HOST'});
+
+# Collect any form input passed in
+*in = getInput() if (($ENV{'HTTP_HOST'}) || (@ARGV));
+%dat = %in;
+
+# Setup database connection info
+my %dbconf = (	'user'    => 'mail',
+		'passwd'  => 'activate',
+		'host'    => 'localhost',
+		'dbdrv'   => 'mysql',
+		'db'      => 'sys');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+$hth = $dbh->prepare("select * from host");
+$hth->execute();
+
+print "\nInter\@ctivate Host Information\n\n";
+print "_"x60, "\n\n";
+
+my @fields = @{$hth->{NAME}};
+$last = pop @fields;
+push(@fields, "services", $last);
+while (%host = %{$hth->fetchrow_hashref}) {
+   $sth = $dbh->prepare("select * from service, host_services where host_services.serviceID=service.serviceID and host_services.hostID=$host{'hostID'}");
+   $sth->execute();
+
+   my @services = ();
+   while (%service = %{$sth->fetchrow_hashref}) {
+      push(@services, $service{'service'});
+   }
+   print "$host{'host'}.$host{'domain'}\n\n";
+   $host{'services'} = join(",", @services);
+
+  foreach my $f (@fields) {
+     next if ($host{$f} !~ /\w/);
+format STDOUT =
+@>>>>>>>>>>>>>>>>>>>: @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+$f, $host{$f}
+.
+       write;
+   }
+   print "_"x60, "\n\n";
+}
+

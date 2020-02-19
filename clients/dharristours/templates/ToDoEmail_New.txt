@@ -1,0 +1,24 @@
+Date: #RFCDate#
+To: Simple Software Team <team@simplesoftwaresf.com>
+Reply-to: Simple Software Support <support@simplesoftwaresf.com>
+Cc: patrickmp1975@gmail.com
+Bcc: cdr@netoasis.net
+From: ToDo System <todos@simplesoftwaresf.com>
+Subject: [ToDo] New ToDo '#Title#' has been submitted
+
+A new todo titled '#Title#' has been submitted.  Please review
+the following details and do whatever is necessary to remedy the problem.
+You may view this todo online at:
+#URL#
+
+ToDo ID: #ToDoID#
+ToDo Title: #Title#
+Assigned By: #AssignedBy#
+Assigned To: #Owner#
+Status: #Status#
+Priority: #Priority#
+
+Description: #ToDo#
+
+Notes: #Notes#
+

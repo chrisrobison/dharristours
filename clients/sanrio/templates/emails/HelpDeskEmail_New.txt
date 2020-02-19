@@ -1,0 +1,32 @@
+Date: #RFCDate#
+To: Sanrio HelpDesk Team <ITDept@sanrio.com>
+Reply-to: Sanrio HelpDesk Support <ITDept@sanrio.com>
+Cc: #CreatedBy#
+Bcc: sanrio@simplesoftwaresf.com
+From: Simple Support <root@cloud.simpsf.com>
+Subject: [HelpDesk] New '#RequestType#' Requestor: '#CreatedBy#'
+
+A new helpdesk request titled '#HelpDesk#' has been submitted.  
+You may view or update this helpdesk request online at:
+
+http://#Host#/apps/?pid=10&rsc=#rsc#&id=#id#
+
+The Helpdesk may view this request at:
+http://#Host#/apps/?pid=13&rsc=#rsc#&id=#id#
+
+    Help Desk ID:  #HelpDeskID#
+       
+        Category:  #Category#
+     Description:  #Description#
+        Severity:  #User_Severity#
+         
+         Created:  #Created#
+      Created By:  #CreatedBy#
+     
+           Notes:  #Notes#
+
+
+Thank you,
+
+   The Simple Software Email Notification System
+

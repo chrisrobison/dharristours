@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	develop_dir	develop_host	staging_dir	staging_host	personal	ServerAdmin
+179	interactivate.com	derek	dstanley		htdocs	standard	192.168.1.7	80				1	logs/derek.access_log	logs/derek.error_log	combined	/u1/dstanley/projects/derek					0	hostmaster@interactivate.com

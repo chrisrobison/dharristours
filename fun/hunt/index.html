@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<html>
+   <head>
+      <title>Hunt</title>
+      <style type="text/css">
+            BODY {
+               font-size:1em;
+               font-family: "Digital",Optima,"Gill Sans","Gill Sans MT",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+               color: #000000;
+               background-color: #ffffff;
+               cursor: none;
+               width: 1024px;
+               height: 768px;
+               background-image: url("hunt_bg.jpg");
+            }
+            #huntBG {
+               position: absolute;
+               top: 0px;
+               left: 0px;
+               width: 1024px;
+               height: 768px;
+               background-color: #009900;
+               background-image: url("hunt_bg.jpg");
+               background-repeat: no-repeat; 
+               z-index: 10;
+               cursor: none;
+            }
+            #huntFG {
+               position: absolute;
+               width: 1024px;
+               left: 0px;
+               top: 0px;
+               height: 768px;
+               background-image: url("hunt_fg.png");
+               background-repeat: no-repeat;
+               z-index: 100;
+               cursor: none;
+            }
+            .bird {
+               position: absolute;
+               height: 99px;
+               width: 134px;
+               z-index: 50;
+               display: none;
+            }
+            #crosshairs {
+               position: absolute;
+               top: 300px;
+               left: 300px;
+               background-image: url("crosshairs.png");
+               height: 72px;
+               width: 75px;
+               z-index: 500;
+            }
+            #bird0 {
+               top: 100px;
+               left: 0px;
+            }
+            #bird1 {
+               top: 200px;
+               left: 100px;
+            }
+            #bird2 {
+               top: 300px;
+               left: 250px;
+            }
+            #shot {
+               top: 100px;
+               left: 100px;
+               position: absolute;
+               height: 32px;
+               width: 32px;
+               border: 0px;
+               z-index: 400;
+               display: none;
+            }
+            .kill {
+               position: absolute;
+               top: 100px;
+               left: 100px;
+               width: 134px;
+               height: 99px;
+               display: none;
+            }
+            
+            #level {
+               position: absolute;
+               text-align: center;
+               top: 250px;
+               height: 64px;
+               left: 0px;
+               right: 0px;
+               font-size: 72px;
+               font-weight: bold;
+               color: #00ff00;
+               z-index: 1000;
+               -moz-opacity: .70;
+               filter: progid: DXImageTransform.Microsoft.Alpha(opacity=70);
+               display: none;
+            }
+            
+            #levelHighlight {
+               position: absolute;
+               margin-left: -4px;
+               top: 248px;
+               text-align: center;
+               height: 64px;
+               left: 0px;
+               right: 0px;
+               font-size: 72px;
+               font-weight: bold;
+               color: #ffffff;
+               -moz-opacity: .80;
+               filter: progid: DXImageTransform.Microsoft.Alpha(opacity=80);
+               z-index: 999;
+               display: none;
+            }
+
+            #levelShadow {
+               position: absolute;
+               margin-left: 4px;
+               top: 254px;
+               text-align: center;
+               height: 64px;
+               left: 0px;
+               right: 0px;
+               font-size: 72px;
+               font-weight: bold;
+               color: #000000;
+               -moz-opacity: .50;
+               filter: progid: DXImageTransform.Microsoft.Alpha(opacity=50);
+               z-index: 999;
+               display: none;
+            }
+
+
+             #countdown {
+               position: absolute;
+               top: 10px;
+               right: 10px;
+               width: 50px;
+               height: 50px;
+               font-size: 48px;
+               font-weight: bold;
+               color: #00ff00;
+               z-index: 1000;
+            }
+
+            #score {
+               position: absolute;
+               top: 10px;
+               left: 10px;
+               width: 50px;
+               height: 50px;
+               font-size: 48px;
+               font-weight: bold;
+               color: #00ff00;
+               z-index: 1000;
+            }
+            #debug {
+               position: absolute;
+               right: 0px;
+               width: 250px;
+               top: 0px;
+               bottom: 0px;
+               background-color: #ffffcc;
+            }
+      </style>
+      <script language="JavaScript" type='text/javascript'>
+         var birds = new Array();
+         var kill = new Array();
+         var score = 0;
+         var level = 1;
+         var countdown = 60;
+         var countdownTimer;
+         var stopwatch = 1;
+         var gameOver = 0;
+
+         var birdleft = new Image();
+         var birdright = new Image();
+         var birdcircle = new Image();
+         birdleft.src = 'img.php?img=dove_left.gif';
+         birdright.src = 'img.php?img=dove_right.gif';
+         birdcircle.src = 'img.php?img=bird.gif';
+         
+         var killleft = new Image();
+         var killright = new Image();
+         killleft.src = 'img.php?img=kill_left.gif';
+         killright.src = 'img.php?img=kill_right.gif';
+
+         function updateTime() {
+            if (stopwatch) {
+               countdown = countdown - 1;
+               showTime(countdown);
+
+               if (countdown == 0) {
+                  stopwatch = 0;
+                  doGameOver();
+               } else {
+                  countdownTimer = setTimeout('updateTime()', 1000);
+               }
+            }
+         }
+         
+         function showTime(secs) {
+            var countdowndiv = document.getElementById('countdown');
+            if (countdowndiv) countdowndiv.innerHTML = secs;
+         }
+
+         function updateScore(points) {
+            score += points;
+            var scorediv = document.getElementById('score');
+            if (scorediv) {
+               scorediv.innerHTML = score;
+            }
+         }
+         
+         function aim(evt) {
+            evt = (evt) ? evt : window.event;
+            var ch = document.getElementById('crosshairs');
+            if (ch) {
+               ch.style.top = (evt.clientY - 36) + 'px';
+               ch.style.left = (evt.clientX - 38) + 'px';
+            }
+         }
+         
+         function shoot(evt) {
+            var shell = document.getElementById('shot');
+            if (shell) {
+               shell.style.top = (evt.clientY - 16) + 'px';
+               shell.style.left = (evt.clientX - 16) + 'px';
+               shell.style.display = 'block';
+            }
+            setTimeout('checkShot('+(evt.clientX - 16)+','+(evt.clientY)+')', 500);
+         }
+         
+         function checkShot(x,y) {
+            var shell = document.getElementById('shot');
+            if (shell) shell.style.display = 'none';
+
+            for (var i=0; i<birds.length; i++) {
+               if (!kill[i].killed) {
+                  if ((x > birds[i].x) && (x < (birds[i].x + 134))) {
+                     if ((y > birds[i].y) && (y < (birds[i].y + 99))) {
+                        if (kill[i].obj) {
+                           birds[i].obj.style.zIndex = 51;
+                           kill[i].obj.style.zIndex = 52;
+                           kill[i].active = 1;
+                           kill[i].killed = 1;
+                           kill[i].x = x;
+                           kill[i].y = y;
+                           kill[i].obj.src = (birds[i].dirX==-1) ? 'img.php?img=kill_left.gif' : 'img.php?img=kill_right.gif';
+                           kill[i].obj.style.top = birds[i].y + 'px';
+                           kill[i].obj.style.left = birds[i].x + 'px';
+                           kill[i].obj.style.display = 'block';
+                           birds[i].obj.style.display = 'none';
+                           kill[i].timeout = setTimeout('dropBird('+i+')', 10);
+                           setTimeout('stopDrop(' + i + ')', 1500);
+
+                           if (birds[i].timeout) {
+                              clearTimeout(birds[i].timeout);
+                           }
+                           updateScore(10);
+                        }
+                     }
+                  }
+               }
+            }
+         }
+
+         function stopDrop(num) {
+            kill[num].obj.style.display = 'none';
+
+            if (kill[num].timeout) {
+               clearTimeout(kill[num].timeout);
+            }
+            
+            var notdone = 0;
+            for (var i in kill) {
+               if (!kill[i].killed) {
+                  notdone = 1;
+                  break;
+               }
+            }
+
+            if (!notdone) {
+               nextLevel();               
+            }
+
+         }
+         
+         function dropBird(num) {
+            kill[num].y += 1;
+            kill[num].x += birds[num].dirX;
+
+            kill[num].obj.style.top = kill[num].y + 'px';
+            kill[num].obj.style.left = kill[num].x + 'px';
+
+            if (kill[num].y < 500) {
+               kill[num].timeout = setTimeout('dropBird('+num+')', 10);
+            } else {
+               kill[num].active = 0;
+               kill[num].obj.style.display = 'none';
+               birds[num].obj.style.zIndex = 50;
+               // setTimeout('initBird('+num+')', 2000);
+            }
+            
+         }
+         
+         function nextLevel() {
+            stopwatch = 0;
+            showLevel(level + ' Complete');
+            if (countdownTimer) clearTimeout(countdownTimer);
+            var longest = (500 + (100 * countdown));
+            var up = 0;
+
+            while (countdown > -1) {
+               setTimeout("updateScore(10)", (500 + (100 * countdown)));
+               setTimeout("showTime("+up+")", (500 + (100 * countdown)));
+               ++up;
+               countdown--;
+            }
+
+            level++;
+            countdown = (60 - (5 * level));
+            setTimeout('init()', longest);
+            
+         }
+         
+         function stopAllBirds() {
+            for (var i=0; i<6; i++) {
+               birds[i].obj.style.display = 'none';
+               clearTimeout(birds[i].timeout);
+            }
+            gameOver = 1;
+         }
+
+         function doGameOver() {
+            showGameOver();
+            stopAllBirds();
+            stopwatch = 0;
+         }
+         
+         function init() {
+            showLevel(level);
+            stopwatch = 1;
+            setTimeout('initBirds()', 1500);
+            setTimeout('updateTime()', 2000);
+         }
+         
+         function initBirds() {
+            window.innerWidth = 1024;
+            window.innerHeight = 768;
+            for (var i=0; i<6; i++) {
+               if (!birds[i]) birds[i] = new Object();
+               if (!kill[i]) kill[i] = new Object();
+               kill[i].killed = 0;
+
+               setTimeout('initBird('+i+')', (2000 * i));
+            }
+         }
+
+         function initBird(num) {
+            if (birds[num].timeout) clearTimeout(birds[num].timeout);
+            var dir = Math.round(Math.random(1));
+            var typ = (Math.round(Math.random(1))) ? 'goose' : 'dove';
+            birds[num].speed = (typ=='goose') ? 4 : 1;
+            birds[num].bird = typ;
+            birds[num].obj = document.getElementById('bird'+num);
+            birds[num].obj.src = (dir) ? 'img.php?img='+typ+'_left.gif' : 'img.php?img='+typ+'_right.gif';
+           
+            birds[num].x = (dir) ? 1024 : 0;
+            birds[num].dirX = (dir) ? -1 : 1;
+            birds[num].y = Math.round(Math.random() * 500) + 10;
+            birds[num].dirY = -1;
+            birds[num].obj.style.display = 'block';
+
+            birds[num].obj.style.top = birds[num].y + 'px';
+            birds[num].obj.style.left = birds[num].x + 'px';
+            
+            kill[num].obj = document.getElementById('kill'+num);
+
+            setTimeout('moveBird('+num+')', Math.round(Math.random(1000 * num)));
+         }
+         
+         function moveBird(num) {
+            if (kill[num].killed) {
+               return false;
+            }
+            
+            // Change vertical direction if bird goes to high or low or random sez so
+            if ((Math.random() > .9) || ((birds[num].y > 400) && (birds[num].dirY > 0))){
+               birds[num].dirY = birds[num].dirY * -1;
+            }
+
+            var incX = birds[num].dirX * ( Math.round( Math.random() * ( 2 * level ) * birds[num].speed ) + 1 );
+            var incY = birds[num].dirY * ( Math.round( Math.random() * level ) + 1 );
+            
+         
+            birds[num].y += incY;
+            birds[num].obj.style.top = birds[num].y + 'px';
+            
+            birds[num].x += incX;
+            birds[num].obj.style.left = birds[num].x + 'px';
+         
+            if (birds[num].dirX == 1) {
+               if (((birds[num].x > 1000) || (birds[num].y < 10)) && (!kill[num].killed)) {
+                  initBird(num);
+               } else if (gameOver!=1) {
+                  birds[num].timeout = setTimeout('moveBird('+num+')', 20);
+               }
+            } else {
+               if (((birds[num].x < 10) || (birds[num].y < 10)) && (!kill[num].killed)) {
+                  initBird(num);
+               } else if (gameOver!=1) {
+                  birds[num].timeout = setTimeout('moveBird('+num+')', 20);
+               }
+            }
+         }
+         
+         function showGameOver() {
+            var lvls = new Array('level', 'levelShadow', 'levelHighlight');
+
+            for (var l=0; l<lvls.length; l++) {
+                  
+               var lvl = document.getElementById(lvls[l]);
+               if (lvl) {
+                  lvl.innerHTML = 'Game Over';
+                  lvl.style.display = 'block';
+               }
+            }
+         }
+         
+         function showLevel(show) {
+            show = (show) ? show : level;
+            var lvls = new Array('level', 'levelShadow', 'levelHighlight');
+
+            for (var l=0; l<lvls.length; l++) {
+                  
+               var lvl = document.getElementById(lvls[l]);
+               if (lvl) {
+                  lvl.innerHTML = 'Level ' + show;
+                  lvl.style.display = 'block';
+               }
+            }
+            
+            setTimeout('hideLevel()', 2000);
+         }
+
+         function hideLevel() {
+            var lvls = new Array('level', 'levelShadow', 'levelHighlight');
+
+            for (var l=0; l<lvls.length; l++) {
+                  
+               var lvl = document.getElementById(lvls[l]);
+               if (lvl) {
+                  lvl.style.display = 'none';
+               }
+            }
+         }
+         
+         document.onmousemove = aim;
+         document.onclick = shoot;
+      </script>
+   </head>
+   <body onload='init()'>
+      <div id='huntBG'>
+         <img id='bird0' class='bird' />
+         <img id='bird1' class='bird' />
+         <img id='bird2' class='bird' />
+         <img id='bird3' class='bird' />
+         <img id='bird4' class='bird' />
+         <img id='bird5' class='bird' />
+         <img id='kill0' class='kill' />
+         <img id='kill1' class='kill' />
+         <img id='kill2' class='kill' />
+         <img id='kill3' class='kill' />
+         <img id='kill4' class='kill' />
+         <img id='kill5' class='kill' />
+         <div id='huntFG'>
+         </div>
+      </div>
+      <img id='shot' src='shell.gif' />
+      <div id='crosshairs'></div>
+      <div id='score'>0</div>
+      <div id='countdown'>60</div>
+      <div id='level'>Level 1</div>
+      <div id='levelShadow'>Level 1</div>
+      <div id='levelHighlight'>Level 1</div>
+      <div id='debug'></div>
+   </body>
+</html>
+

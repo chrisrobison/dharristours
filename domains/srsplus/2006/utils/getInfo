@@ -1,0 +1,58 @@
+#!/usr/bin/perl
+use DBI;
+
+# Setup database connection info
+my %dbconf = (	'user'    => 'mail',
+               'passwd'  => 'activate',
+               'host'    => 'localhost',
+               'dbdrv'   => 'mysql',
+               'db'      => 'hosting');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+$dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+($dom, $tld) = split(/\./, $ARGV[0]);
+print "Checking TLD: $tld Domain: $dom\n";
+my @whois = getInfo($dom, $tld);
+print join("\n", @whois);
+
+
+sub getInfo {
+   use Net::Telnet ();
+   my $domain = shift @_;
+   my $tld = shift @_;
+   my @results = ();
+
+   eval {
+      my $whois = $dbh->selectrow_hashref("select * from TLD where TLD like '\%$tld'");
+      print "Found $whois->{'WhoisServer'} whois server...\n";
+      die "No whois server known for extension $tld" if ($whois->{'WhoisServer'} !~ /\w/);
+      
+      my $session = new Net::Telnet (Timeout => 5, Port => 43); 
+      $session->open($whois->{'WhoisServer'});
+      
+      die "Error opening connection to port 43 on $whois->{'WhoisServer'}" if (!$session);
+      $session->print("$domain.$tld");
+
+      while (my $line = $session->getline()) {
+         chomp $line;
+         push(@results, $line);
+      }
+      my $results = join("\n", @results);
+      if ($results =~ /$whois->{'AvailMatch'}/gis) {
+         return 1;
+      } else {
+         return 0;
+      }
+   };
+
+   if ($@) {
+      return($@);
+   } else {
+      return(@results);
+   }
+}

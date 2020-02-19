@@ -1,0 +1,94 @@
+<script language="JavaScript">
+   frm = document.forms[0];
+   function addItem() {
+      var optstart = frm.all_values.selectedIndex;
+      var id = frm.all_values.options[optstart].value;
+      var txt = frm.all_values.options[optstart].text;
+      
+      var newopt = new Option(txt, id, false, false);
+      frm.my_values.options[frm.my_values.options.length] = newopt;
+      
+      frm.all_values.options[optstart] = null;
+      buildValues();
+      doChange();
+      
+      return true;
+   }
+
+   function rmItem() {
+      var optstart = frm.my_values.selectedIndex;
+      var id = frm.my_values.options[optstart].value;
+      var txt = frm.my_values.options[optstart].text;
+      
+      var newopt = new Option(txt, id, false, false);
+      frm.all_values.options[frm.all_values.options.length] = newopt;
+
+      frm.my_values.options[optstart] = null;
+      buildValues();
+      doChange();
+
+      return true;
+   }
+
+   function addAllItem() {
+      while (frm.all_values.length>0) {
+         var mylen = frm.my_values.length;
+         var val = frm.all_values.options[0].value;
+         var txt = frm.all_values.options[0].text;
+	 var newopt = new Option(txt, val, false, false);
+	 frm.my_values.options[mylen] = newopt;
+	 frm.all_values.options[0] = null;
+      }
+      buildValues();
+      doChange();
+
+      return true;
+   }
+
+   function rmAllItem() {
+      while (frm.my_values.length>0) {
+         var alllen = frm.all_values.length;
+         var val = frm.my_values.options[0].value;
+         var txt = frm.my_values.options[0].text;
+	 var newopt = new Option(txt, val, false, false);
+	 frm.all_values.options[alllen] = newopt;
+	 frm.my_values.options[0] = null;
+      }
+      buildValues();
+      doChange();
+
+      return true;
+   }
+
+   function buildValues() {
+      var val = new Array();
+      for (var i=0; i<frm.my_values.length; i++) {
+         val.push(frm.my_values.options[i].value);
+      }
+      frm.my_ids.value = val.join(",");
+
+      return true; 
+   }
+
+</script>
+		    <table border='0' cellpadding='3' cellspacing='1'>
+		       <tr><td align='left' class='FIELD' colspan='3'><span class='FIELD' style='font-size: 14px; font-weight: bold;'>Current #Table#: #display#</span></td></tr>
+		       <tr><td align='left' class='FIELD' colspan='3'><hr></td></tr>
+		       <tr>
+               	          <td align='left' class='FIELD' valign='top'><span class='FIELD'>#Table# #Dest_table#s:</span></td>
+			  <td class='FIELD'>&nbsp;</td>
+               	          <td align='left' class='FIELD' valign='top'><span class='FIELD'>Available #Dest_table#s:</span></td>
+		       </tr>
+		       <tr class='MAIN'>
+               	          <td class='MAIN'><span class='MAIN'><input type='hidden' name='my_ids' value='#my_links#'><select name="my_values" size='15' class='MAIN' style="width: 200px;">#my_values#</select></span></td>
+			  <td class='MAIN' align='left' valign='top'>
+			     <span class='MAIN' style="font-family:Arial,Helvetica,SansSerif;"><br>
+			        <input type='button' name='additem' value='   &lt;   ' class='MAIN' style="font-size:16px; border-style:groove; padding:0px 2px 0px 2px;" onClick="addItem();"><br />
+			        <input type='button' name='rmitem' value='   &gt;   ' class='MAIN' style="font-size:16px; border-style:groove; padding:0px 2px 0px 2px;" onClick="rmItem();"><br /><br />
+			        <input type='button' name='additem' value='  &lt;&lt;  ' class='MAIN' style="font-size:16px; border-style:groove; padding:0px 2px 0px 2px;" onClick="addAllItem();"><br />
+			        <input type='button' name='rmallitem' value='  &gt;&gt;  ' class='MAIN' style="font-size:16px; border-style:groove; padding:0px 2px 0px 2px;" onClick="rmAllItem();"><br />
+			     </span>
+			  </td>
+               	          <td class='MAIN'><span class='FIELD'><select name="all_values" class='MAIN' style="width: 200px;" size='15'>#all_values#</select></span></td>
+		       #record_detail#
+                    </table>

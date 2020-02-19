@@ -1,0 +1,34 @@
+                    <table border='0' cellpadding='3' cellspacing='1'>
+                       <tr>
+                     <td align="right" class="MAIN"><span class='FIELD'>Domain:</span></td>
+                          <td valign="top" colspan='2'>
+                             <select style='width:200px;' name="domainID" onChange="checkChanges('change_table') && setTimeout('document.forms[0].submit();', 150);" class='MAIN'>
+                                #domains#
+                             </select>
+                          </td>
+                       </tr>
+                       <tr>
+                          <td valign="top" align="right" class="MAIN"><span class='FIELD'>Aliases:</span></td>
+                          <td valign="top">
+                             <select style='width:200px;' name="aliasID" size="20" onChange="checkChanges('lookup') && setTimeout('document.forms[0].submit();', 150);" class='LIST'>
+                                #aliases#
+                             </select>
+                          </td>
+                       </tr>
+                    </table>
+                 </td>
+                 <td valign='top'>
+         <table border='0' cellpadding='5' cellspacing='1'>
+            <tr><td class='TBLFIELD' colspan='3' style="padding-bottom:8px;border-bottom:1px solid #808080;"><span class='HEADING'>Aliases for #domain#</span></td></tr>
+            <tr><td class='TBLFIELD' colspan='2' style="height:5px;padding:0px;margin:0px;border-top:1px solid #ffffff"><span class='myHR' style='height:1px;padding:0px;margin:0px;border-top:1px solid #ffffff; width:100%;'> &nbsp;</span></td><td rowspan='10' style='width: 30px;'>&nbsp;</td></tr>
+            <tr>
+               <td align='right' class='TBLFIELD'><span class='FIELD'>Alias ID:</span></td>
+               <td class='MAIN'><span id='curKey' class='STATIC'>#aliasID#</span></td>
+            </tr>	  
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Mail Alias:</span></td><td class='MAIN'><input type='text' name='alias' size='50' value='#alias#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Domain:</span></td><td class='MAIN'><input type='text' name='domain' size='50' value='#domain#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Route To:</span></td><td class='MAIN'><input type='text' name='routeto' size='50' value='#routeto#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'><span class='FIELD'>Client:</span></td><td class='MAIN'><input type='text' name='client' size='50' value='#client#' class='DATA' onChange='doChange();'></td></tr>
+            <tr><td align='right' valign='top' class='TBLFIELD'>&nbsp;</td><td class='MAIN'><input type='checkbox' name='active' value='1' class='DATA' onChange='doChange();'#active#><span class='FIELD'>Active</span></td></tr>
+
+         </table>

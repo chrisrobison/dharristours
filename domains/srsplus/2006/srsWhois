@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use DotSRS_Client;
+use Data::Dumper;
+
+my $srs = new DotSRS_Client;
+
+while (my $domain = shift @ARGV) {
+	my ($dom, $tld) = split(/\./, $domain, 2);
+
+	my $results = $srs->whois($dom, $tld);
+
+	print Dumper($results);
+}
+

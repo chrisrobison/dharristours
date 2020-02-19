@@ -1,0 +1,358 @@
+<html>
+   <head>
+      <title>DNS Admin</title>
+      <script language="JavaScript">
+         var flash = 0;
+
+         function fillForm(val) {
+            var frm = document.forms[0];
+	    var delimiter = /!/
+
+	    data = val.split(delimiter);
+	    for (i=0; i<frm.RDTYPE.length; i++) {
+	       if (data[3] == frm.RDTYPE.options[i].value) {
+	          frm.RDTYPE.options[i].selected = true;
+	       } else {
+	          frm.RDTYPE.options[i].selected = false;
+	       }
+	    }
+	    frm["recordID"].value = data[0];
+	    frm["NAME"].value = data[1];
+	    frm["TTL"].value = data[2];
+	    frm["RDATA"].value = data[4];
+	 }
+    function doFlash(who, flashing) {
+       if (flashing) {
+          //document.getElementById(who).style.backgroundColor = '#af0000';
+          document.getElementById(who+'Btn').style.color = '#ffffff';
+          document.getElementById(who+'Btn').style.backgroundColor = '#af0000';
+          flashing = 0;
+       } else {
+          //document.getElementById(who).style.backgroundColor = '#d0d0d0';
+          document.getElementById(who+'Btn').style.color = '#000000';
+          document.getElementById(who+'Btn').style.backgroundColor = '#d0d0d0';
+          flashing = 1;
+       }
+
+       if (flash == 1) {
+          setTimeout("doFlash('"+who+"',"+flashing+");", 600);
+       }   
+    } 
+	 function doNew() {
+	    var frm = document.forms[0];
+
+	    frm["NAME"].value = '#domain#';
+	    frm["TTL"].value = '28800';
+	    frm["RDATA"].value = '';
+	    frm["RDTYPE"].options[0].selected = true;
+	    frm.exec.value = 'new_record';
+       document.getElementById('NewRecord').style.display = 'none';
+       document.getElementById('SaveRecord').style.display = 'block';
+	    frm.NAME.focus();
+
+	    return true;
+	 }
+	 function doSave() {
+	    if (document.forms[0].exec.value != 'new_record') {
+	       document.forms[0].exec.value = 'save_record';
+	    }   
+       document.getElementById('SaveRecord').style.display = 'none';
+	    setTimeout('document.forms[0].submit();', 150);
+
+	    return true;
+	 }
+	 function doDelete() {
+	    OK = confirm("Are you sure you want to delete this record?");
+
+	    if (OK) {
+	       document.forms[0].exec.value = 'delete_record';
+          document.getElementById('NewRecord').style.display = 'none';
+          document.getElementById('SaveRecord').style.display = 'none';
+          document.getElementById('DeleteRecord').style.display = 'none';
+	       setTimeout('document.forms[0].submit();', 150);
+	       return true;
+            } else {
+	       return false;
+	    }   
+	 }
+	 function newZone() {
+	    var frm = document.forms[0];
+
+	    frm["domain"].value = '';
+	    frm["tablename"].value = '';
+	    frm["client"].value = '';
+	    frm["created"].value = '';
+	    frm["modified"].value = '';
+	    frm["dbhost"].value = '#default_dbhost#';
+	    frm["dbdb"].value = 'dns';
+	    frm["dbuser"].value = 'mail';
+	    frm["dbpass"].value = 'activate';
+	    frm["active"].checked = true;
+	    frm["exec"].value = 'new_zone';
+
+       document.getElementById('NewZone').style.display = 'none';
+       document.getElementById('SaveZone').style.display= 'block';
+
+	    frm.domain.focus();
+	    return true;
+	 }
+	 function saveZone() {
+	    if (document.forms[0].exec.value != 'new_zone') {
+  	       document.forms[0].exec.value = 'save_zone';
+	    }
+       document.getElementById('SaveZone').style.display = 'none';
+
+	    setTimeout('document.forms[0].submit();', 150);
+
+	    return true;
+	 }
+	 function deleteZone() {
+	    OK = confirm("Are you sure you want to delete this\nzone and all related records?");
+
+	    if (OK) {
+	       document.forms[0].exec.value = 'delete_zone';
+	       setTimeout('document.forms[0].submit();', 150);
+	       return true;
+	    } else {
+	       return false;
+	    }   
+	 }
+    function upTablename(tname) {
+       newname = tname.replace(/\W/g, '_');
+       document.forms[0].tablename.value = newname;
+       setTimeout('document.forms[0].client.focus();',50);
+
+    }
+    function doChange(who) {
+       if (who == 'zone') {
+          flash = 1;
+          doFlash("SaveZone", 1);
+          document.getElementById('NewZone').style.display = 'none';
+          document.getElementById('SaveZone').style.display= 'block';
+       }
+       if (who == 'record') {
+          flash = 1;
+          doFlash("SaveRecord", 1);
+          document.getElementById('NewRecord').style.display = 'none';
+          document.getElementById('SaveRecord').style.display= 'block';
+       }   
+    }
+      </script>
+      <style type="text/css">
+            BODY {
+               font-size:10px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .HEADER {
+               font-size:14px;
+	       font-weight: bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .MAIN {
+               font-size:11px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIXED {
+               font-size:11px;
+               font-family:Courier New,Courier,LucidaConsole,Fixedsys;
+               color:#000000;
+            }
+            #NewZone {
+               position: relative;
+               display: block;
+            }   
+            #SaveZone {
+               position: relative;
+               display: none;
+            }   
+            #DeleteZone {
+               background-color: #d0d0d0;
+               position: relative;
+               display: block;
+            }   
+            #NewRecord {
+               position: relative;
+               display: block;
+               width: 80px;
+            }   
+            #SaveRecord {
+               position: relative;
+               display: none;
+               font-weight: bold;
+               width: 80px;
+            }   
+            #DeleteRecord {
+               position: relative;
+               display: block;
+               width: 80px;
+            }  
+            .btnbtn {
+               margin: 0px;
+               padding: 0px;
+               font-size: 10px;
+               width: 90px;
+               height: 28px;
+               border-top: 3px double #eeeeee;
+               border-left: 3px double #eeeeee;
+               border-bottom: 3px double #303030;
+               border-right: 3px double #303030;
+            }
+            .btn {
+               margin: 0px;
+               padding: 0px;
+               background-color: #eeeeee;
+               color: #000000;
+            }
+            .btnflash {
+               color: #ffffff;
+               font-weight: bold;
+               backgroundColor: #990000;
+            }
+            .btnunflash {
+               color: #000000;
+               font-weight: bold;
+               backgroundColor: #eeeeee;
+            }   
+      </style>
+   </head>
+   <body background="" bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#000099" alink="#ff0000" class="MAIN" onLoad="#alert#">
+      <form name="dns" action="dns.cgi" method="POST">
+         <input type='hidden' name='exec' value=''>
+	 <center>
+          <table border='1' cellpadding='4' cellspacing='1' bgcolor='#d0d0d0'>
+	     <tr>
+	        <td colspan='2' bgcolor='#660088'><span class='HEADER' style='color:white;background-color:#660088;'>DNS Settings for named server on #dbserver#.pimp.net</span></td>
+             </tr>
+	     <tr>
+	        <td valign='top'>
+		   <table border='0' cellpadding='2' cellspacing='0'>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>DNS Server:</td>
+		         <td><select name='dbserver' onChange="document.forms[0].exec.value='change_server'; setTimeout('document.forms[0].submit();', 150);" class='MAIN' style='width:175px;'>
+			    <option value='ns'#dbserver_ns#>Pimp.Net Primary DNS</option>
+			    <option value='www'#dbserver_www#>Pimp.Net Secondary DNS</option>
+			    <option value='netoasis'#dbserver_netoasis#>NetOASIS.Net DNS</option>
+			    <option value='hamster'#dbserver_hamster#>IAI Production DNS</option>
+			    <option value='maila'#dbserver_maila#>IAI Secondary DNS</option>
+			    <option value='dev'#dbserver_dev#>IAI Internal DNS</option>
+			    </select></td>
+		      </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>Zones:</td>
+		         <td><select name='zone' onChange="document.forms[0].submit();" class='MAIN' style='width:175px;'>#zones#</select></td>
+		      </tr>
+		      <tr>
+	                 <td valign='top' align='right'><span class='MAIN'>Records:</span></td>
+		         <td><select name='rr' size='25' class='MAIN' onChange="fillForm(this.options[this.selectedIndex].value);" style='width:175px;'>#rrs#</select></td>
+                      </tr>
+                   </table>
+		</td>
+		<td align='left' valign='top' style="padding: 4px;">
+		   <table border='0' cellpadding='3' cellspacing='2'>
+		      <tr><td align='left' colspan='4'><span class='HEADER'>Zone Details for #domain#</td><td rowspan='15' style='width:30px;'>&nbsp;</td></tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>Domain:</td>
+		         <td colspan='3'><input type='text' name='domain' value="#domain#" size='50' class='MAIN' onchange="upTablename(this.value); doChange('zone');"></td>
+		      </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>Table:</td>
+		         <td colspan='3'><input type='text' name='tablename' value="#tablename#" size='50' onchange="doChange('zone');" class='MAIN'></td>
+		      </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>Owner:</td>
+		         <td><input type='text' name='client' value="#client#" size='20' onchange="doChange('zone');" class='MAIN'></td>
+               <td align='right'><input type='checkbox' name='active' onchange="doChange('zone');" value='1'#active#></td>
+               <td><span class='MAIN'>Active</span></td>
+		      </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>Created:</td>
+		         <td><input type='text' name='created' value="#created#" size='20' onchange="doChange('zone');" style='background-color:#c0c0c0;color:#303030;' class='MAIN'></td>
+	                 <td align='right'><span class='MAIN'>Last Modified:</td>
+		         <td><input type='text' name='modified' value="#modified#" size='20' onchange="doChange('zone');" style='background-color:#c0c0c0;color:#303030;' class='MAIN'></td>
+	              </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>DB Host:</td>
+		         <td><input type='text' name='dbhost' value="#dbhost#" size='20' onchange="doChange('zone');" style='background-color:#c0c0c0;color:#303030;' class='MAIN'></td>
+	                 <td align='right'><span class='MAIN'>DB Database:</td>
+		         <td><input type='text' name='dbdb' value="#dbdb#" size='20' onchange="doChange('zone');" style='background-color:#c0c0c0;color:#303030;' class='MAIN'></td>
+	              </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>DB User:</td>
+		         <td><input type='text' name='dbuser' value="#dbuser#" size='20' onchange="doChange('zone');" style='background-color:#c0c0c0;color:#303030;' class='MAIN'></td>
+	                 <td align='right'><span class='MAIN'>DB Password:</td>
+		         <td><input type='password' name='dbpass' value="#dbpass#" size='20' onchange="doChange('zone');" style='background-color:#c0c0c0;color:#303030;' class='MAIN'></td>
+	              </tr>
+             <tr style='border-top:1px solid white'>
+                <td colspan='2'>
+                   <div id='recbtns' style='width:50%;'>
+                     <span id='NewZone' class='btn'><input type='button' id='NewZoneBtn' value='New Zone' onClick="newZone();" class='btnbtn'></span>
+                     <span id='SaveZone' style='display:none;' class='btn'><input type='button' id='SaveZoneBtn' value='Save Zone' onClick="saveZone();" class='btnbtn' style='font-weight:bold;'></span>
+                   </div>
+                </td>
+                <td align='right' style='background-color:#d0d0d0;' colspan='3'>
+                   <div id='recbtns' style='width:50%;background-color:#d0d0d0;'>
+                     <span id='DeleteZone' class='btn'><input type='button' id='DeleteZoneBtn' value='Delete Zone' onClick="deleteZone();" class='btnbtn'></span>
+                   </div>
+                </td>
+             </tr>
+<!--		      <tr>
+		         <td align='right' colspan='4' NOWRAP><div id='zonebtns' style='position:relative;text-align:right;width:100%;'><span id='DeleteZone' class='btn'><input type='button' value='Delete Zone' id='DeleteZoneBtn' onClick="deleteZone();" class='btnbtn'></span><span id='NewZone' class='btn'><input type='button' value='New Zone' id='NewZoneBtn' onClick="newZone();" class='btnbtn'></span><span id='SaveZone' style='display:none;' class='btn'><input type='button' value='Save Zone' id='SaveZoneBtn' onClick="saveZone();" class='btnbtn'></span></div></td>
+		      </tr>
+-->		   </table>
+		   <hr>
+		   <table border='0' cellpadding='3' cellspacing='2' width='100%'>
+		      <tr><td align='left' colspan='2'><span class='HEADER'>Record Details:</td></tr>
+		      <tr>
+	            <td align='right'><span class='MAIN'>Name:</td>
+		         <td><input type='hidden' name='recordID' value='#recordID#'><input type='text' name='NAME' value="#NAME#" size='50' onchange="doChange('record');" class='MAIN'></td>
+		      </tr>
+		      <tr>
+	            <td align='right'><span class='MAIN'>Type:</td>
+		         <td class='MAIN'>
+			    <select name='RDTYPE' onchange="doChange('record'); if (this.options[this.selectedIndex].value=='MX') { document.forms[0].RDATA.value='10 mail.#domain#.'; }" class='MAIN'> 
+			       <option value='A'#RDTYPE_A#>A</option>
+			       <option value='CNAME'#RDTYPE_CNAME#>CNAME</option>
+			       <option value='MX'#RDTYPE_MX#>MX</option>
+			       <option value='NS'#RDTYPE_NS#>NS</option>
+			       <option value='PTR'#RDTYPE_PTR#>PTR</option>
+			       <option value='PTR'#RDTYPE_TXT#>TXT</option>
+			       <option value='SOA'#RDTYPE_SOA#>SOA</option>
+			    </select>
+            <span class='MAIN' style='padding-left:10px;'>TTL:</span>
+		      <input type='text' name='TTL' value="#TTL#" size='11' maxlength='11' onchange="doChange('record');" class='MAIN'>
+			 </td>
+		      </tr>
+		      <tr>
+	                 <td align='right'><span class='MAIN'>Data:</td>
+		         <td><input type='text' name='RDATA' value="#RDATA#" size='50' onchange="doChange('record');" class='MAIN'></td>
+		      </tr>
+             <tr style='border-top:1px solid white'>
+                <td>
+                   <div id='recbtns' style='width:50%;'>
+                     <span id='NewRecord' class='btn'><input type='button' id='NewRecordBtn' value='New Record' onClick="doNew();" class='btnbtn'></span>
+                     <span id='SaveRecord' style='display:none;' class='btn'><input type='button' id='SaveRecordBtn' value='Save Record' onClick="doSave();" class='btnbtn' style='font-weight:bold;'></span>
+                   </div>
+                </td>
+                <td align='right'>
+                   <div id='recbtns' style='width:50%;'>
+                     <span id='DeleteRecord' class='btn' style='padding-right:10px;'><input type='button' id='DeleteRecordBtn' value='Delete Record' onClick="doDelete();" class='btnbtn'></span>
+                   </div>
+                </td>
+             </tr>
+<!--		      <tr>
+		         <td align='right' colspan='2' NOWRAP><div id='recbtns' style='width:100%;float:right;text-align:right;'><span id='DeleteRecord' class='btn'><input type='button' id='deleterecordbtn' value='delete record' onclick="dodelete();" class='btnbtn'></span><span id='newrecord' class='btn'><input type='button' id='NewRecordBtn' value='New Record' onClick="doNew();" class='btnbtn'></span><span id='SaveRecord' style='display:none;' class='btn'><input type='button' id='SaveRecordBtn' value='Save Record' onClick="doSave();" class='btnbtn'></span></div></td>
+		      </tr>
+-->
+		   </table>
+		</td>
+	     </tr>
+	  </table>
+	  </center>
+      </form>
+   </body>
+</html>
+
+

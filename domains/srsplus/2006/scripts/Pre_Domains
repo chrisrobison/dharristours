@@ -1,0 +1,197 @@
+#!/usr/bin/perl
+
+#$domains = checkDomain($in{'Domain'});
+my $col = 1;
+my $domains = getNames($in{'Domain'});
+
+$dat{'domains'} = "<tr>";
+$dat{'domains'} .= "<td NOWRAP><input type='checkbox' name='Domains' value='$in{'Domain'}$in{'TLD'}' CHECKED><span style='font-weight:bold;vertical-align:text-top;padding-left:3px;' class='MAIN AVAILABLE'>".$in{'Domain'}.$in{'TLD'}."</span></td><td align='right'><span class='MAIN' style='padding-right:4px;'>\$14.95</span></td>";
+
+foreach my $dm (sort(keys(%{$domains}))) {
+   next if (!$domains->{$dm}->{'com'});
+   if (!$response[0]) {
+      $dat{'domains'} .= "<td NOWRAP><input type='checkbox' name='Domains' value='$dm.com'><span style='font-weight:bold;vertical-align:text-top;padding-left:3px;' class='MAIN AVAILABLE'>$dm.com</span></td><td align='right'><span class='MAIN' style='padding-right:4px;'>\$14.95</span></td>";
+   } else {
+         $dat{'domains'} .= "<td NOWRAP><img src='/img/unavail.png' width='15' height='15' style='padding-left:3px;padding-right:3px;'><span class='MAIN' style='padding-left:3px;color:#707070;'>$dm.com</span></td><td align='right'><span class='MAIN' style='font-weight:bold;color:#707070;padding-right:4px;'>Unavailable</span></td>";
+   }
+   ++$col;
+   ++$cnt;
+   if ($col > 1) {
+      $col = 0;
+      $dat{'domains'} .= "</tr>\n<tr>";
+   }
+   last if ($cnt > 14);
+}
+
+$dat{'domains'} .= "</tr>";
+
+my $t = $in{'TLD'};
+$t =~ s/^\.//;
+
+$dat{'TLD_'.$t} = " SELECTED";
+
+sub checkDomain {
+   my $domain = shift @_;
+   use Net::DLookup;
+
+   my @tld = ('com','net','org','biz','info','us');
+#   my @tld = ('com','net','org','biz','info','us');
+   my @result = ('AVAILABLE', 'UNAVAILABLE');
+
+   #
+   # Initialize Net::DLookup object
+   #
+   my $lookup = Net::DLookup->new;
+   my $domains = {};
+   my($dom, $tld) = split(/\./, $domain);
+   my $col = 0;
+
+   $dat{'domains'} = "<tr>";
+   
+   foreach my $t (@tld) {
+      next if ($t eq $in{'TLD'});
+      #
+      # Check domain name validity and assign it to the object
+      #
+      @errors = $lookup->IsValid($dom.'.'.$t);
+
+      #
+      # Store availability in hashref
+      #
+      @response = $lookup->DoWhois(0);
+      $domains->{$dom} = { } if (!exists $domains->{$dom});
+      $domains->{$dom}->{$t} = (!$response[0]) ? 1 : 0;
+      
+      $checked = ($in{'TLD'} =~ /$t/i) ? ' CHECKED' : '';
+
+      if (!$response[0]) {
+         $dat{'domains'} .= "<td NOWRAP><input type='checkbox' name='Domains' value='".$dom.'.'.$t."'$checked><span style='font-weight:bold;vertical-align:text-top;padding-left:3px;' class='MAIN AVAILABLE'>".$dom.'.'.$t."</span></td><td align='right'><span class='MAIN' style='padding-right:4px;'>\$14.95</span></td>";
+      } else {
+            $dat{'domains'} .= "<td NOWRAP><img src='/img/unavail.png' width='15' height='15' style='padding-left:3px;padding-right:3px;'><span class='MAIN' style='padding-left:3px;color:#707070;'>".$dom.'.'.$t."</span></td><td align='right'><span class='MAIN' style='font-weight:bold;color:#707070;padding-right:4px;'>Unavailable</span></td>";
+      }
+      ++$col;
+      
+      if ($col > 1) {
+         $dat{'domains'} .= "</tr>\n<tr>";
+         $col = 0;
+      }
+
+   }
+   $dat{'domains'} .= "</tr>";
+
+   return $domains;
+}
+
+sub SRSLookup {
+   use DotSRS_Client;
+
+   $tld = $dbh->selectcol_arrayref("select TLD from TLD where (AutoCheck!=0 and AutoCheck<3) order by Priority, AutoCheck");
+   $in{'TLD'} =~ s/^\.//;
+
+   $domchk = {};
+
+   foreach $t (@{$tld}) {
+      $t =~ s/^\.//;
+      next if ($t =~ /$in{'TLD'}/i);
+      
+      ++$cnt;
+      $domchk->{"DOMAIN $cnt"} = $in{'Domain'};
+      $domchk->{"TLD $cnt"} = $t;
+   }
+
+   my $cached = $dbh->prepare("select * from Cache where Domain='$in{'Domain'}'");
+   my $ref = {};
+
+   if ($cached->rows) {
+      $cached->execute();
+      my $cnt = 0;
+      while ($rec = $cached->fetchrow_hashref) {
+         ++$cnt;
+         $ref->{'DOMAIN '.$cnt} = $rec->{'Domain'};
+         $ref->{'TLD '.$cnt} = $rec->{'TLD'};
+         $ref->{'PRICE '.$cnt} = $rec->{'Price'};
+      }
+   } else {
+      my $srs_client = new DotSRS_Client;
+      $ref = $srs_client->multidomain_info($domchk);
+   }
+
+   my $col = 0;
+   $dat{'domains'} = "<tr>";
+   use Data::Dumper;
+   print "<pre>".Dumper($ref)."</pre>" if $debug;
+
+   foreach my $c (1..$cnt) {
+      if ($ref->{'DOMAIN STATUS '.$c} =~ /fixed/i) {
+         $dat{'domains'} .= "<td><span class='MAIN'><input type='checkbox' name='".$ref->{'DOMAIN '.$c}.".".$ref->{'TLD '.$c}."' value='true'>".$ref->{'DOMAIN '.$c}.".".$ref->{'TLD '.$c}."</span></td>";
+         ++$col;
+      }
+      if ($col > 2) {
+         $dat{'domains'} .= "</tr>\n<tr>";
+         $col = 0;
+      }
+   }
+   $dat{'domains'} .= "</tr>";
+}
+
+sub getNames {
+   my $url = shift @_;
+   my $url2 = shift @_;
+
+   my ($dom, $tld, $avail, $i);
+   my $domain = { };
+
+   use WWW::Mechanize;
+   my $agent = WWW::Mechanize->new();
+   $agent->agent("Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.5) Gecko/20030916");
+   $agent->get("http://www.nameboy.com/");
+   $agent->form(1);
+   my $html = $agent->current_form();
+
+   $agent->field('primary', $url);
+   $agent->field('secondary', $url2) if ($url2);
+
+   my $clicked = 0;
+   eval {
+      $results = $agent->click('go nameboy go!');
+      $clicked = 1;
+   };
+   $results = $agent->click() if ($clicked != 1);
+
+   while ($results->{'_rc'} == 302) {
+      $results = $agent->get($results->{_headers}->{location});   
+   }
+   
+   $x = $$;
+   open(TMP, ">/tmp/$x.html");
+      print TMP $results->{'_content'};
+   close TMP;
+   open(WWW, "/usr/local/bin/lynx -width 220 -dump /tmp/$x.html |");
+      while (my $www = <WWW>) {
+         next if ($www !~ /com|net|org/);
+         next if ($www !~ /biz/);
+         $www =~ s/^\s*//;
+         if ($www =~ /^(\w+)\s+/) {
+            $dom = $1;
+         }
+         $domain->{$dom} = { };
+         @items = split(/\s\s+/, $www);
+         foreach $i (@items) {
+            if ($i =~ /\[\d+\](\w+)/) {
+               $tld = $1;
+               $avail = 0;
+            } elsif ($i =~ /(\w+)\s\[_\]/) {
+               $tld = $1;
+               $avail = 1;
+            }
+            next if (($tld eq 'Intl'));
+            
+            $domain->{$dom}->{$tld} = $avail;
+         }
+      }
+   close WWW;
+   
+   unlink("/tmp/$$.html");
+   
+   return $domain;
+}

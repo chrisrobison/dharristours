@@ -1,0 +1,138 @@
+------=_Part_6882540_96267105.1581808538634
+Content-Type: multipart/related;
+	boundary="----=_Part_6882541_1922991769.1581808538634"
+
+------=_Part_6882541_1922991769.1581808538634
+Content-Type: multipart/alternative;
+	boundary="----=_Part_6882542_304027484.1581808538634"
+
+------=_Part_6882542_304027484.1581808538634
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hello Patrick Peterson,
+
+You have paid invoice #000002 from Law Office of Nicholas G. Soter for $2,010.00.
+
+
+------=_Part_6882542_304027484.1581808538634
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Square</title>
+<!--[if mso]>  <style type="text/css" data-premailer="ignore">
+    .codelink a { color: #343B42; text-decoration: none }
+    a { color: #343B42; text-decoration: none }
+    .button td { background-color: #343B42 }
+    .nomso { display: none; font-size: 0; line-height: 0 }
+    table { font-size: 1px; line-height:0; mso-margin-top-alt: 1px; }
+    table.MsoNormalTable { font-family: esqmarket, Helvetica, sans-serif }
+    .durv { line-height: 14px !important }
+  </style><![endif]--><!--[if !mso]><!--><style type="text/css" data-premailer="ignore">@font-face { font-family: "esqmarket"; src: url("https://dl6rt3mwcjzxg.cloudfront.net/assets/sqmarket/sqmarket-regular.woff") format("woff"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "esqmarket-medium"; src: url("https://dl6rt3mwcjzxg.cloudfront.net/assets/sqmarket/sqmarket-medium.woff") format("woff"); font-weight: 600; font-style: normal; }
+</style>
+<!--<![endif]--><style type="text/css" data-premailer="ignore">a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+
+#hero a { color: #ffffff; }
+
+body { width: 100% !important; margin: 0 auto !important; padding: 0; }
+
+table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+
+@media only screen and (min-width: 281px) { #container { position: relative; top: 0; left: 0; right: 0; bottom: 0; } }
+div[style*="margin: 16px 0"] { margin:0 !important; }
+@media screen and (min-width: 281px) and (max-width: 599px) and (-webkit-min-device-pixel-ratio: 0) {#container .fullWidth a { display: block !important; }
+#container .column { width: inherit !important; }
+#container .column .embiggen { width: 420px !important; max-width: 420px !important; }
+#container .column .embiggen .list td:first-child { width: inherit !important; }
+#container .column .embiggen .list td:last-child { width: 500px !important; }
+#container .column .embiggen .button td { width: inherit !important; }
+#container .column .embiggen img { max-width: 100% !important; }
+}</style>
+<style type="text/css">
+body {
+background: #F5F6F7; margin: 0;
+}
+</style>
+</head>
+<body style="background-color: #F5F6F7;margin: 0" bgcolor="#F5F6F7">
+<!--[if !mso]><!--><div id="preheader" style="font-size: 0;max-height: 0;overflow: hidden;display: none">Patrick Peterson paid invoice #000002  from Law Office of Nicholas G. Soter.</div>
+<!--<![endif]--><div id="container" style="-webkit-text-size-adjust: none;-ms-text-size-adjust: none;-webkit-font-smoothing: antialiased"><table class="contained" style="table-layout: fixed" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><table bgcolor="#222222"  cellpadding="0" cellspacing="0"><tr><td width="500" align="center" bgcolor="#ffffff"><table  cellpadding="0" cellspacing="0"><tr><td>
+<table style="background-color: #2D3C48" width="100%" class="single invert" bgcolor="#2D3C48" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding: 0 20px"><table  cellpadding="0" cellspacing="0"><tr><td width="520" style="padding: 32px 0 0px" class="singleCell"><table width="100%" class="center" style="text-align: center" cellpadding="0" cellspacing="0">
+<tr><td align="center" class="icon"><table width="inherit" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td style="padding: 0px 0 8px"><img src="https://clinton-production-f.squarecdn.com/default-merchant-logo.png" width="64" height="64" alt="Image" style="display: inline-block;-webkit-border-radius: 11px;-moz-border-radius: 11px;border-radius: 11px;border: 3px solid #ffffff"></td></tr></table></td></tr>
+<tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;color: #ffffff;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600;font-size: 16px;line-height: 24px;padding: 0px 0 13px" class="h2 center " align="center">Law Office of Nicholas G. Soter</td></tr></table></td></tr>
+<tr><td align="center"><div style="width: 0;height: 0;border-left-width: 11px;border-left-color: transparent;border-left-style: solid;border-right-width: 11px;border-right-color: transparent;border-right-style: solid;border-bottom-width: 11px;border-bottom-color: #ffffff;border-bottom-style: solid"></div></td></tr>
+</table></td></tr></table></td></tr></table>
+<table style="background-color: #ffffff" width="100%" class="single " bgcolor="#ffffff" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding: 0 20px"><table  cellpadding="0" cellspacing="0"><tr><td width="400" style="padding: 32px 0 0px" class="singleCell"><table width="100%" class="left" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td align="center"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="font-size: 16px;line-height: 24px;text-align: center;color: #ADB1B5;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;padding: 0px 0 8px" class="p faint center " align="center">Invoice Paid</td></tr></table></td></tr></table></td></tr></table></td></tr></table>
+<hr class="separator" style="width: 32px;height: 1px;background-color: #D5D7D9;border: 0px">
+<table style="background-color: #ffffff" width="100%" class="single " bgcolor="#ffffff" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding: 0 20px"><table  cellpadding="0" cellspacing="0"><tr><td width="400" style="padding: 0px 0 8px" class="singleCell"><table width="100%" class="left" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td align="center"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600;font-size: 44px;line-height: 48px;padding: 8px 0 0px" class="h1 center " align="center">$2,010.00</td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="color: #4ab300;font-size: 16px;line-height: 24px;text-align: center;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;padding: 8px 0 0px" class="p center " align="center">Paid on February 15, 2020</td></tr></table></td></tr><tr><td style="padding: 24px 0 0"></td></tr><tr><td class="separator" style="border-top-width: 1px;border-top-color: #D5D7D9;border-top-style: solid"></td></tr>
+<tr><td style="padding: 24px 0 0"></td></tr>
+<tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600" class="h3 left " align="left"></td></tr></table></td></tr><tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600" class="h3 left " align="left">Invoice #000002</td></tr></table></td></tr><tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p left " align="left">February 15, 2020</td></tr></table></td></tr><tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600;padding: 24px 0 0px" class="h3 left " align="left">Bill To</td></tr></table></td></tr>
+<tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p left " align="left">Patrick Peterson</td></tr></table></td></tr>
+<tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p left " align="left"></td></tr></table></td></tr>
+<tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p left " align="left"><a href="mailto:juanaharrisdht@att.net" id="p-2" style="text-decoration: none;color: #2996cc">juanaharrisdht@att.net</a></td></tr></table></td></tr>
+<tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p left " align="left"></td></tr></table></td></tr><tr><td style="padding: 24px 0 0"></td></tr><tr><td class="separator" style="border-top-width: 1px;border-top-color: #D5D7D9;border-top-style: solid"></td></tr><tr><td align="left"><table width="100%" style="text-align: left" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: left;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;padding: 24px 0 0px" class="p left " align="left">We appreciate your business.</td></tr></table></td></tr>
+<tr><td style="padding: 24px 0 0"></td></tr>
+<tr><td class="separator" style="border-top-width: 1px;border-top-color: #D5D7D9;border-top-style: solid"></td></tr><tr><td ><table class="tabDat" style="text-align: left" cellpadding="0" cellspacing="0"><tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 24px 0 0px" class="key text p" valign="top"><div style="padding-right: 20px"><b style="color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600">Peterson Billing Statement</b></div></td>
+<td width="70" style="text-align: right;padding: 24px 0 0px;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top">$2,010.00</td>
+</tr><tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 24px 0 0px" class="key text p" valign="top"><div style="padding-right: 20px"></div></td>
+<td width="70" style="text-align: right;padding: 24px 0 0px;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top"></td>
+</tr>
+<tr style="vertical-align: top">
+<td class="separator" style="border-top-width: 1px;border-top-color: #D5D7D9;border-top-style: solid;vertical-align: top" valign="top"></td>
+<td class="separator" style="border-top-width: 1px;border-top-color: #D5D7D9;border-top-style: solid;vertical-align: top" valign="top"></td>
+</tr>
+<tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 0px 0 24px" class="key text p" valign="top"><div style="padding-right: 20px"></div></td>
+<td width="70" style="text-align: right;padding: 0px 0 24px;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top"></td>
+</tr><tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 0px 0" class="key text p" valign="top"><div style="padding-right: 20px">Subtotal</div></td>
+<td width="70" style="text-align: right;padding: 0px 0;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top">$2,010.00</td>
+</tr><tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 8px 0 0px" class="key text p" valign="top"><div style="padding-right: 20px"></div></td>
+<td width="70" style="text-align: right;padding: 8px 0 0px;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top"></td>
+</tr>
+<!-- TODO : spacing after sales tax is 30 instead of 24. Probably need a when_additive_tax_or_tip or something...--><tr style="vertical-align: top">
+<td width="450" style="color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600;font-size: 16px;line-height: 24px;vertical-align: top;padding: 0px 0" class="key text h2" valign="top"><div style="padding-right: 20px">Total Paid</div></td>
+<td width="70" style="text-align: right;padding: 0px 0;white-space: nowrap;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600;font-size: 16px;line-height: 24px;vertical-align: top" class="value text h2" align="right" valign="top">$2,010.00</td>
+</tr><tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 24px 0 0px" class="key text p" valign="top"><div style="padding-right: 20px"></div></td>
+<td width="70" style="text-align: right;padding: 24px 0 0px;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top"></td>
+</tr>
+</table></td></tr>
+<tr><td ><table class="tabDat" style="text-align: left" cellpadding="0" cellspacing="0"><tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 0px 0" class="key text p" valign="top"><div style="padding-right: 20px">MASTERCARD 8195</div></td>
+<td width="70" style="text-align: right;padding: 0px 0;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top">02/15/20, 3:15 PM</td>
+</tr>
+<tr style="vertical-align: top">
+<td width="450" style="font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top;padding: 24px 0 0px" class="key text p" valign="top"><div style="padding-right: 20px"></div></td>
+<td width="70" style="text-align: right;padding: 24px 0 0px;white-space: nowrap;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;vertical-align: top" class="value text p" align="right" valign="top"></td>
+</tr></table></td></tr></table></td></tr></table></td></tr></table>
+<table style="background-color: #F5F6F7" width="100%" class="single " bgcolor="#F5F6F7" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding: 0 20px"><table  cellpadding="0" cellspacing="0"><tr><td width="400" style="padding: 32px 0" class="singleCell"><table width="100%" class="center" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600" class="h3 center " align="center">Send estimates or invoices for your business?</td></tr></table></td></tr>
+<tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;padding: 0px 0 8px" class="p center " align="center">Process $1,000 in sales free when you sign up for Square.</td></tr></table></td></tr>
+<tr><td style="padding: 24px 0 0"></td></tr>
+<tr><td align="center"><table class="button" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="280" align="center" style="background-color: #2D3C48;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;font-size: 16px;line-height: 26px;text-align: center" bgcolor="#2D3C48"><a href="https://a.squareupmessaging.com/CL0/https:%2F%2Fsquareup.com%2Ft%2Ff_referrals%2Fd_confirmation%2Fp_invoices%3Froute=signup%2Fus%3Fv=invoices%26product=invoices%26signup_token=A378A036AA/1/010101704b22d43b-d3617ba5-a506-4895-bd63-fc36535883ef-000000/QAh0SyD8vdWOV8lPWWNzWq5m_1RRocrXxj4AfmuSbjQ=128" style="background-color: #2D3C48;padding: 8px 24px;border-color: #2D3C48;border-style: solid;border-width: 1px;text-decoration: none;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;color: #ffffff;display: block">Get Started</a></td></tr></table></td></tr>
+<tr><td style="padding: 24px 0 0"></td></tr>
+<tr><td class="separator" style="border-top-width: 1px;border-top-color: #D5D7D9;border-top-style: solid"></td></tr>
+<tr><td style="padding: 24px 0 0"></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket-medium, Helvetica, sans-serif;font-weight: 600" class="h3 center " align="center">Law Office of Nicholas G. Soter</td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p center " align="center">459 Fulton Street</td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p center " align="center">Suite 300, SAN FRANCISCO, CA 94102 United States</td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p center " align="center"><a href="mailto:nsoter@earthlink.net" id="p-6" style="text-decoration: none;color: #2996cc">nsoter@earthlink.net</a></td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p center " align="center">415-355-1941</td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal" class="p center " align="center">© 2020 Square, Inc.</td></tr></table></td></tr><tr><td align="center"><table width="100%" style="text-align: center" cellpadding="0" cellspacing="0"><tr><td width="" style="text-align: center;font-size: 14px;line-height: 22px;color: #343B42;font-family: esqmarket, Helvetica, sans-serif;font-weight: normal;padding: 0px 0 8px" class="p center " align="center">
+<a href="https://a.squareupmessaging.com/CL0/https:%2F%2Fsquareup.com%2Fus%2Fen%2Fprivacy/1/010101704b22d43b-d3617ba5-a506-4895-bd63-fc36535883ef-000000/N5N55WJIhhyRRQ-mNAS_RA54OAC2YMo7UcxSytHl0lc=128" style="text-decoration: none;color: #2996cc">Square Privacy Policy</a> | <a href="https://a.squareupmessaging.com/CL0/https:%2F%2Fsquareup.com%2Fus%2Fen%2Fsecurity/1/010101704b22d43b-d3617ba5-a506-4895-bd63-fc36535883ef-000000/lQTVy75v9ad79tGAHdhq1DAraW3zuCigCuHRW4tU9CY=128" style="text-decoration: none;color: #2996cc">Security</a>
+</td></tr></table></td></tr>
+<tr><td align="center"><img src="https://d1g145x70srn7h.cloudfront.net/images/email/jewel-grey-22.png" width="22" height="22" style="display: block"></td></tr>
+</table></td></tr></table></td></tr></table>
+</td></tr></table></td></tr></table></td></tr></table></div>
+<img alt="" src="http://a.squareupmessaging.com/CI0/010101704b22d43b-d3617ba5-a506-4895-bd63-fc36535883ef-000000/eEMnGSJABQIZ0FBip5f92I7Fv-IT3LTqe-FggeIxTw4=128" style="display: none; width: 1px; height: 1px;">
+</body>
+</html>
+
+------=_Part_6882542_304027484.1581808538634--
+
+------=_Part_6882541_1922991769.1581808538634--
+
+------=_Part_6882540_96267105.1581808538634--

@@ -1,0 +1,36 @@
+<?php
+require($_SERVER['DOCUMENT_ROOT'] . '/lib/boss_class.php'); 
+require 'Services/Twilio.php';
+
+$boss= new boss($_SERVER['HTTP_HOST']);
+$in = $_REQUEST;
+
+$response = new Services_Twilio_Twiml();
+
+$gather = $response->gather(array(
+	'action' => 'http://'.$_SERVER['HTTP_HOST'].'/apps/notify/log-response.php?id='.$_GET['id'],
+	'method' => 'GET',
+	'numDigits' => '1'
+));
+
+$notify = $boss->getObject("Notify", $_GET['id']);
+file_put_contents("/tmp/notify.log", json_encode($notify), FILE_APPEND);
+
+$gather->say("Hello! This is the Simple Software confirmation system with the following important message: ");
+$gather->say($notify->Notify);
+$gather->say(". End of message...");
+
+if ($notify->Choice) {
+   $gather->say("This notification requires confirmation that it was received. Please choose from the following options:");
+   
+   $parts = preg_split("/\s*\,\s*/", $notify->Choice);
+   foreach ($parts as $part) {
+      list($key, $val) = preg_split("/\=/", $part);
+      $choices[$key] = $val;
+      $gather->say("Press $key for $val");
+   }
+}
+
+header('Content-Type: text/xml');
+print $response;
+?>

@@ -1,0 +1,423 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY>
+<A name=1></a><b>Perl API Reference for Linux </b><br>
+<b>Table of Contents </b><br>
+<b> </b><br>
+<b>Section Page </b><br>
+<b># </b><br>
+<b>1. Introduction ........................................................................... 1 <br>2. Development Tasks ................................................................ 1 <br>3. The API Toolkit....................................................................... 1 </b><br>
+<b>3.1 Organization ................................................................ 1 <br>3.2 Dependencies............................................................... 2 </b><br>
+<b>3.2.1 Perl 5.005 ................................................... 2 <br>3.2.2 OpenSSL...................................................... 2 <br>3.2.3 GnuPG ......................................................... 2 <br>3.2.4 Perl Modules ............................................... 2 </b><br>
+<b>4. Configuration ......................................................................... 3 </b><br>
+<b>4.1 Partner Configuration................................................... 3 <br>4.2 Server Configuration .................................................... 3 </b><br>
+<b>5. Method Reference .................................................................. 3 </b><br>
+<b>5.1 Query Methods............................................................. 3 </b><br>
+<b>account_balance .................................................. 4 <br>domain_info ......................................................... 4 <br>multidomain_info ................................................. 5 <br>whois ................................................................... 5 </b><br>
+<b>5.2 Contact Management Methods ..................................... 6 </b><br>
+<b>create_contact ..................................................... 6 <br>edit_contact ......................................................... 7 <br>get_contact_info .................................................. 7 </b><br>
+<b>5.3 Domain Registration and Manipulation Methods .......... 8 </b><br>
+<b>register_domain................................................... 8 <br>change_domain.................................................... 8 <br>release_domain.................................................... 9 <br>renew_domain ................................................... 10 </b><br>
+Page i <br>
+<hr>
+<A name=2></a><b>5.4 Nameserver Methods ................................................. 11 </b><br>
+<b>register_nameserver.......................................... 11 <br>release_nameserver........................................... 11 <br>get_nameserver_info ......................................... 12 </b><br>
+<b>5.5 Domain Transfer Methods .......................................... 12 </b><br>
+<b>request_transfer ................................................ 12 <br>outbound_transfer_response ............................. 13 <br>view_pending_transfers .................................... 13 </b><br>
+<b>6.  Testing and Certification ...................................................... 14 </b><br>
+<b>6.1 The Test Environment vs. the Production Environment .. 14 <br>6.2 Running the Certification Test.................................... 14 </b><br>
+<b>6.2.1 Logging Client Activity .............................. 14 <br>6.2.2 Running the Text Script ............................ 14 </b><br>
+<b>6.3 Switching Environments............................................. 15 </b><br>
+<b>7.  The Entire Integration Pathway ........................................... 15 <br>8. Next Steps............................................................................ 15 </b><br>
+Page ii <br>
+<hr>
+<A name=3></a><b>Perl API for Linux Reference </b><br>
+<b> </b><br>
+<b>1. Introduction <br></b>This document details specific information you will need to develop an SRS client for the Linux <br>operating system using Perl.  It is assumed at this point that you have read the Technical <br>
+Overview and Developer's Guide documents.  As you develop your SRS client, you will want to <br>
+have a copy of the Developer's Guide at hand since it details all the legal input and output <br>
+values for each SRS command.  We will not duplicate that information here since it is common <br>to all API versions.  Rather, we will focus on issues and features specific to the Perl API for <br>
+Linux. <br> <br><b>2. Development Tasks <br></b>The development of your SRS client will at a minimum involve the following steps: <br>
+· <br>
+Download and uncompress the Perl API Toolkit for Linux <br>
+· <br>
+Download, install and configure GnuPG, the Gnu Privacy Guard <br>(as documented in the Developer's Guide, section 5.1) <br>
+· <br>
+Download and install required 3rd party Perl modules and libraries. <br>
+· <br>
+Customize the API module with your configuration information (e.g., your partner ID, <br>your cryptographic key name and password, etc.)  <br>
+· <br>
+Create your client application/website. <br>
+· <br>
+Test your client. <br>
+· <br>
+Run the certification tests. <br>
+· <br>
+After passing certification, reconfigure the API module to use the SRS production (live) <br>
+server. <br>
+ <br>This Reference, along with supplemental material from the Developer's Guide, provides <br>
+detailed instructions for completing all the above steps, except for the creation of your custom <br>
+client.  We do provide many code examples that you can use as a base for your own <br>development efforts. <br> <br><b>3.  The API Toolkit <br></b>If you have not done so already, download the Perl API Toolkit for Linux<b> </b>from the Developer's <br>
+Library section of our website: <br>
+<A href="http://www.srsplus.com/en/srsplus/partners_dev_library.shtml">http://www.srsplus.com/en/srsplus/partners_dev_library.shtml <br></a> <br>
+Uncompress the archive contents to a directory of your choosing. <br> <br><b>3.1 Organization <br></b>The Toolkit is organized into the following directory structure: <br> <br>Toolkit <br>
+Contains readme and/or releasenotes files.  Read these files with a text <br>
+viewer for the latest information about the API. <br>
+Toolkit/docs <br>
+Contains a copy of this document and the Developer's Guide. <br>
+Toolkit/keys <br>
+Contains a keyblock file called SRS.KEY containing the SRS public keys for <br>importing into your GnuPG database with the "gpg ­-import SRS.KEY" <br>command. <br>
+Toolkit/examples <br>
+Contains an example script, certify.pl, that doubles as the certification <br>
+script. <br>
+Page 1  <br>
+<hr>
+<A name=4></a>Toolkit/source <br>
+Contains the single API module, DotSRS_Client.pm. <br>
+ <br>Be certain to copy the DotSRS_Client.pm file to a directory that is reachable by your scripts <br>
+(i.e., in an accessible path).  <br>
+ <br>
+<b>3.2 Dependencies <br></b>The Perl API for Linux requires additional components that are not part of the Toolkit <br>
+download.  All of these 3rd party components must be installed before using the API module.  <br>
+The required components are detailed in the following sections. <br> <br><b>3.2.1 Perl 5.005 <br></b>It is assumed that you are using a distribution of Linux that includes an appropriate Perl <br>
+interpreter installation.  The minimal version number supported by the API is 5.005. <br> <br><b>3.2.2 OpenSSL <br></b>The Perl API for Linux uses modules that depend on the OpenSSL library to perform SSL <br>operations.  OpenSSL is available for download at <A href="http://www.openssl.org/">http://www.openssl.org/.  T</a>he download <br>
+contains instructions for configuring and installing the OpenSSL library.  We also provide a <br>
+HOW-TO document on our website at: <br> <br>
+<A href="http://www.srsplus.com/en/srsplus/partners_faq_tech.shtml">http://www.srsplus.com/en/srsplus/partners_faq_tech.shtml.</a> <br>
+ <br><b>3.2.3 GnuPG <br></b>Follow the instructions in section 5.1 of the Developer's Guide for installing and configuring <br>
+GnuPG.  In particular, you need to create your public/private key pair and submit your public <br>key to <A href="mailto:registry@srsplus.com">registry@srsplus.com </a>as soon as practicable.  After your key submission is processed, <br>
+you will be sent back your partner ID, which is a vital piece of information.  You will need your <br>
+partner ID for configuring the API.  Without the partner ID, you will not be able to com-<br>municate with the SRS servers. <br> <br><b>3.2.4 Perl Modules <br></b>The DotSRS_Client module is dependent on a number of 3rd party Perl modules, all available <br>at <A href="http://www.cpan.org/">http://www.cpan.org/,</a> the Comprehensive Perl Archive Network.  The required modules <br>
+are: <br>
+· <br>
+Crypt-SSLeay-0.16 <br>
+· <br>
+GnuPG-Interface-0.09 <br>
+· <br>
+libwww-perl-5.48 <br>
+· <br>
+URI-1.06 <br>
+· <br>
+Class-MethodMaker-0.95 <br>
+ <br>Version numbers should be interpreted as minimum version numbers.  Some of these modules <br>may already be installed on your machine depending on your Linux distribution. <br>
+ <br><b>3.2.4.1 Installing Perl Modules <br></b>As a Perl developer, you should already be familiar with the two basic methods of installing <br>
+Perl modules: 1) Using the CPAN module, and 2) Manual installation.  The subject of module <br>
+procurement and installation is beyond the scope of this guide, but if you need a refresher <br>course, we provide a HOW-TO document on our website at: <br>  <br>
+<A href="http://www.srsplus.com/en/srsplus/partners_faq_tech.shtml">http://www.srsplus.com/en/srsplus/partners_faq_tech.shtml.</a>   <br>
+ <br>NOTE:  Each module upon which the API is dependant may have other internal dependencies.  <br>
+Using the CPAN module will automatically handle these for you.  If you choose to manually <br>
+Page 2  <br>
+<hr>
+<A name=5></a>install modules, remember that you may encounter these dependencies and will have to <br>
+handle them yourself.   <br> <br><b>4. Configuration <br></b>The API requires information about your public/private keypair and your partner ID in order <br>
+for API calls to succeed.  In addition, the API module needs to know where your trust database <br>
+is located (i.e., where GnuPG stores its keys). <br> <br><b>4.1 Partner Configuration <br></b>Before you run any Perl scripts, you will need to customize the partner information in the API <br>module file DotSrs_Client.pm.  All of the scalars you will need to modify are clearly identified <br>
+near the top of the file.  Specifically, you will need these four pieces of information: <br>
+· <br>
+The email name used when creating your public/private keypair in GnuPG. <br>
+· <br>
+The passphrase (i.e., password) for your private key. <br>
+· <br>
+Your partner ID, as given to you by SRSplus <br>
+· <br>
+The path to GnuPG's trust database.  This is the value to which you set the GNUPGHOME <br>
+environment variable when you installed GnuPG. <br>
+ <br>Edit the file DotSrs_Client.pm and make the following changes: <br>
+· <br>
+Enter the email name for your keypair as the value for $registrar_email <br>
+· <br>
+Enter the password for your private key as the value for $passphase <br>
+· <br>
+Enter your partner ID as the value for $registrar_id <br>
+· <br>
+Enter the path specified in the GNUPGHOME environment variable for $gpg_dir <br>
+ <br><b>4.2 Server Configuration <br></b>The scalar $test_mode determines which server environment the API will use.  When set to a <br>non-zero value, $test_mode routes all traffic to the test SRS server.  If $test_mode is zero, all <br>
+traffic will be sent to the production SRS server.  Section 6.3 below details the use of this <br>
+value as it relates to switching from the test environment to the production environment <i>after</i> <br>passing the certification tests.  For now, you should leave $test_mode equal to 1. <br> <br><b>5. Method Reference <br></b>Each SRS command has a corresponding method in the DotSRS_Client module.  You will need <br>
+to consult the SRS Command Reference in the Developer's Guide to determine legal input and <br>
+output parameters for the functions.  In the Developer's Guide, all parameters are referred to <br>
+as <b>strings</b> or lists of <b>name-value pairs</b>.  In the Perl API, these two types correspond directly <br>
+to the types scalar and associative array (i.e., hash).  As a Perl programmer, you should be <br>quite familiar with these types. <br>
+ <br>NOTE:  In the case of an error, often a descriptive error string will be available in the  <br>self-&gt;{'error'}member of the DotSRS_Client object.   An example use is included in the <br>
+example code for the contact methods below. <br><b>  </b><br>
+<b>5.1 Query Methods <br></b>These methods correspond directly to the SRS Query Commands.  Refer to section 4.2 of the <br>
+Developer's Guide for a detailed listing of legal input and output parameters. <br>
+Page 3  <br>
+<hr>
+<A name=6></a> <br><b>account_balance <br>Description: <br></b>Returns balance information from your partner account. <br> <br><b>Called as: <br></b>($status, \%balance_ref) = account_balance ($tld) <br> <br><b> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>($status, $ref) = $srs_client-&gt;account_balance('tv'); <br> <br>unless ($status){ <br>    print &quot;account_balance failed (status=$status)\n&quot;; <br>} <br>
+ <br>foreach $key (keys %{ $ref }) { <br>    print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>} <br> <br> <br><b>domain_info <br>Description: <br></b>Returns availability information for a specific domain name. <br> <br><b>Called as: <br></b>(\%info_ref) = domain_info ($domain, $tld) <br> <br><b> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>
+use DotSRS_Client; <br> <br>if( @ARGV){ <br>    $srs_client = new DotSRS_Client; <br> <br>    ($ref) = $srs_client-&gt;domain_info(shift @ARGV, 'tv'); <br> <br>    foreach $key (keys %{ $ref }) { <br> <br>
+print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+    } <br>} <br>else{ <br>    print &quot;Usage: dinfo &lt;domain&gt;\n&quot;; <br>
+} <br>
+<b> </b><br>
+Page 4  <br>
+<hr>
+<A name=7></a><b> <br>multidomain_info <br>Description: <br></b>Returns availability and pricing information for many domain names at once. <br> <br><b>Called as: <br></b>(\%info_ref) = multidomain_info (\%query_ref) <br> <br><b> <br>Example code: </b><br>
+<b> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>
+# create the object <br>$srs_client = new DotSRS_Client; <br> <br>$domain_ref = { <br>
+'DOMAIN 1' =&gt; 'domain-to-check1', <br>
+  <br>
+ <br>
+ <br>
+'TLD 1'    =&gt; 'tv', <br>'DOMAIN 2' =&gt; 'domain-to-check2', <br>
+  <br>
+ <br>
+ <br>
+'TLD 2'    =&gt; 'tv' <br>
+   <br>
+ <br>
+}; <br>
+($ref) = srs_client-&gt;multidomain_info($domain_ref); <br> <br>foreach $key (keys %{ $ref }) { <br>    print &quot;$key =&gt; &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+} <br><b> <br> <br>whois <br>Description: <br></b>Obtains domain name server and contact information for the given domain and TLD combination. <br> <br><b>Called as: <br></b>(\%info_ref) = whois ($domain, $tld) <br> <br><b> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>if( @ARGV ) <br>{ <br>    $srs_client = new DotSRS_Client; <br> <br>    ($ref) = $srs_client-&gt;whois( shift @ARGV, 'tv'); <br> <br>    foreach $key (keys %{ $ref }) { <br> <br>
+print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+    } <br>} <br>else{ <br>    print &quot;Usage: whois &lt;domain&gt;\n&quot;; <br>} <br>
+<b> </b><br>
+Page 5  <br>
+<hr>
+<A name=8></a><b>5.2 Contact Management Methods <br></b>These methods correspond directly to the SRS Contact Management Commands.  Refer to <br>
+section 4.3 of the Developer's Guide for a detailed listing of legal input and output parameters. <br>
+ <br><b>create_contact <br>Description: <br></b>Creates a new contact record and returns its unique ID.  A return value of 0 for $contact_id indicates an <br>error, in which case a descriptive string of the error(s) is then available in the  <br>self-&gt;{'error'} member of the DotSRS_Client object. (See example below) <br>
+ <br><b>Called as:   <br></b>($contact_id, $request_id) = create_contact($transaction_id, \%contact_ref) <br> <br><b> <br>Example code: <br> <br></b>#!/usr/bin/perl <br>
+use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>$contact_ref = { <br>    'TLD' =&gt; 'tv', <br>    'FNAME' =&gt; 'John', <br>    'LNAME' =&gt; 'Public', <br>    'ORGANIZATION' =&gt; 'John Q. Public Co.', <br>    'EMAIL' =&gt; 'johnq@public.com', <br>    'ADDRESS1' =&gt; '123 Main St.', <br>
+    'ADDRESS2' =&gt; 'Suite 100', <br>    'CITY'  =&gt; 'Metropolis', <br>    'PROVINCE' =&gt; 'CA', <br>    'POSTAL CODE' =&gt; '90024', <br>    'COUNTRY' =&gt; 'US', <br>    'PHONE' =&gt; '(310)555-1212' <br>    }; <br> <br>($contact_id, $request_id) =  <br>$srs_client-&gt;create_contact( 1, $contact_ref ); <br> <br>if ($contact_id) { <br>    print &quot;contactID=$contact_id\n&quot;; <br>
+    print &quot;requestID=$request_id\n&quot;; <br>} <br>else{ <br>    # `error' member of client has descriptive error string(s) <br>    print &quot;Error(s) creating contact:\n&quot;; <br>    print $srs_client-&gt;{'error'}; <br>    print &quot;\n&quot;; <br>} <br> <br>
+Page 6  <br>
+<hr>
+<A name=9></a><b> <br>edit_contact <br>Description: <br></b>Modifies fields in an existing contact record.  A return value of 0 for $contact_id indicates an error, in <br>which case a descriptive string of the error(s) is then available in the  <br>self-&gt;{'error'} member of the DotSRS_Client object. (See example below) <br>
+ <br><b>Called as: <br></b>($contact_id, $request_id) = edit_contact($transaction_id, \%contact_ref) <br>
+<b> <br> <br>Example Code:   <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>
+$srs_client = new DotSRS_Client; <br> <br>$contact_ref = { <br>
+ <br>
+    'CONTACTID' =&gt; 171206, <br>    'EMAIL' =&gt; 'jqp@public.com', <br>    'ADDRESS2' =&gt; 'Suite 200', <br>}; <br> <br>($contact_id, $request_id) =  <br>    $srs_client-&gt;edit_contact( 1, $contact_ref ); <br> <br>if ($contact_id) { <br>    print &quot;contactID=$contact_id\n&quot;; <br>
+    print &quot;requestID=$request_id\n&quot;; <br>} <br>else{ <br>    # `error' member of client has descriptive error string(s) <br>    print &quot;Error(s) editing contact:\n&quot;; <br>    print $srs_client-&gt;{'error'}; <br>    print &quot;\n&quot;; <br>} <br><b> <br>get_contact_info <br>Description: <br></b>Retrieves fields of an existing contact record. <br> <br><b>Called as: <br></b>(\%info_ref) = get_contact_info($contact_id) <br> <br><b> <br>Example Code:  Print contact fields for contact id entered on command line <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>$ref = $srs_client-&gt;get_contact_info( shift @ARGV ); <br> <br>foreach $key (keys %{ $ref }) { <br>    print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+} <br>
+Page 7  <br>
+<hr>
+<A name=10></a><b>5.3 Domain Registration and Manipulation Methods <br></b>These methods correspond directly to the SRS Domain Registration and Manipulation <br>
+Commands.  Refer to section 4.4 of the Developer's Guide for a detailed listing of legal input <br>
+and output parameters. <br> <br><b>register_domain <br>Description: <br></b>Register (buy) a domain. <br> <br><b>Called as: <br></b>($request_id, \%response_ref) =  <br>register_domain ($transaction_id, \%domain_info_ref) <br>
+<b> <br> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>$domain_ref = {    <br>    'DOMAIN' =&gt; 'querydomain', <br>
+    'TLD'    =&gt; 'tv', <br>    'TERM YEARS' =&gt; 1, <br>    'RESPONSIBLE PERSON' =&gt; 17206, <br>    'TECHNICAL CONTACT' =&gt; 0, <br>    'PRICE'             =&gt; 100.00 <br>    }; <br> <br>($request_id, $ref) = $srs_client-&gt;register_domain( 2, $domain_ref ); <br> <br>print $request_id; <br> <br>if( $request_id ){ <br>    print &quot;requestID = $request_id\n&quot;; <br>
+} <br>else{ <br>    print &quot;register_domain failed.\n&quot;; <br>} <br> <br>foreach $key (keys %{ $ref }) { <br>    print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>} <br><b> <br> <br>change_domain <br>Description: <br></b>Modify contact and domain name server information for a domain. <br> <br><b>Called as: <br></b>($request_id) = change_domain ($transaction_id, \%domain_info_ref) <br>
+ <br><b> <br>Example Code:   <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>
+Page 8  <br>
+<hr>
+<A name=11></a>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>$domain_ref = {  <br>  'DOMAIN' <br>
+=&gt; <br>
+'querydomain', <br>
+  <br>
+ <br>
+'TLD' =&gt; 'tv', <br>
+  <br>
+ <br>
+'RESPONSIBLE PERSON' =&gt; 0, <br>
+  <br>
+ <br>
+'TECHNICAL CONTACT' =&gt; 0, <br>
+ <br>
+ <br>
+'DNS SERVER NAME 1' =&gt; 'ns1.yahoo.com', <br>
+  }; <br>$request_id = $srs_client-&gt;change_domain( 1, $domain_ref ); <br> <br>if( $request_id ){ <br>    print &quot;requestID = $request_id\n&quot;; <br>} <br>else{ <br>    print &quot;register_domain failed.\n&quot;; <br>} <br>
+ <br>foreach $key (keys %{ $ref }) { <br>    print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>} <br> <br>
+ <br><b>release_domain <br>Description: <br></b>Release a domain back into the pool of available domain names. <br> <br><b>Called as: <br></b>($request_id) = release_domain ($transaction_id, \%domain_info_ref) <br> <br><b> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>$domain_ref = {  <br>
+  'DOMAIN' <br>
+=&gt; <br>
+'querydomain', <br>
+  <br>
+ <br>
+'TLD' =&gt; 'tv', <br>
+  }; <br> <br>$request_id = $srs_client-&gt;release_domain( 1, $domain_ref ); <br> <br> <br>if( $request_id ){ <br>    print &quot;requestID = $request_id\n&quot;; <br>} <br>else{ <br>    print &quot;release_domain failed.\n&quot;; <br>} <br>
+<b> <br> <br> <br> </b><br>
+Page 9  <br>
+<hr>
+<A name=12></a><b>renew_domain <br>Description: <br></b>Renews a domain registration for a given number of years <br> <br><b>Called as: <br></b>($request_id, \%response_ref) =  <br>renew_domain ($transaction_id, \%domain_info_ref) <br> <br><b> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br># create the object <br>$srs_client = new DotSRS_Client; <br> <br>$domain_ref = {  <br>  'DOMAIN' <br>
+=&gt; <br>
+'querydomain', <br>
+  <br>
+ <br>
+'TLD' =&gt; 'tv', <br>
+ <br>
+ <br>
+'TERM YEARS' =&gt; 2, <br>
+  'PRICE' <br>
+=&gt; <br>
+50 <br>
+  }; <br> <br>($request_id,$ref) = $srs_client-&gt;renew_domain( 1, $domain_ref ); <br> <br>if( $request_id ){ <br>    print &quot;requestID = $request_id\n&quot;; <br>    foreach $key (keys %{ $ref }) { <br>       print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>    } <br>} <br>else{ <br>
+    print &quot;renew_domain failed.\n&quot;; <br>} <br> <br><b> </b><br>
+Page 10  <br>
+<hr>
+<A name=13></a><b>5.4 Nameserver Methods <br></b>These methods correspond directly to the SRS Nameserver Commands.  Refer to section 4.5 <br>
+of the Developer's Guide for a detailed listing of legal input and output parameters. <br>
+ <br><b>register_nameserver <br>Description: <br></b>Add a nameserver. <br> <br><b>Called as: <br></b>($request_id) = register_nameserver($transaction_id, \%ns_info_ref) <br>
+<b> <br> <br>Example Code: </b><br>
+<b> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>$srs_client = new DotSRS_Client; <br> <br>$ns_ref = {   'DNS SERVER NAME' =&gt; 'ns1.querydomain.tv', <br>
+ <br>
+ <br>
+'DNS SERVER IP' =&gt; '127.0.0.1' }; <br>
+ <br>$request_id = $srs_client-&gt;register_nameserver( 1, $ns_ref ); <br> <br>if( $request_id ){ <br>    print &quot;requestID = $request_id\n&quot;; <br>} <br>else{ <br>    die &quot;register_nameserver failed.\n&quot;; <br>} <br> <br> <br><b>release_nameserver <br>Description: <br></b>Remove a nameserver. <br> <br><b>Called as: <br></b>($request_id) = release_nameserver($transaction_id, \%ns_info_ref) <br>
+<b> <br> <br>Example Code: </b><br>
+<b> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>
+$srs_client = new DotSRS_Client; <br> <br>
+ <br>
+$ns_ref = { 'DNS SERVER NAME' =&gt; 'ns1.querydomain.tv' }; <br> <br>$request_id = $srs_client-&gt;release_nameserver( 1, $ns_ref ); <br> <br>if( $request_id ){ <br>    print &quot;requestID = $request_id\n&quot;; <br>} <br>else{ <br>    die &quot;register_nameserver failed.\n&quot;; <br>} <br>
+Page 11  <br>
+<hr>
+<A name=14></a> <br><b>get_nameserver_info <br>Description: <br></b>Obtain information about nameserver. <br> <br><b>Called as: <br></b>(\%response_ref) = get_nameserver_info($transaction_id, \%ns_info_ref) <br>
+<b> <br> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>$srs_client = new DotSRS_Client; <br> <br>$ns_ref = { 'DNS SERVER NAME' =&gt; 'ns1.querydomain.tv' }; <br> <br>$ref = $srs_client-&gt;get_nameserver_info( 1, $ns_ref ); <br> <br>
+if( $ref ){ <br>    foreach $key (keys %{ $ref }) { <br> <br>
+print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+    } <br>} <br>else{ <br>    die &quot;nameserver_info failed\n&quot;; <br>} <br> <br>
+<b>5.5 Domain Transfer Methods <br></b>These methods correspond directly to the SRS Domain Transfer Commands.  Refer to section <br>
+4.6 of the Developer's Guide for a detailed listing of legal input and output parameters. <br>
+ <br><b>request_transfer <br>Description: <br></b>Request a transfer of a domain to the SRSplus registrar from another registrar. <br> <br><b>Called as:</b> <br>($request_id, \%response_ref) =  <br>request_transfer($transaction_id, \%transfer_info_ref) <br>
+<b> <br> <br>Example Code: </b><br>
+<b> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br>
+ <br>$srs_client = new DotSRS_Client; <br> <br>$trans_ref = {`DOMAIN' =&gt; shift @ARGV,  <br>
+`TLD' =&gt; shift @ARGV, <br>`CURRENT ADMIN EMAIL' =&gt; shift @ARGV <br>}; <br>
+ <br>($request_id, $ref) = $srs_client-&gt;request_transfer ( 1, $trans_ref); <br> <br>if( $ref ){ <br>    foreach $key (keys %{ $ref }) { <br> <br>
+print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+Page 12  <br>
+<hr>
+<A name=15></a>    } <br>} <br>else{ <br>    die &quot;request_transfer failed\n&quot;; <br>} <br> <br><b>outbound_transfer_response <br>Description: <br></b>Respond to a transfer request where you are the losing partner.  You may ACCEPT or DENY the pending <br>request. <br> <br><b>Called as:</b> <br>(\%response_ref) = outbound_transfer_response ($transaction_id, $domain, $tld, <br>$response_string) <br> <br><b> <br>Example Code: <br> <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>$srs_client = new DotSRS_Client; <br> <br>$ref = $srs_client-&gt;outbound_transfer_response <br>
+( 1, "TESTDOMAIN", "ORG", "ACCEPT" ); <br>
+ <br>if( $ref ){ <br>    foreach $key (keys %{ $ref }) { <br> <br>
+print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+    } <br>
+} <br>else{ <br>    die &quot;outbound_transfer_response failed\n&quot;; <br>} <br> <br><b>view_pending_transfers <br>Description: <br></b>Returns information about pending transfers, either INBOUND or OUTBOUND. <br>
+ <br><b>Called as:</b> <br>(\%response_ref) = view_pending_transfers ($transaction_id, $transfer_type) <br>
+<b> <br> <br>Example Code:   <br></b>#!/usr/bin/perl <br>use lib qw ( /usr/local/www/perl-libs ); <br>use DotSRS_Client; <br> <br>$srs_client = new DotSRS_Client; <br> <br>$ref = $srs_client-&gt;view_pending_transfers ( 1, "OUTBOUND"); <br>
+ <br>if( $ref ){ <br>    foreach $key (keys %{ $ref }) { <br> <br>
+print &quot;$key : &quot;, $ref-&gt;{$key},&quot;\n&quot;; <br>
+    } <br>} <br>else{ <br>    die &quot;<b> </b>view_pending_transfers<b> </b>failed\n&quot;; <br>} <br>
+Page 13  <br>
+<hr>
+<A name=16></a> <br><b>6.  Testing and Certification <br></b>Once you send in your public key and receive back your partner ID, you will have access to <br>
+the test SRS server.  While developing and debugging your client, you can perform SRS <br>
+commands in the test environment without fear of incurring charges or destroying registry <br>
+data.  This server is functionally equivalent to the production server, but it separate and <br>isolated.  There are other differences, which we explore next. <br>
+ <br><b>6.1 The Test Environment vs. the Production Environment <br></b>The main difference between the two is that the database used by the test server is isolated <br>and separate from the production server database.  This test database does not necessarily <br>
+reflect real-time conditions.  It gets updated periodically with data from the production <br>
+database, but you should never make assumptions about the state of the test database at any <br>time.  A name you register in it one day may not be there the next.  <br>
+ <br>The test server does not actually charge against your account when you perform <br><b>RegisterDomain</b> commands.  In fact, while in the testing environment, your account will <br>
+have a zero balance, but you will have nearly unlimited buying power.  When you perform the <br>
+<b>AccountBalance</b> command you will see a response like the following: <br> <br>
+<b>Name </b><br>
+<b>Value </b><br>
+BUYING POWER <br>
+10000000.00 <br>
+STORED VALUE <br>
+0.00 <br>
+UNPAID CHARGES <br>
+100.00 <br>
+ <br>Since the test server is updated from the live server occasionally, your STORED VALUE may <br>reset to the current live value from time to time.  Once the STORED VALUE reaches zero, the <br>UNPAID CHARGES will increase until it reaches the limit specified in BUYING POWER.  BUYING <br>POWER will be sufficiently large to accommodate about 200,000 test registrations before your <br>test BUYING POWER needs to be reset. <br>
+ <br><b>6.2 Running the Certification Tests <br></b>A sample script called certify.pl is included in the API Toolkit.  It is used to perform the <br>
+certification tests.  You must successfully complete the certification tests and submit a log file <br>
+of your client's activity during this test in order to gain access to the live production server.  <br>
+Once the log file is reviewed and approved, and if all other financial and contractual <br>obligations have been met, you will gain "Active" status and may begin selling domain names <br>
+to your customers.  You will be notified of this accomplishment via email.  <br>
+ <br><b>6.2.1 Logging Client Activity <br></b>You will need to log client activity while running the certification tests.  This is accomplished <br>most easily by redirecting the output of the script to a file.  The log file will show a record of <br>
+the raw command messages being sent back and forth between your SRS client and the SRS <br>server.  It is this log file that you must submit to <A href="mailto:registry@srsplus.com">registry@srsplus.com </a>in order to achieve <br>
+certification and access to the live SRS server. <br> <br><b>6.2.2 Running the Test Script <br></b>The sample certify.pl file will perform all the SRS commands required for the certification <br>
+test.  The steps required to run the test are: <br>
+· <br>
+Ensure that the scalar $test_mode in the file DotSRS_Client.pm is set to 1. <br>
+· <br>
+Ensure that DotSRS_Client.pm is reachable by the script.  You may need to edit the <br>
+path in the use lib statement. <br>
+· <br>
+Run the certify.pl script and redirect the output to a log file. <br>
+Example: perl certify.pl &gt; srs.log <br>
+Page 14  <br>
+<hr>
+<A name=17></a> <br>After the test has finished, email the log file (as an attachment) to <A href="mailto:registry@srsplus.com">registry@srsplus.com </a><br>
+with the subject line "Certification Log."  Be sure to specify your organization's name in the <br>body of the message.  Once the log is reviewed you will be sent a reply email with your <br>
+results.  You will either pass or fail the test.  In the case of failure, you will be given specific <br>
+reasons why your test was rejected and you may try again after making corrective changes.  <br>Once you pass the test, you are given access to the live production server and your partner <br>
+account is made "Active" in our system.  You may then modify the API configuration to use the <br>
+live SRS server. <br>  <br><b>6.3 Switching Environments <br></b>As discussed in section 4.2, the server environment is determined by the value of the scalar <br>$test_mode, which is declared in the DotSrs_Client.pm file.  When $test_mode is non-zero, <br>
+you will be working against the test SRS server.  When it is zero, you will be working against <br>
+the live production server.  Attempting to use the production server before completing the <br>certification tests will result in error responses, typically "Client not known to server."  <br>
+After you do pass the certification tests, you may still work against the test server.  In fact <br>you may switch back and forth whenever necessary, or even run concurrently in both <br>
+environments from two separate systems. <br><b> <br>7.  The Entire Integration Pathway <br></b>For your easy reference, the complete process from download to certification is presented in <br>
+figure 7.1.  You may want to make a separate copy of this flowchart and use it to keep track <br>of your progress. <br> <br><b>8.  Next Steps <br></b>You should now feel prepared to start the development of your custom SRS client.  This is the <br>
+last formal document in the progression specified in the documentation roadmap.  For further <br>
+detailed help, take a look at the various FAQs and HOW-TO documents on the SRSplus website <br>at <A href="http://www.srsplus.com/en/srsplus/partners_faq_tech.shtml">http://www.srsplus.com/en/srsplus/partners_faq_tech.shtml.</a>  These supplemental <br>
+documents are based on feedback from developers who have already used the APIs to create <br>SRS clients.  If you are having a problem with a specific process, or with a certain step in the <br>
+integration pathway, it is likely that others have had the same problem and that we have an <br>
+available FAQ or HOW-TO document addressing the topic. <br>
+Page 15  <br>
+<hr>
+<A name=18></a><b>Figure 7.1:  Pathway from Signup to Certification</b><br>
+<b>NOTE:  Arrows pointing to a<br>box represent a<br>prerequisite dependency.<br>For example, the &quot;Create</b><br>
+Debug<br>
+<b>web application and/or<br>scripts&quot; step requires the<br>completion of all four steps</b><br>
+Download Perl API<br>
+<b>pointing to it before it can<br>begin.</b><br>
+fail<br>
+Set $test_mode=0<br>
+Create web<br>
+Run<br>
+in<br>
+application and/or<br>
+certification<br>
+pass<br>
+DotSrs_Client.pm<br>
+scripts<br>
+test<br>
+to switch to  live<br>
+SRS server<br>
+Download and install<br>
+required 3rd party<br>
+components<br>
+(e.g., OpenSSL, Perl<br>
+The design, development and testing<br>
+modules, IE, etc.)<br>
+of your custom client executable may<br>begin at this point.  You may want to<br>
+Sign up for<br>
+complete the certification process<br>
+SRSplus Partner<br>
+before testing your custom client so<br>
+program on<br>
+that all potential connectivity and setup<br>
+website<br>
+issues are resolved first.<br>
+Establish positive<br>
+deposit account<br>
+Sell names<br>
+balance or line of credit<br>
+Fix<br>
+yes<br>
+Meet contract<br>
+Import and locally<br>
+no<br>
+compliance<br>
+sign SRS test and<br>
+criteria?<br>
+production server<br>
+public keys<br>
+Create<br>
+Download and install<br>
+public/private<br>
+GnuPG<br>
+keypair<br>
+Modify<br>
+Receive<br>
+Export public key<br>
+DotSrs_Client.pm<br>
+partner ID and,<br>
+and send to<br>
+to specify partner ID,<br>
+optionally, sign up<br>
+registry@<br>
+key information and<br>
+for referral link<br>
+srsplus.com<br>
+GNUPGHOME<br>
+program<br>
+directory<br>
+<hr>
+</BODY>
+</HTML>

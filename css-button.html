@@ -1,0 +1,41 @@
+<style>
+.myButton {
+	-moz-box-shadow:0px 2px 2px 0px rgba(0,0,0,.3);;
+	-webkit-box-shadow:0px 2px 2px 0px #rgba(0,0,0,.3);;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #d1d1d1) );
+	background:-moz-linear-gradient( center top, #ffffff 5%, #d1d1d1 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d1d1d1');
+	background-color:#ffffff;
+	-moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px;
+	display:inline-block;
+	color:#222;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:500;
+	padding:.5em 1.5em;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+   border-color: #aaa rgba(0,0,0,.5) #444;
+   border-radius: .5em;
+   border-style: solid;
+   border-width: 1px 1px 2px;
+   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+}
+.myButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #d1d1d1 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#ffffff');
+	background-color:#d1d1d1;
+}
+.myButton:active {
+	position:relative;
+	top:2px;
+   border-bottom-width: 1px;
+   box-shadow: 0px 1px 1px #000 inset;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fff), color-stop(1, #cfcfcf) );
+	background:-moz-linear-gradient( center top, #fff 5%, #cfcfcf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#bfbfbf');
+}
+</style>
+
+<a href="#" class="myButton">Pure CSS Button</a>

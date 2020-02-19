@@ -1,0 +1,334 @@
+First_Name	Last_Name	Professional Title	Organization	City	State
+Deepa	Whipple	Senior Manager	Accenture	Pleasanton	CA
+Julie	Bily	Business Manager	Acosta Sales & Marketing	Pleasanton	CA
+Carla	Daugherty	Business Manager	Acosta Sales & Marketing	Pleasanton	CA
+Cheryl	Hoofs	Director	Acosta Sales & Marketing	Pleasanton	CA
+Jennifer	Klomp	Business Manager 	Acosta Sales & Marketing	Pleasanton	CA
+Jennifer	Lessner	Category Development Manager	Acosta Sales & Marketing	Pleasanton	CA
+Terri	Rathbun	Sr. Business Manager	Acosta Sales & Marketing	Pleasanton	CA
+Shirley	Wong	Business Manager	Acosta Sales & Marketing	Rodeo	CA
+Keila	Wolfe	"Sr. Manager, Product Development"	"Activant Solutions, Inc."	Livermore	CA
+Kathryn	Keller	Business Development Manager	Advantage Sales & Marketing	Pleasanton	CA
+Timme	Taylor	Business Development Manager	Advantage Sales & Marketing	Pleasanton	CA
+Betty 	Topping	Business Development Manager	Advantage Sales & Marketing	Pleasanton	CA
+John	Brennan	SVP HR and Facilities	"Advent Software, Inc."	Chicago	IL
+Cory	Jackson	Account Supervisor	Alcone Marketing	San Francisco	CA
+Lori	Leiva	"SVP, Managing Director"	Alcone Marketing	San Francisco	CA
+April	Howell	Brand Manager	Annie's	Napa	CA
+Kathy	Oneto	"Vice President, Brand Strategy"	Anthem Worldwide	San Francisco	CA
+Vicki	Andria	Director Customer Service	AT&T	San Francisco	CA
+Dawn	Coupe	Area Manager Customer Service	AT&T	San Francisco	CA
+Michelle	DeGroff	Senior IT Project Manager	Bare Escentuals	Dublin	CA
+Andal	Allison	Category Management Manager	Bell Carter Foods	Lafayette 	CA
+Robin	Robinson	Vice President Marketing	Bell Carter Foods	Lafayette	CA
+Karl	Konrad	General Sales Manager	Berkeley Farms	Hayward	CA
+Angela	Black	Off-Premise National Account Manager	Boston Beer Company	Napa	CA
+Brittany	Welch	Customer Insights & Category Management	Bush Brothers & Company	Knoxville	TN
+Kristalin	Farrelly	Key Account Manager	Cadbury	Burlingame	CA
+Sara	Chung	Customer Logistics Manager	Campbell Soup Company	Pleasanton	CA
+Janelle	Heinrich	Category Manager	Campbell Soup Company	Pleasanton	CA
+Bill	Klein	Vice President West Region	Campbell Soup Company	Pleasanton	CA
+Stefan	Matthews	Sr. Customer Business Manager	Campbell Soup Company	Pleasanton	CA
+Rose	Schmidt	Sr. Manager FP&A	Campbell Soup Company	Pleasanton	CA
+Stephanie	Swannack	Director of Analytics	Catalina Marketing	Dublin	CA
+Angela	Vold	Director of Business Development	Catalina Marketing	Irvine	CA
+Deborah	Donovan-Niemi	IT Strategy Developer	Chevron Corporation	San Ramon	CA
+Audrey	Goins Brichi	Manager Strategy and Planning - Downstream Tech/ Svc	Chevron Corporation	San Ramon	CA
+Miriam	Lopez	Corp Diversity Consultant	Chevron Corporation	San Ramon	CA
+Karin	DeBoer	National Account Manager	Clif Bar & Company	Berkeley	CA
+Karen	Jobb	Vice President of Sales	Clif Bar & Company	Berkeley	CA
+Claudia	Perkins	Vice President of Human Resources	Clif Bar & Company	Emeryville	CA
+Chital	Bhagdev	Director Global Shopper Insights	Clorox Company	Oakland	CA
+Valerie	Breitholle	Global Insights Manager	Clorox Company	Oakland	CA
+Nicole	Brown	Area Sales Manager- Multicultural	Clorox Company	Oakland	CA
+Carole	Chiang	Finance Manager	Clorox Company	Oakland	CA
+Carolyn	Chin		Clorox Company	Oakland	CA
+Erby	Foster	"Director, Diversity & Inclusion"	Clorox Company	Oakland	CA
+Katrina	Hahn	"Director of Sales, Away From Home"	Clorox Company	Oakland	CA
+Tammy	House	Global Shopper Insights Lead	Clorox Company	Oakland	CA
+Amy	Hsiao	MKT	Clorox Company	Oakland	CA
+Anna	Husk	Global Insights Lead	Clorox Company	Oakland	CA
+Bill	Ingham		Clorox Company	Oakland	CA
+Bennett	Javier	HR Client Manager	Clorox Company	Oakland	CA
+Doug	Korn	Director of Sales	Clorox Company	Oakland	CA
+Liz 	Lee Koo	Global Insights Manager	Clorox Company	Oakland	CA
+Lupe	Leon	Recruiter	Clorox Company	Oakland	CA
+Shaunte	Mears-Watkins	Marketing Manager	Clorox Company	Oakland	CA
+Mario	Mediate	Director of Sales	Clorox Company	Oakland	CA
+Elena	Otero	"VP Marketing, International"	Clorox Company	Oakland	CA
+Estrella	Parker	Talent Acquisition Consultant	Clorox Company	Oakland	CA
+Julia	Ponce	Associate Marketing Manager	Clorox Company	Oakland	CA
+Jennifer	Reiner	Team Leader	Clorox Company	Oakland	CA
+Juliandra	Rittmann	"Practice Leader, HR Talent Management"	Clorox Company	Oakland	CA
+Nicole	Thomas	Associate Global Insights Mgr.	Clorox Company	Oakland	CA
+Claudia	Williams		Clorox Company	Oakland	CA
+Robyn	Yan	"Director, Media"	Clorox Company	Oakland	CA
+Julie	Yasko	Associate Marketing Manager	Clorox Company	Oakland	CA
+Kristen	Politzer	Shopper Marketing Manager	Coca-Cola Company	San Ramon	CA
+Toni	Booker-Warren	National Account Manager - Safeway	ConAgra Foods	Pleasanton	CA
+Ali	King	Sales Analyst	ConAgra Foods	Pleasanton	CA
+Karen	Loughran	National Account Manager	ConAgra Foods	Pleasanton	CA
+Yolanda	Youts McRae	Shopper Marketing Manager	ConAgra Foods	Pleasanton	CA
+Lori	Lee	Category Leadership Manager	ConAgra Foods 	Pleasanton	CA
+Marcie	Wissinger	Consultant/Moderator	Connell + Associates	Danville	CA
+Ana	Dumitrescu	Schematic Analyst	CROSSMARK	Pleasanton	CA
+Colleen	Landis	Client Service Manager	CROSSMARK	Pleasanton	CA
+Michelle	Tonner	Director of Business Development	"Damon Worldwide, Inc."	Sacramento	CA
+Robin	Regan	Category Manager	Dannon Company	Pleasanton	CA
+Mara	Flynn-Rothman	Business Manager	"Daymon Worldwide, Inc."	Alamo	CA
+Pam	Brown	Director TPM	Del Monte Foods	San Francisco	CA
+Tina	Childs	"Sr. Manager, Trade Promotion Management"	Del Monte Foods	San Francisco	CA
+Loreen	Dye	Sr. Customer Marketing Manager	Del Monte Foods	San Ramon	CA
+Diane	Giansante	VP HQCM & Sales Strategy	Del Monte Foods	San Francisco	CA
+Christine 	Hunter 	"Director, Organization Development and Training "	Del Monte Foods	San Francisco	CA
+Navdeep	Jassal	Sr. Sales Analyst	Del Monte Foods	San Ramon	CA
+Mark	Kemmerer	"Senior Manager, Sales Finance"	Del Monte Foods	San Ramon	CA
+Debbie	Koteskey	"Senior Manager, Field Customer Marketing"	Del Monte Foods	San Ramon	CA
+Nicole	L'Ecuyer	Customer Marketing Manager	Del Monte Foods	San Francisco	CA
+Sharon	Markowitz	"Brand Manager, Innovation"	Del Monte Foods	San Francisco	CA
+Matt	Miller	Vice President	Del Monte Foods	San Francisco	CA
+Leanne	Molder	Director Finance 	Del Monte Foods	San Ramon	CA
+Kerry	Raines	Sr. Manager Field Customer Marketing	Del Monte Foods	San Ramon	CA
+Kristen	Semelius	Sales Finance Planning Manager	Del Monte Foods	San Ramon	CA
+Catherine	Tanner	"Sr. Manager, Shopper Marketing"	Del Monte Foods	San Francisco	CA
+Nancy	Ticzon	Sr. Mgr. Customer Marketing	Del Monte Foods	San Francisco	CA
+Ellen	Basilico	Partner	Deloitte & Touche LLP	San Francisco	CA
+Karen	Boone	Partner	Deloitte & Touche LLP	San Francisco	CA
+Dana	Brent	"Audit Senior Manager, CPA"	Deloitte & Touche LLP	San Francisco	CA
+Michelle	Leung	Audit Manager	Deloitte & Touche LLP	San Francisco	CA
+Kay	Pitman	Office Tax Managing Partner	Deloitte & Touche LLP	Seattle	WA
+Elizabeth 	Brunkal	National Account Manager	Diamond Foods	Vacaville	CA
+Tracey	Matchett	VP Marketing Strategy and New Business	DMI Music	Pasadena	CA
+Laura	Bream	Sr. HR Manager	E & J Gallo Winery	Modesto	CA
+Mercedes	Carter	Operations Manager	E & J Gallo Winery	Modesto	CA
+Cecilia	Cervantes	Regulatory Compliance Analyst	E & J Gallo Winery	Modesto	CA
+Julie	Craven	Project Manager	E & J Gallo Winery	Modesto	CA
+Melanie	Eckenroth	Assistant Marketing Manager	E & J Gallo Winery	Modesto	CA
+Amber	Fain	Associate Marketing Manager	E & J Gallo Winery	Modesto	CA
+Leah	Gerig	New Brand & Product Development Manager	E & J Gallo Winery	Modesto	CA
+Deborah	Hein	Sr. Quality Manager	E & J Gallo Winery	Modesto	CA
+Wendy	Hobbling	"Director, Sales & Operations Planning"	E & J Gallo Winery	Modesto	CA
+Sheryl	Hoffman	Supervisor Consumer Relations	E & J Gallo Winery	Modesto	CA
+Hayley	Hovious	Assistant Marketing Manager	E & J Gallo Winery	Modesto	CA
+Angie	Jordan	"Director, Event Marketing/Tour Facilitation"	E & J Gallo Winery	Modesto	CA
+Brie	Koenigs	Assistant Marketing Manager	E & J Gallo Winery	Modesto	CA
+Christine	Lopez	Supply Chain Analyst	E & J Gallo Winery	Modesto	CA
+Melany	Paul	"Manager, Quality Assurance Inventory Control"	E & J Gallo Winery	Auburn	CA
+Maria	Reardon	Manager - Applications Programming	E & J Gallo Winery	Modesto	CA
+Nicole	Rivera	Consumer Relations Representative	E & J Gallo Winery	Modesto	CA
+Liz	Tran	On-Premise Market Specialist	E & J Gallo Winery	San Jose	CA
+Kate	Weiner	"Manager, Global Supply Chain Compliance"	E & J Gallo Winery	Modesto	CA
+Elizabeth	Windram	Asst. Marketing Manager	E & J Gallo Winery	Modesto	CA
+Stephanie	Woodlee	Senior Sales Analyst	E & J Gallo Winery	Modesto	CA
+Tracy	Younkin	"Sr. Manager, Grape & Wine Supply Systems"	E & J Gallo Winery	Modesto	CA
+Melinda	de Leon	Category Analyst	Edge Sales & Marketing	Pleasanton	CA
+Janis	Lewis	Office Manager	Edge Sales & Marketing	Pleasanton	CA
+Lee	Merritts	"SVP, Sr. Partner"	"Encore Associates, Inc."	San Ramon	CA
+Gary	Smith	President/CEO	"Encore Associates, Inc."	San Ramon	CA
+Anne	Daniels	Consultant	ExecuteNow	Lafayette	CA
+Matthew	Kelly	Speaker	Floyd Consulting	Chicago	IL
+Samantha	Smith	Key Account Manager	Foster Farms	Livingston	CA
+Alice	Chan	Sr. Key Account Manager	"Frito-Lay, Inc."	Alameda	CA
+Sherry	Clise	Sales Fleet Safety Manager	"Frito-Lay, Inc."	Pleasanton	CA
+Shoua 	Lee	District Sales Leader 	"Frito-Lay, Inc."	San Jose	CA
+Megan	McCarty	Operations Resource	"Frito-Lay, Inc."	Modesto	CA
+Janet	McMonagle	District Sales Leader	"Frito-Lay, Inc."	Oakley	CA
+Taryn	Osburn	Zone Business Manager	"Frito-Lay, Inc."	San Jose	CA
+Joia	Pardo	Zone Sales Leader	"Frito-Lay, Inc."	Pleasanton	CA
+Ruthann	Snyder	Operations Resource	"Frito-Lay, Inc."	Modesto	CA
+Robert	Youssefi	Operations Resource	"Frito-Lay, Inc."	Modesto	CA
+Joanna	Drumonde	Assistant Controller	"G3 Enterprises, Inc."	Modesto	CA
+Beth	Nagle	"Director, Winery Operations"	"G3 Enterprises, Inc."	Modesto	CA
+Patti	Reeder	"Sr. Director, General Manager"	"G3 Enterprises, Inc."	Modesto	CA
+Yvonne	Sams	Business Development Manager	"G3 Enterprises, Inc."	Modesto	CA
+Mary	Coon	VP Account Management/Client Services	"GA Communications, Inc."	Livermore	CA
+Kaitlyn 	McCauley	Account Executive	"GA Communications, Inc."	Livermore	CA
+Katie	Lechner	Sr. Director	Gap Inc.	San Francisco	CA
+Margaret	Martin	Organizational Talent Development Director	GL Mezetta	American Canyon 	CA
+Maritza	Monge-Reynoso	VP of HR	GL Mezzetta	American Canyon	CA
+Michele	Reis	Customer Sales Executive	Hershey Company	Pleasanton	CA
+Shannon	Syms	"Manager, Category Development"	Hershey Company	Pleasanton	CA
+Lisa	Dodson	Senior Category Development Analyst	Hormel Foods	Pleasanton	CA
+Pat	Brennan	Sales Director - Team Leader	Johnson & Johnson	Livermore	CA
+Matt	Davison	Customer Business Manager	Johnson & Johnson	Livermore	CA
+Anne 	Gorman	Senior Coordinator	Johnson & Johnson	Livermore	CA
+Christie	Shern	Customer Business Manager	Johnson & Johnson	Livermore	CA
+Paul	Vomund	Customer Business Manager	Johnson & Johnson	Livermore	CA
+Denise	Bartow	National Account Executive	Kellogg Co.	Castro Valley	CA
+Victoria	Jacoby	National Account Executive	Kellogg Co.	Walnut Creek	CA
+Brenda	LaPlante	NAE	Kellogg Co.	El Sobrante	CA
+Jackie	Braise	Director of Customer Development	Kimberly-Clark Corporation	Pleasanton	CA
+Jaime 	Callow	Analyst	Kimberly-Clark Corporation	Pleasanton	CA
+Dianna	Chiu	Customer Development Associate	Kimberly-Clark Corporation	Pleasanton	CA
+Priti	Gupta	Finance Manager	Kimberly-Clark Corporation	Pleasanton	CA
+Mike	Heinaman	Category Business Analyst	Kimberly-Clark Corporation	Pleasanton	CA
+Amber 	Laurel	Category Business Analyst	Kimberly-Clark Corporation	Pleasanton	CA
+Velda	Marini	Customer Business Partner	Kimberly-Clark Corporation	Pleasanton	CA
+David	Stephenson	Business Development Manager	Kimberly-Clark Corporation	Pleasanton	CA
+Laurie	Wood	Customer Business Analyst	Kimberly-Clark Corporation	Pleasanton	CA
+Ronna	Anderson	VMI Manager	Kraft Foods	Livermore	CA
+Hae	Carberry	Sales Analyst	Kraft Foods	Livermore	CA
+Rebecca	Collison	Senior Customer Business Manager	Kraft Foods	Livermore	CA
+Melissa	Coto	BDM	Kraft Foods	Livermore	CA
+Lynn	Davies	Sr. Customer Business Manager	Kraft Foods	Livermore	CA
+Gina	Gaitan	CCM	Kraft Foods	Livermore	CA
+Navneet	Gill	CFM	Kraft Foods	Livermore	CA
+Mitzi 	Gitlin	Category Manager	Kraft Foods	Castro Valley	CA
+Felicia	Napoli		Kraft Foods		CA
+Denise	O'Mara	Customer Category Manager	Kraft Foods	Livermore	CA
+Jeannine	Sordini	Business Process Analyst	Kraft Foods	Livermore	CA
+Cheryl	Stark	Director Logistics Development	Kraft Foods	Livermore	CA
+Amy	Wu	Retail Merchandising Supervisor	Kraft Foods		CA
+Amy	Andrews	Senior Account Planner	"MARS Advertising, Inc."	Oakland	CA
+Julie	Emmett	"Director, Client Service"	"MARS Advertising, Inc."	Oakland	CA
+Steslow	Irene	VP Client Service	"MARS Advertising, Inc."	Oakland	CA
+Denea	Meister	Senior Account Executive	"MARS Advertising, Inc."	Oakland	CA
+Carol	Perinea	"Director, Client Service"	"MARS Advertising, Inc."	Oakland	CA
+Mary	Tarczynski	SVP/GM MARS Oakland	"MARS Advertising, Inc."	Oakland	CA
+Charles	Aeh	Vice President Performance Measures	"Medallia, Inc."	Los Angeles	CA
+Lissa	Daniels	"Director, Marketing"	"Medallia, Inc."	Menlo Park	CA
+Stephanie	Gwinner	Client Services Director	"Medallia, Inc."	Menlo Park	CA
+Russ	Haswell	"VP, Sales"	"Medallia, Inc."	Menlo Park	CA
+Emre	Ozdemir	Sr. Manager	"Medallia, Inc."	Menlo Park	CA
+Amy	Pressman	President	"Medallia, Inc."	Menlo Park	CA
+Sue	Sweet	"Director, Product Marketing"	"Medallia, Inc."	Menlo Park	CA
+Charmaine	Wong	"Senior Manager, Client Services"	"Medallia, Inc."	Menlo Park	CA
+Teresa	Estrada	Category/Consumer Leadership Manager	"Nestle Dreyer's Grand Ice Cream Holdings, Inc."	San Ramon	CA
+Natalie	McDermott	N/A	Nestle Purina PetCare Company	San Ramon	CA
+Joan	Toth	Executive Director	Network of Executive Women (NEW)	Chicago	IL
+Kimberly	Fruin	Client Director	Nielsen Company	Schaumburg	IL
+Liem	Le	Client Director	Nielsen Company	San Francisco	CA
+Candy	Marciano	Associate Client Director	Nielsen Company	Pleasanton	CA
+Mary	Pryor	Client Manager	Nielsen Company	Oakland	CA
+Rose	Syriani	Associate Client Manager	Nielsen Company	Fremont	CA
+Kerri	Shaffer	National Account Sales Manager	Pepperidge Farm Inc.	Brentwood	CA
+Michelle	Fledge	Director of Retail	Pepsi Beverages Company	Hayward	CA
+Christa 	Hedrick	Small Format Regional Sales Manager	Pepsi Beverages Company	Hayward	CA
+Kelly	Lowry	Territory Sales Manager	Pepsi Beverages Company	Sunnyvale	CA
+Sara	Pinocchio	District Sales Leader	"PepsiCo, Inc."	Hayward	CA
+Elissa	Shewmaker	Category Manager	"PepsiCo, Inc."	Pleasanton	CA
+Julie	Swick	"Sr. Manager, Shopper Marketing"	"PepsiCo, Inc."	Pleasanton	CA
+Blair	Cornish	Sr. National Account Manager	"PepsiCo, Inc. (Quaker)"	Pleasanton	CA
+Kelly	Jasso	Category Account Manager	"PepsiCo, Inc. (Quaker)"	Pleasanton	CA
+Deborah	Ball	Account Manager	Procter & Gamble	San Ramon	CA
+Chris	Binggeli	GBS	Procter & Gamble	San Ramon	CA
+Irina	Boutorina	Category Development Manager	Procter & Gamble	San Ramon	CA
+Steve	Bried	SAE	Procter & Gamble	San Ramon	CA
+Kelly	Buckles	Retail Sales Analyst	Procter & Gamble	San Ramon	CA
+Marlene	Ching	Account Executive	Procter & Gamble	San Ramon	CA
+Steve	Ding	Associate Director	Procter & Gamble	San Ramon	CA
+Dean	Fairbanks	CDM	Procter & Gamble	San Ramon	CA
+Emily	Falhaber	CMK Manager	Procter & Gamble	San Ramon	CA
+David	Fielder	Director	Procter & Gamble	San Ramon	CA
+Stacy	Harrington	Account Manager	Procter & Gamble	San Ramon	CA
+Jayne	Hegenbart	Account Executive	Procter & Gamble	San Ramon	CA
+Judith	Hsu	Account Manager	Procter & Gamble	San Ramon	CA
+Lindsey	Hunziker	Account Manager	Procter & Gamble	Brentwood	CA
+Jon	Lavine	Retail Supply Leader	Procter & Gamble	San Ramon	CA
+Doug	MacPherson	HR	Procter & Gamble	San Ramon	CA
+Paul	Murar	CDM	Procter & Gamble	San Ramon	CA
+Julie	Oxner	Account Executive	Procter & Gamble	San Ramon	CA
+Jim	Pleau	Senior Account Executive 	Procter & Gamble	San Ramon	CA
+Lori	Proctor	Retail Supply Leader	Procter & Gamble	San Ramon	CA
+John	Reiland	Account Executive	Procter & Gamble	San Ramon	CA
+Todd	Schueler	Account Manager	Procter & Gamble	Healdsburg	CA
+Sofia	Taboada	Account Manager	Procter & Gamble	San Ramon	CA
+Zeena	Tamimi	Marketing Manager	Procter & Gamble	San Ramon	CA
+Tricia	To	Retail Supply Leader	Procter & Gamble	San Ramon	CA
+Vasu 	Trisal	Account Executive	Procter & Gamble	Fair Oaks	CA
+Dana	Warner	Account Executive	Procter & Gamble	Soquel	CA
+Malia	Wycoff	Account Manager	Procter & Gamble	San Ramon	CA
+Linda	Nazareth	Analyst	Procurement	San Ramon	CA
+Laurie	Miller	National Sales Manager	Ralcorp/Bremner Food Group	Clayton	CA
+Jill	Allen	"Director, Sales"	Retail Merchandising Services Inc.	Livermore	CA
+Jolie 	Bourque	VP Client Services	Retail Merchandising Services Inc.	Livermore	CA
+Charleen	Avenell	Sr. Financial Reporting Manager	"Ross Stores, Inc. "	Pleasanton	CA
+Lisa	Hess	"Director, Talent Acquisition"	"Ross Stores, Inc. "	Pleasanton	CA
+Vivian 	Hui	"Senior Manager, Corporate Accounting"	"Ross Stores, Inc. "	Pleasanton	CA
+Ashley	Canonica	Program Manager	RPM Connect	Pleasanton	CA
+Hilaire	Fouts	Associate Program Manager	RPM Connect	Pleasanton	CA
+Maria	Belshaw	Product Manager	"Safeway, Inc."	Pleasanton	CA
+Shalini	Bhatia	Brand Manager	"Safeway, Inc."	Pleasanton	CA
+Melissa 	Carvalho	Category Manager	"Safeway, Inc."	Pleasanton	CA
+Jo	Chiti	Manager of Leadership Development	"Safeway, Inc."	Pleasanton	CA
+Christy	Consler	Vice President Sustainability	"Safeway, Inc."	Pleasanton	CA
+Nancy	Cota	Vice President Innovation	"Safeway, Inc."	Pleasanton	CA
+Dan	Cousins	Director of Leadership Development	"Safeway, Inc."	Pleasanton	CA
+Kerri	Daley	Regional Director - Corporate Bakery	"Safeway, Inc."	Pleasanton	CA
+Susan 	Daley	Supply Chain Manager	"Safeway, Inc."	Pleasanton	CA
+Bao	Fong	Senior Innovation Manager	"Safeway, Inc."	Pleasanton	CA
+Cecilia	Green	Sr. Brand Manager	"Safeway, Inc."	Pleasanton	CA
+Kelly 	Griffith	"President, Corporate Merchandising"	"Safeway, Inc."	Pleasanton	CA
+Kate 	Hart	Sr. Product Manager	"Safeway, Inc."	Pleasanton	CA
+Doris	Hasegawa	Product Manager	"Safeway, Inc."	Pleasanton	CA
+Tonya	Herring	Group Director of Category Development	"Safeway, Inc."	Pleasanton	CA
+Sara 	Hugo	Asst. Brand Manager	"Safeway, Inc."	Pleasanton	CA
+Emily	Hui	Innovation Manager	"Safeway, Inc."	Pleasanton	CA
+Jewel	Hunt	VP Deli Food Service	"Safeway, Inc."	Pleasanton	CA
+Russ	Jackson	SVP Human Resources	"Safeway, Inc."	Pleasanton	CA
+Christine	Keller	Senior Innovation Manager	"Safeway, Inc."	Pleasanton	CA
+Dianne 	Lamendola	GVP IT	"Safeway, Inc."	Pleasanton	CA
+Ana	Li	Innovation Manager	"Safeway, Inc."	Pleasanton	CA
+Linda 	Mann	Leadership Development	"Safeway, Inc."	Pleasanton	CA
+Monica	McCombs	Vice President - Marketing Planning	"Safeway, Inc."	Pleasanton	CA
+Liz	McGowan	Director Executive Communications	"Safeway, Inc."	Pleasanton	CA
+Patty	Nelson	"Director, Employee Relations"	"Safeway, Inc."	Pleasanton	CA
+Jeannine	Nobriga	FMC Training and Communication/PA 	"Safeway, Inc."	Pleasanton	CA
+Linda	Nordgren	Group Vice-President	"Safeway, Inc."	Pleasanton	CA
+Christine 	Parra	Supply Chain Strategies Manager	"Safeway, Inc."	Pleasanton	CA
+Linda	Pollack	Director of Brand Management	"Safeway, Inc."	Pleasanton	CA
+Larree 	Renda	EVP	"Safeway, Inc."	Pleasanton	CA
+Debbie	Rook stool	Director of Leadership Development	"Safeway, Inc."	Pleasanton	CA
+Elizabeth	Shoemaker	"VP, Brand Marketing"	"Safeway, Inc."	Pleasanton	CA
+Michele	Silva	Vice President ESC 	"Safeway, Inc."	Pleasanton	CA
+Mei-Mei	Stark	Director of Innovation	"Safeway, Inc."	Pleasanton	CA
+Rebekah	Stevenson	Category Director Household Cleaning	"Safeway, Inc."	Pleasanton	CA
+Jo 	Stratton	Director of Leadership Development	"Safeway, Inc."	Pleasanton	CA
+Megan 	Vincent	Manager Human Resources	"Safeway, Inc."	Pleasanton	CA
+Karrie 	Wainscott	Leadership Development	"Safeway, Inc."	Pleasanton	CA
+Joye	White	Category Development Manager	"Safeway, Inc."	Pleasanton	CA
+Flora	Youssefifar	Product Development Manager	"Safeway, Inc."	Pleasanton	CA
+Sarah	Brackett	Graduate Business Student	San Francisco State University	Pleasanton	CA
+Liz	Schmidt	Graduate Business Student	San Francisco State University	Pleasanton	CA
+Kira	Keating	College Student	Santa Clara University	Pleasanton	CA
+Aubree	Murguia	College Student	Santa Clara University	Pleasanton	CA
+Katrina	Johnson	Team Category Manager	Sara Lee Corporation	Livermore	CA
+Marla	McIntosh	Director - Customer Team Safeway	Sara Lee Corporation	Livermore	CA
+Mira 	Tanihaha	Category Insights Manager	Sara Lee Corporation	Livermore	CA
+Elina	Chen	Consultant	Slalom Consulting	Redwood City	CA
+Michelle	Dennen	Practice Area Lead- Organization Effectiveness	Slalom Consulting	San Francisco	CA
+Angie	Kenny	Business Development Executive	Slalom Consulting	San Francisco	CA
+Gessica	Moreale	Business Development 	Slalom Consulting	San Francisco	CA
+Erica	Swanson	Client Service Partner	Slalom Consulting	San Francisco	CA
+Marina	Tsed	Consultant	Slalom Consulting	Mountain View	CA
+Alicia 	Santini	Consultant	Slalom Consulting 	San Francisco	CA
+Harriot	Manley	Food Editor	Sunset Magazine		CA
+Amy	Olmsted	Director	Sunset Magazine	Menlo Park	CA
+Shannon	Thompson	VP Marketing	Sunset Magazine		CA
+Marilyn	Pepper	Business Development Manager	Swedish Match North America	Roseville	CA
+Julie	Stevens	Vice President	SymphonyIRI Group	El Segundo	CA
+Dana	Hymel	Senior Director Northwest	Tampico Beverages	San Francisco	CA
+David	Haubert	Vice President of Business Development	Trinity Consulting and VideoMining 	Dublin	CA
+Charlotte	Kavanagh	Customer Development Manager	"Tyson Foods, Inc."	Pleasanton	CA
+Andrea	Bourgeois	Space Management Specialist	Unilever	Pleasanton	CA
+Mike	Coady	Supply Chain Manager	Unilever	Pleasanton	CA
+Katie	Dubil	Trade Marketing Analyst	Unilever	Pleasanton	CA
+Jeff	Greenhagen	Customer Business Manager	Unilever	Pleasanton	CA
+Joe	Sacriponte	Category Management Manager	Unilever	Pleasanton	CA
+Julie	Sale	Sales Analyst	Unilever	Pleasanton	CA
+Ruth	Strong	Customer Business Manager	Unilever	Pleasanton	CA
+Jensen	Wong	Space Management Specialist	Unilever	Pleasanton	CA
+Lacey	Zane	Category Management Manager	Unilever	Pleasanton	CA
+Morgan	Nelson		WAG	Emeryville	CA
+Justin	Nolan		WAG	Emeryville	CA
+Francine	Pinoni	Partner-Ideologist	WAG	Emeryville	CA
+Jim	Walcott-Ayers	Partner	WAG	Emeryville	CA
+Linda	Pacheco	Director - Consumer Insights	Wal-Mart Global ecommerce	Brisbane	CA
+Charla	Giles	Market Manager	"Walmart Stores, Inc."	Ceres	CA
+Allison	Lewin	Senior Director	"Walmart Stores, Inc."	Brisbane	CA
+Jenna	Wainaina	Market Manager M450	"Walmart Stores, Inc."	San Jose	CA
+Sandra	Karee	"Director, Finance IT Projects"	"Wal-Mart Stores, Inc."	Brisbane	CA
+Geraldine	Nueva	Director of Accounting & Financial Controls	"Wal-Mart Stores, Inc."	Brisbane	CA
+Rodney	Rain bolt	"Director, FP&A"	"Wal-Mart Stores, Inc."	Brisbane	CA
+Natalia	Calderon	Retail Account Manager	WhiteWave Foods	San Francisco	CA
+Martha	Ramirez	High School Teacher		Ceres	CA

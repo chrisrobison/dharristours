@@ -1,0 +1,14 @@
+cp BoxDetail_get-columns.json            Lawson_BoxDetail_get-columns.json
+cp Box_get-columns.json                  Lawson_Box_get-columns.json
+cp DBAPVEN_get-columns.json              Lawson_DBAPVEN_get-columns.json
+cp DBARA50_get-columns.json              Lawson_DBARA50_get-columns.json
+cp DBARA53_get-column-list.json          Lawson_DBARA53_get-column-list.json
+cp DBARA53_get-columns.json              Lawson_DBARA53_get-columns.json
+cp DBARACF_get-column-list.json          Lawson_DBARACF_get-column-list.json
+cp DBARACF_get-columns.json              Lawson_DBARACF_get-columns.json
+cp DBARARH_get-columns.json              Lawson_DBARARH_get-columns.json
+cp DBARCUD_get-columns.json              Lawson_DBARCUD_get-columns.json
+cp DBBLOEB_get-columns.json              Lawson_DBBLOEB_get-columns.json
+cp DailyOrderReport_get-column-list.json Lawson_DailyOrderReport_get-column-list.json
+cp DailyOrderReport_get-columns.json     Lawson_DailyOrderReport_get-columns.json
+cp Sales_Summary_get-column-list.json    Lawson_Sales_Summary_get-column-list.json

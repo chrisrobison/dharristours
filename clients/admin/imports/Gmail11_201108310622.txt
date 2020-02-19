@@ -1,0 +1,655 @@
+First Name,Middle Name,Last Name,Title,Suffix,Initials,Web Page,Gender,Birthday,Anniversary,Location,Language,Internet Free Busy,Notes,E-mail Address,E-mail 2 Address,E-mail 3 Address,Primary Phone,Home Phone,Home Phone 2,Mobile Phone,Pager,Home Fax,Home Address,Home Street,Home Street 2,Home Street 3,Home Address PO Box,Home City,Home State,Home Postal Code,Home Country,Spouse,Children,Manager's Name,Assistant's Name,Referred By,Company Main Phone,Business Phone,Business Phone 2,Business Fax,Assistant's Phone,Company,Job Title,Department,Office Location,Organizational ID Number,Profession,Account,Business Address,Business Street,Business Street 2,Business Street 3,Business Address PO Box,Business City,Business State,Business Postal Code,Business Country,Other Phone,Other Fax,Other Address,Other Street,Other Street 2,Other Street 3,Other Address PO Box,Other City,Other State,Other Postal Code,Other Country,Callback,Car Phone,ISDN,Radio Phone,TTY/TDD Phone,Telex,User 1,User 2,User 3,User 4,Keywords,Mileage,Hobby,Billing Information,Directory Server,Sensitivity,Priority,Private,Categories
+,,,,,,,,,,,,,"gametag is lillyliver2 ps3
+
+IM: None: 1071069899
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,1d9c3ee10f0939bd@contact.talk.google.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,4152469979@txt.att.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Adam,,Geiger,,,,,,,,,,,,amclaingeiger@gmail.com,,,,,,3128042472,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"2828 N. Clark #1
+Chicago, IL
+United States of America",2828 N. Clark #1,,,,Chicago,IL,,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+adhadala@hotmail.com,,,,,,,,,,,,,,adhadala@hotmail.com,,,,,,(415) 847-2388,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Aimee,,,,,,,,,,,,,,amelia_loftin@yahoo.com,,,,,,14172311334,,,"171 osprey ln.
+Blue eye, Mo 65611
+United States of America",171 osprey ln.,,,,Blue eye,Mo,65611,United States of America,,,,,,,(310) 720-7827,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Al,,Big,,,,,,,,,,,"Notes: 
+
+",,,,,,,,,,,,,,,,,,,,,,,,,(817) 937-4229,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Alenka,,Sanchez,,,,,,,,,,,,,,,,,,(214) 403-4872,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Alex,,Marmaduke,,,,,,,,,,,,alxmarmo@gmail.com,,,,,,(909) 528-8317,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Alvin,,Garcia,,,,,,,,,,,,agarcia@sanrio.com,alvgarcia23@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,amanda.sevillano@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Amandeep,Singh,Bhatia,,(US - Glen Mills),,,,,,,,,,amabhatia@deloitte.com,,,,,,(240) 477-2635,,,,,,,,,,,,,,,,,,,,,,,OIC Technical Lead,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Amir,,,,,,,,,,,,,,,,,,,,14152543700,,,,,,,,,,,,,,,,,,,,,,Go Bus,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Amir'ra,,Loughran,,,,,,,,,,,,sfmira@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,1415-272-1905,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts;Most Contacted,
+Anai,,,,,,,,,,,,,,,,,,,,+18177972930,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Andres,,Alvarez,,(UTG),,,,,,,,,"Account: angalvarez@univision.net
+Notes: 
+
+",Group/cn=Recipients/cn=angalvarez@univision.net,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=angalvarez@univision.net,,,,,(310) 686-1567,,,,,,,,,,,,,,,,,,(310) 410-5668,,,,Univision Management Company,Systems Engineer,Corp MIS,Los Angeles,,,angalvarez@univision.net,"5999 Center Drive
+Los Angeles, CA 90045",5999 Center Drive,,,,Los Angeles,CA,90045,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Andy,,Baulk,,,,,,,,,,,"Notes: 
+
+",,,,,,,,,,,,,,,,,,,,,,,,,(310) 318-1202,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Angie,,,,,,,,,,,,,,,,,,,,(817) 995-0061,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Arnold,,Cabrera,,,,,,,,,,,,arnoldc@datasafe.com,,,,,,,,,,,,,,,,,,,,,,,,(650) 875-3800 x3266,,,,,,,,,,,"574 Eccles
+South San Francisco, CA
+United States of America",574 Eccles,,,,South San Francisco,CA,,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Artie,,Pagan,,,,,,,,,,,"Account: apagan
+",/o=Corp/ou=First Administrative Group/cn=Recipients/cn=apagan,,,,972-394-5296,,(214) 251-5019,,(214) 758-2477,,,,,,,,,,,,,,,,(214) 758-2476,,,,UNIVISION Radio,Intranet Manager,Information Technology,Corporate,,,apagan,"2323 Bryan Street
+Suite 1900
+Dallas, Texas 75201
+United States","2323 Bryan Street
+Suite 1900",,,,Dallas,Texas,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Astrid,,Juarez,,,,,,,,,,,"User 1: 400887FC
+",asjuarez@UNIVISION.NET,,,,,,,,,,,,,,,,,,,,,,,,415-538-8061,,,,Univision Management Company,Human Resources Manager,,,,,,"50 Fremont Street, 41st Floor
+San Francisco, CA 94105
+United States","50 Fremont Street, 41st Floor",,,,San Francisco,CA,94105,United States,,,,,,,,,,,,,,,,,,400887FC,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+att,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,patrickmp75,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,azul_77_00@hotmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,babruns5@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Basil,,Mavrovitis,,,,,,,,,,,"Car Phone: 12012708177
+",BMavrovitis@univision.net,mavrovitis@optonline.net,,,201-722-9558,,(551) 486-5075,,,,,,,,,,,,,,,,,,201-287-4345,,,,Univision Management Company,Director of Corporate Credit,,,,,,"500 Frank W. Burr Blvd, 6th Floor
+Teaneck, NJ 07666
+UNITED STATES","500 Frank W. Burr Blvd, 6th Floor",,,,Teaneck,NJ,07666,UNITED STATES,,,,,,,,,,,,,12012708177,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Beth,,,,,,,,,,,,,,,,,,,,+14156789131,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Betsy,,Perez,,,,,,,,,,,,bperez@UNIVISION.net,,,,,,2012896951,,,,,,,,,,,,,,,,,,(201) 287-4227,,,,Univision Management Company,"Mgr, SSO Revenue Accounting",,,,,,"500 Frank W. Burr Blvd, Suite 19
+Teaneck, NJ 07666
+UNITED STATES","500 Frank W. Burr Blvd, Suite 19",,,,Teaneck,NJ,07666,UNITED STATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Bianca,,Diaz,,,,,,,,,,,"Notes: 
+
+",bonkdiaz@yahoo.com,,,,(619) 286-2085,,(619) 772-7259,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Bill,,Loftin,,,,,,,,,,,"Notes: 
+
+",wtloftin@inter-linc.net,,,,(417) 779-8415,,(417) 598-0699,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Billy,,Harris,,,,,,,,,,,"Categories: Unfiled
+",wfhharris@cs.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Billy,William,Ambrose,,,,,,,,,,,,bluvthekid@yahoo.com,,,,,,,,,1716 Longmont CO. 80501,1716 Longmont CO. 80501,,,,,,,,,,,,,,3308198504,,,,,,,,,,,1329 cole,1329 cole,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+BMW,motorcycle parts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2095242955,,,,,,,,,,,"307 maze blvd
+Modesto, CA 95351",307 maze blvd,,,,Modesto,CA,95351,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts,
+Brandt,,,,,,,,,,,,,,,,,,,,,,,"4810 n. Seeley
+Damen/lawrence
+Chicago, Il","4810 n. Seeley
+Damen/lawrence",,,,Chicago,Il,,,,,,,,,7735174686,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Brett,,Larsen,,,,,,,,,,,"Mobile Phone: 5102957712
+",brett01@berkeley.edu,beacon_dues@yahoo.com,beacon.dues@gmail.com,,5108084138,,15103882443,(510) 539-3792,,"94 Bayo Vista Avenue # 301
+Oakland, CA 94611
+United States of America",,,,,,,,,,,,,,,+1 (510) 643-5243,,,,,IST Desktop Support,,,,,,"2195 Hearst 225-05
+Berkeley, CA 94720-4872
+United States of America",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts;Most Contacted,
+Brian,,Traudt,,,,,,,,,,,,briantraudt@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,(512) 923-5223,,,,,,,,,,,"710 West Avenue
+Austin, TX 78701
+United States of America",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts;Most Contacted,
+,,,,,,,,,,,,,,brian.traudt@veradatum.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Carla,,Martorell,,,,,,,,,,,,cmartorell78@hotmail.com,,,,,,(787) 645-3628,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Cassa,,,,,,,,,,,,,,kaufman.cassandra@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Jaime,,,Castro valley,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5107066174,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Cathe,,Swineford,,,,,,,,,,,"Categories: Unfiled
+",cathesw@hotmail.com,,,,(415) 567-4331,,,,,,,,,,,,,,,,,,,,(415) 778-3800,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Cathy,,Viscarra,,,,,,,,,,,,cviscarra@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Most Contacted,
+cdr,,,,,,,,,,,,,,,,,,,,+14158106991,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Chris,,Brown,,,,,,,,,,,"Account: CDBrown
+",/O=UNIVISION/OU=UVN1NYC1/CN=RECIPIENTS/cn=CDBrown,,,,,,(713) 858-5440,,(713) 669-1365,,,,,,,,,,,,,,,,(713) 965-2607,,,,UVN Texas L.P.,V.P./ Controller,KXLN - G and A,Houston,,,CDBrown,"9440 Kirby Drive
+Houston, TX 77054
+United States",9440 Kirby Drive,,,,Houston,TX,77054,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Chris,,Derby,,,,,,,,,,,"User 1: 240B5047
+",cderby@UNIVISION.NET,,,,,,310-650-6066,,,,,,,,,,,,,,,,,,310-410-5665,,310-410-5666,,Univision Management Company,Sr Systems Engineer,,,,,,"5999 Center Drive
+Los Angeles, CA 90045
+United States",5999 Center Drive,,,,Los Angeles,CA,90045,United States,,,,,,,,,,,,,,,,,,240B5047,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Chris,,Robison,,,,,,,,,,,,christopher.robison@gmail.com,cdr@netoasis.net,cdr@im.netoasis.net,,,,4157302336,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts;Most Contacted,
+Chris,,Spetter,,,,,,,,,,,"Account: cspetter
+Notes: 645 Lewis Drive
+Hurst, TX 76054",/o=Corp/ou=First Administrative Group/cn=Recipients/cn=cspetter,cspetter@gmail.com,,,,,(214) 893-7725,,(214) 525-7770,,,,,,,,,,,,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=gkemp,,,,(214) 758-2475,,,,UNIVISION Radio,Network Administrator,,,,,cspetter,"2323 Bryan Street
+Suite 1900
+Dallas, Texas 75201
+United States","2323 Bryan Street
+Suite 1900",,,,Dallas,Texas,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Chris,,Weller,,,,,,,,,,,,chrishw1980@gmail.com,,,,,,(415) 871-5811,,,"401-445 Taraval St
+San Francisco
+California
+94116
+United States",401-445 Taraval St,,,,San Francisco,California,94116,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Most Contacted,
+,,,,,,,,,,,,,,chris.robison@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,chris.robison@me.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Christopher,,Robison,,,,,,,,,,,,chris@simplesoftwaresf.com,cdr@cdr2.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Claudio,,Saldaña,,(UTG),,,,,,,,,"Account: csaldana@UNIVISION.NET
+",csald9999@yahoo.com,,,,310-798-9350,,310-654-7005,,,,,,,,,,,,,,,,,,,,,,Univision Management Company,Sr. Systems Engineer,Corp MIS,Los Angeles,,,csaldana@UNIVISION.NET,"5999 Center Drive
+Los Angeles, CA 90045",5999 Center Drive,,,,Los Angeles,CA,90045,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Colin,,Wadman,,,,,,,,,,,,colinwadman@msn.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Most Contacted,
+Cruz,,Torres,,,,,,,,,,,,,,,,,,469-328-0120,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Crystal,,,,,,,,,,,,,,,,,,,,+18318695361,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,crystal.a.koenig@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,customers@poplus.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Damen,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4152645450,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Danica,,San Martin,,,,,,,,,,,,smdanicasm@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,4158833468,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Danielle,,Herschend,,,,,,,,,,,,dherschend@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Darel,,Roberts,,,,,,,,,,,"User 1: 40045225
+",droberts@UNIVISION.NET,,,,,,,,,,,,,,,,,,,,,,,,310-410-5655,,310-348-3698,,Univision Management Company,"Director, Software Development",,,,,,"5999 Center Drive
+Los Angeles, CA 90045
+UNITED STATES",5999 Center Drive,,,,Los Angeles,CA,90045,UNITED STATES,,,,,,,,,,,,,,,,,,40045225,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Darryl,,Holley,,,,,,,,,,,"Account: dholley
+",/O=UNIVISION/OU=UVN1NYC1/cn=Recipients/cn=dholley,,,,,,(214) 882-7331,,,,,,,,,,,,,,/o=UNIVISION/ou=UVN1MIA1/cn=Recipients/cn=AndresC,,,,(214) 758-2455,,,,UVN Texas L.P.,System Administrator,Texas CORP MIS,Dallas,,,dholley,"2323 Bryan Street, Suite 1900
+Dallas, TX 75201
+United States","2323 Bryan Street, Suite 1900",,,,Dallas,TX,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+David,,Harr,,,,,,,,,,,"Account: DHARR
+",/o=Corp/ou=First Administrative Group/cn=Recipients/cn=DHARR,,,,,,(214) 498-3283,,,,,,,,,,,,,,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=gkemp,,,,(214) 758-2473,,,,UNIVISION Radio,Network Administrator,Information Technology,Corporate,,,DHARR,"2323 Bryan Street
+Suite 1900
+Dallas, Texas 75201
+United States","2323 Bryan Street
+Suite 1900",,,,Dallas,Texas,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+David,,Leiva,,,,,,,,,,,"Notes: 
+
+",,,,,(415) 206-0588,6502961664,(415) 756-4881,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+david,,salinas,,,,,,,,,,,,,,,,,,+14152978425,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+David,,Scott,,,,,,,,,,,,,,,,,,4154120690,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,david.salinas64@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,david@simplesoftwaresf.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Debbie,,Pilgrim,,,,,,,,,,,"Account: dpilgrim
+",/o=Corp/ou=First Administrative Group/cn=Recipients/cn=debbie,,,,,,(214) 394-7726,,(214) 525-7770,,,,,,,,,,,,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=gkemp,,,,(214) 758-2471,,,,UNIVISION Radio,Network Administrator,Information Technology,Corporate,,,dpilgrim,"2323 Bryan Street
+Suite 1900
+Dallas, Texas 75201
+United States","2323 Bryan Street
+Suite 1900",,,,Dallas,Texas,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Deputy,,Jones,,,,,,,,,,,,,,,,,,(415) 254-0353,,,,,,,,,,,,,,,,,,(415) 499-7233,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Legal,
+Devlin,,,,,,,,,,,,,,,,,,,,(415) 828-3199,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,dleiva415@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Dominga,,Leiva,,,,,,,,,,,,,,,,(415) 626-2591,,(925) 752-6985,,,,,,,,,,,,,,,,,,,,,,,Grandma,,,,,,"370 valencia st
+210
+San Francisco, CA 94103
+United States of America","370 valencia st
+210",,,,San Francisco,CA,94103,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Doris,,Battaglia,,,,,,,,,,,,dabreu@univision.net,,,,,,2014780176,,,,,,,,,,,,,,,,,,201-287-4359,,,,Univision Management Company,Database Applications Programmer,,,,,,"500 Frank W. Burr Blvd, 6th Floor
+Teaneck, NJ 07666
+United States","500 Frank W. Burr Blvd, 6th Floor",,,,Teaneck,NJ,07666,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Doug,,Horngrad,,,,,,,,,,,"4 felonies:
+burglary, criminal threats, vandalism, corporal injury;",horngrad@sbcglobal.net,pstutz@sbcglobal.net,,,,,(415) 397-9509,,,"1736 Stockton St
+San Francisco
+California
+United States",1736 Stockton St,,,,San Francisco,California,,United States,,,,,,,,,,,Criminal,Lawyer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Legal;Most Contacted,
+Drew,,Whittle,,,,,,,,,,,"Account: dwhittle
+",/o=Corp/ou=First Administrative Group/cn=Recipients/cn=dwhittle,,,,(972) 394-8776,,(214) 392-7739,,(214) 525-7770,,,,,,,,,,,,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=gkemp,,,,(214) 758-2472,,,,UNIVISION Radio,Senior Network Administrator,Information Technology,Corporate,,,dwhittle,"2323 Bryan Street
+Suite 1900
+Dallas, Texas 75201
+United States","2323 Bryan Street
+Suite 1900",,,,Dallas,Texas,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Ed,,Peterson,,,,,,,,,,,"Notes: Anne Abene from Genoa 
+
+",petersinej@yahoo.com,,,,4156377159,5108889582,4156859115,,,"1319 East Montevista
+Turlock, CA
+United States of America",1319 East Montevista,,,,Turlock,CA,,United States of America,,,,,,,4153579009,,,,,,,,,,,"93 Leland Ave --behind 95
+San, Francisco
+United States of America",93 Leland Ave --behind 95,,,,San,Francisco,,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Edgar,,Chiriff,,,,,,,,,,,,EChiriff@UNIVISION.net,,,,,,201-675-6754,,,,,,,,,,,,,,,,,,201-287-4250,,201-287-8361,,Univision Management Company,Billing Manager,,,,,,"500 Frank W. Burr Blvd, Suite 19
+Teaneck, NJ 07666
+United States","500 Frank W. Burr Blvd, Suite 19",,,,Teaneck,NJ,07666,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+,,,,,,,,,,,,,,edppeterson@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+eileen,,dunn,,,,,,,,,,,"Categories: Unfiled
+",Eileen.DUNN@danone.com,,,,,,,,,,,,,,,,,,,,,,,,(626) 351-7829,,(626) 351-0803,,Danone Waters,,,,,,,"465 N. Halstead St. Suite 150
+Pasadena, CA 91030",465 N. Halstead St. Suite 150,,,,Pasadena,CA,91030,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Eleanor,,Power,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5105259987,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,emilie.laik@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,emilie.lauk,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Epiphany,,Consulting,,,,,,,,,,,"Notes: Comerica
+ECI7011
+
+
+TID #47-0870624
+
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,47-0870624,Tax num,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,eppeterson@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Erica,,Schaefer,,,,,,,,,,,,eSchaefer@atlastinc.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Eugene,,Breymeyer,,,,,,,,,,,,eugen_breymeyer@web.de,,,,,,,,,,,,,,,,,,,,,,,,,,,,Russia,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Fastrack,,,,,,,,,,,,,"106925367
+1133
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+files@quickofficeconnect.com,,,,,,,,,,,,,,files@quickofficeconnect.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Florencio,,Enriquez,,,,,,,,,,,"Account: fenriquez
+",/o=UNIVISION/ou=UVN1LAX1/cn=Recipients/cn=fenriquez,,,,,,(310) 345-8629,,(310) 410-5666,,,,,,,,,,,,,,,,(310) 410-5661,,,,Univision Management Company,Systems Engineer,Corp MIS,Los Angeles,,,fenriquez,"5999 Center Drive
+Los Angeles, CA 90045
+United States",5999 Center Drive,,,,Los Angeles,CA,90045,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+FRANCO,A,TARM,,,,,,,,,,,"Notes: Education: UCLA 
+Languages: 
+
+
+",,,,,,,,,,,,,,,,,,,,,,,,,650-342-3597,,,,,Dentist,,,,,,"410 N SAN MATEO DR
+SAN MATEO, CA 94401
+United States of America",410 N SAN MATEO DR,,,,SAN MATEO,CA,94401,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Frank,,Gutierrez,,,,,,,,,,,Account: fegutierrez,/o=UNIVISION/ou=UVN1LAX1/cn=Recipients/cn=fegutierrez,fegutierrez@charter.net,,,,,(310) 902-8976,,(310) 410-5666,,,,,,,,,,,,/o=UNIVISION/ou=UVN1MIA1/cn=Recipients/cn=MHesse,,,,(310) 410-5664,,,,Univision Management Company,Regional Manager - West,,,,,fegutierrez,"5999 Center Drive
+Los Angeles, CA 90045
+United States",5999 Center Drive,,,,Los Angeles,CA,90045,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Gabby,,Denton,,,,,,,,,,,,gdenton@quarrylane.org,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Geico,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8772060215,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Geoffrey,,Kemp,,,,,,,,,,,"Account: gkemp
+Notes: All support calls should go to 214-758-2479
+
+",,,,,(972) 642-4058,,(214) 641-7749,,(214) 758-2477,,,,,,,,,,,,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=jhinson,,,,(214) 758-2470,,,,UNIVISION Radio,IT Director,Information Technology,Corporate,,,gkemp,"2323 Bryan Street
+Suite 1900
+Dallas, Texas 75201
+United States","2323 Bryan Street
+Suite 1900",,,,Dallas,Texas,75201,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+George,,Leiva,,,,,,,,,,,,,,,,9252619560,,,,,,,,,,,,,,,,,,,,415 215 4843,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Gery,,,,,,,,,,,,,,,,,,,,+16503050345,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+gina,,,,,,,,,,,,,,,,,,,,+14158672064,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Gina,,,,,,,,,,,,,,ginamarsot@gmail.com,,,,,,+14159129039,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Golden,,One,,,,,,,,,,,,,,,,8004488181 X2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Gordon,,Guerra,,,,,,,,,,,"Notes: 
+
+",cajn97@aol.com,,,,(972) 907-9700,,(214) 529-0936,,,,,,,,,,,,,,,,,,(817) 399-5234,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+griasti,,2000,,,,,,,,,,,,griasti2000@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Guiermo,,Perez,,,,,,,,,,,"Notes: 
+
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Heath,,Kornblum,,,,,,,,,,,"Categories: Unfiled
+
+E-mail Address: heathkornblum@gmail.com
+",heathkornblum@hotmail.com,heath.kornblum@mindjet.com,heath@im.netoasis.net,,,,(415) 786-3093,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"1730 broderick 11
+San Francisco, CA 94121
+United States of America",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts;Most Contacted,
+,,,,,,,,,,,,,,heath@simplesoftwaresf.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Hector,,Columbian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7073346170,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Hiroko,,,,,,,,,,,,,,,,,,,,+14158104015,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,horngrad@att.blackberry.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,horngrad@speakeasy.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Imam,,Shiek,,,,,,,,,,,"Categories: Unfiled
+",imam888@hotmail.com,,,,,,(650) 450-0710,,,"15 hawthorne way, #302
+san jose, ca 95110","15 hawthorne way, #302",,,,san jose,ca,95110,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;My Contacts;Old Contacts,
+IRS,,,,,,,,,,,,,"Checks payable to U.S. Treasury Department
+On check = cell number, SSN, 1040/02
+$200 month
+Balance as of 4-17-2007 = 0.00
+Collections #800-829-7650
+Lien and Levy 800-913-6050
+  
+https://www.pay1040.com/Receipt.aspx
+ 
+Home | Convenience Fee Calculator | Payment Verification | FAQ | Contact Us   
+ 
+STEP 5: Receipt Your transaction is complete. There is no need to mail in a payment voucher (Form 1040-V). Note, the IRS will match your payment to your single or joint tax return. If you file a paper tax return, you may choose to write the confirmation number in the upper left hand corner of the form, but this is optional. 
+We will process your payment immediately. The IRS payment date will be equal to the date your transaction was authorized and completed. However, it may take the IRS 5 - 7 days to post the payment to your tax account.  
+
+For frequently asked questions concerning your confirmation number, click here
+For frequently asked questions about how your payment is posted to your IRS account, click here
+Please print this page and keep it with your tax records. 
+
+ 
+
+Confirmation Number: 6467423 
+Payment Date: 04/18/2007 
+Payment Type: Form 1040 (All Types) Balance Due - Prior Year 1997 - 2005 
+
+Tax Year: 2002 
+  
+
+IRS Payment Amount: $717.76 
+Link2Gov Convenience Fee: $17.87 
+Total Amount of Transaction: $735.63 
+
+Primary Social Security Number: xxx-xx-6410 
+
+Primary First Name: Patrick 
+Primary Middle Initial: M 
+Primary Last Name: Peterson 
+Primary Suffix (Jr, Sr, etc.):  
+
+Card Type: Visa 
+Card Number:
+  xxxx-xxxx-xxxx-4488
+  
+
+
+ 
+  
+
+
+If you elected to receive an email receipt or reminder, it may be blocked by email filtering software or your internet service provider. To prevent this, you may add our email address (pay1040@link2gov.com) to your address book.
+ 
+ 
+TO PROTECT YOUR SENSITIVE DATA PLEASE BE SURE TO CLOSE THE BROWSER WHEN YOU ARE FINISHED 
+ 
+ 
+ 
+1 Burton Hills Boulevard | Suite 300 | Nashville, TN 37215
+e-mail: PAY1040@Link2Gov.com.
+Copyright © 2007 LINK2GOV Corp. All rights reserved. Privacy Statement.
+",,,,,(800) 829-7650,,,,,,,,,,,,,,,,,,,,1-800-829-1040,,,,,,,,,,,"IRS
+Austin, TX 73301-0010
+United States of America",IRS,,,,Austin,TX,73301-0010,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Isabel,,SEVERO,,,,,,,,,,,"Notes: 
+
+",isabel.severo@danone.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Israel,,Rodriguez,,(UTG),,,,,,,,,"Account: irodriguez@UNIVISION.NET
+",Group/cn=Recipients/cn=irodriguez@UNIVISION.NET,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=irodriguez@UNIVISION.NET,,,,,,,,,,,,,,,,,,,,,,,(310) 410-5669,,,,Univision Management Company,Systems Engineer,Corp MIS,Los Angeles,,,irodriguez@UNIVISION.NET,"5999 Center Drive
+Los Angeles, CA 90045",5999 Center Drive,,,,Los Angeles,CA,90045,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Jaime,,Weston,,,,,,,,,,,,,,,,,,+14155324066,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+James,,Duperry,,,,,,,,,,,,james@largethought.com,,,,,,2142570361,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Janet,,Hernandez,,,,,,,,,,,"Notes: 
+
+",,,,,(925) 756-7052,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Janice,,,,,,,,,,,,,,jjaraicie@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Jason,,Campos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,858-336-6586,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Jason,,Duplissis,,,,,,,,,,,,jduplissis@deloitte.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Jason,,Reed,,(US - New York),,,,,,,,,,jareed@deloitte.com,,,,,,(310) 709-5435,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Jay,,Malari,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8588296637,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Jayna,,,,,,,,,,,,,,jaynafay@gmail.com,,,,,,+19177031432,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Most Contacted,
+jayna,,knight,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,jeby@netoasis.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Jennifer,,Moody,,,,,,,,,,,,jmoody@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Jeremy,,Mollett,,,,,,,,,,,,jeremy.mollet@sapphire.com,,,,,,,,,,,,,,,,,,,,,,,,415-788-8488,,415-788-2592,,Sapphire Technologies,,,,,,,"27 Maiden Lane Suite 300
+San Francisco, Ca. 94108
+United States of America",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Jessica,,,,,,,,,,,,,,jrabbyt888@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,8315880510,,,,,,,,,,,"2039 forest ave. #306
+san jose, ca. 95128
+United States of America",2039 forest ave. #306,,,,san jose,ca.,95128,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts;Most Contacted,
+Jim,,,,,,,,,,,,,,,,,,,,+14156789032,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Joann,,peterson,,,,,,,,,,,,joansup@yahoo.com,,,,(817) 468-2293,,8176581406,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Joe,,Mccarley,,,,,,,,,,,"Notes:
+
+E-mail Address: joemccarley@gmail.com
+",joemccarley@hotmail.com,joemccarley@tmomail.net,jmccarley@appliancewhse.com,,,,(469) 360-7602,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"4341 Horizon North Pkwy #432
+Dallas, Tx 75287
+United States of America",4341 Horizon North Pkwy #432,,,,Dallas,Tx,75287,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+John,,Arrow,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7738993926,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,john@simplesoftwaresf.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Jon,,Eby,,,,,,,,,,,"Notes:
+
+E-mail Address: jeby1975@gmail.com
+",JEby@xeroxagents.com,jeby1975@hotmail.com,thabolts@yahoo.com,,(858) 484-4033,,831-325-8247,,,,,,,,,,,,,,,,,,415-981-9116 #20,,,,,,,,,,,"157 Elm St. #302
+San Mateo, CA 94401
+United States of America",,,,,,,,,549-39-3976,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts;Most Contacted,
+Jonathan,,Smith,,,,,,,,,,,"Notes: 
+
+",jonathan_smith@charter.net,,,,(817) 563-1093,,(817) 808-7557,,,,,,,,,,,,,,,,,,,,,,Etalk,,,,,,,"1401 The Lakes Ct.
+Keller, TX 76248
+United States of America",1401 The Lakes Ct.,,,,Keller,TX,76248,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Joseph,,Idler,,,,,,,,,,,,jidler@univision.net,,,,,,917-301-7293,,,,,,,,,,,,,,,,,,201-287-4321,,201-287-9315,,Univision Management Company,Technology Manager,,,,,,"500 Frank W. Burr Blvd, 6th Floor
+Teaneck, NJ 07666
+UNITED STATES","500 Frank W. Burr Blvd, 6th Floor",,,,Teaneck,NJ,07666,UNITED STATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Juan,,Rivera,,,,,,,,,,,"Notes: Cell# (323)377-3759
+MSN IM/Email = Tonyr4music@hotmail.com
+Yahoo IM/Email = Tonyr4music@yahoo.com
+Facebook = http://www.facebook.com/people/Tony_Rivera/580681211
+MySpace = http://www.myspace.com/jr4music
+LinkedIn = http://www.linkedin.com/in/tonyr4music
+
+
+",Tonyr4music@hotmail.com,Tonyr4music@yahoo.com,,,,,323-377-3759,,,,,,,,,,,,,,,,,,,,,,,Sr. Systems Architect,,,,,,United States of America,,,,,,,,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Juana,,Harris,,,,,,,,,,,Notes:,juanaharris@sbcglobal.net,,,,(707) 554-9853,,(415) 902-8542,,,,,,,,,,,,,,,,,,28542,,(707) 557-0306,,,Mom,,,,,,"332 Seamist Dr.
+Vallejo, CA 94591
+United States of America",332 Seamist Dr.,,,,Vallejo,CA,94591,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Junior,,Peterson,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8176581584,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Justin,,Giardi,,,,,,,,,,,,lesliaisonsdangereuses73@yahoo.com,,,,,,(972) 369-9201,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Justin,,Seagraves,,,,,,,,,,,,jseagraves@univision.net,,,,,,214-621-9966,,,,,,,,,,,,,,,,,,214-525-7798,,214-525-7770,,"Univision Radio, Inc.",Vice President of Business and Traffic Operations,,,,,,"3102 Oaklawn Ave, Ste 215
+Dallas, TX 75219
+UNITED STATES",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Justin,,Steadman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4805771643,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Kaiser,,Appt & pills,,,K.A.p.,,,,,,,,"Notes: eve548burn278
+
+Rx 1155041682 albut
+",,,,,8882186245,,,,,,,,,,,,,,,,,,,,5107521190,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Kajsa,,Bohman,,,,,,,,,,,,kajsabohman@sbcglobal.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Katharina,,Wurm,,,,,,,,,,,,griasti2000@yahoo.com,,,,203 570 8679,,,,,"3059 Market St.
+San Francisco
+CA
+",3059 Market St.,,,,San Francisco,CA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Kelli,,Watson,,,,,,,,,,,"Account: kwatson
+",/o=UNIVISION/ou=UVN1LAX1/cn=Recipients/cn=kwatson,,,,,,(408) 595-9378,,,,,,,,,,,,,,/o=UNIVISION/ou=UVN1LAX1/cn=Recipients/cn=MBeltran,,,,(415) 538-6442,,(415) 538-6402,,Univision Management Company,Director Traffic Service,CORP Sales and Marketing,San Francisco,,,kwatson,"50 Fremont Street, 41st Floor
+San Francisco, CA 94105
+UNITED STATES","50 Fremont Street, 41st Floor",,,,San Francisco,CA,94105,UNITED STATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Ken,,Klein,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,3109387999,,,,Univision,Office manager,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Kenneth,,Klein,,(UTG),,,,,,,,,"Account: KKlein@UNIVISION.NET
+",Group/cn=Recipients/cn=KKlein@UNIVISION.NET,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=KKlein@UNIVISION.NET,,,,,,,,,,,,,,,,,,,,,,,(310) 348-3684,,,,Univision,"Vice President, Special Projects",Special Projects - UTG,Los Angeles,,,KKlein@UNIVISION.NET,"5999 Center Drive
+Los Angeles, CA 90045",5999 Center Drive,,,,Los Angeles,CA,90045,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Kevin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,(972) 342-5623,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Kevin,A.,Duffy,,,,,,,,,,,,Marxduffy@aol.com,Kevin@marxandduffy.com,,,415 567 4111,,,,,"1388 Sutter Street,  San Francisco, CA 94109-5454",,,,,,,,,,,,,,,,,,,Civil,Lawyer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Legal;Most Contacted,
+Khalid,,Qurashi,,,,,,,,,,,"Account: kqurashi
+",/O=UNIVISION/OU=UVN1NYC1/cn=Recipients/cn=kqurashi,,,,,,(201) 218-2782,,(201) 287-9583,,,,,,,,,,,,,,,,(201) 287-4373,,,,Univision Management Company,Director of Financial & Corporate Applications,Corp MIS,Teaneck,,,kqurashi,"500 Frank W. Burr Blvd, Suite 19
+Teaneck, NJ 07666
+United States","500 Frank W. Burr Blvd, Suite 19",,,,Teaneck,NJ,07666,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Kimani,,,,,,,,,,,,,,,,,,8584841338,,8585681665,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Kris,,Vivas,,,,,,,,,,,Notes:,woofies4ever@yahoo.com,,,,,,,,,,,,,,,,,,,,,,,,(954) 885-6600,,(954) 885-6655,,PUPPY BOUTIQUE,,,,,,,"9113 Taft St.
+Pembroke Pines, FL. 33024
+United States of America",9113 Taft St.,,,,Pembroke Pines,FL.,33024,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Krissy,,,,,,,,,,,,,,,,,,,,+14154567093,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Kristina,,Kelley,,,,,,,,,,,"Mobile Phone: 2147708734
+",dimentionsunlimited@yahoo.com,,,,19722219328,12149343319,4694646773,,,,,,,,,,,,,,,,,,12145659499,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Lauren,,,,,,,,,,,,,,77lashes@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,leigherinbarrett@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Linda,,Thomas,,,,,,,,,,,,lthomas@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Linux,,Password,,,,,,,,,,,"Notes: Admin
+admin
+
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+lostlove,,,,,,,,,,,,,,megansf415@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Louis,,Perez,,,,,,,,,,,"Notes: 
+
+",,,,,,,(818) 497-1177,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,lpiazza@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+lulu,,,,,,http://www.poadocs.com,,,,,,,"Categories: Unfiled
+Web Page: http://www.poadocs.com
+",louanan@hotmail.com,,,,,,(650) 515-9595,,,,,,,,,,,,,,,,,,(650) 922-5043,6507565630,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Manuel,,Sanches,,Jr.,,,,,,,,,"Notes: 
+
+",chez100s@hotmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Manuel,,Sanchez,,,,,,,,,,,"Notes: 
+
+",,,,,(714) 538-2594,,(714) 267-9642,,,,,,,,,,,,,,,,,,,,,,,Jr.,,,,,,"17831 romelle ave
+Santa ana, ca 92705",17831 romelle ave,,,,Santa ana,ca,92705,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Manuel,sr.,Sanchez,,,,,,,,,,,"Notes: 
+
+",,,,,,,(408) 464-3728,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Margarita,,,,,,,,,,,,,,,,,,,,(510) 685-4257,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Mari,,Sanchez,,,,,,,,,,,,Mari_d_sanchez@hotmail.com,,,,,,(214) 394-0133,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Mark,,Piesanen,,(US - New York),,,,,,,,,,mpiesanen@deloitte.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,Deloitte,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Marlene,,Sanchez,,,,,,,,,,,"Notes: 
+
+",msanchez@connetics.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"390 Sunnyvale Avenue #6
+Sunnyvale, CA 94086
+United States of America",390 Sunnyvale Avenue #6,,,,Sunnyvale,CA,94086,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Martin,,Sacks,,,,,,,,,,,,martin.sacks@humanconcepts.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Marva,,Cadle,,,,,,,,,,,,mcadle@UNIVISION.NET,,,,,,,,,,,,,,,,,,,,,,,,415-538-8060,,415-538-8053,,Univision Management Company,Credit Manager,,,,,,"50 Fremont Street, 41st Floor
+San Francisco, CA 94105
+United States","50 Fremont Street, 41st Floor",,,,San Francisco,CA,94105,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Mary,,Mohrenweiser,,,,,,,,,,,"Account: MMohrenweiser
+",/O=UNIVISION/OU=UVN1NYC1/CN=RECIPIENTS/cn=MMohrenweiser,,,,,,(201) 562-4852,,(201) 287-9583,,,,,,,,,,,,,,,,(201) 287-4334,,,,Univision Management Company,Project Manager - Finance Applications,Corp MIS,Teaneck,,,MMohrenweiser,"500 Frank W. Burr Blvd, 6th Floor
+Teaneck, NJ 07666
+United States","500 Frank W. Burr Blvd, 6th Floor",,,,Teaneck,NJ,07666,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+,,,,,,,,,,,,,,mary@marystudio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,mary@marystudios.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Matt,,Ramsey,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,ZigZag Bondings,Owner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Legal,
+Matthew,,Szczepanski,,,,,,,,,,,,mszczepanski@nakajimausa.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Megan,,,,,,,,,,,,,,megansf415@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Most Contacted,
+Megan,,Schmidt,,,,,,,,,,,"fat_girl_00@hotmail.com
+Ms_megan33@hotmail.com
+
+
+Vin# 3vwth69mo3mo91641
+Car lic# 5xzc408
+Dl# 03143056 tx
+
+Fvvzyr AA
+
+E-mail Address: megansf@me.com
+Mobile Phone: 4152469979
+",meganschmidt20@yahoo.com,ms_megan33@yahoo.com,meganschmidt20@gmail.com,,1972-353-5305,,+14694649428,,,"157 Elm St. #302
+San Mateo, CA 94401",157 Elm St. #302,,,,San Mateo,CA,94401,,,,,,,,(415) 275-9192,,,,,,,,,,,"1502 juniper
+Louisville, TX 75077
+United States of America",1502 juniper,,,,Louisville,TX,75077,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts;Most Contacted,
+Megan,,Schmidt Work,,,,,,,,,,,,megan.schmidt@humanconcepts.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"3 Harbor Drive #200
+Sausalito, CA 94965
+United States of America",3 Harbor Drive #200,,,,Sausalito,CA,94965,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+,,,,,,,,,,,,,,megansf415,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Michael,,Patino,,,,,,,,,,,,,,,,,,7863769515,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Michael,W.,Anderson,,(US - San Francisco),,,,,,,,,,mianderson@deloitte.com,,,,,,(415) 412-7459,,,,,,,,,,,,,,,,,,,,,,,OIC Commission Plans Logic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Michael,,Wallace,,,,,,,,,,,,Michael.Wallace@etalk.com,,,,,,(214) 264-2637,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"1504 mckee
+Dallas, TX",1504 mckee,,,,Dallas,TX,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+,,,,,,,,,,,,,,michael.yan@schwab.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,michaelwallace22@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Mike,,Schmidt,,,,,,,,,,,,,,,,9723535305,,2149067055,,,,,,,,,,,,,,,,,,9724264920,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,MJones@rodmancompanies.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Moinul,,Haque,,,,,,,,,,,"Account: MHaque@us.univision.com
+",/O=UNIVISION/OU=UOLNYC1/cn=Recipients/cn=MHaque,,,,718-874-9636,,646-831-9355,,646-487-1569,,,,,,,,,,,,,,,,646-487-6516,,,,"Univision Online, Inc.",Solution Architect,UOL Technical,New York,,,MHaque@us.univision.com,"605 Third Avenue, 26th Floor
+New York, NY 10158
+United States","605 Third Avenue, 26th Floor",,,,New York,NY,10158,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Morgan,,Stanley,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,866-340-3629,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,mrocean4@mac.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Naga,Siddeswara Rao,Giddaluru,,(US - Glen Mills),,,,,,,,,,ngiddaluru@deloitte.com,,,,(201) 836-0600 x1212,,,,,,,,,,,,,,,,,,,,(201) 287-4319,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Naomi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8314313061,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Nathan - Law,Office of Douglas,Horngrad,,,,,,,,,,,,nategarr@sbcglobal.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+office,,Apps,,,,,,,,,,,,files@quickofficeconnect.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,Edit Docs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Oscar,,Espinoza,,,,,,,,,,,,espinoza.oscar@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,paola2007@gatamail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Patrick,,Bible,,,,,,,,,,,"Notes: The 5 senses are distractions,
+Life is the physical form of being divided,
+Love is the lack of 0,
+We can never be 0,
+As long as we're 69
+
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Patrick,,Emmons,,,,,,,,,,,"Notes: 
+
+",pemmons@msn.com,pemmons@sbcglobal.com,pemmons@sbcglobal.net,,,,(817) 713-8591,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Patrick,,Gannon,,,,,,,,,,,,patrickjosephgannon@yahoo.com,,,,,,(310) 467-3272,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Patrick,,Peterson,,,,,,,,,,,"Notes: Motorcycle License #2Z5092
+Vin#wb104480906173225
+Airline Vouchers 001766662382(8/9)
+Golden 1 route #321175261
+",GROUP/CN=RECIPIENTS/CN=PPETERSON@UNIVISION.NET,PATRICKMP@YAHOO.COM,/O=CORP/OU=FIRST ADMINISTRATIVE GROUP/CN=RECIPIENTS/CN=PPETERSON@UNIVISION.NET,,,,(214) 405-1862,,,"157 Elm St. #302
+San Mateo, CA 94401
+United States of America",157 Elm St. #302,,,,San Mateo,CA,94401,United States of America,,,,,,,4155386449,(310) 348-3500,,,Univision,Database Administrator/Programmer,,,,,,"5999 Center Dr.
+Los Angeles, CA 90045
+United States of America",5999 Center Dr.,,,,Los Angeles,CA,90045,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts;Most Contacted,
+,,,,,,,,,,,,,,patrick@netoasis.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,patrick@simplesoftwaresf.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,patrickmp,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+patrickmp1975@gmail.com,,,,,,,,,,,,,,patrickmp1975@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Patti,,Willey,,,,,,,,,,,,pattiwilley@judgefite.com,,,,,,,,,,,,,,,,,,,,,,,,+1 (972) 780-5380 x385,,,,Century 21,Office Manager,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Paul,,Calocino,,,,,,,,,,,,pcalocino@UNIVISION.net,,,,,,,,,,,,,,,,,,,,,,,,201-287-4225,,,,Univision Management Company,"Manager, Corporate Administration",,,,,,"500 Frank W. Burr Blvd, 6th Floor
+Teaneck, NJ 07666
+UNITED STATES","500 Frank W. Burr Blvd, 6th Floor",,,,Teaneck,NJ,07666,UNITED STATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Paula,,Giacometti,,,,,,,,,,,,pmgia@hotmail.com,,,,(925) 487-7190,,,,,,,,,,,,,,,,,,,,(510) 388-8911,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Pedro,,Paint,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4155739930,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Peter,,Salmeri,,(UTG),,,,,,,,,"Account: psalmeri@univision.net
+",Group/cn=Recipients/cn=psalmeri@univision.net,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=psalmeri@univision.net,,,,,,,,,,,,,,,,,,,,,,,(212) 455-5357,,,,Univision,Systems Engineer,CORP - MIS,New York,,,psalmeri@univision.net,"605 Third Ave. 12th
+New York, NY 10158",605 Third Ave. 12th,,,,New York,NY,10158,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Phillip,,Caruthers,,(E-mail),P.C.E.,,,,,,,,"Categories: Unfiled
+",p.j.carruthers@talk21.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Poplar,,Golf,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,6505224653,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+pops,,,,,,,,,,,,,,,,,,,,+14156857964,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Prerna,,Chhabria,,,,,,,,,,,"Account: PChhabr
+",/O=UNIVISION/OU=UVN1NYC1/cn=Recipients/cn=PChhabr79608346,,,,,,(201) 674-1781,,,,,,,,,,,,,,,,,,201-287-4363,,,,Univision,Application Programmer,Corp MIS,Teaneck NJ,,,PChhabr,"500 Frank W
+Burr
+Teaneck, NJ 07666
+United States","500 Frank W
+Burr",,,,Teaneck,NJ,07666,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Remy,,,,,,,,,,,,,,Remyjaypeace@hotmail.com,,,,,,+19729658255,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Rene,,Perez,,,,,,,,,,,"Notes: 
+
+",jrperezc@msn.com,,,,(818) 897-5324,,(818) 497-5818,,,,,,,,,,,,,,,,,,(310) 864-1196,,,,,,,,,,,"11620 Glenoaks Blvd
+Pacoima, CA 91331
+United States of America",11620 Glenoaks Blvd,,,,Pacoima,CA,91331,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Richard,,Harben,,,,,,,,,,,,richard@harben.org,,,,,,(858) 229-9641,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Robert,,Husband,,,,,,,,,,,"Notes: 
+
+",,,,,,,(917) 406-7155,,,,,,,,,,,,,,,,,,(201) 287-4331,(212) 455-5345,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Romel,,Lucy,,,,,,,,,,,,,,,,4154601749,4152613944,4155711651,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Roneil,,Icatar,,,,,,,,,,,,ricatar@UNIVISION.net,,,,(203) 299-0792,,(203) 451-3257,,,"15 Prowitt St.
+Norwalk, CT 06855
+United States of America",15 Prowitt St.,,,,Norwalk,CT,06855,United States of America,,,,,,,(201) 287-4357,(305) 471-1544,(201) 287-8362,,Univision Management Company,Senior Systems Engineer,Corp MIS,Teaneck,,,,"500 Frank W. Burr Blvd, 6th Floor
+Teaneck, NJ 07666
+United States","500 Frank W. Burr Blvd, 6th Floor",,,,Teaneck,NJ,07666,United States,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Roneil,,Icatar,,(UTG),,,,,,,,,"Account: ricatar@UNIVISION.net
+",Group/cn=Recipients/cn=ricatar@UNIVISION.net,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=ricatar@UNIVISION.net,,,(212) 455-4704,,(347) 512-2175,,,,,,,,,,,,,,,,,,,,,,Univision,System Engineer,CORP - MIS,New York,,,ricatar@UNIVISION.net,"605 Third Ave
+12 Fl
+New York, NY 10158","605 Third Ave
+12 Fl",,,,New York,NY,10158,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Safeway,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5106583587,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Sal,,Leiva,,,,,,,,,,,,,,,,,,5109678677,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+sales@peninsulatour.com,,,,,,,,,,,,,,sales@peninsulatour.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,sales@simplesoftwaresf.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Salvador,,Leiva,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,510 672 6478,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Samantha,,Lee,,,,,,,,,,,,slee@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Sammy,,Sanchez,,,,,,,,,,,"Categories: Unfiled
+",samuelsanchez@magicbeat.com,magicbeats@yahoo.com,,,,,(408) 464-3728,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"390 Sunnyvale Avenue #6
+Sunnyvale, CA 94086
+United States of America",390 Sunnyvale Avenue #6,,,,Sunnyvale,CA,94086,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;My Contacts;Old Contacts,
+Sandra,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4152615130,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Scott,,Brown,,,,,,,,,,,Categories: Unfiled,sbrown4746@yahoo.com,sbrown4746@hotmail.com,,,(972) 370-3336,,214-548-9276,,,,,,,,,,,,,,,,,,(972) 249-6949,,,,,,,,,,,"3803 West Crescent Way
+Frisco, TX 75034
+United States of America",3803 West Crescent Way,,,,Frisco,TX,75034,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Sean,,Coker,,,,,,,,,,,"Notes: 64.80
+
+
+",shawncoker@verizon.net,,,,,,(817) 235-5215,,,,,,,,,,,,,,,,,,,,,,Neighborhood Partners,,,,,,,"2510 Greenbough Ln.
+SouthLake, TX 76092
+United States of America",2510 Greenbough Ln.,,,,SouthLake,TX,76092,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Shadi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5105797409,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Shams,,,,,,,,,,,,,,idjshams@yahoo.com,,,,18172016613,,4694463439,,,"501 sycamore ln
+2112
+Euless, TX 76039","501 sycamore ln
+2112",,,,Euless,TX,76039,,,,,,,,12147092763,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Shawn,J.,Foust,,,,,,,,,,,,Shawn.J.Foust@usdoj.gov,,,,,,(415) 740-4105,,,,,,,,,,,,,,,,,,(510) 637-5612,,(510) 637-5097,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Legal,
+Shirin,,Sohrabi,,,,,,,,,,,,ssohrabi@UNIVISION.NET,,,,,,,,,,,,,,,,,,,,,,,,559 285 0839,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Silvio,,Migliaccio,,,,,,,,,,,,s1lv1o@hotmail.com,,,,0039 3349 4567 25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+,,,,,,,,,,,,,,simplesoftwaresf,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,simplesoftwaresf@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+,,,,,,,,,,,,,,smonas@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Stan,,,,,,,,,,,,,,,,,,,,(972) 408-5141,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+,,,,,,,,,,,,,,stephaneill@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Stephen,,Ely,,,,,,,,,,,,sely@atlastinc.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Steve,,Dominguez,,,,,,,,,,,,scampos@mrcopy.com,,,,,,(858) 945-8383,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Steve,,Monas,,,,,,,,,,,,steve@fastagency.com,,,,6196841241,,,,,,,,,,,,,,,,,,,,3109261127,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Steve,,Progressive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,4153306029,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Susan,,,,,,,,,,,,,,,,,,(310) 827-7142,,(310) 415-2020,,,,,,,,,,,,,,,,,,(310) 305-8000,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Susan,,Beard,,,,,,,,,,,,suzesf@hotmail.com,,,,,,(415) 421-7047,,,,,,,,,,,,,,,,,,,,,,Elks,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Tax,,Accountant,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5107871603,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Taylor,,Spetter,,,,,,,,,,,,,,,,,,16825581749,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Ted,,Callaghun,,,,,,,,,,,"Notes: 
+
+",ted.callaghan@ihrco.com,wcb972@yahoo.com,,,,,(469) 531-1378,,,,,,,,,,,,,,,,,,+14697776130,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts;Most Contacted,
+Tenant,,Moms,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,8314306269,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Theresa,,Davis,,,,,,,,,,,"Notes: 
+
+",,,,,(479) 243-9699,,,,,,,,,,,,,,,,,,,,(479) 394-7622,,,,,,,,,,,"800 hornbeck
+Mena, Ar 71593",800 hornbeck,,,,Mena,Ar,71593,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Tim & Paula,,,,,T.,,,,,,,,,,,,,,,6502184530,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Tina,,Varsanyi,,,,,,,,,,,,tvarsanyi@sanrio.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Tom,,Lebovic,,(UTG),,,,,,,,,"Account: tlebovic@UNIVISION.net
+Notes: 
+
+",tlebovic@univision.net,,,,(914) 764-5131,9143180724,(646) 715-2091,,,"19 Buck Hill Lane
+Pound Ridge, NY 10576
+United States of America",19 Buck Hill Lane,,,,Pound Ridge,NY,10576,United States of America,,,,,,,(212) 455-5340,(201) 287-4330,,,Univision,Applications Manager,CORP - MIS,New York,,,tlebovic@UNIVISION.net,"605 Third Ave 12 FL
+New York, NY 10158",605 Third Ave 12 FL,,,,New York,NY,10158,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Tony,,,,,,,,,,,,,,,,,,,,(415) 922-0220,,,,,,,,,,,,,,,,,,,,,,Bonjoir Bus,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Tony,,,,,,,,,,,,,"Mobile Phone: +19174172422
+",antoniocafaro@gmail.com,,,,,,+14152940909,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Most Contacted,
+Tony,,,,(SMS),,,,,,,,,,14157637016.14152940909.WgDzk3R9td@txt.voice.google.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Tony,,Leiva,,,,,,,,,,,,,,,,,,(916) 410-7805,,,"6065 Sundale Way
+Fairoaks
+95628
+",6065 Sundale Way,,,,Fairoaks,,95628,,,,,,,,,,,,Napolean,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts,
+Travis,,Harben,,,,,,,,,,,,,,,,,,(858) 229-9651,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Trey,,Wilder,,,,,,,,,,,"Categories: Unfiled
+",twilder@fujikoki.com,wilderrocks@hotmail.com,,,(214) 321-7115,,(214) 770-9222,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"10253 San Juan Ave.
+Dallas, TX 75228
+United States of America",10253 San Juan Ave.,,,,Dallas,TX,75228,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;My Contacts;Old Contacts,
+,,,,,,,,,,,,,,univark@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,
+Victor,,Broughton,,(UTG),,,,,,,,,"Account: vbroughton@UNIVISION.NET
+Notes: 
+
+",Group/cn=Recipients/cn=vbroughton@UNIVISION.NET,/o=Corp/ou=First Administrative Group/cn=Recipients/cn=vbroughton@UNIVISION.NET,,,,,(310) 714-5165,,,,,,,,,,,,,,,,,,(310) 410-5662,,,,Univision Management Company,Systems Engineer,Corp MIS,Los Angeles,,,vbroughton@UNIVISION.NET,"5999 Center Drive
+Los Angeles, CA 90045",5999 Center Drive,,,,Los Angeles,CA,90045,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Old Contacts;My Contacts,
+Vincent,,Coloyan,,,,,,,,,,,,vcoloyan@sanrio.com,vincent.coloyan@gmail.com,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Most Contacted,
+Voicemail,,,,,,,,,,,,,"11331133
+",,,,,,,,,,,,,,,,,,,,,,,,,8080,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+Wallace,,Francis,,,,,,,,,,,,wallace@wallacefrancis.com,,,,+1 (707) 544-1134,,(707) 953-7516,,,"3535 Industrial A3
+Santa Rosa
+CA",,,,,,,,,,,,,,,(707) 238-5470,,,,Lawyer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Legal;Most Contacted,
+Wanda,,Lim,,,,,,,,,,,"Categories: Unfiled
+",wlim@sanrio.com,,,,,,(415) 819-8396,,,,,,,,,,,,,,,,,,(650) 616-3213,,,,Sanrio,IT Director,,,,,,"570 Eccles Ave.
+So. San Francisco, CA 94080
+United States of America",570 Eccles Ave.,,,,So. San Francisco,CA,94080,United States of America,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+Wendy,,Leiva,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,5107348855,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,My Contacts;Old Contacts,
+William,,Harris,,,,,,,,,,,"Categories: Unfiled
+",wfharris@sbcglobal.net,,,,,,17073429853,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,Unfiled;Old Contacts;My Contacts,
+,,,,,,,,,,,,,,wlim@netoasis.net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Normal,,,

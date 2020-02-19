@@ -1,0 +1,282 @@
+BODY {
+   font-family: "Gill Sans",Verdana,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   margin: 0px;
+   padding: 0px;
+}
+
+#finder {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   width: 1000px;
+   height: 99%;
+   background-color: #ffffff;
+   white-space: nowrap;
+   overflow: scroll;
+}
+
+.panel {
+   float:left;
+   white-space: nowrap;
+   top:0px;
+   bottom: 0px;
+   width: 250px;
+   background-color: #ffffff;
+   border-right: 1px solid #d0d0d0;
+   border-left: 1px solid #a0a0a0;
+   margin: 0px 1px 0px 1px;
+}
+
+.framed {
+   height: 98%;
+   width: 250px;
+   white-space: nowrap;
+}
+#EditFrame {
+   width: 400px;
+}
+.selectedList {
+   position: relative;
+   left: 0px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   background-color: #ffffcc;
+   font-size: 14px;
+   margin-right: 3px;
+   cursor: pointer;
+}
+
+.listItem {
+   position: relative;
+   left: 0px;
+   margin-right: 3px;
+   top: 0px;
+   text-decoration: none;
+   color: black;
+   font-size: 14px;
+   cursor: pointer;
+}
+
+.listRow {
+   position: relative;
+   left: -2px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   padding-left: 16px;
+   background-image: url("/admin/appmanager/img/arrow_closed.png");
+   background-repeat: no-repeat;
+   font-size: 14px;
+   margin-right: 3px;
+   cursor: pointer;   
+   background-color: transparent;
+}
+
+.listRowSelected {
+   position: relative;
+   left: -2px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   padding-left: 16px;
+   background-image: url("/admin/appmanager/img/arrow_closed.png");
+   background-repeat: no-repeat;
+   font-family: "Gill Sans",Verdana,Arial,Helvetica,sans-serif;
+   font-size: 14px;
+   margin-right: 3px;
+   cursor: pointer;   
+   -moz-outline: 1px dotted #303030;
+   background-color: #ffffcc;
+}
+
+.unfocusedRow {
+   position: relative;
+   left: -2px;
+   right: 4px;
+   top: 0px;
+   bottom: 0px;
+   text-decoration: none;
+   color: black;
+   padding-left: 16px;
+   background-image: url("/admin/appmanager/img/arrow_closed.png");
+   background-repeat: no-repeat;
+   font-size: 14px;
+   margin-right: 3px;
+   cursor: pointer;   
+   background-color: #d0d0d0;
+}
+
+#recordForm {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 25px;
+   overflow-y: scroll;
+}
+
+#resultset {
+   position: absolute;
+   top: 1em;
+   left: 4px;
+   right: 15em;
+   bottom: 0px;
+}
+
+#resultLabel {
+   position: absolute;
+   top: 1em;
+   left: 4px;
+   text-align: right;
+}
+.parentlistlabel {
+   width: 5em;
+   position:relative;
+   text-align: right;
+}
+.parentlist {
+   font-family: "Gill Sans",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   margin: 4px 0px 4px 0px;
+   position: relative;
+   left: 4px;
+}
+.resultBox {
+   position:relative;
+   left: 4em;
+   font-family: "Gill Sans",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   width: 20em;
+}
+
+.formrow {
+   position: relative;
+   padding: 2px 2px 2px 2px;
+   clear: left;
+   display: block;
+}
+
+.label {
+   float: left;
+   position: relative;
+   width: 8em;
+   text-align: right;
+   padding: 4px 4px 0px 0px;
+}
+
+.data {
+   float: left;
+}
+
+.dataList {
+   font-family: "Gill Sans",Verdana,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   width: 18em;
+}
+
+.chkbox {
+   position: relative;
+   left: 8em;
+}
+
+.check {
+   position: relative;
+   top: 2px;
+   border: 1px inset #a0a0a0;
+   margin: 4px 0px 4px 4px;
+}
+TEXTAREA.data,INPUT.data {
+   border: 1px inset #a0a0a0;
+}
+
+#btns {
+   position: absolute;
+   top: 26em;
+   height: 24px;
+   left: 4.25em;
+   width: auto;
+   z-index: 9999;
+}
+
+#formWrap {
+   position: absolute;
+   top: 24px;
+   left: 4px;
+   right: 0px;
+   bottom: 0px;
+   z-index: 500;
+}
+
+.btn {
+   font-family: Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   margin-top: 1px;
+   height: 22px;
+   width: 60px;
+}
+
+.btn2 {
+   font-family: Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   height: 24px;
+   float: right;
+}
+
+#edit {
+   right: 0px;
+   width: 400px;
+}
+
+.heading {
+   font-size: 18px;
+   background-color: #006699;
+   position: relative;
+   height: 20px;
+   border-bottom: 2px outset #909090;
+   text-align: center;
+   font-family: Optima,Verdana,Arial,Helvetica,sans-serif;
+   background-image: url("/img/process_title.png");
+}
+
+.footer {
+   position: absolute;
+   bottom: 0px;
+   background-color: #f0f0f0;
+   border-top: 1px solid #909090;
+   height: 24px;
+   right:0px;
+   left:0px;
+}
+.footerButton {
+   font-family: "Gill Sans",Verdana,Tahoma,Arial,Helvetica,sans-serif;
+   font-size: 12px;
+   border-color: #ffffff #909090 #909090 #ffffff;
+   border-width: 1px;
+   border-style: solid;
+   margin-top: 2px;
+   height: 20px;
+   position: relative;
+   z-index: 5000;
+}
+
+.itemID {
+   position: absolute;
+   top: 0px;
+   right: 4px;
+   z-index: 1000;
+   float: right;
+   color: #a0a0a0;
+}

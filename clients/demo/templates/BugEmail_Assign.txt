@@ -1,0 +1,23 @@
+Date: #RFCDate#
+To: #Owner#
+Cc: #AssignedBy#
+Bcc: cdr@netoasis.net, patrick@netoasis.net
+From: Bug System <bugs@simplesoftwaresf.com>
+Subject: [Bug] Bug '#Title#' has been assigned to you
+
+Bug #BugID# has been assigned to you.  You may view this bug online at
+#URL#
+
+Bug details are as follows:
+
+Bug ID: #BugID#
+Bug Title: #Title#
+Assigned By: #AssignedBy#
+Assigned To: #Owner#
+Status: #Status#
+Priority: #Priority#
+
+Description: #Bug#
+
+Notes: #Notes#
+

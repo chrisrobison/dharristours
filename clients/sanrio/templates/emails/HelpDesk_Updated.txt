@@ -1,0 +1,20 @@
+
+
+    Help Desk ID:  #HelpDeskID#
+       Help Desk:  #HelpDesk#
+    Request Type:  #RequestType#
+        Category:  #Category#
+            Name:  #Name#
+          Number:  #Number#
+      Department:  #Department#
+  Request Status:  #RequestStatus#
+        Severity:  #Severity#
+   User Severity:  #User_Severity#
+     Description:  #Description#
+         Created:  #Created#
+      Created By:  #CreatedBy#
+   Last Modified:  #LastModified#
+Last Modified By:  #LastModifiedBy#
+           Notes:  #Notes#
+
+

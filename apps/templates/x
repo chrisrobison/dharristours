@@ -1,0 +1,56 @@
+<script language='Javascript' type='text/javascript' src='/lib/js/sha1.js'> </script>
+<script language='Javascript' type='text/javascript' src='/lib/js/default.js'> </script>
+<script language='Javascript' type='text/javascript' src='/lib/js/tree.js'> </script>
+<?php 
+   if (!$boss) $boss = new boss();
+   $boss->db->addResource('Module');
+   $boss->db->Module->getlist('1=1 order by Sequence');
+   
+   $nav =& $boss->db->Module->Module;
+   $jsobj = array();
+
+   for ($n=0; $n<count($nav); $n++) {
+      $jsobj[$nav[$n]->Module] = $nav[$n];
+      $jsobj[$nav[$n]->Module]->_children = array();
+
+      $boss->db->addResource('Process');
+      $boss->db->Process->getlist("ModuleID=".$nav[$n]->ModuleID.' order by Sequence');
+
+      foreach ($boss->db->Process->Process as $proc) {
+         $jsobj[$nav[$n]->Module]->_children[] = $proc;
+      }
+   }
+
+   $jsout = 'var sitetree = ' . json_encode($jsobj) . ";\n";
+
+   $user = $boss->getObject('Login', $in['ID']);
+   $jsuser = 'var user = ' . json_encode($user) . ";\n";
+?>
+<script language='Javascript' type='text/javascript'>
+   <?php
+      print $jsout;
+      print $jsuser; 
+   ?>
+   setTimeout( function() { buildModuleTree('tree', sitetree, user) }, 1000);
+</script>
+<style>
+   .children { margin-left:1em; }
+</style>
+<div class='formHeading'> Login ID: <span id='mainID'><?php print $current->LoginID; ?></span></div>
+<div class='tableGroup' style='width:500px;position:relative;float:left;'>
+   <div class='fieldcontainer'>
+      <span class='fieldcolumn fieldfloater'>
+         <div class='contentField'><span class='fieldLabel'>First Name</span><input type='text' name='Login[<?php print $current->LoginID; ?>][FirstName]' id='FirstName' value='<?php print $current->FirstName; ?>' size='30' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Last Name</span><input type='text' name='Login[<?php print $current->LoginID; ?>][LastName]' id='LastName' value='<?php print $current->LastName; ?>' size='30' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Email</span><input type='text' name='Login[<?php print $current->LoginID; ?>][Email]' id='Email' value='<?php print $current->Email; ?>' size='30' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Password</span><input type='password' name='Login[<?php print $current->LoginID; ?>][Passwd]' onblur='this.value = (this.value.length<40) ? SHA1(this.value) : this.value;' id='Passwd' value='<?php print $current->Passwd; ?>' size='30' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Phone</span><input type='text' name='Login[<?php print $current->LoginID; ?>][Phone]' id='Phone' value='<?php print $current->Phone; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Home</span><input type='text' name='Login[<?php print $current->LoginID; ?>][HomePhone]' id='HomePhone' value='<?php print $current->HomePhone; ?>' size='25' class='boxValue' /></div>
+      </span><br style="clear:left"/>
+      <div class='contentField' style='display:none'><span class='fieldLabel'>Notes</span><textarea name='Login[<?php print $current->LoginID; ?>][Notes]' id='Notes' class='textBox' style='width:45em;height:5em;'><?php print $boss->app->AppID; ?></textarea></div>
+   </div>
+</div>
+<div class='accessTree' style="float:left;">
+   <div id='tree'><h2>Simple Access</h2></div>
+   <div id='tree_children'></div>
+</div>

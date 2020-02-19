@@ -1,0 +1,38 @@
+Date: #RFCDate#
+To: juanaharrisdht@att.net
+Cc: #CreatedBy#, #ContactEmail#
+Bcc: patrick@simplesoftwaresf.com,cdr@netoasis.net
+From: D' Harris Tours Notification System <no-reply@simplesoftwaresf.com>
+Reply-To: Juana Harris <juanaharrisdht@att.net>
+Subject: New: Q(#QuoteID#) Pax: (#NumberOfPassengers#) For: (#Date#)
+
+Thank you for considering us for your next trip!
+The details are listed below. If there are any errors, please feel free to make changes:
+https://#Host#/apps/?pid=247&rsc=#rsc#&id=#id#
+
+You will receive an email once we have reviewed your information. Enjoy your trip!
+
+      Quote ID: #QuoteID#
+          Date: #Date#
+    Passengers: #NumberOfPassengers#
+  Contact Name: #ContactName#
+ Contact Phone: #ContactPhone#
+ Contact Email: #ContactEmail#
+Pickup Address: #Pickup#
+      Drop off: #DropOff#
+    Round Trip: #RoundTrip# (0=No, 1=Yes)
+    Start Time: #StartTime#
+      End Time: #EndTime#
+         Hours: #Hours#
+ Special Instructions -
+ #SpecialInstructions#
+
+Created @ #Created#
+Quote Requested By: #CreatedBy# 
+----------------------------------------------------------
+Sincerely,
+
+Juana Harris
+D' Harris Tours
+415-902-8542
+juanaharrisdht@att.net

@@ -1,0 +1,39 @@
+<div class='tableGroup'>
+   <div class='boxHeading'> Employee ID: <?php print $current->EmployeeID; ?></div>
+   <div class='fieldcontainer'>
+      <span class='fieldcolumn fieldfloater'>
+         <div class='contentField'><span class='fieldLabel'>Employee</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Employee]' id='Employee' value='<?php print $current->Employee; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Email</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Email]' id='Email' value='<?php print $current->Email; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Alt Email</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][AltEmail]' id='AltEmail' value='<?php print $current->AltEmail; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>First Name</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][FirstName]' id='FirstName' value='<?php print $current->FirstName; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Middle Name</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][MiddleName]' id='MiddleName' value='<?php print $current->MiddleName; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Last Name</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][LastName]' id='LastName' value='<?php print $current->LastName; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Title</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Title]' id='Title' value='<?php print $current->Title; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Department</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Department]' id='Department' value='<?php print $current->Department; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Office Status</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][OfficeStatus]' id='OfficeStatus' value='<?php print $current->OfficeStatus; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Hire Date</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][HireDate]' id='HireDate' value='<?php print $current->HireDate; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Termination Date</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][TerminationDate]' id='TerminationDate' value='<?php print $current->TerminationDate; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Office</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Office]' id='Office' value='<?php print $current->Office; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Office Address</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][OfficeAddress]' id='OfficeAddress' value='<?php print $current->OfficeAddress; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Office City</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][OfficeCity]' id='OfficeCity' value='<?php print $current->OfficeCity; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Office State</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][OfficeState]' id='OfficeState' value='<?php print $current->OfficeState; ?>' size='2' class='boxValue' /></div>
+      </span>
+      <span class='fieldcolumn'>
+         <div class='contentField'><span class='fieldLabel'>Office Zip</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][OfficeZip]' id='OfficeZip' value='<?php print $current->OfficeZip; ?>' size='10' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Phone</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Phone]' id='Phone' value='<?php print $current->Phone; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Cell</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Cell]' id='Cell' value='<?php print $current->Cell; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Extension</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Extension]' id='Extension' value='<?php print $current->Extension; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Address</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Address]' id='Address' value='<?php print $current->Address; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>City</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][City]' id='City' value='<?php print $current->City; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>State</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][State]' id='State' value='<?php print $current->State; ?>' size='2' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Zip</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Zip]' id='Zip' value='<?php print $current->Zip; ?>' size='10' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Notes</span><textarea name='Employee[<?php print $current->EmployeeID; ?>][Notes]' id='Notes' class='textBox' style='width:41em;height:5em;'><?php print $current->Notes; ?></textarea></div>
+         <div class='contentField'><span class='fieldLabel'>Vacation Hours</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][VacationHours]' id='VacationHours' value='<?php print $current->VacationHours; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Sick Hours</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][SickHours]' id='SickHours' value='<?php print $current->SickHours; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Rate</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Rate]' id='Rate' value='<?php print $current->Rate; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Gender</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][Gender]' id='Gender' value='<?php print $current->Gender; ?>' size='1' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Birth Date</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][BirthDate]' id='BirthDate' value='<?php print $current->BirthDate; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>SSN</span><input type='text' name='Employee[<?php print $current->EmployeeID; ?>][SSN]' id='SSN' value='<?php print $current->SSN; ?>' size='9' class='boxValue' /></div>
+      </span>
+   </div>
+</div>

@@ -1,0 +1,2 @@
+ID	domain	hostname	user	client_code	docroot	type	IP	port	cgidir	private_key	cert	active	access_log	error_log	log_type	server_root	userpass	personal	extras	ServerAdmin	check	cvs	LastModified
+161	interactivate.com	wreath-eartha	eartha	WREATH	htdocs	standard	192.168.1.7	80				1	logs/wreath-eartha.access_log	logs/wreath-eartha.error_log	combined	/u1/eartha/projects/wreath-eartha		0		hostmaster@interactivate.com	1	WREATH	20030604091119

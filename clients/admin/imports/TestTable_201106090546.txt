@@ -1,0 +1,204 @@
+Category,Business Name,Full Address,Address,City,State,Post Code,Phone,Website,Email Address
+alarm,Crown Lock & Safe,"3615 Balboa St, San Francisco, CA 94121",3615 Balboa St, San Francisco,CA,94121,(415) 221-9086,http://www.crownlock.com,joe@crownlock.com
+alarm,Mainline Security,"617 7th St, San Francisco, CA 94103",617 7th St, San Francisco,CA,94103,(415) 398-6161,http://www.mainline-security.com,
+alarm,Alarms - Fire/TOM JUE & COMPANY,"477 Myra Way, San Francisco, CA 94127",477 Myra Way, San Francisco,CA,94127,(415) 716-9292,,fyrtom@yahoo.com
+alarm,All Wired Communications,"San Francisco, CA 94134",,San Francisco,CA,94134,(415) 468-9400,http://www.allwired.net,info@allwired.net
+alarm,Advanced Direct Security - ADT Authorized Company,"1 Bush St, San Francisco, CA 94104",1 Bush St, San Francisco,CA,94104,(877) 519-9692,http://www.homesecurityteam.com/?tfid=y,
+alarm,Security Choice,Serving the San Francisco Area.,,,,,(888) 426-7140,http://local.ingenio.com/Listings/Details.aspx?NUM=a%3a9271886%3a13%3a4859924%3a14%3a0%3a7,
+alarm,Protect America Home Security,Serving the San Francisco Area.,,,,,(888) 604-7107,http://local.ingenio.com/Listings/Details.aspx?NUM=a%3a10340741%3a13%3a4859924%3a14%3a0%3a7,
+alarm,ADT® Home Security,Serving the San Francisco Area.,,,,,(877) 323-5621,http://local.ingenio.com/Listings/Details.aspx?NUM=a%3a10210238%3a13%3a4859924%3a14%3a0%3a7,
+alarm,Security Choice,Serving the San Francisco Area.,,,,,(888) 442-4613,http://local.ingenio.com/Listings/Details.aspx?NUM=a%3a10159255%3a13%3a4859924%3a14%3a0%3a7,
+alarm,Protect Your Home - ADT Authorized Security Dealer,Serving the San Francisco Area. <SPAN class=business-phone phone>(800) 322-1582 <SPAN class=additional-phones></DIV><DIV class=rating sizcache=8 sizset=111><SPAN class=average-rating rating rating-3-5>3.5 stars <SPAN class=review-count sizcache=8 sizset=111>,,,,,,http://ypcom-scsm.protectyourhome.com,
+alarm,"ADT Security Services, Inc.",Serving the San Francisco Area.,,,,,(888) 370-9786,http://www.adtfastresponse.com/fastresponse/offer.aspx?ecid=bgtyp100302,
+alarm,Acme Security,"1922 Republic Ave, San Leandro, CA 94577",1922 Republic Ave, San Leandro,CA,94577,(800) 355-6584,http://www.acmesecurity.com,
+alarm,Allied Security Alarms,"269 Wattis Way, South San Francisco, CA 94080",269 Wattis Way, South San Francisco,CA,94080,(650) 871-8959,http://www.alliedsecurityalarms.com,contactus@alliedsecurityalarms.com
+alarm,California Security Alarms Inc,"1009 S Claremont St, San Mateo, CA 94402",1009 S Claremont St, San Mateo,CA,94402,(650) 588-4485,http://www.calsecurity.com,
+alarm,William White Co,"3505 Magnolia St, Emeryville, CA 94608",3505 Magnolia St, Emeryville,CA,94608,(510) 658-8167,http://www.wmdwhiteco.com,
+alarm,Bay Cities Automatic Gates,"853 Industrial Rd, San Carlos, CA 94070",853 Industrial Rd, San Carlos,CA,94070,(650) 595-4283,http://www.bcautogates.com,info@bcautogates.com
+alarm,K & R Security,"1130 Industrial Ave, Petaluma, CA 94952",1130 Industrial Ave, Petaluma,CA,94952,(800) 448-3248,http://www.kandr-security-inc.com,
+alarm,First Alarm Security & Patrol Inc,"2365 Paragon Dr, San Jose, CA 95131",2365 Paragon Dr, San Jose,CA,95131,(408) 364-1110,http://www.firstalarm.com,
+alarm,Sound & Alarm,"6500 Mission St, Daly City, CA 94014",6500 Mission St, Daly City,CA,94014,(650) 991-4448,http://www.soundandalarm.com,soundandalarm@yahoo.com
+alarm,Advanced Direct Security - ADT Authorized Company,Serving the San Francisco Area.,,,,,(866) 314-6058,http://www.homesecurityteam.com/yellowpages,
+alarm,Advanced Direct Security - ADT Authorized Company,Serving the San Francisco Area.,,,,,(888) 235-0354,http://www.homesecurityteam.com/yellowpages,
+alarm,Alarm USA - ADT Authorized Agent,Serving the San Francisco Area.,,,,,(866) 333-6589,,
+alarm,"Vivint, Inc.",Serving the San Francisco Area. <SPAN class=business-phone phone><SPAN class=additional-phones></DIV><DIV class=rating sizcache=8 sizset=271><SPAN class=average-rating rating rating-0>0.0 stars <SPAN class=review-count sizcache=8 sizset=271>,,,,,,http://www.freeapxoffer.com/blue/,id@domain.zzz;id@domain.xx.zzz
+alarm,Security Choice,Serving the San Francisco Area.,,,,,(888) 432-1974,http://local.ingenio.com/Service/ADT-Home-Security/9271886,
+alarm,Bay Alarm Company,Serving the San Francisco Area.,,,,,(800) 610-1000,http://www.bayalarm.com,webmasters@bayalarm.com;bayalarm@bayalarm.com;marketing@bayalarm.com
+alarm,Cal Communication Service Inc.,Serving the San Francisco Area.,,,,,(925) 755-3473,http://www.calcsc.com,sales@calcsc.com
+alarm,First Alarm Security & Patrol Inc,"Serving The Greater Bay Area.,",,Serving The Greater Bay Area.,,,(800) 400-1110,http://www.firstalarm.com,
+alarm,Muscio Electric-CAT Communications,,,,,,(650) 952-1212,,timgleason@muscioelectric.com
+alarm,On-Guard Security,Serving the San Francisco Area.,,,,,(707) 584-0894,http://www.on-guardsecurity.com,onguard@sbcglobal.net
+alarm,First Home Alarm - ADT Authorized Dealer,Serving the San Francisco Area.,,,,,(877) 243-9387,,
+alarm,Warman Security,Serving the San Francisco Area.,,,,,(800) 592-7626,http://www.warmansecurity.com,support@warmansecurity.com;chris@warmansecurity.com;peter@warmansecurity.com;steve@warmansecurity.com;marty@warmansecurity.com;dispatch@warmansecurity.com;alex@warmansecurity.com;accounting@warmansecurity.com;purchasing@warmansecurity.com
+alarm,Ameritech CCTV Co,Serving the San Francisco Area.,,,,,(415) 543-2288,,phcctv@aol.com
+alarm,Safety Dynamics,Serving the San Francisco Area.,,,,,(510) 547-7656,,
+alarm,Direct Savings USA,Serving the San Francisco Area.,,,,,(415) 200-0893,http://www.directsavingsusa.com,
+alarm,Acme Security,Serving the San Francisco Area.,,,,,(800) 355-6584,http://www.acmesecurity.com,
+alarm,Direct Savings USA,Serving the San Francisco Area.,,,,,(888) 542-7172,http://www.directsavingsusa.com,
+alarm,Electrical Experts,"1035 Pine St Apt 104, San Francisco, CA 94109",1035 Pine St Apt 104, San Francisco,CA,94109,(415) 742-8301,,
+alarm,Local Locksmith Service,"2112 22nd St, San Francisco, CA 94107",2112 22nd St, San Francisco,CA,94107,(415) 524-7223,,
+alarm,All Access Locksmith 24/7,"243 san jose ave, San Francisco, CA 94110",243 san jose ave, San Francisco,CA,94110,(866) 505-5625,http://www.sanfranciscolocksmith24-7.com,info@allaccess24-7.com
+alarm,Audio Symphony,"1525 Van Ness Ave, San Francisco, CA 94109",1525 Van Ness Ave, San Francisco,CA,94109,(415) 292-3300,http://www.triptel.com,rental@triptel.com
+alarm,Audio Dimensions,"5635 Mission St, San Francisco, CA 94112",5635 Mission St, San Francisco,CA,94112,(415) 587-8700,,
+alarm,Gaylord Security Systems,"71 Stevenson St Ste 400, San Francisco, CA 94105",71 Stevenson St Ste 400, San Francisco,CA,94105,(415) 814-1915,,
+alarm,Custom Car Alarms,"10 S Van Ness Ave, San Francisco, CA 94103",10 S Van Ness Ave, San Francisco,CA,94103,(415) 553-8868,,
+alarm,Auto Tech Stereo,"396 5th St, San Francisco, CA 94107",396 5th St, San Francisco,CA,94107,(415) 495-8882,,
+alarm,Wsb & Assoc,"1385 Mission St Ste 201, San Francisco, CA 94103",1385 Mission St Ste 201, San Francisco,CA,94103,(415) 864-6592,,
+alarm,24 hour emergency Locksmith,"415 Pennsylvania Ave, San Francisco, CA 94107",415 Pennsylvania Ave, San Francisco,CA,94107,(415) 756-4043,,
+alarm,Century Electric,"221 Oak St, San Francisco, CA 94102",221 Oak St, San Francisco,CA,94102,(415) 861-6522,http://www.centuryelectric.com,jim@centuryelectric.com
+alarm,Rlh Fire Protection,"60 Tehama St, San Francisco, CA 94105",60 Tehama St, San Francisco,CA,94105,(415) 442-4833,http://www.rlhfp.com,gholt@rlhfp.com;jhernandez@rlhfp.com;gstites@rlhfp.com;gfulton@rlhfp.com;carthurs@rlhfp.com
+alarm,North America Alarm Compnay Inc,"2018 Oakdale Ave, San Francisco, CA 94124",2018 Oakdale Ave, San Francisco,CA,94124,(415) 826-0333,http://www.naalarm.com,bill@naalarm.com;sales@naalarm.com;yolanda@naalarm.com;tech@naalarm.com
+alarm,Applied Video Solutions,"2601 Mission St, San Francisco, CA 94110",2601 Mission St, San Francisco,CA,94110,(415) 824-1717,http://www.snowlinc.com,sales@applyvideo.com;support@applyvideo.com
+alarm,"Pacific Heights Security, Inc.","5758 Geary Blvd, San Francisco, CA 94121",5758 Geary Blvd, San Francisco,CA,94121,(650) 619-9335,http://WWW.PacificHeightsSecurity.com,
+alarm,Detect All Security Systems,"3248 22nd St, San Francisco, CA 94110",3248 22nd St, San Francisco,CA,94110,(415) 821-2356,,
+alarm,Pacific Automatic Sprinkler,"2601 Harrison St, San Francisco, CA 94110",2601 Harrison St, San Francisco,CA,94110,(415) 826-5800,,
+alarm,Birthday Alarm,"333 Bryant St Ste 330, San Francisco, CA 94107",333 Bryant St Ste 330, San Francisco,CA,94107,(415) 896-9200,,
+alarm,Detect All Security Systems,"4104 24th St 135, San Francisco, CA 94114",4104 24th St 135, San Francisco,CA,94114,(415) 753-5634,http://www.detectall.com,customercare@detectall.com
+alarm,Star Fire Protection,"2250 Jerrold Ave, San Francisco, CA 94124",2250 Jerrold Ave, San Francisco,CA,94124,(415) 642-8088,,
+alarm,Twilight Security Inc.,"1355 Fairfax Ave, San Francisco, CA 94124",1355 Fairfax Ave, San Francisco,CA,94124,(415) 252-1957,,
+alarm,4441 Mission,"4441 Mission St, San Francisco, CA 94112",4441 Mission St, San Francisco,CA,94112,(415) 239-2036,,
+alarm,Potter Fire Protection Inc.,"1823 Egbert Ave 300, San Francisco, CA 94124",1823 Egbert Ave 300, San Francisco,CA,94124,(415) 330-9977,http://www.potterfire.com,mail@potterfire.com;sue@potterfire.com;jeanne@potterfire.com;john@potterfire.com;bret@potterfire.com
+alarm,Microbiz Security Company,"444 Jessie St, San Francisco, CA 94103",444 Jessie St, San Francisco,CA,94103,(415) 777-1151,http://www.mbiz.com,Dave@Mbiz.com;Todd@Mbiz.com;Marco@Mbiz.com;Michelle@Mbiz.com;Sam@Mbiz.com;Jim@Mbiz.com;Martha@Mbiz.com;Esther@Mbiz.com
+alarm,Pacific Technology Cctv,"500 Pine St, San Francisco, CA 94108",500 Pine St, San Francisco,CA,94108,(415) 433-2288,http://www.PacificTechnologyCCTV.com,gene@pacifictechnologycctv.com;rob@pacifictechnologycctv.com
+alarm,United Safe Inc,"75 Industrial St, San Francisco, CA 94124",75 Industrial St, San Francisco,CA,94124,(415) 826-2700,,
+alarm,Watchdog Locksmith & Security Camera,"San Francisco, CA 94121",,San Francisco,CA,94121,(415) 971-6123,http://watchdoglsc.com,info@watchdoglsc.com
+alarm,Alarm,"95 Brady St, San Francisco, CA 94103",95 Brady St, San Francisco,CA,94103,(415) 503-1697,,
+alarm,Classic Car Stereo And Alarm,"650 Polk St, San Francisco, CA 94102",650 Polk St, San Francisco,CA,94102,(415) 292-4949,,
+alarm,Spencer's Car Radio,"1911 Mission St, San Francisco, CA 94103",1911 Mission St, San Francisco,CA,94103,(415) 626-1761,,
+alarm,Megan Furth Academy,"548 Fillmore St, San Francisco, CA 94117",548 Fillmore St, San Francisco,CA,94117,(415) 431-5017,,
+alarm,1900 Bryant St.,"535 Florida St, San Francisco, CA 94110",535 Florida St, San Francisco,CA,94110,(415) 621-4249,,
+alarm,Fire Alarm Lines,"698 Bush St, San Francisco, CA 94108",698 Bush St, San Francisco,CA,94108,(415) 398-5840,,
+alarm,Alrams,"2335 Washington St, San Francisco, CA 94115",2335 Washington St, San Francisco,CA,94115,(415) 345-8755,,
+alarm,Local Home Alarm Systems,"282 2nd St Ste 12, San Francisco, CA 94105",282 2nd St Ste 12, San Francisco,CA,94105,(415) 632-1905,,
+alarm,Detect All,"218 Montgomery St, San Francisco, CA 94104",218 Montgomery St, San Francisco,CA,94104,(415) 956-1586,,
+alarm,Direct Security,"2259 Green St, San Francisco, CA 94123",2259 Green St, San Francisco,CA,94123,(415) 776-7768,,
+alarm,New Sound Car Stereos,"1663 Valencia St, San Francisco, CA 94110",1663 Valencia St, San Francisco,CA,94110,(415) 647-5577,,
+alarm,Pacific Auxiliary Fire Alarm,"95 Boutwell St, San Francisco, CA 94124",95 Boutwell St, San Francisco,CA,94124,(415) 467-9393,,
+alarm,Tryckies Gps,"401 Crescent Ave, San Francisco, CA 94110",401 Crescent Ave, San Francisco,CA,94110,(415) 725-7252,,
+alarm,Emergency Systems Maintenance,"620 Ortega St, San Francisco, CA 94122",620 Ortega St, San Francisco,CA,94122,(415) 564-0400,,
+alarm,Goldstar Alarms,"759 Cambridge St, San Francisco, CA 94134",759 Cambridge St, San Francisco,CA,94134,(415) 587-8148,,
+alarm,Jerrick Auto Sound Accessories,"822 28th Ave, San Francisco, CA 94121",822 28th Ave, San Francisco,CA,94121,(415) 221-8863,,
+alarm,Golden Gate Burglar Alarm Co,"PO Box 2974, San Francisco, CA 94112",PO Box 2974, San Francisco,CA,94112,(415) 285-1787,,
+alarm,Golden Gate Burglar Alarm Co,"4651 Mission St, San Francisco, CA 94112",4651 Mission St, San Francisco,CA,94112,(415) 285-1787,,
+alarm,ADT,"1505 Market St, San Francisco, CA 94103",1505 Market St, San Francisco,CA,94103,(800) 209-7271,,
+alarm,San Francisco Home Security+ Cameras,"445 Van Ness Ave, San Francisco, CA 94103",445 Van Ness Ave, San Francisco,CA,94103,(415) 230-0620,,
+alarm,Dedicated Securities Technologies Inc.,"1121 Howard St, San Francisco, CA 94103",1121 Howard St, San Francisco,CA,94103,(415) 255-2828,,
+alarm,Radius Services,"1221 Harrison St, San Francisco, CA 94103",1221 Harrison St, San Francisco,CA,94103,(415) 391-4776,,
+alarm,Kimberlite,"650 Townsend St, San Francisco, CA 94103",650 Townsend St, San Francisco,CA,94103,(415) 621-1487,,
+alarm,Flexilis,"539 Bryant St Ste 406, San Francisco, CA 94107",539 Bryant St Ste 406, San Francisco,CA,94107,(213) 341-0461,,
+alarm,Unlimited Security Systems,"1518 Jackson St, San Francisco, CA 94109",1518 Jackson St, San Francisco,CA,94109,(415) 885-2126,,
+alarm,Pay By Touch Solutions,"101 2nd St, San Francisco, CA 94105",101 2nd St, San Francisco,CA,94105,(415) 281-2200,http://ypcom-scsm.protectyourhome.com,
+alarm,Douglas Manor Hoa,"2750 Market St, San Francisco, CA 94114",2750 Market St, San Francisco,CA,94114,(415) 621-2531,,
+alarm,Touchcom,"1 Sutter St, San Francisco, CA 94104",1 Sutter St, San Francisco,CA,94104,(415) 591-0067,,
+alarm,Shorenstein-Touchcom,"425 Market St, San Francisco, CA 94105",425 Market St, San Francisco,CA,94105,(415) 543-7815,,
+alarm,Security Pacific Equipment Leasing Inc,"4 Embarcadero Ctr # 1200, San Francisco, CA 94111",4 Embarcadero Ctr # 1200, San Francisco,CA,94111,(415) 391-3830,,
+alarm,Hsm Associates Lp,"2745 Larkin St, San Francisco, CA 94109",2745 Larkin St, San Francisco,CA,94109,(415) 673-9693,,
+alarm,Luce Security Staffing & Event Planning,"2200 Cesar Chavez, San Francisco, CA 94124",2200 Cesar Chavez, San Francisco,CA,94124,(415) 643-6148,,
+alarm,"Clue, Inc.","444 Francisco St Apt 104, San Francisco, CA 94133",444 Francisco St Apt 104, San Francisco,CA,94133,(650) 723-4971,,
+alarm,Americom Central Stations,"1355 Fairfax Ave, San Francisco, CA 94124",1355 Fairfax Ave, San Francisco,CA,94124,(415) 821-9500,,
+alarm,Crime Watch Security Systems,"1355 Fairfax Ave, San Francisco, CA 94124",1355 Fairfax Ave, San Francisco,CA,94124,(415) 282-7777,,
+alarm,Business 2000 Inc,"727 30th Ave, San Francisco, CA 94121",727 30th Ave, San Francisco,CA,94121,(415) 751-0888,,
+alarm,Kitech,"230 Junipero Serra Blvd, San Francisco, CA 94127",230 Junipero Serra Blvd, San Francisco,CA,94127,(415) 584-2000,,
+alarm,Acp Tech Security Systems Inc,"2920 Ulloa St, San Francisco, CA 94116",2920 Ulloa St, San Francisco,CA,94116,(415) 731-3681,,
+alarm,NSC Federal Security,"5700 Mission St, San Francisco, CA 94112",5700 Mission St, San Francisco,CA,94112,(415) 585-2223,,
+alarm,Forbes Security Fax,"1539 Sloat Blvd, San Francisco, CA 94132",1539 Sloat Blvd, San Francisco,CA,94132,(415) 242-5459,,
+alarm,Total DVR,"San Francisco, CA 94119",,San Francisco,CA,94119,(415) 397-2929,,
+alarm,Protect America Alarms,Serving the San Francisco Area.,,,,,(888) 786-2947,,
+alarm,Kitech Security System,"200 Valley Dr Ste 10, Brisbane, CA 94005",200 Valley Dr Ste 10, Brisbane,CA,94005,(415) 584-2000,,
+alarm,Motor Music,"7070 Mission St, Daly City, CA 94014",7070 Mission St, Daly City,CA,94014,(650) 994-4300,http://www.motormusic.com,
+alarm,Home Alarm Systems,"2800 Junipero Serra Blvd, Daly City, CA 94015",2800 Junipero Serra Blvd, Daly City,CA,94015,(650) 991-7460,,
+alarm,Spectrum Security Resource,"124 Cityview Dr, Daly City, CA 94014",124 Cityview Dr, Daly City,CA,94014,(415) 587-5760,,
+alarm,US Surveillance Systems,"44 Visitacion Ave Ste 102, Brisbane, CA 94005",44 Visitacion Ave Ste 102, Brisbane,CA,94005,(415) 508-0550,,
+alarm,Adt A-1 Security Authorized Dealer,"1690 Sullivan Ave, Daly City, CA 94015",1690 Sullivan Ave, Daly City,CA,94015,(650) 731-0933,,
+alarm,ADEX Home Security,Serving the San Francisco Area.,,,,,(866) 753-2410,,
+alarm,GV Cards Dot Com CCTV,Serving the San Francisco Area.,,,,,(888) 943-6847,http://www.gvcards.com,sales@gvcards.com;support@gvcards.com
+alarm,Zeumann & Associates,Serving the San Francisco Area.,,,,,(415) 661-6004,http://www.westcoastsecurity.com,wcs6000@aol.com
+alarm,Sonitrol Of San Francisco,Serving the San Francisco Area.,,,,,(415) 552-9700,http://www.sonitrol.com,
+alarm,Ids Security System,Serving the San Francisco Area.,,,,,(415) 781-7718,,
+alarm,San Francisco Security,Serving the San Francisco Area.,,,,,(415) 643-5625,,
+alarm,Sonitrol Corporation,Serving the San Francisco Area.,,,,,(415) 552-9700,,
+alarm,Teletech Security,Serving the San Francisco Area.,,,,,(415) 731-7202,http://www.homesecurityteam.com/yellowpages,
+alarm,A & S Alarm,Serving the San Francisco Area.,,,,,(415) 863-5318,,
+alarm,Network Security Systems,Serving the San Francisco Area.,,,,,(415) 824-4700,,
+alarm,Action Alarm 24 Hour Monitoring Co.,Serving the San Francisco Area.,,,,,(510) 481-5551,,
+alarm,Exocet Security,Serving the San Francisco Area.,,,,,(415) 332-3488,,
+alarm,Crime Watch Security Systems,Serving the San Francisco Area.,,,,,(415) 664-1155,,
+alarm,Keepin' It Focused,Serving the San Francisco Area.,,,,,(415) 675-0252,,
+alarm,Predator Security Systems,Serving the San Francisco Area.,,,,,(415) 641-9191,,
+alarm,Gallagher Security Electronics,Serving the San Francisco Area.,,,,,(415) 488-1679,,
+alarm,A1 Cleaning Systems,Serving the San Francisco Area.,,,,,(650) 757-0300,,
+alarm,Integrated Detection Systems,Serving the San Francisco Area.,,,,,(415) 626-6318,,
+alarm,West Coast Security,Serving the San Francisco Area.,,,,,(415) 661-6000,,
+alarm,Western Security Systems,Serving the San Francisco Area.,,,,,(415) 626-0990,,
+alarm,Watchtower Security Systems,Serving the San Francisco Area.,,,,,(415) 468-8882,,
+alarm,Red 7 Inc.,Serving the San Francisco Area.,,,,,(415) 759-7337,,
+alarm,Soleil Securities,Serving the San Francisco Area.,,,,,(415) 495-6981,,
+alarm,Kitech Systems Inc,Serving the San Francisco Area.,,,,,(415) 566-3278,,
+alarm,Consolidated Security Systems,"510 W Macarthur Blvd, Oakland, CA 94609",510 W Macarthur Blvd, Oakland,CA,94609,(510) 450-9100,http://www.consolidatedlock.com,
+alarm,MACO Security Products LLC,"4505 Martin Luther King Jr Way, Oakland, CA 94609",4505 Martin Luther King Jr Way, Oakland,CA,94609,(510) 655-1043,http://www.macosecurity.com,msp@att.net;macosecurity@mindspring.com
+alarm,Reed Brothers Security,"4432 Telegraph Ave, Oakland, CA 94609",4432 Telegraph Ave, Oakland,CA,94609,(510) 652-2477,http://www.reedbrothers.com,randyreed@reedbrothers.com;sales@reedbrothers.com;hr@reedbrothers.com
+alarm,Advanced Direct Security - ADT Authorized Company,"1601 Franklin St, Oakland, CA 94612",1601 Franklin St, Oakland,CA,94612,(877) 519-9692,http://www.homesecurityteam.com/?tfid=y,
+alarm,Best in Town Locks,"1401 Harrison St, Oakland, CA 94612",1401 Harrison St, Oakland,CA,94612,(510) 495-1518,http://BestinTownLocks.net,neiubi87@hotmail.com
+alarm,Global Fire & Safety,"2001 Peralta St Ste F, Oakland, CA 94607",2001 Peralta St Ste F, Oakland,CA,94607,(510) 834-2323,http://www.globalfireandsafety.com,sales@globalfireandsafety.com;service@globalfireandsafety.com;jobs@globalfireandsafety.com;webmaster@globalfireandsafety.com;training@globalfireandsafety.com
+alarm,Sentry Alert Security,"330 2nd St, Oakland, CA 94607",330 2nd St, Oakland,CA,94607,(510) 549-0306,http://www.sentryalert.com,info@sentryalert.com
+alarm,Bay Cities Pyrotector Inc.,"1435 Park Ave, Emeryville, CA 94608",1435 Park Ave, Emeryville,CA,94608,(510) 450-7760,http://www.baycitiesfire.com,
+alarm,L N Curtis & Sons,"1800 Peralta St, Oakland, CA 94607",1800 Peralta St, Oakland,CA,94607,(510) 839-5111,http://www.lncurtis.com,
+alarm,Adt Monitored Home Security Sales,"1587 Franklin St, Oakland, CA 94612",1587 Franklin St, Oakland,CA,94612,(510) 457-9900,http://www.alarm-home.com,
+alarm,Alarm Sales & Services,"1601 Franklin St, Oakland, CA 94612",1601 Franklin St, Oakland,CA,94612,(925) 551-0753,,
+alarm,Shorenstein Security Service,"505 14th St Ste 101, Oakland, CA 94612",505 14th St Ste 101, Oakland,CA,94612,(510) 444-3411,,
+alarm,Cypress Security,"250 Frank H Ogawa Plz, Oakland, CA 94612",250 Frank H Ogawa Plz, Oakland,CA,94612,(510) 899-6060,,
+alarm,Total DVR,"324 14th St, Oakland, CA 94612",324 14th St, Oakland,CA,94612,(510) 251-2929,http://local.ingenio.com/Service/ADT-Home-Security/9271886,
+alarm,Evetsite Systems,"2015 Bridgeway Ste 301, Sausalito, CA 94965",2015 Bridgeway Ste 301, Sausalito,CA,94965,(415) 332-5316,,
+alarm,Adt 24 Hr Alarm & Security Dealer,"1802 Webster St, Alameda, CA 94501",1802 Webster St, Alameda,CA,94501,(510) 629-6980,,
+alarm,Fire And Security Alarm Company,"1552 Beach St, Emeryville, CA 94608",1552 Beach St, Emeryville,CA,94608,(510) 595-5322,,
+alarm,Strand Erik,"636 9th St, Oakland, CA 94607",636 9th St, Oakland,CA,94607,(510) 835-4007,,
+alarm,Western Telephone & Alarm,"3532 Peralta St, Emeryville, CA 94608",3532 Peralta St, Emeryville,CA,94608,(510) 521-8900,,
+alarm,Alarm,"1201 Park Ave, Emeryville, CA 94608",1201 Park Ave, Emeryville,CA,94608,(510) 547-1348,,
+alarm,ADT 24/7 Alarm Monitoring & Home Security,"344 Thomas L Berkley Way, Oakland, CA 94612",344 Thomas L Berkley Way, Oakland,CA,94612,(707) 762-8420,,
+alarm,Diversified Fire Products,"180 Grand Ave, Oakland, CA 94612",180 Grand Ave, Oakland,CA,94612,(510) 588-3100,,
+alarm,Sur,"2719 Harrison St Apt 1, Oakland, CA 94612",2719 Harrison St Apt 1, Oakland,CA,94612,(510) 625-1875,,
+alarm,Fire And Security Alarm Company,"1552 Beach St, Emeryville, CA 94608",1552 Beach St, Emeryville,CA,94608,(510) 428-9194,,
+alarm,Securetrans,"555 Maritime St, Oakland, CA 94607",555 Maritime St, Oakland,CA,94607,(510) 835-0464,,
+alarm,Total DVR,"324 14th St, Oakland, CA 94612",324 14th St, Oakland,CA,94612,(888) 251-8989,,
+alarm,Adt A-1 Security Authorized Dealer,"1310 Central Ave, Alameda, CA 94501",1310 Central Ave, Alameda,CA,94501,(510) 629-6983,,
+alarm,ADS-ADT Authorized Comapny,"344 Thomas L Berkley Way, Oakland, CA 94612",344 Thomas L Berkley Way, Oakland,CA,94612,(707) 762-8420,,
+alarm,Dtm Security Corp,"3317 Elm St, Oakland, CA 94609",3317 Elm St, Oakland,CA,94609,(510) 891-1804,,
+alarm,Seismic Auto Sound,"4049 3rd St, San Francisco, CA 94124",4049 3rd St, San Francisco,CA,94124,(415) 800-7127,http://www.seismicautosound.com/,contact@seismicautosound.com
+alarm,Arrow Fire Protection,Serving the San Francisco Area.,,,,,(877) 546-5617,http://local.ingenio.com/Listings/Details.aspx?NUM=a%3a10355517%3a13%3a4859924%3a14%3a0%3a7,
+alarm,Freedom Phone,Serving the San Francisco Area.,,,,,(866) 950-9756,,
+alarm,Central Coast Systems,"312 Kings St, Salinas, CA 93905",312 Kings St, Salinas,CA,93905,(831) 758-2037,http://www.ccoastsys.com,billbeau@ix.netcom.com;info@ccoastsys.com;admin@ccoastsys.com;info@jmelectric.com
+alarm,Bay Cities Pyrotector Inc.,"1315 67th St, Emeryville, CA 94608",1315 67th St, Emeryville,CA,94608,(510) 450-7760,http://www.realpagessites.com/baycities,Lloyd@baycitiespyrotector.com
+alarm,Pyro-Comm Systems Inc,"10966 Bigge St, San Leandro, CA 94577",10966 Bigge St, San Leandro,CA,94577,(510) 632-1208,http://WWW.PYROCOMM.COM,WEBMASTER@PYROCOMM.COM;insphb@pyrocomm.com;inspsd@pyrocomm.com
+alarm,Jorgensen Co- Fire Sprinkler Fire Extinguisher Sales & Service,"2691 S East Ave, Fresno, CA 93706",2691 S East Ave, Fresno,CA,93706,(800) 481-3473,http://www.jorgensenco.com,sales@jorgensenco.com
+alarm,Alarm USA - ADT Authorized Agent,Serving the San Francisco Area.,,,,,(866) 333-1587,,
+alarm,CVS Pharmacy Medical Alert System,Serving the San Francisco Area.,,,,,(866) 531-7551,,
+alarm,Alarm USA - ADT Authorized Agent,Serving the San Francisco Area.,,,,,(866) 333-1837,,
+alarm,Alarm USA - ADT Authorized Agent,Serving the San Francisco Area.,,,,,(866) 333-5631,,
+alarm,Alarm USA - ADT Authorized Agent,Serving the San Francisco Area.,,,,,(866) 333-9602,,
+alarm,Fields Fire Protection,Serving the San Francisco Area.,,,,,(888) 670-3473,http://www.fieldsfire.com,support@fieldsfire.com
+alarm,"CTR Alarm Systems, Inc.",Serving the San Francisco Area.,,,,,(888) 737-8199,http://paypercall.ingenio.com/documents/smartpages/ctralarmsystems.asp,
+alarm,MBV Systems,Serving the San Francisco Area.,,,,,(415) 294-5930,http://ypcom-scsm.protectyourhome.com,
+alarm,Life Alert,Serving the San Francisco Area.,,,,,(877) 490-4488,,
+alarm,Life Alert,Serving the San Francisco Area.,,,,,(800) 498-8490,,
+alarm,Safety Dynamics,Serving the San Francisco Area.,,,,,(415) 294-5935,,
+alarm,Home Alarms San Francisco,"505 Montgomery St, San Francisco, CA 94111",505 Montgomery St, San Francisco,CA,94111,(415) 992-3411,http://www.homealarmsystemssanfrancisco.com,info@homealarmsystems.com
+alarm,!!! san-francisco locksmith ca !!!,"2018 15th St, San Francisco, CA 94114",2018 15th St, San Francisco,CA,94114,(415) 422-9897,http://www.sanfranciscolocksmithca.com,sanfranciscolocksmithca@yahoo.com
+alarm,! 0-20 minute San Francisco locksmith !,"526 Golden Gate Ave, San Francisco, CA 94102",526 Golden Gate Ave, San Francisco,CA,94102,(415) 599-0250,,albertfrancisco15@yahoo.com
+alarm,Tons Of Bubbles,"998 Filbert St, San Francisco, CA 94133",998 Filbert St, San Francisco,CA,94133,(650) 464-4513,,tonsofbubbles@gmail.com
+alarm,Vision Performance,"1588 Noriega St, San Francisco, CA 94122",1588 Noriega St, San Francisco,CA,94122,(415) 566-1723,,
+alarm,Tom Murphy,"560 Brannan St, San Francisco, CA 94107",560 Brannan St, San Francisco,CA,94107,(415) 512-7037,,
+alarm,San Francisco Fire Protection Inc.,"601 Grant Ave, San Francisco, CA 94108",601 Grant Ave, San Francisco,CA,94108,(415) 986-4387,,
+alarm,Tic,"1580 Lombard St, San Francisco, CA 94123",1580 Lombard St, San Francisco,CA,94123,(415) 441-1901,,
+alarm,Peter's Auto Radio,"2128 Lombard St, San Francisco, CA 94123",2128 Lombard St, San Francisco,CA,94123,(415) 567-4678,,
+alarm,Jue And Co Tom,"477 Myra Way, San Francisco, CA 94127",477 Myra Way, San Francisco,CA,94127,(415) 716-9292,,
+alarm,Kitech Systems Inc,"San Francisco, CA 94122",,San Francisco,CA,94122,(415) 566-3278,,
+alarm,"NSS, ADT Authorized Dealer",Serving the San Francisco Area.,,,,,(866) 319-4717,,
+alarm,ADT - Authorized Reseller,Serving the San Francisco Area.,,,,,(888) 211-1178,,
+alarm,Zheng Hong,"15 Como Ave, Daly City, CA 94014",15 Como Ave, Daly City,CA,94014,(650) 757-1575,,
+alarm,GE Alarm Systems,Serving the San Francisco Area.,,,,,(877) 251-2671,,m_harad@yahoo.com
+alarm,Jimmy Carl Duarte Electric,Serving the San Francisco Area.,,,,,(415) 626-8428,,
+alarm,A D T About A L A Customer Info,Serving the San Francisco Area.,,,,,(415) 242-1093,,
+alarm,1755 Broadway,"1755 Broadway, Oakland, CA 94612",1755 Broadway, Oakland,CA,94612,(510) 893-0698,,
+alarm,Gvh Hoa Alarm Line,"24 Linda Vista Ave, Belvedere Tiburon, CA 94920",24 Linda Vista Ave, Belvedere Tiburon,CA,94920,(415) 435-2107,,
+alarm,Linden Dwight,"853 W Grand Ave, Oakland, CA 94607",853 W Grand Ave, Oakland,CA,94607,(510) 834-8162,,
+alarm,Lee Esther,"369 13th St, Oakland, CA 94612",369 13th St, Oakland,CA,94612,(510) 836-3984,http://ypcom-scsm.protectyourhome.com,

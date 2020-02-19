@@ -1,0 +1,21 @@
+WEBFLEET event message
+
+
+Account: US01-1530 - harris-tours
+Status: Alarm 1
+Object: 2802 - LW1474F00330
+Message:  (2/18/20 1:11 PM) Leaving area '002 - Crockett'
+Position:  (2/18/20 1:11 PM) 8099 Cummings Skwy, Rodeo CA 94525, US
+Longitude: 122°14'33.1" W
+Latitude: 38°03'01.3" N
+
+*** This is an automatically generated email, please do not reply. ***
+
+If you have a question about our products and solutions, you can find your answer on our website under "frequently asked questions" or under "user guides".
+
+If you need to contact our Customer Support, please use our online contact form.
+
+Kind regards,
+Webfleet Solutions
+
+*** Let's drive business. Further. www.webfleet.com ***

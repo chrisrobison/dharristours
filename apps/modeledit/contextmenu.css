@@ -1,0 +1,55 @@
+﻿.b-m-mpanel {
+	background: #F0F0F0 url(img/menu_bg.gif) left repeat-y;
+	border: 1px solid #718BB7;
+	padding: 2px 0;
+	position: absolute;
+	z-index: 99997;
+	left:0px;
+	top:0px;
+   -webkit-box-shadow: .25em .5em .75em rgba(0, 0, 0, .4);
+   -moz-box-shadow: .25em .5em .75em rgba(0, 0, 0, .4);
+   box-shadow: .25em .5em .75em rgba(0, 0, 0, .4);
+}
+.b-m-split {
+	height: 6px;
+	background: url(img/m_splitLine.gif) center repeat-x;
+	font-size: 0px;
+	margin: 0 2px;
+}
+.b-m-item, .b-m-idisable
+{
+    padding: 4px 2px;
+    margin: 0 2px 0 3px;
+    cursor: normal;
+    line-height:100%;
+}
+.b-m-idisable
+{
+    color:#808080;
+}
+.b-m-ibody, .b-m-arrow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	
+}
+.b-m-arrow {
+	background: url(img/m_arrow.gif) right  no-repeat;	
+}
+.b-m-idisable .b-m-arrow
+{
+    background:none;
+}
+.b-m-item img, .b-m-ifocus img, .b-m-idisable img {
+	margin-right: 8px;
+}
+.b-m-ifocus {
+	background: url(img/m_item.gif) repeat-x bottom;
+	border: 1px solid #AACCF6;
+	padding: 3px 1px ;
+    margin: 0 2px 0 3px;
+    cursor: normal;
+    line-height:100%;
+}
+.b-m-idisable img {
+	visibility:hidden;
+}

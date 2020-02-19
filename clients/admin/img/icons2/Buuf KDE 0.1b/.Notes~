@@ -1,0 +1,220 @@
+work on the 'unknown cd' icon!
+
+------actions------
+
+Missing:
+about_kde
+abs
+add_user
+artsaudiomanager
+artsbuilderexecute
+artsenvironment
+artsfftscope
+artsmediatypes
+artsmidimanager
+bab_---
+babelfish
+blend
+brackets
+bStarter*
+chart
+charset
+color_fill
+color_line
+compfile
+crop
+cssvalidator
+decrypted
+delete_user
+edit_user
+eraser
+fill
+filter **
+goto
+help ****
+kopete_available ******
+kopete_away *****
+mail_replylist
+make_develop
+message_reply
+minitools
+newfont
+news_subscribe
+news_unsubscribe
+make a better player_end/start icon! ****
+playlist ****
+rebuild
+search_user
+unlock
+
+Not sure about these ones...:
+
+clear -- eraser, maybe?
+contexthelp
+edit_delete
+filequickprint
+
+
+
+------apps------
+
+Missing:
+
+abiword
+acroread *
+agent
+applixware
+baghira stuff
+bluefish
+designer
+dia
+eclipse
+emacs
+email
+fifteenpieces
+gabber
+gaim *
+galeon
+gnome_apps
+gnomemeeting
+gnucash
+gnumeric *
+gvim *
+help_index
+ieee1394
+input_device_settings *
+jabber_protocol
+kbinaryclock
+kcmdrkonqi
+kcmmidi
+kcmopengl
+kcmpartitions
+kcmpci
+kcmprocessor
+kcmscsi
+kcmx
+kcontrol *
+kdisknav
+kmailcvt
+kmenu ----------**********-------------
+konqsidebar_mediaplayer
+kplato *
+ksim
+kttsd
+kviewshell *
+kvirc
+laptop_pcmcia
+licq
+linuxconf
+nedit
+netscape
+package_applications
+package_development
+package_favourite
+packages_games_board * 
+package_games_card * 
+pan
+phppg
+planner
+proxy *
+pysol
+scribus
+sodipodi
+staroffice
+stylesheet
+usb
+vnc
+window_list *
+wine
+wmaker_apps
+wp
+xchat ********
+xedit
+xemacs
+xfmail
+xv
+
+
+Not sure about these ones:
+bell
+cache
+enhanced_browsing
+filetypes
+taskbar
+xclock
+
+amarok
+ark
+kalarm
+kalzium
+kspread
+laptop_battery
+laptop_powerl
+looknfeel
+
+------devices------
+
+Idea: make overlay for mounted things
+
+Missing:
+compact_flash - there wasn't an icon for it and it looks okay already
+mo
+smart_media
+zip
+
+Not sure about these ones:
+joystick
+
+------filesystems------
+
+Notes: Made my own lock_overlay!
+
+Missing:
+pipe
+
+Not sure about these ones:
+file_broken
+folder_orange
+folder_tar
+
+------mimetypes------
+
+Missing:
+appliex
+cdr
+core.png
+dvi
+gf
+
+karbon_karbon
+kchart_kchrt
+kexi_kexi
+kformula_kfo
+kivio_flw
+kmultiple
+koffice <----------- work on these!
+kpresenter_kpr
+krita_kra
+kspread_ksp
+kugar_kud
+kword_kwd
+
+metafont
+netscape_doc
+pk
+soffice
+source_c
+source_cpp
+source_moc
+source_python ---- oh no!
+a bunch of other source_*letter*s
+tex
+widget_doc
+
+
+SEE WHAT HAPPENS WITH gz/bz!
+
+Not sure about these ones:
+man
+pdf
+recycled

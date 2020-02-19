@@ -1,0 +1,52 @@
+<script language='JavaScript' type='text/javascript'>
+function init() {
+   setTimeout('document.forms[0].Fname.focus();', 3000);
+}
+window.onload = init;
+</script>
+<table border='0' cellpadding='4' cellspacing='0' vspace='0' hspace='0'>
+   <tr>
+      <td align='right' NOWRAP><span class='FIELD'>Name:</span></td>
+      <td colspan='3'>
+         <span class='MAIN'>
+            <input class='MAIN' type='TEXT' name="Fname" value="#Fname#" onfocus="if (this.value=='First Name') this.value = '';" size='25' tabindex='1'>
+            <input class='MAIN' type='TEXT' name="Lname" VALUE="#Lname#" onfocus="if (this.value=='Last Name') this.value = '';" size='25' tabindex='2'>
+         </span>
+      </td>
+   </tr>
+   <tr>
+      <td align='right' NOWRAP><span class='MAIN'>Organization: </span></td>
+      <td colspan='3'><span class='MAIN'><input class='MAIN' type='TEXT' name="Organization" VALUE="#Organization#" size='40' tabindex='3'></span></td>
+   </tr>
+   <tr>
+      <td align='right' NOWRAP><span class='FIELD'>Address:</span></td>
+      <td colspan='3'><span class='MAIN'><input class='MAIN' type='TEXT' name="Address1" value="#Address1#" size='40' tabindex='4'></span></td>
+   </tr>
+<!--   <tr>
+      <td align='right' NOWRAP></td>
+      <td colspan='3'><span class='MAIN'><input class='MAIN' type='TEXT' name="Address2" value="#Address2#" size='40'></span></td>
+   </tr>
+-->
+   <tr>
+      <td align='right' NOWRAP><span class='FIELD'>City:</span></td>
+      <td><span class='MAIN'><input class='MAIN' type='TEXT' name="City" value="#City#" size='17' tabindex='5'></td>
+      <td align='right'><span class='FIELD'>State:</span></td>
+      <td><span class='MAIN'><select name="Province" size='1' tabindex='6'><option>AL<option>AR<option>AZ<option SELECTED>CA<option>CO<option>CT<option>DC<option>DE<option>FL<option>GA<option>HI<option>IA<option>ID<option>IL<option>IN<option>KS<option>KY<option>LA<option>MA<option>MD<option>ME<option>MI<option>MN<option>MO<option>MS<option>MT<option>NC<option>ND<option>NE<option>NH<option>NJ<option>NM<option>NV<option>NY<option>OH<option>OK<option>OR<option>PA<option>PR<option>RI<option>SC<option>SD<option>TN<option>TX<option>UT<option>VA<option>VT<option>WA<option>WI<option>WV<option>WY</select></span></td>
+   </tr>
+   <tr>
+      <td align='right' NOWRAP><span class='FIELD'>ZIP Code:</span></td>
+      <td><span class='MAIN'><input class='MAIN' type='TEXT' name="PostalCode" value="#PostalCode#" size='13' tabindex='7'> </span></td>
+      <td align='right' NOWRAP><span class='FIELD'>Country:</span></td>
+      <td><span class='MAIN'><select name='Country'>#Countries#</select></span></td>
+   </tr>
+   <tr>
+      <td align='right' NOWRAP><span class='FIELD'>Phone:</span></td>
+      <td><span class='MAIN'><input class='MAIN' type='TEXT' name="Phone" value="#Phone#" size='13' tabindex='9'></span></td>
+      <td align='right'><span class='MAIN'>Fax: </span></td>
+      <td><span class='MAIN'><input class='MAIN' type="TEXT" name="Fax" value="#Fax#" size='15' tabindex='10'></span></td>
+   </tr>
+   <tr>
+      <td align='right' NOWRAP><span class='FIELD'>Alt. Email:</span></td>
+      <td colspan='3'><span class='MAIN'><input class='MAIN' type='TEXT' name="Email" value="#Email#" size='40' tabindex='11'></span></td>
+   </tr>
+</table>

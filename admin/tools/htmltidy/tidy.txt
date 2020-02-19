@@ -1,0 +1,62 @@
+tidy [option...] [file...] [option...] [file...]
+Utility to clean up and pretty print HTML/XHTML/XML
+see http://tidy.sourceforge.net/
+
+Options for HTML Tidy for FreeBSD released on 1st June 2003:
+
+File manipulation
+-----------------
+  -out or -o <file> specify the output markup file
+  -config <file>    set configuration options from the specified <file>
+  -f      <file>    write errors to the specified <file>
+  -modify or -m     modify the original input files
+
+Processing directives
+---------------------
+  -indent  or -i    indent element content
+  -wrap <column>    wrap text at the specified <column> (default is 68)
+  -upper   or -u    force tags to upper case (default is lower case)
+  -clean   or -c    replace FONT, NOBR and CENTER tags by CSS
+  -bare    or -b    strip out smart quotes and em dashes, etc.
+  -numeric or -n    output numeric rather than named entities
+  -errors  or -e    only show errors
+  -quiet   or -q    suppress nonessential output
+  -omit             omit optional end tags
+  -xml              specify the input is well formed XML
+  -asxml            convert HTML to well formed XHTML
+  -asxhtml          convert HTML to well formed XHTML
+  -ashtml           force XHTML to well formed HTML
+  -access <level>   do additional accessibility checks (<level> = 1, 2, 3)
+
+Character encodings
+-------------------
+  -raw              output values above 127 without conversion to entities
+  -ascii            use US-ASCII for output, ISO-8859-1 for input
+  -latin0           use US-ASCII for output, ISO-8859-1 for input
+  -latin1           use ISO-8859-1 for both input and output
+  -iso2022          use ISO-2022 for both input and output
+  -utf8             use UTF-8 for both input and output
+  -mac              use MacRoman for input, US-ASCII for output
+  -win1252          use Windows-1252 for input, US-ASCII for output
+  -ibm858           use IBM-858 (CP850+Euro) for input, US-ASCII for output
+  -utf16le          use UTF-16LE for both input and output
+  -utf16be          use UTF-16BE for both input and output
+  -utf16            use UTF-16 for both input and output
+  -big5             use Big5 for both input and output
+  -shiftjis         use Shift_JIS for both input and output
+  -language <lang>  set the two-letter language code <lang> (for future use)
+
+Miscellaneous
+-------------
+  -version  or -v   show the version of Tidy
+  -help, -h or -?   list the command line options
+  -help-config      list all configuration options
+  -show-config      list the current configuration settings
+
+Use --blah blarg for any configuration option "blah" with argument "blarg"
+
+Input/Output default to stdin/stdout respectively
+Single letter options apart from -f may be combined
+as in:  tidy -f errs.txt -imu foo.html
+For further info on HTML see http://www.w3.org/MarkUp
+

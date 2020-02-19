@@ -1,0 +1,28 @@
+#!/usr/local/bin/php
+<?php
+   array_shift($argv);  // Shift program name off of argv stack
+   
+   $prodPath = "/simple.prod";
+   $demoPath = "/simple.dev";
+
+   chdir("$prodPath/clients");
+   $today = date("Ymdhi");
+
+   function execute($cmd) {
+      $results = `$cmd`;
+      print $results;
+   }
+
+   while ($client = array_shift($argv)) {
+      // Archive any existing files
+      if (file_exists($client)) {
+         //$results = `tar -zcvf .archives/$client_$today.tgz $client`;
+         //$results = `rm -Rf $client`;
+         $results = `/bin/mv $client .archives/{$client}_{$today}`;
+      }
+      mkdir($client, 0775);
+
+      execute("cp -Rp $demoPath/clients/$client/* $prodPath/clients/$client/");
+      execute("chown -R 80:80 $prodPath/clients/$client");
+   }
+?>

@@ -1,0 +1,15 @@
+#!/usr/bin/perl 
+use DotSRS_Client;
+
+$srs = new DotSRS_Client;
+
+while ($domain = shift @ARGV) {
+   print $domain."\n";
+   ($dom, $tld) = split(/\./, $domain, 2);
+   ($ref) = $srs->whois($dom, $tld);
+   
+   foreach $key (keys %{ $ref }) {
+      print "$key : ".$ref->{$key}."\n"; 
+   }
+   print "\n";
+}

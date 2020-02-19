@@ -1,0 +1,89 @@
+body {
+   background-color:#001022;
+}
+#game {
+	color: #fff;
+	font-size: 18px;
+	height: 700px;
+	width: 500px;
+   margin: 0 auto;
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+#gameIntro h1 {
+	font-size: 30px;
+   font-weight: bold;
+   text-transform: uppercase;
+}
+
+#game p {
+	margin: 0 20px;
+}
+
+#gameIntro a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#gameIntro a:hover {
+	text-decoration: underline;
+}
+
+#gameIntro a.button {
+	background: #185da8;
+	border-radius: 5px;
+	display: block;
+	font-size: 30px;
+	margin: 40px auto 0 auto;
+	padding: 10px;
+	width: 200px;
+}
+
+#gameIntro a.button:hover {
+	background: #2488f5;
+	color: #fff;
+	text-decoration: none;
+}
+
+#gameCanvas {
+	background: #001022;
+}
+
+#gameUI {
+	height: 700px;
+	position: absolute; /* Places UI on top of the canvas */
+	width: 500px;
+}
+
+
+#gameIntro, #gameComplete {
+	background: rgba(0, 0, 0, 0.5);
+	margin-top: 100px;
+	padding: 40px 0;
+	text-align: center;
+   color:#ddd;
+}
+#gameIntro p {
+   color:#bbb;
+}
+#gameComplete {
+	display: none;
+}
+
+#gameStats {
+	display: none;
+	font-size: 14px;
+	margin: 20px 0;
+}
+
+#gameStats .gameReset {
+	margin: 20px 20px 0 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}

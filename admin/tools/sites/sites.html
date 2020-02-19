@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Pimp.Net Web Server Administration</title>
+  <script language="JavaScript" type="text/javascript">
+         var curUser = '#user#';
+         var watching = '';
+         
+         #refresh#
+         
+         function startWatch(who, val) {
+            if (flash = 1) {
+               return false;
+            }   
+            watching = who;
+            curwatch = setTimeout("watchChanges('"+who+"', '"+val+"');", 250);
+         }
+         function stopWatch() {
+            clearTimeout(curwatch);
+            watching = '';
+         }   
+         function watchChanges(who, val) {
+            if (!watching) {
+               return false;
+            } else {
+               if (document.forms[0][who].value != val) {
+                  doChange();
+               } else {
+                  curwatch = setTimeout("watchChanges('"+who+"','"+val+"');", 250);
+               }
+
+            }
+         }
+         function doFlash(who, flashing) {
+            if (flashing) {
+               //document.getElementById(who).style.backgroundColor = '#af0000';
+               document.getElementById(who+'Btn').style.color = '#ffffff';
+               document.getElementById(who+'Btn').style.backgroundColor = '#af0000';
+               flashing = 0;
+            } else {
+               //document.getElementById(who).style.backgroundColor = '#eeeeee';
+               document.getElementById(who+'Btn').style.color = '#000000';
+               document.getElementById(who+'Btn').style.backgroundColor = '#eeeeee';
+               flashing = 1;
+            }
+
+            if (flash == 1) {
+               setTimeout("doFlash('"+who+"',"+flashing+");", 600);
+            }   
+         } 
+         function doChange() {
+            flash = 1;
+            doFlash("SaveRecord", 1);
+            document.getElementById('NewRecord').style.display = 'none';
+            document.getElementById('SaveRecord').style.display= 'block';
+         }   
+         function doSave() {
+            frm = document.forms[0];
+            cur = frm.exec.value;
+
+            if (cur != 'new') {
+               frm.exec.value = 'update';
+            }
+            document.getElementById('SaveRecord').style.display = 'none';
+            setTimeout('document.forms[0].submit();', 150);
+         }
+         function doDelete() {
+            var OK = confirm("Are you sure you want to delete this\nentry from ALL web and dns servers?");
+            if (OK) {
+               document.forms[0].exec.value = 'delete';
+               document.getElementById('NewRecord').style.display = 'none';
+               document.getElementById('SaveRecord').style.display = 'none';
+               document.getElementById('DeleteRecord').style.display = 'none';
+	            setTimeout("document.forms[0].submit();", 150);
+               return true;
+            } else {
+               return false;
+            }
+         }   
+         function doNew() {
+            frm = document.forms[0];
+            frm.exec.value = 'new';
+            frm.Host.value = 'www';
+            frm.Domain.value = '';
+            frm.ServerRoot.value = '#user_home#';
+            frm.DocumentRoot.value = 'www';
+            frm.ScriptAlias.value = '';
+            frm.IP.value = '66.181.7.12';
+            frm.Port.value = '80';
+            frm.Type.selectedIndex = 1;
+            frm.CustomLog.value = 'logs/www-access.log';
+            frm.ErrorLog.value = 'logs/www-error.log';
+            frm.user.value = '#REMOTE_USER#';
+            document.getElementById('NewRecord').style.display = 'none';
+            document.getElementById('SaveRecord').style.display = 'block';
+            
+            setTimeout('document.forms[0].Domain.focus();',150);
+
+            return true;
+         }
+         function updateRoot() {
+            var frm = document.forms[0];
+            var host = frm.Host.value;
+            frm.ServerRoot.value = frm.ServerRoot.value + '/domains/' + frm.Domain.value;
+       frm.DocumentRoot.value = frm.Host.value;
+            frm.CustomLog.value = 'logs/'+host+'-access.log';
+            frm.ErrorLog.value = 'logs/'+host+'-error.log';
+
+            return true;
+         }   
+  </script>
+  <style type="text/css">
+            BODY {
+               font-size:11px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .HEADER {
+               font-size:14px;
+                    font-weight:bold;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#ffffff;
+            }
+            .FIELD {
+               font-size:12px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+                 .MAIN {
+               font-size:11px;
+               font-family:Arial,Helvetica,SansSerif;
+               color:#000000;
+            }
+            .FIXED {
+               font-size:11px;
+               font-family:Courier New,Courier,LucidaConsole,Fixedsys;
+               color:#000000;
+            } 
+            #NewRecord {
+               position: relative;
+               display: block;
+               width: 80px;
+            }   
+            #SaveRecord {
+               position: relative;
+               display: none;
+               font-weight: bold;
+               width: 80px;
+            }   
+            #DeleteRecord {
+               position: relative;
+               display: block;
+               width: 80px;
+            }  
+            .btnbtn {
+               margin: 0px;
+               padding: 0px;
+               width: 80px;
+               height: 28px;
+               border-top: 3px double #eeeeee;
+               border-left: 3px double #eeeeee;
+               border-bottom: 3px double #303030;
+               border-right: 3px double #303030;
+            }
+            .btn {
+               margin: 0px;
+               padding: 0px;
+               background-color: #eeeeee;
+               color: #000000;
+            }
+            .btnflash {
+               color: #ffffff;
+               font-weight: bold;
+               backgroundColor: #990000;
+            }
+            .btnunflash {
+               color: #000000;
+               font-weight: bold;
+               backgroundColor: #eeeeee;
+            }   
+
+  </style>
+  <style type="text/css">
+     body {
+        background-color: #FFFFFF;
+        color: #000000;
+     }
+     :link { color: #0000FF }
+     :visited { color: #000099 }
+     :active { color: #FF0000 }
+     div.c3 {text-align: center}
+     hr.c2 {height:1px;}
+     input.c1 {width:75px;}
+  </style>
+</head>
+
+<body class="MAIN" onload="#alert#">
+  <form name="sites" action="index.cgi" method="post">
+    <input type="hidden" name='LogType' value='combined'>
+    <input type="hidden" name="exec" value="">
+    <input type="hidden" name="REMOTE_USER" value="#REMOTE_USER#"><br>
+
+    <center>
+      <table border="1" cellpadding="4" cellspacing="1" bgcolor="#D0D0D0">
+        <tr>
+          <td colspan='2' bgcolor="#880088">
+          <!--<img src="/img/bulb-logo.gif" align='left'>--><span class=
+          'HEADER'>Pimp.Net Apache Webhost Tool</span></td>
+        </tr>
+
+        <tr>
+          <td valign='top'>
+            <table border='0' cellpadding='4' cellspacing='1'>
+              <tr>
+                <td valign="top" align="right" class="MAIN"><span class= 'FIELD'>Websites:</span></td>
+
+                <td valign="top">
+                  <select name="DomainID" size="22"onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange= "document.sites.submit();" class='MAIN'>
+                     #sites#
+                  </select></td>
+                <td width='30'>&nbsp;</td>
+<!--                <td valign="top"><input type="button" value="New" onclick= "doNew();" class='MAIN c1'><br>
+                <input type='button' value=' Delete' onclick="doDelete();" class='MAIN c1'></td>
+-->
+              </tr>
+
+              <tr>
+                <td align='right' class='MAIN' colspan='2'><span class='MAIN'>* Denotes secure webserver</span></td>
+              </tr>
+            </table>
+          </td>
+          <td valign='top'>
+            <table border='0' cellpadding='5' cellspacing='1'>
+              <tr>
+                <td align='right' class='MAIN'><span class= 'FIELD'>Type:</span></td>
+                <td class="MAIN">
+                  <table border='0' cellpadding='5' cellspacing='1'>
+                     <tr>
+                        <td><span style='position:relative;left:-5px;top:0px'>
+                           <select name='ServerType' class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange="if (this.options[this.selectedIndex].value=='standard') { document.forms[0].Port.value='80'; } else { document.forms[0].Port.value ='443'; }">
+                   <option value='standard'>Standard</option>
+                   <option value='secure'>Secure</option>
+                </select></span></td>
+
+                <td align='right' class='MAIN'><span class='FIELD'>Port:</span></td>
+                <td class="MAIN"><input type="text" name="Port" value="#Port#" size="5" class='MAIN'></td>
+              </tr>
+              </table></td></tr>
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Host Name:</span></td>
+                <td class="MAIN"><input type="text" name="Host" value="#Host#" size="25" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange="updateRoot(); doChange();"></td>
+              </tr>
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Domain Name:</span></td>
+                <td class="MAIN"><input type="text" name="Domain" value="#Domain#" size="50" tabindex='1' class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange="updateRoot(); doChange();"></td>
+              </tr>
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Server Root:</span></td>
+                <td class="MAIN"><input type="text" name="ServerRoot" value="#ServerRoot#" size="50" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange='doChange();'></td>
+              </tr>
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Document Root:</span></td>
+                <td class="MAIN"><input type="text" name="DocumentRoot" value="#DocumentRoot#" size="50" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange='doChange();'></td>
+              </tr>
+<!--              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>CGI Directory:</span></td>
+                <td class="MAIN"><input type="text" name="ScriptAlias" value="#ScriptAlias#" size="30" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange='doChange();'>[Optional]</td>
+   -->
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Access Log:</span></td>
+                <td class="MAIN"><input type="text" name="CustomLog" value="#CustomLog#" size="50" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange='doChange();'></td>
+              </tr>
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Error Log:</span></td>
+                <td class="MAIN"><input type="text" name="ErrorLog" value= "#ErrorLog#" size="50" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange='doChange();'></td>
+              </tr>
+              <tr>
+                <td align="right" class="MAIN"><span class= 'FIELD'>User:</span></td>
+                <td class="MAIN"><input type="text" name="user" value="#user#" size="20" class='MAIN' onfocus='startWatch(this.name, this.value)' onblur='stopWatch(this.name)' onchange='doChange();'>    
+                   <span class='FIELD'>Status:</span>  
+                   <span class='MAIN'>#status#</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td align="right" class="MAIN"><span class='FIELD'>Test URL:</span></td>
+
+                <td class="MAIN"><a href="#URL#/env.cgi" target='test'>#URL#/env.cgi</a>    
+                  <span class='FIELD'><input type='checkbox' name='Active' value='1'#Active#> Active</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan='2'>
+                   <div style='border-top: 1px inset #909090; height:4px; width:100%;position:relative;'>&nbsp;</div>
+                </td>
+              </tr>
+
+                      <tr style='border-top:1px solid white'>
+                         <td>
+                            <div id='recbtns' style='width:50%;'>
+                              <span id='NewRecord' class='btn'><input type='button' id='NewRecordBtn' value='New' onClick="doNew();" class='btnbtn'></span>
+                              <span id='SaveRecord' style='display:none;' class='btn'><input type='button' id='SaveRecordBtn' value='Save' onClick="doSave();" class='btnbtn' style='font-weight:bold;'></span>
+                            </div>
+                         </td>
+                         <td align='right'>
+                            <div id='recbtns' style='width:50%;'>
+                              <span id='DeleteRecord' class='btn'><input type='button' id='DeleteRecordBtn' value='Delete' onClick="doDelete();" class='btnbtn'></span>
+                            </div>
+                         </td>
+                      </tr>
+<!--              <tr>
+                <td align="right" colspan="2"><input type="button" value="Save"
+                tabindex='2' onclick="doSave();" class='MAIN c1'></td>
+              </tr>
+-->              
+            </table>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </form>
+</body>
+</html>

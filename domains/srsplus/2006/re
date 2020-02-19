@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+#
+#
+use DBI;
+use CDR::Input;
+use CDR::DB;
+
+# Setup database connection info
+my %dbconf = (	'user'    => 'pimp',
+					'passwd'  => 'pimpin',
+					'host'    => 'localhost',
+					'dbdrv'   => 'mysql',
+					'db'      => 'hosting');
+
+# Build DBI driver string
+$dbconf{'driver'} = "dbi:$dbconf{'dbdrv'}:host=$dbconf{'host'}:database=$dbconf{'db'}";
+
+# Connect to our db server
+my $dbh = DBI->connect($dbconf{'driver'}, $dbconf{'user'}, $dbconf{'passwd'})
+	or die "Error connecting to $dbconf{'driver'} DB server on '$dbconf{'host'}' as '$dbconf{'user'}': $!";
+
+my $data = new CDR::DB($dbh);
+
+open(LOG, "paypalipn.log");
+   while ($log = <LOG>) {
+		chomp $log;
+		if ($log =~ /________/) {
+			$data->new_record('Paypal', $newrec) if ($newrec);
+			$newrec = { };
+			next;
+		}
+		if ($log =~ /(\w+)\:\s*(.*)/) {
+			$newrec->{$1} = $2;
+		}
+	}
+close LOG;
+
+exit 0;
+
