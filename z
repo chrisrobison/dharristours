@@ -1,8 +1,0 @@
-ls -lFA  /home/cdr/backup/data/ibdata1
-ls -lFA  /root/percona-data-recovery-tool-for-innodb-0.5/recover/ibdata1
-ls -lFA  /root/restore/mysql/ibdata1
-ls -lFA  /root/simple/mysql/ibdata1
-ls -lFA  /usr/local/data/ibdata1
-ls -lFA  /usr/local/data.oem/ibdata1
-ls -lFA  /usr/local/olddata/ibdata1
-ls -lFA  /var/lib/mysql/ibdata1
