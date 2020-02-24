@@ -308,7 +308,8 @@
                $rows[] = $val;
             }
          }
-         $out .= '{"page":"'.$in['page'].'","total":"'.ceil($total/$count).'","records":"'.$total.'","rows":'.json_encode($rows).'}';
+         //$out .= '{"page":"'.$in['page'].'","total":"'.ceil($total/$count).'","records":"'.$total.'","rows":'.json_encode($rows).'}';
+         $out .= '{"page":'.$in['page'].',"total":'.ceil($total/$count).',"records":'.count($rows).',"rowTotal":'.$total.',"totalrows":'.$total.', "rows":'.json_encode($rows).'}';
 
          $boss->headers('json');
          print $out;
@@ -321,7 +322,7 @@
          $dbr = $sys->{$rsc}->execute("select FOUND_ROWS() as total");
          $row = mysql_fetch_object($dbr);
          $total = $row->total;
-         $out .= '{"page":"'.$in['page'].'","total":"'.ceil($total / $count).'","records":"'.$total.'","rows":'.json_encode($rows).'}';
+         $out .= '{"page":'.$in['page'].',"total":'.ceil($total / $count).',"records":'.$total.',"totalrows":'.$row->total.', "rows":'.json_encode($rows).'}';
          
          $boss->headers('json');
          print $out;

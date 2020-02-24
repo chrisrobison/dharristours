@@ -353,7 +353,7 @@ $("#files")
          $("#browserFrame").attr("src", "edit.php?path=" + file);
       } else if (file.match(/\.(png|jpg|jpeg|gif|bmp|ico|svg|swf)$/i)) {
          $("#browserFrame").attr("src", "view.php?file=" + file);
-      } else if (file.match(/\.(htm|html)$/)) {
+      } else if (file.match(/\.(htm|html|txt|csv|sql)$/)) {
          $("#browserFrame").attr("src", "/apps/edit/?file=" + file);
       } else {
          $("#browserFrame").attr("src", "download.php?file=" + file);

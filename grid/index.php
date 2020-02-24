@@ -80,7 +80,7 @@
             include($boss->getPath("templates/toolbar.php")); 
          ?>
          <div id='formContainer'<?php if (!$process->NoTable) print " style='display:none'"; ?>>
-            <form id="simpleForm" name="simpleForm" method="POST" autocomplete="off">
+            <form id="simpleForm" name="simpleForm" method="POST" autocomplete="on">
                <input type="hidden" id="cmd" name="x" value="get" />
                <input type="hidden" id="simpleID"name='ID' value='' />
                <input type="hidden" id="pid" name='pid' value='<?php print $in['pid']; ?>' />
@@ -185,7 +185,7 @@
          toggleGrid('<?php print $process->NoSearch; ?>');
       });   
    </script>
-   <script type="text/javascript" src="/lib/js/grid.js?ver=3.98"></script>
+   <script type="text/javascript" src="/lib/js/grid.js?ver=4.00"></script>
    <script type='text/javascript'>
       var simpleConfig = {
          resource:"<?php print $rsc; ?>",

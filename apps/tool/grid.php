@@ -61,22 +61,29 @@
       }
       if ($fields[$key]->Type=="tinyint") {
          $field->edittype = "checkbox";
+	 $field->editoptions = new stdClass;
          $field->editoptions->value = "true:false";
       } else if ($fields[$key]->Type=="text") {
          $field->edittype = "textarea";
+	 $field->editoptions = new stdClass;
          $field->editoptions->rows = "4";
          $field->editoptions->cols = "30";
       } else if ($fields[$key]->Type=="int") {
+	 $field->editrules = new stdClass;
          $field->editrules->integer = true;
          $field->align = 'right';
          $field->width = 10;
          $field->formatter = 'integer';
+	 $field->formatoptions = new stdClass;
          $field->formatoptions->thousandsSeparator = '';
       } else if ($fields[$key]->Type=="date") {
+	 $field->editrules = new stdClass;
          $field->editrules->date = true;
       } else if ($fields[$key]->Type=="time") {
+	 $field->editrules = new stdClass;
          $field->editrules->time = true;
       } else {
+	 $field->editoptions = new stdClass;
          $field->editoptions->size = 30;
          $field->editoptions->maxlength = $fields[$key]->Length;
       }
@@ -95,8 +102,9 @@
    $grid->viewrecords = true;
    $grid->gridview = true;
    $grid->sortorder = "asc";
+   $grid->jsonReader = new stdClass;
    $grid->jsonReader->repeatitems = false;
-   $grid->jsonReader->id = "0"; 
+   $grid->jsonReader->id = $process-Process . "ID"; 
    $grid->caption = $process->Process;
    $grid->editurl = "/grid/ctl.php?x=edit&rsc=".$rsc."&";
    $grid->height = $in['h'] ? $in['h'] : 200;

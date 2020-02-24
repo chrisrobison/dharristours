@@ -9,3 +9,5 @@ spool
 **/src/
 src
 CVS
+clients/dharristours/invoices/
+clients/dharristours/incoming/

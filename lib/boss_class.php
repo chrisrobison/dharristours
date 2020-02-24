@@ -1116,7 +1116,7 @@ class boss {
       $grid->colNames = $colnames;
       $grid->colModel = $colmodel;
       $grid->jsonReader->repeatitems = false;
-      $grid->jsonReader->id = "0"; 
+      $grid->jsonReader->id = $process->Process . "ID"; // "0"; 
       $grid->rowList = array(10,50,100,500,1000,5000,10000);
       $grid->caption = $process->Process;
       $grid->datatype = "json";

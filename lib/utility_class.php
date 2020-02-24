@@ -541,11 +541,11 @@ class Utility {
             if ($dbh) {
 		    $user = mysql_fetch_object($dbh);
 		    $admin = true;
-		    $dbr = $sys->Login->execute("select sum(distinct(Access)) as ModuleAccess from Module");
+		    $dbr = $sys->Login->execute("select sum(a.Access) as ModuleAccess from (select distinct(Access) from Module) as a");
 		    $mrec = mysql_fetch_object($dbr);
 		    $user->Access = $mrec->ModuleAccess;
-
-		    $dbp = $sys->Login->execute("select sum(distinct(Access)) as ProcessAccess from Process");
+// select sum(a.Access) from (select distinct(Access) from Process) as a
+		    $dbp = $sys->Login->execute("select sum(a.Access) as ProcessAccess from (select distinct(Access) from Process) as a");
 		    $prec = mysql_fetch_object($dbp);
 		    $user->ProcessAccess = $prec->ProcessAccess;
 	    }
