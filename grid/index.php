@@ -185,7 +185,7 @@
          toggleGrid('<?php print $process->NoSearch; ?>');
       });   
    </script>
-   <script type="text/javascript" src="/lib/js/grid.js?ver=4.00"></script>
+   <script type="text/javascript" src="/lib/js/grid.js?ver=4.05"></script>
    <script type='text/javascript'>
       var simpleConfig = {
          resource:"<?php print $rsc; ?>",

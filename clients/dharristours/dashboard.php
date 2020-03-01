@@ -1,4 +1,6 @@
 <?php
+   header("Location: https://dharristours.simpsf.com/tools/fullcalendar/examples/scheduling-vertical.html");
+   exit;
    require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
 
    $boss->db->addResource('JobCal');

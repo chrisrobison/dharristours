@@ -5,7 +5,7 @@
    if ($_SERVER['SERVER_NAME'] && !$_SESSION['UserID']) {
       $s = $_SERVER;
       $prot = ($s['SERVER_PORT']=='443') ? "https://" : "http://";
-      header("Location: ".$prot.$s['SERVER_NAME']."/login.php?url=".urlencode($_SERVER['REQUEST_URI']));
+      header("Location: https://".$s['SERVER_NAME']."/login.php?url=".urlencode($_SERVER['REQUEST_URI']));
       exit;
    }
    

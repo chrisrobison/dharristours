@@ -94,8 +94,12 @@
                   foreach ($childs as $child) {
                      $url = ($child->URL) ? $child->URL : "/grid/?pid=".$child->ProcessID;
                      $cname = $child->ClassName ? $child->ClassName : "childnav";
-
-                     print "\t\t<li class='$cname' id='pid_" . $child->ProcessID . "'><a rel='nav' title='" . $child->Process . "' href='" . $url . "' class='" . $cname . "'>" . $child->Process . "</a></li>\n";
+                     if ($child->Target) {
+                        $target = " target='".$child->Target."'";
+                     } else {
+                        $target = "";
+                     }
+                     print "\t\t<li class='$cname' id='pid_" . $child->ProcessID . "'><a rel='nav' title='" . $child->Process . "'".$target." href='" . $url . "' class='" . $cname . "'>" . $child->Process . "</a></li>\n";
                   }
 
                   print "</ul>\n";
@@ -115,10 +119,14 @@
    <script type='text/javascript'>
       $(document).ready(function() {
          $("a[rel=nav]").click(function(e) {
-            top.loadUrl($(this).attr("href"), $(this).text());
-            e.stopPropagation();
-            e.preventDefault();
-            return false;
+            if (!$(this).attr("target")) {
+               top.loadUrl($(this).attr("href"), $(this).text());
+               e.stopPropagation();
+               e.preventDefault();
+               return false;
+            } else {
+               return true;
+            }
          });
          $("span.arrow").click(function() { 
             $("ul.child", $(this).parent()).toggle(); 
