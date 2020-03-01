@@ -30,12 +30,9 @@
    $in['ID'] = $in['ID'] ? $in['ID'] : 1;
  
    $boss->addResource("Job");
-   $boss->db->Job->execute("SELECT JobID, Job from Job where ((JobDate > CURDATE()) or (JobDate < (CURDATE() + INTERVAL 2 MONTH))) or JobID not in (select JobID from Invoice) OR (JobID='{$in['ID']}') order by LastModified desc");
+   $boss->db->Job->execute("SELECT JobID, Job from Job where JobID='{$in['ID']}'"); // ((JobDate > CURDATE()) or (JobDate < (CURDATE() + INTERVAL 2 MONTH))) or JobID not in (select JobID from Invoice) OR (JobID='{$in['ID']}') order by LastModified desc");
 
-   $jobs = array();
-   while ($row = mysql_fetch_assoc($boss->db->Job->result)) {
-      $jobs[] = $row;
-   }
+   $job = mysql_fetch_assoc($boss->db->Job->result); 
 
    if ($in['x'] == "create") {
       // Call a stored procedure passing in the ID of the record just created
@@ -101,16 +98,8 @@
      <div  class="flex-container">
       <section class="content">
          <form method='post'>
-            <span style='float:left;padding:0 .125em;'><label>Job: </label><span class='val'>
-               <select id="joblist" style='width:25em'>
-               <?php
-                  foreach ($jobs as $job) {
-                     $sel = ($in['ID'] == $job['JobID']) ? " SELECTED" : "";
-                     print "<option value='{$job['JobID']}'$sel>{$job['Job']}</option>";
-                  }
-               ?>
-               </select>
-               <?php // print $in['ID']; ?>
+            <span style='float:left;padding:0 .125em;'><label>Job ID: </label><span class='val'>
+               <input type='text' id="joblist" style='width:5em' value='<?php print $in['ID']; ?>'><button id='lookup'>Lookup</button> <span class='val'><?php print $job['Job']; ?></span>
                </span></span>
                <span id='emailWrap' style='float:right;'<?php if (!$InvID) print " disabled='true'"; ?>>
                   <!-- Email fields -->
@@ -190,9 +179,8 @@
             
          });
          
-         $("#joblist").change(function(e) {
-            document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $(this).val());
-         });
+         $("#joblist").change(function(e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $(this).val()); });
+         $("#lookup").click(function(e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $("#joblist").val()); });
 
          $("#what").change(function(e) {
             var curdoc = $(this).val();

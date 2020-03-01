@@ -76,7 +76,8 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
    margin-right:6px;
    background-color:#eeeeee;
    padding:8px 0 0;
-   border:3px solid #000000;-moz-box-shadow:3px 3px 6px rgba(0,0,0,.35);-webkit-box-shadow:3px 3px 6px rgba(0,0,0,.35);box-shadow:3px 3px 6px rgba(0,0,0,.35); 
+   border:3px solid #000000;
+   /* -moz-box-shadow:3px 3px 6px rgba(0,0,0,.35);-webkit-box-shadow:3px 3px 6px rgba(0,0,0,.35);box-shadow:3px 3px 6px rgba(0,0,0,.35); */
    border-radius:6px; -moz-border-radius:6px; -webkit-border-radius:6px; 
 }
 .navIcon img {
@@ -99,7 +100,8 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
    border:3px solid #000000;
    border-radius:6px; -moz-border-radius:6px; -webkit-border-radius:6px; 
    margin-right:6px;
-   vertical-align:middle;-moz-box-shadow:3px 3px 6px rgba(0,0,0,.35);-webkit-box-shadow:3px 3px 6px rgba(0,0,0,.35);box-shadow:3px 3px 6px rgba(0,0,0,.35); 
+   vertical-align:middle;
+   /* -moz-box-shadow:3px 3px 6px rgba(0,0,0,.35);-webkit-box-shadow:3px 3px 6px rgba(0,0,0,.35);box-shadow:3px 3px 6px rgba(0,0,0,.35); */
 }
 /* #toolbar { position:relative; height:2.5em; padding:0px; border-bottom:1px solid #606060; background-image:url("/img/toolbar_bg.png"); background-color:#000; } */
 #toolbar { position:relative; height:2.5em; padding:0px; border-bottom:1px solid #606060;}
