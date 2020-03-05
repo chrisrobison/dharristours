@@ -11,11 +11,18 @@
       $model = $boss->getObject('Model', $in['mid']);
    } 
    
-   $models = $boss->getObject('Model', '1=1 ORDER BY Model');
+   $models = $boss->getObject('Model', 'LoginID=0 ORDER BY ProcessID');
    if (!$model) {
       $model = $models->Model[0];
       $in['mid'] = $model->ModelID;
    }
+   $modeljson = json_encode($models);
+
+   $logins = $boss->getObject('Login', '1=1 ORDER BY Login');
+   $loginjson = json_encode((array)$logins->Login);
+
+   $process = $boss->getObject('Process', '1=1');
+   $processjson = json_encode($process);
 
    foreach ($models->Model as $k=>$m) {
       if ($k != '_ids') {
@@ -29,6 +36,13 @@
          $sel .= "\t<option value='{$m->ModelID}'$x>[{$m->ModelID}] {$m->Model} (PID: {$m->ProcessID}, LoginID: {$m->LoginID})</option>\n";
       }
    }
+   
+
+   foreach ($process->Process as $idx=>$proc) {
+      if ($idx=="_ids") { next; }
+      $procs[$proc->ProcessID] = $proc;
+   }
+   $processjson = json_encode($procs);
 ?>
 <!DOCTYPE html> 
 <html>
@@ -38,6 +52,23 @@
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
       <link rel='stylesheet' type='text/css' href='jsonedit.css' />
       <link rel='stylesheet' type='text/css' href='contextmenu.css' />
+      <script>
+         <?php print "var models = ".$modeljson.";\n"; ?>
+         <?php print "var process = ".$processjson.";\n"; ?>
+         <?php print "var logins = ".$loginjson.";\n"; ?>
+
+         function getModel(id) {
+            return models.filter(function(item) { return item.ModelID===id; });
+         }
+
+         function getProcess(id) {
+            return process.filter(function(item) { return item.ProcessID===id; });
+         }
+
+         function getLogin(id) {
+            return logins.filter(function(item) { return item.LoginID===id; });
+         }
+      </script>
   </head>
    <body>
       <form id='gridform'>

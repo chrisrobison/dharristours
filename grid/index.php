@@ -15,6 +15,13 @@
    if (!$rsc) {
       $rsc = $in['rsc'] = $process->Resource;
    }
+
+   $id = $in['id'];
+
+   if ($id) {
+      $record = $boss->getObject($rsc, $id);
+   }
+
    $model = $boss->getModel($in['pid']);
    $json = preg_replace("/\r?\n/", "\\n", $model->Config);
 ?>
@@ -185,10 +192,10 @@
          toggleGrid('<?php print $process->NoSearch; ?>');
       });   
    </script>
-   <script type="text/javascript" src="/lib/js/grid.js?ver=4.05"></script>
+   <script type="text/javascript" src="/lib/js/grid.js?ver=4.08"></script>
    <script type='text/javascript'>
       var simpleConfig = {
-         resource:"<?php print $rsc; ?>",
+         resource:"<?php print $in['rsc']; ?>",
          pid: <?php print $in['pid'] ? $in['pid'] : "''"; ?>,
          process: <?php print json_encode($process); ?>,
          record: { "<?=$rsc?>ID": "new1" },

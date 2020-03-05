@@ -460,9 +460,11 @@ return false;
 }
 
 function realUpAll(id) {
-   // $('#mygrid').trigger('reloadGrid');
-   // doSelect(id);
-   //$("#mygrid").setSelection(simpleConfig.rowid,true);
+   if (id) {
+      //$('#mygrid').trigger('reloadGrid');
+      //doSelect(id);
+      //$("#mygrid").setSelection(simpleConfig.rowid,true);
+   }
    if (simpleConfig.current['JobDate'] && simpleConfig.current['EmployeeID'] && simpleConfig.current['PickupLocation'] && simpleConfig.current['PickupTime']) {
      $("#doNotify").removeAttr("disabled");
      $("#notifyToggle").removeClass("disabled");
@@ -486,15 +488,21 @@ function realUpAll(id) {
    $("#dropoffToggle").removeAttr('checked');
    $("#estPrice").html("");
    $("#estPrice").val("");
-   var stimes = getTimes(simpleConfig.record["PickupTime"]);
-   $("#Pickup_hour").val(stimes[0]);
-   $("#Pickup_minute").val(stimes[1]);
-   $("#Pickup_meridian").val(stimes[2]);
 
-   var etimes = getTimes(simpleConfig.record["DropOffTime"]);
-   $("#DropOff_hour").val(etimes[0]);
-   $("#DropOff_minute").val(etimes[1]);
-   $("#DropOff_meridian").val(etimes[2]);
+   if (simpleConfig.record && simpleConfig.record.PickupTime) {
+      var stimes = getTimes(simpleConfig.record["PickupTime"]);
+      $("#Pickup_hour").val(stimes[0]);
+      $("#Pickup_minute").val(stimes[1]);
+      $("#Pickup_meridian").val(stimes[2]);
+   }
+
+   if (simpleConfig.record && simpleConfig.record.DropOffTime) {
+      var etimes = getTimes(simpleConfig.record["DropOffTime"]);
+      $("#DropOff_hour").val(etimes[0]);
+      $("#DropOff_minute").val(etimes[1]);
+      $("#DropOff_meridian").val(etimes[2]);
+   }
+
    handleEndTime();
    if (simpleConfig.current['JobDate'] && simpleConfig.current['EmployeeID'] && simpleConfig.current['PickupLocation'] && simpleConfig.current['PickupTime'] && simpleConfig.current['BusID']) {
       $("#doNotify").removeAttr("disabled");
@@ -566,23 +574,25 @@ function myNew() {
 }
 
 function getTimes(mytime) {
-   var stimes = mytime.split(/:/);
-   stimes[0] = stimes[0].replace(/^0(\d)/, '$1');
-   stimes[2] = 0;
-
-   if (stimes[0] == 24) {
-      stimes[0] = 12;
-   }
-   if (stimes[0] >= 12) {
-      stimes[0] = parseInt(stimes[0]) - 12;
-      stimes[2] = 12;
-   } else {
+   if (mytime) {
+      var stimes = mytime.split(/:/);
+      stimes[0] = stimes[0].replace(/^0(\d)/, '$1');
       stimes[2] = 0;
+
+      if (stimes[0] == 24) {
+         stimes[0] = 12;
+      }
+      if (stimes[0] >= 12) {
+         stimes[0] = parseInt(stimes[0]) - 12;
+         stimes[2] = 12;
+      } else {
+         stimes[2] = 0;
+      }
+
+      if (stimes[0] < 10) stimes[0] = '0' + stimes[0];
+
+      return stimes;
    }
-
-   if (stimes[0] < 10) stimes[0] = '0' + stimes[0];
-
-   return stimes;
 }
 
 function setTime(who, time) {
@@ -739,11 +749,13 @@ function updateTimeDiffinHours(who, mytime) {
 }
 
 function handleEndTime() {
-   var rt = simpleConfig.record["RoundTrip"]; //added
-   if ((rt == "1") || (rt == "true")) {
-      $("#endspan").show();
-   } else {
-      $("#endspan").hide();
+   if (simpleConfig.record && simpleConfig.record.RoundTrip) {
+      var rt = simpleConfig.record["RoundTrip"]; //added
+      if ((rt == "1") || (rt == "true")) {
+         $("#endspan").show();
+      } else {
+         $("#endspan").hide();
+      }
    }
 }
 
