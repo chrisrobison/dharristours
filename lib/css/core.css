@@ -473,16 +473,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .ui-pg-table td[align='left'] {  display:inline-block; }
 .status { color:#009900; }
 div.paid { 
-   background: rgb(255,255,255);
-   background: -moz-linear-gradient(-45deg,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 48%, rgba(209,239,255,1) 100%);
-   background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(48%,rgba(255,255,255,1)), color-stop(100%,rgba(209,239,255,1)));
-   background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,239,255,1) 100%);
-   background: -o-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,239,255,1) 100%);
-   background: -ms-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,239,255,1) 100%);
-   background: linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,239,255,1) 100%);
+   background-color: #333 !important;
+   /* background: -moz-linear-gradient(-45deg,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 48%, rgba(209,209,209,1) 100%);
+   background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(48%,rgba(255,255,255,1)), color-stop(100%,rgba(209,209,209,1)));
+   background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,209,209,1) 100%);
+   background: -o-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,209,209,1) 100%);
+   background: -ms-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,209,209,1) 100%);
+   background: linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 48%,rgba(209,209,209,1) 100%);
    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d1efff',GradientType=1 );
    /* background-color:#ddeeff !important; */
-   color:#555; 
+   color:#fff; 
 }
 div.trialwarn { 
    background: rgb(255,255,255);

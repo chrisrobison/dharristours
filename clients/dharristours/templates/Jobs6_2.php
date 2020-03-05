@@ -1,6 +1,26 @@
-<script src='/files/templates/time.js?ver=1.32' type='text/javascript' async> </script>
+<script src='/files/templates/time.js?ver=1.33' type='text/javascript' async> </script>
 <script type='text/javascript'>
    var userEmail = '<?php print htmlspecialchars($_SESSION['Email'], ENT_QUOTES); ?>';
+
+   var jobdateset = false;
+
+   setTimeout(checkJobDate, 1000);
+
+   function checkJobDate() {
+      if (jobdateset) { return true; }
+      var jobdate = $("#gs_JobDate");
+      var grid = $("#mygrid");
+      if (grid && jobdate && jobdate[0]) {
+         jobdate[0].value = new Date().toISOString().substr(0,10);
+         setTimeout(function() {
+            $("#mygrid")[0].triggerToolbar();
+         }, 2000);
+         jobdateset = true;
+         return true;
+      } else {
+         setTimeout(checkJobDate, 1000);
+      }
+   }
 </script>
 <div class='tableGroup'>
    <div class='formHeading'>

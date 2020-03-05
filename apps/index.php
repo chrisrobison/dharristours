@@ -103,7 +103,7 @@
                if ($boss->app->PayStatus == "current") $trialdone = "paid";
             ?>
             <div dojoType="dijit.layout.ContentPane" region="bottom" id="footer" style="height:32px;" splitter="true"<?php print ($trialdone) ? " class='$trialdone'" : ''; ?>>
-               <div id="copy"><a style='color:inherit' href='#changePasswd' id='chpassIcon'>&#9881;</a>   Logged in as: <a id='easteregg' style="color:#000;font-size:1.1em;" href="javascript:var%20s%20=%20document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='/lib/js/asteroids.min.js';void(0);"><?php print $_SESSION['FirstName'].' '.$_SESSION['LastName']; ?></a> [<a href="/login.php?logout=true" target="_top" style="color:#0000ff;text-decoration:underline;">Logout</a>] 
+               <div id="copy"><a style='color:inherit' href='#changePasswd' id='chpassIcon'>&#9881;</a>   Logged in as: <a id='easteregg' style="color:#cc0;font-size:1.1em;" href="javascript:var%20s%20=%20document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='/lib/js/asteroids.min.js';void(0);"><?php print $_SESSION['FirstName'].' '.$_SESSION['LastName']; ?></a> [<a href="/login.php?logout=true" target="_top" style="color:#ffaaaa;text-decoration:underline;">Logout</a>] 
                <br/>&copy; Copyright <?php print date("Y"); ?>, Simple Software Inc.</div>
                <div id="simpleStatus"> Status: <b class='status'>
                <?php 
