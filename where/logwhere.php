@@ -48,7 +48,7 @@
 	       printf("Connect failed: %s\n", mysqli_connect_error());
 		   exit();
 	   }
-	   mysqli_query($link, "update WebfleetBus set Active=0");
+	   mysqli_query($link, "update WebfleetBus set Active=0 where Active=1");
 	   $sql = "INSERT INTO WebfleetBus values (null, '".mysqli_real_escape_string($link, $contents)."', now(), now(), 1)";
       $newid = mysqli_query($link, $sql);
 

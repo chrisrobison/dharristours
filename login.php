@@ -21,14 +21,15 @@ if (file_exists($boss->app->Assets . "/login.php")) {
    exit;
 }
 
+if (isset($_COOKIE['email'])) {
+     unset($_COOKIE['email']);
+     unset($_SESSION['email']);
+     setcookie('email', null, -1, '/');
+}
+
 if ($_REQUEST['logout']) {	
    $boss->utility->logout($boss);
    // header("Location: /index.php");
-   if (isset($_COOKIE['email'])) {
-        unset($_COOKIE['email']);
-        unset($_SESSION['email']);
-	setcookie('email', null, -1, '/');
-   }
    print "<script type='text/javascript'>\ntop.location.href='/index.php';\n</script>\n";
    exit;
 } else if (isset($_REQUEST['submitted'])) {
