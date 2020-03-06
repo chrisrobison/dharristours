@@ -1,4 +1,4 @@
-#!/usr/local/bin/php
+#!/usr/bin/php
 <?php
 $imap = imap_open("{pop.mail.yahoo.com:995/pop3/ssl/novalidate-cert}", "juanaharrisdht@att.net", "CANADA8bxx559");
 
