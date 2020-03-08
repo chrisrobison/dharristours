@@ -29,14 +29,16 @@ function initFirebase() {
       console.dir(val);
       updateBuses(val);
    });
-   var people = firebase.database().ref('people/');
+/*
+ * var people = firebase.database().ref('people/');
    people.on('value', function(snapshot) {
       var val = snapshot.val();
       staff = val;
       console.dir(val);
       updatePeople(val);
    });
-   geoFindMe();
+*/
+   // geoFindMe();
 }
 
 var map;
@@ -59,8 +61,10 @@ function geoFindMe() {
     
     if (who) {
       var d = new Date();
-    
-      firebase.database().ref('people/' + who).set({lat: latitude, long: longitude, updated: d.toISOString(), icon: "/where/img/" + who + ".png", name: name });
+      var o = {lat: latitude, long: longitude, updated: d.toISOString(), icon: "/where/img/" + who + ".png", name: name }; 
+      console.log("geoFindMe: who="+who);
+      console.dir(o);
+      firebase.database().ref('people/' + who).set(o);
     }
   }
 
