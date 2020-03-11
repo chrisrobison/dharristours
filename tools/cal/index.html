@@ -3,13 +3,15 @@
 <head>
 <meta charset='utf-8' />
 <link href='main.css' rel='stylesheet' />
+<link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
+<script src='/lib/js/tiny-date-picker.min.js'></script>
 <script src='mycal.js'></script>
 <script>
-
+  var calendar;
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
       defaultView: 'resourceTimeGridDay',
       defaultDate: new Date().toISOString().substr(0, 10),
@@ -70,15 +72,144 @@
   }
 
   #calendar {
-    max-width: 900px;
-    margin: 50px auto;
+    max-width: 60%;
+    margin: .5em auto 0px auto;
+    display:inline-block;
   }
+  .left {
+     position:relative; 
+     width:400px;
+     display:inline-block;
+     float:left;
+     margin-top:0em;
+     margin-right:1em;
+  }
+  #tinycal {
+    width:400px;
+  }
+  #details {
+     display:inline-block;
+     width:400px;
+     height:25em;
+     margin:.5em 0 1em 0;
+     border:1px solid #ccc;
+     padding:0px;
+  }
+  #detail {
+    overflow-y:scroll;
+    position:relative;
+    height:20em;
 
+  }
+  .fc-scroller { height:48em !important; }
+  .dp-col-header, .dp-permanent {
+     font-size:1em;
+  }
+  .dp-day, .dp-today {
+     font-size:22px;
+  }
+  #details h1 { 
+   text-align:center;
+   margin:0;
+   background-color:#f5f5f5;
+   font-weight:normal;
+   padding:.5em 0;
+   font-size:1.7em;
+  }
+  #jobdetail th {
+    text-align: right;
+    padding: .3em;
+    border-right: 1px solid #ccc;
+   vertical-align:top;
+  }
+  #jobdetail td {
+   padding:.3em;
+   vertical-align:top;
+  }
+  #jobdetail {
+   border-collapse:collapse;
+   max-height:100%;
+   font-size:1.2em;
+   line-height:1.5em;
+   overflow-y: scroll;
+  }
+  .left {
+    
+  }
 </style>
 </head>
 <body>
-
+<div class='left'>
+  <div id='tinycal'></div>
+  <div id='details'>
+  <h1>Job Details</h1>
+  <div id='detail'>
+  </div>
+</div>
+</div>
   <div id='calendar'></div>
+<script>
+   var dpPermanent = TinyDatePicker('#tinycal', { mode: 'dp-permanent', });
+   dpPermanent.on('statechange', (_, picker) => { 
+      console.log(picker.state.hilightedDate.toISOString()); 
+      calendar.gotoDate(picker.state.hilightedDate.toISOString()); 
 
+   } );
+
+   function handleClick(who) { 
+      
+      makeRequest('GET', 'get-event.php?id='+who, function (err, datums) {
+        myevent = JSON.parse(datums);
+        console.dir(myevent);
+
+        var out = "<table id='jobdetail'><tr><th>Job ID</th><td colspan='3'>" + myevent.JobID + "</td></tr>";
+        out += "<tr><th>Job</th><td colspan='3'>"+myevent.Job+"</td></tr>";
+        out += "<tr><th>Bus</th><td>" + mybuses[myevent.BusID].title + "</td></tr>";
+        out += "<tr><th>Driver</th><td colspan='3'>" + mydrivers[myevent.EmployeeID].Driver + " - " + mydrivers[myevent.EmployeeID].Phone + "</td></tr>";
+        out += "<tr><th>Pickup</th><td>"+ myevent.PickupLocation +"</td><td>" +myevent.PickupTime + "</td></tr>";
+        out += "<tr><th>Dropoff</th><td>"+ myevent.DropOffLocation +"</td><td>" +myevent.DropOffTime + "</td></tr>";
+        if (myevent.finalDropOffLocation) {
+         out += "<tr><th>Final</th><td>"+myevent.FinalDropOffLocation +"</td></tr>";
+        }
+        out += "</table>";
+
+        document.querySelector("#detail").innerHTML = out;
+        if (err) { throw err; }
+        console.log(datums);
+      }); 
+   } 
+   function makeRequest (method, url, done) {
+     var xhr = new XMLHttpRequest();
+     xhr.open(method, url);
+     xhr.onload = function () {
+       done(null, xhr.response);
+     };
+     xhr.onerror = function () {
+       done(xhr.response);
+     };
+     xhr.send();
+   }
+   var buses, myevent, drivers, mybuses = {}, mydrivers = {};
+
+   makeRequest('GET', 'get-resources.php', function (err, data) {
+      buses = JSON.parse(data);
+      for (var i=0; i<buses.length; i++){
+         mybuses[buses[i].busID] = buses[i];
+      }
+      console.log("Buses:");
+      console.dir(mybuses);
+   });
+   
+   makeRequest('GET', 'get-drivers.php', function (err, data) {
+      drivers = JSON.parse(data);
+      for (var i=0; i<drivers.length; i++){
+         mydrivers[drivers[i].EmployeeID] = drivers[i];
+      }
+      console.log("Drivers:");
+      console.dir(mydrivers);
+   });
+
+
+</script>
 </body>
 </html>

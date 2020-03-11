@@ -20,15 +20,15 @@
          $obj = new stdClass();
          if ($row['BusNumber']) {
             $obj->id = $row['BusNumber'];
-            $obj->title = 'Bus #' . $row['BusNumber'];
+            $obj->busID = $row['BusID'];
+            $obj->title = '#' . $row['BusNumber'];
          } else {
             $obj->id = $row['Bus'];
+            $obj->busID = $row['BusID'];
             $obj->title = $row['Bus'];
          }
-         $obj->eventColor = $colors[$cnt];
          $obj->capacity = $row['capacity'];
-
-         $cnt++;
+         
          array_push($out, $obj);
       }
 
