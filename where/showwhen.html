@@ -67,11 +67,14 @@
     <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
 
    <script defer src="/where/init-firebase.js"></script>  
-   <script defer src="/where/markerclusterer.min.js"></script>  
+   <script defer src="/where/markerclustererplus.min.js"></script>  
    <script defer src="/where/showwhere.js"> </script>
   </head>
   <body>
     <div id="map"></div>
+    <div id="toolbar">
+      <div id='startdate'><input type='datetime' value='2020-03-10' onchange='loadData(this.value)'><button onclick="loadData(document.querySelector('#mydate').value)"> &gt; </button></div>
+    </div>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script>
   </body>
 </html>

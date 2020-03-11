@@ -55,7 +55,8 @@
             if ($row['JobCancelled']==1) {
                $obj->color = "#222222";
             }
-            $obj->url = "/grid/view.php?rsc=Job&pid=335&id={$row['JobID']}";
+         //   $obj->url = "/grid/view.php?rsc=Job&pid=335&id={$row['JobID']}";
+         $obj->url = "javascript:handleClick('{$row['JobID']}')";
             $obj->extendedProps = new stdClass;
             $obj->extendedProps->EmployeeID = $row['EmployeeID'];
 
