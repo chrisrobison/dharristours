@@ -113,14 +113,17 @@
    margin:0;
    background-color:#f5f5f5;
    font-weight:normal;
-   padding:.5em 0;
+   padding:.5em .5em;
+   min-width:5em;
    font-size:1.7em;
+   display:inline-block;
   }
   #jobdetail th {
     text-align: right;
     padding: .3em;
     border-right: 1px solid #ccc;
-   vertical-align:top;
+    vertical-align:top;
+    font-weight:normal;
   }
   #jobdetail td {
    padding:.3em;
@@ -136,16 +139,60 @@
   .left {
     
   }
+.tabs{
+  overflow:hidden;
+  clear:both;
+
+}
+.tabs ul{
+  list-style-type:none;
+  bottom: -1px;
+  position:relative;
+}
+.tabs li{
+  float:left;
+}
+
+.tabs a{
+  display:block;
+  padding:5px 10px;
+  background-color: #EEE;
+  color: #000;
+  text-decoration: none;
+  margin: 0 4px;
+  border-top:1px solid #CCC;
+  border-left:1px solid #DDD;
+  border-right:1px solid #DDD;
+  font:13px/18px verdana,arial,sans-serif;
+  border-bottom:1px solid #CCC;
+}
+.tabs a.active{
+  background-color: #fff;
+  border-bottom:1px solid #fff;
+}
+.tabs div{
+  clear: both;
+  border:1px solid #CCC;
+  padding:5px;
+  font-family:verdana;
+  font-size:13px;
+  background-color: #fff;
+  display:none;
+}
 </style>
 </head>
 <body>
 <div class='left'>
   <div id='tinycal'></div>
-  <div id='details'>
-  <h1>Job Details</h1>
-  <div id='detail'>
-  </div>
-</div>
+  <div id='details' class='tabs'>
+      <ul>
+        <li><a href="#jobs" >Jobs</a></li> 
+        <li><a href="#detail" class="active">Details</a></li> 
+      </ul>
+
+      <div id='jobs'> </div>
+      <div id='detail'> </div>
+   </div>
 </div>
   <div id='calendar'></div>
 <script>
@@ -162,14 +209,18 @@
         myevent = JSON.parse(datums);
         console.dir(myevent);
 
-        var out = "<table id='jobdetail'><tr><th>Job ID</th><td colspan='3'>" + myevent.JobID + "</td></tr>";
+        var out = "<table id='jobdetail'><tr><th>Job ID</th><td>" + myevent.JobID + "</td>";
+        out += "<th>Passengers</th><td>" + ((myevent.NumberOfItems) ? myevent.NumberOfItems : "?") + "</td></tr>";
         out += "<tr><th>Job</th><td colspan='3'>"+myevent.Job+"</td></tr>";
-        out += "<tr><th>Bus</th><td>" + mybuses[myevent.BusID].title + "</td></tr>";
-        out += "<tr><th>Driver</th><td colspan='3'>" + mydrivers[myevent.EmployeeID].Driver + " - " + mydrivers[myevent.EmployeeID].Phone + "</td></tr>";
-        out += "<tr><th>Pickup</th><td>"+ myevent.PickupLocation +"</td><td>" +myevent.PickupTime + "</td></tr>";
-        out += "<tr><th>Dropoff</th><td>"+ myevent.DropOffLocation +"</td><td>" +myevent.DropOffTime + "</td></tr>";
+        out += "<tr><th>Bus</th><td colspan='3'>" + mybuses[myevent.BusID].title + "</td></tr>";
+        
+        var driver = (myevent && myevent.EmployeeID && mydrivers && mydrivers[myevent.EmployeeID]) ? mydrivers[myevent.EmployeeID].Driver + " - " + mydrivers[myevent.EmployeeID].Phone : "Unassigned";
+      
+        out += "<tr><th>Driver</th><td colspan='3'>" + driver + "</td></tr>";
+        out += "<tr><th>Pickup</th><td colspan='2'>"+ ((myevent.PickupLocation) ? myevent.PickupLocation : "") +"</td><td>" +myevent.PickupTime + "</td></tr>";
+        out += "<tr><th>Dropoff</th><td colspan='2'>"+ ((myevent.DropOffLocation) ? myevent.DropOffLocation : "") +"</td><td>" +myevent.DropOffTime + "</td></tr>";
         if (myevent.finalDropOffLocation) {
-         out += "<tr><th>Final</th><td>"+myevent.FinalDropOffLocation +"</td></tr>";
+         out += "<tr><th>Final</th><td colspan='2'>"+myevent.FinalDropOffLocation +"</td></tr>";
         }
         out += "</table>";
 
@@ -209,7 +260,42 @@
       console.dir(mydrivers);
    });
 
-
+function makeTabs(selector) {
+ 
+    tab_lists_anchors = document.querySelectorAll(selector + " li a");
+    divs = document.querySelector(selector).getElementsByTagName("div");
+    for (var i = 0; i < tab_lists_anchors.length; i++) {
+        if (tab_lists_anchors[i].classList.contains('active')) {
+            divs[i].style.display = "block";
+        }
+ 
+    }
+ 
+    for (i = 0; i < tab_lists_anchors.length; i++) {
+ 
+        document.querySelectorAll(".tabs li a")[i].addEventListener('click', function(e) {
+ 
+            for (i = 0; i < divs.length; i++) {
+                divs[i].style.display = "none";
+            }
+ 
+            for (i = 0; i < tab_lists_anchors.length; i++) {
+                tab_lists_anchors[i].classList.remove("active");
+            }
+ 
+            clicked_tab = e.target || e.srcElement;
+ 
+            clicked_tab.classList.add('active');
+            div_to_show = clicked_tab.getAttribute('href');
+ 
+            document.querySelector(div_to_show).style.display = "block";
+ 
+        });
+    }
+}
+window.addEventListener("load", function() {
+    makeTabs(".tabs")
+});
 </script>
 </body>
 </html>

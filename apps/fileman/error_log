@@ -1,8 +1,0 @@
-[18-Jun-2018 22:33:30 America/Denver] Boss class using server: dharristours.simpsf.com
-
-[18-Jun-2018 22:33:30 America/Denver] PHP Warning:  require_once(js.php): failed to open stream: No such file or directory in /home/cdr/simple/apps/fileman/files.php on line 2
-[18-Jun-2018 22:33:30 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'js.php' (include_path='.:./lib:../lib:/www/lib/php:/usr/lib/php:/usr/local/lib/php:/simple/src/twilio/twilio-twilio-php-3252c53/Services/:/simple/src/twilio/twilio-twilio-php-3252c53/') in /home/cdr/simple/apps/fileman/files.php on line 2
-[18-Jun-2018 23:00:53 America/Denver] Boss class using server: dharristours.simpsf.com
-
-[18-Jun-2018 23:00:53 America/Denver] PHP Warning:  require_once(js.php): failed to open stream: No such file or directory in /home/cdr/simple/apps/fileman/files.php on line 2
-[18-Jun-2018 23:00:53 America/Denver] PHP Fatal error:  require_once(): Failed opening required 'js.php' (include_path='.:./lib:../lib:/www/lib/php:/usr/lib/php:/usr/local/lib/php:/simple/src/twilio/twilio-twilio-php-3252c53/Services/:/simple/src/twilio/twilio-twilio-php-3252c53/') in /home/cdr/simple/apps/fileman/files.php on line 2
