@@ -1,0 +1,40 @@
+#!/usr/local/bin/php
+<?php
+   $me = array_shift($argv);
+
+   $files = $argv;
+   while ($file = array_shift($files)) {
+      if (preg_match("/\.(php)$/", $file)) {
+         $check = file($file);
+         if (preg_match("/^\#\!/", $check[0])) {
+            chmod($file, 0755);
+         } else {
+            chmod($file, 0644);
+         }
+         system("chown cdr:cdr $file");
+      } else if (preg_match("/\.(js|css|gif|jpg|png|json|html)$/", $file)) {
+         chmod($file, 0644);
+         system("chown cdr:cdr $file");
+      } else if (is_dir($file)) {
+         $files = array_merge($files, getFiles($file));
+         chmod($file, 0755);
+         system("chown cdr:cdr $file");
+      }
+
+
+   }
+
+   function getFiles($dir) {
+      $newfiles = scandir($dir);
+      $out = array();
+      
+      foreach ($newfiles as $idx=>$newfile) {
+         if (($newfile == '.') || ($newfile == '..')) {
+            next;
+         } else {
+            $out[] = $dir.'/'.$newfile;
+         }
+      }
+      return $out;
+   }
+?>
