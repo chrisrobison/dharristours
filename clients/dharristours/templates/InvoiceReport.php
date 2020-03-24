@@ -18,13 +18,12 @@
 
       for ($i=0; $i < $cnt; $i++) {
           list($key, $val) = preg_split("/=/", $parts[$i]);
-          $in[urldecode($key)] = urldecode($val);
+          $in[urldecode($key)] = preg_replace("/\#.*/", '', urldecode($val));
       }
    }
    /* END NOAUTH SECTION */
    $in['Resource'] = "Invoice";
-//   print_r($in);
-   $current = $boss->getObjectRelated($in['Resource'], $in['ID'],false);
+   $current = $boss->getObject($in['Resource'], $in['ID']);
    $job = $boss->getObjectRelated('Job',$current->JobID,false);
    $trip = $boss->getObjectRelated('Trip','JobID = '.$current->JobID.' ',false);
    $business = $boss->getObjectRelated('Business',$job->BusinessID,false);
@@ -32,17 +31,19 @@
 //   print "var data = ".json_encode($current).";\n";
 //print_r($trip->Trip[0]->TripID);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="https://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <link type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" />
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:14pt;color:black;font-family:"Quicksand",Verdana,sans-serif; }
+   @import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro&display=swap');
+   body { font-size:14pt;color:black;font-family:"Roboto",sans-serif; padding:0; margin:0;}
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; }
    H1 { text-align:justify; margin:0;text-indent:0px; }
+   H2 { text-align:center; }
    P { text-align:justify; margin:0 28px 0 0; text-indent:0px; line-height:20px }
    TABLE { border-width:thin; border-collapse:collapse; padding:3px; text-align:left; vertical-align:top; margin:0; width:auto; height:auto; display:table; float:none }
    TR { vertical-align:top; height:auto }
@@ -57,13 +58,13 @@
    #top_header div { float:left;width:2.25in;height:.5in;padding:.006in .05in;}
    #top_header>:first-child { border-right:4px solid #000;}
    #header { width:4.5in;height:.6in; }
-   #top_overview { position:absolute;right:1.5in;width:2in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+   #top_overview { position:absolute;right:1in;width:2in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:.9em; }
-   #main { background:none repeat scroll 0 0 #FFFFFF; height:10in; margin:1px auto; padding:.5in; position:relative; width:7.5in; }
+   #main { background:none repeat scroll 0 0 #FFFFFF; height:11in; margin:1px auto; padding:.5in; position:relative; width:8.5in; }
    .shadow { -moz-box-shadow:0px -2px 7px rgba(0,0,0,.5);}
    #forprint { margin:.5in; width:8.0in;height:11in; position:relative;}
-   #ticket {border:solid 1px #000000;height:7in;width:7.0in;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
+   #ticket {border:solid 1px #000000;height:9in;width:7.5in;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
    h2{margin:0px; font-size:20pt; font-weight:bold;}
    .big {font-size:18pt;}
    div.date {font-size:10pt;}
@@ -77,9 +78,14 @@
    #return_table {text-align:center; position:relative;width:7.5in;}
    #return_table td { border: 1px solid #000000;height:.25in; }
    #return_table th { font-weight:bold;text-align:center;border: 1px solid #000000;height:.25in; }
-   #ticket_table { width:7in; }
+   #ticket_table,.trips { width:7.5in; font-size:1.2em; }
    #ticket_table td { padding:2px 5px; vertical-align:top }
-   td.field { text-align:right; }
+   td.field { text-align:right; color:#666;}
+   .header { font-size:.9em; }
+   .header td.right { padding-right:.5em; }
+   .right { text-align:right; }
+   h3 { padding:0px; margin:0px; }
+   .trips td { padding:.25em; }
    /*]]>*/
    </style>
    <link rel="stylesheet" type="text/css" media="print" href="print.css" />
@@ -91,31 +97,15 @@
    <div id='top_overview'>
       <table>
       <tr>
-      	<td> 
-      	 <h3>Invoice:</h3>
-	</td>
-	<td>&nbsp;</td>
-	<td>
-		<h3><?php print $current->InvoiceID; ?></h3>
-	</td>
+      	<td><h3>Invoice:</h3> </td>
+         <td> <h3><?php print $current->InvoiceID; ?></h3></td>
       </tr>
-      <tr>
-      	<td>
-	Date:
-      </td>
-	<td>&nbsp;</td>
-      <td>
-	<?php if ($current->InvoiceDate==0) {print $current->LastModified;} print $current->InvoiceDate; ?>
-      </td>
+      <tr class='header'>
+      	<td class='right'>Date</td>
+         <td><?php if ($current->InvoiceDate==0) {print $current->LastModified;} print date("F j, Y", strtotime($current->InvoiceDate)); ?></td>
       </tr>
-      
-      <tr><td>TCP: </td>
-      <td>&nbsp;</td>
-	<td> 017270-B</td></tr>
-
-      <tr><td>CA </td>
-      <td>&nbsp;</td>
-   <td>273437</td></tr>
+      <tr class='header'><td class='right'>TCP </td><td>017270-B</td></tr>
+      <tr class='header'><td class='right'>CA </td> <td>273437</td></tr>
 
    </table>
    </div>
@@ -124,33 +114,39 @@
          <tr>
             <td colspan='3'><h2>D HARRIS TOURS Inc.</h2></td>
          </tr>
-         <tr><td></td></tr>
          <tr>
-            <td>415-902-8542</td>
+            <td class='header'>Voice: (415) 902-8542 / Fax: (800) 853-4006</td>
          </tr>
          <tr>
-            <td>800-853-4006 FAX</td>
+            <td class='header'>PO Box 5961, Vallejo, CA 94591</td>
          </tr>
          <tr>
-            <td>PO Box 5961</td>
-         </tr>
-         <tr>
-            <td>Vallejo CA 94591</td>
-         </tr> 
-         <tr>
-            <td>juanaharrisdht@att.net</td>
+            <td class='header'>juanaharrisdht@att.net</td>
          </tr> 
    </table>
     <br />
        <div class='date'>
       <div id='ticket' >
-         <div style="padding:4px;">
-            <h2 class='center'><?php print $business->Business; ?></h2>
-            <div class="date center"><input type="text" value="<?php print $business->AttnTo; ?>" style='width:30em; text-align:center; border: none;'/></div>
-            <div class="date center"><input type="text" value="<?php print $business->Address1; ?>" style='width:30em; text-align:center; border: none;'/></div>
-            <div class="date center"><input type="text" value="<?php print $business->Address2; ?>" style='width:30em; text-align:center; border: none;'/></div>
-            <div class="date center"><input type="text" value="<?php print $business->City; ?>, <?php print $business->State; ?>. <?php print $business->Zip; ?>" style='width:30em; text-align:center; border: none;'/></div>
-            <div class="date center"><input type="text" value="<?php print $business->Phone; ?>, fax: <?php print $business->Fax; ?>" style='width:30em; text-align:center; border: none;'/></div>
+         <div style="padding:4px;font-size:1.5em">
+            <h2 class=''><?php print $business->Business; ?></h2>
+            <?php
+               if (($business->AttnTo != ".") && ($business->AttnTo!="")) {
+            ?><div class="date"><input type="text" value="<?php print $business->AttnTo; ?>" style='width:30em; text-align:center; border: none;font-size:1.2em;'/></div>
+            <?php
+               }
+               if (($business->Address1 != ".") && ($business->Address1!="")) {
+            ?>
+            <!--div class="date"><input type="text" value="<?php print $business->Address1; ?>" style='width:30em; text-align:center; border: none;font-size:1.2em;'/></div-->
+            <?php
+               }
+               if (($business->Address2 != ".") && ($business->Address2!="")) {
+            ?>
+            <!--div class="date"><input type="text" value="<?php print $business->Address2; ?>" style='width:30em; text-align:center; border: none;font-size:1.2em;'/></div-->
+            <?php
+               }
+            ?>
+            <div class="date"><input type="text" value="<?php print $business->Address1 . ", " . $business->City; ?>, <?php print $business->State; ?>. <?php print $business->Zip; ?>" style='width:30em; border: none;font-size:1.2em;'/></div>
+            <div class="date"><input type="text" value="Voice: <?php print $business->Phone; ?> <?php print $business->Fax ? 'Fax: ' .$business->Fax : ''; ?>" style='width:30em; border: none;font-size:1.2em;'/></div>
          </div>
          <br />
        <table id='ticket_table'>
@@ -158,7 +154,7 @@
                <td class='field'>Job ID: </td>
 	       <td class='value' style='max-width: 55%; width:45%;'><?php print $job->JobID; ?></td>
                <td class='field'>Job Date: </td>
-               <td class='value'><?php print $job->JobDate; ?></td>
+               <td class='value'><?php print date("m/d/Y", strtotime($job->JobDate)); ?></td>
             </tr>
             <tr>
                <td class='field'>Job: </td>
@@ -174,72 +170,94 @@
             <tr>
                <td class='field'></td>
                <td class='value'></td>
-               <td></td>
+               <td><br></td>
                <td></td>
             </tr>
-            <tr><td colspan='3'><br /></td></tr>
+         </table>
+         <div style='float:left;font-size:1.5em;padding-left:3em;'>Trip Details</div>
+         <table class='trips' style="margin-top:.5em;width:5in;margin-left:auto;margin-right:auto;">
             <tr>
                <td class='field'>From:</td>
-               <td class='value'><?php print $job->PickupLocation; ?></td>
-               <td class='field'></td>
-               <td class='value'></td>
+               <td colspan='3' class='value'><?php print $job->PickupLocation; ?></td>
             </tr>
-            <tr><td colspan='3'><br /></td></tr>
             <tr>
                <td class='field'>To:</td>
-               <td class='value'><?php print $job->DropOffLocation; ?></td>
-               <td class='field'></td>
-               <td class='value'></td>
+               <td colspan='3' class='value'><?php print $job->DropOffLocation; ?></td>
             </tr>
-            <tr><td colspan='3'><br /></td></tr>
-            <tr>
+            <?php 
+               if (preg_match("/\w/", $job->FinalDropOffLocation)) {
+            ?><tr>
                <td class='field'>Final:</td>
-               <td class='value'><?php print $job->FinalDropOffLocation; ?></td>
-               <td class='field'></td>
-               <td class='value'></td>
+               <td colspan='3' class='value'><?php print $job->FinalDropOffLocation; ?></td>
             </tr>
-            <tr><td colspan="3"><br /></td></tr>
+            <?php } ?>
+            </table>
+            <table class='trips' style='width:6in;margin-top:.5em;'>
             <tr>
-               <td class='field' >Recorded: </td>
-               <td class='value'><?php if ($trip->Trip[0]->JobStartTime==0) {print $job->PickupTime;} print $trip->Trip[0]->JobStartTime; ?></td>
-               <td class='field'>Requested:</td>
-               <td class='value'><?php print $job->PickupTime; ?></td>
+               <td></td><td style='border-bottom:1px solid #ccc;'>Requested</td><td></td><td style='border-bottom:1px solid #ccc;'>Recorded</td><td rowspan='10'>&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+               <td class='field' style='width:10em;'>Pickup: </td>
+               <td class='value'><?php 
+               print date("g:ia", strtotime($job->PickupTime));
+               ?></td>
+               <td class='field'></td>
+               <td class='value'><?php 
+                  if ($job->JobStartTime) {
+                     print date("g:ia", strtotime($trip->Trip[0]->JobStartTime)); 
+                  } else {
+                     print date("g:ia", strtotime($job->PickupTime)); 
+                  }
+                  ?></td>
             </tr>
             <tr>
                <td class='field'>Dropoff: </td>
-               <td class='value'><?php if ($trip->Trip[0]->JobEndTime==0) {print $job->DropOffTime;} print $trip->Trip[0]->JobEndTime; ?></td>
+               <td class='value'><?php 
+                     print date("g:ia", strtotime($job->DropOffTime));
+               ?></td>
                <td class='field'></td>
-               <td class='value'><?php print $job->DropOffTime; ?></td>
+               <td class='value'><?php 
+                  if ($job->JobEndTime) {
+                     print date("g:ia", strtotime($trip->Trip[0]->JobEndTime));
+                  } else {
+                     print date("g:ia", strtotime($job->DropOffTime)); 
+                  } 
+               ?></td>
             </tr>
 	    <tr>
                <td class='field'>Hours:</td>
-               <td class='value'><?php if ($current->BillableHours==0) {print $job->Hours;} print $current->BillableHours; ?></td>
-               <td class='field'>Hours:</td>
-               <td class='value'><?php print $job->Hours; ?></td>
+               <td class='value' style='border-top:1px solid #ccc;'><?php if ($current->BillableHours==0) {print $job->Hours;} print $current->BillableHours; ?></td>
+               <td class='field'></td>
+               <td class='value' style='border-top:1px solid #ccc;'><?php print $job->Hours; ?></td>
 	    </tr>
+        <tr><td><br></td></tr> 
+        </table>
+        <table class='trips' style='width:6in;'>
 	    <tr>
-               <td class='field'>Over:</td>
-               <td class='value'><?php if ($current->BillableHours<=$job->Hours) {print 0;} print $current->BillableHours-$job->Hours; ?></td>
                <td class='field'>Quote:</td>
                <td class='value'>$<?php print $job->QuoteAmount; ?></td>
+               <td class='field'>Additional hours:</td>
+               <td class='value'><?php if ($current->BillableHours<=$job->Hours) {print "0.0";} else { print $current->BillableHours-$job->Hours; }?></td>
             </tr>
             <tr><td colspan="3"><br /><td></tr>
+            </table>
+            <table class='trips'>
             <tr>
-               <td></td>
-               <td class='field'>OT Charge:</td>
-               <td class='value'><?php if ($current->InvoiceAmt==$job->QuoteAmount) {print 0;} print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost; ?></td>
+               <td>Notes:</td>
+               <td class='field'>Overtime Charge:</td>
+               <td class='value'><?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
                <td></td>
 	    </tr>
             <tr>
-               <td></td>
+               <td class='value'><?php print $current->Description; ?></td>
                <td class='field'>Gas:</td>
-               <td class='value' colspan='3'><?php print $current->Gas; ?></td>
+               <td class='value' colspan='3'><?php print $current->Gas ? $current->Gas : "0.00"; ?></td>
                <td></td>
             </tr>
             <tr>
                <td></td>
                <td class='field'>Misc Cost:</td>
-               <td class='value' colspan='3'><?php print $current->MiscCost; ?></td>
+               <td class='value' colspan='3'><?php print $current->MiscCost  ? $current->MiscCost : "0.00"; ?></td>
                <td></td>
             </tr>
             <tr>
@@ -248,17 +266,23 @@
                <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {print $job->QuoteAmount;} print $current->InvoiceAmt; ?></td>
             </tr>
             <tr>
-               <td class='field'>Desc: </td>
-               <td class='value' colspan='3'><?php print $current->Description; ?></td>
+               <td></td>
+               <td class='field' style='font-weight: bold; font-size:12pt'>Paid Amount:</td>
+               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->PaidAmt==0) {print "0";} print $current->PaidAmt; ?></td>
             </tr>
+            <tr>
+               <td></td>
+               <td class='field' style='font-weight: bold; font-size:12pt'>Balance DUE:</td>
+               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php print $current->Balance; ?></td> 
+            </tr>
+
          </table>
          </div>
       </div>
       </div>
-Thank you for your business!
-   <br />
-   <p style="font-size:.8rem"><span class="bold">Cancellation Policy: </span> a charge of $400 if service not cancelled 72 hours prior to spot time. Full charge for on the spot cancellation. 
+   <p style="text-align:center;font-size:.8rem"><span class="bold">Cancellation Policy: </span> a charge of $400 if service not cancelled 72 hours prior to spot time. <br>Full charge for on the spot cancellation. 
 <span class="bold">Late Payment: </span> 10% monthly fee will be added to any invoice 30 days past due.</p>
+<br><h2>Thank you for your business!</h2>
    </div>
 </body>
 </html>

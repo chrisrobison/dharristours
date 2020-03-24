@@ -13,7 +13,7 @@
    
 
     $obj = json_decode($contents);
-    
+
     $busid = $_GET['bus'];
     if (!$busid) {
     	$busid = '3601';
