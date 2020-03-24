@@ -2,12 +2,12 @@
    $in = array();
    $in = $_REQUEST;
 
-   $out = getWhere($in['date'], $in['bus']);
+   $out = getWhere($in['date'], $in['end'], $in['bus']);
    header("Content-type: application/javascript");
    print json_encode($out);
    exit;
 
-   function getWhere($date="", $bus="") {
+   function getWhere($date="", $enddate="", $bus="") {
       $link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "SS_DHarrisTours");
       /* check connection */
       if (mysqli_connect_errno()) {
@@ -15,12 +15,12 @@
           exit();
       }
       
-      if ($date) {
-         $mydate = strtotime($date);
-         $earlier = date("Y-m-d H:i:00", strtotime("2 hours ago", $mydate));
-         $now = date("Y-m-d H:i:00", $mydate);
+      if ($date && $enddate) {
+         // $mydate = strtotime($date);
+         // $earlier = date("Y-m-d H:i:00", strtotime("2 hours ago", $mydate));
+         //$now = date("Y-m-d H:i:00", $mydate);
 
-         $sql = "SELECT * from WebfleetBus where Created>='".$earlier."' and Created<='".$now."' order by Created desc limit 1440";
+         $sql = "SELECT * from WebfleetBus where Created>='".$date."' and Created<='".$enddate."' order by Created desc";
       } else { 
          $sql = "SELECT * from WebfleetBus order by Created desc limit 1440";
       }
@@ -40,7 +40,7 @@
                         $coord = new stdClass();
                         $coord->lat = $obj->latitude_mdeg / 1000000;
                         $coord->lng = $obj->longitude_mdeg / 1000000;
-                        
+                        $coord->date = $obj->pos_time;
                         $out[$obj->objectno][] = $coord;
                      }
                   }
@@ -49,7 +49,7 @@
                      $coord = new stdClass();
                      $coord->lat = $obj->latitude_mdeg / 1000000;
                      $coord->lng = $obj->longitude_mdeg / 1000000;
-                     
+                     $coord->date = $obj->pos_time;
                      $out[$obj->objectno][] = $coord;
                   }
                }

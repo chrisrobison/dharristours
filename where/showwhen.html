@@ -4,17 +4,23 @@
     <title>Realtime Bus Locations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <style>
+       @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 90%;
+        height: 100%;
+        width:80%;
+        float:right;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        font-size:15px;
+        font-family: 'Roboto', sans-serif;
       }
       h2 {
          padding-bottom:0px;
@@ -44,12 +50,6 @@
          padding:.5em;
 
       }
-      th {
-         background-color:#000099;
-         color:#ffffff;
-         font-weight:bold;
-         white-space: nowrap;
-      }
       .subtable {
          margin:0px;
          padding:0px;
@@ -59,7 +59,54 @@
          text-align:right;
          width:4em;
       }
+      #buses {
+         height: 8em;
+         overflow-y:scroll;
+         display:inline-block;
+         padding:0px .25em;
+         margin:0px;
+         background-color:#fff;
+         border:1px inset #eee;
+      }
+      .label {
+         display:inline-block;
+         vertical-align:top;
+         padding:.25em;
+      }
+      #buses li {
+         display:block; 
+         font-weight:100;
+         width:8em;
+      }
+      #startdate {
+         display:inline-block;
+         vertical-align:top;
+      }
+      #toolbar {
+         padding:.25em;
+         background-color:#eee;
+         height:50%;
+         width:20%;
+      }
+      .daterangepicker .drp-calendar { max-width:1000px !important; }
+      #when { 
+         font-size: 16px;
+         padding:3px;
+         width:15em;
+      }
+      #startdate button::before {
+         content: "►";
+         position:absolute;
+      }
+      #startdate button {
+         height:2.4em;
+         width:2.7em;
+
+      }
     </style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
    <script defer src="/where/markerclustererplus.min.js"></script>  
    <script defer src="/where/showwhen.js"> </script>
@@ -67,9 +114,41 @@
   <body>
     <div id="map"></div>
     <div id="toolbar">
-      <div id='startdate'><input type='datetime' value='2020-03-10' onchange='loadData(this.value)'><button onclick="loadData(document.querySelector('#mydate').value)"> &gt; </button></div>
+      <span class='label'>Buses: </span>
+      <ul id='buses'>
+         <li><input type='radio' name='buses' value='' checked='checked'> All buses</li>
+         <li><input type='radio' name='buses' value='2302'> Bus# 2302</li>
+         <li><input type='radio' name='buses' value='2502'> Bus# 2502</li>
+         <li><input type='radio' name='buses' value='2503'> Bus# 2503</li>
+         <li><input type='radio' name='buses' value='2802'> Bus# 2802</li>
+         <li><input type='radio' name='buses' value='3301'> Bus# 3301</li>
+         <li><input type='radio' name='buses' value='3601'> Bus# 3601</li>
+         <li><input type='radio' name='buses' value='3801'> Bus# 3801</li>
+         <li><input type='radio' name='buses' value='4001'> Bus# 4001</li>
+         <li><input type='radio' name='buses' value='4402'> Bus# 4402</li>
+      </ul>
+      <br>
+      <br>
+      <div id='startdate'><span class='label'>Date Range:</span><br><input id='when' type='datetime'><button onclick="getPath(mystart, myend)"> &gt; </button></div>
     </div>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script>
+    <script>
+      window.mystart = new moment(new Date().getTime() - 86400000).format("YYYY-MM-DD HH:mm:ss");
+      window.myend = new moment(new Date().getTime()).format("YYYY-MM-DD HH:mm:ss");
+
+      $('#when').daterangepicker({
+         "timePicker":true,
+          "timePicker24Hour": true,
+          "autoApply": true,
+          "alwaysShowCalendars": true,
+          "startDate": new moment(new Date().getTime() - 86400000),
+          "endDate": new moment(new Date().getTime())
+          }, function(start, end, label) {
+         window.mystart = start.format("YYYY-MM-DD HH:mm:ss");;
+         window.myend = end.format("YYYY-MM-DD HH:mm:ss");
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm') + ' to ' + end.format('YYYY-MM-DD hh:mm') + ' (predefined range: ' + label + ')');
+      });
+    </script>
   </body>
 </html>
 

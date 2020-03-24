@@ -104,33 +104,76 @@ function getWhere(when, who) {
       });
 }
 
-function getPath(when, who) {
+var paths = {};
+function getPath(start, end, who) {
+   var whichbus = document.querySelectorAll("input[name=buses]:checked")[0].value;
    var query = [];
    
    if (who) {
       query[query.length] = "bus=" + encodeURIComponent(who);
    } 
-   if (when) {
-      query.push("date=" + encodeURIComponent(when));
+   if (whichbus) {
+      query[query.length] = "bus=" + encodeURIComponent(whichbus);
+   } 
+   if (start) {
+      query.push("date=" + encodeURIComponent(start));
    }
-   var drivePath = [];
+   if (end) {
+      query.push("end=" + encodeURIComponent(end));
+   }
+   drivePath = [];
    fetch("path.php?" + query.join('&')).then(res => res.json())
       .then((out) => {
-      drivePath = [];
 console.dir(out);
+
+ var lineSymbol = {
+//    path: google.maps.SymbolPath.CIRCLE,
+   // "m 82.300942,206.4326 -0.01441,-8.24527 23.617178,0.20657 0.0238,-16.18849 -19.954647,-0.25864 -0.0056,16.11554 -3.712717,-0.48413 -0.01728,-20.35905 24.101274,0.19472 v -15.875 H 85.965607 v 14.55208 l -3.737982,1.07487 -0.02336,-20.39699 23.809495,-0.30486 -0.003,-16.34148 -20.111745,-0.0986 -0.0034,15.77644 -3.633975,0.976 v -25.4 l 38.62917,-0.26459 v -5.02708 l -34.395836,-0.26459 v -2.38125 h 34.395836 v -5.29166 l -28.155015,-0.11763 0.217924,-3.11775 12.030461,-0.45062 0.0547,-4.41495 0.17591,-5.69343 -11.051711,10.10152 -1.317354,3.75737 -6.879878,-0.0645 v 12.96457 l -3.64615,0.16086 -0.167349,-15.46504 c 0,0 0.595237,-3.86905 3.869047,-3.42262 l 3.852381,-0.0827 1.223809,2.29822 1.983929,-2.86072 11.111306,-9.78809 4.01786,-10.383341 6.38214,-1.65357 1.78572,-1.6369 4.91071,0.0661 -0.14881,4.39821 3.86905,1.62024 c 2.23214,0.89285 4.7125,2.54642 4.11726,7.010711 0.44643,6.84524 -8.28393,7.88691 -8.28393,7.88691 l 1.63691,5.20833 1.78571,0.89286 v 19.18031 l -2.08331,1.04166 -0.44643,25.80952 c 0,0 8.22816,1.46905 7.77143,9.25953 0.45673,9.40744 -8.23452,9.75536 -8.23452,9.75536 l -1.76905,27.95952 -2.23214,-0.14881 -1.93453,-1.78571 z",
+    path: "m 78.221351,135.64258 4.122635,-0.007 -0.103285,11.80858 8.094245,0.0119 0.12932,-9.97732 -8.05777,-0.003 0.242065,-1.85636 10.179525,-0.009 -0.09736,12.05064 h 7.937504 v -10.18647 h -0.762537 l -0.163281,-0.11312 0.340328,9.63812 h -0.726022 l 0.07992,-9.62883 -0.488702,-0.0351 0.11765,10.08733 -0.389347,0.006 -0.18364,-10.07072 -0.717881,0.004 -0.235635,9.94951 -0.572539,0 0.142258,-9.82182 -0.646043,-0.0341 0.0305,9.85415 -0.6201,-7.5e-4 -0.05583,-9.82568 -0.455964,0.004 0.0045,9.83136 -0.444638,-0.004 -0.05386,-9.82842 -0.439515,-0.002 0.0676,9.82981 -0.469807,2.6e-4 0.01625,-9.81175 -0.495079,-0.009 -0.0062,9.81631 -0.506293,6.3e-4 0.03103,-9.83386 -0.202273,-0.002 -0.0083,-1.86899 10.19849,-0.0117 0.0893,11.90475 8.23382,-0.002 0.0493,-10.05587 -7.88822,-0.001 -0.488,-1.81699 h 12.7 l 0.1323,19.31458 h 2.51354 l 0.13229,-17.19791 h 1.19063 v 17.19791 h 2.64583 l 0.0588,-14.0775 1.55888,0.10896 0.22531,6.01523 2.20747,0.0273 2.84672,0.088 -5.05076,-5.52585 -1.87869,-0.65868 0.0323,-3.43994 h -6.48228 l -0.0804,-1.82307 7.73252,-0.0837 c 0,0 1.93452,0.29762 1.71131,1.93453 l 0.0413,1.92619 -1.14911,0.6119 1.43036,0.99197 4.89404,5.55565 5.19167,2.00893 0.82679,3.19107 0.81845,0.89286 -0.0331,2.45535 -2.19911,-0.0744 -0.81012,1.93452 c -0.44642,1.11607 -1.27321,2.35625 -3.50535,2.05863 -3.42262,0.22322 -3.94346,-4.14196 -3.94346,-4.14196 l -2.60416,0.81845 -0.44643,0.89286 h -9.59016 l -0.52083,-1.04166 -12.90476,-0.22321 c 0,0 -0.73452,4.11408 -4.62976,3.88571 -4.70372,0.22837 -4.87768,-4.11726 -4.87768,-4.11726 l -13.97976,-0.88452 0.0744,-1.11607 0.892855,-0.96727 z",
+    anchor: new google.maps.Point(0,0),
+    fillColor: '#fff',
+    fillOpacity: 1,
+    strokeWeight: 1,
+    scale: .5,
+    strokeColor: '#000',
+    zIndex: 1
+  };
+
          if (!Array.isArray(out)) {
+            var colors = ['#490a3d','#bd1550','#e97f02','#f8ca00','#0CA230','#8a9b0f','#785fdd','#3e5aad','#274c91','#e52d30'];
+            var cnt = 0, line;
             for (var idx in out) {
-               drivePath.push(new google.maps.Polyline({
+               if (!drivePath[idx]) {
+                  drivePath[idx] = [];
+               }
+               line = new google.maps.Polyline({
                 path: out[idx],
+                icons: [{
+                  icon: lineSymbol,
+                  offset: '100%'
+                }],
                 geodesic: true,
-                strokeColor: '#FFff00',
-                strokeOpacity: 1.0,
-                strokeWeight: 8
-              }));
-              drivePath[drivePath.length-1].setMap(map); 
-   
+                strokeColor: colors[Math.floor(Math.random()*colors.length)],
+                strokeOpacity: .6,
+                strokeWeight: 8,
+                map:map,
+                zIndex: 999
+              });
+              drivePath[idx] = line;
+              animateCircle(line);
+              paths[idx] = out[idx];
+              
+              cnt++;
+              if (cnt > colors.length) {
+                 cnt = 0;
+               }
+//               paths.push(idx);
             }
+console.dir(drivePath[idx]);
+console.log("updatePath");
+            
          } else {
+            drivePath = [];
            drivePath.push(new google.maps.Polyline({
              path: out,
              geodesic: true,
@@ -142,7 +185,31 @@ console.dir(out);
         }
       });
 }
+function animateCircle(line) {
+    var count = 0;
+    window.setInterval(function() {
+      count = (count + 1) % 200;
 
+      var icons = line.get('icons');
+      icons[0].offset = (count / 2) + '%';
+      line.set('icons', icons);
+  }, 100);
+}
+
+var pathIdx=0;
+function updatePath(who) {
+   
+
+   pathIdx++;
+   if (pathIdx > drivePath[who].length) {
+      for (var o=0; o<drivePath[who].length; o++) {
+         drivePath[who][o].setMap(null);
+      }
+      pathIdx = 0;
+   }
+   setTimeout("updatePath("+who+")", 500);
+
+}
 var infoWindows = [], markers = [], makers = [];
 var iconPath = '/where/img/';
 function updateBuses(buses) {
