@@ -102,7 +102,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
       <span class='time'><?php print ($job->PickupTime ? date("h:ia", strtotime($job->PickupTime)) : 'Time NOT SET'); ?></span><br />
       <span class='desc'><?php print substr($business->Business, 0, 25); ?></span><br />
       <span class='pass'>Pax: <?php print $job->NumberOfItems; ?></span><br />
-      <span class='pass'>Bus: <?php print $bus->Bus; ?></span>
+      <span class='pass'>Bus: <?php print (count($bus->Bus) > 1) ? "Unknown" : $bus->Bus; ?></span>
    </div>
    <div id='top_header'>
        <div>Job ID: <?php print $job->JobID; ?><br />Passengers: <?php print $job->NumberOfItems; ?></div>

@@ -38,12 +38,12 @@
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   @import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro&display=swap');
+   @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:100,400,700,900|Source+Sans+Pro&display=swap');
    body { font-size:14pt;color:black;font-family:"Roboto",sans-serif; padding:0; margin:0;}
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; }
    H1 { text-align:justify; margin:0;text-indent:0px; }
-   H2 { text-align:center; }
+   H2 { font-weight:900;font-family:"Montserrat"; font-weight:700;  }
    P { text-align:justify; margin:0 28px 0 0; text-indent:0px; line-height:20px }
    TABLE { border-width:thin; border-collapse:collapse; padding:3px; text-align:left; vertical-align:top; margin:0; width:auto; height:auto; display:table; float:none }
    TR { vertical-align:top; height:auto }
@@ -58,10 +58,10 @@
    #top_header div { float:left;width:2.25in;height:.5in;padding:.006in .05in;}
    #top_header>:first-child { border-right:4px solid #000;}
    #header { width:4.5in;height:.6in; }
-   #top_overview { position:absolute;right:1in;width:2in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+   #top_overview { position:absolute;right:.5in;width:2in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px; }
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:.9em; }
-   #main { background:none repeat scroll 0 0 #FFFFFF; height:11in; margin:1px auto; padding:.5in; position:relative; width:8.5in; }
+   #main { background:none repeat scroll 0 0 #FFFFFF; height:11in; margin:1px auto; padding:.5in; position:relative; width:7.75in; }
    .shadow { -moz-box-shadow:0px -2px 7px rgba(0,0,0,.5);}
    #forprint { margin:.5in; width:8.0in;height:11in; position:relative;}
    #ticket {border:solid 1px #000000;height:9in;width:7.5in;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
@@ -97,7 +97,7 @@
    <div id='top_overview'>
       <table>
       <tr>
-      	<td><h3>Invoice:</h3> </td>
+      	<td><h3>Invoice</h3> </td>
          <td> <h3><?php print $current->InvoiceID; ?></h3></td>
       </tr>
       <tr class='header'>
@@ -280,9 +280,9 @@
          </div>
       </div>
       </div>
-   <p style="text-align:center;font-size:.8rem"><span class="bold">Cancellation Policy: </span> a charge of $400 if service not cancelled 72 hours prior to spot time. <br>Full charge for on the spot cancellation. 
+   <p style="text-align:center;padding-top:.5em;font-size:.8rem"><span class="bold">Cancellation Policy: </span> a charge of $400 if service not cancelled 72 hours prior to spot time. <br>Full charge for on the spot cancellation. 
 <span class="bold">Late Payment: </span> 10% monthly fee will be added to any invoice 30 days past due.</p>
-<br><h2>Thank you for your business!</h2>
+<h2 style='text-align:center'>Thank you for your business!</h2><br>
    </div>
 </body>
 </html>
