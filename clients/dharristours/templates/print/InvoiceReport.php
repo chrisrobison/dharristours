@@ -230,7 +230,6 @@
                <td class='field'></td>
                <td class='value' style='border-top:1px solid #ccc;'><?php print $job->Hours; ?></td>
 	    </tr>
-        <tr><td><br></td></tr> 
         </table>
         <table class='trips' style='width:6in;'>
 	    <tr>
@@ -245,19 +244,19 @@
             <tr>
                <td>Notes:</td>
                <td class='field'>Overtime Charge:</td>
-               <td class='value'><?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
+               <td class='value'>$<?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
                <td></td>
 	    </tr>
             <tr>
                <td class='value'><?php print $current->Description; ?></td>
                <td class='field'>Gas:</td>
-               <td class='value' colspan='3'><?php print $current->Gas ? $current->Gas : "0.00"; ?></td>
+               <td class='value' colspan='3'>$<?php print $current->Gas ? $current->Gas : "0.00"; ?></td>
                <td></td>
             </tr>
             <tr>
                <td></td>
                <td class='field'>Misc Cost:</td>
-               <td class='value' colspan='3'><?php print $current->MiscCost  ? $current->MiscCost : "0.00"; ?></td>
+               <td class='value' colspan='3'>$<?php print $current->MiscCost  ? $current->MiscCost : "0.00"; ?></td>
                <td></td>
             </tr>
             <tr>
@@ -273,7 +272,7 @@
             <tr>
                <td></td>
                <td class='field' style='font-weight: bold; font-size:12pt'>Balance DUE:</td>
-               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php print $current->Balance; ?></td> 
+               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.2f", $current->Balance); ?></td> 
             </tr>
 
          </table>
