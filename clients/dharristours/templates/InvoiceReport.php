@@ -80,7 +80,7 @@
    #return_table th { font-weight:bold;text-align:center;border: 1px solid #000000;height:.25in; }
    #ticket_table,.trips { width:7.5in; font-size:1.2em; }
    #ticket_table td { padding:2px 5px; vertical-align:top }
-   td.field { text-align:right; color:#666;}
+   td.field { text-align:right; color:#666;vertical-align:top; }
    .header { font-size:.9em; }
    .header td.right { padding-right:.5em; }
    .right { text-align:right; }
@@ -178,17 +178,17 @@
          <table class='trips' style="margin-top:.5em;width:5in;margin-left:auto;margin-right:auto;">
             <tr>
                <td class='field'>From:</td>
-               <td colspan='3' class='value'><?php print $job->PickupLocation; ?></td>
+               <td colspan='3' class='value'><?php print preg_replace("/\(?\d\d\d\)?\s*\d\d\d\-\d\d\d\d/", '', $job->PickupLocation); ?></td>
             </tr>
             <tr>
                <td class='field'>To:</td>
-               <td colspan='3' class='value'><?php print $job->DropOffLocation; ?></td>
+               <td colspan='3' class='value'><?php print preg_replace("/\(?\d\d\d\)?\s*\d\d\d\-\d\d\d\d/", '', $job->DropOffLocation); ?></td>
             </tr>
             <?php 
                if (preg_match("/\w/", $job->FinalDropOffLocation)) {
             ?><tr>
                <td class='field'>Final:</td>
-               <td colspan='3' class='value'><?php print $job->FinalDropOffLocation; ?></td>
+               <td colspan='3' class='value'><?php print preg_replace("/\(?\d\d\d\)?\s*\d\d\d\-\d\d\d\d/", '', $job->FinalDropOffLocation); ?></td>
             </tr>
             <?php } ?>
             </table>
@@ -245,35 +245,34 @@
             <tr>
                <td>Notes:</td>
                <td class='field'>Overtime Charge:</td>
-               <td class='value'><?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
-               <td></td>
+               <td class='value right'>$<?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
 	    </tr>
             <tr>
                <td class='value'><?php print $current->Description; ?></td>
                <td class='field'>Gas:</td>
-               <td class='value' colspan='3'><?php print $current->Gas ? $current->Gas : "0.00"; ?></td>
+               <td class='value right' colspan='3'>$<?php printf("%.02f", $current->Gas); ?></td>
                <td></td>
             </tr>
             <tr>
                <td></td>
                <td class='field'>Misc Cost:</td>
-               <td class='value' colspan='3'><?php print $current->MiscCost  ? $current->MiscCost : "0.00"; ?></td>
+               <td class='value right' colspan='3'>$<?php printf("%.02f", $current->MiscCost); ?></td>
                <td></td>
             </tr>
             <tr>
                <td></td>
                <td class='field' style='font-weight: bold; font-size:12pt'>Invoice Amount:</td>
-               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {print $job->QuoteAmount;} print $current->InvoiceAmt; ?></td>
+               <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {printf("%.02f",  $job->QuoteAmount);} else { printf("%.02f", $current->InvoiceAmt); }?></td>
             </tr>
             <tr>
                <td></td>
                <td class='field' style='font-weight: bold; font-size:12pt'>Paid Amount:</td>
-               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->PaidAmt==0) {print "0";} print $current->PaidAmt; ?></td>
+               <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->PaidAmt); ?></td>
             </tr>
             <tr>
                <td></td>
                <td class='field' style='font-weight: bold; font-size:12pt'>Balance DUE:</td>
-               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php print $current->Balance; ?></td> 
+               <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->Balance); ?></td> 
             </tr>
 
          </table>

@@ -30,16 +30,16 @@
       <div id='mbtnWrap'><a id='MoreButton' rel='More' title='Tools to interact with your data' class='simpleButton buttonMenu'><span class='ui-icon ui-icon-plusthick'> </span>More...<span class='menuButton ui-icon ui-icon-triangle-1-s'> </span></a>
          <div id="MoreMenu" class='menu toolsMenu'>
             <ul>
-               <li id='myReportButton' class='enabled' onclick='return openWin("/apps/report.php?ReportID=20")'><span class='ui-icon ui-icon-clipboard'></span> Today Jobs</li>
-		<li id='myReportButton' onclick='return openWin("/apps/report.php?ReportID=18")'><span class='ui-icon ui-icon-clipboard'></span> 2 Days</li>
-		<li id='myReportButton' onclick='return openWin("/apps/report.php?ReportID=19")'><span class='ui-icon ui-icon-clipboard'></span> 3 Days</li>
-		<li id='myReportButton' onclick='return openWin("/apps/report.php?ReportID=9")'><span class='ui-icon ui-icon-clipboard'></span> 2 Weeks</li>
+               <li id='myReportButton' class='enabled' onclick='$(".menu").slideUp(75); openWin("/apps/report.php?ReportID=20");return false'><span class='ui-icon ui-icon-clipboard'></span> Today Jobs</li>
+		<li id='myReportButton' onclick='$(".menu").slideUp(75); openWin("/apps/report.php?ReportID=18"); return false;'><span class='ui-icon ui-icon-clipboard'></span> 2 Days</li>
+		<li id='myReportButton' onclick='$(".menu").slideUp(75); openWin("/apps/report.php?ReportID=19"); return false;'><span class='ui-icon ui-icon-clipboard'></span> 3 Days</li>
+		<li id='myReportButton' onclick='$(".menu").slideUp(75); openWin("/apps/report.php?ReportID=9"); return false;'><span class='ui-icon ui-icon-clipboard'></span> 2 Weeks</li>
 		<li class='divider'><hr /></li>
-		<li id='createInvoiceButton' class='disabled' onclick='return openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#InvoiceReport", "btnInvWin")'><span class='ui-icon ui-icon-document'></span> Invoice</li>
+		<li id='createInvoiceButton' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#InvoiceReport", "btnInvWin"); return false;'><span class='ui-icon ui-icon-document'></span> Invoice</li>
                <li class='divider'><hr /></li>
-               <li id='driverLogButton' class='disabled' onclick='return openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#DriverLog", "btnDrvLog")'><span class='ui-icon ui-icon-clipboard'></span> Print Driver Log</li>
-               <li id='confirmButton' class='disabled' onclick='return openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#Confirmation", "btnConfWin")'><span class='ui-icon ui-icon-print'></span> Print Confirmation</li>
-               <li id='subLog' class='disabled' onclick='openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#DriverLogExternal", "btnLogWin")'><span class='ui-icon ui-icon-document-b'></span> Print Sub Log</li>
+               <li id='driverLogButton' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#DriverLog", "btnDrvLog"); return false;'><span class='ui-icon ui-icon-clipboard'></span> Print Driver Log</li>
+               <li id='confirmButton' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#Confirmation", "btnConfWin"); return false;'><span class='ui-icon ui-icon-print'></span> Print Confirmation</li>
+               <li id='subLog' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#DriverLogExternal", "btnLogWin"); return false;'><span class='ui-icon ui-icon-document-b'></span> Print Sub Log</li>
             </ul>
          </div>
       </div>
