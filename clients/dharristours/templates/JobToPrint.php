@@ -27,47 +27,49 @@
    }
    
    $in['Resource'] = "Job";
-   $in['ID'] = $in['ID'] ? $in['ID'] : 1;
+   $in['ID'] = $in['ID'] ? $in['ID'] : 0;
  
-   $boss->addResource("Job");
-   $boss->db->Job->execute("SELECT JobID, Job from Job where JobID='{$in['ID']}'"); // ((JobDate > CURDATE()) or (JobDate < (CURDATE() + INTERVAL 2 MONTH))) or JobID not in (select JobID from Invoice) OR (JobID='{$in['ID']}') order by LastModified desc");
+   if ($in['ID']) {
+      $boss->addResource("Job");
+      $boss->db->Job->execute("SELECT JobID, Job from Job where JobID='{$in['ID']}'"); // ((JobDate > CURDATE()) or (JobDate < (CURDATE() + INTERVAL 2 MONTH))) or JobID not in (select JobID from Invoice) OR (JobID='{$in['ID']}') order by LastModified desc");
 
-   $job = mysql_fetch_assoc($boss->db->Job->result); 
+      $job = mysql_fetch_assoc($boss->db->Job->result); 
 
-   if ($in['x'] == "create") {
-      // Call a stored procedure passing in the ID of the record just created
-      $boss->db->Job->execute("CALL JobToInvoice({$in['ID']},'{$_SESSION['Login']->Email}',@InvoiceID)");//QuoteToJob($id,$_SESSION['Login']->Email,$results['JobID']);
-      $boss->db->Job->execute("SELECT @InvoiceID");
-   }
+      if ($in['x'] == "create") {
+         // Call a stored procedure passing in the ID of the record just created
+         $boss->db->Job->execute("CALL JobToInvoice({$in['ID']},'{$_SESSION['Login']->Email}',@InvoiceID)");//QuoteToJob($id,$_SESSION['Login']->Email,$results['JobID']);
+         $boss->db->Job->execute("SELECT @InvoiceID");
+      }
 
-   $record = $current = $boss->getObjectRelated('Job', $in['ID']);
-   $business = $boss->getObjectRelated("Business", $current->BusinessID);
-   if ($current->EmployeeID) $employee = $boss->getObjectRelated("Employee", $current->EmployeeID);
+      $record = $current = $boss->getObjectRelated('Job', $in['ID']);
+      $business = $boss->getObjectRelated("Business", $current->BusinessID);
+      if ($current->EmployeeID) $employee = $boss->getObjectRelated("Employee", $current->EmployeeID);
 
-   $InvID = $current->related_Invoice[0]->InvoiceID;
-   
-   $base = (($_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
-   $url =  $base . '/files/templates/print/InvoiceReport.php?ID='.$InvID; 
-   $file = $InvID.'.html';
+      $InvID = $current->related_Invoice[0]->InvoiceID;
+      
+      $base = (($_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
+      $url =  $base . '/files/templates/print/InvoiceReport.php?ID='.$InvID; 
+      $file = $InvID.'.html';
 
-   if ($in['x'] == "create") {
-      $invoice = file_get_contents($url);
-      $path = $_SERVER['DOCUMENT_ROOT'] . $boss->app->Assets .'/invoices/';
-      $save = $path . $file;
-      $cnt = 0;
-      while (file_exists($save)) {
-         ++$cnt;
-         $file = $InvID . '-' . $cnt . '.html';
+      if ($in['x'] == "create") {
+         $invoice = file_get_contents($url);
+         $path = $_SERVER['DOCUMENT_ROOT'] . $boss->app->Assets .'/invoices/';
          $save = $path . $file;
-         
+         $cnt = 0;
+         while (file_exists($save)) {
+            ++$cnt;
+            $file = $InvID . '-' . $cnt . '.html';
+            $save = $path . $file;
+            
+         }
+
+         if (!file_exists($save) || $in['force']) {
+            file_put_contents($save, $invoice);
+         }
       }
 
-      if (!file_exists($save) || $in['force']) {
-         file_put_contents($save, $invoice);
-      }
+      $static = $base . '/files/invoices/?z=' . base64_encode("ID=" . $InvID);
    }
-
-   $static = $base . '/files/invoices/?z=' . base64_encode("ID=" . $InvID);
 ?>
 <!DOCTYPE html> 
 <html>
@@ -122,13 +124,11 @@
                <button class='view' style='margin-right:2em;'>View</button>
                
                <span style='padding-left:1em;'>
-            <span style='padding:0 2em;'><label>Invoice: </label><span class='val'><?php print $current->related_Invoice[0]->InvoiceID; ?></span></span>
+                  <span style='padding:0 2em;'><label>Invoice: </label><span class='val'><?php print $current->related_Invoice[0]->InvoiceID; ?></span> </span>
                   <button class='geninvoice'><?php print ($InvID) ? "Update" : "Create"; ?> Invoice</button>
-               </span>
-               <span style='padding-left:1em;'>
                   <button class='print'>Print</button>
-               </span>
-                  <button class='print sendmsg'>Print&Email</button>
+                  <button class='print sendmsg'>Print &amp; Email</button>
+                  <button id='mkpdf'>Make PDF</button>
                </span>
             </div>
          </form>
@@ -192,6 +192,13 @@
             viewDoc(curdoc);
          });
          
+         $("#mkpdf").click(function(e) {
+            makePDF($("#what").val());
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
+         });
+
          $("button.geninvoice").click(function(e) {
             $("#x").val("create");
          });
@@ -233,6 +240,24 @@
          if (chkdoc) {
             $("#what").val(chkdoc);
             viewDoc(chkdoc);
+         }
+         
+         function makePDF(what) {
+            if (!what) {
+               what = $("#what").val();
+            } 
+            var id;
+            
+            if (what == "InvoiceReport") {
+               id = "<?=$InvID?>";
+            } else {
+               id = "<?=$in['ID']?>";
+            }
+            var query = "saveto=invoices/&ID="+id+"&url="  + document.location.origin + "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
+            url = "/tools/mkpdf/?" + query;
+            console.log("pdf url: " + url);
+            $("#viewer").attr("src", url);
+            return false;
          }
 
          function viewDoc(what) {

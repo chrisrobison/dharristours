@@ -1440,3 +1440,19 @@ be a descendant of the grid when it is being dragged.
 .fc-today {
   background-color: inherit !important;
 }
+tr {
+   background-color:#ffffff;
+}
+tr:nth-child(4n-1), tr:nth-child(4n) {
+   background-color:#f6f6f6;
+}
+tr:nth-child(4n) td.fc-axis { 
+/*   border-color:#999; */
+}
+tr:nth-child(4n) td { 
+   border-color:#ccc; 
+   border-right:1px solid #ccc;
+}
+.fc-axis { 
+}
+
