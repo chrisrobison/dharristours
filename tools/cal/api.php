@@ -18,13 +18,13 @@
             $out = getEvent($link, $in['id']);
             break;
          case "drivers":
-            $out = getDrivers($link);
+            $out = getDrivers($link, $in);
             break;
          case "jobs":
-            $out = getJobs($link);
+            $out = getJobs($link, $in);
             break;
          case "resources":
-            $out = getResources($link);
+            $out = getResources($link, $in);
             break;
       }
 
@@ -34,7 +34,7 @@
       }
    }
 
-   function getEvents($link) {
+   function getEvents($link, $in) {
       $colors = array('#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000');
       
       $out = array(); $cnt = 0;
@@ -45,7 +45,7 @@
          $now = date("Y-m-d");
       }
 
-      $in = $_REQUEST;
+//       $in = $_REQUEST;
       $threedays = date("Y-m-d", strtotime("+3 days"));
       $yesterday = date("Y-m-d", strtotime($in['start']));
 
@@ -94,7 +94,7 @@
       return $out;
    }
    
-   function getEvent($id) {
+   function getEvent($link, $id) {
       $sql = "SELECT * from Job where JobID='".$id."'";
 
       $results = mysqli_query($link, $sql);
@@ -109,7 +109,7 @@
       return $out;
    }
 
-   function getJobs($link, 4IN) {
+   function getJobs($link, $in) {
       $colors = array('#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000');
       
       $out = array(); $cnt = 0;
@@ -164,7 +164,11 @@
             $obj->busID = $row['BusID'];
             $obj->title = $row['Bus'];
          }
-         $obj->capacity = $row['capacity'];
+         $obj->capacity = $row['Capacity'];
+
+         if (!$obj->capacity || $obj->capacity == "null") {
+            $obj->capacity = $row['BusNumber'] ? substr($row['BusNumber'], 0, 2) : 0;
+         }
          
          array_push($out, $obj);
       }

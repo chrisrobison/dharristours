@@ -17,7 +17,6 @@
       defaultDate: new Date().toISOString().substr(0, 10),
       editable: true,
       selectable: true,
-      eventLimit: true,
       eventLimit: true, // allow "more" link when too many events
       header: {
         left: 'prev,next today',
@@ -35,10 +34,10 @@
       allDaySlot: false,
 
       resources: {
-         url: "get-resources.php"
+         url: "api.php?type=resources"
       },
       events: {
-         url: "get-events.php"
+         url: "api.php?type=events"
       },
 
       select: function(arg) {
@@ -196,6 +195,7 @@
 </div>
   <div id='calendar'></div>
 <script>
+   
    var dpPermanent = TinyDatePicker('#tinycal', { mode: 'dp-permanent', });
    dpPermanent.on('statechange', (_, picker) => { 
       console.log(picker.state.hilightedDate.toISOString()); 
@@ -205,7 +205,7 @@
 
    function handleClick(who) { 
       
-      makeRequest('GET', 'get-event.php?id='+who, function (err, datums) {
+      makeRequest('GET', 'api.php?type=event&id='+who, function (err, datums) {
         myevent = JSON.parse(datums);
         console.dir(myevent);
 
@@ -242,7 +242,8 @@
    }
    var buses, myevent, drivers, mybuses = {}, mydrivers = {};
 
-   makeRequest('GET', 'get-resources.php', function (err, data) {
+   // Fetch vehicle(resources) data and store for later use
+   makeRequest('GET', 'api.php?type=resources', function (err, data) {
       buses = JSON.parse(data);
       for (var i=0; i<buses.length; i++){
          mybuses[buses[i].busID] = buses[i];
@@ -251,7 +252,8 @@
       console.dir(mybuses);
    });
    
-   makeRequest('GET', 'get-drivers.php', function (err, data) {
+   // Fetch driver data and store for later use
+   makeRequest('GET', 'api.php?type=drivers', function (err, data) {
       drivers = JSON.parse(data);
       for (var i=0; i<drivers.length; i++){
          mydrivers[drivers[i].EmployeeID] = drivers[i];
@@ -294,7 +296,28 @@ function makeTabs(selector) {
     }
 }
 window.addEventListener("load", function() {
-    makeTabs(".tabs")
+    makeTabs(".tabs");
+    var toolbar = document.querySelector(".fc-right .fc-button-group");
+
+    if (toolbar) {
+       var el = document.createElement('div');
+       el.className = "dropdown";
+
+       var btn = document.createElement('button');
+       btn.className = "btn btn-secondary dropdown-toggle";
+       btn.type = "button";
+       btn.id = "settingsButton";
+       btn.dataToggle = "dropdown";
+       btn.ariaHasPopup = true;
+       btn.ariaExpanded = false;
+      
+       el.appendChild(btn);
+
+       var list = document.createElement('div');
+       list.className = "dropdown-menu";
+
+
+    }
 });
 </script>
 </body>
