@@ -60,9 +60,9 @@
         <div dojoType="dijit.layout.BorderContainer" id="mainContent" design="sidebar" style="width:100%;height:100%;border:0px;">
             <div dojoType="dijit.layout.ContentPane" region="leading" style="width:205px;margin:0px;padding:0px;" splitter="true">
                <div  dojoType="dijit.layout.ContentPane" id='logoWrap' region="top">
-                  <div id='appLogo'><img id='logoImage' src="<?php print $boss->app->Assets . "/" . $boss->app->Logo; ?>" border="0" /></div>
+                  <div id='appLogo'><img id='logoImage' src="<?php print $boss->app->Assets . "/" . $boss->app->Logo; ?>" border="0" width='200' /></div>
                </div>
-               <div id="accordion" class='nav' dojoType="dijit.layout.AccordionContainer" region="trailing"  style="position:absolute;top:125px;bottom:0px;width:100%;padding:0px;margin:0px;left:0px;" splitter="true" minsize="20">
+               <div id="accordion" class='nav' dojoType="dijit.layout.AccordionContainer" region="trailing"  style="position:absolute;top:75px;bottom:0px;width:100%;padding:0px;margin:0px;left:0px;" splitter="true" minsize="20">
                   <?php include("nav3.php"); ?>
                </div>
             </div>
