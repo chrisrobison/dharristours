@@ -1,262 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Driver's Vehicle Inspection Report</title>
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-   <style>
-      body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size:18px; margin:0;padding:0; background-color:#fff9f3;}
-      #report { width:8.5in; height:11in; display:block; margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-bottom:2in; margin-top:.5in; box-shadow:.75em 1em .5em rgba(0,0,0,.3); border:1px solid #aaa; border-radius:4px ; text-align:center;}
-      H1, H2, H3 { margin:0; padding:0; text-transform: uppercase; }
-      H3 { font-weight: normal; margin:0; padding:0; color:#666; font-size:.8em;}
-      .longinput { width: 6in; border-bottom: 2px solid #666; border-top:0; border-left:0; border-right:0;}
-      .shortinput { width: 2.71in; border-bottom: 2px solid #666; border-top:0; border-left:0; border-right:0;}
-      h2 { font-weight:400; }
-      th { text-align: right; text-transform:uppercase; font-weight: normal; }
-      .header {
-         text-align:left; 
-         line-height:2em; 
-         margin-top:1em; 
-         width:7.5in; 
-         margin-left:auto;
-         margin-right:auto;
-      }
-      #damageDialog {
-         border:1px solid rgba(0,0,0,.4);
-         box-shadow: 1em 1em 1em rgba(0,0,0,.3);
-         top:5em;
-         left:20%;
-         position:absolute;
-         width:50%;
-         background-color:#eee;
-         display:none;
-      }
-      #mid th { font-size:1.2em; font-weight:500; }
-      #mid .shortinput { width: 2.4in; }
-      #checklist {
-         width:7.5in;
-         line-height:1.25em;
-         text-align:left;
-         margin:1em auto;
-         font-size:16px;
-      }
-      #checklist input {
-         margin-right:1em; 
-         border: 2px inset #ccc; 
-         background-color:#f00;
-         display:inline-block;
-      }
-      #bus {
-         width:4in;
-         float:right;
-      }
-      .footer { 
-         text-align:left;
-      }
-      .footer img {
-         float:right;
-      }
-      .footer textarea {
-         height:100%;
-         width:100%;
-      }
-      #checklist .indent input { display: none; }
-      .indent { padding-left:2em; }
-      .btn3d {
-          position: relative;
-          top: -6px;
-          border: 0;
-          transition: all 40ms linear;
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-left: 2px;
-          margin-right: 2px;
-      }
-
-      .btn3d:active:focus,
-      .btn3d:focus:hover,
-      .btn3d:focus {
-          -moz-outline-style: none;
-          outline: medium none;
-      }
-
-      .btn3d:active,
-      .btn3d.active {
-          top: 2px;
-      }
-
-      .btn3d.btn-white {
-          color: #666666;
-          box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.10) inset, 0 8px 0 0 #f5f5f5, 0 8px 8px 1px rgba(0, 0, 0, .2);
-          background-color: #fff;
-      }
-
-      .btn3d.btn-white:active,
-      .btn3d.btn-white.active {
-          color: #666666;
-          box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, .1);
-          background-color: #fff;
-      }
-
-      .btn3d.btn-default {
-          color: #666666;
-          box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255, 255, 255, 0.10) inset, 0 8px 0 0 #BEBEBE, 0 8px 8px 1px rgba(0, 0, 0, .2);
-          background-color: #f9f9f9;
-      }
-
-      .btn3d.btn-default:active,
-      .btn3d.btn-default.active {
-          color: #666666;
-          box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, .1);
-          background-color: #f9f9f9;
-      }
-
-      .btn3d.btn-primary {
-          box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-          background-color: #4274D7;
-      }
-
-      .btn3d.btn-primary:active,
-      .btn3d.btn-primary.active {
-          box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-          background-color: #4274D7;
-      }
-
-      .btn3d.btn-success {
-          box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-          background-color: #78d739;
-      }
-
-      .btn3d.btn-success:active,
-      .btn3d.btn-success.active {
-          box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-          background-color: #78d739;
-      }
-
-      .btn3d.btn-info {
-          box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #348FD2, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-          background-color: #39B3D7;
-      }
-
-      .btn3d.btn-info:active,
-      .btn3d.btn-info.active {
-          box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-          background-color: #39B3D7;
-      }
-
-      .btn3d.btn-warning {
-          box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-          background-color: #FEAF20;
-      }
-
-      .btn3d.btn-warning:active,
-      .btn3d.btn-warning.active {
-          box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-          background-color: #FEAF20;
-      }
-
-      .btn3d.btn-danger {
-          box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-          background-color: #D73814;
-      }
-
-      .btn3d.btn-danger:active,
-      .btn3d.btn-danger.active {
-          box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-          background-color: #D73814;
-      }
-
-      .btn3d.btn-magick {
-          color: #fff;
-          box-shadow: 0 0 0 1px #9a00cd inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #9823d5, 0 8px 8px 1px rgba(0, 0, 0, 0.5);
-          background-color: #bb39d7;
-      }
-
-      .btn3d.btn-magick:active,
-      .btn3d.btn-magick.active {
-          box-shadow: 0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-          background-color: #bb39d7;
-      }
-      #damageDialog {
-      }
-.dialog__overlay {
-	-webkit-transition-duration: 0.4s;
-	transition-duration: 0.4s;
-}
-
-.dialog__content {
-	overflow: hidden;
-}
-
-.dialog.dialog--open .dialog__content,
-.dialog.dialog--close .dialog__content {
-	-webkit-animation-duration: 0.4s;
-	animation-duration: 0.4s;
-	-webkit-animation-fill-mode: forwards;
-	animation-fill-mode: forwards;
-}
-
-.dialog.dialog--open .dialog__content {
-	-webkit-animation-name: anim-open;
-	animation-name: anim-open;
-	-webkit-animation-timing-function: cubic-bezier(0.7,0,0.3,1);
-	animation-timing-function: cubic-bezier(0.7,0,0.3,1);
-}
-
-.dialog.dialog--close .dialog__content {
-	-webkit-animation-name: anim-close;
-	animation-name: anim-close;
-}
-
-.dialog.dialog--open h2,
-.dialog.dialog--open button {
-	-webkit-animation: anim-elem 0.4s both;
-	animation: anim-elem 0.4s both;
-}
-
-.dialog.dialog--open h2 {
-	-webkit-animation-delay: 0.25s;
-	animation-delay: 0.25s;
-}
-
-.dialog.dialog--open button {
-	-webkit-animation-delay: 0.15s;
-	animation-delay: 0.15s;
-}
-
-@-webkit-keyframes anim-open {
-	0% { opacity: 0; -webkit-transform: translate3d(0, -400px, 0); }
-	100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); }
-}
-
-@keyframes anim-open {
-	0% { opacity: 0; -webkit-transform: translate3d(0, -400px, 0); transform: translate3d(0, -400px, 0); }
-	100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-}
-
-@-webkit-keyframes anim-close {
-	0% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); }
-	100% { opacity: 0; -webkit-transform: translate3d(0, 100px, 0); }
-}
-
-@keyframes anim-close {
-	0% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-	100% { opacity: 0; -webkit-transform: translate3d(0, 100px, 0); transform: translate3d(0, 100px, 0); }
-}
-
-/* Inner elements animations */
-
-@-webkit-keyframes anim-elem {
-	0% { opacity: 0; -webkit-transform: translate3d(0, -100px, 0); }
-	100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); }
-}
-
-@keyframes anim-elem {
-	0% { opacity: 0; -webkit-transform: translate3d(0, -100px, 0); transform: translate3d(0, -100px, 0); }
-	100% { opacity: 1; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-}
-
-   </style>
+   <link href="main.css" rel="stylesheet">
 </head>
 <body>
 <div id='report'>
@@ -264,15 +14,15 @@
 <h3>As required by D.O.T. Federal Motor Carrier Safety Regulations</h3>
 <table class='header'>
    <tr>
-   <th>Carrier:</th><td><input type='text' id='carrier' class='shortinput'></td>
-   <th>Driver:</th><td><input type='text' id='driver' class='shortinput'></td>
+   <th>Carrier:</th><td><input type='text' id='carrier' class='shortinput' value='D Harris Tours, Inc.'></td>
+   <th>Driver:</th><td><input type='text' id='driver' class='shortinput' ></td>
    </tr>
-   <tr><th>Address:</th><td colspan='3'><input type='text' id='address' class='longinput'></td></tr>
+   <tr><th>Address:</th><td colspan='3'><input type='text' id='address' class='longinput' value='153 Utah St, South San Francisco, CA'></td></tr>
    <tr><th>Date:</th><td><input type='text' id='date' class='shortinput'></td>
       <th>Time:</th><td><input type='text' id='time' class='shortinput'></td></tr>
 </table>
 <table id='mid' class='header'>
-   <tr><th style='white-space:nowrap;' >Bus #:</th><td><input type='text' id='busno' class='shortinput' style='width:1.25in;'></td>
+   <tr><th style='white-space:nowrap;' >Bus:</th><td><select id='buses'></select></td>
    <th>Odometer:</th><td><input type='text' id='odometer' class='shortinput' style='width:1.5in;'></td>
    <th>Fuel:</th>
    <td>
@@ -396,8 +146,8 @@
          <textarea id='damage' cols='85' rows='15'></textarea>
          <br>
          <div style='text-align:right'>
-            <button id='damageSave' class="btn btn-primary btn-lg btn3d"><i class="fa fa-save"></i> Save</button>
             <button id='damageCancel' class="btn btn-default btn-lg btn3d"><i class='fa fa-ban'></i> Cancel</button>
+            <button id='damageSave' class="btn btn-primary btn-lg btn3d"><i class="fa fa-save"></i> Save</button>
          </div>
       </div>
    </div>
@@ -406,11 +156,14 @@
 <script>
 (function() {
    var damages = [];
+   window.damages = damages;
    var dialog = document.querySelector("#damageDialog");
    
    var cancel = document.querySelector("#damageCancel");
    var save = document.querySelector("#damageSave");
    var close = document.querySelector("#closeDamage");
+   var driver = document.querySelector("#driver");
+   var buses = document.querySelector("#buses");
 
    close.addEventListener("click", function(e) {
       dialog.style.display = "none";   
@@ -419,23 +172,70 @@
    });
 
    cancel.addEventListener("click", function(e) {
-      dialog.style.display = "none";   
-      e.preventDefault();
-      return false;
+      return cancelDamage();
    });
 
    save.addEventListener("click", function(e) {
+      var d = document.querySelector("#damage");
+      var n = document.querySelector("#note");
+      if (d && d.value) {
+         damage.damage = d.value;
+      }
+
+      window.damages[window.damages.length] = damage;
+      dialog.style.display = "none";   
       
+      if (n) {
+         n.value = n.value + "\n[" + damage.x + "," + damage.y +"] "+ d.value;
+      }
+      
+      localStorage.setItem('damages', JSON.stringify(window.damages));
+      
+      var nd = {
+         Damage: damage.damage,
+         ReportedBy: driver.value,
+         Status: 'new',
+         BusID: buses.options[buses.selectedIndex].value,
+         x: damage.x,
+         y: damage.y,
+         CreatedBy: getEmail(),
+         LastModifiedBy: getEmail()
+      }
+      newDamage(nd);
+
       e.preventDefault();
       return false;
    });
+   
+   document.querySelector("#buses").addEventListener("change", function (e) {
+      document.querySelector("#note").value = '';
+      drawBus.call(img);
+
+      getDamages(this.options[this.selectedIndex].value);
+      var busname = this.options[this.selectedIndex].text.replace(/\#/,'');
+      if (window.liveBuses) {
+         document.querySelector("#odometer").value = liveBuses[busname].odometer / 10;
+      }
+   });
+
+   function newDamage(damageObj) {
+      fetch("api.php?type=newDamage&json="+JSON.stringify(damageObj)).then((results)=>{
+         return results.json();
+      }).then((data) => {
+         console.dir(data);
+      });
+   }
 
    const canvas = document.getElementById('bus');
    const ctx = canvas.getContext('2d');
    const img = new Image();
+   const damageForm = document.querySelector("#damage");
+
    img.onload = drawBus;
    img.src = 'businspection.jpg';
    var nx, ny;
+   var damage = {}, damages = [];
+   window.damages = damages;
    canvas.addEventListener('click', function(e) {
       console.dir(e);
       ctx.lineWidth = 30;
@@ -443,19 +243,140 @@
       ctx.beginPath();
       nx = e.offsetX * (canvas.width / canvas.scrollWidth);
       ny = e.offsetY * (canvas.height / canvas.scrollHeight);
+      
+      damage = {};
+      damage.x = Math.floor(nx);
+      damage.y = Math.floor(ny);
 
       ctx.ellipse(nx, ny, 150, 150, 0, 0, 2 * Math.PI);
       ctx.stroke();
-      
+
       dialog.style.top = window.pageYOffset + 100 + "px";
       dialog.style.display = "block";
-   });
+      damageForm.value = "";
+      damageForm.focus();
 
+   });
+   damageForm.addEventListener('keydown', function(e) {
+      if (e.keyCode === 27) {
+         cancelDamage();
+      }
+   });
+   canvas.addEventListener('mousemove', function(event) {
+     if (event.region) {
+       alert('hit region: ' + event.region);
+     }
+   });
+   
+   function getEmail() {
+      var cookies = parseCookies();
+      if (cookies['email']) {
+         window.email = cookies['email'];
+      }
+      return cookies['email'];
+   }
+
+   function getName() {
+      var cookies = parseCookies();
+      if (cookies['name']) {
+         document.querySelector("#driver").value = cookies.name.replace(/\+/, ' ');
+      }
+      return cookies['name'].replace(/\+/, ' ');
+   }
+
+   function getDamages(busID) {
+      fetch("api.php?type=damages&BusID=" + busID).then((response) => {
+         return response.json();
+      }).then((data) => {
+         window.damages = damages = data;
+         loadDamages(damages);
+      });
+   }
+   var today;
+   function init() {
+      myname = getName();
+      today = new Date();
+      document.querySelector("#date").value = today.toLocaleDateString();
+      document.querySelector("#time").value = today.toLocaleTimeString();
+      getLiveBusInfo();
+
+      fetch('api.php?type=resources').then((response) => {
+         return response.json();
+      }).then((data) => {
+         
+         var opts = "<option value=''>-- Bus # --</option>";
+         for (var i=0; i<data.length; i++) {
+            if (data[i].capacity > 0) {
+               opts += "<option value='" + data[i].busID + "'>" + data[i].title + "</option>";
+            }
+         }
+         document.querySelector("#buses").innerHTML = opts;
+
+      });
+   }
+   window.liveBuses = liveBuses = [];
+
+   function getLiveBusInfo() {
+      fetch("/where/latest.json").then((response) => {
+         return response.json();
+      }).then((data) => {
+         var tmp = {};
+         for (var i=0; i<data.length; i++) {
+            var b = data[i];
+            tmp[b['objectno']] = b;
+         }
+         liveBuses = tmp;
+      });
+   }
+
+   function parseCookies() {
+      var c = document.cookie.split(/;\s?/);
+      
+      var parts, vals = {};
+      for (var i=0; i<c.length; i++) {
+         parts = c[i].split(/=/);
+         vals[parts[0]] = parts[1];
+      }
+      return vals;
+   }
+
+   function loadDamages(damages) {
+      var damageForm = document.querySelector("#damage");
+      for (var i=0; i<damages.length; i++) {
+         ctx.lineWidth = 30;
+         ctx.strokeStyle = "#ff0000";
+         ctx.beginPath();
+         ctx.ellipse(damages[i].x, damages[i].y, 150, 150, 0, 0, 2 * Math.PI);
+         ctx.stroke();
+         note.value = note.value + "\n[" + damages[i].x + ":" + damages[i].y + "] " + damages[i].Damage;
+      }
+   }
    function drawBus() {
       canvas.width = this.naturalWidth;
       canvas.height = this.naturalHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(this, 0, 0);
    }
+   function localDamages() {
+      var dmg = localStorage.getItem("damages");
+      console.log(dmg);
+
+      damages = window.damages = JSON.parse(dmg);
+      console.dir(damages);
+      if (damages) {
+         loadDamages(damages);
+      }
+   }
+
+   function cancelDamage() {
+      dialog.style.display = "none";   
+      note.value = "";
+      drawBus.call(img);
+
+      return false;
+   }
+   init();
 })();
 
 </script>
