@@ -1,0 +1,170 @@
+<!DOCTYPE html> 
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Daily Driver Log</title>
+   <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+   <link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
+   <style>
+      body { margin:0; padding:0; font-size:14px; font-family:"Roboto", "Helvetica Neue", Helvetica, sans-serif; }
+      h1, h2, h3, h4, h5, input, select, button, textarea { font-family:"Roboto", "Helvetica Neue", sans-serif; }
+      a { text-decoration:none;color:#00c; }
+      a:hover { text-decoration:underline; }
+      a:visited { color:#006; }
+      a:active { color:#e00;display:inline-block;top:2px; }
+      #main { text-align:center; }
+      #wrap { background-color:#000; display:inline-block; border:1px solid #333; text-align:left; margin-top:1em; }
+      .timetable {
+         height:200px;
+         background-color:#f3ecd9;
+         border-collapse:collapse;
+      }
+      td:hover { background-color:#fff; outline:5px solid #ff0000; }
+      .timetable thead th { background-color:#333; color:#f0f0f0; width:43px; text-align:right; position:relative; left:-3em; }
+      .timetable tfoot th { position:relative; height:3em; text-align:right; left:-2.9em; }
+      .timetable thead th.totalhours { padding:0px .25em; width:8em; text-align:center; text-transform:uppercase;}
+      .timetable tbody th { font-family: "Roboto", sans-serif; font-weight:900; width:100px; white-space:nowrap; text-transform: uppercase; text-align:left; font-size:18px; padding:0px .25em; }
+      .timetable td { background-color:#f3ecd9; background-image:url("ticks2.png"); color:#023; width:35px; height:53px; border-left:1px solid #000; }
+      .timetable td.totalhours { background-image:none; text-align:center; width:6em; padding:0px 1em; }
+      .tiny { font-weight:400; font-size:.7em; }
+      .total { border-bottom:2px solid #333; height: 45px; width: 70%; }
+      .timetable thead th.blank { background-color:transparent; }
+      .timetable tbody tr:first-child { padding-left:.25em; padding-right:.25em; }
+      .timetable td.on { border-bottom: 8px solid red; height:40px; }
+      .timetable td.left { border-left: 8px solid red; }
+      #tinycal { float: left; }
+      #drivetime { display:none; }
+      #form { float:left; margin:1em; font-size:22px; font-family: "Roboto", sans-serif; text-align:left; }
+      .line { width:100%; background-color:#ff0000; height: 8px; }
+      SELECT, INPUT { font-family: "Roboto", sans-serif; font-size:22px; }
+   </style>
+   <script src='/lib/js/tiny-date-picker.min.js'></script>
+</head>
+<body>
+<div id='main'>
+   <div id='form'>
+      <label for='driver'>Driver:</label>
+      <select id='driver'> </select> &nbsp; 
+      <label for='date'>Date:</label>
+      <input type='text' id='date' size='10' class='is-below'>
+      <button id='lookup'>Lookup</button>
+   </div>
+   <div id='wrap'>
+      <table id='hoursTable' class='timetable'>
+      </table> 
+   </div>
+</div>
+</body>
+<script type='text/javascript'>
+   
+(function(win, doc) {
+   const dlog = {
+      config: {
+         workStates: ['Off Duty', 'Sleeper', 'Driving', 'On Duty']
+      },
+      init: function() {
+         dlog.buildTimeTable();
+         dlog.calendar = TinyDatePicker(document.querySelector('#date'), {
+            mode: 'dp-below',
+          });
+         fetch("api.php?type=drivers").then((response) => {
+            return response.json();
+         }).then((data) => {
+            var out = "<option value=''>-- Select Driver --</option>";
+            for (var i=0; i<data.length; i++) {
+               out += "<option value='" + data[i].EmployeeID + "'>"+data[i].Driver+"</option>";
+            }
+            document.querySelector("#driver").innerHTML = out;
+         });
+         var btn = document.querySelector("#lookup");
+         btn.addEventListener("click", function(e) {
+            
+            var drvr = document.querySelector("#driver");
+            var driver = drvr.options[drvr.selectedIndex].value;
+            var mydate = document.querySelector("#date").value;
+
+            if (driver && mydate) {
+               fetch("api.php?type=jobs&EmployeeID="+driver+"&jobdate="+mydate).then((response) => {
+                  return response.json();
+               }).then((data) => {
+                  var last = 0, x, y;
+                  for (var i=0; i<data.length; i++) {
+                     x = new Date(data[i]['start']);
+                     y = new Date(data[i]['end']);
+                     for (var k=last; k<x.getHours(); k++) {
+                        var worktype = (last) ? "OnDuty" : "OffDuty";
+                        dlog.setHour(worktype, k, "Not Driving");
+                     }
+                     for (var j=x.getHours(); j<y.getHours(); j++) {
+                        dlog.setHour('Driving', j, data[i].pickup + ' -> ' + data[i].dropoff);
+                     }
+                     last = y.getHours();
+                  }
+
+                  for (var k=last; k<23; k++) {
+                     dlog.setHour("OffDuty", k, "Not Driving");
+                  }
+               });
+            }
+            e.preventDefault();
+            return false;
+         });
+      },
+      buildTimeTable: function() {
+         var workstate, out='', foot='';
+
+         // First build header
+         out += "<thead><tr><th class='blank'></th>";
+         foot += "<tfoot><tr><th class='blank'></th>";
+         for (var c=0; c<24; c++) {
+            if ((c ) === 0) {
+               t = "12a";
+            } else if ((c ) === 12) {
+               t = "12p";
+            } else {
+               t = c % 12;
+            }
+            out += "<th>" + t + "</th>";
+            foot += "<th>" + t + "</th>";
+         }
+         foot += "<th></th><th class='totalhours'><div id='totalhours'></div></th></tr></tfoot>";
+         out += "<th></th><th class='totalhours'>Total<br>Hours</th></tr></thead>\n";
+         out += "<tbody>";
+         for (var i=0; i < dlog.config.workStates.length; i++) {
+            out += "<tr>";
+            workstate = dlog.config.workStates[i];
+            wrk = workstate.replace(/\W/, '');
+            out += "<th>" + (i + 1) + ". " + workstate + "</th>";
+
+            for (var j=0; j < 24; j++) {
+               out += "<td id='" + wrk + "_" + j + "'></td>";
+            }
+            out += "<td colspan='2' class='totalhours'><div id='" + wrk + "_total' class='total'></div></td>";
+            out += "</tr>\n";
+         }
+         out += "</tbody>";
+         out += foot;
+
+         var hours = document.querySelector('#hoursTable');
+         hours.innerHTML = out;
+         console.log(out);
+      },
+      setHour: function(type, hour, val) {
+         var cell = document.querySelector("#"+type+"_"+hour);
+         if (cell) {
+            cell.innerHTML = "<div class='line' title='" + val + "'></div>";
+         }
+      }
+
+   };
+
+   window.dlog = dlog;
+   window.addEventListener('load', function() {
+      dlog.init();
+   });
+
+})(window, document);
+
+</script>
+</html>
