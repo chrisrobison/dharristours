@@ -8,28 +8,30 @@
    <link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
    <style>
       body { margin:0; padding:0; font-size:14px; font-family:"Roboto", "Helvetica Neue", Helvetica, sans-serif; }
-      h1, h2, h3, h4, h5, input, select, button, textarea { font-family:"Roboto", "Helvetica Neue", sans-serif; }
+      h1, h2, h3, h4, h5, input, select, button, textarea { font-family:"Roboto", "Helvetica Neue", sans-serif; margin:0px; }
       a { text-decoration:none;color:#00c; }
       a:hover { text-decoration:underline; }
       a:visited { color:#006; }
       a:active { color:#e00;display:inline-block;top:2px; }
       #main { text-align:center; }
-      #wrap { background-color:#000; display:inline-block; border:1px solid #333; text-align:left; margin-top:1em; }
+      #wrap { display:inline-block; border:1px solid #333; text-align:left; margin-top:1em; padding:1em; padding-bottom: 20em; background-color:#f3f3d9; border-radius:.5em; }
       .timetable {
          height:200px;
-         background-color:#f3ecd9;
+         background-color:#f3f3d9;
          border-collapse:collapse;
       }
       td:hover { background-color:#fff; outline:5px solid #ff0000; }
       .timetable thead th { background-color:#333; color:#f0f0f0; width:43px; text-align:right; position:relative; left:-3em; }
-      .timetable tfoot th { position:relative; height:3em; text-align:right; left:-2.9em; }
+      .timetable .tfoot th { position:relative; height:2em; text-align:right; left:-2.9em; background-color:#333; color:#f0f0f0;}
       .timetable thead th.totalhours { padding:0px .25em; width:8em; text-align:center; text-transform:uppercase;}
       .timetable tbody th { font-family: "Roboto", sans-serif; font-weight:900; width:100px; white-space:nowrap; text-transform: uppercase; text-align:left; font-size:18px; padding:0px .25em; }
-      .timetable td { background-color:#f3ecd9; background-image:url("ticks2.png"); color:#023; width:35px; height:53px; border-left:1px solid #000; }
+      .timetable tbody tr.tfoot th { font-family: "Roboto", sans-serif; font-weight:400; white-space:nowrap; text-align:right; font-size:14px; width:auto; left:-2.5em; }
+      .timetable td { background-color:#f3f3d9; background-image:url("ticks2.png"); color:#023; width:35px; height:53px; border-left:1px solid #000; }
       .timetable td.totalhours { background-image:none; text-align:center; width:6em; padding:0px 1em; }
       .tiny { font-weight:400; font-size:.7em; }
-      .total { border-bottom:2px solid #333; height: 45px; width: 70%; }
+      .total { border-bottom:2px solid #333; height: 32px; width: 70%; font-size:2em; }
       .timetable thead th.blank { background-color:transparent; }
+      .timetable .tfoot th.blank { background-color:transparent; }
       .timetable tbody tr:first-child { padding-left:.25em; padding-right:.25em; }
       .timetable td.on { border-bottom: 8px solid red; height:40px; }
       .timetable td.left { border-left: 8px solid red; }
@@ -37,7 +39,21 @@
       #drivetime { display:none; }
       #form { float:left; margin:1em; font-size:22px; font-family: "Roboto", sans-serif; text-align:left; }
       .line { width:100%; background-color:#ff0000; height: 8px; }
+      #topform { font-size:22px; font-family: "Roboto", sans-serif; margin-bottom: 1em;}
+      .topform { width: 100%; line-height:1.5em;}
+      .topval { background-color:#fff0; border-bottom:2px solid #000; padding:.25em; min-width:20em; display:inline-block; height:1.2em; }
+      .topform td { vertical-align:top; }
+      .remark { 
+transform: rotate(-58deg) translateX(-230px) translateY(-80px);
+    position: absolute;
+    width: 300px;
+    border-bottom: 1px solid #0004;
+    text-align: right;
+      }
+      .label { text-align:right; }
       SELECT, INPUT { font-family: "Roboto", sans-serif; font-size:22px; }
+      .notes { margin-top:.5em; padding-top:.5em; font-size:22px; }
+      .carrier { background-color:#fff; border:3px solid #000; border-radius:.5em; padding:.25em; white-space:nowrap; font-size:1.2em; padding-top:1em; }
    </style>
    <script src='/lib/js/tiny-date-picker.min.js'></script>
 </head>
@@ -51,8 +67,29 @@
       <button id='lookup'>Lookup</button>
    </div>
    <div id='wrap'>
+      <div id='topform'>
+         <table class='topform'>
+            <tr>
+               <td><h1 style='display:inline-block;'>DRIVER'S DAILY LOG</h1>
+               <table>
+                  <tr><th class='label'><label>Pickup:</label></td><td><span class='topval' id='logpickup'></span></td></tr>
+                  <tr><th class='label'><label>Drop-off:</label></td><td><span class='topval' id='logdropoff'></span></td></tr>
+               </table>
+               </td>
+               <td>
+               <table>
+                  <tr><th class='label'><label>Date:</label></td><td><span class='topval' id='logdate'></span></td></tr>
+                  <tr><th class='label'><label>Driver:</label></td><td><span class='topval' id='logdriver'></span></td></tr>
+                  <tr><th class='label'><label>Bus #:</label></td><td><span class='topval' id='busno'></span></td>
+               </tr></table></td>
+               <td>&nbsp;</td>
+               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:75px;position:relative;top:.25em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span></td>
+            </tr>
+         </table>
+      </div>
       <table id='hoursTable' class='timetable'>
       </table> 
+      <div class='notes'><label>Job ID:</label> <span id='jobid'></span></div>
    </div>
 </div>
 </body>
@@ -61,7 +98,7 @@
 (function(win, doc) {
    const dlog = {
       config: {
-         workStates: ['Off Duty', 'Sleeper', 'Driving', 'On Duty']
+         workStates: ['Off Duty', 'Sleeper', 'Driving', 'On Duty', 'Remarks']
       },
       init: function() {
          dlog.buildTimeTable();
@@ -79,44 +116,73 @@
          });
          var btn = document.querySelector("#lookup");
          btn.addEventListener("click", function(e) {
-            
-            var drvr = document.querySelector("#driver");
-            var driver = drvr.options[drvr.selectedIndex].value;
-            var mydate = document.querySelector("#date").value;
-
-            if (driver && mydate) {
-               fetch("api.php?type=jobs&EmployeeID="+driver+"&jobdate="+mydate).then((response) => {
-                  return response.json();
-               }).then((data) => {
-                  var last = 0, x, y;
-                  for (var i=0; i<data.length; i++) {
-                     x = new Date(data[i]['start']);
-                     y = new Date(data[i]['end']);
-                     for (var k=last; k<x.getHours(); k++) {
-                        var worktype = (last) ? "OnDuty" : "OffDuty";
-                        dlog.setHour(worktype, k, "Not Driving");
-                     }
-                     for (var j=x.getHours(); j<y.getHours(); j++) {
-                        dlog.setHour('Driving', j, data[i].pickup + ' -> ' + data[i].dropoff);
-                     }
-                     last = y.getHours();
-                  }
-
-                  for (var k=last; k<23; k++) {
-                     dlog.setHour("OffDuty", k, "Not Driving");
-                  }
-               });
-            }
+            dlog.fetchJobs(e);
             e.preventDefault();
             return false;
          });
+      },
+      fetchJobs: function(e) {
+         var drvr = document.querySelector("#driver");
+         var driver = drvr.options[drvr.selectedIndex].value;
+         var mydate = document.querySelector("#date").value;
+          
+         if (driver && mydate) {
+            $("#logdate").innerHTML = new Date(mydate).toLocaleDateString();
+            $("#logdriver").innerHTML = drvr.options[drvr.selectedIndex].text;
+            fetch("api.php?type=jobs&EmployeeID="+driver+"&jobdate="+mydate).then((response) => {
+               return response.json();
+            }).then((data) => {
+               var last = 0, x, y;
+               $("#busno").innerHTML = data[0]['busnum'];
+               $("#logpickup").innerHTML = data[0]['pickup'];
+               $("#logdropoff").innerHTML = data[data.length-1]['dropoff'];
+               $("#jobid").innerHTML = data[0]['id'];
+               var tots = {OffDuty:0, Sleeper:0, Driving:0, OnDuty:0, Remarks:0};
+               for (var i=0; i<data.length; i++) {
+                  x = new Date(data[i]['start']);
+                  y = new Date(data[i]['end']);
+                  for (var k=last; k<x.getHours(); k++) {
+                     var worktype = (last) ? "OnDuty" : "OffDuty";
+                     tots[worktype]++;
+                     dlog.setHour(worktype, k, "Not Driving");
+                  }
+                  for (var j=x.getHours(); j<y.getHours(); j++) {
+                     if (j < y.getHours()-1) {
+                        tots['Driving']++;
+                        dlog.setHour('Driving', j, data[i].pickup); 
+                     } else {
+                        tots['Driving']++;
+                        dlog.setHour('Driving', j, data[i].dropoff);
+                     }
+                  }
+                  last = y.getHours();
+               }
+
+               for (var k=last; k<23; k++) {
+                  tots['OffDuty']++;
+                  dlog.setHour("OffDuty", k, "Not Driving");
+               }
+
+               for (var i in dlog.config.workStates) {
+                  var wstxt = dlog.config.workStates[i];
+                  wstxt = wstxt.replace(/\s*/g, '');
+                  console.log("wstxt: "+wstxt);
+                  if (wstxt != 'Remarks') {
+                     var el = $("#" +  wstxt + "_total");
+                     if (el) {
+                        el.innerHTML = tots[wstxt];
+                     }
+                  }
+               }
+            });
+         }
       },
       buildTimeTable: function() {
          var workstate, out='', foot='';
 
          // First build header
          out += "<thead><tr><th class='blank'></th>";
-         foot += "<tfoot><tr><th class='blank'></th>";
+         foot += "<tr class='tfoot'><th class='blank'></th>";
          for (var c=0; c<24; c++) {
             if ((c ) === 0) {
                t = "12a";
@@ -128,10 +194,11 @@
             out += "<th>" + t + "</th>";
             foot += "<th>" + t + "</th>";
          }
-         foot += "<th></th><th class='totalhours'><div id='totalhours'></div></th></tr></tfoot>";
+         foot += "<th></th><th class='totalhours'><div id='totalhours'></div></th></tr>";
          out += "<th></th><th class='totalhours'>Total<br>Hours</th></tr></thead>\n";
          out += "<tbody>";
-         for (var i=0; i < dlog.config.workStates.length; i++) {
+         var wsCount = dlog.config.workStates.length;
+         for (var i=0; i < wsCount; i++) {
             out += "<tr>";
             workstate = dlog.config.workStates[i];
             wrk = workstate.replace(/\W/, '');
@@ -142,18 +209,35 @@
             }
             out += "<td colspan='2' class='totalhours'><div id='" + wrk + "_total' class='total'></div></td>";
             out += "</tr>\n";
+
+            console.log("dlog.config.workStates.length: "+wsCount);
+            if (i == (wsCount - 2)) {
+               out += foot;
+            }
          }
          out += "</tbody>";
-         out += foot;
+//         out += foot;
 
          var hours = document.querySelector('#hoursTable');
          hours.innerHTML = out;
-         console.log(out);
       },
+      lastHourRemark: '',
       setHour: function(type, hour, val) {
          var cell = document.querySelector("#"+type+"_"+hour);
+
          if (cell) {
             cell.innerHTML = "<div class='line' title='" + val + "'></div>";
+         }
+
+         val = val.replace(/\(?\d\d\d\)?[\-\s]?\d\d\d\-\d\d\d\d/, '');
+         if (dlog.lastHourRemark != val) {
+            var remarkCell = document.querySelector("#Remarks_"+hour);
+            if (remarkCell) {
+               if (val!= "Not Driving") {
+                  remarkCell.innerHTML = "<div class='remark'>" + val + "</div>";
+               }
+            }
+            dlog.lastHourRemark = val;
          }
       }
 
@@ -165,6 +249,8 @@
    });
 
 })(window, document);
-
+function $(str) {
+   return document.querySelector(str);
+}
 </script>
 </html>

@@ -118,7 +118,7 @@
          $now = date("Y-m-d");
       }
       $in = $_REQUEST;
-      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions FROM Job where JobDate='{$now}' AND JobCancelled=0 AND EmployeeID=".$in['EmployeeID'];
+      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Bus.BusNumber as BusNumber, SpecialInstructions FROM Job, Bus where Job.BusID=Bus.BusID AND JobDate='{$now}' AND JobCancelled=0 AND EmployeeID=".$in['EmployeeID'];
       $results = mysqli_query($link, $sql);
       
       while ($row = $results->fetch_assoc()) {
@@ -127,6 +127,7 @@
          $obj->title = $row['Job'];
          $obj->pickup = $row['PickupLocation'];
          $obj->dropoff = $row['DropOffLocation'];
+         $obj->busnum = $row['BusNumber'];
          $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
          $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
 
@@ -167,7 +168,7 @@
    
    function getDrivers($link) {
       $out = array(); $cnt = 0;
-      $results = mysqli_query($link, "SELECT EmployeeID, concat(FirstName, ' ', LastName) as Driver, Email, Phone FROM Employee WHERE Active=1 and Driver=1");
+      $results = mysqli_query($link, "SELECT EmployeeID, concat(FirstName, ' ', LastName) as Driver, Email, Phone FROM Employee WHERE Active=1 and Driver=1 and EmployeeID!=69 order by Driver");
       
       while ($row = $results->fetch_assoc()) {
          array_push($out, $row);
