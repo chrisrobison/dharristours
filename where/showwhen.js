@@ -106,14 +106,17 @@ function getWhere(when, who) {
 
 var paths = {};
 function getPath(start, end, who) {
-   var whichbus = document.querySelectorAll("input[name=buses]:checked")[0].value;
+   var b = [];
+   var whichbuses = document.querySelectorAll("input[name=buses]:checked");
+       whichbuses.forEach(function(val) { b[b.length] = val.value; });
+   var whichbus = b.join(":");
    var query = [];
    
    if (who) {
       query[query.length] = "bus=" + encodeURIComponent(who);
    } 
    if (whichbus) {
-      query[query.length] = "bus=" + encodeURIComponent(whichbus);
+      query[query.length] = "bus=" + whichbus;
    } 
    if (start) {
       query.push("date=" + encodeURIComponent(start));
@@ -125,6 +128,7 @@ function getPath(start, end, who) {
    fetch("path.php?" + query.join('&')).then(res => res.json())
       .then((out) => {
 console.dir(out);
+window.simplePaths = out;
 
  var lineSymbol = {
     path: google.maps.SymbolPath.CIRCLE,
@@ -159,8 +163,8 @@ console.dir(out);
                 map:map,
                 zIndex: 999
               });
-              drivePath[idx] = line;
-              animateCircle(line);
+              drivePath[idx][drivePath[idx].length] = line;
+              // animateCircle(line);
               paths[idx] = out[idx];
               
               cnt++;
@@ -169,7 +173,7 @@ console.dir(out);
                }
 //               paths.push(idx);
             }
-console.dir(drivePath[idx]);
+console.dir(drivePath);
 console.log("updatePath");
             
          } else {
@@ -185,6 +189,13 @@ console.log("updatePath");
         }
       });
 }
+
+function setCircle(line, pct) {
+   var icons = line.get('icons');
+   icons[0].offset = pct + '%';
+   line.set('icons', icons);
+}
+
 function animateCircle(line) {
     var count = 0;
     window.setInterval(function() {
@@ -193,7 +204,7 @@ function animateCircle(line) {
       var icons = line.get('icons');
       icons[0].offset = (count / 2) + '%';
       line.set('icons', icons);
-  }, 10);
+  }, 100);
 }
 
 var pathIdx=0;
@@ -387,5 +398,24 @@ function distanceInMilesBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   return earthRadiusMiles * c;
 }
+
+var allbus = document.querySelector("#allbuses");
+allbus.addEventListener('click', function(e) {
+});
+
+var buslist = document.querySelectorAll("input[name=buses]");
+buslist.forEach(function(val) { 
+   val.addEventListener('click', function(e) {
+   if (this.id !== "allbuses") {
+      document.querySelector("#allbuses").checked = false;
+   } else {
+      if (this.checked) {
+         buslist.forEach(function(val) { val.checked = false; });
+         document.querySelector("#allbuses").checked = true;
+      } 
+
+   }
+   });
+});
 
 

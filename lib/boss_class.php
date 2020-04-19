@@ -1245,20 +1245,25 @@ class boss {
          if ($fields[$key]->Type=="tinyint") {
             $field->formatter = "checkbox";
             $field->edittype = "checkbox";
+            $field->editoptions = new stdClass();
             $field->editoptions->value = "true:false";
          } else if (preg_match("/text$/", $fields[$key]->Type)) {
             $field->edittype = "textarea";
+            $field->editoptions = new stdClass();
             $field->editoptions->rows = "4";
             $field->editoptions->cols = "30";
          } else if ($fields[$key]->Type=="int") {
+            $field->editrules = new stdClass();
             $field->editrules->integer = true;
             // $field->align = 'right';
             $field->width = 80;
             $field->formatter = 'integer';
+            $field->formatoptions = new stdClass();
             $field->formatoptions->thousandsSeparator = '';
          } else if ($fields[$key]->Type=="float") {
             // $field->align = 'right';
             $field->formatter = 'number';
+            $field->formatoptions = new stdClass();
             $field->formatoptions->thousandsSeparator = '';
             $l = preg_split("/,\s*/", $fields[$key]->Length);
             $field->formatoptions->decimalPlaces = ($l[1]) ? $l[1] : '2';
@@ -1268,6 +1273,7 @@ class boss {
             $field->formatter = 'date';
             $field->sorttype = 'datetime';
             $field->datefmt = 'm/d/Y';
+            $field->formatoptions = new stdClass();
             $field->formatoptions->srcformat = 'Y-m-d';
             $field->formatoptions->newformat = 'm/d/Y';
          } else if ($fields[$key]->Type=="time") {
@@ -1275,12 +1281,14 @@ class boss {
             $field->width = 120;
             $field->formatter = "time";
          } else if ($fields[$key]->Type=="datetime") {
+            $field->editrules = new stdClass();
             $field->editrules->date = true;
             $field->width = 200;
             $field->formatter = 'date';
             $field->sorttype = 'date';
             $field->datefmt = 'm/d/Y h:i a';
             if (!$field->editoptions) $field->editoptions = new stdClass();
+            $field->formatoptions = new stdClass();
             $field->formatoptions->srcformat = 'Y-m-d G:i:s';
             $field->formatoptions->newformat = 'm/d/Y g:i:s a';
          } else {

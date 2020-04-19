@@ -1,20 +1,28 @@
 <?php
+   include($_SERVER['DOCUMENT_ROOT'] . "/.env");
    $in = array();
    $in = $_REQUEST;
 
-   $out = getWhere($in['date'], $in['end'], $in['bus']);
+   $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
+   if (mysqli_connect_errno()) {
+       printf("Connect failed: %s\n", mysqli_connect_error());
+       exit();
+   }
+         
+   $buses = preg_split("/\:/", $in['bus']);
+
+   $out = getWhere($link, $in['date'], $in['end'], $buses);
+
    header("Content-type: application/javascript");
    print json_encode($out);
+   
+   mysqli_close($link);
+
    exit;
 
-   function getWhere($date="", $enddate="", $bus="") {
-      $link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "SS_DHarrisTours");
+   function getWhere($link, $date="", $enddate="", $buses=array()) {
       /* check connection */
-      if (mysqli_connect_errno()) {
-          printf("Connect failed: %s\n", mysqli_connect_error());
-          exit();
-      }
-      
+
       if ($date && $enddate) {
          // $mydate = strtotime($date);
          // $earlier = date("Y-m-d H:i:00", strtotime("2 hours ago", $mydate));
@@ -34,9 +42,9 @@
 
                $json = json_decode($row['JSON']);
 
-               if ($bus) {
+               if (count($buses)) {
                   foreach ($json as $idx=>$obj) {
-                     if ($obj->objectno == $bus) {
+                     if (in_array($obj->objectno, $buses)) {
                         $coord = new stdClass();
                         $coord->lat = $obj->latitude_mdeg / 1000000;
                         $coord->lng = $obj->longitude_mdeg / 1000000;

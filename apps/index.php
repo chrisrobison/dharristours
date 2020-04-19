@@ -9,7 +9,8 @@
          if (file_exists($_SERVER['DOCUMENT_ROOT'] . $favico)) { 
             print $favico; 
          } else {
-            print "/favicon.ico?v=2.3";
+            //print "/favicon.ico?v=2.4";
+            print "/clients/dharristours/favicon.ico?v=2.4";
          }
       ?>">
       <link href='//fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
@@ -21,7 +22,7 @@
       <link rel="stylesheet" type="text/css" href="/lib/css/icons24.css" />
       <link rel="stylesheet" type="text/css" href="/lib/css/core.css" />
       <style>
-       .dijitAccordionText, ul.nav li a.nav { font-family: Quicksand, "Helvetica Neue", Optima, Verdana, sans-serif; }
+       .dijitAccordionText, ul.nav li a.nav { font-family: Quicksand, "Helvetica Neue", Optima, Verdana, sans-serif; white-space:nowrap; }
       </style>
       <link rel="stylesheet" type="text/css" href="<?php print $boss->app->Assets . "/" . $boss->app->CSS; ?>" />
       <?php
@@ -185,8 +186,8 @@
          }, 2000);
          */
          dojo.ready(function() {
-            if (localStorage && localStorage['tabs']) {
-               var tabs = JSON.parse(localStorage['tabs']);
+            if (sessionStorage && sessionStorage['tabs']) {
+               var tabs = JSON.parse(sessionStorage['tabs']);
                for (var i in tabs) {
                   loadUrl(tabs[i].url, tabs[i].title, tabs[i].target, tabs[i].force, tabs[i].mid, tabs[i].isModule);
                }

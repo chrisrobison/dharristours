@@ -26,6 +26,11 @@
          case "resources":
             $out = getResources($link, $in);
             break;
+         case "guessCity":
+            $out = array(new stdClass());
+            $out[0]->address = $in['addr'];
+            $out[0]->city = guessCity($in['addr']);
+            break;
       }
 
       if ($out) {
@@ -141,7 +146,7 @@
       $colors = array('#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000');
       
       $out = array(); $cnt = 0;
-      $results = mysqli_query($link, "SELECT * FROM Bus WHERE Active=1");
+      $results = mysqli_query($link, "select BusID, Bus, BusNumber, Capacity, License, Year, Make, Model, VIN, Active from Bus where Active=1 and Capacity>0 order by BusNumber");
       
       while ($row = $results->fetch_assoc()) {
          $obj = new stdClass();
@@ -176,5 +181,42 @@
 
       return $out;
    }
+
+ function guessCity($addr) {
+      $cities = array('South San Francisco', 'San Francisco', 'San Rafael', 'Vallejo', 'San Ramon', 'Castro Valley', 'Loma Mar', 'Alameda', 'Oakland', 'Sausalito', 'Elk Grove', 'Walnut Creek', 'Berkeley', 'Rocklin', 'Atherton', 'Brentwood', 'Folsom', 'Pacifica', 'Morgan Hill', 'Burlingame', 'Lagunita', 'El Cerrito', 'Richmond', 'Monterey', 'Montara', 'Concord', 'Pleasanton', 'Windsor', 'Corte Madera', 'Oakville', 'Mill Valley', 'Daly City', 'Vacaville', 'Union City', 'Merced', 'San Mateo', 'Palo Alto', 'Hayward', 'Livermore', 'Santa Clara', 'Sunnyvale', 'San Carlos', 'Redwood City', 'San Leandro', 'Pleasant Hill', 'Hercules', 'Eureka', 'Marin City', 'Danville', 'Alviso', 'Pittsburgh', 'Rohnert Park', 'San Lorenzo', 'Half Moon Bay', 'San Pablo', 'Dublin', 'Larkspur', 'Davis', 'Sacramento', 'Lafayette', 'Ross', 'Pittsburg', 'Menlo Park', 'Novato', 'Arbuckle', 'San Jose', 'Kentfield', 'Fremont', 'Piedmont', 'Boulder Creek', 'Healdsburg', 'Fairfax', 'Milpitas', 'Martinez', 'Aptos', 'Fairfield', 'Orinda', 'Antioch', 'Oakley', 'Pinole', 'Clayton', 'Greenbrae', 'Lotus', 'Dixon', 'Stockton', 'Albany', 'Emeryville', 'Cazadoro', 'El Sobrante', 'Oakhurst', 'Stanford', 'Nicasio', 'Suisun City', 'Napa', 'Tomales', 'Newark', 'Modesto', 'Santa Rosa', 'Turlock', 'Pescadero', 'Santa Cruz', 'Groveland', 'Tiburon', 'Crockett', 'Sonoma', 'Brisbane', 'Mountain House', 'Mt House', 'Tracy', 'Moraga', 'Los Altos', 'Fresno', 'San Bruno', 'Petaluma', 'Benecia', 'Gilroy', 'Sausilito', 'Stinson Beach', 'Felton', 'San Gregorio', 'Mountain View', 'Mt View', 'Mt. View', 'Millbrae', 'Milbrae', 'Rodeo', 'Clarksberg', 'Alamo', 'Marysville', 'Yuba City', 'Belmont', 'Inverness');
+
+      $ccnt = count($cities);
+      $city = "";
+      for ($c=0; $c<$ccnt; $c++) {
+         $matched = preg_grep("/".$cities[$c]."/i", $addr);
+         if (count($matched) > 0) {
+            $city = $cities[$c];
+            //print "Found city '".$cities[$c]."'\n";
+            $c = $ccnt + 1;
+         }
+      }
+
+      if (!$city) {
+         $city = "San Francisco";
+      }
+
+      return $city;
+   }
+
+   function lookupZip($zip) {
+      $link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "SS_DHarrisTours");
+      /* check connection */
+      if (mysqli_connect_errno()) {
+          printf("Connect failed: %s\n", mysqli_connect_error());
+          exit();
+      }
+      
+      $results = mysqli_query($link, "SELECT * from ZipCode where ZipCode='".$zip."'");
+      
+      $row = $results->fetch_assoc();
+
+      return $row;
+   }
+
 
 ?>

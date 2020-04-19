@@ -5,56 +5,8 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Daily Driver Log</title>
    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-   <link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
-   <style>
-      body { margin:0; padding:0; font-size:14px; font-family:"Roboto", "Helvetica Neue", Helvetica, sans-serif; }
-      h1, h2, h3, h4, h5, input, select, button, textarea { font-family:"Roboto", "Helvetica Neue", sans-serif; margin:0px; }
-      a { text-decoration:none;color:#00c; }
-      a:hover { text-decoration:underline; }
-      a:visited { color:#006; }
-      a:active { color:#e00;display:inline-block;top:2px; }
-      #main { text-align:center; }
-      #wrap { display:inline-block; border:1px solid #333; text-align:left; margin-top:1em; padding:1em; padding-bottom: 20em; background-color:#f3f3d9; border-radius:.5em; }
-      .timetable {
-         height:200px;
-         background-color:#f3f3d9;
-         border-collapse:collapse;
-      }
-      td:hover { background-color:#fff; outline:5px solid #ff0000; }
-      .timetable thead th { background-color:#333; color:#f0f0f0; width:43px; text-align:right; position:relative; left:-3em; }
-      .timetable .tfoot th { position:relative; height:2em; text-align:right; left:-2.9em; background-color:#333; color:#f0f0f0;}
-      .timetable thead th.totalhours { padding:0px .25em; width:8em; text-align:center; text-transform:uppercase;}
-      .timetable tbody th { font-family: "Roboto", sans-serif; font-weight:900; width:100px; white-space:nowrap; text-transform: uppercase; text-align:left; font-size:18px; padding:0px .25em; }
-      .timetable tbody tr.tfoot th { font-family: "Roboto", sans-serif; font-weight:400; white-space:nowrap; text-align:right; font-size:14px; width:auto; left:-2.5em; }
-      .timetable td { background-color:#f3f3d9; background-image:url("ticks2.png"); color:#023; width:35px; height:53px; border-left:1px solid #000; }
-      .timetable td.totalhours { background-image:none; text-align:center; width:6em; padding:0px 1em; }
-      .tiny { font-weight:400; font-size:.7em; }
-      .total { border-bottom:2px solid #333; height: 32px; width: 70%; font-size:2em; }
-      .timetable thead th.blank { background-color:transparent; }
-      .timetable .tfoot th.blank { background-color:transparent; }
-      .timetable tbody tr:first-child { padding-left:.25em; padding-right:.25em; }
-      .timetable td.on { border-bottom: 8px solid red; height:40px; }
-      .timetable td.left { border-left: 8px solid red; }
-      #tinycal { float: left; }
-      #drivetime { display:none; }
-      #form { float:left; margin:1em; font-size:22px; font-family: "Roboto", sans-serif; text-align:left; }
-      .line { width:100%; background-color:#ff0000; height: 8px; }
-      #topform { font-size:22px; font-family: "Roboto", sans-serif; margin-bottom: 1em;}
-      .topform { width: 100%; line-height:1.5em;}
-      .topval { background-color:#fff0; border-bottom:2px solid #000; padding:.25em; min-width:20em; display:inline-block; height:1.2em; }
-      .topform td { vertical-align:top; }
-      .remark { 
-transform: rotate(-58deg) translateX(-230px) translateY(-80px);
-    position: absolute;
-    width: 300px;
-    border-bottom: 1px solid #0004;
-    text-align: right;
-      }
-      .label { text-align:right; }
-      SELECT, INPUT { font-family: "Roboto", sans-serif; font-size:22px; }
-      .notes { margin-top:.5em; padding-top:.5em; font-size:22px; }
-      .carrier { background-color:#fff; border:3px solid #000; border-radius:.5em; padding:.25em; white-space:nowrap; font-size:1.2em; padding-top:1em; }
-   </style>
+   <link href='/lib/css/tiny-date-picker.css' rel='stylesheet'>
+   <link href='main.css' rel='stylesheet'>
    <script src='/lib/js/tiny-date-picker.min.js'></script>
 </head>
 <body>
@@ -64,11 +16,15 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
       <select id='driver'> </select> &nbsp; 
       <label for='date'>Date:</label>
       <input type='text' id='date' size='10' class='is-below'>
-      <button id='lookup'>Lookup</button>
+      <button id='lookup'>&#x1f50d; Lookup</button>
    </div>
    <div id='wrap'>
       <div id='topform'>
          <table class='topform'>
+            <tr>
+               <td id='perf' colspan='4'>&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</td>
+            </tr>
+            <tr><td><br></td></tr>
             <tr>
                <td><h1 style='display:inline-block;'>DRIVER'S DAILY LOG</h1>
                <table>
@@ -105,6 +61,24 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
          dlog.calendar = TinyDatePicker(document.querySelector('#date'), {
             mode: 'dp-below',
           });
+         
+         var drvr = document.querySelector("#driver");
+         drvr.addEventListener("change", function(e) {
+            if (document.querySelector("#date").value!="") {
+               dlog.buildTimeTable();
+               dlog.fetchJobs(e);
+            }
+         });
+
+         document.querySelector('#date').addEventListener("change", function(e) {
+            var drvr = document.querySelector("#driver");
+            if (drvr.selectedIndex) {
+               dlog.buildTimeTable();
+               dlog.fetchJobs(e);
+            }
+
+         });
+         
          fetch("api.php?type=drivers").then((response) => {
             return response.json();
          }).then((data) => {
@@ -114,8 +88,10 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
             }
             document.querySelector("#driver").innerHTML = out;
          });
+         
          var btn = document.querySelector("#lookup");
          btn.addEventListener("click", function(e) {
+            dlog.buildTimeTable();
             dlog.fetchJobs(e);
             e.preventDefault();
             return false;
@@ -144,34 +120,36 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
                   for (var k=last; k<x.getHours(); k++) {
                      var worktype = (last) ? "OnDuty" : "OffDuty";
                      tots[worktype]++;
+                     tots['Remarks']++;
                      dlog.setHour(worktype, k, "Not Driving");
                   }
                   for (var j=x.getHours(); j<y.getHours(); j++) {
                      if (j < y.getHours()-1) {
                         tots['Driving']++;
+                        tots['Remarks']++;
                         dlog.setHour('Driving', j, data[i].pickup); 
                      } else {
                         tots['Driving']++;
+                        tots['Remarks']++;
                         dlog.setHour('Driving', j, data[i].dropoff);
                      }
                   }
                   last = y.getHours();
                }
 
-               for (var k=last; k<23; k++) {
+               for (var k=last; k<24; k++) {
                   tots['OffDuty']++;
+                  tots['Remarks']++;
                   dlog.setHour("OffDuty", k, "Not Driving");
                }
 
                for (var i in dlog.config.workStates) {
                   var wstxt = dlog.config.workStates[i];
                   wstxt = wstxt.replace(/\s*/g, '');
-                  console.log("wstxt: "+wstxt);
-                  if (wstxt != 'Remarks') {
-                     var el = $("#" +  wstxt + "_total");
-                     if (el) {
-                        el.innerHTML = tots[wstxt];
-                     }
+                  
+                  var el = $("#" +  wstxt + "_total");
+                  if (el) {
+                     el.innerHTML = tots[wstxt];
                   }
                }
             });
@@ -180,7 +158,7 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
       buildTimeTable: function() {
          var workstate, out='', foot='';
 
-         // First build header
+         // Handle headers and footers first
          out += "<thead><tr><th class='blank'></th>";
          foot += "<tr class='tfoot'><th class='blank'></th>";
          for (var c=0; c<24; c++) {
@@ -196,6 +174,8 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
          }
          foot += "<th></th><th class='totalhours'><div id='totalhours'></div></th></tr>";
          out += "<th></th><th class='totalhours'>Total<br>Hours</th></tr></thead>\n";
+         
+         // Now generate timelines for each dlog.conf.workStates
          out += "<tbody>";
          var wsCount = dlog.config.workStates.length;
          for (var i=0; i < wsCount; i++) {
@@ -216,10 +196,11 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
             }
          }
          out += "</tbody>";
-//         out += foot;
 
          var hours = document.querySelector('#hoursTable');
          hours.innerHTML = out;
+         console.log(out);
+         return out;
       },
       lastHourRemark: '',
       setHour: function(type, hour, val) {
@@ -230,15 +211,29 @@ transform: rotate(-58deg) translateX(-230px) translateY(-80px);
          }
 
          val = val.replace(/\(?\d\d\d\)?[\-\s]?\d\d\d\-\d\d\d\d/, '');
+         var city = dlog.guessCity(val);
          if (dlog.lastHourRemark != val) {
             var remarkCell = document.querySelector("#Remarks_"+hour);
             if (remarkCell) {
                if (val!= "Not Driving") {
-                  remarkCell.innerHTML = "<div class='remark'>" + val + "</div>";
+                  remarkCell.innerHTML = "<div class='remark'>" + city + ", CA</div>";
                }
             }
             dlog.lastHourRemark = val;
          }
+      },
+      guessCity: function(addr) {
+         var cities = ['South San Francisco', 'San Francisco', 'San Rafael', 'Vallejo', 'San Ramon', 'Castro Valley', 'Loma Mar', 'Alameda', 'Oakland', 'Sausalito', 'Elk Grove', 'Walnut Creek', 'Berkeley', 'Rocklin', 'Atherton', 'Brentwood', 'Folsom', 'Pacifica', 'Morgan Hill', 'Burlingame', 'Lagunita', 'El Cerrito', 'Richmond', 'Monterey', 'Montara', 'Concord', 'Pleasanton', 'Windsor', 'Corte Madera', 'Oakville', 'Mill Valley', 'Daly City', 'Vacaville', 'Union City', 'Merced', 'San Mateo', 'Palo Alto', 'Hayward', 'Livermore', 'Santa Clara', 'Sunnyvale', 'San Carlos', 'Redwood City', 'San Leandro', 'Pleasant Hill', 'Hercules', 'Eureka', 'Marin City', 'Danville', 'Alviso', 'Pittsburgh', 'Rohnert Park', 'San Lorenzo', 'Half Moon Bay', 'San Pablo', 'Dublin', 'Larkspur', 'Davis', 'Sacramento', 'Lafayette', 'Ross', 'Pittsburg', 'Menlo Park', 'Novato', 'Arbuckle', 'San Jose', 'Kentfield', 'Fremont', 'Piedmont', 'Boulder Creek', 'Healdsburg', 'Fairfax', 'Milpitas', 'Martinez', 'Aptos', 'Fairfield', 'Orinda', 'Antioch', 'Oakley', 'Pinole', 'Clayton', 'Greenbrae', 'Lotus', 'Dixon', 'Stockton', 'Albany', 'Emeryville', 'Cazadoro', 'El Sobrante', 'Oakhurst', 'Stanford', 'Nicasio', 'Suisun City', 'Napa', 'Tomales', 'Newark', 'Modesto', 'Santa Rosa', 'Turlock', 'Pescadero', 'Santa Cruz', 'Groveland', 'Tiburon', 'Crockett', 'Sonoma', 'Brisbane', 'Mountain House', 'Mt House', 'Tracy', 'Moraga', 'Los Altos', 'Fresno', 'San Bruno', 'Petaluma', 'Benecia', 'Gilroy', 'Sausilito', 'Stinson Beach', 'Felton', 'San Gregorio', 'Mountain View', 'Mt View', 'Mt. View', 'Millbrae', 'Milbrae', 'Rodeo', 'Clarksberg', 'Alamo', 'Marysville', 'Yuba City', 'Belmont', 'Inverness'];
+         var re, city='';
+
+         for (var i=0; i<cities.length; i++) {
+            re = new RegExp(cities[i], 'i');
+            if (re.exec(addr)) {
+               city = cities[i];
+               i = cities.length;
+            }
+         }
+         return city;
       }
 
    };
