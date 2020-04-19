@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day|Give+You+Glory|Swanky+and+Moo+Moo&display=swap');
+body { margin:0; padding:0; font-size:12px; font-family:"Helvetica Neue", Helvetica, sans-serif; font-size:18px; }
+h1, h2, h3, h4, h5, input, select, button, textarea { font-family:"Helvetica Neue", sans-serif; margin:0px; font-weight:500; }
+a { text-decoration:none;color:#00c; }
+a:hover { text-decoration:underline; }
+a:visited { color:#006; }
+a:active { color:#e00;display:inline-block;top:2px; }
+#main { text-align:center; user-select:none;
+   background-color:#e3e3e3; 
+}
+#wrap { user-select:none; display:inline-block; text-align:left; margin-top:1em; margin-left:1em; padding:1em; padding-bottom: 20em; 
+   background-color:#fff; 
+   margin-bottom:2em;
+   box-shadow: 0.75em .75em 0.5em rgba(0,0,0,.25); }
+.timetable {
+   height:200px;
+   background-color:#ffffff;
+   border-collapse:collapse;
+}
+.timetable thead th { background-color:#333; color:#f0f0f0; width:43px; text-align:right; position:relative; left:-2em; font-weight:400; }
+.timetable .tfoot th { position:relative; height:2em; text-align:right; left:-2.9em; background-color:#333; color:#f0f0f0;}
+.timetable thead th.totalhours { padding:0px .25em; width:8em; height:2em; text-align:center; text-transform:uppercase;font-weight: 400; }
+.timetable tbody th { font-family: "Helvetica Neue", Helvetica, sans-serif; font-weight:900; width:100px; white-space:nowrap; text-transform: uppercase; text-align:left; font-size:16px; padding:0px .25em;  font-weight:500; }
+.timetable tbody tr.tfoot th { font-family: "Helvetica Neue", Helvetica, sans-serif; font-weight:400; white-space:nowrap; text-align:right; font-size:14px; width:auto; left:-2.5em; font-weight: 400; }
+.timetable td { background-color:#ffffff; background-image:url("ticks2.png"); color:#023; width:35px; height:53px; border-left:1px solid #000; }
+.timetable td.totalhours { background-image:none; text-align:center; width:6em; padding:0px 1em; }
+.tiny { font-weight:400; font-size:.7em; }
+.total { border-bottom:2px solid #333; height: 32px; width: 70%; font-size:2em; padding-bottom:4px; }
+.timetable thead th.blank { background-color:transparent; }
+.timetable .tfoot th.blank { background-color:transparent; }
+.timetable tbody tr:first-child { padding-left:.25em; padding-right:.25em; }
+.timetable td.on { border-bottom: 8px solid red; height:40px; }
+.timetable td.left { border-left: 8px solid red; }
+#tinycal { float: left; }
+#drivetime { display:none; }
+#form { float:left; margin:1em; font-size:18px; font-family: "Roboto", sans-serif; text-align:left; }
+.line { width:45px; position:absolute; background-color:#ff0000; height: 8px; }
+#topform { font-size:18px; font-family: "Roboto", sans-serif; margin-bottom: 1em;}
+.topform { width: 100%; line-height:1.5em;}
+.topval { 
+   font-family: 'Swanky and Moo Moo', cursive;
+   font-size:22px;
+   background-color:#fff0; border-bottom:2px solid #000; padding:.25em; min-width:20em; display:inline-block; height:1.2em; 
+   color:#0033cc;
+}
+.topform td { vertical-align:top; }
+
+.remark { 
+   font-family: 'Swanky and Moo Moo', cursive;
+   transform: rotate(-58deg) translateX(-230px) translateY(-80px);
+   position: absolute;
+   width: 300px;
+   border-bottom: 1px solid #0004;
+   text-align: right;
+   font-size:38px;
+   color:#0033cc;
+}
+.label { text-align:right;text-transform:uppercase; font-weight:400; }
+SELECT, INPUT { font-family: "Roboto", sans-serif; font-size:18px; }
+.notes { margin-top:.5em; padding-top:.5em; font-size:22px; }
+.carrier { background-color:#fff; border:3px solid #000; border-radius:.5em; padding:.25em; white-space:nowrap; font-size:1.2em; padding-top:1em; }
+button#lookup { font-family: "Roboto", sans-serif; font-size:18px; box-shadow: 2px 2px 4px #00000033;}
+#perf { font-size: 72px; margin: 0px; padding: 0px 0px .25em; color: #ccc; text-shadow: 0px -2px 2px rgba(0,0,0,.8); border-bottom: 2px dashed #0002; }
+
