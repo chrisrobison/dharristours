@@ -26,6 +26,8 @@
             </tr>
             <tr><td><br></td></tr>
             <tr>
+               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:80px;position:relative;top:.0125em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span><hr><span style='font-size:.7em'>(415) 902-8542<br>US DOT #:2016332</span></td>
+               <td>&nbsp;</td>
                <td><h1 style='display:inline-block;'>DRIVER'S DAILY LOG</h1>
                <table>
                   <tr><th class='label'><label>Pickup:</label></td><td><span class='topval' id='logpickup'></span></td></tr>
@@ -38,8 +40,6 @@
                   <tr><th class='label'><label>Driver:</label></td><td><span class='topval' id='logdriver'></span></td></tr>
                   <tr><th class='label'><label>Bus #:</label></td><td><span class='topval' id='busno'></span></td>
                </tr></table></td>
-               <td>&nbsp;</td>
-               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:75px;position:relative;top:.25em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span></td>
             </tr>
          </table>
       </div>
@@ -210,7 +210,9 @@
             cell.innerHTML = "<div class='line' title='" + val + "'></div>";
          }
 
-         val = val.replace(/\(?\d\d\d\)?[\-\s]?\d\d\d\-\d\d\d\d/, '');
+         if (val) {
+            val = val.replace(/\(?\d\d\d\)?[\-\s]?\d\d\d\-\d\d\d\d/, '');
+         }
          var city = dlog.guessCity(val);
          if (dlog.lastHourRemark != val) {
             var remarkCell = document.querySelector("#Remarks_"+hour);
@@ -233,6 +235,8 @@
                i = cities.length;
             }
          }
+
+         if (!city) { city = "San Francisco"; }
          return city;
       }
 
