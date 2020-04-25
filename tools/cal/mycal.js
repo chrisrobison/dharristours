@@ -14777,7 +14777,8 @@ Docs & License: https://fullcalendar.io/scheduler
     var LICENSE_INFO_URL = 'http://fullcalendar.io/scheduler/license/';
     var PRESET_LICENSE_KEYS = [
         'GPL-My-Project-Is-Open-Source',
-        'CC-Attribution-NonCommercial-NoDerivatives'
+        'CC-Attribution-NonCommercial-NoDerivatives',
+        '12345-fcs-67890'
     ];
     var CSS = {
         position: 'absolute',

@@ -1455,4 +1455,124 @@ tr:nth-child(4n) td {
 }
 .fc-axis { 
 }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial,"Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+  }
 
+  #calendar {
+    max-width: 60%;
+    margin: .5em auto 0px auto;
+    display:inline-block;
+  }
+  .left {
+     position:relative; 
+     width:400px;
+     display:inline-block;
+     float:left;
+     margin-top:0em;
+     margin-right:1em;
+  }
+  #tinycal {
+    width:400px;
+  }
+  #details {
+     display:inline-block;
+     width:400px;
+     height:25em;
+     margin:.5em 0 1em 0;
+     border:1px solid #ccc;
+     padding:0px;
+  }
+  #detail {
+    overflow-y:scroll;
+    position:relative;
+    height:20em;
+
+  }
+  .fc-scroller { height:48em !important; }
+  .dp-col-header, .dp-permanent {
+     font-size:1em;
+  }
+  .dp-day, .dp-today {
+     font-size:22px;
+  }
+  #details h1 { 
+   text-align:center;
+   margin:0;
+   background-color:#f5f5f5;
+   font-weight:normal;
+   padding:.5em .5em;
+   min-width:5em;
+   font-size:1.7em;
+   display:inline-block;
+  }
+  #jobdetail th {
+    text-align: right;
+    padding: .3em;
+    border-right: 1px solid #ccc;
+    vertical-align:top;
+    font-weight:normal;
+  }
+  #jobdetail td {
+   padding:.3em;
+   vertical-align:top;
+  }
+  #jobdetail {
+   border-collapse:collapse;
+   max-height:100%;
+   font-size:1.2em;
+   line-height:1.5em;
+   overflow-y: scroll;
+  }
+  .left {
+    
+  }
+.tabs{
+  overflow:hidden;
+  clear:both;
+
+}
+.tabs ul{
+  list-style-type:none;
+  bottom: -1px;
+  position:relative;
+}
+.tabs li{
+  float:left;
+}
+
+.tabs a{
+  display:block;
+  padding:5px 10px;
+  background-color: #EEE;
+  color: #000;
+  text-decoration: none;
+  margin: 0 4px;
+  border-top:1px solid #CCC;
+  border-left:1px solid #DDD;
+  border-right:1px solid #DDD;
+  font:13px/18px verdana,arial,sans-serif;
+  border-bottom:1px solid #CCC;
+}
+.tabs a.active{
+  background-color: #fff;
+  border-bottom:1px solid #fff;
+}
+.tabs div{
+  clear: both;
+  border:1px solid #CCC;
+  padding:5px;
+  font-family:verdana;
+  font-size:13px;
+  background-color: #fff;
+  display:none;
+}
+@media screen and (max-width: 992px) {
+   #calendar {
+      width:100%;
+      max-width:100%;
+   }
+}

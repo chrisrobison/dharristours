@@ -207,6 +207,15 @@ function animateCircle(line) {
   }, 100);
 }
 
+function updateCircles(percent) {
+   if (drivePath) {
+      for (var bid in drivePath) {
+          var icons = drivePath[bid][0].get('icons');
+          icons[0].offset = percent + '%';
+          drivePath[bid][0].set('icons', icons);
+      }
+   }
+}
 var pathIdx=0;
 function updatePath(who) {
    
@@ -418,4 +427,7 @@ buslist.forEach(function(val) {
    });
 });
 
+document.querySelector('#timeslice').addEventListener("change", function(e) {
+   updateCircles(this.value);
+});
 
