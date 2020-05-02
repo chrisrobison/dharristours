@@ -1,8 +1,10 @@
 <?php
+   include($_SERVER['DOCUMENT_ROOT'] . "/.env");
 
    $in = $_REQUEST;
    
-   $link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "SS_DHarrisTours");
+   $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
+   
    /* check connection */
    if (mysqli_connect_errno()) {
        printf("Connect failed: %s\n", mysqli_connect_error());
