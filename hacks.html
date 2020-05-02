@@ -81,9 +81,10 @@
     <!--div class="cdr-dual-ring"></div-->
    <div id="loader"><div></div><div></div><div></div>LOADING...</div>
    <script>
-      google.charts.load('current', {'packages':['bar']});
+      google.charts.load('current', {'packages':['line','bar']});
       google.charts.setOnLoadCallback(getData);
-      
+      var chartType = 'Line';
+
       function getData() {
 
          fetch("hackstats.php").then((response) => {
@@ -109,9 +110,9 @@
           colors: ['#1b9e77', '#d95f02', '#7570b3']
         };
 
-        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+        var chart = new google.charts[chartType](document.getElementById('chart_div'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+        chart.draw(data, google.charts[chartType].convertOptions(options));
 
         var btns = document.getElementById('btn-group');
 
@@ -119,7 +120,7 @@
 
           if (e.target.tagName === 'BUTTON') {
             options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
-            chart.draw(data, google.charts.Bar.convertOptions(options));
+            chart.draw(data, google.charts[chartType].convertOptions(options));
           }
         }
       }

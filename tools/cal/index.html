@@ -19,11 +19,11 @@
   <div id='tinycal'></div>
   <div id='details' class='tabs'>
       <ul>
-        <li><a href="#jobs" class="active">Jobs</a></li> 
-        <li><a href="#detail">Details</a></li> 
+        <li><a href="#joblist" class="active joblist">Jobs</a></li> 
+        <li><a href="#detail" class='detail'>Details</a></li> 
       </ul>
 
-      <div id='jobs'> </div>
+      <div id='joblist'> </div>
       <div id='detail'> </div>
    </div>
 </div>
@@ -85,19 +85,26 @@
         console.log("eventSourceSuccess");
         console.dir(content);
         
-        const jobs = document.querySelector("#jobs");
+        const jobs = document.querySelector("#joblist");
         var html = "<table class='jobs'><thead><tr><th>Job</th><th>Start</th><th>End</th><th>Link</th></tr></thead><tbody>";
-        var sel = calendar.getDate();
+        var sel = calendar.getDate(), rowclass='';
         sels = (new Date(calendar.getDate().toISOString().substr(0,10)).getTime()); 
         for (var i in content) { 
            id = (new Date(content[i].start).getTime());
            if ((id > sels) && (id < sels + 86400000)) {
-               html += "<tr><td>"+content[i].title+"</td><td>"+cleanTime(content[i].start)+"</td><td>"+cleanTime(content[i].end)+"</td><td><a target='_blank' href=\""+content[i].url+"\"></a></td></tr>";
+               rowclass = "";
+               if (content[i].title.match(/CANCELLED/i)) {
+                  content[i].title = content[i].title.replace(/\s*CANCELLED\s*/, '');
+                  rowclass = "cancelled";
+               } else {
+                  rowclass = "";
+               }
+               html += "<tr><td class='"+rowclass+"'>"+content[i].title+"</td><td class='"+rowclass+"'>"+cleanTime(content[i].start)+"</td><td class='"+rowclass+"'>"+cleanTime(content[i].end)+"</td><td><a target='_blank' href=\""+content[i].url+"\">&#128279;</a></td></tr>";
            }
         }
         html += "</tbody></table>";
         jobs.innerHTML = html;
-        selectTab(document.querySelector("a[href='#jobs']")); 
+        selectTab(document.querySelector("a[href='#joblist']")); 
         return content.eventArray;
       },
       select: function(arg) {
@@ -199,11 +206,10 @@
    function selectTab(who) {
       cleanTabs(".tabs");
       if (typeof who === "string") {
-         who = document.querySelector(who);
+         who = document.querySelector("a[href=\""+who+"\"]");
       }
       who.classList.add('active');
       div_to_show = who.getAttribute('href');
-
       document.querySelector(div_to_show).style.display = "block";
 
    }

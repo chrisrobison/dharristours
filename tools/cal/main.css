@@ -1443,13 +1443,42 @@ be a descendant of the grid when it is being dragged.
 tr {
    background-color:#ffffff;
 }
-tr:nth-child(4n-1), tr:nth-child(4n) {
+thead th {
+   background-color:#f6f6f6;
+   border-bottom: 1px solid #00000022;
+   box-shadow:0px 2px 2px rgba(0,0,0,.3);
+   text-align:center;
+   padding:.25em .5em;
+}
+#joblist tr:nth-child(even) {
    background-color:#f6f6f6;
 }
-tr:nth-child(4n) td.fc-axis { 
+#joblist table td {
+   vertical-align:top;
+   border-left:1px solid #f0f0f0;
+   padding:2px;
+   height:3em; 
+}
+#joblist table tbody tr td:last-child, #joblist table tbody tr td:last-child a  {
+   text-decoration: none;
+}
+.cancelled {
+   text-decoration:line-through;
+   color:#999;
+}
+tr.cancelled td a {
+   text-decoration: none;
+}
+#joblist a {
+   top:0px;
+}
+#calendar tr:nth-child(4n-1), #calendar tr:nth-child(4n) {
+   background-color:#f6f6f6;
+}
+#calendar tr:nth-child(4n) td.fc-axis { 
 /*   border-color:#999; */
 }
-tr:nth-child(4n) td { 
+#calendar tr:nth-child(4n) td { 
    border-color:#ccc; 
    border-right:1px solid #ccc;
 }
@@ -1463,7 +1492,7 @@ body {
   }
 
   #calendar {
-    max-width: 60%;
+    max-width: 63em;
     margin: .5em auto 0px auto;
     display:inline-block;
   }
@@ -1480,8 +1509,8 @@ body {
   }
   #details {
      display:inline-block;
-     width:400px;
-     height:25em;
+     width:25em;
+     height:27em;
      margin:.5em 0 1em 0;
      border:1px solid #ccc;
      padding:0px;
@@ -1489,15 +1518,22 @@ body {
   #detail {
     overflow-y:scroll;
     position:relative;
-    height:20em;
+    height:25em;
 
   }
-  .fc-scroller { height:48em !important; }
+  .jobs {
+    position:relative;
+  }
+  .jobs th {
+    position: -webkit-sticky;
+    position: sticky;
+    top:0;
+  }
+  .fc-scroller { height:41em !important; }
   .dp-col-header, .dp-permanent {
      font-size:1em;
   }
   .dp-day, .dp-today {
-     font-size:22px;
   }
   #details h1 { 
    text-align:center;
@@ -1539,6 +1575,8 @@ body {
   list-style-type:none;
   bottom: -1px;
   position:relative;
+  overflow:hidden;
+  margin-bottom:0px;
 }
 .tabs li{
   float:left;
@@ -1550,16 +1588,25 @@ body {
   background-color: #EEE;
   color: #000;
   text-decoration: none;
-  margin: 0 4px;
   border-top:1px solid #CCC;
   border-left:1px solid #DDD;
   border-right:1px solid #DDD;
   font:13px/18px verdana,arial,sans-serif;
   border-bottom:1px solid #CCC;
+  border-radius:4px;
+  position:relative;
+  top:4px;
 }
 .tabs a.active{
   background-color: #fff;
   border-bottom:1px solid #fff;
+  position:relative;
+  top:1px;
+  z-index:99999;
+  box-shadow:-2px -1px 2px rgba(0,0,0,.3);
+}
+.tabs a.active.joblist {
+  box-shadow:2px -1px 2px rgba(0,0,0,.3);
 }
 .tabs div{
   clear: both;
@@ -1574,5 +1621,30 @@ body {
    #calendar {
       width:100%;
       max-width:100%;
+   }
+   .left {
+    position:absolute;
+    width:100%;
+    top:55rem;
+   }
+   #tinycal {
+      width:100%;
+      font-size:64px;
+   }
+   #details {
+      width:100%;
+      font-size:28px;
+   }
+   .tabs div {
+      font-size:28px;  
+   }
+   .tabs a {
+      font-size:32px;
+   }
+   div.dp-permanent {
+      width:100%;
+   }
+   div.dp {
+      max-height:45rem;
    }
 }
