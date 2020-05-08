@@ -13,9 +13,10 @@ if ($bus != '') {
 }
 
 //print $sql . "\n";
+include($_SERVER['DOCUMENT_ROOT'] . "/.env");
+$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
 
-$link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "SS_DHarrisTours");
-        /* check connection */
+/* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
