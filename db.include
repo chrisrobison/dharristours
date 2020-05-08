@@ -1,0 +1,2 @@
+   include($_SERVER['DOCUMENT_ROOT'] . "/.env");
+   $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
