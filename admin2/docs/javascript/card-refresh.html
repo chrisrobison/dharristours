@@ -1,0 +1,30 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Card Refresh Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The card refresh plugin provides the functionality for loading ajax content into the card.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin can be activated as a jQuery plugin or using the data api.</p>
+<h6 id="data-api">Data API</h6>
+<p>{: .text-bold }</p>
+<p>Activate the plugin by adding a button with <code>data-card-widget=&quot;card-refresh&quot;</code> to the card and provide the required <code>data-source=&quot;/URL-TO-CONTENT&quot;</code> option. By doing that, the plugin will automatically create a GET request to the provided URL and render the returned response the <code>.card-body</code> section of the card. If you need to process the returned response before rendering, you should use the jQuery API, which provides hooks to deal with the response.</p>
+<h6 id="jquery">jQuery</h6>
+<p>{: .text-bold } The jQuery API provides more customizable options that allows the developer to pre-process the request before rendering and post-process it after rendering.</p>
+<pre class="js"><code>(&quot;#my-card&quot;).refreshBox(options)</code></pre>
+<h5 id="options">Options</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Name | Type | Default | Description |-|-|-|- | source | String | '' | The URL to the source. | sourceSelector | String | '' | A selector to get return only the content of the selector. | params | Object | {} | GET query paramaters (example: {search_term: 'layout'}, which renders to URL/?search_term=layout) | trigger | String | <code>[data-card-widget=&quot;card-refresh&quot;]</code> | The CSS selector to the refresh button | content | String | <code>.card-body</code> | The CSS selector to the target where the content should be rendered. This selector should exist within the card. | loadInContent | Boolean | TRUE | Whether to automatically render the content. | loadOnInit | Boolean | TRUE | Init plugin on page load. | responseType | String | '' | Response type (example: 'json' or 'html') | overlayTemplate | String | TRUE | The HTML template for the ajax spinner | onLoadStart | Function | Anonymous Function | Called before the ajax request is made | onLoadDone | Function | Anonymous Function | Called after the ajax request is made. A <code>response</code> parameter is passed to the function that hold the server response. {: .table .table-bordered .bg-light}</p>
+<h5 id="events">Events</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Event Type | Description |-|- |loaded.lte.cardrefresh | Triggered after a card is refreshed. |overlay.added.lte.cardrefresh | Triggered after the overlay added to the card. |overlay.removed.lte.cardrefresh | Triggered after the overlay removed from the card. {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('#my-card [data-card-widget=&quot;card-refresh&quot;]').on('loaded.lte.cardrefresh', handleLoadedEvent)</code></p>
+<h5 id="methods">Methods</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Method | Description |-|- |load | Reloads the content and runs the <code>onLoadStart</code> and <code>onLoadDone</code> hooks {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('#my-card-widget').Widget('toggle')</code></p>

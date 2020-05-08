@@ -1,0 +1,32 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Push Menu Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The PushMenu plugin controls the toggle button of the main sidebar.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin can be activated as a jQuery plugin or using the data api.</p>
+<h6 id="data-api">Data API</h6>
+<p>{: .text-bold } Add <code>data-widget=&quot;pushmenu&quot;</code> to a button to activate the plugin. <code>html &lt;button class=&quot;btn btn-primary&quot; data-widget=&quot;pushmenu&quot;&gt;Toggle Sidebar&lt;/button&gt;</code></p>
+<h6 id="jquery">jQuery</h6>
+<p>{: .text-bold } <code>js $('.sidebar-toggle-btn').PushMenu(options)</code></p>
+<h5 id="options">Options</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Name | Type | Default | Description |-|-|-|- |autoCollapseSize | Boolean/Number | FALSE | Screen width in pixels to trigger auto collapse sidebar |enableRemember | Boolean | FALSE | Remember sidebar state and set after page refresh. |noTransitionAfterReload | Boolean | TRUE | Hold Transition after page refresh. {: .table .table-bordered .bg-light}</p>
+<blockquote>
+<h5>Tip!</h5>
+<p>You can use any option via the data-attributes like this to enable auto collapse sidebar on 768 pixels width. <code>html &lt;button class=&quot;btn btn-primary&quot; data-widget=&quot;pushmenu&quot; data-auto-collapse-size=&quot;768&quot;&gt;Toggle Sidebar&lt;/button&gt;</code> {: .quote-info}</p>
+</blockquote>
+<h5 id="events">Events</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Event Type | Description |-|- |collapsed.lte.pushmenu | Fired when the sidebar collapsed. |shown.lte.pushmenu | Fired when the sidebar shown. {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$(document).on('shown.lte.pushmenu', handleExpandedEvent)</code></p>
+<h5 id="methods">Methods</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Method | Description |-|- |toggle | Toggles the state of the menu between expanded and collapsed. |collapse | Collapses the sidebar menu. |expand | Expands the sidebar menu {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('[data-widget=&quot;pushmenu&quot;]').PushMenu('toggle')</code></p>

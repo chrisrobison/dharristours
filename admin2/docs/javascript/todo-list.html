@@ -1,0 +1,20 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Todo List Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The todo list plugin provides simple functionality to the todo list component.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin can be activated as a jQuery plugin or using the data api.</p>
+<h6 id="data-api">Data API</h6>
+<p>{: .text-bold } Activate the plugin by adding <code>data-widget=&quot;todo-list&quot;</code> to the ul element. If you need to provide onCheck and onUncheck methods, please use the jQuery API.</p>
+<h6 id="jquery">jQuery</h6>
+<p>{: .text-bold } The jQuery API provides more customizable options that allows the developer to handle checking and unchecking the todo list checkbox events. <code>js $('#my-todo-list').TodoList({   onCheck: function(checkbox) {     // Do something when the checkbox is checked   },   onUnCheck: function(checkbox) {     // Do something after the checkbox has been unchecked   } })</code></p>
+<h5 id="options">Options</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Name | Type | Default | Description |-|-|-|- |onCheck | Function | Anonymous Function | Handle checkbox onCheck event. The checkbox is passed as parameter to the function. |onUnCheck | Function | Anonymous Function | Handle checkbox onUnCheck event. The checkbox is passed as parameter to the function. |--- {: .table .table-bordered .bg-light}</p>

@@ -1,0 +1,24 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Layout Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The layout plugin manages the layout in case of css failure to reset the height or width of the content.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin is activated automatically upon window load.</p>
+<h5 id="options">Options</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Name | Type | Default | Description |-|-|-|- |scrollbarTheme | Boolean | <code>os-theme-light</code> | Scrollbar Theme used while SideBar Fixed |scrollbarAutoHide | Boolean | <code>l</code> | Scrollbar auto-hide trigger |panelAutoHeight | Boolean|Numeric | true | Panel Height Correction (<code>true</code> = default correction on load/resize; numeric = offset the correction on load/resize) |loginRegisterAutoHeight | Boolean|Integer | true | Login &amp; Register Height Correction (<code>true</code> = single correction on load; integer = correction with a interval based on the interger) |--- {: .table .table-bordered .bg-light}</p>
+<blockquote>
+<h5>Tip!</h5>
+<p>You can use any option via the data-attributes like this. <code>html &lt;body data-scrollbar-auto-hide=&quot;n&quot;&gt;...&lt;/body&gt;</code> {: .quote-info}</p>
+</blockquote>
+<h5 id="methods">Methods</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Method | Description |-|- |fixLayoutHeight | Fix the content / control sidebar height and activates OverlayScrollbars for sidebar / control sidebar |fixLoginRegisterHeight | Fix the login &amp; register body height {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('body').Layout('fixLayoutHeight')</code></p>
