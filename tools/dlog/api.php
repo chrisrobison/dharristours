@@ -33,6 +33,8 @@
             $out[0]->address = $in['addr'];
             $out[0]->city = guessCity($in['addr']);
             break;
+         case "lookupZip":
+            $out = lookupZip($link, $in['zip']);
       }
 
       if ($out) {
@@ -205,13 +207,7 @@
       return $city;
    }
 
-   function lookupZip($zip) {
-      $link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "SS_DHarrisTours");
-      /* check connection */
-      if (mysqli_connect_errno()) {
-          printf("Connect failed: %s\n", mysqli_connect_error());
-          exit();
-      }
+   function lookupZip($link, $zip) {
       
       $results = mysqli_query($link, "SELECT * from ZipCode where ZipCode='".$zip."'");
       

@@ -7,7 +7,9 @@
    exit;
 
    function getHelp() {
-      $link = mysqli_connect("localhost", "root", ")wsN5WNL%=nNd\$U6", "mysql");
+      include($_SERVER['DOCUMENT_ROOT'] . "/.env");
+      $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
+
      
       if (mysqli_connect_errno()) {
          printf("Connect failed: %s\n", mysqli_connect_error());
