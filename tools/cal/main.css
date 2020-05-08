@@ -1,4 +1,13 @@
 @charset "UTF-8";
+body {
+   white-space:nowrap;
+}
+.left {
+   white-space:normal;
+}
+#calendar {
+   white-space:normal;
+}
 .fc {
   direction: ltr;
   text-align: left;
