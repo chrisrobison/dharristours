@@ -5,6 +5,8 @@ print "<h1>_SESSION</h1><pre>";
 print_r($_SESSION);
 print "<h1>_REQUEST</h1><pre>";
 print_r($_REQUEST);
+print "<h1>_App</h1><pre>";
+print_r($boss);
 print "</pre><h1>_SERVER</h1><pre>";
 print_r($_SERVER);
 print "</pre>";

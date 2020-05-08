@@ -113,6 +113,13 @@
       #player {
          white-space:nowrap;
       }
+      button:active {
+         position:relative;
+         top:2px;
+      }
+      button:focus {
+         outline:none;
+      }
     </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -142,13 +149,73 @@
       <div id='startdate'><span class='label'>Date Range:</span><br><input id='when' type='datetime'><button onclick="getPath(mystart, myend)"> &gt; </button></div>
       <input type='range' min='0' max='100' id='timeslice' value='0'>
       <div id='player'>
-         <button id='ts_0'>&#9198;</button><button id='ts_-1'>&#9194;</button><button id='ts_play'>&#9199;</button><button id='ts_+1'>&#9193;</button><button id='ts_100'>&#9197;</button><button>&#9654;</button>
+         <button id='ts_0'>&#9198;</button><button id='ts_-1'>&#9194;</button><button id='ts_play'>&#9199;</button><button id='ts_+1'>&#9193;</button><button id='ts_100'>&#9197;</button>
       </div>
     </div>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script>
     <script>
       window.mystart = new moment(new Date().getTime() - 86400000).format("YYYY-MM-DD HH:mm:ss");
       window.myend = new moment(new Date().getTime()).format("YYYY-MM-DD HH:mm:ss");
+      
+      var btns = document.querySelectorAll("#player button");
+      for (var i=0; i<btns.length; i++) {
+         btns[i].addEventListener("click", handleClick);
+      }
+      
+      function fireEvent(el, type) {
+         if ("createEvent" in document) {
+             var evt = document.createEvent("HTMLEvents");
+             evt.initEvent(type, false, true);
+             el.dispatchEvent(evt);
+         }
+         else {
+             el.fireEvent("on" + type);
+         }
+      }
+
+      function nextStep() {
+         var slider = document.querySelector("#timeslice");
+         slider.value = parseInt(slider.value) + 1;
+         if (slider.value > 100) {
+            slider.value = 0;
+         }
+         fireEvent(slider, 'change');
+         if (window.playing) {
+            window.playTimeout = setTimeout(nextStep, 500);
+         }
+      }
+      function handleClick(e) {
+         var slider = document.querySelector("#timeslice");
+         console.log("handling Click");
+         var action = e.target.id.replace(/^ts_/, '');
+         console.log(action);
+         switch(action) {
+            case "play":
+               if (window.playing) {
+                  window.playing = 0;
+               } else {
+                  window.playing = 1;
+                  window.playTimeout = setTimeout(nextStep, 500);
+               }
+            break;
+            case "+1":
+               slider.value = parseInt(slider.value) + 1;
+               fireEvent(slider, 'change');
+               break;
+            case "-1":
+               slider.value = slider.value - 1;
+               fireEvent(slider, 'change');
+               break;
+            case "0":
+               slider.value = 0; 
+               fireEvent(slider, 'change');
+               break;
+            case "100":
+               slider.value = 100;
+               fireEvent(slider, 'change');
+            break;
+         }
+      }
 
       $('#when').daterangepicker({
          "timePicker":true,
