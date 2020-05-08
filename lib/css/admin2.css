@@ -1,0 +1,22 @@
+p {
+   display:block;
+   width:100%;
+   position:relative;
+}
+.simpleIcon {
+    background-color: #0000;
+    background-image: url(/lib/css/icons48-white.png);
+    height: 48px;
+    left: -7px;
+    margin: 4px;
+    position: relative;
+    top: -15px;
+    outline: none;
+    width: 48px;
+    float:left;
+    transform:scale(.75);
+}
+li.nav-item a.nav-link {
+   height:2em;
+   margin-left:1em;
+}

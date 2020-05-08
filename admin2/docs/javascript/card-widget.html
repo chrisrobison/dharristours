@@ -1,0 +1,107 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Card Widget Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The card widget plugin provides the functionality for collapsing, expanding and removing a card.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin can be activated as a jQuery plugin or using the data api.</p>
+<h6 id="data-api">Data API</h6>
+<p>{: .text-bold }</p>
+<p>This plugin provides two data-api attributes. Any element using one of the following attributes should be placed within the <code>.card-tools</code> div, which is usually in the card header. For more information about the <a href="{%%20link%20components/cards.md%20%}">card HTML structure</a>, visit the card component documentation</p>
+<code>data-card-widget=&quot;collapse&quot;</code> <br /> This attribute, when attached to a button, allows the box to be collapsed/expanded when clicked.
+<div class="row">
+  <div class="col-12 col-md-4">
+     <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+Collapsible Card Example
+</h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+<i class="fas fa-minus"></i></button>
+</div>
+      </div>
+      <div class="card-body">
+        
+The body of the card
+</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-8" markdown="1">
+<code>html &lt;div class=&quot;card&quot;&gt;   &lt;div class=&quot;card-header&quot;&gt;     &lt;h3 class=&quot;card-title&quot;&gt;Collapsible Card Example&lt;/h3&gt;     &lt;div class=&quot;card-tools&quot;&gt;       &lt;!-- Collapse Button --&gt;       &lt;button type=&quot;button&quot; class=&quot;btn btn-tool&quot; data-card-widget=&quot;collapse&quot;&gt;&lt;i class=&quot;fas fa-minus&quot;&gt;&lt;/i&gt;&lt;/button&gt;     &lt;/div&gt;     &lt;!-- /.card-tools --&gt;   &lt;/div&gt;   &lt;!-- /.card-header --&gt;   &lt;div class=&quot;card-body&quot;&gt;     The body of the card   &lt;/div&gt;   &lt;!-- /.card-body --&gt; &lt;/div&gt; &lt;!-- /.card --&gt;</code> {: .max-height-300}
+</div>
+</div>
+
+<code>data-card-widget=&quot;remove&quot;</code> <br /> This attribute, when attached to a button, allows the box to be removed when clicked.
+<div class="row">
+  <div class="col-12 col-md-4">
+     <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+Removable Card Example
+</h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+<i class="fas fa-times"></i></button>
+</div>
+      </div>
+      <div class="card-body">
+        
+The body of the card
+</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-8" markdown="1">
+<code>html &lt;div class=&quot;card&quot;&gt;   &lt;div class=&quot;card-header&quot;&gt;     &lt;h3 class=&quot;card-title&quot;&gt;Removable Card Example&lt;/h3&gt;     &lt;div class=&quot;card-tools&quot;&gt;       &lt;!-- Remove Button --&gt;       &lt;button type=&quot;button&quot; class=&quot;btn btn-tool&quot; data-card-widget=&quot;remove&quot;&gt;&lt;i class=&quot;fas fa-times&quot;&gt;&lt;/i&gt;&lt;/button&gt;     &lt;/div&gt;     &lt;!-- /.card-tools --&gt;   &lt;/div&gt;   &lt;!-- /.card-header --&gt;   &lt;div class=&quot;card-body&quot;&gt;     The body of the card   &lt;/div&gt;   &lt;!-- /.card-body --&gt; &lt;/div&gt; &lt;!-- /.card --&gt;</code> {: .max-height-300}
+</div>
+</div>
+
+<code>data-card-widget=&quot;maximize&quot;</code> <br /> This attribute, when attached to a button, allows the box to be maximize/minimize when clicked.
+<div class="row">
+  <div class="col-12 col-md-4">
+     <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+Maximizable Card Example
+</h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="maximize">
+<i class="fas fa-expand"></i></button>
+</div>
+      </div>
+      <div class="card-body">
+        
+The body of the card
+</div>
+    </div>
+  </div>
+  <div class="col-12 col-md-8" markdown="1">
+<code>html &lt;div class=&quot;card&quot;&gt;   &lt;div class=&quot;card-header&quot;&gt;     &lt;h3 class=&quot;card-title&quot;&gt;Maximizable Card Example&lt;/h3&gt;     &lt;div class=&quot;card-tools&quot;&gt;       &lt;!-- Maximize Button --&gt;       &lt;button type=&quot;button&quot; class=&quot;btn btn-tool&quot; data-card-widget=&quot;maximize&quot;&gt;&lt;i class=&quot;fas fa-expand&quot;&gt;&lt;/i&gt;&lt;/button&gt;     &lt;/div&gt;     &lt;!-- /.card-tools --&gt;   &lt;/div&gt;   &lt;!-- /.card-header --&gt;   &lt;div class=&quot;card-body&quot;&gt;     The body of the card   &lt;/div&gt;   &lt;!-- /.card-body --&gt; &lt;/div&gt; &lt;!-- /.card --&gt;</code> {: .max-height-300}
+</div>
+</div>
+
+
+<h6 id="jquery">jQuery</h6>
+<p>{: .text-bold } To activate any button using jQuery, you must provide the removeTrigger and collapseTrigger options. Otherwise, the plugin will assume the default <code>data-card-widget</code> selectors.</p>
+<pre class="js"><code>$(&#39;#my-card&#39;).CardWidget(options)</code></pre>
+<h5 id="options">Options</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Name | Type | Default | Description |-|-|-|- |animationSpeed | Number | 300 | Speed of slide down/up animation in milliseconds. |collapseTrigger | String | <code>[data-card-widget=&quot;collapse&quot;]</code> | jQuery selector to the element responsible for collapsing the box. |removeTrigger | String | <code>[data-card-widget=&quot;remove&quot;]</code> | jQuery selector to the element responsible for removing the box. |maximizeTrigger | String | <code>[data-card-widget=&quot;maximize&quot;]</code> | jQuery selector to the element responsible for maximizing the box. {: .table .table-bordered .bg-light}</p>
+<blockquote>
+<h5>Tip!</h5>
+<p>You can use any option via the data-attributes like this. <code>html &lt;button type=&quot;button&quot; class=&quot;btn btn-tool&quot; data-card-widget=&quot;collapse&quot; data-animation-speed=&quot;1000&quot;&gt;&lt;i class=&quot;fas fa-minus&quot;&gt;&lt;/i&gt;&lt;/button&gt;</code> {: .quote-info}</p>
+</blockquote>
+<h5 id="events">Events</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Event Type | Description |-|- |expanded.lte.cardwidget | Triggered after a card expanded. |collapsed.lte.cardwidget | Triggered after a card collapsed. |maximized.lte.cardwidget | Triggered after a card maximized. |minimized.lte.cardwidget | Triggered after a card minimized. |removed.lte.cardwidget | Triggered after a card removed. {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('#my-card').on('expanded.lte.cardwidget', handleExpandedEvent)</code></p>
+<h5 id="methods">Methods</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Method | Description |-|- |collapse | Collapses the card |expand | Expands the card |remove | Removes the card |toggle | Toggles the state of the card between expanded and collapsed |maximize | Maximizes the card |minimize | Minimizes the card |toggleMaximize | Toggles the state of the card between maximized and minimized {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('#my-card-widget').CardWidget('toggle')</code> or <code>$('#my-card').CardWidget('toggle')</code></p>

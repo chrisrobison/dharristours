@@ -1,0 +1,30 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Control Sidebar Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The control sidebar component is part of Simple's layout as the right sidebar.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin can be activated as a jQuery plugin or using the data api. To activate the plugin, you must first add the HTML markup to your layout, then create the toggle button as shown below.</p>
+<h6 id="html-markup">HTML Markup</h6>
+<p>{: .text-bold } <code>html &lt;!-- Control Sidebar --&gt; &lt;aside class=&quot;control-sidebar control-sidebar-dark&quot;&gt;   &lt;!-- Control sidebar content goes here --&gt; &lt;/aside&gt; &lt;!-- /.control-sidebar --&gt;</code></p>
+<h6 id="data-api">Data api</h6>
+<p>{: .text-bold } Add <code>data-widget=&quot;control-sidebar&quot;</code> to any button or a element to activate the plugin.</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="ot"> data-widget=</span><span class="st">&quot;control-sidebar&quot;</span><span class="kw">&gt;</span>Toggle Control Sidebar<span class="kw">&lt;/a&gt;</span></code></pre>
+<h6 id="jquery">jQuery</h6>
+<p>{: .text-bold } Just like all other Simple plugins, you can also activate the toggle button using jQuery by running the following example. <code>js $(&quot;#my-toggle-button&quot;).ControlSidebar('toggle');</code></p>
+<h5 id="options">Options</h5>
+<p>|--- | Name | Type | Default | Description |-|-|-|- |controlsidebarSlide | Boolean | TRUE | Whether the sidebar should slide over the content or push the content to make space for itself. |scrollbarTheme | Boolean | <code>os-theme-light</code> | Scrollbar Theme used while SideBar Fixed |scrollbarAutoHide | Boolean | <code>l</code> | Scrollbar auto-hide trigger {: .table .table-bordered .bg-light}</p>
+<blockquote>
+<h5>Tip!</h5>
+<p>You can use any option via the data-attributes like this to enable auto collapse sidebar on 768 pixels width. <code>html &lt;a href=&quot;#&quot; data-widget=&quot;control-sidebar&quot; data-controlsidebar-slide=&quot;false&quot;&gt;Toggle Control Sidebar&lt;/a&gt;</code> {: .quote-info}</p>
+</blockquote>
+<h5 id="events">Events</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Event Type | Description |-|- |expanded.lte.controlsidebar | Triggered after a control sidebar expands. |collapsed.lte.controlsidebar | Triggered after a control sidebar collapses. {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('#toggle-button').on('expanded.lte.controlsidebar', handleExpandedEvent)</code></p>

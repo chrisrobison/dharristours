@@ -1,0 +1,38 @@
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">layout: page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title: Treeview Plugin</td>
+</tr>
+</tbody>
+</table>
+<p>The Treeview plugin converts a nested list into a tree view where sub menus can be expanded.</p>
+<h5 id="usage">Usage</h5>
+<p>This plugin can be activated as a jQuery plugin or using the data api.</p>
+<h6 id="data-api">Data API</h6>
+<p>{: .text-bold }</p>
+<p>Add <code>data-widget=&quot;treeview&quot;</code> to any <code>ul</code> or <code>ol</code> element to activate the plugin.</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;ul</span><span class="ot"> data-widget=</span><span class="st">&quot;treeview&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>One Level<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">&quot;treeview&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>Multilevel<span class="kw">&lt;/a&gt;</span>
+    <span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">&quot;treeview-menu&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>Level 2<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="kw">&lt;/ul&gt;</span>
+  <span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ul&gt;</span></code></pre>
+<h6 id="jquery">jQuery</h6>
+<p>{: .text-bold } <code>js $('ul').Treeview(options)</code></p>
+<h5 id="options">Options</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Name | Type | Default | Description |-|-|-|- |animationSpeed | Number | 300 | Speed of slide down/up animation in milliseconds. |accordion | Boolean | TRUE | Whether to collapse the open menu when expanding another. |trigger | String | <code>[data-widget=&quot;treeview&quot;] .nav-link</code> | Selector of the element that should respond to the click and result in expanding or collapsing it sibling sub menu. |expandSidebar | Boolean | FALSE | Whether to expand sidebar on open menu. |sidebarButtonSelector | String | <code>[data-widget=&quot;pushmenu&quot;]</code> | Selector of the sidebar button. {: .table .table-bordered .bg-light}</p>
+<blockquote>
+<h5>Tip!</h5>
+<p>You can use any option via the data-attributes like this. <code>html &lt;ul data-widget=&quot;treeview&quot; data-accordion=&quot;false&quot;&gt;...&lt;/ul&gt;</code> {: .quote-info}</p>
+</blockquote>
+<h5 id="events">Events</h5>
+<p>{: .mt-4}</p>
+<p>|--- | Event Type | Description |-|- |expanded.lte.treeview | Triggered after a sub menu expands. |collapsed.lte.treeview | Triggered after a sub menu collapses. |load.lte.treeview | Triggered after the plugin initialized via data api. {: .table .table-bordered .bg-light}</p>
+<p>Example: <code>$('ul').on('expanded.lte.treeview', handleExpandedEvent)</code></p>
