@@ -9,7 +9,9 @@
        exit();
    }
          
-   $buses = preg_split("/\:/", $in['bus']);
+   if ($in['bus']) {
+      $buses = preg_split("/\:/", $in['bus']);
+   }
 
    $out = getWhere($link, $in['date'], $in['end'], $buses);
 
@@ -42,7 +44,7 @@
 
                $json = json_decode($row['JSON']);
 
-               if (count($buses)) {
+               if (count($buses) && $buses[0] != "") {
                   foreach ($json as $idx=>$obj) {
                      if (in_array($obj->objectno, $buses)) {
                         $coord = new stdClass();

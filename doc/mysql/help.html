@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>HTML5 boilerplate – all you really need…</title>
+   <style>
+      body { font-family: "Helvetica Neue", sans-serif; font-size: 18px; }
+      .hidden div { 
+         display: none; 
+      }
+      LI.hidden {
+         list-style-type: "+";
+      }
+      LI.show {
+         list-style-type: "-";
+      }
+      UL {
+         column-count: 2;
+         column-rule: dotted 1px #333;
+      }
+      div {
+         margin: .25em 1em;
+         white-space: pre;
+      }
+   </style>
+</head>
+
+<body id="home">
+
+        <h1>MySQL Help Topics</h1>
+      <ul id='topics'>
+
+      </ul>
+</body>
+<script>
+   function init() {
+      fetch("gethelp.php").then((response)=>{
+         return response.json();
+      }).then((data) => {
+         var out = '';
+         for (var i=0; i < data.length; i++) {
+            data[i].description = data[i].description.replace(/</g, '&lt;');
+            data[i].description = data[i].description.replace(/>/g, '&gt;');
+            out += "<li class='hidden'>" + data[i].name + " <div>" + data[i].description + "</div></li>"; 
+         }
+         document.querySelector("#topics").innerHTML = out;
+      });
+
+      document.querySelector("#topics").addEventListener("click", (e) => {
+         if (e.target.tagName == "LI") {
+            let detail = e.target;
+            if (detail.className.match(/hidden/)) {
+               detail.className = 'show';
+            } else {
+               detail.className = 'hidden';
+            }
+         }
+         console.dir(e);
+      });
+   }
+   init();
+</script>
+</html>

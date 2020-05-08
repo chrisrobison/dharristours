@@ -57,11 +57,15 @@ foreach ($newfilt as $key=>$obj) {
 //print_r($out);
 //print_r($addresses);
 //print_r($newaddresses);
+$cleaned = array();
 print "Address\tCity\tState\tZip\n";
 foreach ($newaddresses as $idx=>$obj) {
    $row = array($obj->address, $obj->city, $obj->state, $obj->zip);
+   $full = $obj->address . ', ' . $obj->city . ' ' . $obj->state . ' ' . $obj->zip;
+   $newaddr = file("https://dharristours.simpsf.com/where/getaddress.php?q=".urlencode($full))[0];
+   $cleaned[] = $newaddr;
+   //print $newaddr."\n";
    print implode("\t", $row)."\n";
-
 }
    //print json_encode($newfilt);
 

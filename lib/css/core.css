@@ -299,12 +299,12 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
    
 }
 #chpassDialog { font-size:1em; } 
-#simpleForm input.boxValue, #simpleForm textarea.textBox { border:1px solid transparent;font-size:1em; padding:.25em; width:20em; background-color:#f7f7f7; outline:0px; -webkit-focus-ring-color: transparent; font-family:"Open Sans",sans-serif; } 
+#simpleForm input.boxValue, #simpleForm textarea.textBox { border:1px inset #ddd;font-size:1em; padding:.25em; width:20em; background-color:#f7f7f7; outline:0px; -webkit-focus-ring-color: transparent; font-family:"Open Sans",sans-serif; } 
 #simpleForm input.boxValue:focus { background-color:#fff;box-shadow:0px 3px 4px rgba(0,0,0,.4);-moz-box-shadow:0px 3px 4px rgba(0,0,0,.4);-webkit-box-shadow:0px 3px 4px rgba(0,0,0,.4); 
    -webkit-focus-ring-color: transparent;
    outline:0px;
 }
-#simpleForm textarea.textBox { width:52em; }
+#simpleForm textarea.textBox { width:52em; white-space:nowrap; }
 input:-webkit-autofill {
    background-color: #fff !important;
 }
@@ -582,3 +582,12 @@ legend { color:#333; font-weight:normal;}
 button.ui-dialog-titlebar-close span.ui-button-text { display: none !important; }
 button.ui-dialog-titlebar-close span.ui-icon { margin-left: -8px !important; margin-top: -8px !important; }
 #ui-datepicker-div { z-index:999999 !important; }
+canvas#bus {
+    border: .5em inset #ccc;
+    border-style: ridge;
+    box-shadow: 0.25em 0.25em 0.5em rgba(0,0,0,.4);
+    margin-left:1em;
+}
+input[type=text] {
+
+}

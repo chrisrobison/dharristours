@@ -1,5 +1,5 @@
 body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size:18px; margin:0;padding:0; background-color:#e3e3e3;}
-#report { width:8.5in; height:11in; display:block; margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-bottom:2in; margin-top:.5in; box-shadow:.75em 1em .5em rgba(0,0,0,.3); text-align:center;}
+#report { width:8.5in; height:11in; display:block; margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-bottom:2in; margin-top:.5em; box-shadow:.5em .5em .5em rgba(0,0,0,.3); text-align:center;padding-top:0px;}
 H1, H2, H3 { margin:0; padding:0; text-transform: uppercase; }
 H3 { font-weight: normal; margin:0; padding:0; color:#666; font-size:.8em;}
 .longinput { width: 6in; border-bottom: 2px solid #666; border-top:0; border-left:0; border-right:0;}
@@ -254,4 +254,18 @@ padding-left: .5em;
     font-size: 1em;
     font-family: "Courier New";
     color: #66f;
+}
+#perf {
+    font-size: 40px;
+    margin: 0px;
+    padding: 0px;
+    width:20em;
+    color: #ccc;
+    text-shadow: -1px -2px 2px rgba(0,0,0,.8);
+    border-bottom: 2px dashed #0002;
+    position:relative;
+    left:-1em;
+    margin-bottom: .25em;
+    line-height:1;
+
 }

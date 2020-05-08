@@ -2,7 +2,6 @@
 #
 #
 use DBI;
-use CDR::Input;
 use CDR::DB;
 open(STDERR, ">&STDOUT");
 # Setup client headers and input if we are in HTTP environment
@@ -270,3 +269,53 @@ sub build_Options {
    }
    return $opt;
 }
+
+sub getInput {
+   local(*in) = @_ if @_;
+   my($i, $loc, $key, $val, $req, $in, @in, $arg, $k, %keys, @dup);
+
+   #
+   # First find out where our input's coming from
+   #
+   $req = $ENV{'REQUEST_METHOD'};
+   $req = 'tty' if (!$req);
+
+   if ($req ne "tty") {
+      if ($req eq "GET") {
+         $in = $ENV{'QUERY_STRING'};
+      }
+      elsif ($req eq "POST") {
+         read(STDIN,$in,$ENV{'CONTENT_LENGTH'});
+      }
+
+      @in = split(/&/,$in);
+   } else {
+      if (($#ARGV < 0) && (!$in{'noargs'})) {
+         print <<EOT;
+No command arguments found. Enter any switches or arguments needed
+below.  One assignment per line, should follow KEY=VALUE format.
+Type a blank line to continue (press ENTER twice without extra characters)
+EOT
+         print "> ";
+         while ($in !~ /\n\n/gm) {
+            $in .= <STDIN>;
+            print "> ";
+         }
+         print "\n";
+         @in = split(/\n/, $in);
+      } else {
+         @in = readArgs(@ARGV);
+      }
+   }
+   @dup = @in;
+   while ($i = shift @dup) {
+      $i =~ s/\+/ /g;
+      ($key, $val) = split(/=/,$i,2);
+      $key =~ s/%(..)/pack("c",hex($1))/ge;
+      $val =~ s/%(..)/pack("c",hex($1))/ge;
+      $in{$key} .= "\0" if (defined $in{$key}); # \0 is the multiple separator
+      $in{$key} .= $val;
+   }
+   return(*in);
+}
+
