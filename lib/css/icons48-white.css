@@ -8,8 +8,10 @@
     outline: 2px dotted #333;
     background-color: transparent;
  }
- .simpleIconWhite { background-image:url(/lib/css/icons48-white.png); }
- .simpleIconBlack { background-image:url(/lib/css/icons48-black.png); }
+
+ span.simpleIconWhite { background-image:url(/lib/css/icons48-white.png); }
+ a.active span.simpleIcon { background-image:url(/lib/css/icons48-black.png); }
+ span.simpleIconBlack { background-image:url(/lib/css/icons48-black.png); }
  .icon-refresh { background-position: -0px -0px; }
  .icon-redo { background-position: -48px -0px; }
  .icon-loopback { background-position: -96px -0px; }

@@ -4,7 +4,7 @@
 
 
    $out = getWhere($in['date'], $in['bus']);
-   header("Content-type: application/javascript");
+   header("Content-type: application/javascript; charset=utf-8");
    print json_encode($out);
    exit;
 

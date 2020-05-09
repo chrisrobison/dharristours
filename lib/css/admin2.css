@@ -20,3 +20,6 @@ li.nav-item a.nav-link {
    height:2em;
    margin-left:1em;
 }
+li.nav-item a.nav-link.active {
+   height:5vh;
+}
