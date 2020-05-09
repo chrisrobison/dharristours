@@ -15,3 +15,5 @@ tools/fullcalendar
 izzy.php
 name-ideas.txt
 where/latest.json
+.env
+neoplan/
