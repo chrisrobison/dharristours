@@ -147,7 +147,7 @@
       <br>
       <br>
       <div id='startdate'><span class='label'>Date Range:</span><br><input id='when' type='datetime'><button onclick="getPath(mystart, myend)"> &gt; </button></div>
-      <input type='range' min='0' max='100' id='timeslice' value='0'>
+      <input type='range' min='0' max='100' step='.1' id='timeslice' value='0'>
       <div id='player'>
          <button id='ts_0'>&#9198;</button><button id='ts_-1'>&#9194;</button><button id='ts_play'>&#9199;</button><button id='ts_+1'>&#9193;</button><button id='ts_100'>&#9197;</button>
       </div>
@@ -175,13 +175,13 @@
 
       function nextStep() {
          var slider = document.querySelector("#timeslice");
-         slider.value = parseInt(slider.value) + 1;
-         if (slider.value > 100) {
+         slider.value = parseFloat(slider.value) + .1;
+         if (slider.value >= 100) {
             slider.value = 0;
          }
          fireEvent(slider, 'change');
          if (window.playing) {
-            window.playTimeout = setTimeout(nextStep, 500);
+            window.playTimeout = setTimeout(nextStep, 10);
          }
       }
       function handleClick(e) {
@@ -227,6 +227,7 @@
           }, function(start, end, label) {
          window.mystart = start.format("YYYY-MM-DD HH:mm:ss");;
          window.myend = end.format("YYYY-MM-DD HH:mm:ss");
+         getPath(mystart, myend);
         console.log('New date range selected: ' + start.format('YYYY-MM-DD hh:mm') + ' to ' + end.format('YYYY-MM-DD hh:mm') + ' (predefined range: ' + label + ')');
       });
     </script>

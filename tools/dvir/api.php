@@ -4,7 +4,7 @@
    $in = $_REQUEST;
    
    $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
-   /* check connection */
+   
    if (mysqli_connect_errno()) {
        printf("Connect failed: %s\n", mysqli_connect_error());
        exit();
@@ -43,7 +43,7 @@
          $out = getResources($link, $in);
          break;
    }
-   header("Content-type: application/json");
+   header("Content-type: application/json; charset=utf-8");
    print json_encode($out);
 
    function getEvents($link, $in) {

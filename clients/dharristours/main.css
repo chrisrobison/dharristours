@@ -6,15 +6,9 @@ font-size:1em;
 h1 { text-align:center; }
 p { }
 .claro .dijitAccordionContainer .dijitAccordionContainer-child {
-background: -moz-linear-gradient(top,  #fdfeff 0%, #f5faff 40%, #e0f0ff 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdfeff), color-stop(40%,#f5faff), color-stop(100%,#e0f0ff));
-background: -webkit-linear-gradient(top,  #ffffff 0%,#f5f5f5 40%,#e0e0e0 100%);
-background: -o-linear-gradient(top,  #ffffff 0%,#f5f5f5 40%,#e0e0e0 100%);
-background: -ms-linear-gradient(top,  #fdfeff 0%,#f5f5f5 40%,#e0f0ff 100%);
-background: linear-gradient(top,  #ffffff 0%,#f5f5f5 40%,#d3d3d3 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfefd', endColorstr='#e0f0ff',GradientType=0 );
+   background-color:#eee;
 }
-
+.nav { color: #333; }
 .ui-jqgrid .ui-jqgrid-bdiv {
     font-size:1em;
 }

@@ -15,7 +15,7 @@
 
    $out = getWhere($link, $in['date'], $in['end'], $buses);
 
-   header("Content-type: application/javascript");
+   header("Content-type: application/javascript; charset=utf-8");
    print json_encode($out);
    
    mysqli_close($link);
@@ -50,7 +50,7 @@
                         $coord = new stdClass();
                         $coord->lat = $obj->latitude_mdeg / 1000000;
                         $coord->lng = $obj->longitude_mdeg / 1000000;
-                        $coord->date = $obj->pos_time;
+                        $coord->date = $row['Created']; //$obj->pos_time;
                         $out[$obj->objectno][] = $coord;
                      }
                   }
@@ -59,7 +59,7 @@
                      $coord = new stdClass();
                      $coord->lat = $obj->latitude_mdeg / 1000000;
                      $coord->lng = $obj->longitude_mdeg / 1000000;
-                     $coord->date = $obj->pos_time;
+                     $coord->date = $row['Created']; // $obj->pos_time;
                      $out[$obj->objectno][] = $coord;
                   }
                }

@@ -127,8 +127,8 @@ function getPath(start, end, who) {
    drivePath = [];
    fetch("path.php?" + query.join('&')).then(res => res.json())
       .then((out) => {
-console.dir(out);
-window.simplePaths = out;
+         console.dir(out);
+         window.simplePaths = out;
 
  var lineSymbol = {
     path: google.maps.SymbolPath.CIRCLE,

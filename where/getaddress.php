@@ -8,6 +8,6 @@
    } else {
       $json = "{}";
    }
-   header("Content-type: application/javascript");
+   header("Content-type: application/javascript; charset=utf-8");
    print $json;
 ?>
