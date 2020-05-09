@@ -3,13 +3,17 @@
 
     include("head.html");
     include("nav.php");
-    include("content-wrapper.html");
+    include("content-wrapper.php");
     include("footer.html");
     include("scripts.html");
     include("end.html");
 
 ?>
 <script>
+   function updateStatus(msg) {
+      console.log(msg);
+   }
+
    function clearClass(cls) {
       var all = document.querySelectorAll("a.active");
       var re = new RegExp(cls + '\s*', "g");
@@ -23,16 +27,16 @@
       event.preventDefault();
       event.returnValue = '';
       var a;
-
       if (!event.target.href) {
          a = event.target.parentElement;
       } else {
-         a = event.target.href;
+         a = event.target;
       }
-      if (a.href) {
+      
+      if (a.href && a.href != "#") {
          clearClass('active');
          a.className += ' active';
-         document.querySelector("#content").href = a.href;
+         document.querySelector("#content").src = a.href;
 
       }
       console.dir(event.target.parentElement);
