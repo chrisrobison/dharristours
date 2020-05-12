@@ -108,6 +108,7 @@
         return content.eventArray;
       },
       select: function(arg) {
+         console.dir(arg);
         console.log(
           'select',
           arg.startStr,
@@ -305,6 +306,14 @@ function init() {
 
    makeTabs(".tabs");
 
+}
+
+function modal(dlg) {
+   var overlay = document.createElement('div');
+   overlay.className = 'overlay';
+
+   var oform = "<form>";
+   oform += "<div class='form-group'><label for='business'>Customer</label> <input type='text' id='customer' name='customer' placeholder='Customer' className='form-control' onchange='handleForm(this)'/></div>";
 }
 
 window.addEventListener("load", init);
