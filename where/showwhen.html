@@ -172,16 +172,20 @@
              el.fireEvent("on" + type);
          }
       }
-
+      window.simpleAdvance = .1;
       function nextStep() {
          var slider = document.querySelector("#timeslice");
-         slider.value = parseFloat(slider.value) + .1;
+         slider.value = parseFloat(slider.value) + window.simpleAdvance;
          if (slider.value >= 100) {
-            slider.value = 0;
+            window.simpleAdvance = -.1;
+            slider.value = 99.9;
+         } else if (slider.value <= 0) {
+            window.simpleAdvance = .1;
+            slider.value += window.simpleAdvance;
          }
          fireEvent(slider, 'change');
          if (window.playing) {
-            window.playTimeout = setTimeout(nextStep, 10);
+            window.playTimeout = setTimeout(nextStep, 20);
          }
       }
       function handleClick(e) {
