@@ -1501,7 +1501,7 @@ body {
   }
 
   #calendar {
-    max-width: 63em;
+    max-width: 68%;
     margin: .5em auto 0px auto;
     display:inline-block;
   }
@@ -1611,7 +1611,7 @@ body {
   border-bottom:1px solid #fff;
   position:relative;
   top:1px;
-  z-index:99999;
+  z-index:999;
   box-shadow:-2px -1px 2px rgba(0,0,0,.3);
 }
 .tabs a.active.joblist {

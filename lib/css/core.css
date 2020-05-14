@@ -165,7 +165,7 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
 .fieldcolumn { position:relative;display:inline-block; }
 .fieldfloater { float:left; }
 .contentField {clear:left; padding: 2px 0px 2px 0px; position: relative; }
-#main { position:absolute; top:0px; left:0px; bottom:0px; right: 0px; height:100%; background-color:#fff;}
+#main { position:absolute; top:0px; left:0px; bottom:0px; right: 0px; height:100%; background-color:#fff; margin:0px; padding:0px !important;}
 #main.grid { overflow: hidden; }
 #formWrap { position:absolute; top:295px; left:0px; right:0px; bottom:2px; } 
 #myform { border:0 none; }

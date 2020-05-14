@@ -27,6 +27,12 @@
          case "resources":
             $out = getResources($link, $in);
             break;
+         case "suggestion":
+            $out = getSuggestions($link, $in);
+            break;
+         case "reserve":
+            $out = makeReservation($link, $in);
+            break;
       }
 
       if ($out) {
@@ -187,5 +193,101 @@
 
       return $out;
    }
+   
+   function getSuggestions($link, $in) {
+      $out = new stdClass();
+      $out->results = array();
+      
+      $rsc = $in['rsc'];
+      if ($rsc == 'customer') {
+         $rsc = 'Business';
+         
+         $results = mysqli_query($link, "SELECT distinct(Business) from Business where Business like '" . $in['q'] . "%' order by Business limit 10");
+         while ($row = $results->fetch_assoc()) {
+            $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Business']);
+            $out->results[] = $match;
+            // $out->results[] = $row['Business'];
+         }
+         
+         if (count($out->results) < 10) {
+            $results = mysqli_query($link, "SELECT distinct(Business) from Business where Business like '%" . $in['q'] . "%' order by Business limit 20");
+            while ($row = $results->fetch_assoc()) {
+               $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Business']);
+               if (!in_array($match, $out->results)) {
+                  $out->results[] = $match;
+                  //$out->results[] = $row['Business'];
+               }
+            }
+         }
 
+      } else if (($rsc == 'pickup') || ($rsc == 'dropoff')) {
+         $rsc = 'Address';
+
+         $results = mysqli_query($link, "SELECT * from Address where Nickname like '%" . $in['q'] . "%' order by Nickname limit 10");
+         while ($row = $results->fetch_assoc()) {
+            $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Nickname'] . ' - ' . $row['Address'] . ', ' . $row['City']);
+            $out->results[] = $match;
+            //$out->results[] = $row['Address'] . ', ' . $row['City'];
+         }
+
+         if (count($out->results) < 10) {
+            $results = mysqli_query($link, "SELECT * from Address where Address like '" . $in['q'] . "%' or city like '" . $in['q'] . "%' order by Address limit " . (10 - count($out->results)));
+            while ($row = $results->fetch_assoc()) {
+               $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Address'] . ', ' . $row['City']);
+               if (!in_array($match, $out->results)) {
+                  $out->results[] = $match;
+               }
+            }
+         }
+
+         if (count($out->results) < 10) {
+            $results = mysqli_query($link, "SELECT * from Address where Address like '%" . $in['q'] . "%' or city like '%" . $in['q'] . "%' order by Address limit " . (10 - count($out->results)));
+            while ($row = $results->fetch_assoc()) {
+               $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Address'] . ', ' . $row['City']);
+               if (!in_array($match, $out->results)) {
+                  $out->results[] = $match;
+               }
+            }
+         }
+      }
+
+      return $out;
+   }
+
+   function getBusinessID($link , $str) {
+
+   }
+
+   function makeReservation($link, $in) {
+      $obj = json_decode(urldecode($in['data']));
+
+      if ($obj) {
+         $sql = "INSERT INTO Job (Job, BusinessID, ContactName, ContactPhone, ContactEmail, JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation)  VALUES (";
+         $sql .= quote($obj->cust . ' trip to ' . $obj->to, $link) . ", ";
+         $sql .= quote($obj->cn, $link) . ", ";
+         $sql .= quote($obj->cp, $link) . ", ";
+         $sql .= quote($obj->ce, $link) . ", ";
+
+         $start = date('H:i:s', strtotime($obj->from));
+         $end = date('H:i:s', strtotime($obj->to));
+         $date = date('Y-m-d', strtotime($obj->date));
+
+         $sql .= quote($date, $link) . ", ";
+         $sql .= quote($start, $link) . ", ";
+         $sql .= quote($end, $link) . ", ";
+         $sql .= quote($obj->pickup, $link) . ", ";
+         $sql .= quote($obj->dropoff, $link) . ")";
+
+         $results = mysqli_query($link, $sql);
+         $out = new stdClass();
+         $out->sql = $sql;
+         $out->status = 'success';
+         return $out;
+      }
+
+
+   }
+   function quote($str, $link) {
+      return "'" . mysqli_real_escape_string($link, $str) . "'";
+   }
 ?>

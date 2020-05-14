@@ -23,3 +23,14 @@ li.nav-item a.nav-link {
 li.nav-item a.nav-link.active {
    height:5vh;
 }
+.content-wrapper>.content {
+   position:absolute;
+   top:0px;
+   right:0px;
+   height:93%;
+   width:85%;
+}
+.framecontent {
+   width:100%;
+   height:100%;
+}

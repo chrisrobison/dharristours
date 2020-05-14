@@ -58,6 +58,11 @@
       <script type="text/javascript" src="/lib/js/cmd.js"> </script>
     </head>
     <body class="claro">
+<div id='imgcache' style='position:absolute;left:-9999px;top:-9999px;'>
+<img src='/lib/css/icons48-black.png' width='1' height='1'/>
+<img src='/lib/css/icons48-white.png' width='1' height='1'/>
+<img src='/lib/css/icons24-black.png' width='1' height='1'/>
+<img src='/lib/css/icons24-white.png' width='1' height='1'/></div>
         <div dojoType="dijit.layout.BorderContainer" id="mainContent" design="sidebar" style="width:100%;height:100%;border:0px;">
             <div dojoType="dijit.layout.ContentPane" region="leading" style="width:205px;margin:0px;padding:0px;" splitter="true">
                <div  dojoType="dijit.layout.ContentPane" id='logoWrap' region="top">

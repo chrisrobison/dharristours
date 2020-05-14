@@ -4,7 +4,7 @@
    ?>
     <!-- Main content -->
     <section class="content">
-      <iframe height='100%' width='100%' id='content' class='content' src='/tools/cal/'></iframe>
+      <iframe id='content' class='content framecontent' src='/tools/cal/'></iframe>
     </section>
     <!-- /.content -->
   </div>

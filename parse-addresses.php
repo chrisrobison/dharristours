@@ -1,4 +1,7 @@
 <?php
+   if (!$_SERVER['DOCUMENT_ROOT']) {
+      $_SERVER['DOCUMENT_ROOT'] = "/simple";
+   }
    list($out, $addresses, $filtered) = getAddresses();
    header("Content-type: application/json");
 
@@ -62,15 +65,15 @@ print "Address\tCity\tState\tZip\n";
 foreach ($newaddresses as $idx=>$obj) {
    $row = array($obj->address, $obj->city, $obj->state, $obj->zip);
    $full = $obj->address . ', ' . $obj->city . ' ' . $obj->state . ' ' . $obj->zip;
-   $newaddr = file("https://dharristours.simpsf.com/where/getaddress.php?q=".urlencode($full))[0];
-   $cleaned[] = $newaddr;
+   //$newaddr = file("https://dharristours.simpsf.com/where/getaddress.php?q=".urlencode($full))[0];
+   //$cleaned[] = $newaddr;
    //print $newaddr."\n";
    print implode("\t", $row)."\n";
 }
    //print json_encode($newfilt);
 
    function getAddresses() {
-      include($_SERVER['DOCUMENT_ROOT'] . "/.env");
+      include((($_SERVER['DOCUMENT_ROOT'])?$_SERVER['DOCUMENT_ROOT']:'/simple') . "/.env");
       $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
 
       /* check connection */

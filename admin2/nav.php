@@ -1,7 +1,7 @@
 <?php
 //   include("navbar.php");
 ?><!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside id='mainNav' class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
 <a href="index3.html" class="brand-link">
   <img src="/img/bus-white.png"
@@ -56,7 +56,7 @@
             $xtra = "";
             $xtra2 = "";
          }
-         print '<li class="nav-itm has-treeview'.$xtra.'"><a href="#" class="nav-link'.$xtra2.'">'.$ico.' <p> ' . $mod->Module . ' <i class="right fas fa-angle-left"></i></p></a>';
+         print '<li class="nav-itm has-treeview'.$xtra.'"><a href="/apps/module.php?mid=' . $mod->ModuleID . '" class="nav-link'.$xtra2.'">'.$ico.' <p> ' . $mod->Module . ' <i class="right fas fa-angle-left"></i></p></a>';
 
          print "\t<ul id='mid_" . $mod->ModuleID . "' class='nav nav-treeview' >\n";
          //print "<h3><a rel='nav'$target href='".$mod->URL."'>".$mod->Module."</a></h3>\n<div>\n";
@@ -80,15 +80,15 @@
                   if (preg_match("/\.(png|jpg|gif|ico|bmp|svg)$/", $proc->Icon)) {
                      $icon = (file_exists($_SERVER['DOCUMENT_ROOT'].$boss->app->Assets.$proc->Icon)) ? $boss->app->Assets.$proc->Icon : $proc->Icon;
                      if (!file_exists($_SERVER['DOCUMENT_ROOT'].$icon)) {
-                        print "<a href='{$proc->URL}' target='{$target}' class='nav-link'> <span class='simpleIcon icon-".$proc->Icon."'> ";
+                        print "<a href='{$proc->URL}'{$target} class='nav-link'> <span class='simpleIcon icon-".$proc->Icon."'> ";
                      } else {
-                        print "<a href='{$proc->URL}' target='{$target}' class='nav-link'><img src='{$icon}' border='0'> <span class='simpleIcon icon-".$proc->Icon."'> ";
+                        print "<a href='{$proc->URL}'{$target} class='nav-link'><img src='{$icon}' border='0'> <span class='simpleIcon icon-".$proc->Icon."'> ";
                      }
                   } else {
-                     print "<a href='{$proc->URL}' target='{$target}' class='nav-link'> <span class='simpleIcon icon-".$proc->Icon."'> ";
+                     print "<a href='{$proc->URL}'{$target} class='nav-link'> <span class='simpleIcon icon-".$proc->Icon."'> ";
                   }
                } else {
-                  print "<a href='{$proc->URL}' target='{$target}' class='nav-link'> <span class='simpleIcon icon-".$proc->Icon."'> ";
+                  print "<a href='{$proc->URL}'{$target} class='nav-link'> <span class='simpleIcon icon-".$proc->Icon."'> ";
                }
                print "</span>".$proc->Process."</a>";
                

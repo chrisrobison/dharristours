@@ -4,7 +4,7 @@
 
    var jobdateset = false;
 
-   setTimeout(checkJobDate, 1000);
+   setTimeout(checkJobDate, 2000);
 
    function checkJobDate() {
       if (jobdateset) { return true; }
@@ -18,7 +18,8 @@
          jobdateset = true;
          return true;
       } else {
-         setTimeout(checkJobDate, 1000);
+         setTimeout(checkJobDate, 2000);
+
       }
    }
 </script>
