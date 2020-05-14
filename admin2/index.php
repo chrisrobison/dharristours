@@ -1,12 +1,20 @@
 <?php  
     if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
-
+?>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <base href="/admin2/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" href="<?php print ($boss->app->Favicon) ? $boss->app->Favicon : '/favicon.ico'; ?>">
+  <title><?php print $boss->app->App . ' - Simple Software'; ?></title>
+<?php
     include("head.html");
     include("nav.php");
     include("content-wrapper.php");
     include("footer.html");
     include("scripts.html");
-    include("end.html");
 
 ?>
 <script>
@@ -44,3 +52,6 @@
       return false;
    });
 </script>
+<?php
+    include("end.html");
+?>
