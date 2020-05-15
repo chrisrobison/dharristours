@@ -42,7 +42,7 @@
       if (!$contents) {
          return false;
       }
-      include($_SERVER['DOCUMENT_ROOT'] . "/.env");
+      include("/simple/.env");
       $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, $env->db->db);
 	   /* check connection */
 	   if (mysqli_connect_errno()) {
