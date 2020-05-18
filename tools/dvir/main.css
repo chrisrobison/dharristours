@@ -1,5 +1,5 @@
 body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size:18px; margin:0;padding:0; background-color:#e3e3e3;}
-#report { width:8.5in; height:11in; display:block; margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-bottom:2in; margin-top:.5em; box-shadow:.5em .5em .5em rgba(0,0,0,.3); text-align:center;padding-top:0px;}
+#report { width:8.5in; height:14in; display:block; margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-bottom:2in; margin-top:.5em; box-shadow:.5em .5em .5em rgba(0,0,0,.3); text-align:center;padding-top:0px;}
 H1, H2, H3 { margin:0; padding:0; text-transform: uppercase; }
 H3 { font-weight: normal; margin:0; padding:0; color:#666; font-size:.8em;}
 .longinput { width: 6in; border-bottom: 2px solid #666; border-top:0; border-left:0; border-right:0;}
@@ -269,3 +269,34 @@ padding-left: .5em;
     line-height:1;
 
 }
+.checkbox {
+    display:inline-block;
+    margin:.5em auto 0;
+    height:1.5em;
+    width:1.5em;
+    border: 2px solid #666;
+    border-radius:4px;
+    content:"";
+    position:relative;
+    line-height:1;
+    float:left;
+    top:-.5em;
+    left:-.5em;
+}
+.checkbox.checked:before {
+    position:absolute;
+    top:-2rem;
+    font-size:5rem;
+    color:#cc0000;
+    content:"✓";
+    overflow:hidden;
+    transition:all 200ms ease-in;
+    width:0px;
+    height:4rem;
+    left:-2px;
+}
+.checkbox.checked.ticked:before {
+    transition:all 200ms ease-in;
+    width:32px;
+}
+
