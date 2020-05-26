@@ -3,6 +3,7 @@
 ?><!-- Main Sidebar Container -->
 <aside id='mainNav' class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
+<!--a style="float:right;color:#eee;padding-right:1rem;padding-top:1rem;" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a-->
 <a href="index3.html" class="brand-link">
   <img src="/img/bus-white.png"
        alt="Logo"
@@ -14,7 +15,6 @@
 </a>
 <!-- Sidebar -->
 <div class="sidebar">
-  <!-- Sidebar user panel (optional) -->
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
       <img src="<?php
@@ -56,7 +56,7 @@
             $xtra = "";
             $xtra2 = "";
          }
-         print '<li class="nav-itm has-treeview'.$xtra.'"><a href="/apps/module.php?mid=' . $mod->ModuleID . '" class="nav-link'.$xtra2.'">'.$ico.' <p> ' . $mod->Module . ' <i class="right fas fa-angle-left"></i></p></a>';
+         print '<li class="nav-itm has-treeview'.$xtra.'"><a href="/apps/module.php?mid=' . $mod->ModuleID . '" class="nav-link'.$xtra2.'">'.$ico.' <p> ' . $mod->Module . ' </p></a>';
 
          print "\t<ul id='mid_" . $mod->ModuleID . "' class='nav nav-treeview' >\n";
          //print "<h3><a rel='nav'$target href='".$mod->URL."'>".$mod->Module."</a></h3>\n<div>\n";

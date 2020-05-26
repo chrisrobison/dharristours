@@ -213,11 +213,38 @@
       drawBus.call(img);
 
       getDamages(this.options[this.selectedIndex].value);
+      clearChecks();
+      getChecks(this.options[this.selectedIndex].value);
       var busname = this.options[this.selectedIndex].text.replace(/\#/,'');
       if (window.liveBuses) {
          document.querySelector("#odometer").value = liveBuses[busname].odometer / 10;
       }
    });
+
+   function rmCheck(who) {
+      var out = { "Checkbox": who.id,
+                  "BusID": buses.options[buses.selectedIndex].value
+               };
+      fetch("api.php?type=rmCheck&json="+JSON.stringify(out)).then((results) => { return results.json(); }).then((data) => {
+      console.log("newCheck returned");
+      console.dir(data);
+      });
+   }
+
+   function newCheck(who) {
+      var out = { "Checkbox": who.id,
+                  "Damage": who.id.replace(/_/g, ' ').replace(/\b(\w)/g, function(match, offset, string) { return match.toUpperCase(); }),
+                  "BusID": buses.options[buses.selectedIndex].value,
+                  "CreatedBy": getEmail(),
+                  "LastModifiedBy": getEmail(),
+                  "Status": "new",
+                  "ReportedBy": driver.value
+               };
+      fetch("api.php?type=newCheck&json="+JSON.stringify(out)).then((results) => { return results.json(); }).then((data) => {
+      console.log("newCheck returned");
+      console.dir(data);
+      });
+   }
 
    function newDamage(damageObj) {
       fetch("api.php?type=newDamage&json="+JSON.stringify(damageObj)).then((results)=>{
@@ -285,6 +312,15 @@
       return cookies['name'].replace(/\+/, ' ');
    }
 
+   function getChecks(busID) {
+      fetch("api.php?type=checks&BusID=" + busID).then((response) => {
+         return response.json();
+      }).then((data) => {
+         window.checks = checks = data;
+         loadChecks(checks);
+      });
+   } 
+
    function getDamages(busID) {
       fetch("api.php?type=damages&BusID=" + busID).then((response) => {
          return response.json();
@@ -312,10 +348,11 @@
          item.addEventListener("click", function(evt) { 
              if (this.className.match(/ticked/)) {
                  this.className = "checkbox checked";
-                 //setTimeout(function(el) { el.className = "checkbox"; }, 2000);
+                 rmCheck(this);
              } else {
                  this.className = "checkbox checked";
                  this.className += " ticked";
+                 newCheck(this);
              }
          });
       });
@@ -371,6 +408,27 @@
          note.value = note.value + "\n[" + damages[i].x + ":" + damages[i].y + "] " + damages[i].Damage;
       }
    }
+
+   function clearChecks() {
+      var el;
+      const checkboxes = document.querySelectorAll(".checkbox");
+      checkboxes.forEach((el) => {
+         el.className = 'checkbox checked'; 
+      });
+   }
+
+   function loadChecks(checks) {
+      if (checks && checks.length > 0) {
+         clearChecks();
+         for (var i=0; i < checks.length; i++) {
+            el = document.querySelector("#"+checks[i]);
+            if (el) {
+               el.className = "checkbox checked ticked";
+            }
+         }
+      }
+   }
+
    function drawBus() {
       canvas.width = this.naturalWidth;
       canvas.height = this.naturalHeight;

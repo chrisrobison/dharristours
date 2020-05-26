@@ -10,7 +10,7 @@ html, body {
 #aniLogo { font-weight:bold;text-align:center;font-size:1.3em;display:none; }
 #logoWrap { padding:0px; }
 ul.nav { margin:0; padding:0; }
-ul.nav li {padding:0px;list-style:none outside none; padding:.5em 0px 0px 0px;}
+ul.nav li {padding:0px;list-style:none outside none; padding:0px 0px 0px 0px;}
 a:focus .navIcon { background-color:#99ddff; }
 a:focus { outline: none; }
 ul.nav li a { font-size:1.1em; }
@@ -94,9 +94,9 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
 	font-size:2em;
 	font-weight:bold;
 	color:#c0c0c0;
-	height:24px;
-   width: 32px;
-   background-color:#eeeeee;
+	height:2.3rem;
+   width: 2.3rem;
+   background-color:transparent;
    border:0px solid #000000;
    border-radius:6px; -moz-border-radius:6px; -webkit-border-radius:6px; 
    margin-right:6px;
@@ -153,7 +153,7 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
    top:2px;
 }
 .ui-widget-header { background-color:#222; }
-.simpleIcon { background-color: transparent; background-image: url("/lib/css/icons48-black.png"); display: inline-block; height: 48px; left: -7px; margin: 4px; position: relative; top: -15px; outline:none;width: 48px; }
+.simpleIcon { background-color: transparent; background-image: url("/lib/css/icons48-black.png"); display: inline-block; height: 3.2rem; left: -7px; margin: .2rem 0px 0px 0px; position: relative; top: -0.7rem; outline:none;width: 48px; }
 #searchField { float:right; padding-top:4px;}
 #SearchImg { top:4px; float:right; }
 /* .formHeading { overflow:hidden; width:100%; } */
