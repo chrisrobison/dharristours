@@ -401,15 +401,35 @@ function closeDialog() {
    over.parentElement.removeChild(over);
 }
 
-function makeReservation(event, cust, pu, dr, fr, to, pax) {
-   event.preventDefault();
-   event.stopPropagation();
+function makeReservation() {
+   const customer = document.querySelector('#customer').value;
+   const pickup = document.querySelector('#pickup').value;
+   const dropoff = document.querySelector('#dropoff').value;
+   const frel = document.querySelector('#from').value;
+   const toel = document.querySelector('#to').value;
+   const pax = document.querySelector('#pax').value;
 
-   const out = { "customer": cust, "date": window.reservation.date, "pickup": pu, "dropoff": dr, "from": window.reservation.from, "to": window.reservation.to, "pax": pax };
+   const out = { "customer": customer, "date": window.reservation.date, "pickup": pickup, "dropoff": dropoff, "from": window.reservation.from, "to": window.reservation.to, "pax": pax };
    fetch("api.php?type=reserve&data=" + encodeURIComponent(JSON.stringify(out))).then((response) => { return response.json(); }).then((data) => {
       console.log("from fetch in makeReservation");
       console.dir(data);
+      closeDialog();
+      
+      var alert = document.createElement('div');
+      alert.className = "alert alert-warning alert-dismissible fade show toast";
+      alert.role = 'alert';
+
+      var html = "<b>Success!</b> Your reservation has been made.";
+      html += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+
+      alert.innerHTML = html;
+      document.body.append(alert);
+      //alert.toast('show');
+      alert.alert();
+
+
    });
+   return false;
 }
 
 function modal(from, to, rsc) {
@@ -419,23 +439,20 @@ function modal(from, to, rsc) {
    
    window.reservation = { "date": from.toLocaleDateString(), "from": from, "to": to };
 
-   var oform = "<form id='newdlg' action='api.php' onsubmit='return makeReservation()' autocomplete='off'>";
-   oform += "<input type='hidden' name='type' value='form'/>";
-   oform += "<div id='dialog'>";
+   var oform = "<div id='dialog'>";
    oform += "<div class='dlgtitle'>Reserve Bus " + rsc._resource.id + " on " + from.toLocaleDateString() + "</div>";
    oform += "<div class='dlgform'>";
    oform += "<div class='form-group'><label for='customer'>Customer</label> <input type='text' id='customer' name='customer' placeholder='Customer' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='customer_suggestions' class='suggestions'></div></div>";
    oform += "<div class='form-group'><label for='from'>From</label> <input type='text' id='from' name='from' placeholder='Pickup Time' value='" + formatTime(from) + "' size='10' class='form-time' onchange='handleForm(this)'/>";
    oform += "<label style='width:2em' for='to'>To</label> <input type='text' id='to' name='to' placeholder='Dropoff Time' value='" + formatTime(to) + "' size='10' class='form-time' onchange='handleForm(this)'/>";
    oform += "<label style='width:3em' for='pax'>Pax</label> <input type='text' id='pax' name='pax' placeholder='<=" + rsc._resource.id.substr(0,2) + "' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' /></div>";
-   oform += "<div class='form-check form-check-inline'><input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' /><label class='form-check-label' for='oneway'>One Way</label></div>";
-   oform += "<div class='form-check form-check-inline'><input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label></div>";
+   oform += "<div class='form-check form-check-inline'><input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' /><label class='form-check-label' for='oneway'>One Way</label>";
+   oform += "<input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label></div>";
    oform += "<div class='form-group'><label for='pickup'>Pickup</label> <input type='text' id='pickup' name='pickup' placeholder='Pickup Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='pickup_suggestions' class='suggestions'></div></div>";
    oform += "<div class='form-group'><label for='dropoff'>Dropoff</label> <input type='text' id='dropoff' name='dropoff' placeholder='Dropoff Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='dropoff_suggestions' class='suggestions'></div></div>";
-   oform += "<div class='form-group right'><button id='dlg_cancel' onclick='closeDialog()'>Cancel</button> <button id='dlg_reserve' onclick='makeReservation()'>Reserve</button></div>";
+   oform += "<div class='form-group right'><button type='button' id='dlg_cancel' onclick='closeDialog()'>Cancel</button> <button type='button' id='dlg_reserve' onclick='return makeReservation()'>Reserve</button></div>";
    oform += "</div>";
    oform += "</div>";
-   oform += "</form>";
 
    overlay.innerHTML = oform;
    document.body.append(overlay); 
@@ -451,7 +468,7 @@ function modal(from, to, rsc) {
    customer.addEventListener("keydown", event => { doSuggestions('customer', event); });
    pickup.addEventListener("keydown", event => { doSuggestions('pickup', event); });
    dropoff.addEventListener("keydown", event => { doSuggestions('dropoff', event); });
-   dlgform.addEventListener("submit", event => { makeReservation(event, customer.value, pickup.value, dropoff.value, frel.value, toel.value, pax.value); });
+   //dlgform.addEventListener("submit", event => { makeReservation(event, customer.value, pickup.value, dropoff.value, frel.value, toel.value, pax.value); });
    customer.focus();
 }
 

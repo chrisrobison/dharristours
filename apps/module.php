@@ -43,7 +43,7 @@
          }
           .navIcon {
             margin-right:.5em;
-            padding:.2em .25em .4em .2em;
+            padding:.2em .25em .2em .2em;
             border-radius: 1em; -webkit-border-radius: 1em; -moz-border-radius: 1em;
             font-family: Quicksand, "Helvetica Neue", Optima, Verdana, sans-serif; 
          }

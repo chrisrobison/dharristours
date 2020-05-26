@@ -26,6 +26,12 @@
       case "drivers":
          $out = getDrivers($link, $in);
          break;
+      case "newCheck":
+         $out = newCheck($link, $in);
+         break;
+      case "rmCheck":
+         $out = rmCheck($link, $in);
+         break;
       case "newDamage":
          $out = newDamage($link, $in);
          break;
@@ -34,6 +40,9 @@
          break;
       case "damages":
          $out = getDamages($link, $in);
+         break;
+      case "checks":
+         $out = getChecks($link, $in);
          break;
       case "jobs":
          $out = getJobs($link, $in);
@@ -223,6 +232,50 @@
       return $out;
    }
    
+   function rmCheck($link, $in) {
+      $values = json_decode($in['json']);
+      $keys = array();
+      $vals = array();
+      $fields = getFields($link, "Damage");
+      foreach ($fields as $idx=>$field) {
+         if ($values->$field) {
+            $keys[] = $field;
+            $vals[] = $values->$field;
+         }
+      }
+
+      $sql = "INSERT INTO Damage (" . implode(",", $keys) .") VALUES ('" .implode("','", $vals)."')";
+      $results = mysqli_query($link, $sql);
+
+      $out = new stdClass();
+      $out->results = $results;
+      $out->sql = $sql;
+
+      return $out;
+   }
+
+   function newCheck($link, $in) {
+      $values = json_decode($in['json']);
+      $keys = array();
+      $vals = array();
+      $fields = getFields($link, "Damage");
+      foreach ($fields as $idx=>$field) {
+         if ($values->$field) {
+            $keys[] = $field;
+            $vals[] = $values->$field;
+         }
+      }
+
+      $sql = "INSERT INTO Damage (" . implode(",", $keys) .") VALUES ('" .implode("','", $vals)."')";
+      $results = mysqli_query($link, $sql);
+
+      $out = new stdClass();
+      $out->results = $results;
+      $out->sql = $sql;
+
+      return $out;
+   }
+
    function newDamage($link, $in) {
       $values = json_decode($in['json']);
       $keys = array();
@@ -260,6 +313,23 @@
       return $out;
    }
    
+   function getChecks($link, $in) {
+      $out = array(); $cnt = 0;
+
+      if ($in['BusID']) {
+         $xtra = " AND BusID='" . $in['BusID'] . "'";
+      }
+      $results = mysqli_query($link, "SELECT Checkbox from Damage WHERE Status!='complete'" . $xtra);
+      
+      while ($row = $results->fetch_assoc()) {
+         if ($row['Checkbox'] != "") {
+            array_push($out, $row['Checkbox']);
+         }
+      }
+
+      return $out;
+   }
+
    function getDrivers($link) {
       $out = array(); $cnt = 0;
       $results = mysqli_query($link, "SELECT EmployeeID, concat(FirstName, ' ', LastName) as Driver, Email, Phone FROM Employee WHERE Active=1 and Driver=1");

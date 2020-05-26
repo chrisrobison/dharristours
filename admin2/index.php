@@ -13,13 +13,21 @@
     include("head.html");
     include("nav.php");
     include("content-wrapper.php");
-    include("footer.html");
+//    include("footer.html");
     include("scripts.html");
 
 ?>
 <script>
    function updateStatus(msg) {
       console.log(msg);
+   }
+   
+   function toggleSidebar() {
+      if (document.body.className.match(/sidebar\-mini/)) {
+         document.body.className.replace(/\s?(sidebar\-mini|sidebar\-collapse)\s?/g, '');
+      } else {
+         document.body.className += " sidebar-mini sidebar-collapse";
+      }
    }
 
    function clearClass(cls) {
@@ -41,7 +49,9 @@
          a = event.target;
       }
       
-      if (a.href && a.href != "#") {
+      if (a.dataWidget == "pushmenu") {
+         toggleSidebar();
+      } else if (a.href && a.href != "#") {
          clearClass('active');
          a.className += ' active';
          document.querySelector("#content").src = a.href;
@@ -51,6 +61,16 @@
       console.dir(event);
       return false;
    });
+   
+   function init() {
+      document.querySelector("section.content").style.height = window.innerHeight + 'px';
+   }
+
+   if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+   } else {
+      init();
+   }
 </script>
 <?php
     include("end.html");

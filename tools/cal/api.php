@@ -1,7 +1,7 @@
 <?php
    include($_SERVER['DOCUMENT_ROOT'] . '/.env');
    $in = $_REQUEST;
-   
+   $out = array();
    $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
 
    /* check connection */
@@ -35,10 +35,10 @@
             break;
       }
 
-      if ($out) {
-         header("Content-type: application/json; charset=utf-8");
-         print json_encode($out);
-      }
+      file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
+      
+      header("Content-type: application/json; charset=utf-8");
+      print json_encode($out);
    }
 
    function getEvents($link, $in) {
@@ -255,7 +255,12 @@
    }
 
    function getBusinessID($link , $str) {
+      $results = mysqli_query($link, "SELECT * FROM Business where Business='$str'");
+      $row = $results->fetch_assoc();
 
+      if ($row) {
+         return $row['BusinessID'];
+      }
    }
 
    function makeReservation($link, $in) {
@@ -263,7 +268,8 @@
 
       if ($obj) {
          $sql = "INSERT INTO Job (Job, BusinessID, ContactName, ContactPhone, ContactEmail, JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation)  VALUES (";
-         $sql .= quote($obj->cust . ' trip to ' . $obj->to, $link) . ", ";
+         $sql .= quote($obj->customer . ' trip to ' . $obj->dropoff, $link) . ", ";
+         $sql .= quote(getBusinessID($link, $obj->customer), $link) . ", ";
          $sql .= quote($obj->cn, $link) . ", ";
          $sql .= quote($obj->cp, $link) . ", ";
          $sql .= quote($obj->ce, $link) . ", ";
