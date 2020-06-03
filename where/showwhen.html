@@ -120,6 +120,9 @@
       button:focus {
          outline:none;
       }
+      .webding {
+         font-family: "Webdings", cursive;
+      }
     </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -149,7 +152,7 @@
       <div id='startdate'><span class='label'>Date Range:</span><br><input id='when' type='datetime'><button onclick="getPath(mystart, myend)"> &gt; </button></div>
       <input type='range' min='0' max='100' step='.1' id='timeslice' value='0'>
       <div id='player'>
-         <button id='ts_0'>&#9198;</button><button id='ts_-1'>&#9194;</button><button id='ts_play'>&#9199;</button><button id='ts_+1'>&#9193;</button><button id='ts_100'>&#9197;</button>
+         <button id='ts_0' class='webding'>&#0x39;</button><button id='ts_-1'>&#9194;</button><button id='ts_play'>&#9654;;</button><button id='ts_+1'>&#9193;</button><button id='ts_100' class='webding'>&#0x3a;</button>
       </div>
     </div>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script>
