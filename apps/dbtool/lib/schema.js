@@ -45,9 +45,6 @@ function init(obj) {
          stored = getValue('table_' + tbl); 
          mytable = getTable(tbl); 
          color = (mytable && mytable.color) ? mytable.color : "rgb(" + [getColor(), getColor(), getColor()].join(",") + ")"; 
-         xy = [];
-         
-         if (stored) xy = stored.split(/:/);
          
          $headingDiv[tbl] = $("<div/>", {"id": tbl + "_heading", "class": "tableHeading", "style": "background-color:" + color + ";" }).
                               append("<div class='linkBtn'></div>" + "<div class='options'></div><div class='toggle toggle" + 
@@ -64,7 +61,9 @@ function init(obj) {
             if (mytable.zIndex) $tableDiv[tbl].css("z-index", mytable.zIndex);
             $fieldContainer[tbl].css("display", (mytable.state) ? mytable.state : "none");
          } 
-         if (stored) {
+         if (stored && (typeof(stored) === "string")) {
+            xy = [];
+            xy = stored.split(/:/);
             ui.zcount = 100;
             
             if (xy[3]) {

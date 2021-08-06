@@ -1,9 +1,10 @@
 <?php
    require_once("obj_class.php");
    require_once("js_serialize.php");
+   require($_SERVER['DOCUMENT_ROOT'] . "/.env");
 
    $in =& $_REQUEST;
-   $obj = new obj('cdrmail2', 'pimp', 'pimpin');
+   $obj = new obj('cdrmail2', $env->db->user, $env->db->pass);
    $obj->addResource('doc');
    
    if ((($in['node']) && ($in['outliner_id'])) || ($in['id'])) {

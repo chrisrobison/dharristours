@@ -15,7 +15,7 @@
       <title>Visual DB Schema Editor</title>
       <link rel="stylesheet" type="text/css" href="lib/default.css" />
       <link rel="stylesheet" type="text/css" href="/lib/css/icons.css" />
-      <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" />
+      <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" />
       <style>
          #main {
             position:relative;
@@ -122,8 +122,8 @@
       <script type="text/javascript">
          <?php print $js; ?>
       </script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
       <script type='text/javascript'>
          var myui = { dragging:'' };
          $(document).ready(function() {

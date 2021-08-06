@@ -11,7 +11,7 @@
       <script type='text/javascript' language="JavaScript" src="lib/ui.js"> </script>
       <script type='text/javascript' language="JavaScript" src="lib/schema.js"> </script>
       <script type="text/javascript" language="JavaScript">
-         <?php print $js; ?>
+         <?php print $js; // set in head.php ?>
       </script>
    </head>
    <body onload="init(schema)">

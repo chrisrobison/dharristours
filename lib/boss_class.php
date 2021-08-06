@@ -343,6 +343,7 @@ class boss {
          }
          if (!$newout) $newout = new stdClass();
          $newout->{$resource} = $out;
+
          $this->Object = (preg_match("/^\d+$/", $id)) ? $out[0] : $newout;
 
          return $this->Object;

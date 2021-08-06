@@ -1,13 +1,14 @@
 <?php
    require_once("obj_class.php");
-   
+   require($_SERVER["DOCUMENT_ROOT"] . "/.env");
+
    session_start();
    
    $in =& $_REQUEST;
    $maillogin = $in['user_id'] = 'netoasis.net';
    $pass = $_SESSION['pass'];
 
-   $obj = new obj('cdrmail2', 'pimp', 'pimpin');
+   $obj = new obj('cdrmail2', $env->db->user, $env->db->pass);
    $obj->addResource('outliner');
    
    switch($in['x']) {

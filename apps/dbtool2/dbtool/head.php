@@ -1,8 +1,8 @@
 <?php
    require_once($_SERVER['DOCUMENT_ROOT'].'/lib/auth.php');
-   require_once("obj_class.php");
-   require_once("dbtool_class.php");
-   require_once("lib/jsserialize.php");
+   require_once($_SERVER['DOCUMENT_ROOT'].'/lib/obj_class.php');
+   require_once($_SERVER['DOCUMENT_ROOT'].'/lib/dbtool_class.php');
+   require_once($_SERVER['DOCUMENT_ROOT'].'/lib/jsserialize.php');
    
    $in = $_REQUEST;
       $sys = new obj('SS_System', 'pimp', 'pimpin', 'localhost');
