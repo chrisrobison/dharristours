@@ -57,7 +57,7 @@
    #top_header { width:5in; height:.5in;position:relative;white-space:nowrap;border-radius:12px;-webkit-border-radius:12px;-moz-border-radius:12px;border: 4px solid #000000; }
    #top_header div { float:left;width:2.25in;height:.5in;padding:.006in .05in;}
    #top_header>:first-child { border-right:4px solid #000;}
-   #header { width:4.5in;height:.6in; }
+   #header { width:4.75in;height:.6in; }
    #top_overview { position:absolute;right:.5in;width:2in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px; }
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:.9em; }
@@ -112,6 +112,7 @@
    <div class="Part">
       <table id="header">
          <tr>
+            <td rowspan='4'><img width='100' src='/clients/dharristours/img/bus-logo.png'></td>
             <td colspan='3'><h2>D HARRIS TOURS Inc.</h2></td>
          </tr>
          <tr>
@@ -206,7 +207,7 @@
                   if ($job->JobStartTime) {
                      print date("g:ia", strtotime($trip->Trip[0]->JobStartTime)); 
                   } else {
-                     print date("g:ia", strtotime($job->PickupTime)); 
+                     print date("g:ia", strtotime($current->StartTime)); 
                   }
                   ?></td>
             </tr>
@@ -220,15 +221,15 @@
                   if ($job->JobEndTime) {
                      print date("g:ia", strtotime($trip->Trip[0]->JobEndTime));
                   } else {
-                     print date("g:ia", strtotime($job->DropOffTime)); 
+                     print date("g:ia", strtotime($current->EndTime)); 
                   } 
                ?></td>
             </tr>
 	    <tr>
                <td class='field'>Hours:</td>
-               <td class='value' style='border-top:1px solid #ccc;'><?php if ($current->BillableHours==0) {print $job->Hours;} print $current->BillableHours; ?></td>
-               <td class='field'></td>
                <td class='value' style='border-top:1px solid #ccc;'><?php print $job->Hours; ?></td>
+               <td class='field'></td>
+               <td class='value' style='border-top:1px solid #ccc;'><?php if ($current->BillableHours==0) { print $job->Hours;} else { print sprintf("%.01f", $current->BillableHours); } ?></td>
 	    </tr>
         <tr><td><br></td></tr> 
         </table>
@@ -248,7 +249,7 @@
                <td class='value right'>$<?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
 	    </tr>
             <tr>
-               <td class='value'><?php print $current->Description; ?></td>
+               <td class='value'><?php print preg_replace("/\-\-.*/", "", preg_replace("/[,]/", "<br>\n", $current->Description)); ?></td>
                <td class='field'>Gas:</td>
                <td class='value right' colspan='3'>$<?php printf("%.02f", $current->Gas); ?></td>
                <td></td>
@@ -261,17 +262,17 @@
             </tr>
             <tr>
                <td></td>
-               <td class='field' style='font-weight: bold; font-size:12pt'>Invoice Amount:</td>
+               <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Invoice Amount:</td>
                <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {printf("%.02f",  $job->QuoteAmount);} else { printf("%.02f", $current->InvoiceAmt); }?></td>
             </tr>
             <tr>
                <td></td>
-               <td class='field' style='font-weight: bold; font-size:12pt'>Paid Amount:</td>
+               <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Paid Amount:</td>
                <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->PaidAmt); ?></td>
             </tr>
             <tr>
                <td></td>
-               <td class='field' style='font-weight: bold; font-size:12pt'>Balance DUE:</td>
+               <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Balance DUE:</td>
                <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->Balance); ?></td> 
             </tr>
 

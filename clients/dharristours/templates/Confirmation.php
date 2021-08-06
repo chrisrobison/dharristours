@@ -39,10 +39,13 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
-/*<![CDATA[*/
-   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:20px;color:black;font-family:"Helvetica Neue",Verdana,sans-serif; }
+   body { 
+      /* background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0); */
+      font-size:20px;color:black;font-family:"Helvetica Neue",Verdana,sans-serif; 
+      background-color:#fff;
+   }
    IMG { margin:0 0 -4px 0; }
-   DIV[class="Part"] { margin:0;text-indent:0; font-size:1em }
+   DIV[class="Part"] { margin:0;text-indent:0; width:100%; position:relative; font-size:1em }
    H1 { text-align:justify; margin:0;text-indent:0px; }
    P { text-align:justify; margin:0 28px 0 0; text-indent:0px; line-height:20px }
    TABLE { border-width:thin; border-collapse:collapse; padding:3px; text-align:left; vertical-align:top; margin:0; width:auto; height:auto; display:table; float:none }
@@ -62,15 +65,15 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    #top_overview { position:absolute;right:.5in;width:2in;height:1.35in;border:solid 1px #000000;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;border-bottom:2px solid #000;}
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:1em; }
-   #main { background:none repeat scroll 0 0 #FFFFFF; height:10in; margin:1px auto; padding:.5in; position:relative; width:7.5in; }
+   #main { background:none repeat scroll 0 0 #FFFFFF; height:11in; margin:1px auto; padding:.5in; position:relative; width:8.5in; border:1px solid #0006;}
    .shadow { -moz-box-shadow:0px -2px 7px rgba(0,0,0,.5);}
    #forprint { margin:.5in; width:8.0in;height:11in; position:relative;}
-   #ticket {border:solid 1px #000000;height:6in;width:7.5in;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
+   #ticket {border:solid 1px #000000;height:6in;width:100%;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
    h2{margin:0px; font-size:1.5em; font-weight:bold;}
    .big {font-size:1.5em;}
    div.date {font-size:1em;font-weight:bold;}
    .center {text-align:center;}
-   #sigs { width:7.5in; border: solid 1px #000000; }
+   #sigs { width:100%; border: solid 1px #000000; }
    #sigs th {text-align:center;border:solid 1px #000000;font-weight:normal;font-size:1em;padding:4px;}
    #sigs td {border:solid 1px #000000;padding:4px;}
    #stats {margin-bottom:14px;width:7.5in;position:relative;border:solid 1px #000000;}
@@ -80,7 +83,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    #return_table td { border: 1px solid #000000;height:.25in; }
    #return_table th { font-weight:bold;text-align:center;border: 1px solid #000000;height:.25in; }
    #ticket_table { margin: 0px 1em; }
-   #ticket_table, .table { width:7.5in; }
+   #ticket_table, .table { width:100%; }
    #ticket_table td, .table td { padding:2px 5px; vertical-align:top; }
    .nowrap { white-space:nowrap; }
    td.field { text-align:right; }
@@ -89,14 +92,13 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    .foot { position:absolute; bottom:1em; font-size:.7em;}
    .table th { text-align:right; font-weight:bold; background-color:#ddd; padding:.25em;}
    .table td { border-bottom:1px solid #ccc; padding:.25em; font-size:.9em;}
-   /*]]>*/
    </style>
    <link rel="stylesheet" type="text/css" media="print" href="print.css" />
 
    <title>Confirmation</title>
 </head>
 <body>
-   <div id="main" class='shadow'>
+   <div id="main">
    <div id='top_overview'>
       <span class='date'><?php print date("m/d/Y", strtotime($job->JobDate)); ?></span><br />
       <span class='time'><?php print ($job->PickupTime ? date("h:ia", strtotime($job->PickupTime)) : 'Time NOT SET'); ?></span><br />

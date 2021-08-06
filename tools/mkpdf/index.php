@@ -32,24 +32,31 @@
 <html>
 <head>
    <style>
-      body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size: 18px; text-align:center; }
+      body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size: 18px; text-align:center; background-color:#fff;}
       .iconText { display:inline-block; width:200px; font-size:1.5em; color:#eee; text-shadow:1px 1px 2px rgba(0,0,0,.4);}
       h1, h2, h3 { color: #eee; text-shadow:2px 2px 2px rgba(0,0,0,.4); }
       a { text-decoration: none; color: #eee; font-size:1.5em; font-weight: 500; }
       a:hover { text-decoration: underline; color:#aaf; }
       .icon { display:inline-block; width:200px; }
+      .result {
+         background-color:#3F51B5; 
+         display:inline-block;
+         width: 32rem;
+         border-radius: 1em; 
+         padding:1em;
+      }
    </style>
 </head>
 <body>
 
 <?php
    $link = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/files/" . $in['saveto'] . $in['ID'] . '.pdf';
-   print "<h1>Created Invoice " .$in['ID'].".pdf</h1>";
+   print "<div class='result'><h1>Created Invoice " .$in['ID'].".pdf</h1>";
    print "<a class='icon' href='$link'><img src='/tools/mkpdf/view.png' height='100' width='100' border='0' alt='View'></a>";
 //   print "&nbsp;|&nbsp;";
    print "<a class='icon' download href='$link'><img src='/tools/mkpdf/download.png' height='100' width='100' border='0' alt='Download'></a>";
    print "<br>";
-   print "<span class='iconText'><a href='$link'>View</a></span><span class='iconText'><a download href='$link'>Download</a></span>";
+   print "<span class='iconText'><a href='$link'>View</a></span><span class='iconText'><a download href='$link'>Download</a></span><br></div>";
 
 ?>
 </body>

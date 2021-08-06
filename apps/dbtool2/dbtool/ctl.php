@@ -103,7 +103,7 @@
          $msg = file_get_contents($msgfile);
          $mail = (array)$current;
          $mail['RFCDate'] = date('r');
-         $mail['URL'] = "http://".$_SERVER['HTTP_HOST']."/apps/?pid=".$in['pid']."&rsc=".$in['rsc']."&id=".$in[$in['rsc'].'ID'];
+         $mail['URL'] = "//".$_SERVER['HTTP_HOST']."/apps/?pid=".$in['pid']."&rsc=".$in['rsc']."&id=".$in[$in['rsc'].'ID'];
          $rep = "\$mail[\$1]";
          $msg = preg_replace("/\#(\w+)\#/e", $rep, $msg);
          file_put_contents("/tmp/send_email.log", $msg, FILE_APPEND);

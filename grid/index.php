@@ -143,7 +143,7 @@
          var gridH = store.get("gridHeight");
          if (!gridH) gridH = 200;
          console.log("Grid Height: " + gridH);
-         grid.setGridHeight(gridH - 65);
+         grid.setGridHeight(gridH - 25);
 
          // setup grid print capability. Add print button to navigation bar and bind to click.
          setPrintGrid('mygrid', '<?php print $process->Resource; ?>Nav','<?php print $process->Process; ?>');

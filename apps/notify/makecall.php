@@ -4,27 +4,33 @@ $base = ($_SERVER['DOCUMENT_ROOT']) ?  $_SERVER['DOCUMENT_ROOT'] : "/simple";
 require($base . '/lib/boss_class.php'); 
 // $server = "admin.dev.sscsf.com";
 require 'Services/Twilio.php';
+require '.auth.php';
+
+print_r($twilio_auth);
 //require $base . '/src/twilio/twilio-twilio-php-3252c53/Services/Twilio.php';
 $server = "dharristours.simpsf.com";
 $boss= new boss($server);
 $in = $_REQUEST;
 
 // $id = $in['id'];
-
+print_r($in);
 if ($in['Notify']) {
    $store['Notify'] = $in['Notify'];
-   $newid = $boss->storeObject($store);
+   $newids = $boss->storeObject($store);
 }
 
 // Set our AccountSid and AuthToken
-$sid = 'AC715921a3209c46399873e89058f0666d';
-$token = '90781d3c3844396b0c38c933a8c583ca';
+$sid = $twilio_auth->sid;
+$token = $twilio_auth->token;
 
 // Get list of phone numbers
 // $numbers = $_REQUEST['phone'];
 // $n = $boss->getObject("Notify", "`When`<=now() and MaxAttempts > Attempts and Response is NULL and (Until >=now() or Until is NULL)");//PATRICK check Until for cutoff
-if ($newid) {
-   $n = $boss->getObject("Notify", $newid);//PATRICK check Until for cutoff
+
+if ($newids) {
+   $ids = array_keys($newids);
+   $newid = $ids[0];
+   $n = $boss->getObject("Notify", $ids[0]);//PATRICK check Until for cutoff
 } else { 
    $n = $boss->getObject("Notify", "`When`<=now() and MaxAttempts > Attempts and (Response = 'Delivered' or Response is NULL) and (Until >=now() or Until = '0000-00-00 00:00:00' or Until is NULL)");//PATRICK check Until for cutoff
 }

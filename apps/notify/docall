@@ -3,6 +3,7 @@
 $base = ($_SERVER['DOCUMENT_ROOT']) ?  $_SERVER['DOCUMENT_ROOT'] : "/simple";
 require($base . '/lib/boss_class.php'); 
 require 'Services/Twilio.php';
+require '.auth.php';
 
 array_shift($argv);
 $host = ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : array_shift($argv);
@@ -15,8 +16,8 @@ if ($in['Notify']) {
 }
 
 // Set our AccountSid and AuthToken
-$sid = 'AC715921a3209c46399873e89058f0666d';
-$token = '90781d3c3844396b0c38c933a8c583ca';
+$sid = $twilio_auth->sid;
+$token = $twilio_auth->token;
 
 // Get list of phone numbers
 // $numbers = $_REQUEST['phone'];
