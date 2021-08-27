@@ -1,0 +1,11 @@
+(a) A driver of a chartered vehicle engaged in providing transportation services shall 
+    have a trip sheet in the vehicle. The trip sheet must contain the following information:
+   (1) The date of service.
+   (2) The name and certificate number of the carrier.
+   (3) The name of the engaging person or organization.
+   (4) The service being provided 
+   (5) The origin and intended destination.
+   (6) The starting time and length of time for which the vehicle has been reserved.
+
+(b) At the conclusion of the trip, the driver shall record the ending time on the trip sheet.
+(c) The trip sheet shall be retained by the certificateholder for a minimum of 1 year. 
