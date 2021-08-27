@@ -37,10 +37,13 @@
 <html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 <link type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:12pt;color:black;font-family:"Helvetica Neue",Verdana,sans-serif; }
+   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:12pt;color:black;font-family:"Lexend","Helvetica Neue",Verdana,sans-serif; }
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; }
    H1 { text-align:justify; margin:0;text-indent:0px; }
@@ -58,7 +61,7 @@
    #top_header { width:5in; height:.5in;position:relative;white-space:nowrap;border-radius:12px;-webkit-border-radius:12px;-moz-border-radius:12px;border: 4px solid #000000; }
    #top_header div { float:left;width:2.25in;height:.5in;padding:.006in .05in;font-size:12pt;}
    #top_header>:first-child { border-right:4px solid #000;}
-   #header { width:4.5in;height:.6in; }
+   #header { width:5in;height:.6in; }
    #top_overview { position:absolute;right:22px;width:2in;height:1.4in;border:solid 1px #000000;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:1.1em; }
@@ -68,13 +71,13 @@
    #ticket {border:solid 1px #000000; /* height:4in;*/ width:7.0in;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
    h2{margin:0px; font-size:18pt; font-weight:bold;}
    .big {font-size:18pt;}
-   div.date {font-size:12pt;font-weight:bold;}
+   div.date {font-size:1.2em;display:inline-block;font-weight:bold;}
    .center {text-align:center;}
    #sigs { width:7.5in; border: solid 1px #000000; }
-   #sigs th {text-align:center;border:solid 1px #000000;font-weight:bold;font-size:1.5em;padding:4px;}
+   #sigs th {text-align:center;border:solid 1px #000000;font-weight:bold;font-size:1.1em;padding:4px;}
    #sigs td {border:solid 1px #000000;padding:4px;}
-   #stats {margin-bottom:14px;width:7.5in;position:relative;border:solid 1px #000000;}
-   #stats td { border: 1px solid #000000;height:.25in; }
+   #stats {margin-bottom:14px;width:7.5in;position:relative; border-top: 2px solid #000; border-bottom: 2px solid #000; }
+   #stats td { border: 0px solid #000000; padding-bottom:0.5em; height:.25in; }
    #stats th { font-weight:bold;text-align:center;border: 1px solid #000000;height:.25in; }
    #return_table {text-align:center; position:relative;width:7.5in;}
    #return_table td { border: 1px solid #000000;height:.25in; }
@@ -83,6 +86,12 @@
    #ticket_table td { padding:0px 5px; vertical-align:top }
    td.field { text-align:right;font-weight:bold;font-size:9.5pt; }
    td.value { text-align:left;font-weight:normal;font-size:10pt; }
+   .line { display: inline-block; width: 3em; border-bottom:1px solid #000; height:1.5em; margin-left:.5em; margin-right:.5em; }
+   .pax { width: 1em; }
+   .miles { width: 4em; }
+   @media print {
+       .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+   }
    /*]]>*/
    </style>
    <title>Driver Trip Sheet</title>
@@ -103,23 +112,43 @@
    <div class="Part">
       <table id="header">
          <tr>
-            <td colspan='4'><h2>D HARRIS TOURS Inc.</h2></td>
+            <td colspan='4'><h2>D Harris Tours, Inc.</h2></td>
          </tr>
-	 <tr>
+         <tr>
+            <td>P.O. Box 5961, Vallejo, CA 94591</td>
+            <td>TCP 017270-B</td>
+         </tr>
+         <tr>
+            <td>(415) 902-8542</td>
+            <td>CA 273437</td>
+         </tr>
+         <tr>
+            <td>juanaharrisdht@att.net</td>
+         </tr>
+         <!--tr>
+            <td>https://dharristours.com/</td>
+         </tr-->
+	 <!--tr>
 	   <td>juanaharrisdht@att.net</td><td>TCP 017270-B</td> <td>CA 273437</td>
 	 </tr>
          <tr>
             <td>415-902-8542</td><td>PO Box 5961</td></tr>
          <tr>
             <td>800-853-4006 FAX</td><td>Vallejo CA 94591</td>
-	 </tr>
+	 </tr-->
       </table>
       <br />
       <div id='ticket' >
          <div style="padding:4px; position:relative;">
             <h2 class='center'>DRIVER TRIP</h2>
-            <div class="date center"><?php print $current->JobDate; ?> at </div>
-            <div class="date center"><?php  if (is_null($current->OnSpotTime) or $current->OnSpotTime =='') {print $current->PickupTime;} print $current->OnSpotTime; ?></div>
+            <div class="date center"><?php print date("n/j/Y", strtotime($current->JobDate)); ?> at </div>
+            <div class="date center"><?php  
+               if (is_null($current->OnSpotTime) || $current->OnSpotTime =='') {
+                  print date("g:ia", strtotime($current->PickupTime));
+               } else {
+                  print date("g:ia", strtotime($current->OnSpotTime)); 
+               }
+            ?></div>
          </div>
          <table id='ticket_table'>
             <tr>
@@ -135,11 +164,11 @@
 
             <tr>
                <td class='field'>Start:</td>
-               <td class='value'><?php  if (is_null($current->OnSpotTime) or $current->OnSpotTime =='') {print $current->PickupTime;} print $current->OnSpotTime; ?></td>
+               <td class='value'><?php  if (is_null($current->OnSpotTime) || $current->OnSpotTime =='') {print date("g:ia", strtotime($current->PickupTime));} else { print date("g:ia", strtotime($current->OnSpotTime)); } ?></td>
             </tr>
             <tr>
                <td class='field'>End Time:</td>
-               <td class='value'><?php print $current->DropOffTime; ?></td>
+               <td class='value'><?php print date("g:ia", strtotime($current->DropOffTime)); ?></td>
             </tr>
 
             <tr>
@@ -169,50 +198,29 @@
 <tr>
 <th width=70%>Driver: <b><?php print $driver->Employee; ?></b>
 	</th>
-	<td> 
-		For Payroll purposes, please be accurate
-	</td>
-</tr> 
+	</tr> 
 </table>
-   <table id="stats">
-      <tr>   
-	 <td>Pre Trip Completed at  _____:______</td><td>Mileage:</td>
-	</tr>
-	<tr>
-         <td>Depart Time: _____:_____</td>
-         <td>Travel Minutes: _____:_____</td>
-	</tr>
-  </table>
 <table >
 <tr>
-	<td>On Spot _____:_____</td>
-	<td>Mileage: _________</td>
-	<td>PAX ______</td>
-	<td>Depart ____:____</td>
+	<td>On Spot <span class='line'></span>:<span class='line'></span></td>
+	<td>Mileage: <span class='line miles'></span></td>
+	<td>PAX <span class='line pax'></span></td>
+	<td>Depart <span class='line'></span>:<span class='line'></span></td>
   </tr>
 <tr>
-	<td>Stop 1 _____:_____</td>
-	<td>Mileage: _________</td>
-	<td>PAX ______</td>
-	<td>Depart ____:____</td>
+	<td>Stop 1 <span class='line'></span>:<span class='line'></span></td>
+	<td>Mileage: <span class='line miles'></span></td>
+	<td>PAX <span class='line pax'></span></td>
+	<td>Depart <span class='line'></span>:<span class='line'></span></td>
   </tr>
 <tr>
-	<td>Stop 2 _____:_____</td>
-	<td>Mileage: _________</td>
-	<td>PAX ______</td>
-	<td>Depart ____:____</td>
+	<td>Stop 2 <span class='line'></span>:<span class='line'></span></td>
+	<td>Mileage: <span class='line miles'></span></td>
+	<td>PAX <span class='line pax'></span></td>
+	<td>Depart <span class='line'></span>:<span class='line'></span></td>
   </tr>
 </table>
  <br />
- <table id="stats">
-	<tr>
-         <td>Return Time: _____:_____</td>
-         <td>Travel Minutes: _____:_____</td>
-	</tr>
-	<tr>
-	<td colspan=2>Post Trip Mileage/Comments:</td>
-	</tr>
-  </table><br />
 <table width="100%">  
 <tr>
 <th width=70%><b><?php print $business->Business; ?></b>
@@ -237,8 +245,27 @@
      </tr>
    </table>
 <br />
+<div class='pagebreak'></div>
+   <table id="stats">
+      <tr>   
+	 <td>Pre Trip Completed at  <span class='line'></span>:<span class='line'></span></td><td>Mileage: <span class='line miles'></span></td>
+	</tr>
+	<tr>
+         <td>Depart Time: <span class='line'></span>:<span class='line'></span></td>
+         <td></td>
+	</tr>
+  </table>
+ <table id="stats">
+	<tr>
+         <td>Return Time: _____:_____</td>
+         <td>Travel Minutes: _____:_____</td>
+	</tr>
+	<tr>
+	<td colspan=2>Post Trip Mileage/Comments:</td>
+	</tr>
+  </table><br />
 
-</div>
+   </div>
    </div>
 </body>
 </html>
