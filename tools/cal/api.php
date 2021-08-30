@@ -33,12 +33,26 @@
          case "reserve":
             $out = makeReservation($link, $in);
             break;
+         case "updateColor":
+            $out = updateColor($link, $in);
+            break;
       }
 
       file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
       
       header("Content-type: application/json; charset=utf-8");
       print json_encode($out);
+   }
+
+   function updateColor($link, $in) {
+      if ($in['color'] && $in['id']) {
+         $sql = "update Job set Color='" . mysqli_real_escape_string($link, $in['color']) . "' where JobID='" . mysqli_real_escape_string($link, $in['id']) . "'";
+         $results = mysqli_query($link, $sql); 
+         if ($results) {
+            $out = ["status"=>"ok"];
+         }
+         return $out;
+      }
    }
 
    function getEvents($link, $in) {

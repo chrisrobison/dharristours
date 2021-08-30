@@ -5,10 +5,11 @@
 <meta charset='utf-8' />
 <link href='main.css' rel='stylesheet' />
 <link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
 <script src='/lib/js/tiny-date-picker.min.js'></script>
 <script src='mycal.js'></script>
 <style>
@@ -87,6 +88,13 @@
 .right {
    text-align:right;
 }
+div.dropdown-open {
+   display:block;
+}
+div.dropdown-menu {
+   box-shadow: 3px 3px 3px #0009;
+   transition: all 200ms linear;
+}
 </style>
 </head>
 <body>
@@ -104,7 +112,6 @@
 </div>
   <div id='calendar'></div>
 <script>
-   
    var dp = TinyDatePicker('#tinycal', { 
       format(date) {
          return date.toLocaleDateString();
@@ -116,94 +123,97 @@
       mode: 'dp-permanent' 
    });
 
-   dp.on('statechange', (_, picker) => { 
-      console.log(picker.state.hilightedDate.toISOString()); 
-      calendar.gotoDate(picker.state.hilightedDate.toISOString()); 
+   dp.on('select', (_, dp) => {
+         console.log("SELECTED", dp.state.selectedDate);
+         calendar.gotoDate(dp.state.selectedDate);
+      }
+   );
 
+   dp.on('statechange', (_, picker) => { 
+      console.log("statechange");
    } );
    var calendar, calendarEl;
 
    function doCalendar(exclude) {
       calendarEl = document.getElementById('calendar');
-
+      
       calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
-      defaultView: 'resourceTimeGridDay',
-      defaultDate: new Date().toISOString().substr(0, 10),
-      editable: true,
-      selectable: true,
-      eventLimit: true, // allow "more" link when too many events
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'resourceTimeGridDay,resourceTimeGridTwoDay,timeGridWeek,dayGridMonth'
-      },
-      views: {
-        resourceTimeGridTwoDay: {
-          type: 'resourceTimeGrid',
-          duration: { days: 2 },
-          buttonText: '2 days',
-        }
-      },
-      timeZone: "America/Los_Angeles",
-      schedulerLicenseKey: '12345-fcs-67890',
-      //// uncomment this line to hide the all-day slot
-      allDaySlot: false,
-
-      resources: {
-         url: "api.php?type=resources"
-      },
-      events: {
-         url: "api.php?type=events"
-      },
-      eventSourceSuccess: function(content, xhr) {
-        console.log("eventSourceSuccess");
-        console.dir(content);
-        
-        const jobs = document.querySelector("#joblist");
-        var html = "<table class='jobs'><thead><tr><th>Job</th><th>Start</th><th>End</th><th>Link</th></tr></thead><tbody>";
-        var sel = calendar.getDate(), rowclass='';
-        sels = (new Date(calendar.getDate().toISOString().substr(0,10)).getTime()); 
-        for (var i in content) { 
-           id = (new Date(content[i].start).getTime());
-           if ((id > sels) && (id < sels + 86400000)) {
-               rowclass = "";
-               if (content[i].title.match(/CANCELLED/i)) {
-                  content[i].title = content[i].title.replace(/\s*CANCELLED\s*/, '');
-                  rowclass = "cancelled";
-               } else {
-                  rowclass = "";
-               }
-               html += "<tr><td class='"+rowclass+"'>"+content[i].title+"</td><td class='"+rowclass+"'>"+cleanTime(content[i].start)+"</td><td class='"+rowclass+"'>"+cleanTime(content[i].end)+"</td><td><a target='_blank' href=\""+content[i].url+"\">&#128279;</a></td></tr>";
+         plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
+         defaultView: 'resourceTimeGridDay',
+         defaultDate: new Date(),
+         editable: true,
+         selectable: true,
+         eventLimit: true, // allow "more" link when too many events
+         header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'resourceTimeGridDay,resourceTimeGridTwoDay,timeGridWeek,dayGridMonth'
+         },
+         views: {
+           resourceTimeGridTwoDay: {
+             type: 'resourceTimeGrid',
+             duration: { days: 2 },
+             buttonText: '2 days',
            }
-        }
-        html += "</tbody></table>";
-        jobs.innerHTML = html;
-        selectTab(document.querySelector("a[href='#joblist']")); 
-        return content.eventArray;
-      },
-      select: function(arg) {
-         console.dir(arg);
-        console.log(
-          'select',
-          arg.startStr,
-          arg.endStr,
-          arg.resource ? arg.resource.id : '(no resource)'
-        );
-        modal(arg.start, arg.end, arg.resource);
-      },
-      dateClick: function(arg) {
-        console.log(
-          'dateClick',
-          arg.date,
-          arg.resource ? arg.resource.id : '(no resource)'
-        );
-      },
-      datesRender: function(arg) {
-         dp.setState({"selectedDate": new Date(arg.view.currentStart.getTime())})
-         console.log("datesRender");
-         console.dir(arg);
-      }
+         },
+         timeZone: "local",
+         schedulerLicenseKey: '12345-fcs-67890',
+         //// uncomment this line to hide the all-day slot
+         allDaySlot: false,
+
+         resources: {
+            url: "api.php?type=resources"
+         },
+         events: {
+            url: "api.php?type=events"
+         },
+         eventSourceSuccess: function(content, xhr) {
+           console.log("eventSourceSuccess");
+           console.dir(content);
+           
+           const jobs = document.querySelector("#joblist");
+           let html = `<table class='jobs'><thead><tr><th>Job</th><th>Start</th><th>End</th><th>Link</th></tr></thead><tbody>`;
+           let sel = calendar.getDate(), rowclass='';
+           sels = (new Date(calendar.getDate().toISOString().substr(0,10)).getTime()); 
+           for (let i in content) { 
+              id = (new Date(content[i].start).getTime());
+              if ((id > sels) && (id < sels + 86400000)) {
+                  rowclass = "";
+                  if (content[i].title.match(/CANCELLED/i)) {
+                     content[i].title = content[i].title.replace(/\s*CANCELLED\s*/, '');
+                     rowclass = "cancelled";
+                  } else {
+                     rowclass = "";
+                  }
+                  html += "<tr><td class='"+rowclass+"'>"+content[i].title+"</td><td class='"+rowclass+"'>"+cleanTime(content[i].start)+"</td><td class='"+rowclass+"'>"+cleanTime(content[i].end)+"</td><td><a target='_blank' href=\""+content[i].url+"\">&#128279;</a></td></tr>";
+              }
+           }
+           html += "</tbody></table>";
+           jobs.innerHTML = html;
+           selectTab(document.querySelector("a[href='#joblist']")); 
+           return content.eventArray;
+         },
+         select: function(arg) {
+           console.log(
+             'select',
+             arg.startStr,
+             arg.endStr,
+             arg.resource ? arg.resource.id : '(no resource)'
+           );
+           modal(arg.start, arg.end, arg.resource);
+         },
+         dateClick: function(arg) {
+           console.log(
+             'dateClick',
+             arg.date,
+             arg.resource ? arg.resource.id : '(no resource)'
+           );
+         },
+         datesRender: function(arg) {
+            dp.setState({"selectedDate": new Date(arg.view.currentStart.getTime())})
+            console.log("datesRender");
+            console.dir(arg);
+         }
     });
 
     calendar.render();
@@ -235,20 +245,27 @@
         myevent = JSON.parse(datums);
         console.dir(myevent);
 
-        var out = "<table id='jobdetail'><tr><th>Job ID</th><td>" + myevent.JobID + "</td>";
-        out += "<th>Passengers</th><td>" + ((myevent.NumberOfItems) ? myevent.NumberOfItems : "?") + "</td></tr>";
-        out += "<tr><th>Job</th><td colspan='3'>"+myevent.Job+"</td></tr>";
-        out += "<tr><th>Bus</th><td colspan='3'>" + mybuses[myevent.BusID].title + "</td></tr>";
+        var out = `<table id='jobdetail'>
+         <tr>
+            <th>Job ID</th><td>${myevent.JobID}</td>
+            <th>Passengers</th><td>${((myevent.NumberOfItems) ? myevent.NumberOfItems : "?")}</td>
+         </tr>
+         <tr><th>Job</th><td colspan='3'>${myevent.Job}</td></tr>
+         <tr><th>Bus</th><td colspan='3'>${mybuses[myevent.BusID].title}</td></tr>`;
         
         var driver = (myevent && myevent.EmployeeID && mydrivers && mydrivers[myevent.EmployeeID]) ? mydrivers[myevent.EmployeeID].Driver + " - " + mydrivers[myevent.EmployeeID].Phone : "Unassigned";
       
-        out += "<tr><th>Driver</th><td colspan='3'>" + driver + "</td></tr>";
-        out += "<tr><th>Pickup</th><td colspan='2'>"+ ((myevent.PickupLocation) ? myevent.PickupLocation : "") +"</td><td>" +myevent.PickupTime + "</td></tr>";
-        out += "<tr><th>Dropoff</th><td colspan='2'>"+ ((myevent.DropOffLocation) ? myevent.DropOffLocation : "") +"</td><td>" +myevent.DropOffTime + "</td></tr>";
+        out += `
+         <tr><th>Driver</th><td colspan='3'>${driver}</td></tr>
+         <tr><th>Pickup</th><td colspan='2'>${((myevent.PickupLocation) ? myevent.PickupLocation : "")}</td><td>${myevent.PickupTime}</td></tr>
+         <tr><th>Dropoff</th><td colspan='2'>${((myevent.DropOffLocation) ? myevent.DropOffLocation : "")}</td><td>${myevent.DropOffTime}</td></tr>`;
+        
         if (myevent.finalDropOffLocation) {
-         out += "<tr><th>Final</th><td colspan='2'>"+myevent.FinalDropOffLocation +"</td></tr>";
+         out += `<tr><th>Final</th><td colspan='2'>${myevent.FinalDropOffLocation}</td></tr>`;
         }
-        out += "</table>";
+
+        out += `<tr><th>Color</th><td colspan='2'><input type='color' value='${myevent.Color}' id='color' onchange='updateColor(this.value, ${myevent.JobID})'></td></tr>`;
+        out += `</table>`;
 
         document.querySelector("#detail").innerHTML = out;
         selectTab("#detail");
@@ -256,6 +273,18 @@
         console.log(datums);
       }); 
    } 
+   function updateColor(newcolor, id) {
+      console.log(`updateColor: ${newcolor} [${id}] `);
+      if (color && id) {
+         let url = `api.php?id=${id}&type=updateColor&color=${encodeURIComponent(newcolor)}`;
+         console.log(url);
+         fetch(url).then(response=>response.json()).then(data=>{
+            console.dir(data);
+
+         });
+      }
+   }
+
    function makeRequest (method, url, done) {
      var xhr = new XMLHttpRequest();
      xhr.open(method, url);
@@ -346,7 +375,11 @@ function makeSettingsDropdown(resources) {
        console.log(el.innerHTML);
        console.dir(el);
        toolbar.appendChild(el);
-       $(".showbus_checkbox").on('click', function(e) {
+       document.querySelector("#settingButton")?.addEventListener('click', function(e) {
+         console.log("settingButton", e);
+         document.querySelector(".dropdown-menu").classList.toggle('dropdown-open');
+       });
+       document.querySelector(".showbus_checkbox")?.addEventListener('click', function(e) {
           if (this.checked) {
              
           }
@@ -439,20 +472,20 @@ function modal(from, to, rsc) {
    
    window.reservation = { "date": from.toLocaleDateString(), "from": from, "to": to };
 
-   var oform = "<div id='dialog'>";
-   oform += "<div class='dlgtitle'>Reserve Bus " + rsc._resource.id + " on " + from.toLocaleDateString() + "</div>";
-   oform += "<div class='dlgform'>";
-   oform += "<div class='form-group'><label for='customer'>Customer</label> <input type='text' id='customer' name='customer' placeholder='Customer' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='customer_suggestions' class='suggestions'></div></div>";
-   oform += "<div class='form-group'><label for='from'>From</label> <input type='text' id='from' name='from' placeholder='Pickup Time' value='" + formatTime(from) + "' size='10' class='form-time' onchange='handleForm(this)'/>";
-   oform += "<label style='width:2em' for='to'>To</label> <input type='text' id='to' name='to' placeholder='Dropoff Time' value='" + formatTime(to) + "' size='10' class='form-time' onchange='handleForm(this)'/>";
-   oform += "<label style='width:3em' for='pax'>Pax</label> <input type='text' id='pax' name='pax' placeholder='<=" + rsc._resource.id.substr(0,2) + "' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' /></div>";
-   oform += "<div class='form-check form-check-inline'><input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' /><label class='form-check-label' for='oneway'>One Way</label>";
-   oform += "<input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label></div>";
-   oform += "<div class='form-group'><label for='pickup'>Pickup</label> <input type='text' id='pickup' name='pickup' placeholder='Pickup Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='pickup_suggestions' class='suggestions'></div></div>";
-   oform += "<div class='form-group'><label for='dropoff'>Dropoff</label> <input type='text' id='dropoff' name='dropoff' placeholder='Dropoff Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='dropoff_suggestions' class='suggestions'></div></div>";
-   oform += "<div class='form-group right'><button type='button' id='dlg_cancel' onclick='closeDialog()'>Cancel</button> <button type='button' id='dlg_reserve' onclick='return makeReservation()'>Reserve</button></div>";
-   oform += "</div>";
-   oform += "</div>";
+   var oform = `<div id='dialog'>
+   <div class='dlgtitle'>Reserve Bus ${rsc._resource.id} on ${from.toLocaleDateString()}</div>
+   <div class='dlgform'>
+      <div class='form-group'><label for='customer'>Customer</label> <input type='text' id='customer' name='customer' placeholder='Customer' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='customer_suggestions' class='suggestions'></div></div>
+      <div class='form-group'><label for='from'>From</label> <input type='text' id='from' name='from' placeholder='Pickup Time' value='${formatTime(from)}' size='10' class='form-time' onchange='handleForm(this)'/>
+      <label style='width:2em' for='to'>To</label> <input type='text' id='to' name='to' placeholder='Dropoff Time' value='${formatTime(to)}' size='10' class='form-time' onchange='handleForm(this)'/>
+      <label style='width:3em' for='pax'>Pax</label> <input type='text' id='pax' name='pax' placeholder='<=${rsc._resource.id.substr(0,2)}' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' /></div>
+      <div class='form-check form-check-inline'><input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' /><label class='form-check-label' for='oneway'>One Way</label>
+      <input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label></div>
+      <div class='form-group'><label for='pickup'>Pickup</label> <input type='text' id='pickup' name='pickup' placeholder='Pickup Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='pickup_suggestions' class='suggestions'></div></div>
+      <div class='form-group'><label for='dropoff'>Dropoff</label> <input type='text' id='dropoff' name='dropoff' placeholder='Dropoff Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='dropoff_suggestions' class='suggestions'></div></div>
+      <div class='form-group right'><button type='button' id='dlg_cancel' onclick='closeDialog()'>Cancel</button> <button type='button' id='dlg_reserve' onclick='return makeReservation()'>Reserve</button></div>
+   </div>
+</div>`;
 
    overlay.innerHTML = oform;
    document.body.append(overlay); 

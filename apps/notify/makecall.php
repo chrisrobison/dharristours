@@ -6,14 +6,13 @@ require($base . '/lib/boss_class.php');
 require 'Services/Twilio.php';
 require '.auth.php';
 
-print_r($twilio_auth);
 //require $base . '/src/twilio/twilio-twilio-php-3252c53/Services/Twilio.php';
 $server = "dharristours.simpsf.com";
 $boss= new boss($server);
 $in = $_REQUEST;
 
 // $id = $in['id'];
-print_r($in);
+
 if ($in['Notify']) {
    $store['Notify'] = $in['Notify'];
    $newids = $boss->storeObject($store);
@@ -34,7 +33,7 @@ if ($newids) {
 } else { 
    $n = $boss->getObject("Notify", "`When`<=now() and MaxAttempts > Attempts and (Response = 'Delivered' or Response is NULL) and (Until >=now() or Until = '0000-00-00 00:00:00' or Until is NULL)");//PATRICK check Until for cutoff
 }
-
+print_r($n);
 if ($n->Notify) {
    $notify = $n->Notify;
 
@@ -64,11 +63,15 @@ if ($n->Notify) {
             }
          }
 
-         if ($notify[$key]->SMS) {
+         if ($item->SMS) {
          
          }
 
-         if ($notify[$key]->Email) {
+         if ($item->Email) {
+$msg = <<<EOT
+
+
+EOT;
 
          }
       }
