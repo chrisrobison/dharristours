@@ -33,17 +33,20 @@
 //   print "var data = ".json_encode($current).";\n";
 //print_r($current);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="https://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <link type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,700;1,400&display=swap" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:12pt;color:black;font-family:"Lexend","Helvetica Neue",Verdana,sans-serif; }
+   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:12pt;color:black;font-family:"Open Sans","Helvetica Neue",Verdana,sans-serif; }
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; }
    H1 { text-align:justify; margin:0;text-indent:0px; }
@@ -84,11 +87,17 @@
    #return_table th { font-weight:bold;text-align:center;border: 1px solid #000000;height:.25in; }
    #ticket_table { width:7in; }
    #ticket_table td { padding:0px 5px; vertical-align:top }
-   td.field { text-align:right;font-weight:bold;font-size:9.5pt; }
-   td.value { text-align:left;font-weight:normal;font-size:10pt; }
+   td.field { text-align:right;font-weight:bold;}
+   td.value { text-align:left;font-weight:normal; }
    .line { display: inline-block; width: 3em; border-bottom:1px solid #000; height:1.5em; margin-left:.5em; margin-right:.5em; }
    .pax { width: 1em; }
    .miles { width: 4em; }
+    .checkbox { display: inline-block; height:1.2em; width: 1.2em; border: 1px solid #000; }
+    .checklist {  margin:.5em auto .5em auto; padding-top:.5em; padding-bottom:.5em;}
+    .checklist td { padding-top:.25em; padding-bottom:.25em; vertical-align:top;}
+    hr { border: 1px solid #000; }
+    .other { display:inline-block; height:5em; width:5em; border:1px solid #000; }
+    table tr { line-height:1.5em; }
    @media print {
        .pagebreak { page-break-before: always; } /* page-break-after works, as well */
    }
@@ -100,7 +109,13 @@
    <div id="main" class='shadow'>
    <div id='top_overview'>
       <span class='date'><?php print $current->JobDate; ?></span><br />
-      <span class='time'><?php if (is_null($current->OnSpotTime)  or $current->OnSpotTime =='') {print $current->PickupTime;} print $current->OnSpotTime; ?></span><br />
+      <span class='time'><?php 
+      if (is_null($current->OnSpotTime)  || $current->OnSpotTime =='') {
+         print date("g:ia", strtotime($current->PickupTime));
+      } else {
+         print $current->OnSpotTime; 
+      }
+      ?></span><br />
       <span><?php print $business->Business; ?></span><br />
       <span class='pass'>Pax: <?php print $current->NumberOfItems; ?><br /></span>
       <span class='pass'>Bus: <?php print $bus->Bus; ?></span>
@@ -139,7 +154,7 @@
       </table>
       <br />
       <div id='ticket' >
-         <div style="padding:4px; position:relative;">
+         <div style="padding:4px; position:relative;text-align:center;">
             <h2 class='center'>DRIVER TRIP</h2>
             <div class="date center"><?php print date("n/j/Y", strtotime($current->JobDate)); ?> at </div>
             <div class="date center"><?php  
@@ -225,17 +240,14 @@
 <tr>
 <th width=70%><b><?php print $business->Business; ?></b>
 	</th>
-	<td> 
-		For BILLING Purposes, please be accurate
-	</td>
 </tr> 
 </table>
    <table id='sigs'>
       <tr>
          <th width=25%>Chaperone Name</th>
-         <th width=25%>Phone</th>
          <th width=25%>Start Time</th>
          <th width=25%>End Time</th> 
+         <th width=25%>Signature</th>
       </tr>
       <tr>
          <td><br /><br /></td>
@@ -244,28 +256,133 @@
          <td><br /><br /></td>
      </tr>
    </table>
-<br />
+   </div>
+   </div>
 <div class='pagebreak'></div>
-   <table id="stats">
-      <tr>   
-	 <td>Pre Trip Completed at  <span class='line'></span>:<span class='line'></span></td><td>Mileage: <span class='line miles'></span></td>
-	</tr>
-	<tr>
-         <td>Depart Time: <span class='line'></span>:<span class='line'></span></td>
-         <td></td>
-	</tr>
-  </table>
- <table id="stats">
-	<tr>
-         <td>Return Time: _____:_____</td>
-         <td>Travel Minutes: _____:_____</td>
-	</tr>
-	<tr>
-	<td colspan=2>Post Trip Mileage/Comments:</td>
+<br>
+<div class='printonly'>
+<div id='main' class='shadow'>
+    <div id='top_header'>
+       <div>Driver Name: <b><?php print $driver->Employee; ?></b><br />Job Number: <b> <?php print $current->JobID; ?></b></div>
+       <div>Date: <b><?php print $current->JobDate; ?></b><br />Start: <b><?php  
+            print date("g:ia", strtotime($current->PickupTime));
+         ?></b></div>
+   </div>
+   <h3>Trip Log</h3>
+   <hr>
+   <table>
+      <tr>
+         <td>Pre-trip Start Time: </td><td><span class='line'></span>:<span class='line'></span></td>
+         <td>Depart Yard Time: </td><td><span class='line'></span>:<span class='line'></span></td>
+         <td>Mileage: </td><td><span class='line miles'></span></td>
+      </tr>
+   </table>
+      <!-- insert dvir form here -->
+      <hr>
+      <h4 style='margin:0;float:right;font-weight:normal;margin-right:2em;'>Check ONLY if problems exists</h4>
+      <h3 style="margin:0;">Daily Vehicle Inspection Report</h3>
+<table class='checklist'>
+   <tr>
+      <td><span class='checkbox' id='air_compressor'></span> Air Compressor</td>
+      <td><span class='checkbox' id='front_axle'></span> Front Axle</td>
+      <td><span class='checkbox' id='safety_equip'></span> Safety Equipment</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='air_lines'></span> Air Lines</td>
+      <td><span class='checkbox' id='fuel_tanks'></span> Fuel Tanks</td>
+      <td class='indent'><span class='checkbox' id='fire_extinguisher'></span> Fire Extinguisher</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='battery'></span> Battery</td>
+      <td><span class='checkbox' id='horn'></span> Horn</td>
+      <td class='indent'><span class='checkbox' id='flasg_flares_fuses'></span> Flags/Flares/Fuses</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='belts_hoses'></span> Belts and Hoses</td>
+      <td><span class='checkbox' id='lights'></span> Lights</td>
+      <td class='indent'><span class='checkbox' id='reflective_triangles'></span> Reflective Triangles</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='body'></span> Body</td>
+      <td class='indent'><span class='checkbox' id='head_stop'></span> Head/Stop</td>
+      <td class='indent'><span class='checkbox' id='spare_bulb_fuses'></span> Spare Bulb and Fuses</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='brake_accessories'></span> Brake Accessories</td>
+      <td class='indent'><span class='checkbox' id='tail_dash'></span> Tail / Dash</td>
+      <td class='indent'><span class='checkbox' id='spare_seal_beam'></span> Spare Seal Beam</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='brakes_parking'></span> Brakes, Parking</td>
+      <td class='indent'><span class='checkbox' id='turn_indicators'></span> Turn Indicators</td>
+      <td><span class='checkbox' id='starter'></span> Starter</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='brakes_service'></span> Brakes, Service</td>
+      <td class='indent'><span class='checkbox' id='clearance_marker'></span> Clearance / Marker</td>
+      <td><span class='checkbox' id='steering'></span> Steering</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='clutch'></span> Clutch</td>
+      <td><span class='checkbox' id='mirrors'></span> Mirrors</td>
+      <td><span class='checkbox' id='suspension_system'></span> Suspension System</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='defroster_heater'></span> Defroster / Heater</td>
+      <td><span class='checkbox' id='muffler'></span> Muffler</td>
+      <td><span class='checkbox' id='tires'></span> Tires</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='drive_line'></span> Drive Line</td>
+      <td><span class='checkbox' id='oil_pressure'></span> Oil Pressure</td>
+      <td><span class='checkbox' id='transmission'></span> Transmission</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='engine'></span> Engine</td>
+      <td><span class='checkbox' id='radiator'></span> Radiator</td>
+      <td><span class='checkbox' id='rear_end'></span> Rear End</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='exhaust'></span> Exhaust</td>
+      <td><span class='checkbox' id='reflectors'></span> Reflectors</td>
+      <td><span class='checkbox' id='wheels_rims'></span> Wheels &amp; Rims</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='fluid_levels'></span> Fluid Levels</td>
+      <td><span class='checkbox' id='windows'></span> Windows</td>
+      <td><span class='checkbox' id='windshield_wipers'></span> Windshield Wipers</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='frame_assembly'></span> Frame &amp; Assembly</td>
+      <td></td>
+      <td><span class='checkbox' id='other'></span> Other (please describe): </td>
+   </tr>
+   <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+</table>
+<br><br>
+<hr>
+<table>
+      <tr>
+         <td>Return to Yard Time: </td><td><span class='line'></span>:<span class='line'></span></td>
+         <td>Mileage: </td><td><span class='line miles'></span></td>
+      </tr>
+      <tr>
+         <td><span class='checkbox'></span> Fuel</td><td>Gallons: <span class='line'></span> </td><td>Total: <span class='line'></span> </td>
+      </tr>
+</table>
+<hr>
+	<td colspan=2>Comments:</td>
 	</tr>
   </table><br />
-
-   </div>
-   </div>
+</div>
+</div>
 </body>
 </html>

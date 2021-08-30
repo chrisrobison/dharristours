@@ -1,15 +1,16 @@
 <?php
    require "Services/Twilio.php";
-   
+   require ".auth.php";
+
    $in = $_REQUEST;
    
-   if ($in['msg']) {
-      $in['msg'] = ($in['msg']) ? $in['msg'] : "Hey #name#, Monkey Party at 11PM. Bring Bananas!";
+//   if ($in['msg']) {
+      $in['msg'] = ($in['msg']) ? $in['msg'] : "Hey #name#! Monkey Party at 11PM. Bring Bananas!";
 
       $config = array(
-         "from"   => "415-689-7675", 
-         "sid"    => "AC715921a3209c46399873e89058f0666d", 
-         "token"  => "90781d3c3844396b0c38c933a8c583ca",
+         "from"   => "424-321-8687", 
+         "sid"    => $twilio_auth->sid, 
+         "token"  => $twilio_auth->token,
          "msg"    => $in['msg']
       );
 
@@ -27,6 +28,6 @@
 
          print "Sent message: $msg to $name";
        }
-   }
+//   }
 ?>
 

@@ -1532,6 +1532,7 @@ body {
   }
   .jobs {
     position:relative;
+    width:100%;
   }
   .jobs th {
     position: -webkit-sticky;
