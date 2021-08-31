@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Driver's Vehicle Inspection Report</title>
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link href="main.css" rel="stylesheet">
+</head>
+<body>
+<div id='report'>
+<div id='perf'>●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●</div>
+<h1>Driver's Vehicle Inspection Report</h1>
+<h3>As required by D.O.T. Federal Motor Carrier Safety Regulations</h3>
+<table class='header'>
+   <tr>
+   <th>Carrier:</th><td><input type='text' id='carrier' class='shortinput' value='D Harris Tours, Inc.'></td>
+   <th>Driver:</th><td><input type='text' id='driver' class='shortinput' ></td>
+   </tr>
+   <tr><th>Address:</th><td colspan='3'><input type='text' id='address' class='longinput' value='153 Utah St, South San Francisco, CA'></td></tr>
+   <tr><th>Date:</th><td><input type='text' id='date' class='shortinput'></td>
+      <th>Time:</th><td><input type='text' id='time' class='shortinput'></td></tr>
+</table>
+<table id='mid' class='header'>
+   <tr><th style='white-space:nowrap;' >Bus:</th><td><select id='buses'></select></td>
+   <th>Odometer:</th><td><input type='text' id='odometer' class='shortinput' style='width:1.5in;'></td>
+   <th>Fuel:</th>
+   <td>
+      <input type='range' min='0' max='100' step='10' list='steplist' id='fuel' class='shortinput' style='width:1.5in;'>
+      <datalist id='steplist'>
+         <option>0</option>
+         <option>10</option>
+         <option>20</option>
+         <option>30</option>
+         <option>40</option>
+         <option>50</option>
+         <option>60</option>
+         <option>70</option>
+         <option>80</option>
+         <option>90</option>
+         <option>100</option>
+      </datalist> 
+   </td>
+   </tr>
+</table>
+<table id='checklist'>
+   <tr>
+      <td><span class='checkbox' id='air_compressor'></span> Air Compressor</td>
+      <td><span class='checkbox' id='front_axle'></span> Front Axle</td>
+      <td><span class='checkbox' id='safety_equip'></span> Safety Equipment</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='air_lines'></span> Air Lines</td>
+      <td><span class='checkbox' id='fuel_tanks'></span> Fuel Tanks</td>
+      <td class='indent'><span class='checkbox' id='fire_extinguisher'></span> Fire Extinguisher</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='battery'></span> Battery</td>
+      <td><span class='checkbox' id='horn'></span> Horn</td>
+      <td class='indent'><span class='checkbox' id='flasg_flares_fuses'></span> Flags/Flares/Fuses</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='belts_hoses'></span> Belts and Hoses</td>
+      <td><span class='checkbox' id='lights'></span> Lights</td>
+      <td class='indent'><span class='checkbox' id='reflective_triangles'></span> Reflective Triangles</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='body'></span> Body</td>
+      <td class='indent'><span class='checkbox' id='head_stop'></span> Head/Stop</td>
+      <td class='indent'><span class='checkbox' id='spare_bulb_fuses'></span> Spare Bulb and Fuses</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='brake_accessories'></span> Brake Accessories</td>
+      <td class='indent'><span class='checkbox' id='tail_dash'></span> Tail / Dash</td>
+      <td class='indent'><span class='checkbox' id='spare_seal_beam'></span> Spare Seal Beam</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='brakes_parking'></span> Brakes, Parking</td>
+      <td class='indent'><span class='checkbox' id='turn_indicators'></span> Turn Indicators</td>
+      <td><span class='checkbox' id='starter'></span> Starter</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='brakes_service'></span> Brakes, Service</td>
+      <td class='indent'><span class='checkbox' id='clearance_marker'></span> Clearance / Marker</td>
+      <td><span class='checkbox' id='steering'></span> Steering</td>
+   </tr>
+<tr>
+      <td><span class='checkbox' id='clutch'></span> Clutch</td>
+      <td><span class='checkbox' id='mirrors'></span> Mirrors</td>
+      <td><span class='checkbox' id='suspension_system'></span> Suspension System</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='defroster_heater'></span> Defroster / Heater</td>
+      <td><span class='checkbox' id='muffler'></span> Muffler</td>
+      <td><span class='checkbox' id='tires'></span> Tires</td>
+   </tr>
+   <tr>
+      <td><span class='checkbox' id='drive_line'></span> Drive Line</td>
+      <td><span class='checkbox' id='oil_pressure'></span> Oil Pressure</td>
+      <td><span class='checkbox' id='transmission'></span> Transmission</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='engine'></span> Engine</td>
+      <td><span class='checkbox' id='radiator'></span> Radiator</td>
+      <td><span class='checkbox' id='rear_end'></span> Rear End</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='exhaust'></span> Exhaust</td>
+      <td><span class='checkbox' id='reflectors'></span> Reflectors</td>
+      <td><span class='checkbox' id='wheels_rims'></span> Wheels &amp; Rims</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='fluid_levels'></span> Fluid Levels</td>
+      <td><span class='checkbox' id='windows'></span> Windows</td>
+      <td><span class='checkbox' id='windshield_wipers'></span> Windshield Wipers</td>
+   </tr>
+
+   <tr>
+      <td><span class='checkbox' id='frame_assembly'></span> Frame &amp; Assembly</td>
+      <td></td>
+      <td><span class='checkbox' id='other'></span> Other</td>
+   </tr>
+</table>
+<div class='footer'>
+<canvas id='bus'></canvas>
+<div id='notes'><h2>Notes:</h2><div style='display:inline-block; border:1px solid #ddd; height:3in; width:3.25in;'><textarea id='note'></textarea></div>
+</div>
+</div>
+<br clear='right'><hr>
+<label for='sig'>Signature</label><input type='text' id='sig' name='sig' placeholder='Signature' width='40'/>
+</div>
+<div id='damageDialog' class='dialog'>
+   <div class="dialog__overlay"></div>
+   <div class="dialog__content">
+
+      <div id='damageDialogTitle' style='background-color:#444;color:#fff;padding:4px;font-weight:bold;padding-left:.5em;'>
+         Report Damage
+         <span style='float:right;display:inline-block;position:relative;font-size:1.5em;top:-7px;'><a href='#' id='closeDamage'><i class='fa fa-window-close' style='background-color:#fff;padding:0px 1px;'></i></a></span>
+      </div>
+      <div style='padding:.5em'>
+         <span style="">Please describe damage:</span><br>
+         
+         <textarea id='damage' cols='85' rows='15'></textarea>
+         <br>
+         <div style='text-align:right'>
+            <button id='damageCancel' class="btn btn-default btn-lg btn3d"><i class='fa fa-ban'></i> Cancel</button>
+            <button id='damageSave' class="btn btn-primary btn-lg btn3d"><i class="fa fa-save"></i> Save</button>
+         </div>
+      </div>
+   </div>
+</div>
+</body>
+<script>
+(function() {
+   var damages = [];
+   window.damages = damages;
+   var dialog = document.querySelector("#damageDialog");
+   
+   var cancel = document.querySelector("#damageCancel");
+   var save = document.querySelector("#damageSave");
+   var close = document.querySelector("#closeDamage");
+   var driver = document.querySelector("#driver");
+   var buses = document.querySelector("#buses");
+
+   close.addEventListener("click", function(e) {
+      dialog.style.display = "none";   
+      e.preventDefault();
+      return false;
+   });
+
+   cancel.addEventListener("click", function(e) {
+      return cancelDamage();
+   });
+
+   save.addEventListener("click", function(e) {
+      var d = document.querySelector("#damage");
+      var n = document.querySelector("#note");
+      if (d && d.value) {
+         damage.damage = d.value;
+      }
+
+      window.damages[window.damages.length] = damage;
+      dialog.style.display = "none";   
+      
+      if (n) {
+         n.value = n.value + "\n[" + damage.x + "," + damage.y +"] "+ d.value;
+      }
+      
+      localStorage.setItem('damages', JSON.stringify(window.damages));
+      
+      var nd = {
+         Damage: damage.damage,
+         ReportedBy: driver.value,
+         Status: 'new',
+         BusID: buses.options[buses.selectedIndex].value,
+         x: damage.x,
+         y: damage.y,
+         CreatedBy: getEmail(),
+         LastModifiedBy: getEmail()
+      }
+      newDamage(nd);
+
+      e.preventDefault();
+      return false;
+   });
+   
+   document.querySelector("#buses").addEventListener("change", function (e) {
+      document.querySelector("#note").value = '';
+      drawBus.call(img);
+
+      getDamages(this.options[this.selectedIndex].value);
+      clearChecks();
+      getChecks(this.options[this.selectedIndex].value);
+      var busname = this.options[this.selectedIndex].text.replace(/\#/,'');
+      if (window.liveBuses) {
+         document.querySelector("#odometer").value = liveBuses[busname].odometer / 10;
+      }
+   });
+
+   function rmCheck(who) {
+      var out = { "Checkbox": who.id,
+                  "BusID": buses.options[buses.selectedIndex].value
+               };
+      fetch("api.php?type=rmCheck&json="+JSON.stringify(out)).then((results) => { return results.json(); }).then((data) => {
+      console.log("newCheck returned");
+      console.dir(data);
+      });
+   }
+
+   function newCheck(who) {
+      var out = { "Checkbox": who.id,
+                  "Damage": who.id.replace(/_/g, ' ').replace(/\b(\w)/g, function(match, offset, string) { return match.toUpperCase(); }),
+                  "BusID": buses.options[buses.selectedIndex].value,
+                  "CreatedBy": getEmail(),
+                  "LastModifiedBy": getEmail(),
+                  "Status": "new",
+                  "ReportedBy": driver.value
+               };
+      fetch("api.php?type=newCheck&json="+JSON.stringify(out)).then((results) => { return results.json(); }).then((data) => {
+      console.log("newCheck returned");
+      console.dir(data);
+      });
+   }
+
+   function newDamage(damageObj) {
+      fetch("api.php?type=newDamage&json="+JSON.stringify(damageObj)).then((results)=>{
+         return results.json();
+      }).then((data) => {
+         console.dir(data);
+      });
+   }
+
+   const canvas = document.getElementById('bus');
+   const ctx = canvas.getContext('2d');
+   const img = new Image();
+   const damageForm = document.querySelector("#damage");
+
+   img.onload = drawBus;
+   img.src = 'businspection.jpg';
+   var nx, ny;
+   var damage = {}, damages = [];
+   window.damages = damages;
+   canvas.addEventListener('click', function(e) {
+      console.dir(e);
+      ctx.lineWidth = 30;
+      ctx.strokeStyle = "#ff0000";
+      ctx.beginPath();
+      nx = e.offsetX * (canvas.width / canvas.scrollWidth);
+      ny = e.offsetY * (canvas.height / canvas.scrollHeight);
+      
+      damage = {};
+      damage.x = Math.floor(nx);
+      damage.y = Math.floor(ny);
+
+      ctx.ellipse(nx, ny, 150, 150, 0, 0, 2 * Math.PI);
+      ctx.stroke();
+
+      dialog.style.top = window.pageYOffset + 100 + "px";
+      dialog.style.display = "block";
+      damageForm.value = "";
+      damageForm.focus();
+
+   });
+   damageForm.addEventListener('keydown', function(e) {
+      if (e.keyCode === 27) {
+         cancelDamage();
+      }
+   });
+   canvas.addEventListener('mousemove', function(event) {
+     if (event.region) {
+       alert('hit region: ' + event.region);
+     }
+   });
+   
+   function getEmail() {
+      var cookies = parseCookies();
+      if (cookies['email']) {
+         window.email = cookies['email'];
+      }
+      return cookies['email'];
+   }
+
+   function getName() {
+      var cookies = parseCookies();
+      if (cookies['name']) {
+         document.querySelector("#driver").value = cookies.name.replace(/\+/, ' ');
+      }
+      return cookies['name'].replace(/\+/, ' ');
+   }
+
+   function getChecks(busID) {
+      fetch("api.php?type=checks&BusID=" + busID).then((response) => {
+         return response.json();
+      }).then((data) => {
+         window.checks = checks = data;
+         loadChecks(checks);
+      });
+   } 
+
+   function getDamages(busID) {
+      fetch("api.php?type=damages&BusID=" + busID).then((response) => {
+         return response.json();
+      }).then((data) => {
+         window.damages = damages = data;
+         loadDamages(damages);
+      });
+   }
+   var today;
+   function init() {
+      myname = getName();
+      today = new Date();
+      document.querySelector("#date").value = today.toLocaleDateString();
+      document.querySelector("#time").value = today.toLocaleTimeString();
+      getLiveBusInfo();
+      
+      const checks = document.querySelectorAll(".checkbox");
+
+      checks.forEach(function(item) {
+         if (item.className.match(/checked/)) {
+             item.className = "checkbox checked ticked";
+         } else {
+             item.className = "checkbox checked";
+         }
+         item.addEventListener("click", function(evt) { 
+             if (this.className.match(/ticked/)) {
+                 this.className = "checkbox checked";
+                 rmCheck(this);
+             } else {
+                 this.className = "checkbox checked";
+                 this.className += " ticked";
+                 newCheck(this);
+             }
+         });
+      });
+
+      fetch('api.php?type=resources').then((response) => {
+         return response.json();
+      }).then((data) => {
+         
+         var opts = "<option value=''>-- Bus # --</option>";
+         for (var i=0; i<data.length; i++) {
+            if (data[i].capacity > 0) {
+               opts += "<option value='" + data[i].busID + "'>" + data[i].title + "</option>";
+            }
+         }
+         document.querySelector("#buses").innerHTML = opts;
+
+      });
+   }
+   window.liveBuses = liveBuses = [];
+
+   function getLiveBusInfo() {
+      fetch("/where/latest.json").then((response) => {
+         return response.json();
+      }).then((data) => {
+         var tmp = {};
+         for (var i=0; i<data.length; i++) {
+            var b = data[i];
+            tmp[b['objectno']] = b;
+         }
+         liveBuses = tmp;
+      });
+   }
+
+   function parseCookies() {
+      var c = document.cookie.split(/;\s?/);
+      
+      var parts, vals = {};
+      for (var i=0; i<c.length; i++) {
+         parts = c[i].split(/=/);
+         vals[parts[0]] = parts[1];
+      }
+      return vals;
+   }
+
+   function loadDamages(damages) {
+      var damageForm = document.querySelector("#damage");
+      for (var i=0; i<damages.length; i++) {
+         ctx.lineWidth = 30;
+         ctx.strokeStyle = "#ff0000";
+         ctx.beginPath();
+         ctx.ellipse(damages[i].x, damages[i].y, 150, 150, 0, 0, 2 * Math.PI);
+         ctx.stroke();
+         note.value = note.value + "\n[" + damages[i].x + ":" + damages[i].y + "] " + damages[i].Damage;
+      }
+   }
+
+   function clearChecks() {
+      var el;
+      const checkboxes = document.querySelectorAll(".checkbox");
+      checkboxes.forEach((el) => {
+         el.className = 'checkbox checked'; 
+      });
+   }
+
+   function loadChecks(checks) {
+      if (checks && checks.length > 0) {
+         clearChecks();
+         for (var i=0; i < checks.length; i++) {
+            el = document.querySelector("#"+checks[i]);
+            if (el) {
+               el.className = "checkbox checked ticked";
+            }
+         }
+      }
+   }
+
+   function drawBus() {
+      canvas.width = this.naturalWidth;
+      canvas.height = this.naturalHeight;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(this, 0, 0);
+   }
+   function localDamages() {
+      var dmg = localStorage.getItem("damages");
+      console.log(dmg);
+
+      damages = window.damages = JSON.parse(dmg);
+      console.dir(damages);
+      if (damages) {
+         loadDamages(damages);
+      }
+   }
+
+   function cancelDamage() {
+      dialog.style.display = "none";   
+      note.value = "";
+      drawBus.call(img);
+
+      return false;
+   }
+   init();
+})();
+
+</script>
+</html>
