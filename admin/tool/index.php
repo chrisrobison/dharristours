@@ -35,11 +35,22 @@
             init: "<?php print ($in['do']) ? $in['do'] : $process->JS; ?>"
          };
       </script>
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
       <script type="text/javascript" src="/lib/js/ui.multiselect.js"></script>
       <script type="text/javascript" src="/lib/js/i18n/grid.locale-en.js"></script>
-      <script type="text/javascript" src="/lib/js/jquery.jqGrid.4.3.js"></script>
+<script>
+ jQuery.browser = {};
+   (function () {
+       jQuery.browser.msie = false;
+       jQuery.browser.version = 0;
+       if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+           jQuery.browser.msie = true;
+           jQuery.browser.version = RegExp.$1;
+       }
+   })();
+</script>
+      <script type="text/javascript" src="/lib/js/jquery.jqGrid.min.js"></script>
       <script type="text/javascript" src="/lib/js/json2.js"></script>
       <script type="text/javascript" src="/lib/js/store.js"></script>
       <link href="/lib/css/ui.jqgrid.css" type="text/css" rel="stylesheet" />
