@@ -17,3 +17,6 @@ name-ideas.txt
 where/latest.json
 .env
 neoplan/
+.auth.php
+.dbconfig
+.auth
