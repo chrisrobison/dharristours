@@ -221,8 +221,6 @@ function updateCircles(percent) {
 }
 var pathIdx=0;
 function updatePath(who) {
-   
-
    pathIdx++;
    if (pathIdx > drivePath[who].length) {
       for (var o=0; o<drivePath[who].length; o++) {
@@ -231,8 +229,8 @@ function updatePath(who) {
       pathIdx = 0;
    }
    setTimeout("updatePath("+who+")", 500);
-
 }
+
 var infoWindows = [], markers = [], makers = [];
 var iconPath = '/where/img/';
 function updateBuses(buses) {

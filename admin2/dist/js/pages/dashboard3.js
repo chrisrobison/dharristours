@@ -1,6 +1,9 @@
 $(function () {
   'use strict'
 
+fetch("https://dharristours.simpsf.com/files/getrevenue.php?slice=month").then(response=>response.json()).then(data=>{
+  console.dir(data);
+  window.chartdata = data;
   var ticksStyle = {
     fontColor: '#495057',
     fontStyle: 'bold'
@@ -8,39 +11,22 @@ $(function () {
 
   var mode      = 'index'
   var intersect = true
+   var labels = Object.keys(data);
+   var vals = Object.values(data);
 
   var $salesChart = $('#sales-chart')
   var salesChart  = new Chart($salesChart, {
     type   : 'bar',
     data   : {
-      labels  : ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
       datasets: [
-        {
-          backgroundColor: '#007bff',
-          borderColor    : '#007bff',
-          data           : [1000, 2000, 3000, 2500, 2700, 2500, 3000]
-        },
-        {
-          backgroundColor: '#ced4da',
-          borderColor    : '#ced4da',
-          data           : [700, 1700, 2700, 2000, 1800, 1500, 2000]
-        }
+         {
+            data: data 
+         }
       ]
     },
     options: {
-      maintainAspectRatio: false,
-      tooltips           : {
-        mode     : mode,
-        intersect: intersect
-      },
-      hover              : {
-        mode     : mode,
-        intersect: intersect
-      },
-      legend             : {
-        display: false
-      },
-      scales             : {
+      parsing: false,
+       scales: {
         yAxes: [{
           // display: false,
           gridLines: {
@@ -72,6 +58,15 @@ $(function () {
       }
     }
   })
+});
+  var ticksStyle = {
+    fontColor: '#495057',
+    fontStyle: 'bold'
+  }
+
+  var mode      = 'index'
+  var intersect = true
+
 
   var $visitorsChart = $('#visitors-chart')
   var visitorsChart  = new Chart($visitorsChart, {

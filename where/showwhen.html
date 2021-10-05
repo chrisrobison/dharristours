@@ -152,7 +152,7 @@
       <div id='startdate'><span class='label'>Date Range:</span><br><input id='when' type='datetime'><button onclick="getPath(mystart, myend)"> &gt; </button></div>
       <input type='range' min='0' max='100' step='.1' id='timeslice' value='0'>
       <div id='player'>
-         <button id='ts_0' class='webding'>&#0x39;</button><button id='ts_-1'>&#9194;</button><button id='ts_play'>&#9654;;</button><button id='ts_+1'>&#9193;</button><button id='ts_100' class='webding'>&#0x3a;</button>
+         <button id='ts_0' class='webding'></button><button id='ts_-1' class='webding'></button><button id='ts_pause' class='webding' style='display:none'></button><button id='ts_play' class='webding'></button><button id='ts_+1' class='webding'></button><button id='ts_100' class='webding'></button>
       </div>
     </div>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script>
@@ -198,13 +198,21 @@
          console.log(action);
          switch(action) {
             case "play":
+               $("#ts_pause").show();
+               $("#ts_play").hide();
                if (window.playing) {
                   window.playing = 0;
                } else {
                   window.playing = 1;
                   window.playTimeout = setTimeout(nextStep, 500);
                }
-            break;
+               break;
+            case "pause":
+               $("#ts_pause").hide();
+               $("#ts_play").show()
+               window.playing = 0;
+
+               break;
             case "+1":
                slider.value = parseInt(slider.value) + 1;
                fireEvent(slider, 'change');

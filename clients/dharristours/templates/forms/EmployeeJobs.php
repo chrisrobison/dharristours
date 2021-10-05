@@ -1,6 +1,16 @@
+<script>
+   function openDriverLog() {
+      let z = btoa("ID=" + simpleConfig.id);
+      let tgt = '<?php print $boss->app->Assets; ?>/templates/DriverLog.php?z=' + z;
+      
+      window.open(tgt, "btnJobWin", "height=800,width=600,resizable=yes,scrollbars=yes,status=yes,toolbar=yes,menubar=yes,location=no,personalbar=no");
+      
+      return false;
+   }
+</script>
 <div class='tableGroup'>
    <div class='formHeading'> Job ID: <?php print $current->JobID; ?></div>
-   <button name='driverLogButton' style='float:middle' onclick='window.open("<?php print $boss->app->Assets; ?>/templates/forms/EmployeeDriverLog.php?printbtn=yes&ID="+simpleConfig.id, "btnJobWin", "height=800,width=600,resizable=yes,scrollbars=yes,status=yes,toolbar=yes,menubar=yes,location=no,personalbar=no");return false;'>Print Driver Log</button>
+   <button name='driverLogButton' style='float:middle' onclick='return openDriverLog()'>Print Driver Log</button>
    <div class='fieldcontainer'>
       <div class='fieldcolumn fieldfloater'>
          <div class='contentField'><span class='fieldLabel'>Trip Cancelled: </span><span name='Job[][JobCancelled]' id='JobCancelled'></span></div>

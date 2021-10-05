@@ -57,8 +57,8 @@
    #top_header { width:5in; height:.5in;position:relative;white-space:nowrap;border-radius:12px;-webkit-border-radius:12px;-moz-border-radius:12px;border: 4px solid #000000; }
    #top_header div { float:left;width:2.25in;height:.5in;padding:.006in .05in;}
    #top_header>:first-child { border-right:4px solid #000;}
-   #header { width:4.75in;height:.6in; }
-   #top_overview { position:absolute;right:.5in;width:2in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px; }
+   #header { width:5in;height:.6in; }
+   #top_overview { position:absolute;right:.5in;height:.83in;white-space:nowrap;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px; }
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:.9em; }
    #main { background:none repeat scroll 0 0 #FFFFFF; height:11in; margin:1px auto; padding:.5in; position:relative; width:7.75in; }
@@ -66,6 +66,7 @@
    #forprint { margin:.5in; width:8.0in;height:11in; position:relative;}
    #ticket {border:solid 1px #000000;height:9in;width:7.5in;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
    h2{margin:0px; font-size:20pt; font-weight:bold;}
+   td {vertical-align:top; }
    .big {font-size:18pt;}
    div.date {font-size:10pt;}
    .center {text-align:center;}
@@ -101,11 +102,8 @@
          <td> <h3><?php print $current->InvoiceID; ?></h3></td>
       </tr>
       <tr class='header'>
-      	<td class='right'>Date</td>
-         <td><?php if ($current->InvoiceDate==0) {print $current->LastModified;} print date("F j, Y", strtotime($current->InvoiceDate)); ?></td>
+         <td colspan='2'><?php if ($current->InvoiceDate==0) {print $current->LastModified;} print date("F j, Y", strtotime($current->InvoiceDate)); ?></td>
       </tr>
-      <tr class='header'><td class='right'>TCP </td><td>017270-B</td></tr>
-      <tr class='header'><td class='right'>CA </td> <td>273437</td></tr>
 
    </table>
    </div>
@@ -116,14 +114,18 @@
             <td colspan='3'><h2>D HARRIS TOURS Inc.</h2></td>
          </tr>
          <tr>
-            <td class='header'>Voice: (415) 902-8542 / Fax: (800) 853-4006</td>
+            <td class='header' colspan='3'>Voice: (415) 902-8542 / Fax: (800) 853-4006</td>
          </tr>
          <tr>
-            <td class='header'>PO Box 5961, Vallejo, CA 94591</td>
+            <td class='header' colspan='2'>PO Box 5961, Vallejo, CA 94591</td>
+            <td class='header'>TCP 017270-B</td>
          </tr>
          <tr>
-            <td class='header'>juanaharrisdht@att.net</td>
+            <td class='header' colspan='2'>juanaharrisdht@att.net</td>
+            <td class='header'>CA 273437</td>
          </tr> 
+         <tr>
+         </tr>
    </table>
     <br />
        <div class='date'>
@@ -132,7 +134,7 @@
             <h2 class=''><?php print $business->Business; ?></h2>
             <?php
                if (($business->AttnTo != ".") && ($business->AttnTo!="")) {
-            ?><div class="date"><input type="text" value="<?php print $business->AttnTo; ?>" style='width:30em; text-align:center; border: none;font-size:1.2em;'/></div>
+            ?><div class="date"><input type="text" value="<?php print $business->AttnTo; ?>" style='width:30em; border: none;font-size:1.2em;'/></div>
             <?php
                }
                if (($business->Address1 != ".") && ($business->Address1!="")) {
@@ -160,7 +162,7 @@
             <tr>
                <td class='field'>Job: </td>
 	       <td class='value'><?php print $job->Job; ?></td>
-               <td class='field'>Pax:</td>
+               <td class='field'>Passengers:</td>
                <td class='value'><?php print $job->NumberOfItems; ?></td>
             <tr>
                <td class='field'>PO: </td>
@@ -175,7 +177,8 @@
                <td></td>
             </tr>
          </table>
-         <div style='float:left;font-size:1.5em;padding-left:3em;'>Trip Details</div>
+         <div style='font-size:2em;padding-left:1em;'>Trip Details</div>
+            <hr style="height:1px;margin:1em 9em;"/>
          <table class='trips' style="margin-top:.5em;width:5in;margin-left:auto;margin-right:auto;">
             <tr>
                <td class='field'>From:</td>
@@ -193,9 +196,10 @@
             </tr>
             <?php } ?>
             </table>
+            <hr style="height:1px;margin:1em 9em;"/>
             <table class='trips' style='width:6in;margin-top:.5em;'>
             <tr>
-               <td></td><td style='border-bottom:1px solid #ccc;'>Requested</td><td></td><td style='border-bottom:1px solid #ccc;'>Recorded</td><td rowspan='10'>&nbsp;&nbsp;</td>
+               <td></td><td class='field' style='border-bottom:1px solid #ccc;text-align:center;'>Requested</td><td></td><td class='field' style='text-align:center; border-bottom:1px solid #ccc;'>Recorded</td><td rowspan='10'>&nbsp;&nbsp;</td>
             </tr>
             <tr>
                <td class='field' style='width:10em;'>Pickup: </td>
@@ -227,7 +231,7 @@
             </tr>
 	    <tr>
                <td class='field'>Hours:</td>
-               <td class='value' style='border-top:1px solid #ccc;'><?php print $job->Hours; ?></td>
+               <td class='value' style='border-top:1px solid #ccc;'><?php print sprintf("%.01f", $job->Hours); ?></td>
                <td class='field'></td>
                <td class='value' style='border-top:1px solid #ccc;'><?php if ($current->BillableHours==0) { print $job->Hours;} else { print sprintf("%.01f", $current->BillableHours); } ?></td>
 	    </tr>
@@ -244,36 +248,30 @@
             </table>
             <table class='trips'>
             <tr>
-               <td>Notes:</td>
+               <td class='field' style='border-right:0px solid #333;width:4.5em;' rowspan='6'>Notes</td>
+               <td rowspan='6' style='vertical-align:top;width:22em;border:1px solid #eee;border-radius:2em;' class='value'><textarea style='width:4in;height:2in;border:0px;'><?php print preg_replace("/\-\-.*/", "", preg_replace("/[,]/", "<br>\n", $current->Description)); ?></textarea></td>
                <td class='field'>Overtime Charge:</td>
                <td class='value right'>$<?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
 	    </tr>
             <tr>
-               <td class='value'><?php print preg_replace("/\-\-.*/", "", preg_replace("/[,]/", "<br>\n", $current->Description)); ?></td>
                <td class='field'>Gas:</td>
-               <td class='value right' colspan='3'>$<?php printf("%.02f", $current->Gas); ?></td>
-               <td></td>
+               <td class='value right'>$<?php printf("%.02f", $current->Gas); ?></td>
             </tr>
             <tr>
-               <td></td>
                <td class='field'>Misc Cost:</td>
-               <td class='value right' colspan='3'>$<?php printf("%.02f", $current->MiscCost); ?></td>
-               <td></td>
+               <td class='value right'>$<?php printf("%.02f", $current->MiscCost); ?></td>
             </tr>
             <tr>
-               <td></td>
                <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Invoice Amount:</td>
-               <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {printf("%.02f",  $job->QuoteAmount);} else { printf("%.02f", $current->InvoiceAmt); }?></td>
+               <td class='value right' style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {printf("%.02f",  $job->QuoteAmount);} else { printf("%.02f", $current->InvoiceAmt); }?></td>
             </tr>
             <tr>
-               <td></td>
                <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Paid Amount:</td>
-               <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->PaidAmt); ?></td>
+               <td class='value right' style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->PaidAmt); ?></td>
             </tr>
             <tr>
-               <td></td>
                <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Balance DUE:</td>
-               <td class='value right' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->Balance); ?></td> 
+               <td class='value right' style='font-weight: bold; font-size:12pt'>$<?php printf("%.02f", $current->Balance); ?></td> 
             </tr>
 
          </table>

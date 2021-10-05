@@ -94,15 +94,17 @@
             $obj->title = $row['Job'];
             $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
             $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
+            $obj->date = date("m/d", strtotime($row['JobDate']));
             $obj->resourceId = $buses[$row['BusID']];
             $obj->color = $row['Color'];
             if ($row['JobCancelled']==1) {
                $obj->color = "#222222";
             }
          //   $obj->url = "/grid/view.php?rsc=Job&pid=335&id={$row['JobID']}";
-         $obj->url = "javascript:handleClick('{$row['JobID']}')";
+            $obj->url = "javascript:handleClick('{$row['JobID']}')";
             $obj->extendedProps = new stdClass;
             $obj->extendedProps->EmployeeID = $row['EmployeeID'];
+            $obj->extendedProps->Employee = getDriver($link, $row['EmployeeID']);
 
             $cnt++;
             if ($cnt > count($colors)) {
@@ -197,6 +199,18 @@
       return $out;
    }
    
+   function getDriver($link, $id) {
+      $out = array(); $cnt = 0;
+      $id = mysqli_real_escape_string($link, $id);
+      $results = mysqli_query($link, "SELECT EmployeeID, concat(FirstName, ' ', LastName) as Driver, Email, Phone FROM Employee WHERE Active=1 and Driver=1 AND EmployeeID='$id'");
+      
+      if (mysqli_num_rows($results)) {
+         $out = $results->fetch_assoc();
+      }
+
+      return $out;
+   }
+
    function getDrivers($link) {
       $out = array(); $cnt = 0;
       $results = mysqli_query($link, "SELECT EmployeeID, concat(FirstName, ' ', LastName) as Driver, Email, Phone FROM Employee WHERE Active=1 and Driver=1");
@@ -216,7 +230,7 @@
       if ($rsc == 'customer') {
          $rsc = 'Business';
          
-         $results = mysqli_query($link, "SELECT distinct(Business) from Business where Business like '" . $in['q'] . "%' order by Business limit 10");
+         $results = mysqli_query($link, "SELECT distinct(Business) from Business where Business like '" . mysqli_real_escape_string($link, $in['q']) . "%' order by Business limit 10");
          while ($row = $results->fetch_assoc()) {
             $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Business']);
             $out->results[] = $match;
@@ -224,7 +238,7 @@
          }
          
          if (count($out->results) < 10) {
-            $results = mysqli_query($link, "SELECT distinct(Business) from Business where Business like '%" . $in['q'] . "%' order by Business limit 20");
+            $results = mysqli_query($link, "SELECT distinct(Business) from Business where Business like '%" . mysqli_real_escape_string($link, $in['q']) . "%' order by Business limit 20");
             while ($row = $results->fetch_assoc()) {
                $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Business']);
                if (!in_array($match, $out->results)) {

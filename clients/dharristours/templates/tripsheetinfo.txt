@@ -8,4 +8,4 @@
    (6) The starting time and length of time for which the vehicle has been reserved.
 
 (b) At the conclusion of the trip, the driver shall record the ending time on the trip sheet.
-(c) The trip sheet shall be retained by the certificateholder for a minimum of 1 year. 
+(c) The trip sheet shall be retained by the service provider for a minimum of 1 year. 
