@@ -25,7 +25,13 @@
           $in[urldecode($key)] = urldecode($val);
       }
    }
-   
+   $arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+      )
+   );  
+
    $in['Resource'] = "Job";
    $in['ID'] = $in['ID'] ? $in['ID'] : 0;
  
@@ -52,7 +58,7 @@
       $file = $InvID.'.html';
 
       if ($in['x'] == "create") {
-         $invoice = file_get_contents($url);
+         $invoice = file_get_contents($url, false, stream_context_create($arrContextOptions));
          $path = $_SERVER['DOCUMENT_ROOT'] . $boss->app->Assets .'/invoices/';
          $save = $path . $file;
          $cnt = 0;

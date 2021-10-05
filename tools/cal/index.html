@@ -190,7 +190,7 @@ div.dropdown-menu {
            }
            html += "</tbody></table>";
            jobs.innerHTML = html;
-           selectTab(document.querySelector("a[href='#joblist']")); 
+           // selectTab(document.querySelector("a[href='#joblist']")); 
            return content.eventArray;
          },
          select: function(arg) {
@@ -280,7 +280,7 @@ div.dropdown-menu {
          console.log(url);
          fetch(url).then(response=>response.json()).then(data=>{
             console.dir(data);
-
+            calendar.refetchEvents();
          });
       }
    }
@@ -310,14 +310,15 @@ div.dropdown-menu {
  
    }
    function selectTab(who) {
-      cleanTabs(".tabs");
-      if (typeof who === "string") {
-         who = document.querySelector("a[href=\""+who+"\"]");
+      if (who) {
+         cleanTabs(".tabs");
+         if (typeof who === "string") {
+            who = document.querySelector(`a[href="${who}"]`);
+         }
+         who.classList.add('active');
+         div_to_show = who.getAttribute('href');
+         document.querySelector(div_to_show).style.display = "block";
       }
-      who.classList.add('active');
-      div_to_show = who.getAttribute('href');
-      document.querySelector(div_to_show).style.display = "block";
-
    }
 function makeTabs(selector) {
     tab_lists_anchors = document.querySelectorAll(selector + " li a");
@@ -476,11 +477,20 @@ function modal(from, to, rsc) {
    <div class='dlgtitle'>Reserve Bus ${rsc._resource.id} on ${from.toLocaleDateString()}</div>
    <div class='dlgform'>
       <div class='form-group'><label for='customer'>Customer</label> <input type='text' id='customer' name='customer' placeholder='Customer' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='customer_suggestions' class='suggestions'></div></div>
-      <div class='form-group'><label for='from'>From</label> <input type='text' id='from' name='from' placeholder='Pickup Time' value='${formatTime(from)}' size='10' class='form-time' onchange='handleForm(this)'/>
-      <label style='width:2em' for='to'>To</label> <input type='text' id='to' name='to' placeholder='Dropoff Time' value='${formatTime(to)}' size='10' class='form-time' onchange='handleForm(this)'/>
-      <label style='width:3em' for='pax'>Pax</label> <input type='text' id='pax' name='pax' placeholder='<=${rsc._resource.id.substr(0,2)}' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' /></div>
-      <div class='form-check form-check-inline'><input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' /><label class='form-check-label' for='oneway'>One Way</label>
-      <input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label></div>
+      <div class='form-group'>
+         <label for='from'>From</label> <input type='text' id='from' name='from' placeholder='Pickup Time' value='${formatTime(from)}' size='10' class='form-time' onchange='handleForm(this)'/>
+         <label style='width:2em' for='to'>To</label> <input type='text' id='to' name='to' placeholder='Dropoff Time' value='${formatTime(to)}' size='10' class='form-time' onchange='handleForm(this)'/>
+         <label style='width:3em' for='pax'>Pax</label> <input type='text' id='pax' name='pax' placeholder='<=${rsc._resource.id.substr(0,2)}' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' />
+      </div>
+      <div class='form-group'>
+         <label for='triptype'>Trip Type</label>
+         <select name='triptype' id='triptype' onchange='handleForm(this)'>
+            <option value='roundtrip'>Round Trip</option>
+            <option value='oneway'>One Way</option>
+         </select>
+         <!--input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' />
+         <input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label-->
+      </div>
       <div class='form-group'><label for='pickup'>Pickup</label> <input type='text' id='pickup' name='pickup' placeholder='Pickup Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='pickup_suggestions' class='suggestions'></div></div>
       <div class='form-group'><label for='dropoff'>Dropoff</label> <input type='text' id='dropoff' name='dropoff' placeholder='Dropoff Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='dropoff_suggestions' class='suggestions'></div></div>
       <div class='form-group right'><button type='button' id='dlg_cancel' onclick='closeDialog()'>Cancel</button> <button type='button' id='dlg_reserve' onclick='return makeReservation()'>Reserve</button></div>

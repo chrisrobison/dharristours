@@ -52,10 +52,10 @@
       if (a.dataWidget == "pushmenu") {
          toggleSidebar();
       } else if (a.href && a.href != "#") {
-         clearClass('active');
-         a.className += ' active';
          document.querySelector("#content").src = a.href;
-
+      }
+      if (a.href) {
+         a.classList.toggle('active');
       }
       console.dir(event.target.parentElement);
       console.dir(event);

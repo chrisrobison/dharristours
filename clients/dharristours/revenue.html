@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 5vh;
+        }
+
+        main {
+            background-color: #333;
+            color: #ddd;
+            height: 85vh;
+            overflow: scroll;
+            display: flex;
+            position:relative;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+        .bar {
+            width: 3px;
+            background-color:#cc0000;
+            border: 1px solid #000000;
+            display:inline-block;
+            position:absolute;
+            bottom:0px;
+              writing-mode: vertical-lr;
+              overflow:hidden;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+<select id='timeframe'>
+<option>day</option>
+<option>week</option>
+<option>month</option>
+<option>year</option>
+</select>
+<button onclick="app.showData($('#timeframe').options[$('#timeframe').selectedIndex].text)">Load</button>
+</header>
+    <main>
+
+    </main>
+
+    <script>
+        //function $(str) { return document.querySelector(str); }
+        const $ = (str) => document.querySelector(str);
+        const $$ = (str) => document.querySelectorAll(str); 
+
+        (function() {
+            const app = {
+                init: function() {
+                    app.state.loaded = true;
+                    fetch("getrevenue.php").then(response=>response.json()).then(data=>{
+                        app.state.data = data;
+                        console.dir(data);
+                        app.showData("month");
+                    });
+                },
+                showData: function(slice) {
+                  let out = '';
+                  let cnt = 0;
+
+                  app.state.data[slice].forEach((item, key) => {
+                     out += `<div id='bar_${item.x}' class='bar' title='${item.x}' style='font-size:${app.config.timeframe[slice].fontSize};width:${app.config.timeframe[slice].barWidth}px;left:${cnt * app.config.timeframe[slice].barWidth}px;height:${item.y/app.config.timeframe[slice].divideBy}px'>${item.x}</div>`;
+                     cnt++;
+                  });
+                  $("main").innerHTML = out;
+                  
+                },
+                config: {
+                  timeframe: {
+                     day: {
+                        barWidth: 2,
+                        divideBy: 50,
+                        fontSize: '4px'
+                     },
+                     week: {
+                        barWidth: 5,
+                        divideBy: 100,
+                        fontSize: '6px'
+                     },
+                     month: {
+                        barWidth:12,
+                        divideBy: 500,
+                        fontSize: '8px'
+                     },
+                     year: {
+                        barWidth: 20,
+                        divideBy: 5000,
+                        fontSize: '12px'
+                     }
+                  }
+                },
+                state: {
+                    loaded: false
+                }
+            }
+            window.app = app;
+            app.init();
+        })();
+    </script>
+</body>
+
+</html>

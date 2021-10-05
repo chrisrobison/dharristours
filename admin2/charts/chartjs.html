@@ -1014,16 +1014,20 @@
       options: pieOptions      
     })
 
+   fetch("https://dharristours.simpsf.com/files/getrevenue.php").then(response=>response.json()).then(data=>{
+
     //-------------
     //- BAR CHART -
     //-------------
+    
     var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    /*
     var barChartData = jQuery.extend(true, {}, areaChartData)
     var temp0 = areaChartData.datasets[0]
     var temp1 = areaChartData.datasets[1]
     barChartData.datasets[0] = temp1
     barChartData.datasets[1] = temp0
-
+   */
     var barChartOptions = {
       responsive              : true,
       maintainAspectRatio     : false,
@@ -1032,10 +1036,10 @@
 
     var barChart = new Chart(barChartCanvas, {
       type: 'bar', 
-      data: barChartData,
+      data: data['week'],
       options: barChartOptions
     })
-
+   });
     //---------------------
     //- STACKED BAR CHART -
     //---------------------

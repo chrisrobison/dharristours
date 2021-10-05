@@ -4,7 +4,7 @@
 
    var jobdateset = false;
 
-   setTimeout(checkJobDate, 2000);
+   setTimeout(checkJobDate, 3000);
 
    function checkJobDate() {
       if (jobdateset) { return true; }
@@ -135,8 +135,8 @@
                   <input type='text' name='Job[<?php print $current->JobID; ?>][Description]' id='Description' value='<?php print $current->Description; ?>' size='50' style='width:15em;' class='boxValue' />
                </div>
                <div class='contentField'>
-                  <label>Cust PO</label>
-                  <input type='text' name='Job[<?php print $current->JobID; ?>][BusinessLocation]' id='BusinessLocation' value='<?php print $current->BusinessLocation; ?>' size='50' class='boxValue' style='width:15em;' />
+                  <label>Cust PO</label><input type='text' name='Job[<?php print $current->JobID; ?>][BusinessLocation]' id='BusinessLocation' value='<?php print $current->BusinessLocation; ?>' size='25' class='boxValue' style='width:8em;' />
+                  <label>Color</label><input type='color' default='#00ee33' name='Job[<?php print $current->JobID; ?>][Color]' id='Color' value='<?php print $current->Color; ?>' />
                </div>
          </fieldset>
          <div style='margin-left:4em' class='contentField disabled'>
@@ -287,8 +287,8 @@
                   <?php $boss->db->addResource("Bus");$arr = $boss->db->Bus->getlist();print $boss->utility->buildSelect($arr, $current->BusID, "BusID", "Bus", "Job[".$current->JobID."][BusID]");?>
                </div>
        <div class='contentField'><label>Depart Yard Time</label><input type='text' name='Job[<?php print $current->JobID; ?>][DepartYardTime]' id='DepartYardTime' value='<?php print $current->DepartYardTime; ?>' size='50' class='boxValue' /></div>
-	       <div class='contentField'><label>On Spot Time</label><input type='text' name='Job[<?php print $current->JobID; ?>][OnSpotTime]' id='OnSpotTime' value='<?php print $current->OnSpotTime; ?>' size='50' class='boxValue' /></div>
-               <div class='contentField'><label>Driver Instructions</label><textarea name='Job[<?php print $current->JobID; ?>][SpecialInstructions]' id='SpecialInstructions' class='textBox' style='width:21em;height:5em;'><?php print $current->SpecialInstructions; ?></textarea></div>
+	       <!--div class='contentField'><label>On Spot Time</label><input type='text' name='Job[<?php print $current->JobID; ?>][OnSpotTime]' id='OnSpotTime' value='<?php print $current->OnSpotTime; ?>' size='50' class='boxValue' /></div-->
+               <div class='contentField'><label>Instructions</label><textarea name='Job[<?php print $current->JobID; ?>][SpecialInstructions]' id='SpecialInstructions' class='textBox' style='width:21em;'><?php print $current->SpecialInstructions; ?></textarea></div>
                <div class='contentField'>
                   <label>Contact</label>
                   <input type='text' name='Job[<?php print $current->JobID; ?>][ContactName]' id='ContactName' value='<?php print $current->ContactName; ?>' size='50' class='boxValue' />

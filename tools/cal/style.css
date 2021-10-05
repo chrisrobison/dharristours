@@ -9,7 +9,7 @@ body {
     margin: .5em auto 0px auto;
     display:inline-block;
     width: 100%;
-
+    border-bottom:3px groove #ccc; 
   }
   .left {
      position:relative; 
@@ -19,16 +19,25 @@ body {
      margin-top:0em;
      margin-right:1em;
   }
+  th.fc-slot {
+   background-color:#222;
+   color:#eee;
+   text-align:center;
+  }
+  th.fc-slot a {
+   color:#eee;
+   font-family: "Lexend","Helvetica Neue","Verdana",sans-serif;
+   font-weight:500;
+   text-decoration:none;
+  }
   #tinycal {
     width:400px;
   }
   #details {
-     display:inline-block;
-     width:25em;
-     height:27em;
      margin:.5em 0 1em 0;
      border:1px solid #ccc;
      padding:0px;
+     flex-grow: 1;
   }
   #detail {
     overflow-y:scroll;
@@ -44,6 +53,8 @@ body {
     position: -webkit-sticky;
     position: sticky;
     top:0;
+    background-color:#222;
+    color:#eee;
   }
   .dp-col-header, .dp-permanent {
      font-size:1em;
@@ -98,7 +109,7 @@ body {
 }
 
 .tabs a{
-  display:block;
+  display:inline-block;
   padding:5px 10px;
   background-color: #EEE;
   color: #000;
@@ -123,15 +134,30 @@ body {
 .tabs a.active.joblist {
   box-shadow:2px -1px 2px rgba(0,0,0,.3);
 }
-.tabs div{
+#joblist tbody {
+   overflow:scroll;
+   height:auto;
+}
+.tabs div {
   clear: both;
   border:1px solid #CCC;
   padding:5px;
-  font-family:verdana;
-  font-size:13px;
+  font-family:"Lexend","Helvetica Neue","Verdana",sans-serif;
+  font-size:14px;
   background-color: #fff;
+  overflow:scroll;
   display:none;
 }
+div#joblist {
+   height:100%;
+   display:flex;
+   flex-direction: column;
+}
+
+.fc .fc-timeline-header-row-chrono div.fc-timeline-slot-frame {
+   justify-content: center;
+}
+
 @media screen and (max-width: 992px) {
    #calendar {
       width:100%;
