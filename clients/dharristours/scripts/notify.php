@@ -24,8 +24,12 @@
       if ($job->Email == "juana") {
          $job->Email = "juanaharrisdht@att.net";
       }
+      $msgDate = date("D, d M Y H:i:s O");
+
       $email = <<<EOT
-From: $job->ReplyTo
+Date: $msgDate
+From: Simple Software Notification <notify@simpsf.com>
+Reply-to: $job->ReplyTo
 To: $job->Email
 Cc: $job->CC
 Bcc: $job->BCC
