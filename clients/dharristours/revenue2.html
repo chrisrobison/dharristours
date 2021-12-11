@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 3.5vh;
+            padding-top: 1.5vh;
+        }
+
+        main {
+            background-color: #fff;
+            color: #000;
+            height: 95vh;
+            overflow: scroll;
+            display: flex;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+        #myChart {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+<header>
+Chart type: 
+<select id='type'>
+<option>line</option>
+<option selected>bar</option>
+</select>
+
+<label for='range'>Granularity:</label>
+<select id='range'>
+<option>day</option>
+<option selected>week</option>
+<option>month</option>
+<option>year</option>
+</select>
+
+<label for='count'>Number of records:</label>
+<input type='text' id='count' value='52'>
+<button>Go</button>
+</header>
+    <main>
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+ 
+    </main>
+
+<script>
+//function $(str) { return document.querySelector(str); }
+const $ = (str) => document.querySelector(str);
+const $$ = (str) => document.querySelectorAll(str); 
+
+(function() {
+   const app = {
+       init: function() {
+         $("button").addEventListener("click", function(e) {
+            app.state.chart.destroy();
+            app.showChart();
+            e.preventDefault();
+            return false;
+         });
+         fetch("getrevenue.php").then(response=>response.json()).then(data=>{
+            app.state.data = data;
+            console.dir(data);
+            app.showChart();
+            app.state.loaded = true;
+         });
+      },
+      showChart: function(records) {
+         const count = parseInt($("#count").value);
+         const range = $("#range").options[$("#range").selectedIndex].text;
+         console.log(`Range: ${range} Count: ${count}`);
+         const data = {
+           datasets: [{
+             label: 'D Harris Tours Revenue',
+             backgroundColor: 'rgb(255, 99, 132)',
+             borderColor: 'rgb(255, 99, 132)',
+             data: app.state.data[range].splice(-1 * count, count)
+           }]
+         };
+         const config = {
+           type: $("#type").value,
+           data: data,
+           options: {}
+         };
+         app.state.chart = new Chart(
+             document.getElementById('myChart'),
+             config
+           );
+       },
+       state: {
+           loaded: false
+       }
+   }
+   window.app = app;
+   app.init();
+})();
+</script>
+</body>
+
+</html>
