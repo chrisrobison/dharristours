@@ -50,6 +50,10 @@
 	<fieldset class='jobstatus' title="Tracking">
             <legend>Customer Request</legend>
                <div class='contentField'>
+                  <input type='checkbox' id='QuoteOnly' name='Job[<?php print $current->JobID; ?>][QuoteOnly]' dbtype='tinyint(4)' value='1'>
+                  <span>Quote</span>
+               </div>
+               <div class='contentField'>
 		  <label>Job</label>
                   <input type='text' name='Job[<?php print $current->JobID; ?>][Job]' id='Job' value='<?php print $current->Job; ?>' size='75' style='width:25em;' class='boxValue' />
                </div>
@@ -202,8 +206,6 @@
          </fieldset>
    <fieldset class='jobstatus' title="Status">
     <legend>Request Status</legend>
-    <input type='checkbox' id='QuoteOnly' name='Job[<?php print $current->JobID; ?>][QuoteOnly]' dbtype='tinyint(4)' value='1'>
-    <span>Quote until Confirmed</span>
     <input type='checkbox' id='Confirmed' name='Job[<?php print $current->JobID; ?>][Confirmed]' dbtype='tinyint(4)' value='1'>
     <span>Customer Confirmed</span>
     <input type='checkbox' id='DriverNotified' name='Job[<?php print $current->JobID; ?>][DriverNotified]' dbtype='tinyint(4)' value='1'>

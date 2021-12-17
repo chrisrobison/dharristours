@@ -199,39 +199,39 @@ function getEstPrice(obj) {
 	var est1p = "0";
 	} else if (pax > 0 && pax < 29) {
 	  if (roundtrip == 1) {
-	var est4p = data["Cost28FirstFour"];
+	var est4p = "650";// data["Cost28FirstFour"];
 	}
 	else {
-	var est4p = data["Cost28OneWay"];
+	var est4p = "600"; //data["Cost28OneWay"];
 	}
-	var est1p = data["Cost28OT"];
+	var est1p = "100"; //data["Cost28OT"];
 	} else if (pax > 28 && pax < 33) {
 	  if (roundtrip == 1) {
-	var est4p = data["Cost32FirstFour"];
+	var est4p = "750"; //data["Cost32FirstFour"];
 	}
 	else {
-	var est4p = data["Cost32OneWay"];
+	var est4p = "700"; //data["Cost32OneWay"];
 	}
-	var est1p = data["Cost32OT"];
+	var est1p = "110"; //data["Cost32OT"];
 	} else if (pax > 32 && pax < 39) {
 	  if (roundtrip == 1) {
-	var est4p = data["Cost38FirstFour"];
+	var est4p = "775"; //data["Cost38FirstFour"];
 	}
 	else {
-	var est4p = data["Cost38OneWay"];
+	var est4p = "725"; //data["Cost38OneWay"];
 	}
-	var est1p = data["Cost38OT"];
+	var est1p = "110"; //data["Cost38OT"];
 	} else if (pax > 38 && pax < 46) {
 	  if (roundtrip == 1) {
-	var est4p = data["Cost45FirstFour"];
+	var est4p = "850"; //data["Cost45FirstFour"];
 	}
 	else {
-	var est4p = data["Cost45OneWay"];
+	var est4p = "800"; //data["Cost45OneWay"];
 	}
-	var est1p = data["Cost45OT"];
+	var est1p = "120"; //data["Cost45OT"];
 	} else if (pax > 45 && pax < 56) {
-	var est4p = data["Cost55FirstFour"];
-	var est1p = data["Cost55OT"];
+	var est4p = "1000"; //data["Cost55FirstFour"];
+	var est1p = "200"; //data["Cost55OT"];
 	}
 	  if (roundtrip == 1) {
 	var estp = (parseFloat(est4p) + (parseFloat(est1p)*(parseFloat(hrs)-4.0)));

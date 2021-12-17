@@ -51,7 +51,9 @@ class ClientUtility extends utility {
    
    function filterEmployeeJob($tbl=true) {
       global $boss;
-      $sql = 'EmployeeID in (select EmployeeID from Employee where Email='.$boss->q($_SESSION['Email']).')';
+      $email = $_SESSION['Email'];
+//$email = "harristrent750@yahoo.com";
+      $sql = 'EmployeeID in (select EmployeeID from Employee where Email='.$boss->q($email).')';
       $searchQuery = $boss->utility->buildGridSearch();
       if ($searchQuery) $sql .= " AND " . $searchQuery;
 
