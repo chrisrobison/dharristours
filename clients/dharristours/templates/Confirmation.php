@@ -128,7 +128,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
       <div id='ticket' style='padding:0px;margin-top:1em;'>
          <div style="padding:.25em;background-color:#ddd;border-radius:1em 1em 0 0;">
             <div style='float:right' class="date center"><?php print date("m/d/Y", strtotime($job->JobDate)); ?></div>
-            <h2 class='left'>CONFIRMATION</h2>
+            <h2 class='left'><?php ($job->QuoteOnly) ? print "QUOTE"  : print "CONFIRMATION"; ?></h2>
          </div>
          <div style='padding:0px 0px'>
             <div style='padding:.25em 1em'>
@@ -159,8 +159,10 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
                   <th class='field'>Time</th>
                   <td class='value'><?php print ($job->PickupTime ? date("h:ia", strtotime($job->PickupTime)) : 'Time NOT SET'); ?></td>
                   <td class='field' style='border-left:1px solid #ccc;'></td>
-                  <td class='value'><?php print date("h:ia", strtotime($job->DropOffTime)); ?></td>
+                  <td class='value'><?php ($job->RoundTrip) ? print date("h:ia", strtotime($job->DropOffTime)) : print "One Way Xfer"; ?></td>
                </tr>
+            </table>
+            <table class='table pu'>
                <tr>
                   <th class='field'>Spot: </th>
                   <td class='value' colspan='2'><?php print $job->PickupLocation; ?></td>
@@ -195,7 +197,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
                   <td class='value' colspan='3'><?php print $job->Hours; ?><span style="float:right;"><?php if (is_array($driver->Employee)) { print ""; } else { print "Driver: ";  print $driver->Employee; print  " "; print $driver->Phone; }; ?></span></td>
                </tr>
                <tr>
-                  <td class='field'>Quote Amount:</td>
+                  <td class='field'>Amount:</td>
                   <td class='value' colspan='3'>$<?php print sprintf("%.02f", $job->QuoteAmount); ?><br /><br /></td>
                </tr>
             </table>
