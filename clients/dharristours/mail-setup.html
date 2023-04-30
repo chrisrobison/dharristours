@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            background:#ddd;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 0vh;
+        }
+
+        main {
+         width: 70em;
+         min-height: 100vh;
+         display:inline-block;
+         background: #fff;
+         padding: 1vh 2vw;
+        }
+        main p {
+         margin-left: 2vw;
+        }
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+        table {
+         border: 1px solid #000;
+         border-collapse: collapse;
+         width: 20em;
+         height: 8em;
+         float: right;
+        }
+        table th, table td {
+         padding: .25em;
+        }
+        table thead th {
+         background: #000099;
+         color:#fff;
+        }
+        blockquote {
+         white-space: pre;
+         margin-left: 6em;
+         padding: 0px 1em;
+         color: #0c0;
+         background: #000;
+         display: inline-block;
+         width: 30em;
+        }
+    </style>
+</head>
+
+<body>
+<main>
+<h1>Mail Setup</h1>
+
+<h2>Overview</h2>
+<p>
+Currently, we use the <a href="https://exim.org/">exim</a> mail server for sending and receiving 
+email and <a href="https://www.dovecot.org/">Dovecot</a> for POP3/IMAP retrieval of messages.  
+The primary server for these services is <code>mail.netoasis.net</code> (or <code>mail.dharristours.com</code>).  Domain 
+and user data are contained in the Mysql database 'mail' located on the same server.  Everything 
+is secured via SSL/TLS but the insecure ports are still available if needed.
+</p>
+<h2>Domain Setup</h2>
+<p>
+When a message is received by the exim MTA, it performs a series of checks before it will accept a
+message for delivery.  One of the first checks is to see if we handle mail for the recipient domain.
+This is done via the 'domain' table in the mysql 'mail' database. If the domain is found in the 'domain'
+table, a lookup is performed first against the 'alias' table, forwarding the email based on records 
+matches, and secondly against the 'user' table using the recipient address. If a user record is found,
+the message is delivered.
+</p>
+<h2>Sending Messages</h2>
+<table>
+<thead>
+   <tr><th colspan=2>Outgoing Mail Settings</th></tr>
+</thead>
+<tbody>
+   <tr>
+      <td class='label'>Server name:</td>
+      <td>mail.dharristours.com</td>
+   </tr>
+   <tr>
+      <td class='label'>Ports</td>
+      <td>25, 465, 587, 2525</td>
+   </tr>
+   <tr>
+      <td class='label'>Supports</td>
+      <td>PLAIN, LOGIN, CRAM-MD5</td>
+   </tr>
+</tbody>
+</table>
+
+<p>
+Outgoing SMTP is available using authenication. Exim listens on ports 25, 465, 587 and 2525.  Port
+465 automatically starts TLS upon connect whereas port 587 requires a 'STARTTLS' command issued before 
+beginning secure communications.  Use the full email address for the login and passwords are base64 
+encoded.
+</p>
+
+<h2>Receiving Email</h2>
+<table>
+<thead>
+   <tr><th colspan=2>Incoming Mail Settings</th></tr>
+</thead>
+<tbody>
+   <tr>
+      <td class='label'>Server name:</td>
+      <td>mail.dharristours.com</td>
+   </tr>
+   <tr>
+      <td class='label'>Ports</td>
+      <td>143, 993</td>
+   </tr>
+   <tr>
+      <td class='label'>Supports</td>
+      <td>POP3, IMAP</td>
+   </tr>
+</tbody>
+</table>
+
+<p>
+Mail is delivered based on the mysql record lookup from the <code>mail</code> db, <code>user</code> table.
+All of a domain's data is located in <code>~/domains/YOURDOMAINHERE</code>, including web content, user email, logs, etc.  The directory tree for a domain will look similar to the following: 
+</p>
+<blockquote>
+<code>
+   └─ example.com
+      ├── cgi-bin
+      ├── logs
+      │   ├── access.log
+      │   ├── error.log
+      │   ├── secure-access.log
+      │   └── secure-error.log
+      ├── users
+      │   └── cdr
+      │       └── Maildir
+      │           ├── cur
+      │           ├── new
+      │           └── tmp
+      └── www
+          └── [<em>website files...</em>]
+   </code>
+</blockquote>
+</main>
+    <script>
+        const $ = (str) => document.querySelector(str);
+        const $$ = (str) => document.querySelectorAll(str); 
+
+        (function() {
+            const app = {
+                init: function() {
+                    app.state.loaded = true;
+                },
+                state: {
+                    loaded: false
+                }
+            }
+            window.app = app;
+            app.init();
+        })();
+    </script>
+</body>
+
+</html>

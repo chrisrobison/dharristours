@@ -1,0 +1,119 @@
+body {
+   font-family: "Montserrat", "Lexend", "Helvetica Neue", sans-serif;
+   font-weight: 300;
+   margin: 0 1em 0 1em;
+   padding: 0;
+   font-size: 16px;
+   /* display: flex; */
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   box-sizing: border-box;
+   background-color: #eee;
+}
+input {
+   font-family: "Montserrat", "Lexend", "Helvetica Neue", sans-serif;
+   font-size: 16px;
+
+}
+header {
+   background-color: #999;
+   color: #eee;
+   height: 0vh;
+}
+
+main {
+   background-color: #fff;
+   width: 50vw;
+   padding: 1em 4em;
+   box-shadow: 2px 2px 3px #0003, -2px 2px 3px #0003;
+   margin: 1em auto;
+   /* display: flex; */
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+footer {
+   background-color: #666;
+   color: #eee;
+   height: 0vh;
+}
+ol, ul {
+   vertical-align: text-top;
+   margin-top: 0.5em;
+}
+li {
+   padding-bottom: 0.5em;
+   max-width: 50vw;
+   line-height: 1.5;
+}
+#training label {
+   width: 18em;
+   display: inline-block;
+}
+.subcosts {
+   border: 1px solid #0009;
+   width: 35vw;
+   margin-left:2em;
+   border-collapse: collapse;
+}
+.subcosts tr:nth-child(even) {
+  background-color: #0001; 
+}
+.subcosts th{
+   padding-left: 1em;
+   font-weight: 400;
+   text-align: left;
+   font-weight:300;
+}
+.subcosts td {
+   text-align: right;
+   padding-right: 1em;
+}
+.total {
+   font-size: 1.5em;
+   font-weight: 400;
+   text-transform: uppercase;
+   background-color: #ff06;
+}
+.subcosts thead {
+   background-color: #000;
+   color: #fff;
+   font-size:1.25em;
+
+}
+.subcosts thead td:first-child {
+   text-align: left;
+   padding-left: 1em;
+}
+.permile {
+   font-family: "Overpass Mono", monospace;
+}
+.permile::after {
+   content: "/mile";
+}
+.busLife, .busCount { text-align: center; }
+.example li {
+   list-style: none;
+}
+.flash {
+   animation: 1s ease-out 0s 1 flash;
+}
+.example span {
+   background-color: #ff03;
+}
+.nomarker {
+   list-style-type: none;
+}
+@keyframes flash {
+   0% {
+       background-color: #ff0f;
+       box-shadow: 5px 5px 5px #f009, -5px -5px 5px #f003;
+   }
+   100% {
+       background-color: #ff03;
+       box-shadow: 0px 0px 0px #f000, -0px -0px 0px #f000;
+   }
+}
+
