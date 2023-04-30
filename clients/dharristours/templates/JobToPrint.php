@@ -100,6 +100,7 @@
          #toolbar { position:absolute; float:top; top:0px; left:0px; width:100%; height:3em; background-color:#000; color:#fff; font-size:1.3em; padding:.5em 0; }
          #viewWrap { position:absolute; top:5.25em; left:0px; width:100%; bottom:0px; right:0px; }
          button,input,select,option { font-family: "Open Sans",sans-serif; font-size:1em; }
+         th.field { white-space: nowrap; }
       </style>
    </head>
    <body>

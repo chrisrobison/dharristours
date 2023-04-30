@@ -132,7 +132,7 @@ function updateBuses(buses) {
                   map: map,
                   labelClass: 'labels',
                   label: {
-                     text: buses[i].objectno,
+                     text: buses[i].objectname,
                      color: '#ffff00',
                      fontSize: '18px',
                      fontWeight: 'normal'
@@ -144,7 +144,7 @@ function updateBuses(buses) {
                bounds.extend (markers[i].position);
                var iw;
                markers[i].infowin = iw = new google.maps.InfoWindow({ 
-                  content: '<h1>Bus #' + buses[i]['objectno'] + '</h1><div>' + buses[i]['postext'] + '</div>'
+                  content: '<h1>Bus #' + buses[i]['objectname'] + '</h1><div>' + buses[i]['postext'] + '</div>'
                });
      
                let url = 'https://dharristours.simpsf.com/where/businfo.php?bus=' + buses[i]['objectno'];
@@ -154,7 +154,7 @@ function updateBuses(buses) {
 
          fetch(url).then(res => res.json())
          .then((out) => {
-              var html = "<h2>Bus #" + bus['objectno'];
+              var html = "<h2>Bus #" + bus['objectname'];
               if (out && out[0] && out[0].Driver) {
                   html += " - " + out[0].Driver;
               }

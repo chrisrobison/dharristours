@@ -62,13 +62,13 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    #top_header>:first-child { border-right:0px solid #000;}
    #header { width:5in; border-top:0px solid #000; }
    #header td { white-space:nowrap; font-size:.8em; }
-   #top_overview { position:absolute;right:.5in;width:2in;height:1.35in;border:solid 1px #000000;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;border-bottom:2px solid #000;}
+   #top_overview { position:absolute;right:.5in;width:2in;border:solid 1px #000000;text-align:right;padding:.08in .125in; border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;border-bottom:2px solid #000;}
    #top_overview .desc { font-weight:bold; }
    #top_overview span { font-size:1em; }
    #main { background:none repeat scroll 0 0 #FFFFFF; height:11in; margin:1px auto; padding:.5in; position:relative; width:8.5in; border:1px solid #0006;}
    .shadow { -moz-box-shadow:0px -2px 7px rgba(0,0,0,.5);}
    #forprint { margin:.5in; width:8.0in;height:11in; position:relative;}
-   #ticket {border:solid 1px #000000;height:6in;width:100%;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
+   #ticket {border:solid 1px #000000;width:100%;padding:.125in;position:relative; border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;}
    h2{margin:0px; font-size:1.5em; font-weight:bold;}
    .big {font-size:1.5em;}
    div.date {font-size:1em;font-weight:bold;}
@@ -82,16 +82,20 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    #return_table {text-align:center; position:relative;width:7.5in;}
    #return_table td { border: 1px solid #000000;height:.25in; }
    #return_table th { font-weight:bold;text-align:center;border: 1px solid #000000;height:.25in; }
-   #ticket_table { margin: 0px 1em; }
    #ticket_table, .table { width:100%; }
    #ticket_table td, .table td { padding:2px 5px; vertical-align:top; }
    .nowrap { white-space:nowrap; }
    td.field { text-align:right; }
+   th.field { white-space: nowrap; }
    .tdheading { text-align:center; font-weight:bold; background-color:#ddd; }
    .table.pu { border:1px solid #ccc; margin-top:.5em; }
    .foot { position:absolute; bottom:1em; font-size:.7em;}
    .table th { text-align:right; font-weight:bold; background-color:#ddd; padding:.25em;}
    .table td { border-bottom:1px solid #ccc; padding:.25em; font-size:.9em;}
+   .alertText {
+       background: rgb(153, 0, 0);
+       color: rgb(255, 255, 255);
+    }
    </style>
    <link rel="stylesheet" type="text/css" media="print" href="print.css" />
 
@@ -102,7 +106,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    <div id='top_overview'>
       <span class='date'><?php print date("m/d/Y", strtotime($job->JobDate)); ?></span><br />
       <span class='time'><?php print ($job->PickupTime ? date("h:ia", strtotime($job->PickupTime)) : 'Time NOT SET'); ?></span><br />
-      <span class='desc'><?php print substr($business->Business, 0, 25); ?></span><br />
+      <span class='desc'><?php if (gettype($business->Business)=="string") { print substr($business->Business, 0, 25); } ?></span><br />
       <span class='pass'>Pax: <?php print $job->NumberOfItems; ?></span><br />
       <span class='pass'>Bus: <?php print (count($bus->Bus) > 1) ? "Unknown" : $bus->Bus; ?></span>
    </div>
@@ -128,7 +132,11 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
       <div id='ticket' style='padding:0px;margin-top:1em;'>
          <div style="padding:.25em;background-color:#ddd;border-radius:1em 1em 0 0;">
             <div style='float:right' class="date center"><?php print date("m/d/Y", strtotime($job->JobDate)); ?></div>
-            <h2 class='left'><?php ($job->QuoteOnly) ? print "QUOTE"  : print "CONFIRMATION"; ?></h2>
+            <h2 class='left'><?php ($job->QuoteOnly) ? print "QUOTE ONLY"  : print "CONFIRMATION"; ?> 
+                     <?php ($job->WheelChair == 1) ? print "<span class='alertText'>WHEELCHAIR!</span>"  : print ""; ?>
+                     <?php ($job->Cargo == 1) ? print "<span class='alertText'>CARGO!</span>"  : print ""; ?>
+                     <?php ($job->Shuttle) ? print "<span class='alertText'>SHUTTLE</span>"  : print ""; ?>
+            </h2>
          </div>
          <div style='padding:0px 0px'>
             <div style='padding:.25em 1em'>
@@ -145,7 +153,9 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
                </tr>
                <tr>
                   <td class='field'></td>
-                  <td class='value'><?php print $business->AttnTo; ?><br /><?php print $business->Address1; ?>, <?php print $business->Address2; ?><br /><?php print $business->City; ?>, <?php print $business->State; ?> <?php print $business->Zip; ?></td>
+                  <td class='value'><?php print $business->AttnTo; ?><br /><?php print $business->Address1; 
+                     if ($business->Address1) { print ","; } ?> <?php print $business->Address2; ?><br /><?php print $business->City; 
+                     if ($business->City) { print ","; } ?> <?php print $business->State; ?> <?php print $business->Zip; ?></td>
                   <td class='field'>Ph:</td>
                   <td class='nowrap value'><?php print $business->Phone; ?></td>
                </tr>
@@ -159,7 +169,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
                   <th class='field'>Time</th>
                   <td class='value'><?php print ($job->PickupTime ? date("h:ia", strtotime($job->PickupTime)) : 'Time NOT SET'); ?></td>
                   <td class='field' style='border-left:1px solid #ccc;'></td>
-                  <td class='value'><?php ($job->RoundTrip) ? print date("h:ia", strtotime($job->DropOffTime)) : print "One Way Xfer"; ?></td>
+                  <td class='value'><?php ($job->RoundTrip) ? (($job->DropOfftime != "00:00:00") ? print date("h:ia", strtotime($job->DropOffTime)) : print "12:00am"  ) : print "One Way Xfer"; ?></td>
                </tr>
             </table>
             <table class='table pu'>
@@ -205,8 +215,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
       </div>
    <table id='sigs' style='margin-top:1em'>
       <tr>
-         <th>Customer Name</th>
-         <th>Customer Signature</th>
+         <?php ($job->QuoteOnly) ? print "<th>DO NOT USE FOR PAYMENT</th><th>REQUEST CONFIRMATION</th>"  : print "<th>Customer Name</th><th>Customer Signature</th>"; ?> 
       </tr>
       <tr>
          <td><br /></td>
@@ -215,7 +224,12 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    </table>
    <table id='sigs' style='margin-top:1em'>
       <tr>
-         <td style="font-size:.8rem;">Cancellation Policy: a charge of $400 if service not cancelled 72 hours prior to spot time. Full charge for on the spot cancellation. No charge for cancellation due to weather if notified by 4pm the day prior to the trip.  Thank you for your business!</tr>
+         <td style="font-size:.8rem;">Thank you for your business!</td>
+      </tr>
+      <tr>
+      <td style="font-size:.8rem;">
+            <?php ($job->QuoteOnly) ? print "This quote IS NOT a guarantee of service and may be cancelled by D Harris Tours. Reservations are based on first come, first service. Please confirm this quote as soon as possible to ensure a reservation!"  : print "Cancellation Policy: a charge of $650 per bus if service not cancelled 7 days prior to spot time. Full charge if not cancelled 72 hours prior except for sports tournaments. No charge for cancellation due to weather if notified by 4pm the day prior to the trip. This confirmation IS a guarantee of service."; ?>
+      </td>
       </tr>
 
    </table>

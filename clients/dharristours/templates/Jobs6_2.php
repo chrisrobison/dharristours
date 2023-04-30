@@ -1,4 +1,4 @@
-<script src='/files/templates/time.js?ver=1.33' type='text/javascript' async> </script>
+<script src='/files/templates/time.js?ver=1.38' type='text/javascript' async> </script>
 <script type='text/javascript'>
    var userEmail = '<?php print htmlspecialchars($_SESSION['Email'], ENT_QUOTES); ?>';
 
@@ -14,11 +14,11 @@
          jobdate[0].value = new Date().toISOString().substr(0,10);
          setTimeout(function() {
             $("#mygrid")[0].triggerToolbar();
-         }, 2000);
+         }, 4000);
          jobdateset = true;
          return true;
       } else {
-         setTimeout(checkJobDate, 2000);
+         setTimeout(checkJobDate, 4000);
 
       }
    }
@@ -52,14 +52,30 @@
                <div class='contentField'>
                   <input type='checkbox' id='QuoteOnly' name='Job[<?php print $current->JobID; ?>][QuoteOnly]' dbtype='tinyint(4)' value='1'>
                   <span>Quote</span>
+                  <input type='checkbox' id='SPAB' name='Job[<?php print $current->JobID; ?>][SPAB]' dbtype='tinyint(4)' value='1'>
+                  <span>SPAB</span>
+               
+                  <input type='checkbox' id='WheelChair' name='Job[<?php print $current->JobID; ?>][WheelChair]' dbtype='tinyint(4)' value='1'>
+                  <span>Wheel Chair</span>
+
+                  <input type='checkbox' id='Cargo' name='Job[<?php print $current->JobID; ?>][Cargo]' dbtype='tinyint(4)' value='1'>
+                  <span>Cargo</span>
+
+                  <input type='checkbox' id='Shuttle' name='Job[<?php print $current->JobID; ?>][Shuttle]' dbtype='tinyint(4)' value='0'>
+                  <span>Shuttle</span>
                </div>
                <div class='contentField'>
 		  <label>Job</label>
-                  <input type='text' name='Job[<?php print $current->JobID; ?>][Job]' id='Job' value='<?php print $current->Job; ?>' size='75' style='width:25em;' class='boxValue' />
+                  <input type='text' name='Job[<?php print $current->JobID; ?>][Job]' id='Job' value='<?php print $current->Job; ?>' size='100' style='width:25em;' class='boxValue' /> 
                </div>
                <div class='contentField'>
-	       	  <label>Estimated Price</label><span id='estPrice' class="ui-widget-content"></span>
-		  <label>Miles * 1.1</label>
+                  <label>Format</label>
+                   <b>Customer/District | School | Team | (Dest) | Misc</b> 
+               </div>
+            <div class='contentField'>
+	         	       	  <a href="#"  onclick="getEstPrice()" class='simpleButton'><span class="ui-icon ui-icon-calculator"></span>Estimate Price</a><span id='estPrice' class="ui-widget-content"></span>
+                          <span id='priceChart' class="ui-widget-content"></span>
+	         	   <a href="#" id='NoBilling' name='NoBilling' class='simpleButton'>No Billing</a>
 	       </div>
 	       <div class='contentField'>
                   <label>* Date</label>
@@ -127,12 +143,15 @@
                   <input type="hidden" rel="data" onchange='doModify($(this))' id='DropOffTime' name='Job[<?php print $current->JobID; ?>][DropOffTime]' value='<?php print $current->DropOffTime; ?>'></input>
                </span>
                <div class='contentField'>
-                  <label>Num Pax</label><input onchange='getEstPrice()' type='text' name='Job[<?php print $current->JobID; ?>][NumberOfItems]' id='NumberOfItems' value='<?php print $current->NumberOfItems; ?>' size='11' class='boxValue' style='width:6em' />
-                  <label style='width:6.5em'>Hours</label><input onchange='getEstPrice()' type='text' name='Job[<?php print $current->JobID; ?>][Hours]' id='Hours' value='<?php print $current->Hours; ?>' size='25' class='boxValue' style='width:6em;' />
+                  <label>Num Pax</label><input type='text' name='Job[<?php print $current->JobID; ?>][NumberOfItems]' id='NumberOfItems' value='<?php print $current->NumberOfItems; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label style='width:6.5em'>Hours</label><input type='text' name='Job[<?php print $current->JobID; ?>][Hours]' id='Hours' value='<?php print $current->Hours; ?>' size='25' class='boxValue' style='width:6em;' />
+               <label>Total Miles</label><input type='text' name='Job[<?php print $current->JobID; ?>][TotalMileage]' id='TotalMileage' value='<?php print $current->TotalMileage; ?>' size='11' class='boxValue' style='width:6em' />
                </div>
-                <div class='contentField' onchange='getEstPrice()'>
+                <div class='contentField'>
                   <label>Business</label>
                   <?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Job[".$current->JobID."][BusinessID]");?>
+    <input type='checkbox' id='Confirmed' name='Job[<?php print $current->JobID; ?>][Confirmed]' dbtype='tinyint(4)' value='1'>
+    <span>Customer Confirmed</span>
                </div>
                <div class='contentField'>
                   <label>Description</label>
@@ -206,16 +225,10 @@
          </fieldset>
    <fieldset class='jobstatus' title="Status">
     <legend>Request Status</legend>
-    <input type='checkbox' id='Confirmed' name='Job[<?php print $current->JobID; ?>][Confirmed]' dbtype='tinyint(4)' value='1'>
-    <span>Customer Confirmed</span>
-    <input type='checkbox' id='DriverNotified' name='Job[<?php print $current->JobID; ?>][DriverNotified]' dbtype='tinyint(4)' value='1'>
-    <span>Driver Notified</span>
-    <div class='contentField'>
-    <input type='checkbox' id='JobCompleted' name='Job[<?php print $current->JobID; ?>][JobCompleted]' dbtype='tinyint(4)' value='1'>
+                  <input type='checkbox' id='JobCompleted' name='Job[<?php print $current->JobID; ?>][JobCompleted]' dbtype='tinyint(4)' value='1'>
     <span>Driver Completed Trip</span>
     <input type='checkbox' id='JobCancelled' name='Job[<?php print $current->JobID; ?>][JobCancelled]' dbtype='tinyint(4)' value='1' >
     <span>Job Cancelled</span>
-  </div>
 </fieldset>
 <fieldset class='jobstatus' title="Invoice Status">
     <legend>Billing Status</legend>
@@ -263,21 +276,20 @@
             <fieldset title='Options'>
                <legend>Trip Options</legend>
                <div class='contentField'>
-                  <input type='checkbox' id='SPAB' name='Job[<?php print $current->JobID; ?>][SPAB]' dbtype='tinyint(4)' value='1'>
-                  <span>SPAB</span>
+                  <input type='checkbox' id='DriverTraining' name='Job[<?php print $current->JobID; ?>][DriverTraining]' dbtype='tinyint(4)' value='1'>
+                  <span>Driver Training</span>
                
-                  <input type='checkbox' id='WheelChair' name='Job[<?php print $current->JobID; ?>][WheelChair]' dbtype='tinyint(4)' value='1'>
-                  <span>Wheel Chair</span>
-
-                  <input type='checkbox' id='Cargo' name='Job[<?php print $current->JobID; ?>][Cargo]' dbtype='tinyint(4)' value='1'>
-                  <span>Cargo</span>
-         <div id='notifyToggle' style='display:inline;' class='contentField disabled'>
-            <input type='checkbox' id='doNotify' value='0' disabled='true'>
-            <span>Call Driver 1 Day Prior (*)</span>
-         </div>
+                  <input type='checkbox' id='DriverTimeOff' name='Job[<?php print $current->JobID; ?>][DriverTimeOff]' dbtype='tinyint(4)' value='1'>
+                  <span>Time OFF Request</span>
+                     <input type='checkbox' id='DriverNotified' name='Job[<?php print $current->JobID; ?>][DriverNotified]' dbtype='tinyint(4)' value='1'>
+                  <span>Driver Confirmed</span>
                </div>
+         <div id='notifyToggle' style='display:inline;' class='contentField'>
+            <input type='checkbox' id='doNotify' value='1'>
+            <span>Email Driver 1 Day Prior (*)</span>
+         </div>        
                <div class='contentField'>
-                  <label>* Employee</label>
+                  <label>* Driver</label>
                   <?php $boss->db->addResource("Employee");$arr = $boss->db->Employee->getlist("Active=1");print $boss->utility->buildSelect($arr, $current->EmployeeID, "EmployeeID", "Employee", "Job[$current->JobID][EmployeeID]"); ?> 
                </div>
                <div class='contentField'>

@@ -1,134 +1,177 @@
 $(function () {
-      $( "#estPrice" ).draggable({
-	helper: "clone"
+$("#NoBilling").click(function(e) {
+  $("#BusinessID").val("366");
+  $("#NoInvoice").prop('checked', true);
+  $("#QuoteAmount").val("0");
+//  $("#SaveButton").removeClass("disabled");
+//  $("#SaveButton").removeAttr("disabled");
+  $("#SaveButton").addClass("modified");
+//  $("#SaveButton").addClass("modified");
+//  $("#SaveButton").addAttr("modified");
+//  $('#mygrid').setCell(simpleConfig.rowid, "Job", $("#Job").val(), 'modified'); //added
+  $('#mygrid').setCell(simpleConfig.rowid, "Job", $('#Job').val(), 'modified'); //added
+  return true;
+});
+
+$("#estPrice").html("");
+    $( "#estPrice" ).draggable({
+  helper: "clone"
   });
   $( "#QuoteAmount" ).droppable({
-	accept:".ui-widget-content", 
-	drop: function( event, ui ) {
-	var estp = ui.draggable.text(); //clone();
-	$(this)
-	.append(estp)
-	.html(estp)
-	.val(estp)
-	doModify($(this));
-	}
+    accept:".ui-widget-content", 
+    drop: function( event, ui ) {
+      var estp = ui.draggable.text(); //clone();
+      $(this)
+      .append(estp)
+      .html(estp)
+      .val(estp)
+      doModify($(this));
+    }
   });
 
-$( "#schoolAddress" ).draggable({
-	helper: "clone"
+    $( "#schoolAddress" ).draggable({
+helper: "clone"
 });
 
-$( "#PickupLocation" ).droppable({
- accept:".ui-widget-content", 
- drop: function( event, ui ) {
- var schooladdr = ui.draggable.text(); //clone();
- $(this)
- .append(schooladdr)
- //         .addClass( "ui-state-highlight" )
- .html(schooladdr)
- .val(schooladdr)
- doModify($(this));
- }
+    $( "#PickupLocation" ).droppable({
+accept:".ui-widget-content", 
+drop: function( event, ui ) {
+var schooladdr = ui.draggable.text(); //clone();
+$(this)
+.append(schooladdr)
+//         .addClass( "ui-state-highlight" )
+.html(schooladdr)
+.val(schooladdr)
+doModify($(this));
+}
 });
 $( "#DropOffLocation" ).droppable({
- accept:".ui-widget-content", 
- drop: function( event, ui ) {
-	//      alert(ui.draggable.text());
- var schooladdr = ui.draggable.text(); //clone();
- $(this).append(schooladdr)
- //         .addClass( "ui-state-highlight" )
- .html(schooladdr)
- .val(schooladdr);
- doModify($(this));
- }
+accept:".ui-widget-content", 
+drop: function( event, ui ) {
+//      alert(ui.draggable.text());
+var schooladdr = ui.draggable.text(); //clone();
+$(this).append(schooladdr)
+//         .addClass( "ui-state-highlight" )
+.html(schooladdr)
+.val(schooladdr);
+doModify($(this));
+}
 });
 
 $( "#FinalDropOffLocation" ).droppable({
- accept:".ui-widget-content", 
- drop: function( event, ui ) {
- //      alert(ui.draggable.text());
- var schooladdr = ui.draggable.text(); //clone();
- $(this).append(schooladdr)
- //         .addClass( "ui-state-highlight" )
- .html(schooladdr)
- .val(schooladdr);
- doModify($(this));
- }
+accept:".ui-widget-content", 
+drop: function( event, ui ) {
+//      alert(ui.draggable.text());
+var schooladdr = ui.draggable.text(); //clone();
+$(this).append(schooladdr)
+//         .addClass( "ui-state-highlight" )
+.html(schooladdr)
+.val(schooladdr);
+doModify($(this));
+}
 });
 
- 
-   $(".calcDistance").click(function (e) {
-      //doDistance();
-   });
-   
-   $("#SaveButton").click(function(e) {
 
-   });
+$(".calcDistance").click(function (e) {
+    //doDistance();
+    });
 
-   $('input[type="checkbox"]').change(function(){
-       this.value = (Number(this.checked));
-       });
+$("#SaveButton").click(function(e) {
 
-   $("#EmployeeID").change(function (e) {
-      var emp = getEmployee($(this).val(), updateNotifyPhone, e.isTrigger);
-   });
+    });
+
+$('input[type="checkbox"]').change(function(){
+    this.value = (Number(this.checked));
+    });
+
+$("#EmployeeID").change(function (e) {
+    var emp = getEmployee($(this).val(), updateNotifyPhone, e.isTrigger);
+    });
 $('input[type="text"]').keypress(function (e) {
-   if (e.which !== 0 && e.charCode !== 0) { // only characters
-   var c = String.fromCharCode(e.keyCode | e.charCode);
-   $span = $(this).siblings('span').first();
-   $span.text($(this).val() + c); // the hidden span takes
-// the value of the input
-  $inputSize = $span.width();
-   $(this).css("width", $inputSize); // apply width of the span to the input
-  }
-});
+    if (e.which !== 0 && e.charCode !== 0) { // only characters
+    var c = String.fromCharCode(e.keyCode | e.charCode);
+    $span = $(this).siblings('span').first();
+    $span.text($(this).val() + c); // the hidden span takes
+    // the value of the input
+    $inputSize = $span.width();
+    $(this).css("width", $inputSize); // apply width of the span to the input
+    }
+    });
 function insertRow(id, data, elm) {
-   debugger;
-   if (data['JobCancelled']) {
-   $(elm).addClass("cancelled");
+  debugger;
+  if (data['JobCancelled']) {
+    $(elm).addClass("cancelled");
   }
 }
-   $("#doNotify").click(function(e) {
-      if ($(this).is(":checked")) {
-         doSave();
-         $("#DriverNotification > div").show();
-         createNotify();
-      } else {
-         $("#DriverNotification > div").hide();
-         if (simpleConfig.current['related_Notify'] && simpleConfig.current['related_Notify'].length) {
-            var nrec = simpleConfig.current['related_Notify'].shift();
-       	    deleteNotify(nrec.NotifyID);
-         }
-      }
-   });
 
-   $(".jobstatus").on("change", "#JobCancelled", function () {
-      if ($(this).is(":checked")) {
-         var str1 = "CANCELLED ";
-	 $("#Job").val(str1 + $("#Job").val());
-	 $("#BusID").val("22");
-	 $("#" + simpleConfig.rowid).addClass('cancelled');
-         $("#QuoteAmount").val("0");
-         $("#BusinessLocation").val("Job Cancelled!");
-//         $("#NumberOfItems").val("0");
-         $('#mygrid').setCell(simpleConfig.rowid, "Stat", 'Cancelled', 'modified'); //added
-      } else {
-         $("#" + simpleConfig.rowid).removeClass('cancelled');
-         $("#JobLocation").val(" ");
-      }
-   });
+function add_years(dt,n)
+ {
+ if (Object.prototype.toString.call(dt) === "[object Date]") {
+  // it is a date
+  if (! (isNaN(dt))) { // d.getTime() or d.valueOf() will also work
+    // date object is valid
+      var newDate =  new Date(dt.setFullYear(dt.getFullYear() + n));
+      $("#JobDate").val(newDate.toISOString().split('T')[0]);
+      return;
+    }
+  }
+}
 
-  $("#dropoffToggle").on('click', function() {
-	var pu;
-	pu = $("#PickupLocation").val();
-	if ($("#FinalDropOffLocation").val() != pu)
-	{
-		$("#FinalDropOffLocation").val(pu);
-  // 		$('#mygrid').setCell(simpleConfig.rowid,  "FinalDropOffLocation", $("#FinalDropOffLocation").val(), 'modified');
-  		$("#FinalDropOffLocation").prop( "disabled", true ); 
-   		$("#SaveButton").addClass("modified");
-	}
-  });
+$("#doNotify").click(function(e) {
+    if ($(this).is(":checked")) {
+    doSave();
+    $("#DriverNotification > div").show();
+    createNotify();
+    } else {
+    $("#DriverNotification > div").hide();
+    if (simpleConfig.current['related_Notify'] && simpleConfig.current['related_Notify'].length) {
+    var nrec = simpleConfig.current['related_Notify'].shift();
+    deleteNotify(nrec.NotifyID);
+    }
+    }
+    });
+
+//$(".jobstatus").on("change", "#JobCancelled", function () {
+$("#JobCancelled").click(function(e) {
+    if ($(this).is(":checked")) {
+//      var jobDate = $("#JobDate").val();
+//      jobDate.setFullYear(jobDate.getFullYear() + 100);
+        this.checked = confirm('Are you sure you want to CANCEL and no charge is applied?');
+        if (this.checked)
+        {
+          var jobDate = new Date(document.getElementById('JobDate').value);
+          add_years(jobDate, 100);
+          var str1 = " CANCELLED ";
+          $("#BusID").val("22");
+          $("#" + simpleConfig.rowid).addClass('cancelled');
+          var reasonCancelled = prompt("Reason for cancellation? 3 words or less");
+          $("#Job").val(reasonCancelled + str1 + $("#Job").val());
+          $("#BusinessLocation").val("Cancelled! $" + $('#QuoteAmount').val());
+          $("#QuoteAmount").val("0");
+          $("#EmployeeID").val("38");
+    //         $("#NumberOfItems").val("0");
+          $('#mygrid').setCell(simpleConfig.rowid, "Stat", 'Cancelled', 'modified'); //added
+        }
+        else {
+        //$("#" + simpleConfig.rowid).removeClass('cancelled');
+        //$("#JobLocation").val(" ");
+            e.preventDefault();
+        } 
+    }
+  }
+);
+
+$("#dropoffToggle").on('click', function() {
+    var pu;
+    pu = $("#PickupLocation").val();
+    if ($("#FinalDropOffLocation").val() != pu)
+    {
+    $("#FinalDropOffLocation").val(pu);
+    // 		$('#mygrid').setCell(simpleConfig.rowid,  "FinalDropOffLocation", $("#FinalDropOffLocation").val(), 'modified');
+    $("#FinalDropOffLocation").prop( "disabled", true ); 
+    $("#SaveButton").addClass("modified");
+    }
+    });
 
 });
 
@@ -157,97 +200,231 @@ console.dir(simpleConfig.current);
    }  
    doSave();
 }
-   function getEmployee(id, callback, isTrigger) {
-      var emp, now = new Date();
-      $.get("ctl.php?_cache=" + now.getTime(), {
-         x: "related",
-         id: id,
-         rsc: "Employee"
-      }, function (data) {
-         simpleConfig.current['related_Employee'] = [data];
-         console.dir(data);
-         if (data && callback) {
-            if (!isTrigger) callback.call(this, data);
-         }
-      });
-      return emp;
-   }
+function getEmployee(id, callback, isTrigger) {
+    var emp, now = new Date();
+    $.get("ctl.php?_cache=" + now.getTime(), {
+       x: "related",
+       id: id,
+       rsc: "Employee"
+    }, function (data) {
+       simpleConfig.current['related_Employee'] = [data];
+       //console.dir(data);
+       if (data && callback) {
+          if (!isTrigger) callback.call(this, data);
+       }
+    });
+    return emp;
+ }
+
+//function removeBilling() {
 
 function getEstPrice(obj) {
-	$("#estPrice").html("");
+  if ($("#NoInvoice").is(":checked") == false) {
+  $("#estPrice").html("");
+  $("#estPrice").css({'background-color': 'none'});
+  $("#priceChart").html("");
 	var id = $("#BusinessID").val();
-	var pax = $("#NumberOfItems").val();
-	var roundtrip = $("#RoundTrip").val();
+	var paxTotal = $("#NumberOfItems").val();
+  var extraBusCount = Math.floor(paxTotal/45);
+  var pax = (paxTotal % 45);
+
+	var roundtrip =$("#RoundTrip").val(); // === 0) ? -50 : 0 ; // $50 discount for One Way
+	var shuttle = $("#Shuttle").is(":checked") * 100 * (extraBusCount + 1) ;
+  var discount = 0;
+	var wheelchair = $("#WheelChair").is(":checked") * 100 ;
+	var cargo = $("#Cargo").is(":checked") * 100 * (extraBusCount + 1) ;
+  const priceSheetFourHr = [ 675, 800, 850, 900, 1250 ];
+  const priceSheetAddHr = [ 100, 110, 110, 120, 150 ];
 	// var roundtrip =   $("#RoundTrip").is(":checked");
-	var hrs = ($("#Hours").val()<4) ? 2.75 : $("#Hours").val();
-	if (id != 0) {
-	var url;
-	if (!obj) {
-	url = "/grid/ctl.php?x=related&Resource=Business&id=" + encodeURI(id) ;
-	} else {
-	url = "/grid/ctl.php?x=related&Resource=Business&id=" + encodeURI($("#BusinessID").val()) ;
-	}
-	$.getJSON(url,
-	function(data) {
-	try {
-	if (data) {
-	//data = $.parseJSON(data);
-	//                  data.rows[0]['elements'][0].Street.text + ", " +
-	//                  data.rows[0]['elements'][0].City.text
-	if (pax == 0 || pax == null) {
-	var est4p = "0";
-	var est1p = "0";
-	} else if (pax > 0 && pax < 29) {
-	  if (roundtrip == 1) {
-	var est4p = "650";// data["Cost28FirstFour"];
-	}
-	else {
-	var est4p = "600"; //data["Cost28OneWay"];
-	}
-	var est1p = "100"; //data["Cost28OT"];
-	} else if (pax > 28 && pax < 33) {
-	  if (roundtrip == 1) {
-	var est4p = "750"; //data["Cost32FirstFour"];
-	}
-	else {
-	var est4p = "700"; //data["Cost32OneWay"];
-	}
-	var est1p = "110"; //data["Cost32OT"];
-	} else if (pax > 32 && pax < 39) {
-	  if (roundtrip == 1) {
-	var est4p = "775"; //data["Cost38FirstFour"];
-	}
-	else {
-	var est4p = "725"; //data["Cost38OneWay"];
-	}
-	var est1p = "110"; //data["Cost38OT"];
-	} else if (pax > 38 && pax < 46) {
-	  if (roundtrip == 1) {
-	var est4p = "850"; //data["Cost45FirstFour"];
-	}
-	else {
-	var est4p = "800"; //data["Cost45OneWay"];
-	}
-	var est1p = "120"; //data["Cost45OT"];
-	} else if (pax > 45 && pax < 56) {
-	var est4p = "1000"; //data["Cost55FirstFour"];
-	var est1p = "200"; //data["Cost55OT"];
-	}
-	  if (roundtrip == 1) {
-	var estp = (parseFloat(est4p) + (parseFloat(est1p)*(parseFloat(hrs)-4.0)));
-	}
-	else {
-	var estp = parseFloat(est4p);
-	}
-	$("#estPrice").html(parseFloat(estp).toFixed(2));
-	}
-	} catch(err) { }
-	}
-	);
+	var hrs = ($("#Hours").val()<4) ? 4 : $("#Hours").val();
+  var overrideCost;
+  var cssColor = {'background-color': 'white'};
+  var msg = "";
+ 	var url;
+  let defaultRecord;
+  var estp; //+ (parseFloat(est1p)*(parseFloat(hrs)-4.0)));
+  var descText;
+if (id != 0) 
+  {
+	  if (!obj) 
+    {
+	    url = "/grid/ctl.php?x=related&Resource=Business&id=" + encodeURI(id) ;
+  	} 
+    else 
+    {
+	    url = "/grid/ctl.php?x=related&Resource=Business&id=" + encodeURI($("#BusinessID").val()) ;
+	  }
+	  $.getJSON(url,
+	    function(data) {
+        try {
+          if (data) 
+          {
+            overrideCost = data["CostOverrideDefault"];
+            if (roundtrip == 0 && extraBusCount == 0) { discount = 50; }
+            if (overrideCost == 1) {
+              priceSheetFourHr[0] = data["Cost28FirstFour"]
+                ,  priceSheetFourHr[1] = data["Cost32FirstFour"]
+                ,  priceSheetFourHr[2] = data["Cost38FirstFour"]
+                ,  priceSheetFourHr[3] = data["Cost45FirstFour"]
+                ,  priceSheetFourHr[4] = data["Cost55FirstFour"] ;
+              priceSheetAddHr[0] = data["Cost28OT"]
+                , priceSheetAddHr[1] = data["Cost32OT"]
+                , priceSheetAddHr[2] = data["Cost38OT"]
+                , priceSheetAddHr[3] = data["Cost45OT"]
+                , priceSheetAddHr[4] = data["Cost55OT"] ;
+              cssColor = {'background-color': 'yellow'};
+              msg = "_OVERRIDE";
+
+            }
+     /*       else {
+              defaultRecord = getDefaultSystemPrices();
+              if (defaultRecord) {
+              priceSheetFourHr[0] = defaultRecord[0]["Cost28FirstFour"]
+                ,  priceSheetFourHr[1] = defaultRecord[1]["Cost32FirstFour"]
+                ,  priceSheetFourHr[2] = defaultRecord[2]["Cost38FirstFour"]
+                ,  priceSheetFourHr[3] = defaultRecord[3]["Cost45FirstFour"]
+                ,  priceSheetFourHr[4] = defaultRecord[4]["Cost55FirstFour"] 
+                ,  priceSheetAddHr[0] = defaultRecord[5]["Cost28OT"]
+                ,  priceSheetAddHr[1] = defaultRecord[6]["Cost32OT"]
+                ,  priceSheetAddHr[2] = defaultRecord[7]["Cost38OT"]
+                ,  priceSheetAddHr[3] = defaultRecord[8]["Cost45OT"]
+                ,  priceSheetAddHr[4] = defaultRecord[9]["Cost55OT"] ;
+  
+              }
+            }
+       */
+              $("#estPrice").css(cssColor);
+                   
+            estp = parseFloat(-discount); //+ (parseFloat(est1p)*(parseFloat(hrs)-4.0)));
+
+            descText = hrs + " hr: ";
+            // add the cost for each 45 pax bus
+            for (let i = 0; i < extraBusCount; i++) {
+                estp += getEstPricePerBus(4, hrs, priceSheetFourHr, priceSheetAddHr); 
+     
+            }
+            if (extraBusCount > 0) {
+
+                descText += extraBusCount + " * 44 pax $" + priceSheetFourHr[3] + "/$" + priceSheetAddHr[3] + " = $" + estp + " ";
+            }
+            var pax_idx = 0;
+            if (pax >= 1 && pax <=28) { pax_idx = 1; }
+            if (pax >= 29 && pax <=36) { pax_idx = 2; }
+            if (pax >= 37 && pax <=39) { pax_idx = 3; }
+            if (pax >= 40 && pax <=45) { pax_idx = 4; }
+            if (pax >= 46 && pax <=70) { pax_idx = 5; }
+//            console.log(pax_idx);
+//            console.log(priceSheetFourHr[0]);
+//            console.log(pax_idx);
+            switch(pax_idx) {
+              case null:
+                return;
+              case 0:
+                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+                $("#priceChart").text(descText); 
+                break;
+              case 1:
+                 estp += (parseFloat(priceSheetFourHr[0] ) + (parseFloat(priceSheetAddHr[0])*(parseFloat(hrs)-4.0)));
+                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+                $("#priceChart").text(descText + pax + " pax =  $" + priceSheetFourHr[0] + "/$" + priceSheetAddHr[0]); 
+                break;
+              case 2:
+                 estp += (parseFloat(priceSheetFourHr[1] ) + (parseFloat(priceSheetAddHr[1])*(parseFloat(hrs)-4.0)));
+                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+                $("#priceChart").text(descText + pax + " pax =  $" + priceSheetFourHr[1] + "/$" + priceSheetAddHr[1]); 
+                break;
+              case 3:
+                 estp += (parseFloat(priceSheetFourHr[2] ) + (parseFloat(priceSheetAddHr[2])*(parseFloat(hrs)-4.0)));
+                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+                $("#priceChart").text(descText + pax + " pax =  $" + priceSheetFourHr[2] + "/$" + priceSheetAddHr[2]); 
+                break;
+              case 4:
+                 estp += (parseFloat(priceSheetFourHr[3] ) + (parseFloat(priceSheetAddHr[3])*(parseFloat(hrs)-4.0)));
+                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+                $("#priceChart").text(descText + pax + " pax =  $" + priceSheetFourHr[3] + "/$" + priceSheetAddHr[3]); 
+                break;
+              case 5:
+                 estp += (parseFloat(priceSheetFourHr[4] ) + (parseFloat(priceSheetAddHr[4])*(parseFloat(hrs)-4.0)));
+                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+                $("#priceChart").text(descText + pax + " pax =  $" + priceSheetFourHr[4] + "/$" + priceSheetAddHr[4]); 
+                break;
+              default:
+                $("#estPrice").html(parseFloat(0).toFixed(2));
+                $("#priceChart").text("Calculate Manually");
+            }
+          }
+        } catch(err) { }
+      }
+	  );       
+
+     
 	return false;
 	}
+  }
+}
+function getDefaultSystemPrices(){
+    const aPriceSheet= [ 0, 0, 0, 0, 0,  0, 0, 0, 0, 0 ];
+    var url  = "/grid/ctl.php?x=related&Resource=Business&id=332" ;
+	  $.getJSON(url,
+	    function(data2) {
+          if (data2) 
+          {    
+              
+              aPriceSheet[0] = data2["Cost28FirstFour"];
+              aPriceSheet[1] = data2["Cost32FirstFour"];
+              aPriceSheet[2] = data2["Cost38FirstFour"];
+              aPriceSheet[3] = data2["Cost45FirstFour"];
+              aPriceSheet[4] = data2["Cost55FirstFour"];
+              aPriceSheet[5] = data2["Cost28OT"];
+              aPriceSheet[6] = data2["Cost32OT"];
+              aPriceSheet[7] = data2["Cost38OT"];
+              aPriceSheet[8] = data2["Cost45OT"];
+              aPriceSheet[9] = data2["Cost55OT"];
+          }
+      }
+	  );
+  return aPriceSheet;
 }
 
+function getEstPricePerBus(pax_idx, hrs, priceSheetFourHr, priceSheetAddHr) {
+            switch(pax_idx) {
+              case null:
+                return 0;
+              case 0:
+                return 0;
+              case 1:
+                 return (parseFloat(priceSheetFourHr[0] ) + (parseFloat(priceSheetAddHr[0])*(parseFloat(hrs)-4.0)));
+//                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+//                $("#priceChart").text("Cost: $" + priceSheetFourHr[0] + " / $" + priceSheetAddHr[0] + " (-$50 if One Way) for hours: " + hrs); 
+                break;
+              case 2:
+                 return (parseFloat(priceSheetFourHr[1] ) + (parseFloat(priceSheetAddHr[1])*(parseFloat(hrs)-4.0)));
+//                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+//                $("#priceChart").text("Cost: $" + priceSheetFourHr[1] + " / $" + priceSheetAddHr[1] + " (-$50 if One Way) for hours: " + hrs); 
+                break;
+              case 3:
+                 return (parseFloat(priceSheetFourHr[2] ) + (parseFloat(priceSheetAddHr[2])*(parseFloat(hrs)-4.0)));
+//                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+//                $("#priceChart").text("Cost: $" + priceSheetFourHr[2] + " / $" + priceSheetAddHr[2] + " (-$50 if One Way) for hours: " + hrs); 
+                break;
+              case 4:
+                 return (parseFloat(priceSheetFourHr[3] ) + (parseFloat(priceSheetAddHr[3])*(parseFloat(hrs)-4.0)));
+//                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+//                $("#priceChart").text("Cost: $" + priceSheetFourHr[3] + " / $" + priceSheetAddHr[3] + " (-$50 if One Way) for hours: " + hrs); 
+                break;
+              case 5:
+                 return (parseFloat(priceSheetFourHr[4] ) + (parseFloat(priceSheetAddHr[4])*(parseFloat(hrs)-4.0)));
+//                $("#estPrice").html(parseFloat(estp+shuttle+cargo+wheelchair).toFixed(2));
+//                $("#priceChart").text("Cost: $" + priceSheetFourHr[4] + " / $" + priceSheetAddHr[4] + " (-$50 if One Way) for hours: " + hrs); 
+                break;
+              default:
+                  return 0;
+//                $("#estPrice").html(parseFloat(0).toFixed(2));
+//                $("#priceChart").text("Calculate Manually");
+            }
+
+
+}
 
 function formatTime(t) {
    var parts = t.split(/:/), out = {};
@@ -339,7 +516,7 @@ function updateNotify(data) {
 }
 
 function doDistance(obj) {
-   var url = "https://www.google.com/maps/dir/" + encodeURI($('#EmployeeYard').val()) + "/" + encodeURI($('#PickupLocation').val()) + "/" + encodeURI($('#DropOffLocation').val());
+   var url = "https://www.google.com/maps/dir/" + encodeURI($('#PickupLocation').val()) + "/" + encodeURI($('#DropOffLocation').val());
    $('#directionsPU').attr('href',url);
 
 }
@@ -431,32 +608,27 @@ function showNotify(state) {
 function upAll(id) {
    return doSelect(id, realUpAll);
 }
-   function doSchoolAddress(obj) {
-  $("#schoolAddress").html("");
-    var id = $("#SchoolID").val();
-  if (id != 0) {
-     var url;
-     if (!obj) {
-      url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI(id) ;
+function doSchoolAddress(obj) {
+   $("#schoolAddress").html("");
+   var id = $("#SchoolID").val();
+   if (id != 0) {
+      var url;
+      if (!obj) {
+         url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI(id) ;
       } else {
-    url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI($("#SchoolID").val()) ;
-     }
-    $.getJSON(url,
-     function(data) {
-      try {
-      if (data) {
-    //data = $.parseJSON(data);
-      $("#schoolAddress").html(
-   //                  data.rows[0]['elements'][0].StreetAbr.text + ", " +
-     //                  data.rows[0]['elements'][0].City.text
-        data["StreetAbr"] + ", " + data["City"] + ", " + data["School"] + " " + data["Phone"]
-     );
+         url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI($("#SchoolID").val()) ;
+      }
+      fetch(url).then(resp=>resp.json()).then(data=>{ 
+        try {
+            if (data) {
+               $("#schoolAddress").html( data["StreetAbr"] + ", " + data["City"] + ", " + data["School"] + " " + data["Phone"]);
+            }
+         } catch(err) { 
+            console.log(`Error [doSchoolAddress]: ${err}`);
+         }
+      });
+      return false;
    }
-    } catch(err) { }
-    }
-    );
-return false;
-}
 }
 
 function realUpAll(id) {
@@ -486,8 +658,10 @@ function realUpAll(id) {
    $("#FinalDropOffLocation").removeAttr("disabled");
    $("#dropoffToggle").prop("checked", false);
    $("#dropoffToggle").removeAttr('checked');
+   $("#priceChart").html("");
    $("#estPrice").html("");
    $("#estPrice").val("");
+   $("#estPrice").css("background-color: none");
 
    if (simpleConfig.record && simpleConfig.record.PickupTime) {
       var stimes = getTimes(simpleConfig.record["PickupTime"]);
@@ -531,6 +705,7 @@ function myNew() {
    $("#travelTime").html("");
    $("#estPrice").html("");
    $("#estPrice").val("");
+   $("#estPrice").css({'background-color': 'none'});
    $("#schoolAddress").html("");
    $("#schoolAddress").val("");
    $("#PickupLocation").removeClass( "ui-state-highlight" );
@@ -569,8 +744,10 @@ function myNew() {
    $("#DropOff_meridian").val("");
    showEnd("1");
    $("#Job").focus();
-   z = document.getElementById("formContainer").style.overflow = "scroll";
-   $("formContainer").css('overflow','auto');
+   
+   document.getElementById("formContainer").style.overflow = "scroll";
+//   $("formContainer").css('overflow','auto');
+   $("#GetPriceButton").addClass( "simpleButton" );
 }
 
 function getTimes(mytime) {
@@ -714,22 +891,7 @@ function updateTimeDiffinHours(who, mytime) {
 
 
    var rt = $("#RoundTrip").val(); //added
-/*   alert(rt);
-   if (((rt == "1") || (rt == "true"))) //added && (jQuery("#Hours").val() == "4" )
-   { //added
-     if ((parseInt(endhrmin) - parseInt(starthrmin)) < 160) {
-        jQuery("#Hours").val(4); //added
-     } else {
-       jQuery("#Hours").val((parseInt(endhrmin) - parseInt(starthrmin)) / 60);
-     }
-   } else { //added
-     //if ((parseInt(endhrmin) - parseInt(starthrmin)) < 240) {
-     //  jQuery("#Hours").val(4);
-     //} else {
-       jQuery("#Hours").val(2.75);
-     //}
-  }
-  */
+
       if (((rt == "0") || (rt == "false"))) //added && (jQuery("#Hours").val() == "4" )
 	{ //added
 	if ((parseInt(endhrmin) - parseInt(starthrmin)) < 160) {

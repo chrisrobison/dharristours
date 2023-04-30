@@ -21,6 +21,9 @@
          case "drivers":
             $out = getDrivers($link, $in);
             break;
+         case "buses":
+            $out = getBuses($link, $in);
+            break;
          case "jobs":
             $out = getJobs($link, $in);
             break;
@@ -33,6 +36,9 @@
          case "reserve":
             $out = makeReservation($link, $in);
             break;
+         case "update":
+            $out = updateData($link, $in);
+            break;
          case "updateColor":
             $out = updateColor($link, $in);
             break;
@@ -44,12 +50,51 @@
       print json_encode($out);
    }
 
+   function updateData($link, $in) {
+      $fields = array('newStart', 'newEnd', 'newColor', 'newResource');
+      $realFields = array('newStart'=>'PickupTime', 'newEnd'=>'DropoffTime', 'newResource'=>'BusID');
+
+      if ($in['newResource']) {
+         $sql = "SELECT BusID from Bus where BusNumber='{$in['newResource']}'";
+         $results = mysqli_query($link, $sql);
+         
+         if ($results) {
+            while ($row = $results->fetch_assoc()) {
+               $in['newResource'] = $row['BusID'];
+            }
+         }
+         file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . " new Resource - {$in['newResource']} \n$sql\n\n", FILE_APPEND);
+      }
+      if ($in['id']) {
+         $upd = array();
+         foreach ($fields as $field) {
+            if ($in[$field]) {
+               array_push($upd, $realFields[$field] . "='" . mysqli_real_escape_string($link, $in[$field]) ."'");
+            }
+         }
+
+         if (count($upd)) {
+            $sql = "UPDATE Job SET ";
+            $sql .= implode($upd, ", ") . " WHERE JobID='" . mysqli_real_escape_string($link, $in['id']) . "'";
+            
+            file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ": Updating Job[{$in['id']}] with " . implode($upd, ", ") . "\n$sql\n", FILE_APPEND);
+            
+            $results = mysqli_query($link, $sql);
+            if ($results) {
+               $out["status"] = "ok";
+            }
+         }
+      }
+      return $out;
+   }
+
    function updateColor($link, $in) {
+      $out = [];
       if ($in['color'] && $in['id']) {
-         $sql = "update Job set Color='" . mysqli_real_escape_string($link, $in['color']) . "' where JobID='" . mysqli_real_escape_string($link, $in['id']) . "'";
+         $sql = "UPDATE Job SET Color='" . mysqli_real_escape_string($link, $in['color']) . "' where JobID='" . mysqli_real_escape_string($link, $in['id']) . "'";
          $results = mysqli_query($link, $sql); 
          if ($results) {
-            $out = ["status"=>"ok"];
+            $out["status"] = "ok";
          }
          return $out;
       }
@@ -81,9 +126,19 @@
          $last = date("Y-m-d", strtotime('next week'));
       }
       
-      $buses = array("1"=>"3801","18"=>"2302", "24"=>"4402", "26"=>"2502", "28"=>"4001", "31"=>"2802", "32"=>"3301", "33"=>"2503", "34"=>"3601", "22"=>"CANCELLED","27"=>"TBD");
-
-      $sql = "SELECT JobID, Color, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions, Job.EmployeeID as EmployeeID, JobCancelled FROM Job where JobDate>='{$first}' AND JobDate<='{$last}'";
+      // Grab list of buses
+      $buses = array();
+      
+      $sql = "SELECT BusID, Bus, BusNumber, InService from Bus where InService ORDER BY BusNumber";
+      $results = mysqli_query($link, $sql);
+      if ($results) {
+         while ($row = $results->fetch_assoc()) {
+            $buses[$row['BusID']] = $row['BusNumber'];
+         }
+      }
+      
+      // Grab events for date range
+      $sql = "SELECT JobID, Job.Color as JobColor, Business.Color as BusinessColor, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions, Job.EmployeeID as EmployeeID, JobCancelled, Business.Business as Business FROM Job, Business where JobDate>='{$first}' AND JobDate<='{$last}' AND Business.BusinessID=Job.BusinessID";
 
       $results = mysqli_query($link, $sql);
       
@@ -96,7 +151,18 @@
             $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
             $obj->date = date("m/d", strtotime($row['JobDate']));
             $obj->resourceId = $buses[$row['BusID']];
-            $obj->color = $row['Color'];
+            
+            // Set color from business name unless a color is set for either the business or job
+            $obj->color = '#' . stringToColorCode($row['Business']); // $row['Color'];
+            
+            if ($row['BusinessColor'] != '#cccccc') {
+               $obj->color = $row['BusinessColor'];
+            }
+            
+            if ($row['JobColor'] != '#00ee33') {
+               $obj->color = $row['JobColor'];
+            } 
+            
             if ($row['JobCancelled']==1) {
                $obj->color = "#222222";
             }
@@ -116,7 +182,12 @@
 
       return $out;
    }
-   
+   function stringToColorCode($str) {
+      $code = dechex(crc32($str));
+      $code = substr($code, 0, 6);
+      return $code;
+   }
+
    function getEvent($link, $id) {
       $sql = "SELECT * from Job where JobID='".$id."'";
 
@@ -130,6 +201,16 @@
       }
 
       return $out;
+   }
+   
+   function getBuses($link, $in) {
+      $sql = "SELECT BusID, Bus, Capacity, BusNumber, Capacity, InService from Bus";
+
+      if ($in['BusID']) {
+         $sql .= " WHERE BusID={$in['BusID']}";
+      }
+      $results = mysqli_query($link, $sql);
+
    }
 
    function getJobs($link, $in) {
@@ -258,7 +339,7 @@
             //$out->results[] = $row['Address'] . ', ' . $row['City'];
          }
 
-         if (count($out->results) < 10) {
+         if (count($out->results) < 15) {
             $results = mysqli_query($link, "SELECT * from Address where Address like '" . $in['q'] . "%' or city like '" . $in['q'] . "%' order by Address limit " . (10 - count($out->results)));
             while ($row = $results->fetch_assoc()) {
                $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Address'] . ', ' . $row['City']);
@@ -268,7 +349,7 @@
             }
          }
 
-         if (count($out->results) < 10) {
+         if (count($out->results) < 15) {
             $results = mysqli_query($link, "SELECT * from Address where Address like '%" . $in['q'] . "%' or city like '%" . $in['q'] . "%' order by Address limit " . (10 - count($out->results)));
             while ($row = $results->fetch_assoc()) {
                $match = preg_replace("/(".$in['q'].")/i", "<b>$1</b>", $row['Address'] . ', ' . $row['City']);

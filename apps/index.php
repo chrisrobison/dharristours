@@ -4,15 +4,21 @@
    <head>
       <meta http-equiv="X-UA-Compatible" content="chrome=1">
       <title><?php print $boss->app->App; ?> Workplace</title>
-      <link rel="icon" type="image/png" href="<?php 
-         $favico = $boss->app->Assets . '/img/favicon.png';
-         if (file_exists($_SERVER['DOCUMENT_ROOT'] . $favico)) { 
-            print $favico; 
-         } else {
-            //print "/favicon.ico?v=2.4";
-            print "/clients/dharristours/favicon.ico?v=2.4";
+<?php
+         $favicons = array(
+             $boss->app->Assets . '/favicon.ico', 
+             $boss->app->Assets . '/favicon.png',
+             $boss->app->Assets . '/img/favicon.ico', 
+             $boss->app->Assets . '/img/favicon.png'
+         );
+
+         foreach ($favicons as $path) {
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)) { 
+               print '<link rel="icon" type="image/'. substr($path, -3) .'" href="' . $path . '">';
+               break;
+            } 
          }
-      ?>">
+      ?>
       <link href='//fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1/dijit/themes/claro/claro.css" />

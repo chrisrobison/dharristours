@@ -4,6 +4,9 @@
 <title>Reservations &amp; Schedules</title>
 <meta charset='utf-8' />
 <link href='main.css' rel='stylesheet' />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
@@ -13,6 +16,9 @@
 <script src='/lib/js/tiny-date-picker.min.js'></script>
 <script src='mycal.js'></script>
 <style>
+body {
+   font-family: 'Lexend', sans-serif;
+}
 .dlgtitle {
    font-size:1.5em; 
    background-color:#333;
@@ -52,8 +58,9 @@
 .dlgform {
    padding:1rem;
 }
-.form-group {
+#dialog .form-group {
    position:relative;
+   margin-bottom: 2vh;
 }
 .suggestions {
    position:absolute;
@@ -90,6 +97,7 @@
 }
 div.dropdown-open {
    display:block;
+   right: 0px;
 }
 div.dropdown-menu {
    box-shadow: 3px 3px 3px #0009;
@@ -143,11 +151,14 @@ div.dropdown-menu {
          defaultDate: new Date(),
          editable: true,
          selectable: true,
+         droppable: true,
          eventLimit: true, // allow "more" link when too many events
+         eventResourceEditable: true,
+         eventDurationEditable: true,
          header: {
            left: 'prev,next today',
            center: 'title',
-           right: 'resourceTimeGridDay,resourceTimeGridTwoDay,timeGridWeek,dayGridMonth'
+           right: 'resourceTimeGridDay,resourceDayGridDay,dayGridMonth'
          },
          views: {
            resourceTimeGridTwoDay: {
@@ -167,6 +178,55 @@ div.dropdown-menu {
          events: {
             url: "api.php?type=events"
          },
+         eventDrop: function(info) {
+            console.log(">>>Event drop");
+            console.dir(info);
+            
+            let upd = [];
+
+            if (info.newResource && info.newResource.id) {
+                upd["newResource"] = info.newResource.id;
+            } 
+            if (info.oldEvent) {
+               let chkStart = cleanMilitaryTime(info.event.start);
+               let chkOldStart = cleanMilitaryTime(info.oldEvent.start);
+
+               if (chkStart != chkOldStart) {
+                  let newStart = cleanTime(info.event.start);
+                  let oldStart = cleanTime(info.oldEvent.start);
+                  
+                  upd["newStart"] = cleanMilitaryTime(info.event.start);
+               }
+
+               let chkEnd = cleanMilitaryTime(info.event.end);
+               let chkOldEnd = cleanMilitaryTime(info.oldEvent.end);
+
+               if (chkEnd != chkOldEnd) {
+                  let newEnd = cleanTime(info.event.end);
+                  let oldEnd = cleanTime(info.oldEvent.end);
+               
+                  upd["newEnd"] = cleanMilitaryTime(info.event.end);
+               }
+            }
+            
+            if (Object.keys(upd).length) {
+               console.log(`New data:`);
+               console.dir(upd);
+               let confirmation = `Update Job[${info.event.id}] with:\n`;
+               let items = Object.keys(upd);
+               items.forEach(idx=>{
+                  confirmation += `            ${idx}: ${upd[idx]}\n`;
+               });
+
+               if (!confirm(confirmation)) {
+                  info.revert();
+               } else {
+                  updateData(upd, info.event.id);
+               }
+            }
+   
+         },
+
          eventSourceSuccess: function(content, xhr) {
            console.log("eventSourceSuccess");
            console.dir(content);
@@ -175,9 +235,10 @@ div.dropdown-menu {
            let html = `<table class='jobs'><thead><tr><th>Job</th><th>Start</th><th>End</th><th>Link</th></tr></thead><tbody>`;
            let sel = calendar.getDate(), rowclass='';
            sels = (new Date(calendar.getDate().toISOString().substr(0,10)).getTime()); 
+           let duration = (calendar.view.type == "dayGridMonth") ? sels + (31 * 86400000) : sels + 86400000;
            for (let i in content) { 
               id = (new Date(content[i].start).getTime());
-              if ((id > sels) && (id < sels + 86400000)) {
+              if ((id > sels) && (id < duration)) {
                   rowclass = "";
                   if (content[i].title.match(/CANCELLED/i)) {
                      content[i].title = content[i].title.replace(/\s*CANCELLED\s*/, '');
@@ -218,6 +279,18 @@ div.dropdown-menu {
 
     calendar.render();
 
+   }
+   
+   function cleanMilitaryTime(date) {
+      let mydate = new Date(date);
+      let hr = mydate.getHours();
+      hr = (hr < 10) ? "0" + hr : hr;
+
+      let min = mydate.getMinutes();
+      min = (min < 10) ? "0" + min : min;
+      
+      console.log(`cleanMilitaryTime: ${hr}:${min}:00`);
+      return `${hr}:${min}:00`;
    }
 
    function cleanTime(date) {
@@ -272,7 +345,26 @@ div.dropdown-menu {
         if (err) { throw err; }
         console.log(datums);
       }); 
-   } 
+   }
+
+   function updateData(items, id) {
+      console.log(`update: ${id} ${items}`);
+      if (items && id) {
+         let url = `api.php?id=${id}&`;
+         let keys = Object.keys(items);
+
+         keys.forEach((key) => {
+            url += key + '=' + items[key] + '&';
+         });
+         url += 'type=update';
+         console.log(url);
+         fetch(url).then(resp=>resp.json()).then(data=>{
+            console.dir(data);
+            calendar.refetchEvents();
+         });
+      }
+   }
+
    function updateColor(newcolor, id) {
       console.log(`updateColor: ${newcolor} [${id}] `);
       if (color && id) {
@@ -365,8 +457,11 @@ function makeSettingsDropdown(resources) {
 //       list.className = "dropdown-menu";
        var html = "<div class='dropdown-menu dropdown-menu-right'>";
 
-       for (var i in resources) {
-           html += "<a class='dropdown-item' href='#'><input type='checkbox' class='showbus_checkbox' id='showbus_" + resources[i].id + "' checked='true'> " + resources[i].title + "</a>\n";
+       let keys = Object.keys(resources);
+       for (var i=0; i<keys.length; i++) {
+           let rsc = resources[keys[i]];
+           let chk = (showbuses[i]) ? " checked='true'" : "";
+           html += `<a class='dropdown-item' href='#'><input type='checkbox' class='showbus_checkbox' id='showbus_${rsc.id}' onclick='toggleResource(${i})'${chk}> ${rsc.title}</a>\n`;
        }
        html += "</div>";
        // list.innerHTML = html;
@@ -388,8 +483,48 @@ function makeSettingsDropdown(resources) {
     }
 
 }
+function updateResources() {
+   let keys = Object.keys(showbuses);
+   keys.forEach(idx=>{
+      let key = parseInt(idx);
+      let item = showbuses[key];
+      if (item) {
+         console.log(`Showing bus ${key} : ${item}`);
+         document.querySelector(`#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div.fc-content-skeleton > table > tbody > tr > td:nth-child(${key+2})`).style.display = "table-cell";
+         document.querySelector(`#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th:nth-child(${key+2})`).style.display = "table-cell";
+      } else {
+         console.log(`Hiding bus ${key} : ${item}`);
+         document.querySelector(`#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div.fc-content-skeleton > table > tbody > tr > td:nth-child(${key+2})`).style.display = "none";
+         document.querySelector(`#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th:nth-child(${key+2})`).style.display = "none";
 
-var buses, myevent, drivers, mybuses = {}, mydrivers = {};
+      }
+   });
+}
+
+function save(key, obj) {
+   localStorage.setItem(key, JSON.stringify(obj));
+}
+
+function load(key) {
+   return JSON.parse(localStorage.getItem(key));
+}
+
+function toggleResource(idx) {
+   showbuses[idx] ^= 1;
+   save("showbuses", showbuses);
+   updateResources();
+}
+
+function loadSettings() {
+   if (localStorage.getItem("showbuses")) {
+      let savedbuses = load("showbuses");
+      
+      showbuses = savedbuses;
+   }
+   updateResources();
+}
+
+var buses, myevent, drivers, mybuses = {}, mydrivers = {}, showbuses = {}, showdrivers = {};
 function init() {
    doCalendar();
 
@@ -398,7 +533,10 @@ function init() {
       buses = JSON.parse(data);
       for (var i=0; i<buses.length; i++){
          mybuses[buses[i].busID] = buses[i];
+         showbuses[i] = 1; //buses[i].busID;
       }
+
+      loadSettings();
       makeSettingsDropdown(buses);
       console.log("Buses:");
       console.dir(mybuses);
@@ -417,6 +555,20 @@ function init() {
    makeTabs(".tabs");
 
 }
+function fullFormatTime(d) {
+  var hr = d.getHours();
+  if (hr < 10) {
+    hr = `0${hr}`;
+  }
+
+  var min = d.getMinutes();
+  if (min < 10) {
+    min = `0${min}`;
+  }
+
+  return hr + ':' + min;
+}
+
 function formatTime(d) {
 
    var hr = parseInt(d.toISOString().substr(11,2));
@@ -466,35 +618,42 @@ function makeReservation() {
    return false;
 }
 
+
 function modal(from, to, rsc) {
    var overlay = document.createElement('div');
    overlay.id = 'overlay';
    overlay.className = 'overlay';
-   
+   var fromString = fullFormatTime(from);
+
+   var toString = fullFormatTime(to);
+
+   console.log(`model: from=${fromString} to=${toString}`);
    window.reservation = { "date": from.toLocaleDateString(), "from": from, "to": to };
 
    var oform = `<div id='dialog'>
+   <form id='newdlg'>
    <div class='dlgtitle'>Reserve Bus ${rsc._resource.id} on ${from.toLocaleDateString()}</div>
    <div class='dlgform'>
       <div class='form-group'><label for='customer'>Customer</label> <input type='text' id='customer' name='customer' placeholder='Customer' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='customer_suggestions' class='suggestions'></div></div>
       <div class='form-group'>
-         <label for='from'>From</label> <input type='text' id='from' name='from' placeholder='Pickup Time' value='${formatTime(from)}' size='10' class='form-time' onchange='handleForm(this)'/>
-         <label style='width:2em' for='to'>To</label> <input type='text' id='to' name='to' placeholder='Dropoff Time' value='${formatTime(to)}' size='10' class='form-time' onchange='handleForm(this)'/>
-         <label style='width:3em' for='pax'>Pax</label> <input type='text' id='pax' name='pax' placeholder='<=${rsc._resource.id.substr(0,2)}' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' />
+         <label for='from'>Start Time</label> <input type='time' id='from' name='from' placeholder='Pickup Time' value='${fullFormatTime(from)}' size='10' class='form-time' onchange='handleForm(this)'/>
+         <label style='width:2em' for='to'>End Time</label> <input type='time' id='to' name='to' placeholder='Dropoff Time' value='${fullFormatTime(to)}' size='10' class='form-time' onchange='handleForm(this)'/>
       </div>
       <div class='form-group'>
          <label for='triptype'>Trip Type</label>
-         <select name='triptype' id='triptype' onchange='handleForm(this)'>
+         <select name='triptype' id='triptype' onchange='handleForm(this);if (this.selectedIndex==0) { document.querySelector("#dropoffWrap").style.display="inline-block"; } else { document.querySelector("#dropoffWrap").style.display="none"; }'>
             <option value='roundtrip'>Round Trip</option>
             <option value='oneway'>One Way</option>
          </select>
          <!--input class='form-check-input' type='radio' id='oneway' name='triptype' onchange='handleForm(this)' />
          <input class='form-check-input' type='radio' id='roundtrip' name='triptype' onchange='handleForm(this)' checked=true /><label class='form-check-label' for='roundtrip'>Round Trip</label-->
+         <label style='width:3em' for='pax'>Pax</label> <input type='number' id='pax' name='pax' placeholder='<=${rsc._resource.id.substr(0,2)}' size='10' class='form-time' onchange='handleForm(this)' autocomplete='off' />
       </div>
       <div class='form-group'><label for='pickup'>Pickup</label> <input type='text' id='pickup' name='pickup' placeholder='Pickup Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='pickup_suggestions' class='suggestions'></div></div>
-      <div class='form-group'><label for='dropoff'>Dropoff</label> <input type='text' id='dropoff' name='dropoff' placeholder='Dropoff Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='dropoff_suggestions' class='suggestions'></div></div>
+      <div id='dropoffWrap' class='form-group'><label for='dropoff'>Dropoff</label> <input type='text' id='dropoff' name='dropoff' placeholder='Dropoff Location' class='form-control' onchange='handleForm(this)' autocomplete='off' /><div id='dropoff_suggestions' class='suggestions'></div></div>
       <div class='form-group right'><button type='button' id='dlg_cancel' onclick='closeDialog()'>Cancel</button> <button type='button' id='dlg_reserve' onclick='return makeReservation()'>Reserve</button></div>
    </div>
+   </form>
 </div>`;
 
    overlay.innerHTML = oform;
@@ -511,7 +670,7 @@ function modal(from, to, rsc) {
    customer.addEventListener("keydown", event => { doSuggestions('customer', event); });
    pickup.addEventListener("keydown", event => { doSuggestions('pickup', event); });
    dropoff.addEventListener("keydown", event => { doSuggestions('dropoff', event); });
-   //dlgform.addEventListener("submit", event => { makeReservation(event, customer.value, pickup.value, dropoff.value, frel.value, toel.value, pax.value); });
+   dlgform.addEventListener("submit", event => { makeReservation(event, customer.value, pickup.value, dropoff.value, frel.value, toel.value, pax.value); });
    customer.focus();
 }
 
@@ -529,7 +688,13 @@ function pickSuggestion(txt, who) {
    dropdown.style.border = '0px';
    return false;
 }
-window.dialogState = {};
+window.dialogState = {
+   suggestions: {
+      customer: true,
+      pickup: true,
+      dropoff: true
+   }
+};
 
 function doSuggestions(who, evt) {
    console.dir(evt);
@@ -538,14 +703,19 @@ function doSuggestions(who, evt) {
       txt += evt.key;
    }
    
+   if (evt.key == "Backspace") {
+      return true;
+   }
+   
    // Handle 'ESC' key
    if (evt.keyCode === 27) {
       if (window.dialogState.open) {
-         window.dialogState.nosuggestions = true;
+         window.dialogState.suggestions[who] = false;
          const dd = document.querySelector("#" + who + "_suggestions");
          if (dd) {
             dd.style.height = "0px";
             dd.style.border = "0px";
+            dd.style.display = "none";
          }
       }
    }
@@ -569,9 +739,6 @@ function doSuggestions(who, evt) {
       return false;
    }
 
-   if (evt.key == "Backspace") {
-      txt = txt.substr(0, txt.length - 1);
-   }
    if (!txt.match(/\w/)) {
       var el = document.querySelector("#" + who + "_suggestions");
       el.innerHTML = '';
@@ -579,20 +746,25 @@ function doSuggestions(who, evt) {
       el.style.border = "0px solid #3330";
       return true;
    }
-   if (!window.dialogState.nosuggestions) {
+   if (window.dialogState.suggestions[who]) {
       fetch("api.php?type=suggestion&rsc=" + who + "&q=" + txt).then((response) => { return response.json(); }).then((data) => {
          var out = '';
          window.suggestions = data['results'];
-
-         for (var i in data['results']) {
-            var item = data['results'][i];
-            out += "<div class='suggestion'><a href='#' onclick='return pickSuggestion(\"" + item + "\", \""+who+"\")'>" + item + "</a></div>";
+         if (data['results'].length) {
+            for (var i in data['results']) {
+               var item = data['results'][i];
+               out += `<div class='suggestion'><a href='#' onmouseover='this.parentNode.classList.add("hilite")' onmouseout='this.parentNode.classList.remove("hilite")' onclick='return pickSuggestion("${item}", "${who}")'>${item}</a></div>`;
+            }
+            var el = document.querySelector("#" + who + "_suggestions");
+            el.innerHTML = out;
+            el.style.height = "9rem";
+            el.style.border = "1px solid #333";
+            window.dialogState.open = who;
+         } else {
+            var el = document.querySelector("#" + who + "_suggestions");
+            el.style.height = "0px";
+            el.style.border = "0px";
          }
-         var el = document.querySelector("#" + who + "_suggestions");
-         el.innerHTML = out;
-         el.style.height = "9rem";
-         el.style.border = "1px solid #333";
-         window.dialogState.open = who;
       });
    }
 }

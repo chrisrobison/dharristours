@@ -1,6 +1,6 @@
 #!/usr/local/bin/php
 <?php
-$imap = imap_open("{pop.mail.yahoo.com:995/pop3/ssl/novalidate-cert}", "juanaharrisdht@att.net", "CANADA8bxx559");
+$imap = imap_open("{pop.mail.yahoo.com:995/pop3/ssl/novalidate-cert}", "juanaharrisdht@att.net", "2020CANADA8bxx559");
 
 $batchsize = 100;
 $msgdir = "/simple/clients/dharristours/incoming/";

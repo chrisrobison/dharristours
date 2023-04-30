@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
-$imap = imap_open("{pop.mail.yahoo.com:995/pop3/ssl/novalidate-cert}", "juanaharrisdht@att.net", "CANADA8bxx559");
-
+print "Commecting to IMAP mail server...";
+$imap = imap_open("{imap.mail.yahoo.com:993/ssl/novalidate-cert}", "juanaharrisdht@att.net", "wajkxpoukaksgypj");
+print "Connected.\n";
 $batchsize = 200;
 $emaildir = "/simple/clients/dharristours/incoming/";
 
@@ -21,33 +22,28 @@ if( $imap ) {
 
    while (($todo > 0) && ($i > 0)) {
 //   for ($i=$total; $i>($total-$batchsize); $i--) {
-      if (!file_exists($emaildir . "$i-H.json")) {
+      $uid = imap_uid($imap, $i);
+      if (!file_exists($emaildir . "$uid-H.json")) {
          $msg = new stdClass();
          $msg->headers = imap_headerinfo($imap, $i);
          
-	 $json = json_encode($msg);
-         file_put_contents($emaildir . "$i-H.json", $json);
-         print "Retrieved msg $i headers.  Grabbing body...";
-
-	 $msg->body = imap_qprint(imap_body($imap, $i));
-         file_put_contents($emaildir . "$i-B.txt", $msg->body);
-         print "Done. \nFetched msg $i. $todo left to fetch...\n";
+         $json = json_encode($msg);
+         file_put_contents($emaildir . "$uid-H.json", $json);
+         file_put_contents($emaildir . "$uid-B.txt", imap_body($imap, $i));
          $messages[] = $msg;
          $todo--;
          $i--;
-      } else if (file_exists($emaildir . "$i-H.json") && (!file_exists($emaildir . "$i-B.txt"))) {
-         print "Already fetched headers.  Grabbing body for msg $i...";
-	 $body = imap_qprint(imap_body($imap, $i));
-         file_put_contents($emaildir . "$i-B.txt", $body);
-         print "Done. \nFetched msg $i. $todo left to fetch...\n";
+      } else if (file_exists($emaildir . "$uid-H.json") && (!file_exists($emaildir . "$uid-B.txt"))) {
+	      $body = imap_qprint(imap_body($imap, $i));
+         file_put_contents($emaildir . "$uid-B.txt", $body);
          
-	 $todo--;
+         $todo--;
          $i--;
 
       } else {
-         print "Already fetched msg $i. Skipping...\n";
          $i--;
       }
+      print ".";
    }
    print "\n";
    imap_close($imap);

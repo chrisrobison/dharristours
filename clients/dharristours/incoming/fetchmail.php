@@ -1,8 +1,10 @@
 #!/usr/bin/php
 <?php
-$imap = imap_open("{pop.mail.yahoo.com:995/pop3/ssl/novalidate-cert}", "juanaharrisdht@att.net", "CANADA8bxx559");
+print "Connecting to IMAP server...";
+$imap = imap_open("{imap.mail.yahoo.com:993/ssl/novalidate-cert}", "juanaharrisdht@att.net", "wajkxpoukaksgypj");
+print "CONNECTED\n";
 
-$batchsize = 100;
+$batchsize = 10;
 
 if( $imap ) {
    
@@ -31,7 +33,13 @@ if( $imap ) {
          $todo--;
          $i--;
       } else {
+         $msg = new stdClass();
+         $msg->headers = imap_headerinfo($imap, $i);
+
          print "Already fetched msg $i. Skipping...\n";
+         $existing = file_get_contents("/simple/clients/dharristours/incoming/$i-H.json");
+         print "Existing: \n\t".$existing;
+         print "\n\nNew:\n\t".json_encode($msg->headers);
          $i--;
       }
    }

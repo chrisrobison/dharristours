@@ -49,7 +49,36 @@ class ClientUtility extends utility {
       return ($tbl) ? $this->buildTable($job->Job, $_REQUEST['ProcessID'], $_REQUEST['Resource'], array_keys((array)$job->Job[0])) : $job->Job;
    }
    
-   function filterEmployeeJob($tbl=true) {
+   function filterEmployeePayroll($tbl=true) {
+      global $boss;
+      $email = $_SESSION['Email'];
+//$email = "harristrent750@yahoo.com";
+      $sql = 'EmployeeID in (select EmployeeID from Employee where Email='.$boss->q($email).')';
+      $searchQuery = $boss->utility->buildGridSearch();
+      if ($searchQuery) $sql .= " AND " . $searchQuery;
+
+//      print_r($sql);
+      $now = date("Y-m-d h:i:s");
+      file_put_contents("/tmp/simpledb.log", $now . "\t" . $sql."\n", FILE_APPEND);
+
+      $job = $boss->getObjectRelated('EmployeePayroll', $sql,false);
+/*      for ($i=0; $i<count($job->Job['_ids']); $i++) {
+         unset($job->Job[$i]->Notes);
+         unset($job->Job[$i]->QuoteAmount);
+         unset($job->Job[$i]->Description);
+         unset($job->Job[$i]->LastModified);
+         unset($job->Job[$i]->LastModifiedBy);
+         unset($job->Job[$i]->Created);
+         unset($job->Job[$i]->CreatedBy);
+         unset($job->Job[$i]->Employee);
+         unset($job->Job[$i]->Business);
+         unset($job->Job[$i]->Bus);
+      }*/
+      $job->EmployeePayroll['_rows'] = $job->rows;
+      return ($tbl) ? $this->buildTable($job->EmployeePayroll, $_REQUEST['ProcessID'], $_REQUEST['Resource'], array_keys((array)$job->EmployeePayroll[0])) : $job->EmployeePayroll;
+   }
+
+  function filterEmployeeJob($tbl=true) {
       global $boss;
       $email = $_SESSION['Email'];
 //$email = "harristrent750@yahoo.com";

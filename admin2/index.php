@@ -31,23 +31,13 @@
    }
 
    function clearClass(cls) {
-      var all = document.querySelectorAll("a.active");
-      var re = new RegExp(cls + '\s*', "g");
-
-      for (var i=0; i<all.length; i++) {
-         all[i].className = all[i].className.replace(re, '');
-      }
+      document.querySelectorAll(".active").forEach(item=>item.classList.remove(cls));
    }
 
    document.addEventListener("click", (event) => {
       event.preventDefault();
       event.returnValue = '';
-      var a;
-      if (!event.target.href) {
-         a = event.target.parentElement;
-      } else {
-         a = event.target;
-      }
+      let a = (!event.target.href) ? event.target.parentElement : event.target;
       
       if (a.dataWidget == "pushmenu") {
          toggleSidebar();

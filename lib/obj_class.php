@@ -19,6 +19,7 @@ require_once("dbobj_class.php");
  *
  *
  */
+if (!class_exists(obj)) {
 class obj {
    /**
     *
@@ -94,6 +95,6 @@ class TABLE extends dbobj {
          $this->$rcs = new $rcs();
       }
    }
+ }
 }
-
 ?>

@@ -147,8 +147,7 @@ $('input[type="text"]').keypress(function (e) {
             url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI($("#SchoolID").val()) ;
          }
 
-         $.getJSON(url, 
-            function(data) {
+         fetch(url).then(resp=>resp.json()).then(data=>{
                try {
                   if (data) {
 //data = $.parseJSON(data); 
@@ -158,7 +157,7 @@ $('input[type="text"]').keypress(function (e) {
 			data["StreetAbr"] + ", " + data["City"] + ", " + data["School"]  + data["Phone"]
                       );
                   }
-               } catch(err) { }
+               } catch(err) { console.log(`Error: ${errr}`); }
             }
          );
          return false;

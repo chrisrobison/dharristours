@@ -1,5 +1,6 @@
 @charset "UTF-8";
 body {
+   font-family: 'Lexend', sans-serif;
    white-space:nowrap;
 }
 .left {
@@ -826,11 +827,10 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 .fc-toolbar.fc-header-toolbar {
-  margin-bottom: 1.5em;
+   height: 6vh;
 }
 
 .fc-toolbar.fc-footer-toolbar {
-  margin-top: 1.5em;
 }
 
 /* inner content */
@@ -847,6 +847,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 --------------------------------------------------------------------------------------------------*/
 .fc-view-container {
   position: relative;
+  height: 94vh;
 }
 
 /* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */
@@ -1339,6 +1340,7 @@ be a descendant of the grid when it is being dragged.
 
 .fc-time-grid-event .fc-time,
 .fc-time-grid-event .fc-title {
+   text-shadow: 1px 1px 0px #0009;
   padding: 0 1px;
 }
 
@@ -1498,36 +1500,46 @@ body {
     padding: 0;
     font-family: Arial,"Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
+    box-sizing: border-box;
+    display: flex;
   }
 
   #calendar {
-    max-width: 68%;
-    margin: .5em auto 0px auto;
-    display:inline-block;
+    margin: 0 auto 0px auto;
+    display:flex;
+    height: 100vh;
+    flex-direction: column;
   }
   .left {
      position:relative; 
-     width:400px;
-     display:inline-block;
-     float:left;
+     width:30vw;
+     display:flex;
      margin-top:0em;
-     margin-right:1em;
+     height: 100vh;
+     margin-right:0.25em;
+     flex-direction: column;
+     justify-content: space-between;
   }
   #tinycal {
-    width:400px;
+     display: flex;
   }
   #details {
-     display:inline-block;
-     width:25em;
-     height:27em;
-     margin:.5em 0 1em 0;
-     border:1px solid #ccc;
+     display:flex;
+     margin:0 0 1em 0;
+     border:1px solid #aaa;
+     background: #aaa;
+     flex-direction: column;
      padding:0px;
+     height: 21em;
   }
   #detail {
+    height: 100%;
     overflow-y:scroll;
     position:relative;
-    height:25em;
+
+  }
+  #joblist {
+   height:25em;
 
   }
   .jobs {
@@ -1538,8 +1550,12 @@ body {
     position: -webkit-sticky;
     position: sticky;
     top:0;
+    height: 2em;
   }
-  .fc-scroller { height:41em !important; }
+  .fc-scroller {
+    height: 90vh !important;
+    overflow: hidden scroll;
+   }
   .dp-col-header, .dp-permanent {
      font-size:1em;
   }
@@ -1558,7 +1574,9 @@ body {
   #jobdetail th {
     text-align: right;
     padding: .3em;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #0004;
+    border-left: 1px solid #0004;
+    border-radius: 4px;
     vertical-align:top;
     font-weight:normal;
   }
@@ -1587,45 +1605,53 @@ body {
   position:relative;
   overflow:hidden;
   margin-bottom:0px;
+  height: 2em;
 }
 .tabs li{
   float:left;
+  position: relative;
+  z-index: 1;
 }
 
 .tabs a{
   display:block;
   padding:5px 10px;
-  background-color: #EEE;
+  background-color: #ddd;
   color: #000;
   text-decoration: none;
   border-top:1px solid #CCC;
   border-left:1px solid #DDD;
   border-right:1px solid #DDD;
-  font:13px/18px verdana,arial,sans-serif;
+  font:13px/18px "Lexend",arial,sans-serif;
   border-bottom:1px solid #CCC;
   border-radius:4px;
   position:relative;
-  top:4px;
+  top:6px;
 }
 .tabs a.active{
   background-color: #fff;
   border-bottom:1px solid #fff;
   position:relative;
   top:1px;
-  z-index:999;
-  box-shadow:-2px -1px 2px rgba(0,0,0,.3);
+  z-index:9999;
+  box-shadow:-2px -1px 2px rgba(0,0,0,.3), 2px -1 2px #0009;
+  border-right: 1px solid #0009;
+  border-bottom-left-radius: 0px;
+  font:15px/20px "Lexend",verdana,arial,sans-serif;
+  font-weight: bold;
 }
 .tabs a.active.joblist {
   box-shadow:2px -1px 2px rgba(0,0,0,.3);
 }
 .tabs div{
   clear: both;
-  border:1px solid #CCC;
+  border:1px solid #999;
   padding:5px;
-  font-family:verdana;
-  font-size:13px;
+  font-family:"Lexend",verdana;
+  font-size:12px;
   background-color: #fff;
   display:none;
+  overflow: hidden scroll;
 }
 @media screen and (max-width: 992px) {
    #calendar {
