@@ -87,6 +87,9 @@
             include($boss->getPath("templates/toolbar.php")); 
          ?>
          <div id='formContainer'<?php if (!$process->NoTable) print " style='display:none'"; ?>>
+            <div id='loading'>
+               <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
             <form id="simpleForm" name="simpleForm" method="POST" autocomplete="on">
                <input type="hidden" id="cmd" name="x" value="get" />
                <input type="hidden" id="simpleID"name='ID' value='' />

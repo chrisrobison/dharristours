@@ -54,8 +54,22 @@ if ($_REQUEST['logout']) {
       <link rel='stylesheet' type='text/css' href='/lib/css/default.css' />
       <link href="/lib/css/Aristo/jquery-ui-1.8.5.custom.css" type="text/css" rel="stylesheet" />
       <link rel="stylesheet" type="text/css" href="/lib/css/core.css" />
-      <link rel="shortcut icon" href="/favicon.ico?v=2.3" />
-      <style>
+      <?php
+         $favicons = array(
+             $boss->app->Assets . '/favicon.ico', 
+             $boss->app->Assets . '/favicon.png',
+             $boss->app->Assets . '/img/favicon.ico', 
+             $boss->app->Assets . '/img/favicon.png'
+         );
+
+         foreach ($favicons as $path) {
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)) { 
+               print '<link rel="icon" type="image/'. substr($path, -3) .'" href="' . $path . '">';
+               break;
+            } 
+         }
+      ?>
+       <style>
          body { background-color: #306090; color:#ffffff; }
          #loginForm .centered .simpleButton {
             float:right;

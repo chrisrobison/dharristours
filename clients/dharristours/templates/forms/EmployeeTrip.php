@@ -94,6 +94,7 @@ function upAll(id) {
          <label>Date</label><input type='text' dbtype='date' name='Trip[<?php print $current->TripID; ?>][JobStartDate]' id='JobStartDate' value='' size='10' class='date' /></div>
     <fieldset title='EmployeeTime'>
              <legend>Employee Paid Time: <input type='text' dbtype='text' name='Trip[<?php print $current->TripID; ?>][TotalEmployeeHours]' id='TotalEmployeeHours' value='' size='5' disabled='disabled' /></legend>
+         <div class='contentField'><label>Driver Overtime</label><select dbtype='tinyint(4)' name='Trip[<?php print $current->TripID; ?>][DriverOvertime]' id='DriverOvertime'><option value='0'>No</option><option value='1'>Yes</option></select></div>
          <div class='contentField'><label>Yard Start Mileage</label><input type='text' dbtype='int(15)' name='Trip[<?php print $current->TripID; ?>][YardStartMileage]' id='YardStartMileage' value='' size='15' class='boxValue' /></div>
          <div class='contentField'><label>Yard Depart Time</label>
                <select id='YardStart_hour' onchange="updateTime('YardStart');">
@@ -321,6 +322,7 @@ function upAll(id) {
 	</div>
    </fieldset>
 	<div class='contentField'><label>Total Billable Hours</label><input type='text' dbtype='text' name='Trip[<?php print $current->TripID; ?>][TotalHoursWorked]' id='TotalHoursWorked' value='' size='25' disabled='disabled' /></div>
+   <div class='contentField'><label>Notes</label><textarea name='Trip[<?php print $current->TripID; ?>][Notes]' id='Notes' class='textBox' style='width:41em;height:5em;'><?php print $current->Notes; ?></textarea></div>
 </div>
 </div>
 </div>

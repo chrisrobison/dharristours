@@ -1,6 +1,6 @@
 #!/usr/local/bin/php
 <?php
-    $contents = file("https://csv.telematics.tomtom.com/extern?account=harris-tours&username=cdr&password=Simple1%21&apikey=2b6c8db8-071f-44c0-988f-d82718b1be29&lang=en&action=showObjectReportExtern&outputformat=json")[0];
+    $contents = file("https://csv.webfleet.com/extern?account=harris-tours&username=cdr&password=Simple1%21&apikey=2b6c8db8-071f-44c0-988f-d82718b1be29&lang=en&action=showObjectReportExtern&outputformat=json")[0];
     
     $newid = storeBuses($contents);
 

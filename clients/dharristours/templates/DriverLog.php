@@ -362,8 +362,13 @@
         }
 
         /*]]>*/
+   .alertText {
+       background: rgb(153, 0, 0);
+       color: rgb(255, 255, 255);
+    }
     </style>
-    <title>Driver Trip Sheet</title>
+    <title>
+   Drivers Trip Sheet</title>
 </head>
 
 <body>
@@ -427,7 +432,11 @@
             <br />
             <div id='ticket'>
                 <div style="padding:4px; position:relative;text-align:center;">
-                    <h2 class='center'>DRIVER TRIP</h2>
+                  <h2 class='center'>
+                     DRIVER TRIP
+                     <?php ($current->WheelChair == 1) ? print "<span class='alertText'>WHEELCHAIR!</span>"  : print ""; ?>
+                     <?php ($current->Shuttle) ? print "<span class='alertText'>SHUTTLE</span>"  : print ""; ?>
+                  </h2>
                     <div class="date center">
                         <?php print date("n/j/Y", strtotime($current->JobDate)); ?> at </div>
                     <div class="date center">
@@ -450,6 +459,9 @@
                     <tr>
                         <td class='field'>Spot:</td>
                         <td class='value'>15 minutes prior to start</td>
+
+                     </tr>
+                     <tr>
                         <td class='field'>Contact:</td>
                         <td class='value'>
                             <?php print $current->ContactName; ?>
@@ -582,6 +594,9 @@
                     <td>Mileage: </td>
                     <td><span class='line miles'></span></td>
                 </tr>
+                <tr>
+                  <td colspan="5"><b>CLOCK IN</b> USING PAYCHEX APP AFTER YOU COMPLETE THE PRETRIP</td>
+               </tr>
             </table>
             <!-- insert dvir form here -->
             <hr>
@@ -677,7 +692,7 @@
             <hr>
             <table style='width:100%;'>
                 <tr>
-                    <td style='text-align:right;'>Return to Yard Time: </td>
+                    <td style='text-align:right;'>Return to Yard Time: <b>CLOCK OUT</b> </td>
                     <td><span class='line'></span>:<span class='line'></span></td>
                     <td style='text-align:right;'>Mileage: </td>
                     <td><span style='width:10em;' class='line miles'></span></td>

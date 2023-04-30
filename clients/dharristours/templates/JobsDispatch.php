@@ -486,10 +486,6 @@ function upAll(id) {
 	 	<input type='text' disabled='disabled' name='Job[<?php print $current->JobID; ?>][NumberOfItems]' id='NumberOfItems' value='<?php print $current->NumberOfItems; ?>' size='50' class='boxValue' /></div> 
 	</fieldset>
 <div class='contentField'><label>Job</label><input type='text'  name='Job[<?php print $current->JobID; ?>][Job]' id='Job' value='<?php print $current->Job; ?>' size='50' class='boxValue' /></div> 
-         <div class='contentField'><label>Job Description</label>
-	 	<input type='text' name='Job[<?php print $current->JobID; ?>][Description]' id='Description' value='<?php print $current->Description; ?>' size='50' class='boxValue' /></div> 
-         <div class='contentField'><label>Business Location</label>
-	 	<input type='text' name='Job[<?php print $current->JobID; ?>][BusinessLocation]' id='BusinessLocation' value='<?php print $current->BusinessLocation; ?>' size='50' class='boxValue' /></div> 
       <fieldset title='Options'>
          <legend>Options</legend>
             <div class='contentField'>

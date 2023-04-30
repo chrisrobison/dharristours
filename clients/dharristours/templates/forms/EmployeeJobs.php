@@ -1,7 +1,7 @@
 <script>
     function openDriverLog() {
         let z = btoa("ID=" + simpleConfig.id);
-        let tgt = '<?php print $boss->app->Assets; ?>/templates/DriverLog.php?z=' + z;
+        let tgt = '<?php print $boss->app->Assets; ?>/templates/forms/DriverLog.php?z=' + z;
 
         window.open(tgt, "btnJobWin", "height=800,width=600,resizable=yes,scrollbars=yes,status=yes,toolbar=yes,menubar=yes,location=no,personalbar=no");
 
@@ -20,7 +20,7 @@
     <div class='formHeading'> Job ID:
         <?php print $current->JobID; ?>
     </div>
-    <button name='driverLogButton' style='float:middle' onclick='return openDriverLog()'>Print Driver Log</button>
+    <button name='driverLogButton' style='float:middle;background-color:green;color:white' onclick='return openDriverLog()'>Print Driver Log</button>
     <div class='fieldcontainer'>
         <div class='fieldcolumn fieldfloater'>
             <div class='contentField'><span class='fieldLabel'>Trip Cancelled: </span><span name='Job[][JobCancelled]' id='JobCancelled'></span></div>
@@ -41,7 +41,6 @@
         </div>
         <div class='fieldcolumn fieldfloater'>
             <div class='contentField'><span class='fieldLabel'>Hours: </span><span name='Job[][Hours]' id='Hours'></span></div>
-            <div class='contentField'><span class='fieldLabel'>Business Location: </span><span name='Job[][BusinessLocation]' id='BusinessLocation'></span></div>
             <div class='contentField'><span class='fieldLabel'>Contact: </span><span name='Job[][ContactName]' id='ContactName'></span></div>
             <div class='contentField'><span class='fieldLabel'>Phone: </span><span name='Job[][ContactPhone]' id='ContactPhone'></span></div>
             <div class='contentField'><span class='fieldLabel'>Special Instructions: </span><span name='Job[][SpecialInstructions]' id='SpecialInstructions'></span></div>

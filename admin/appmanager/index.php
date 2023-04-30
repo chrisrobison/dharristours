@@ -12,6 +12,11 @@
 <head>
    <title>BPM Browser</title>
    <link href="/lib/css/Aristo/jquery-ui-1.8.5.custom.css" type="text/css" rel="stylesheet" />
+   <link rel="stylesheet" href="css/fontawesome.min.css" />
+   <link rel="stylesheet" href="css/all.min.css" />
+   <link rel="stylesheet" href="css/solid.min.css" />
+   <link rel="stylesheet" href="css/brands.min.css" />
+   <link rel="stylesheet" href="css/v4-shims.min.css" />
    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
    <script language='JavaScript' type='text/javascript' src='finder.js'> </script>
@@ -66,6 +71,23 @@
    <link rel="stylesheet" type="text/css" href="/lib/css/icons24.css" />
    
    <style>
+      .small {
+         width: 24px;
+         height: 24px;
+         display: inline-block;
+         color: #000;
+         font-size: 18px;
+         text-align: center;
+      }
+      .simple {
+         width: 48px;
+         height: 48px;
+         display: inline-block;
+         color: #000;
+         font-size:32px;
+         text-align: center;
+      }
+
       .selectedIcon {
          background-color: #aaddff;
       }
@@ -96,10 +118,25 @@
       </div>
 <div id="dialog" title="Choose an Icon" style='display:none'>
 <?php 
-   $file = file($_SERVER['DOCUMENT_ROOT']."/lib/css/icons48.txt");
+   $file = file("fontawesome.txt");
    
    $row = 0; $col = 0;
    $small = "";
+   foreach ($file as $icon) {
+      $icon = trim($icon);
+      if (preg_match("/^\d+\-([^\.]*)\.png/", $icon)) {
+         $icon = $match[1];
+      }
+      print "<span class='simple fa fa-".$icon."' title='".$icon."'></span>";
+      $small .= "<span class='small fa fa-".$icon."' title='".$icon."'></span>";
+      ++$col;
+      if ($col==10) {
+         ++$row; $col = 0;
+      }
+   }
+   
+   $file = file($_SERVER['DOCUMENT_ROOT']."/lib/css/icons48.txt");
+   $row = 0; $col = 0;   
    foreach ($file as $icon) {
       if (preg_match("/^\d+\-([^\.]*)\.png/", $icon)) {
          $icon = $match[1];

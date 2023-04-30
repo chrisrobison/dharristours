@@ -51,7 +51,7 @@
             }
          }
          closedir($dh);
-         
+         sort($out);
          return $out;
       }
 
