@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+   <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+...<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Overpass+Mono:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="per-mile.css">
+    </head>
+<body>
+    <main>
+        <h1>Cost Per Mile Calculation for D Harris Tours</h1>
+        <p>The "Cost-per-mile" (cpm) metric is typically broken down into the following
+            six sub-cost categories to calculate the cost per mile:</p>
+        <ol>
+            <li><a href="#depreciation">Vehicle Depreciation</a></li>
+            <li><a href="#insurance">Insurance</a></li>
+            <li><a href="#fuel">Fuel</a></li>
+            <li><a href="#repairs">Maintenance &amp; Repairs</a></li>
+            <li><a href="#admin">Administrative Costs</a></li>
+            <li><a href="#training">Training Cost</a></li>
+        </ol>
+        <p>The following is an explanation and example of the six sub-cost categories for
+            the cpm.</p>
+        <h2>Vehicle Depreciation</h2>
+        <div>
+            <p>Vehicle depreciation is calculated by taking the average bus cost and
+                dividing that over the life expectancy of the bus. This sub-cost depends 
+                on the number of buses and the number of years the bus is in service. 
+                Large buses tend to be kept for 10 to 12 years and small buses for 7 to 8 years.
+                <ol>
+                    <li>The average bus cost is derived from the cost per bus (new). Add
+                        up the new cost value of each bus and divide the total by the
+                        number of all buses.
+                        <fieldset class='example'>
+                            <legend>Worksheet</legend> Total cost of buses (new) $<input type="text"
+                                value="500000" id="totalBusCost" onchange="app.data.totalBusCost=this.value; app.calculate()"> /
+                            <input type="text" value="10" id="busCount" class="busCount" size="5" onchange="app.data.busCount = this.value; app.calculate()">
+                            buses = $<span class="avgBusCost">50000</span> Average cost per bus
+                        </fieldset>
+                    </li>
+                    <li>To calculate the depreciation cost per year: take the average bus
+                        cost [see (1)] and divide it by the number of years the bus will
+                        be in service. Avg. Bus Cost / 10 yr. depreciation = $
+                        <fieldset class='example'>
+                            <legend>Worksheet</legend> Average bus cost $<input type="text"
+                                value="100000" id="avgBusCost" class="avgBusCost" onchange="app.data.avgBusCost=this.value; app.calculate()"> /
+                            <input type="text" value="10" id="busLife" class="busLife" size="5" onchange="app.data.busLife=this.value; app.calculate()">
+                            years = $<span id="busCostPerYear" class="busCostPerYear">10000</span> per year.
+                        </fieldset>
+                    </li>
+                    <li>Take the annual mileage from the preceding year and divide that
+                        by the number of buses in the fleet.</li>
+                    <li>Annual Mileage divided by the number of buses equals the miles
+                        per bus.
+                        <fieldset class='example'>
+                            <legend>Worksheet</legend> <label>Total miles</label> <input
+                                type="text" value="150000" id="totalMiles" onchange="app.data.totalMiles=this.value; app.calculate()">
+                            / <input type="text" class="busCount" value="10" size="5" onchange="app.data.busCount=this.value; app.calculate()">
+                            buses = <span class="milesPerBusPerYear" id="milesPerBusPerYear">11,394</span> miles per
+                            bus per year.
+                        </fieldset>
+                    </li>
+                    <li>To calculate the cost per mile, take the average depreciation per
+                        year divided by the average miles per bus per year.
+                        <fieldset class='example'>
+                            <legend>Worksheet</legend> $<span class="busCostPerYear">8,333.33</span>
+                            / <span class="milesPerBusPerYear" id="milesPerBusPerYear2">10,644</span> average miles
+                            = $<span class="vehiclePerMile">0.78</span> per mile
+                        </fieldset>
+                    </li>
+                </ol>
+            </p>
+        </div>
+        <h2>Insurance</h2>
+        <ol type="A">
+            <li>To calculate the total insurance cost per mile, use your total insurance
+                cost divided by the number of buses divided by the average annual miles
+                per bus.
+                <fieldset class='example'>
+                    <legend>Worksheet</legend>
+                    <ol>
+                        <li>$<input type="text" value="258939" size=10 id="insuranceCostPerYear" class="insuranceCostPerYear" onchange="app.data.insuranceCostPerYear=this.value; app.calculate()"> insurance cost current year / <input type="text" class="busCount" size=5 onchange="app.data.busCount=this.value; app.calculate()" value="10"> buses = $<span class="insuranceCostPerBus">1288</span> per bus</li>
+                        <li>$<span class="insuranceCostPerBus"></span> / <span id="milesPerBusPerYear" class="milesPerBusPerYear">10644</span> average miles per bus = $<span class="insuranceCostPerMile">0.12</span> per mile</li>
+                    </ol>
+                </fieldset>
+            </li>
+        </ol>
+        <h2>Fuel</h2>
+        <ol type="A">
+            <li>To calculate the total fuel cost per mile, use the total cost of fuel
+                from the prior year and divide it by the total fleet miles
+                <fieldset class='example'>
+                    <legend>Worksheet</legend>
+                    <ol>
+                        <li>$<input type="text" class="fuelCostPerYear" size=10 onchange="app.data.fuelCostPerYear=this.value; app.calculate();" value="50000"> fuel cost per year / <input type="text" size=10 class="totalMiles" value="150000" onchange="app.data.totalMiles=this.value; app.calculate()">  total miles =$<span class="fuelCostPerMile">0.44</span> per mile</li>
+                    </ol>
+                </fieldset>
+            </li>
+        </ol>
+        <h2>Maintenance &amp; Repairs</h2>
+        <ol type="A">
+            <li>To calculate the total maintenance and repairs cost per mile, add up the
+                annual cost of mechanic salaries, parts, supplies, garage repairs and 
+                any other costs associated with maintaining fleet vehicles. The total 
+                cost of maintenance per year will be divided by the total yearly mileage.
+                <fieldset class='example'>
+                    <legend>Worksheet</legend>
+                    <ol>
+                        <li>$<input type="text" class="totalRepairCost" value="50000" size=10 onchange="app.data.totalRepairCost=this.value; app.calculate()"> Maintenance &amp; repairs cost / <input type="text" size=10 class="totalMiles" value="150000" onchange="app.data.totalMiles=this.value; app.calculate()"> Annual mileage = $<span class="repairCostPerMile">0.33</span> per mile</li>
+                    </ol>
+                </fieldset>
+            </li>
+        </ol>
+        <h2>Administrative Costs</h2>
+        <ol type="A">
+            <li>This cost calculation consists of each
+                administrative employee’s salary plus benefits. Add 
+                all the employees identified as part of your administration 
+                team and divide the total by the yearly fleet miles.
+                <fieldset class='example'>
+                    <legend>Example</legend>
+                    <ol type="i">
+                        <li>Office Manager: $51,300 + Benefits = $65,000</li>
+                        <li>Dispatcher:  $31,200</li>
+                    </ol>
+                </fieldset>
+                <fieldset class='example'>
+                    <legend>Worksheet</legend>
+                    <ol type="a">
+                        <li>Total cost = $<input type="text" size=10 class="adminCostPerYear" value="96200" onchange="app.data.adminCostPerYear=this.value; app.calculate();"> / <input type="text" size=10 class="totalMiles" value="150000" onchange="app.data.totalMiles=this.value; app.calculate()"> miles= $<span class="adminCostPerMile">0.64</span> per mile</li>
+                    </ol>
+                </fieldset>
+            </li>
+        </ol>
+        <h2>Training & Compliance Cost</h2>
+            <ol id="training">
+                <li class="nomarker">Training and compliance costs are costs related to fulfilling State &amp; Federal regulatory requirements such as drug &amp; alcohol testing and yearly driver training.  To get the cost per mile for trainging activities, add up the following and divide by yearly fleet miles:
+                    <fieldset>
+                        <legend>Worksheet</legend>
+                        <ol id="trainingList" type="1">
+                            <li>
+                              <label>Driver instructor pay</label>
+                              $<input type="text" size="10" class="training0" value="67935" onchange="app.data.training[0].value = this.value; app.calcTraining()">
+                            </li>
+                            <li>
+                              <label>Drug &amp; alcohol testing / Physicals cost</label> 
+                              $<input type="text" size="10" class="training1" value="17931" onchange="app.data.training[1].value = this.value; app.calcTraining()">
+                            </li>
+                            <li><label>Compliance costs</label> $<input type="text" size="10" class="training2" value="1781" onchange="app.data.training[2].value = this.value; app.calcTraining()"></li>
+                            <li><label>Safety meeting costs</label> $<input type="text" size="10" class="training3" value="2500" onchange="app.data.training[3].value = this.value; app.calcTraining()">2500</li>
+                            <li>Total cost = $<span class="totalTrainingCost">187647</span> / <span class="totalMiles">150000</span> = $<span class="trainingCostPerMile">0.09</span> per mile</li>
+                        </ol>
+                    </fieldset>
+                </li>
+            </ol>
+            <p>Add all the sub cost per mile:</p>
+            <table class="subcosts">
+                <thead>
+                    <tr>
+                        <td>Category</td>
+                        <td>Amount</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Depreciation</th>
+                        <td class="permile">$<span class="vehiclePerMile">0.78</span></td>
+                    </tr>
+                    <tr>
+                        <th>Insurance</th>
+                        <td class="permile">$<span class="insuranceCostPerMile">0.12</span></td>
+                    </tr>
+                    <tr>
+                        <th>Fuel</th>
+                        <td class="permile">$<span class="fuelCostPerMile">0.44</span></td>
+                    </tr>
+                    <tr>
+                        <th>Repairs</th>
+                        <td class="permile">$<span class="repairCostPerMile">0.76</span></td>
+                    </tr>
+                    <tr>
+                        <th>Administration</th>
+                        <td class="permile">$<span class="adminCostPerMile">0.17</span></td>
+                    </tr>
+                    <tr>
+                        <th>Training</th>
+                        <td class="permile">$<span class="trainingCostPerMile">0.09</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="total">Total</th>
+                        <td class="total permile">$<span class="totalCostPerMile">0.00</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><span class="bold"> TOTAL COST PER MILE $<span class="totalCostPerMile">2.36</span> per mile</span></p>
+    </main>
+    <script>
+        const $ = str => document.querySelector(str);
+        const $$ = str => document.querySelectorAll(str);
+
+        (function() {
+            const app = {
+                data: {
+                    totalBusCost: 500000,
+                    busCount: 10,
+                    busLife: 10,
+                    totalMiles: 150000,
+                    insuranceCostPerYear: 258939,
+                    fuelCostPerYear: 50000,
+                    fuelCostPerMile: 0.33,
+                    totalRepairCost: 50000,
+                    repairCostPerMile: 0.33,
+                    adminCostPerYear: 96200,
+                    adminCostPerMile: 0.00,
+                    trainingCostPerYear: 5000,
+                    trainingCostPerMile: 0.03,
+                    training: [
+                        { label: "Driver Instructor salary", value: 2000 },
+                        { label: "Drug &amp alcohol testing / Physicals", value: 1000 },
+                        { label: "Compliance costs", value: 1000 },
+                        { label: "Safety Meeting costs", value: 1000 },
+                    ]
+                },
+                state: {
+                    loaded: false
+                },
+                init: function() {
+                    app.calcTraining();
+                    app.calculate();
+                    // app.fetch("cask.json", app.display);
+                },
+                fetch: function(url, callback) {
+                    fetch(url).then(response => response.json()).then(
+                        data => {
+                            app.data = data;
+                            app.state.loaded = true;
+                            if (callback && typeof(callback) ===
+                                "function") {
+                                callback(data);
+                            }
+                        });
+                },
+                calculate: function() {
+                    
+                    app.updateValues(".busCount", app.data.busCount, 100);
+                    app.data.busCostPerYear = Math.floor(app.data.totalBusCost / app.data.busLife);
+                    app.data.milesPerBusPerYear = Math.floor(app.data.totalMiles / app.data.busCount);
+                    console.log(`Total bus cost: ${app.data.totalBusCost}\nBus count: ${app.data.busCount}`);
+                    app.data.avgBusCost = Math.floor(app.data.totalBusCost / app.data.busCount);
+
+                    app.data.depreciation = Math.floor(app.data.avgBusCost / app.data.busLife);
+
+                    app.updateValues(".avgBusCost", app.data.avgBusCost, 200);
+
+                    app.data.busCost = Math.floor(app.data.avgBusCost / app.data.busLife);
+                    app.updateValues(".busCostPerYear", app.data.busCost, 300);
+                    app.updateValues(".milesPerBusPerYear", app.data.milesPerBusPerYear, 400);
+
+                    app.data.vehiclePerMile = (app.data.busCost / app.data.milesPerBusPerYear);
+                    app.updateValues(".vehiclePerMile", app.makeCents(app.data.vehiclePerMile), 500);
+
+                    // Insurance costs
+                    app.data.insuranceCostPerBus = app.data.insuranceCostPerYear / app.data.busCount;
+                    app.updateValues(".insuranceCostPerBus", app.data.insuranceCostPerBus, 600);
+
+                    app.data.insuranceCostPerMile = app.data.insuranceCostPerBus / app.data.milesPerBusPerYear;
+                    app.updateValues(".insuranceCostPerMile", app.makeCents(app.data.insuranceCostPerMile), 700);
+
+                    // Fuel costs
+                    app.updateValues(".fuelCostPerYear", app.data.fuelCostPerYear, 800);
+                    app.updateValues(".totalMiles", app.data.totalMiles, 900);
+                    
+                    app.data.fuelCostPerMile = app.data.fuelCostPerYear / app.data.totalMiles;
+                    app.updateValues(".fuelCostPerMile", app.makeCents(app.data.fuelCostPerMile), 2750);
+
+                    // Maintenance costs
+                    app.updateValues(".totalRepairCost", app.data.totalRepairCost, 1000);
+                    
+                    app.data.repairCostPerMile = app.makeCents(app.data.totalRepairCost / app.data.totalMiles);
+                    app.updateValues(".repairCostPerMile", app.data.repairCostPerMile, 1100);
+
+
+                    // Admin costs
+                    app.updateValues(".adminCostPerYear", app.data.adminCostPerYear, 1200);
+                    
+                    app.data.adminCostPerMile = app.makeCents(app.data.adminCostPerYear / app.data.totalMiles);
+                    app.updateValues(".adminCostPerMile", app.data.adminCostPerMile, 1300);
+
+                    // Training costs
+                    let ttot = 0;
+                    app.data.training.forEach(item=>{
+                        ttot += parseInt(item.value);
+                    });
+                    app.data.trainingCostPerYear = ttot;
+                    app.updateValues(".trainingCostPerYear", ttot);
+
+                    app.data.trainingCostPerMile = app.makeCents(ttot / app.data.totalMiles);
+                    app.updateValues(".trainingCostPerMile", app.data.trainingCostPerMile, 1300);
+
+                    // Update 'totals' summary
+                    app.data.totalCostPerMile = app.data.vehiclePerMile + 
+                                                app.data.insuranceCostPerMile +
+                                                app.data.fuelCostPerMile +
+                                                app.data.repairCostPerMile +
+                                                app.data.adminCostPerMile +
+                                                app.data.trainingCostPerMile;
+
+                    app.updateValues(".totalCostPerMile", app.makeCents(app.data.totalCostPerMile), 1500);
+
+                },
+                calcTraining: function() {
+                    let out = "", tot = 0;
+                    
+                    app.data.training.forEach((item, idx) => {
+                        tot += parseInt(item.value);
+                        out += `<li><label>${item.label}</label> $<input type="text" size="10" class="training${idx}" value="${item.value}" onchange="app.data.training[${idx}].value = this.value; app.calcTraining()"></li>`;
+                    });
+                    app.data.totalTrainingCost = tot;
+                    app.data.trainingCostPerYear = tot;
+                    app.updateValues(".totalTrainingCost", tot, 100);
+
+                    out += `<li><label><input type="text" size=15 id="trainingNewLabel" placeholder="New item" onchange="app.data.training.push({label:$("#trainingNewLabel").value, value: $("#trainingNewValue").value }); app.calcTraining();"></label> $<input type="text" size="10" id="trainingNewValue" value="" onchange="app.data.training.push({label:$("#trainingNewLabel"), value: this.value }); app.calcTraining()"></li>`;
+                    out += `<li>Total cost = $<span class="totalTrainingCost">${tot}</span> / <span class="totalMiles">${app.data.totalMiles}</span> = $<span class="trainingCostPerMile">${app.makeCents(tot / app.data.totalMiles)}</span> per mile</li>`;
+                    
+                    app.data.trainingCostPerMile = app.makeCents(app.data.trainingCostPerYear / app.data.totalMiles);
+
+                    $("#trainingList").innerHTML = out;
+                    app.calculate();
+                },
+                makeCents: function(val) {
+                    return (Math.floor(val * 100)) / 100;
+                },
+                updateValues: function(id, val, delay) {
+                    let els = $$(id);
+
+                    els.forEach(el=>{
+                        if (el.value) {
+                            el.value = val;
+                        } else {
+                            el.innerHTML = val;
+                        }
+                        app.flash(el, delay);
+                    });
+                },
+                flash: function(el, delay=0) {
+                    el.classList.remove("flash");
+                    setTimeout(function() { 
+                        el.classList.add("flash"); 
+                    }, delay);
+                },
+                display: function(data, tgt) {
+                    let out = "<table><thead><tr>";
+                    const keys = Object.keys(data[0]);
+                    if (keys) {
+                        keys.forEach(key => {
+                            out += `<th>${key}</th>`;
+                        });
+                    }
+                    out += "</tr></thead><tbody>";
+                    data.forEach(item => {
+                        out += `<tr>`;
+                        keys.forEach(key => {
+                            out +=
+                                `<td>${item[i]}</td>`;
+                        });
+                        out += `</tr>`;
+                    });
+                    out += "</tbody></table>";
+
+                    if (tgt) {
+                        tgt.innerHTML = out;
+                    }
+                    return out;
+                }
+            }
+            window.app = app;
+            app.init();
+        })();
+    </script>
+</body>
+
+</html>
