@@ -158,12 +158,12 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
 #SearchImg { top:4px; float:right; }
 /* .formHeading { overflow:hidden; width:100%; } */
 .formHeading { background-color:#c0c0c0;color:#202020;padding:3px; font-weight:bold; font-size:1.1em;font-weight:normal;margin-top:0px; -moz-box-shadow:0px 4px 5px rgba(0,0,0,.35); -webkit-box-shadow:0px 4px 5px rgba(0,0,0,.35); box-shadow:0px 4px 5px rgba(0,0,0,.35); margin-bottom:1em; position:relative; z-index:10; }
-.fieldLabel, .contentField label { position:relative; width:10em; text-align:right; padding:0 .5em 0 0; display:inline-block;vertical-align:top;font-weight:200;}
+.fieldLabel, .contentField label { position:relative; width:7em; text-align:right; padding:0 .5em 0 0; display:inline-block;vertical-align:top;font-weight:200;}
 #chpassDialog label { position:relative; width:10em; text-align:right; padding:0px .5em 2px 0; display:inline-block;}
 #chpassResults { display:none; }
 #loading { display:none; }
 .fieldcontainer { white-space:nowrap; position: relative; }
-.fieldcolumn { position:relative;display:inline-block; }
+.fieldcolumn { position:relative;display:inline-block; vertical-align:top;}
 .fieldfloater { float:left; }
 .contentField {clear:left; padding: 2px 0px 2px 0px; position: relative; }
 #main { position:absolute; top:0px; left:0px; bottom:0px; right: 0px; height:100%; background-color:#fff; margin:0px; padding:0px !important;}
@@ -211,7 +211,6 @@ background: linear-gradient(top, #404e6d 1%,#1f384f 50%,#192c3f 50%,#000000 100%
 #toolbar button.disabled:active,#toolbar a.disabled:active,.simpleButton.disabled:active, #toolbar a.button.disabled:active { top:0px;position:relative; }
 input:focus,textarea:focus{ background-color:#ffffee;}
 .focus {-moz-box-shadow:4px 4px 6px rgba(0,0,0,.35);box-shadow:4px 4px 6px rgba(0,0,0,.35);-webkit-box-shadow:4px 4px 6px rgba(0,0,0,.35);font-size:1.0em;}
-#main .modified { background-color:#ffffcc;color:#000000;}
 #toolbar a.modified { 
    color:#ffffff;
    background:    -moz-linear-gradient(center top, #ffa0a0 0%, #ffcccc 50%, #ffa0a0 51%, #ff2020 100%) repeat scroll 0 0 #ff0000;
@@ -328,6 +327,7 @@ span.arrow {
    font-size:2em;
    cursor:pointer;
 }
+#main .modified { background-color:#ffffcc !important;color:#000000;}
 #chpassDialog input[type="text"] { margin-bottom:3px; border: 1px inset #aaa; font-size: 1em; padding: 0.25em;border-radius:1em;-moz-border-radius:1em;-webkit-border-radius:1em; width:12em;} 
 table.related { background-color:#fff; border: 1px solid transparent; width:100%; }
 table.related:hover { border-color:#aaa; background-color:#c4e8fd; }

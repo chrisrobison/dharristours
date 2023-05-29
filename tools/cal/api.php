@@ -1,6 +1,8 @@
 <?php
-   include($_SERVER['DOCUMENT_ROOT'] . '/.env');
+   $envfile = (file_exists($_SERVER['DOCUMENT_ROOT'] . '/.env')) ? $_SERVER['DOCUMENT_ROOT'] . '/.env' : "/simple/.env";
+   include($envfile);
    $in = $_REQUEST;
+   
    $out = array();
    $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
 
@@ -21,6 +23,12 @@
          case "drivers":
             $out = getDrivers($link, $in);
             break;
+         case "driver":
+            $out = getDriver($link, $in);
+            break;
+         case "driverSchedule":
+            $out = getDriverAvailability($link, $in);
+            break;
          case "buses":
             $out = getBuses($link, $in);
             break;
@@ -29,6 +37,12 @@
             break;
          case "resources":
             $out = getResources($link, $in);
+            break;
+         case "driverresources":
+            $out = getDriverResources($link, $in);
+            break;
+         case "allresources":
+            $out = getAllResources($link, $in);
             break;
          case "suggestion":
             $out = getSuggestions($link, $in);
@@ -150,8 +164,14 @@
             $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
             $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
             $obj->date = date("m/d", strtotime($row['JobDate']));
-            $obj->resourceId = $buses[$row['BusID']];
+            $obj->driverId = $row['EmployeeID'];
             
+            if (array_key_exists("driver", $in)) {
+               $obj->resourceIds = array($row['EmployeeID'], $buses[$row['BusID']]);;
+            } else {
+               $obj->resourceId = $buses[$row['BusID']];
+            }
+	
             // Set color from business name unless a color is set for either the business or job
             $obj->color = '#' . stringToColorCode($row['Business']); // $row['Color'];
             
@@ -228,7 +248,7 @@
       $yesterday = date("Y-m-d", strtotime($in['start']));
       $first = date("Y-m-d", strtotime($in['start']));
       $last = date("Y-m-d", strtotime($in['end']));
-      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions FROM Job where JobDate>='{$first}' AND JobDate<='{$last}' AND JobCancelled=0";
+      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Job.EmployeeID as EmployeeID, SpecialInstructions FROM Job where JobDate>='{$first}' AND JobDate<='{$last}' AND JobCancelled=0";
       $results = mysqli_query($link, $sql);
       
       while ($row = $results->fetch_assoc()) {
@@ -237,9 +257,14 @@
          $obj->title = $row['Job'];
          $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
          $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
-         $obj->resourceId = $row['BusNumber'];
 
-	 $obj->color = $colors[$cnt];
+         if (array_key_exists("driver", $in)) {
+            $obj->resourceId = $row['EmployeeID'];
+         } else {
+            $obj->resourceId = $row['BusNumber'];
+         }
+	      
+         $obj->color = $colors[$cnt];
          $obj->url = "/grid/view.php?rsc=Job&pid=335&id={$row['JobID']}";
          $cnt++;
 	 if ($cnt > count($colors)) {
@@ -251,9 +276,28 @@
       return $out;
    }
 
-   function getResources($link) {
-      $colors = array('#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000');
+   function getDriverResources($link) {
+      $out = array(); $cnt = 0;
+      $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY LastName");
       
+      while ($row = $results->fetch_assoc()) {
+         $obj = new stdClass();
+         $obj->id = $row['EmployeeID'];
+         $obj->driverID = $row['EmployeeID'];
+         $obj->title = $row['LastName'] . ', ' . $row['FirstName'];
+
+         if (!$obj->capacity || $obj->capacity == "null") {
+            $obj->capacity = $row['BusNumber'] ? substr($row['BusNumber'], 0, 2) : 0;
+         }
+         $obj->type = "bus";
+         
+         array_push($out, $obj);
+      }
+      usort($out, "cmp");
+      return $out;
+   }
+
+   function getResources($link) {
       $out = array(); $cnt = 0;
       $results = mysqli_query($link, "SELECT * FROM Bus WHERE Active=1 order by BusNumber");
       
@@ -273,13 +317,123 @@
          if (!$obj->capacity || $obj->capacity == "null") {
             $obj->capacity = $row['BusNumber'] ? substr($row['BusNumber'], 0, 2) : 0;
          }
+         $obj->type = "bus";
          
          array_push($out, $obj);
       }
 
       return $out;
    }
+
+   function getAllResources($link, $in) {
+      $out = array(); $cnt = 0;
+      $results = mysqli_query($link, "SELECT * FROM Bus WHERE Active=1 order by BusNumber");
+      
+      while ($row = $results->fetch_assoc()) {
+         $obj = new stdClass();
+         if ($row['BusNumber']) {
+            $obj->id = $row['BusNumber'];
+            $obj->busID = $row['BusID'];
+            $obj->title = '#' . $row['BusNumber'];
+         } else {
+            $obj->id = $row['Bus'];
+            $obj->busID = $row['BusID'];
+            $obj->title = $row['Bus'];
+         }
+         $obj->capacity = $row['Capacity'];
+
+         if (!$obj->capacity || $obj->capacity == "null") {
+            $obj->capacity = $row['BusNumber'] ? substr($row['BusNumber'], 0, 2) : 0;
+         }
+         $obj->type = "bus";
+         
+         array_push($out, $obj);
+      }
+
+      $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY LastName");
+      
+      while ($row = $results->fetch_assoc()) {
+         $obj = new stdClass();
+         $obj->id = $row['EmployeeID'];
+         $obj->EmployeeID = $row['EmployeeID'];
+         $obj->title = $row['LastName'] . ', ' . substr($row['FirstName'], 0, 1);
+         $obj->capacity = 0;
+         $obj->type = "driver";
+         
+         array_push($out, $obj);
+      }
+      usort($out, "cmp");
+
+      return $out;
+   }
+   function cmp($a, $b) {
+      return strcmp($a->title, $b->title);
+   }
+
+   function getDriverAvailability($link, $in) {
+      $out = array(); $cnt = 0;
    
+      if ($in['jobdate']) {
+         $now = date("Y-m-d", strtotime($in['jobdate']));
+      } else {
+         $now = date("Y-m-d");
+      }
+
+      if ($in['start']) {
+         $first = date("Y-m-d", strtotime($in['start']));
+      } else {
+         $first = date("Y-m-d", strtotime('last week'));
+      }
+      if ($in['end']) {
+         $last = date("Y-m-d", strtotime($in['end']));
+      } else {
+         $last = date("Y-m-d", strtotime('next week'));
+      }
+      
+      // Grab list of buses
+      $buses = array();
+      
+      $sql = "SELECT BusID, Bus, BusNumber, InService from Bus where InService ORDER BY BusNumber";
+      $results = mysqli_query($link, $sql);
+      if ($results) {
+         while ($row = $results->fetch_assoc()) {
+            $buses[$row['BusID']] = $row['BusNumber'];
+         }
+      }
+      $sql = "SELECT * from Employee where Active=1 and Driver=1";
+      $results = mysqli_query($link, $sql);
+      $drivers = array();
+
+      if ($results) {
+         while ($row = $results->fetch_assoc()) {
+            $drivers[$row['EmployeeID']] = $row;
+         }
+      }
+
+      foreach ($drivers as $driver) {
+         // Grab events for date range
+         $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, Job.PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions, Job.EmployeeID as EmployeeID, JobCancelled FROM Job, Business where JobDate>='{$first}' AND JobDate<='{$last}' and EmployeeID={$driver['EmployeeID']}";
+
+         $results = mysqli_query($link, $sql);
+         
+         if ($results) {
+            while ($row = $results->fetch_assoc()) {
+               $obj = new stdClass();
+               $obj->id = $row['JobID'];
+               $obj->title = $row['Job'];
+               $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
+               $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
+               $obj->date = date("m/d", strtotime($row['JobDate']));
+               $obj->resourceId = $buses[$row['BusID']];
+               $obj->driverId = $row['EmployeeID'];
+               $obj->driverName = $drivers[$row['EmployeeID']]['FirstName'] .' '.$drivers[$row['EmployeeID']]['LastName'];
+               $out[] = $obj;
+            }
+         }
+      }
+      return $out;
+   }
+
    function getDriver($link, $id) {
       $out = array(); $cnt = 0;
       $id = mysqli_real_escape_string($link, $id);

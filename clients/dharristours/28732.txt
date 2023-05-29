@@ -1,0 +1,81 @@
+2023-03-29 15:23:40	
+    update Job 
+        set `EmployeeID`='149'
+			`LastModifiedBy`='patrick@dharristoursmail.com'
+			`Notes`='\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:07 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:10 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:18 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:26 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:32 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:53 PM\n-- Updated by patrickmp1975@gmail.com on 2/14/2023 at 12:24:59 PM\n-- Updated by patrickmp1975@gmail.com on 2/14/2023 at 12:25:29 PM\n-- Updated by patrick@dharristoursmail.com on 3/29/2023 at 3:23:42 PM'
+			`BusID`='33' where `JobID`='28732'
+
+2023-05-15 10:01:37	
+    update Job 
+        set 
+            `EmployeeID`='38'
+			`LastModifiedBy`='nicolesvictor@gmail.com'
+			`Notes`='\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:07 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:10 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:18 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:26 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:32 PM\n-- Updated by patrickmp1975@gmail.com on 2/1/2023 at 9:09:53 PM\n-- Updated by patrickmp1975@gmail.com on 2/14/2023 at 12:24:59 PM\n-- Updated by patrickmp1975@gmail.com on 2/14/2023 at 12:25:29 PM\n-- Updated by patrick@dharristoursmail.com on 3/29/2023 at 3:23:42 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:01:40 AM'
+			`BusID`='27' where `JobID`='28732'
+
+2023-05-15 10:02:15	
+    update Job 
+        set 
+            `Job`='Quote Yoots Oakland Coliseum college prep (Madrone campsite)'
+			`Description`='Craig 1/31 (415) 610-7599'
+			`QuoteAmount`='676'
+			`BusinessID`='688'
+			`PickupLocation`='1390 66th Ave., Oakland, Coliseum College Prep Academy (510) 639-3201'
+			`DropOffLocation`='8889 Sir Francis Drake Blvd, Lagunitas, California, 94938'
+			`FinalDropOffLocation`='1390 66th Ave., Oakland, Coliseum College Prep Academy (510) 639-3201'
+			`PickupTime`='10:00:00'
+			`DropOffTime`='15:00:00'
+			`NumberOfItems`='25'
+			`Cargo`='1'
+			`Confirmed`='0'
+			`EmployeeID`='149'
+			`Notes`='\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:54:26 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:56:03 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 11:34:09 AM\n-- Updated by nicolesvictor@gmail.com on 5/12/2023 at 2:32:18 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:00:49 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:10 AM'
+			`BusID`='33'
+			`SchoolID`='247'
+			`NoInvoice`='0'
+			`QuoteOnly`='1'
+			`TotalMileage`='84' where `JobID`='28732'
+
+2023-05-15 10:02:33	
+    update Job 
+        set 
+            `RoundTrip`='0'
+			`FinalDropOffLocation`='One Way Xfer'
+			`Notes`='\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:54:26 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:56:03 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 11:34:09 AM\n-- Updated by nicolesvictor@gmail.com on 5/12/2023 at 2:32:18 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:00:49 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:10 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:34 AM' where `JobID`='28732'
+
+2023-05-15 10:04:23	
+    update Job 
+        set 
+            `RoundTrip`='1'
+			`FinalDropOffLocation`='1390 66th Ave., Oakland, Coliseum College Prep Academy (510) 639-3201'
+			`DropOffTime`='11:30:00'
+			`Hours`='4'
+			`Notes`='\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:54:26 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:56:03 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 11:34:09 AM\n-- Updated by nicolesvictor@gmail.com on 5/12/2023 at 2:32:18 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:00:49 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:10 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:34 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:25 AM' where `JobID`='28732'
+
+2023-05-15 10:04:39	
+    update Job 
+        set 
+            `RoundTrip`='0'
+			`FinalDropOffLocation`='One Way Xfer'
+			`Hours`='2.75'
+			`Notes`='\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:54:26 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:56:03 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 11:34:09 AM\n-- Updated by nicolesvictor@gmail.com on 5/12/2023 at 2:32:18 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:00:49 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:10 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:34 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:25 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:41 AM' where `JobID`='28732'
+
+2023-05-15 10:05:54	
+    update Job 
+        set 
+            `BusinessID`='598'
+			`Notes`='\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:54:26 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:56:03 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 11:34:09 AM\n-- Updated by nicolesvictor@gmail.com on 5/12/2023 at 2:32:18 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:00:49 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:10 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:34 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:25 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:41 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:05:57 AM' where `JobID`='28732'
+
+2023-05-15 12:28:00	
+    update Job 
+        set 
+            `Job`='overwritten record CANCELLED Quote Yoots Oakland Coliseum college prep (Madrone campsite)'
+			`JobDate`='2123-05-16'
+			`QuoteAmount`='0'
+			`BusinessLocation`='Cancelled! $676'
+			`JobCancelled`='1'
+			`EmployeeID`='38'
+			`LastModifiedBy`='patrick@dharristoursmail.com'
+			`Notes`='\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:54:26 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 10:56:03 AM\n-- Updated by nicolesvictor@gmail.com on 5/11/2023 at 11:34:09 AM\n-- Updated by nicolesvictor@gmail.com on 5/12/2023 at 2:32:18 PM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:00:49 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:10 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:02:34 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:25 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:04:41 AM\n-- Updated by nicolesvictor@gmail.com on 5/15/2023 at 10:05:57 AM\n-- Updated by patrick@dharristoursmail.com on 5/15/2023 at 12:28:02 PM'
+			`BusID`='22' where `JobID`='28732'
+

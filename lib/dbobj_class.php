@@ -361,9 +361,16 @@ class dbobj extends dbd_mysql {
       $fields = $this->fetch_fields($table);
       
       $vals = array();
+      $undo = array();
+      $undos = array();
       
       $who = trim(($_SESSION['Email']) ? $_SESSION['Email'] .'|'. $_SERVER['REMOTE_ADDR'] : $_SERVER['REMOTE_ADDR'] . `whoami`);
-      
+
+      $key = (!$key) ? $this->primary_key : $table.'ID';
+      if (!$key) $key = $table.'ID';
+
+      $curvals = $this->get($id, $key);
+
       foreach ($fields as $field) {
          $value = (is_array($data)) ? $data[$field] : $data->$field;
          
@@ -381,6 +388,7 @@ class dbobj extends dbd_mysql {
             }
          } else if (isset($data[$field])) {
             array_push($vals, "`$field`=".$this->sql_quote($value));
+            array_push($undo, "`$field`=".$this->sql_quote($value));
          }
       }
       if (count($vals)) {
@@ -396,6 +404,12 @@ class dbobj extends dbd_mysql {
          file_put_contents("/tmp/dbobj.log", date("Y-m-d H:i:s\t").$query."\n", FILE_APPEND);
          
          $check = $this->execute($query);
+
+         $undo_sql = "UPDATE $table SET ".join(',', $undo)." WHERE `" .$key."`=".parent::sql_quote($rec);
+         $redo_sql = "UPDATE $table SET ".join(',', $vals)." WHERE `" .$key."`=".parent::sql_quote($rec);
+         $newundo_sql = "INSERT INTO `History` (`Undo`, `Redo`, `LoginID`, `Email`, `LastModified`, `Created`) VALUES (".parent::sql_quote($undo_sql).", ".parent::sql_quote($redo_sql).", ".$_SESSION['LoginID'].", ".$this->sql_quote($_SESSION['Email']).", now(), now())";
+         $this->execute($newundo_sql);
+         file_put_contents("/tmp/dbobj-undo.log", date("Y-m-d H:i:s\t").$newundo_sql."\n", FILE_APPEND);
       }
 
       if ($check) {
@@ -451,6 +465,9 @@ class dbobj extends dbd_mysql {
       foreach ($data as $rec=>$content) {
          if (is_object($content)) $content = (array) $content;
          $vals = array();
+         $undo = array();
+         $undos = array();
+
          if (preg_match("/^new/i", $rec)) {
             if ($in['debug']) { print "\nIn update_multi...adding new record...\n"; }
             $newid = $this->add($content);
@@ -458,6 +475,7 @@ class dbobj extends dbd_mysql {
             $ids[$newid] = $newid;
             $data[$newid] = $data[$rec];
             unset($data[$rec]);
+            array_push($undos, "DELETE FROM $table WHERE $key='$newid'");
          } else {
             $this->get($rec, $key);
             if ($in['debug']) { print "In update_multi....checking for changed records...\n"; }
@@ -478,21 +496,21 @@ class dbobj extends dbd_mysql {
                         $content[$idx] = rtrim($content[$idx]);
                         if ($in['debug']) print "\nFound changed value for $table ID $rec field '$idx' [old value: ".$val.", new value: ".$content[$idx]."]\n";
                         array_push($vals, "`$idx`=".parent::sql_quote($content[$idx]));
+                        array_push($undo, "`$idx`=".parent::sql_quote($val));
                      }
                   }
-               } 
+               }
+
             } else {
                if ($in['debug']) print "Thought we had a record but we don't [$table ID: $rec]: adding new record...";
                $newid = $this->add($content);
                $ids[$newid] = $newid;
                $data[$newid] = $data[$rec];
                if ($in['debug']) print "New record in $table ID: $newid created.\n";
-               unset($data[$rec]);
             }
 
             if (count($vals)) {
-               $query = "update $table set ".join(',', $vals)." where ".
-                        "`$key`='$rec'";
+               $query = "UPDATE $table SET ".join(',', $vals)." WHERE "."`$key`='$rec'";
                
                // Add extra query condition if passed
                if ($cond && $query) $query .= ' AND '.$cond;
@@ -502,6 +520,14 @@ class dbobj extends dbd_mysql {
                
                file_put_contents("/tmp/dbobj.log", date("Y-m-d H:i:s\t").$query."\n", FILE_APPEND);
                $check = parent::execute($query);
+  
+               $undo_sql = "UPDATE $table SET ".join(',', $undo)." WHERE `" .$key."`=".parent::sql_quote($rec);
+               $redo_sql = "UPDATE $table SET ".join(',', $vals)." WHERE `" .$key."`=".parent::sql_quote($rec);
+               $newundo_sql = "INSERT INTO History (`Undo`, `Redo`, `LoginID`, `Email`, `LastModified`, `Created`) VALUES (".parent::sql_quote($undo_sql).", ".parent::sql_quote($redo_sql).", ". $_SESSION['LoginID'].",".$this->sql_quote($_SESSION['Email']).", now(), now())";
+               file_put_contents("/tmp/dbobj-undo.log", date("Y-m-d H:i:s\t").$newundo_sql."\n", FILE_APPEND);
+
+               $check = $this->execute($newundo_sql);
+
             }
          }
       }

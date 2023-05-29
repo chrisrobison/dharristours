@@ -1,0 +1,75 @@
+{
+    "sidemenu": [
+        {
+            "title": "Home",
+            "link": "/portal",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Trips",
+            "link": "#",
+            "icon": "fas fa-bus",
+            "_children": [{
+                    "title": "Upcoming Trips",
+                    "link": "/portal/trips/",
+                    "target": "iframe",
+                    "icon": "fa fa-route"
+                },
+                {
+                    "title": "Past Trips",
+                    "link": "/portal/trips/past.php",
+                    "target": "iframe",
+                    "icon": "fas fa-calendar-check"
+                },
+                {
+                    "title": "Quotes",
+                    "link": "/portal/trips/quotes.php",
+                    "target": "iframe",
+                    "icon": "fas fa-hand-holding-dollar"
+                }
+
+            ]
+        },
+        {
+            "title": "Account",
+            "link": "/portal/account/index.php",
+            "icon": "fas fa-file-invoice",
+			"_children": [
+				{
+					"title": "Profile",
+					"link": "/portal/account/profile.php",
+					"icon": "fas fa-user"
+				},{
+					"title": "Billing",
+					"link": "/portal/account/billing.php",
+					"icon": "fas fa-file-invoice"
+				}
+            ]
+        },
+        {
+            "title": "Request Quote",
+            "link": "/portal/trips/request.php",
+            "icon": "fas fa-file-pen"
+        },
+        {
+            "title": "Contact",
+            "link": "contact.php",
+            "icon": "fas fa-envelope"
+        },
+        {
+            "title": "Help",
+            "link": "help.html",
+            "icon": "fa-solid fa-circle-question"
+        }
+    ],
+    "topmenu": [
+        {
+            "title": "Home",
+            "link": "/"
+        },
+        {
+            "title": "Contact",
+            "link": "contact.html"
+        }
+    ]
+}

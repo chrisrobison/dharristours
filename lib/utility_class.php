@@ -216,7 +216,36 @@ class Utility {
 
       return $out;
    }
-   
+   function buildRatesSelect($list, $id, $key, $val, $name) {
+      $domid = preg_replace("/^.*\[.*\]\[/", '', preg_replace("/\]$/", '', $name));
+      $out = "<select name='$name' id='$domid' rel='$val' class='genSelect'>";
+      
+      $vals = preg_split("/_/", $val);
+      if (count($vals) > 1) {
+         $val = $vals[1];
+      }
+
+
+      foreach ($list as $l=>$item) {
+         $list[$l]->SortBy = $val;
+      }
+      uasort($list, function($a, $b) {
+         $val = $a->SortBy;
+         return (strcmp(strtolower($a->$val), strtolower($b->$val)));
+      });
+      $listcount = count($list);
+      $opts = "<option value=''>--</option>";
+      
+      foreach ($list as $l=>$item) {
+         $s = ($list[$l]->$key == $id) ? ' SELECTED' : '';
+         $opts .= "<option value='".$list[$l]->$key."'$s>".$list[$l]->$val." [$".$list[$l]->Cost28FirstFour."/$".$list[$l]->Cost28OT."/$".$list[$l]->Cost28OneWay."]</option>";
+      }
+
+      $out .= $opts . "</select>";
+
+      return $out;
+   }
+ 
    function buildTable($arr, $pid=0, $rsc, $fields='', $sort='', $sortdir='', $captions = null, $tblname='oviewTable') {
       global $in;
       $listItems = ""; 

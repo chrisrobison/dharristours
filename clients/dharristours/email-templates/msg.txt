@@ -1,0 +1,380 @@
+From: cdr@netoasis.net
+To: christopher.robison@gmail.com
+Subject: Testing new email format
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9-alt"
+
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9-alt
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+This is a MIME email with HTML content.
+
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9-alt
+Content-Type: multipart/related; type="text/html"; boundary="Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9"
+
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>D Harris Tours Trip Notification</title>
+    <link rel="stylesheet" href="cid:653AF19E-12FE-46CA-A952-D3F912E4540D" />
+</head>
+
+<body bgcolor="#FFFFFF" style="">
+    <table class="head-wrap" bgcolor="#999999" style="width:100%;background-color:#999;">
+        <tr>
+            <td></td>
+            <td class="header container">
+                <div class="content" style="padding:15px;margin:0 auto;display:block;width:100vw;">
+                    <table style="width:100$;background-color:#999;" bgcolor="#999999">
+                        <tr>
+                            <td><img src="cid:4C1229FB-6BBB-4A08-8704-8BB8CBE17C45" /></td>
+                            <td align="right" style="text-align:right;">
+                                <h2 style="text-shadow:1px 1px 0px black;color:#ffffff;text-transform:uppercase;font-weight:bold;margin:0;padding:0;">Quote</h2>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <table class="body-wrap" style="width:100%">
+        <tr>
+            <td></td>
+            <td class="container" bgcolor="#FFFFFF" style="display:block;max-width:600px;margin:0 auto;clear:both;">
+                <div class="content" style="padding:15px;max-width:600px;margin:0 auto;display:block;">
+                    <table style="width:100%">
+                        <tr>
+                            <td>
+                                <h3>Quote for Trip on 06/15/2023</h3>
+                                <!-- From El Dorado Elementary|70 Delta Street|San Francisco, CA 94134 to Six Flags Discovery Kingdom|1001 Fairgrounds Dr|Vallejo, CA 94589 -->
+                                <p style="font-size:17px;" class="lead">Please review your trip information and
+                                    quote amount then confirm your reservation. </p>
+                                <p>
+                                    <hr>
+                                    <h4 style="font-size:23px;font-weight:500;margin-bottom:0.25em;padding:0;color:#000;">Customer</h4>
+                                    <table class="tbl-details" style="width:100%;margin-left:auto;margin-right:auto;border:1px solid #ccc;background-color:#eee;">
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Business</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">ABC School District</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Contact</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">Jane Customer</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Email</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">jcustomer@example.com</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Phone</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">(415) 555-1212</td>
+                                        </tr>
+                                    </table><br>
+                                    <h4 style="font-size:23px;font-weight:500;margin-bottom:0.25em;padding:0;color:#000;">Trip</h4>
+                                    <table class="tbl-details" style="width:100%;margin-left:auto;margin-right:auto;border:1px solid #ccc;background-color:#eee;">
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Trip Date</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">06/15/2023</td>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Pax</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">32</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Pickup</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">09:00am</td>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Drop Off</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">12:00pm</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Pickup Location</td>
+                                            <td colspan="3" class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">El Dorado Elementary<br>
+70 Delta Street<br>
+San Francisco, CA 94134</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Drop Off Location</td>
+                                            <td colspan="3" class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">Six Flags Discovery Kingdom<br>
+1001 Fairgrounds Dr<br>
+Vallejo, CA 94589</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Round Trip</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">Yes</td>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Shuttle</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">ADA</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">Yes</td>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Text</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">Yes</td>
+                                        </tr>
+                                    </table><br>
+                                    <h4 style="font-size:23px;font-weight:500;margin-bottom:0.25em;padding:0;color:#000;">Quote</h4>
+                                    <table class="tbl-details" style="width:100%;margin-left:auto;margin-right:auto;border:1px solid #ccc;background-color:#eee;">
+                                        <tr>
+                                            <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.25em;background-color:#eee;">Trip Price</td>
+                                            <td class="tbl-value" style="vertical-align:top;border-top:1px solid #aaa;border-left:1px solid $aaa;padding:0.25em;background-color:#fff;">$1200.00</td>
+                                        </tr>
+                                    </table>
+                                </p>
+                                <p class="callout" style="text-align:center;padding:15px;background-color:#ecf8ff;margin-bottom:15px;max-width:600px;">
+                                    <a style="font-size:1.5em;text-transform:uppercase;font-weight:bold;color:#2BA6CB;"
+                                        href="https://dharristours.simpsf.com/files/confirm.php?z=1234">Click
+                                        here to confirm your reservation</a><br>or visit:<br>
+                                    <span style="margin-left:3em;">
+                                        https://dharristours.simpsf.com/files/confirm.php?z=1234
+                                    </span><br>
+                                    in a web browser.
+                                </p>
+                                <table class="social" width="100%" style="background-color:#ebebeb;width:100%;">
+                                    <tr>
+                                        <td style="vertical-align:top;">
+                                            <table align="left" class="column" style="width:280px;min-width:279px;float:left;">
+                                                <tr>
+                                                    <td>
+                                                        <h5 style="font-weight:900;font-size:17px" class="">Visit Us Online:</h5>
+                                                        <p class=""><a style="background-color:#1daced;padding: 3px 7px;font-size: 12px;margin-bottom: 10px;text-decoration: none;color: #FFF;font-weight: bold;display: block;text-align: center;" href="http://www.dharristours.com"
+                                                                class="soc-btn tw">Website</a>
+                                                            <a style="background-color:#1daced;padding: 3px 7px;font-size: 12px;margin-bottom: 10px;text-decoration: none;color: #FFF;font-weight: bold;display: block;text-align: center;" href="https://dharristours.simpsf.com/portal/"
+                                                                class="soc-btn tw">Customer
+                                                                Portal</a> <a style="background-color:#3b5998;padding: 3px 7px;font-size: 12px;margin-bottom: 10px;text-decoration: none;color: #FFF;font-weight: bold;display: block;text-align: center;" href="https://www.linkedin.com/company/dharristours/"
+                                                                class="soc-btn fb">LinkedIn</a></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table align="left" class="column" style="width:280px;min-width:279px;float:left;">
+                                                <tr>
+                                                    <td>
+                                                        <h5 style="font-weight:900;font-size:17px" class="">Contact Info:</h5>
+                                                        <p>
+                                                            D Harris Tours, Inc.<br>
+                                                            153 Utah Ave<br>
+                                                            South San Francisco, CA 94080
+                                                        </p>
+                                                        <p>Phone: <strong>415.902.8542</strong><br />
+                                                            Email: <strong><a href="emailto:juanaharrisdht@att.net">juanaharrisdht@att.net</a></strong></p>
+                                                        <p>CA 273437<br>
+                                                            TCP 017270-B</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <span class="clear"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <table class="footer-wrap" style="min-width:608px;">
+        <tr>
+            <td></td>
+            <td class="container" style="width:100%">
+                <div class="content" style="width:100%">
+                    <table style="width:100%">
+                        <tr>
+                            <td align="center" style="text-align:center;">
+                                <p>
+                                    <a href="#">Terms</a> &nbsp; | &nbsp;
+                                    <a href="#">Privacy</a> &nbsp; | &nbsp;
+                                    <a href="https://dharristours.simpsf.com/files/unsub.php?email=jcustomer@example.com">
+                                        <unsubscribe>Unsubscribe</unsubscribe>
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+</html>
+
+
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Disposition: inline; filename="logo-24.png"
+Content-ID: <4C1229FB-6BBB-4A08-8704-8BB8CBE17C45>
+
+iVBORw0KGgoAAAANSUhEUgAAAJQAAAAyCAYAAAC6efInAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAADtNJREFUeNrsXQlYVVUef+8BwpN9UWRTdhfU3ALFBcbcERz7klwax88E
+LZG0SbQJt0i/xqa00U8HKAizyTRyGYxQQsMgI3FcIEREVARF2USUnTe/czuXbq/37rsPXuCr+/++
+P3f7n3P+95z/+W/nnodUoVBIRBBBVyATu0AEUaBEEAVKBFGgRBBBFCgRehYMhRJKpdI+OLwA/DPQ
+GNiqRkA9gAaqqgDeB1aqaUIOvAU8iMjzU3Fo9BOkQtIGECYiRElAi27iKxc4C7zdE4fodyZQEKbB
+OPzYA7wVAn3AX5s4TL8THwrC5IbD9h7ibSAwRByi3xbMzMwWhISEjNdZhURDqUPAViDREIoewjTg
+COBIerTj45fgpk2bfEC3D5gA/FAFJpqYmCROmTIl4tlnn3XUVJ8yjho16lXU8VlERMRkPrpt27b1
+oW5CwpEjRyy0bac7cPTo0TvZvn7zzTdH66JOTU55vx6OBKdRZOE14LsayngD/8JH0NjYKElPT18i
+k8l2DRgwIObmzZsbteApnGrPy8AMHjpb4GJ6/gaw7knTTnjvQex5e3t7n+6I8h512EaZrOr1118v
+0ORzYbDaa2tr25Wtp5GRkcTa2hrVyKQ8JlZy7969tvj4+Ak0UswBbgJWA78XGJXWkz+mpqaNLS0t
+6c3NzQorKytpW1uHK6ZA5xnI5XK3ysrKwbdu3dqAmWqbm5u7Uug4EIFCfdV8RK2trS2cvutofOXK
+lSZ79uwhg6fcRxI7Ozvp/fv3b/PVa25u7lRfXy+lmqWj64yNjdvs7e0rICQd9fbv379faWmpkYq2
+ZPPmzSsPCwtbFhsbewD8XYJm/4pLMGjQoL6FhYXGKsoaBAQE1J0+fbq2MybvX6xKBMPFim4CtNdC
+203m8EL+nBRg8qYS2qFDh17XRBscHLyGfb/w8HB/gSaPmGHFunXrXuajS0xM9GDrPn78eF/2/qpV
+q4L5zDz6udTHx2e1cn1eXl4L+vTpU6SunKGhYZ23t7cJoQ0KChrt7u6ehQmqth0/Pz+nJUuW2Pbq
+1asE1ylsO0ePHnV0c3M7CSFTW3bSpEn/Vvfegs0ZZrVRd6jhsrIybqqgnWquH+j1FJyvFlIPtI+B
+Jppjx47tGDNmTAo5z87OfkMbPm1tbcv4nmOwijFYqvpRzkxzAwMJhOAXSKCpqck5Pz9/R2hoKGsu
+Jbt37x5fVFT0H2gvTx6NaB4YGNgE4bUGnrt+/TozQYjWV2maDA1l0ODW0OCuuBzG3ocV+m9JSckU
+8KmSP6qErLuc2OwhaKDHIZx7I4UGG0Jg+PDhe8+dOzc7Ly9vZkxMjNmGDRvqNVVNB3lpVFTUU+po
+YFJtCA8QnHYyOBzhOHjmzJmTME2mGOx2tj5CY2NjQ0za+suXL0dmZma+SoMLyfbt219jHNp+/TIh
+pOsePXrUjmNHygfCRExeK8wX0Tx/I/fgXtwCDy82NDTUIQj5RXoI5WVwA+5CSCbQW4/pxHXAYRTo
+JU5OTouqq6u/JuaRlpU5ODi0wHVpAo8m+ipQrJYh/kpvel4rMLMvqIELFy4UsUU2b97sCIG6KqQc
+fK8QvrQGBpI5koHm3l+xYoUXeJv94MGDobhs5j6DxoBstNqQczw3Ze/DD2LuweQdunTp0lk+vnJy
+cvpTX+s0hDadj3bZsmXm3OvFixfX79u3TwKtJYEwLaipqRnPCcqMUOdDmNJUaMAT+ipQvzk4Ojo6
+nz9/njmHf3Nfy8QrwUY1WswMGiAIAmKAGS6j5mQytMjXfEJ4+/Zt1jRy62U0CAbaUmhQAtPZWxPh
+w4cPW7jXSUlJDxGghL3yyivxEKbZyvQQbIKr4UMdjouLC4Xj3vqHEShOVMcLVVVVy5hcg7d35s6d
+O2uEKD/yJyIiYuuuXbs+VkcEp12G+togBLB6BswgI3r9kEZz2RjwUxhQqZIQEo1MVibmqIqGWcEU
+ugrSGbcgMjLyA0Tql+BfTsvKyjKjeUiGHFGkaV1d3csw2XPXrFkTlpqaulffBIp9GW6OxFqg5mnV
+RDN37tw5ubm5C8k5fI93tGEM/gSvBhgxYsQAYjqI6Z01a1Y9FV5XJpEVHh6xdevW/6kx1ST3N0ei
+eoFdp6DOLYBvmENQ1bMZM2b4p6Wl+Z49e3aUPpo81o/IBE6l52lCCpaXl9vDf/kAg9pA0xDs7FZY
+WFhIIRAehYWFjFofMmRIKnyHFG0Ygw/FO+DFxcUd2gQz2XzmzJkPTU1Nr8Eh9kRbH0C7fUM1lFQp
+qvXkRrjdCQgEbAMCAjZTbckGDCx/7c7OzhbgmQmKJk+enKOPAsVqgSDgcyRAgZo+JkQIEWKT44uq
+CKC2GSSAaOZThOkLteDJhfFQjYx4NSXMnBFrVuBsk680HkZHRy+B0/8t/CQyu0dpaGeAcpvEWgrg
+z54enQTQmtGjO+WZlIlQR8z6d76+vgdWr14dr48C1UYHhWgYod9IkUTdEWoypHSmtXJmmgzmsAkh
+eomlpWXKtwAteToAfBp4XgMdiUaP0lnOmLz169dnZWdnexUVFS2HhvN4/Pixcsa7I5MNvMG5/oyM
+IzBLAH8kAiMJsDMCaItJUpNtC35dBe07iQq+DOBD1UObn8zIyPhIrRnly9fAxpJM+So6I0thPly6
+I7EJ1WpDhf04+JstEUFvoMsLv2+99VZWcHDwaa2ylQ0NjRMnTsw8cOBArjgEvzMQupYHDXWLu95W
+WVlZ7erqSpJsCoS497VZq6uurq5l6509e/Yp7jOYgruSn9fyUp7Ezz5EVI8yLQSvI6p5++23s+zs
+7Kxv3LjhN3bs2EyYQhtthNja2tqyoqKi2sXFJSclJSWwV69epenp6Xn0mZmYcP0DaCiE2nlEgyD8
+PUXvnSstLa3o6pcFhw8fJvkYsrSi2Lhx4xn6tUG1qKH0E7Vxym8jrGwEeNIBfyM5OTm8oKDgMcLi
+TuVMTExMZD4+PmYhISEkFbCB3r5AQ94+olOufyBYoHoIRIHSM9DKV7G0tMybPn16FRxySUZGRoCu
+mPDy8vpu4MCBTRcvXjSFGX2607Pjpx065PPcRm0U5ZAhQy7m5+eXiOLQjT6UlZXVZa7v8/nnn5+X
+6GAjQnR0dCa33sDAwNOc51r5UIBPOsPD4MGD/yH6P7pBwQKVkJCQo+xQ9+vX71xXhAk+1DXlOhsa
+GppoZltrgTI0NHwPqGAR0SN3TYrFdmNj4w4a+IYKT0/PKFEYujltgM7/1dI0/e64SwpSRZ2drszB
+wWEL0BXo6OTk5IhgwXHatGkO48aNYxZ+Z82a9XFQUJBDU1OTo7OzM4OgcW1ra9vD1uHv7/+cq6vr
+fpjPr4DHyRHXB+bNm/er9T7UuxbPTyCoUOtnwpz+ldAAN3Pv+/n5uY8cOXI3Ap1U2g4XUyHoHTwt
+WLAgzNzc/AiHJy6mTZgwIVLvTJ6pqWkBOr6N1SSxsbFndWHyli5depqroXx9fTM7a/J4NiOQ75YU
+YWFh76mjuXLlirmbm9spPl7lcvnljRs3OrFlwCvZRqVA/UfV1QtzGkfLn2fvJSUlkU+amzX1DaFd
+vnx5tCY6CHbuk6KhBDvljx49GgQTdQuz6mZtba1hUVHRcJiO662trfJOr/vIZC379+8fnJaW9oOL
+i0vDtWvXLODwT9T1pKmoqCDbgchquVpen3nmmYyysrIx5Lxv377J0Fw/EnMIbUacfXe88wswx0Pj
+4+O/2bJlC/OJCbTLHbYJnubZHwcpZ2/s2LGDbLA0MjMzK4JZ/ox+W94RcePaCBbhKoTRDoIeQzYI
+wL3YjPbzOctlxKTL6uvrnUBfrHcaSgVeQ2c3dTWxyUmUqkKdaCjM4INUk+xV9RyaaypdXlJs3749
+VBVNZGTkZAgQw9fChQtDqYb6hNYbx6Ohtim/i+SnvX0KTM75fHwTk0x9TQWi4HBMYF+cj6U4EXWP
+1FsfSgV4WFhYlMFkfYOQ+4Y2BaGFanbu3Pmdu7v72dTU1MDfPNmmYcPCF198EUqOiGTT165de1AV
+zfvvv58xZsyYJEYabt4MpfUyFStvRBAAjRLWpvFAaWlp+dSpUz8mO50LCwtjMX+/x/l3FDMLCgrO
+k8ACZnGFvuSheM0ZXtAtMTGRIGMVIWA34Aw/sLe3b0Ff/eJ7aXSA9M6dOyZ37961b25uJh+PjRPA
+n7w7OqGqqorZFmRjY8P780HwI5kvzK5evdqbmjxmQtbU1GjbJLOyAHfBWBPhiRMnFiMguJ2dnR1U
+Xl5O2m3jBDS94db2j4uL2+vh4ZEdFRV16Uk3ee9Ieu6HMgge1oUaRuTGa/IWLVr0MnluaWlZn5CQ
+YKWKBo60FM+rCB0ixWhyD9EV2QOnsLa2LuVpO0qFySsg94YNG7a4q+8Gl4EJYqZPn75BH0xeMlkE
+7kF5P9UdjSDs/4hEXWQvHPypHJiZeQ4ODv6waOOhhcbNnz9/zqpVq37Ac+arCuIzkeNLL72USDWU
+M4QqB4I2B74NU44gnOZxJSUlQzvL16FDh+SoZyJwAnA0cARwJMUR4MMfGp9szpTAOlQ98U45nU1/
+6iHtRDYXmOlIQx2nGuojdTQxMTFjJT/tf+PlCwI3h1sOZmaGwPfJ4PTpbaqhXuTjOzk52UdI3RDc
+GtBaPvGZck4H/L2bhYnsIPDT1UtCoMj36O0QqN18dM8//3x/RF5x5ubmd9kfmiDJW1xXwi/ch/JP
+qSoXEBDwFJ4flMvltSp+ZKKV4hFOfxJfpx0C9YIGgfLm6ydEpY0uLi5fIjL11IulFyWhmgRMpBEK
+98XqqU9wRUssUFEXyev8k6SCdPmSECiy68QRAmEuhH7Tpk3EQSefz9jj2DciIsJQSLnw8PBetra2
+pFxf+vkNi2SvnRWnL4npdIRAmWgQKANal3J9TJ2+vr4WevU9lJoQnCTR3Dm3YlFHp8JW1EUSddwf
+wtiCujaLS/b6C53JQ5lqWo/TApR/76a3OCR/PIFSTuKZdKF9uQ74EUHPBWot55zsXnm3C+3HcM5J
+hLVXHBL9Bq13l5D/ckB/bprgl7jO60L7JJ9D8ijOwHTUVSwOiX6D1k65CCLwwf8FGACVw+nR5Gvc
+lAAAAABJRU5ErkJggg==
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: inline; filename="main.css"
+Content-ID: <653AF19E-12FE-46CA-A952-D3F912E4540D>
+
+KiB7CiAgICBtYXJnaW46IDA7CiAgICBwYWRkaW5nOiAwOwp9CgoqIHsKICAgIGZvbnQtZmFtaWx5
+OiAiSGVsdmV0aWNhIE5ldWUiLCAiSGVsdmV0aWNhIiwgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1z
+ZXJpZjsKfQoKaW1nIHsKICAgIG1heC13aWR0aDogMTAwJTsKfQoKLmNvbGxhcHNlIHsKICAgIG1h
+cmdpbjogMDsKICAgIHBhZGRpbmc6IDA7Cn0KCmJvZHkgewogICAgLXdlYmtpdC1mb250LXNtb290
+aGluZzogYW50aWFsaWFzZWQ7CiAgICAtd2Via2l0LXRleHQtc2l6ZS1hZGp1c3Q6IG5vbmU7CiAg
+ICB3aWR0aDogMTAwJSAhaW1wb3J0YW50OwogICAgaGVpZ2h0OiAxMDAlOwp9CgphIHsKICAgIGNv
+bG9yOiAjMkJBNkNCOwp9CgouYnRuIHsKICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICAgIGNv
+bG9yOiAjRkZGOwogICAgYmFja2dyb3VuZC1jb2xvcjogIzY2NjsKICAgIHBhZGRpbmc6IDEwcHgg
+MTZweDsKICAgIGZvbnQtd2VpZ2h0OiBib2xkOwogICAgbWFyZ2luLXJpZ2h0OiAxMHB4OwogICAg
+dGV4dC1hbGlnbjogY2VudGVyOwogICAgY3Vyc29yOiBwb2ludGVyOwogICAgZGlzcGxheTogaW5s
+aW5lLWJsb2NrOwp9CgpwLmNhbGxvdXQgewogICAgcGFkZGluZzogMTVweDsKICAgIGJhY2tncm91
+bmQtY29sb3I6ICNFQ0Y4RkY7CiAgICBtYXJnaW4tYm90dG9tOiAxNXB4Owp9CgouY2FsbG91dCBh
+IHsKICAgIGZvbnQtd2VpZ2h0OiBib2xkOwogICAgY29sb3I6ICMyQkE2Q0I7Cn0KCnRhYmxlLnNv
+Y2lhbCB7CiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWJlYmViOwp9Cgouc29jaWFsIC5zb2MtYnRu
+IHsKICAgIHBhZGRpbmc6IDNweCA3cHg7CiAgICBmb250LXNpemU6IDEycHg7CiAgICBtYXJnaW4t
+Ym90dG9tOiAxMHB4OwogICAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogICAgY29sb3I6ICNGRkY7
+CiAgICBmb250LXdlaWdodDogYm9sZDsKICAgIGRpc3BsYXk6IGJsb2NrOwogICAgdGV4dC1hbGln
+bjogY2VudGVyOwp9CgphLmZiIHsKICAgIGJhY2tncm91bmQtY29sb3I6ICMzQjU5OTggIWltcG9y
+dGFudDsKfQoKYS50dyB7CiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMWRhY2VkICFpbXBvcnRhbnQ7
+Cn0KCmEuZ3AgewogICAgYmFja2dyb3VuZC1jb2xvcjogI0RCNEEzOSAhaW1wb3J0YW50Owp9Cgph
+Lm1zIHsKICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDAgIWltcG9ydGFudDsKfQoKLnNpZGViYXIg
+LnNvYy1idG4gewogICAgZGlzcGxheTogYmxvY2s7CiAgICB3aWR0aDogMTAwJTsKfQoKdGFibGUu
+aGVhZC13cmFwIHsKICAgIHdpZHRoOiAxMDAlOwp9CgouaGVhZGVyLmNvbnRhaW5lciB0YWJsZSB0
+ZC5sb2dvIHsKICAgIHBhZGRpbmc6IDE1cHg7Cn0KCi5oZWFkZXIuY29udGFpbmVyIHRhYmxlIHRk
+LmxhYmVsIHsKICAgIHBhZGRpbmc6IDE1cHg7CiAgICBwYWRkaW5nLWxlZnQ6IDBweDsKfQoKdGFi
+bGUuYm9keS13cmFwIHsKICAgIHdpZHRoOiAxMDAlOwp9Cgp0YWJsZS5mb290ZXItd3JhcCB7CiAg
+ICB3aWR0aDogMTAwJTsKICAgIGNsZWFyOiBib3RoICFpbXBvcnRhbnQ7Cn0KCi5mb290ZXItd3Jh
+cCAuY29udGFpbmVyIHRkLmNvbnRlbnQgcCB7CiAgICBib3JkZXItdG9wOiAxcHggc29saWQgcmdi
+KDIxNSwgMjE1LCAyMTUpOwogICAgcGFkZGluZy10b3A6IDE1cHg7Cn0KCi5mb290ZXItd3JhcCAu
+Y29udGFpbmVyIHRkLmNvbnRlbnQgcCB7CiAgICBmb250LXNpemU6IDEwcHg7CiAgICBmb250LXdl
+aWdodDogYm9sZDsKfQoKaDEsCmgyLApoMywKaDQsCmg1LApoNiB7CiAgICBmb250LWZhbWlseTog
+IkhlbHZldGljYSBOZXVlIiwgSGVsdmV0aWNhLCBBcmlhbCwgIkx1Y2lkYSBHcmFuZGUiLCBzYW5z
+LXNlcmlmOwogICAgbGluZS1oZWlnaHQ6IDEuMTsKICAgIG1hcmdpbi1ib3R0b206IDE1cHg7CiAg
+ICBjb2xvcjogIzAwMDsKfQoKaDEgc21hbGwsCmgyIHNtYWxsLApoMyBzbWFsbCwKaDQgc21hbGws
+Cmg1IHNtYWxsLApoNiBzbWFsbCB7CiAgICBmb250LXNpemU6IDYwJTsKICAgIGNvbG9yOiAjNmY2
+ZjZmOwogICAgbGluZS1oZWlnaHQ6IDA7CiAgICB0ZXh0LXRyYW5zZm9ybTogbm9uZTsKfQoKaDEg
+ewogICAgZm9udC13ZWlnaHQ6IDIwMDsKICAgIGZvbnQtc2l6ZTogNDRweDsKfQoKaDIgewogICAg
+Zm9udC13ZWlnaHQ6IDIwMDsKICAgIGZvbnQtc2l6ZTogMzdweDsKfQoKaDMgewogICAgZm9udC13
+ZWlnaHQ6IDUwMDsKICAgIGZvbnQtc2l6ZTogMjdweDsKfQoKaDQgewogICAgZm9udC13ZWlnaHQ6
+IDUwMDsKICAgIGZvbnQtc2l6ZTogMjNweDsKfQoKaDUgewogICAgZm9udC13ZWlnaHQ6IDkwMDsK
+ICAgIGZvbnQtc2l6ZTogMTdweDsKfQoKaDYgewogICAgZm9udC13ZWlnaHQ6IDkwMDsKICAgIGZv
+bnQtc2l6ZTogMTRweDsKICAgIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7CiAgICBjb2xvcjog
+IzQ0NDsKfQoKLmNvbGxhcHNlIHsKICAgIG1hcmdpbjogMCAhaW1wb3J0YW50Owp9CgpwLAp1bCB7
+CiAgICBtYXJnaW4tYm90dG9tOiAxMHB4OwogICAgZm9udC13ZWlnaHQ6IG5vcm1hbDsKICAgIGZv
+bnQtc2l6ZTogMTRweDsKICAgIGxpbmUtaGVpZ2h0OiAxLjY7Cn0KCnAubGVhZCB7CiAgICBmb250
+LXNpemU6IDE3cHg7Cn0KCnAubGFzdCB7CiAgICBtYXJnaW4tYm90dG9tOiAwcHg7Cn0KCnVsIGxp
+IHsKICAgIG1hcmdpbi1sZWZ0OiA1cHg7CiAgICBsaXN0LXN0eWxlLXBvc2l0aW9uOiBpbnNpZGU7
+Cn0KCnVsLnNpZGViYXIgewogICAgYmFja2dyb3VuZDogI2ViZWJlYjsKICAgIGRpc3BsYXk6IGJs
+b2NrOwogICAgbGlzdC1zdHlsZS10eXBlOiBub25lOwp9Cgp1bC5zaWRlYmFyIGxpIHsKICAgIGRp
+c3BsYXk6IGJsb2NrOwogICAgbWFyZ2luOiAwOwp9Cgp1bC5zaWRlYmFyIGxpIGEgewogICAgdGV4
+dC1kZWNvcmF0aW9uOiBub25lOwogICAgY29sb3I6ICM2NjY7CiAgICBwYWRkaW5nOiAxMHB4IDE2
+cHg7CiAgICBtYXJnaW4tcmlnaHQ6IDEwcHg7CiAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICBib3Jk
+ZXItYm90dG9tOiAxcHggc29saWQgIzc3Nzc3NzsKICAgIGJvcmRlci10b3A6IDFweCBzb2xpZCAj
+RkZGRkZGOwogICAgZGlzcGxheTogYmxvY2s7CiAgICBtYXJnaW46IDA7Cn0KCnVsLnNpZGViYXIg
+bGkgYS5sYXN0IHsKICAgIGJvcmRlci1ib3R0b20td2lkdGg6IDBweDsKfQoKdWwuc2lkZWJhciBs
+aSBhIGgxLAp1bC5zaWRlYmFyIGxpIGEgaDIsCnVsLnNpZGViYXIgbGkgYSBoMywKdWwuc2lkZWJh
+ciBsaSBhIGg0LAp1bC5zaWRlYmFyIGxpIGEgaDUsCnVsLnNpZGViYXIgbGkgYSBoNiwKdWwuc2lk
+ZWJhciBsaSBhIHAgewogICAgbWFyZ2luLWJvdHRvbTogMCAhaW1wb3J0YW50Owp9CgouY29udGFp
+bmVyIHsKICAgIGRpc3BsYXk6IGJsb2NrICFpbXBvcnRhbnQ7CiAgICBtYXgtd2lkdGg6IDYwMHB4
+ICFpbXBvcnRhbnQ7CiAgICBtYXJnaW46IDAgYXV0byAhaW1wb3J0YW50OwogICAgY2xlYXI6IGJv
+dGggIWltcG9ydGFudDsKfQoKLmNvbnRlbnQgewogICAgcGFkZGluZzogMTVweDsKICAgIG1heC13
+aWR0aDogNjAwcHg7CiAgICBtYXJnaW46IDAgYXV0bzsKICAgIGRpc3BsYXk6IGJsb2NrOwp9Cgou
+Y29udGVudCB0YWJsZSB7CiAgICB3aWR0aDogMTAwJTsKfQoKLmNvbHVtbiB7CiAgICB3aWR0aDog
+MzAwcHg7CiAgICBmbG9hdDogbGVmdDsKfQoKLmNvbHVtbiB0ciB0ZCB7CiAgICBwYWRkaW5nOiAx
+NXB4Owp9CgouY29sdW1uLXdyYXAgewogICAgcGFkZGluZzogMCAhaW1wb3J0YW50OwogICAgbWFy
+Z2luOiAwIGF1dG87CiAgICBtYXgtd2lkdGg6IDYwMHB4ICFpbXBvcnRhbnQ7Cn0KCi5jb2x1bW4g
+dGFibGUgewogICAgd2lkdGg6IDEwMCU7Cn0KCi5zb2NpYWwgLmNvbHVtbiB7CiAgICB3aWR0aDog
+MjgwcHg7CiAgICBtaW4td2lkdGg6IDI3OXB4OwogICAgZmxvYXQ6IGxlZnQ7Cn0KCi5jbGVhciB7
+CiAgICBkaXNwbGF5OiBibG9jazsKICAgIGNsZWFyOiBib3RoOwp9CgpAbWVkaWEgb25seSBzY3Jl
+ZW4gYW5kIChtYXgtd2lkdGg6IDYwMHB4KSB7CiAgICBhW2NsYXNzPSJidG4iXSB7CiAgICAgICAg
+ZGlzcGxheTogYmxvY2sgIWltcG9ydGFudDsKICAgICAgICBtYXJnaW4tYm90dG9tOiAxMHB4ICFp
+bXBvcnRhbnQ7CiAgICAgICAgYmFja2dyb3VuZC1pbWFnZTogbm9uZSAhaW1wb3J0YW50OwogICAg
+ICAgIG1hcmdpbi1yaWdodDogMCAhaW1wb3J0YW50OwogICAgfQoKICAgIGRpdltjbGFzcz0iY29s
+dW1uIl0gewogICAgICAgIHdpZHRoOiBhdXRvICFpbXBvcnRhbnQ7CiAgICAgICAgZmxvYXQ6IG5v
+bmUgIWltcG9ydGFudDsKICAgIH0KCiAgICB0YWJsZS5zb2NpYWwgZGl2W2NsYXNzPSJjb2x1bW4i
+XSB7CiAgICAgICAgd2lkdGg6IGF1dG8gIWltcG9ydGFudDsKICAgIH0KfQoKLnRibC1sYWJlbCB7
+CiAgICB0ZXh0LWFsaWduOiByaWdodDsKICAgIHZlcnRpY2FsLWFsaWduOiB0b3A7CiAgICBwYWRk
+aW5nOiAuMjVlbTsKICAgIGJhY2tncm91bmQtY29sb3I6ICNlZWU7Cn0KCi50YmwtdmFsdWUgewog
+ICAgdmVydGljYWwtYWxpZ246IHRvcDsKICAgIGJvcmRlci10b3A6IDFweCBzb2xpZCAjYWFhOwog
+ICAgYm9yZGVyLWxlZnQ6IDFweCBzb2xpZCAjYWFhOwogICAgcGFkZGluZzogLjI1ZW07CiAgICBi
+YWNrZ3JvdW5kLWNvbG9yOiAjZmZmOwp9CgoudGJsLWRldGFpbHMgewogICAgd2lkdGg6IDkwJTsK
+ICAgIG1hcmdpbi1sZWZ0OiBhdXRvOwogICAgbWFyZ2luLXJpZ2h0OiBhdXRvOwogICAgYm9yZGVy
+OiAxcHggc29saWQgI2NjYzsKICAgIGJhY2tncm91bmQtY29sb3I6ICNlZWU7Cn0KCmg0IHsKICAg
+IG1hcmdpbi1ib3R0b206IC4yNWVtOwogICAgcGFkZGluZzogMDsKfQo=
+
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9--
+
+--Mail=_60887DA4-E679-4F59-B796-DEEA14EA7EA9-alt--

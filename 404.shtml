@@ -7,7 +7,7 @@
   body {
     height: 100%;
     width: 100%;
-    background: #fefefe url(Golden_Gate.png)center top fixed;
+    background: #fefefe url(Golden_Gate.png) center top fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
