@@ -1269,6 +1269,9 @@ class boss {
             $l = preg_split("/,\s*/", $fields[$key]->Length);
             $field->formatoptions->decimalPlaces = ($l[1]) ? $l[1] : '2';
          } else if ($fields[$key]->Type=="date") {
+            if (!isset($field->editrules)) {
+               $field->editrules = new stdClass();
+            }
             $field->editrules->date = true;
             $field->width = 150;
             $field->formatter = 'date';
@@ -1278,6 +1281,9 @@ class boss {
             $field->formatoptions->srcformat = 'Y-m-d';
             $field->formatoptions->newformat = 'm/d/Y';
          } else if ($fields[$key]->Type=="time") {
+            if (!isset($field->editrules)) {
+               $field->editrules = new stdClass();
+            }
             $field->editrules->time = true;
             $field->width = 120;
             $field->formatter = "time";

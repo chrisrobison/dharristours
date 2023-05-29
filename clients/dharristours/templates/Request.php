@@ -1,8 +1,17 @@
+<script>
+function updateQuoteEmail() {
+   let id = document.querySelector("#simpleID").value;
+   console.log(`updateQuoteEmail got ID ${id}`);
+   let url = "/files/email-templates/example.php?id="+id;
+   console.log(`Frame URL: ${url}`);
+   document.querySelector("#quote").src = "/files/email-templates/example.php?id="+id;
+}
+</script>
 <div class='tableGroup'>
    <div class='formHeading'>Request ID: <?php print $current->RequestID; ?></div>
    <div class='fieldcontainer'>
       <div class='fieldcolumn fieldfloater'>
-         <div class='contentField'><label>Request</label><input type='text' dbtype='varchar(100)' name='Request[<?php print $current->RequestID; ?>][Request]' id='Request' value='<?php print $current->Request; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><label>Request</label><input type='text' onchange="updateQuoteEmail()" dbtype='varchar(100)' name='Request[<?php print $current->RequestID; ?>][Request]' id='Request' value='<?php print $current->Request; ?>' size='50' class='boxValue' /></div>
          <fieldset>
             <legend>Contact</legend>
              <div class='contentField'><label style='width:4em'>Name</label><input type='text' dbtype='varchar(100)' name='Request[<?php print $current->RequestID; ?>][Name]' id='Name' value='<?php print $current->Name; ?>' size='50' class='boxValue' /></div>
@@ -11,6 +20,7 @@
         </fieldset>
         <div class='contentField'><label>Business </label><?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Request[$current->RequestID][BusinessID]")."</div>";?>
         <div class='contentField'><label>Quote </label><?php $boss->db->addResource("Quote");$arr = $boss->db->Quote->getlist();print $boss->utility->buildSelect($arr, $current->QuoteID, "QuoteID", "Quote", "Request[$current->RequestID][QuoteID]")."</div>";?>
+        <div class='contentField'><label>Rate </label><?php $boss->db->addResource("SpecialRates");$arr = $boss->db->SpecialRates->getlist();print $boss->utility->buildRatesSelect($arr, $current->SpecialRatesID, "SpecialRatesID", "SpecialRates", "Request[$current->RequestID][SpecialRatesID]")."</div>";?>
         <div class='contentField'><label>UID</label><input type='text' dbtype='varchar(100)' name='Request[<?php print $current->RequestID; ?>][UID]' id='UID' value='<?php print $current->UID; ?>' size='50' class='boxValue' /></div>
     </div>
     <div class='fieldcolumn'>
@@ -32,7 +42,14 @@
             </div>
         </fieldset>
     </div>
-        <div class='contentField' style='clear:left'><label>Notes</label><textarea dbtype='text' name='Request[<?php print $current->RequestID; ?>][Notes]' id='Notes' style='width:48em;white-space:normal;' class='textBox'>
+</div>
+   <div class="fieldcolumn">
+      <fieldset>
+         <legend>Quote Email</legend>
+         <div class'contentfield'=""><iframe id="quote" style="width:800px;height:20em;" src="/files/email-templates/example.php?id=<?php print $current->SpecialRatesID; ?>"></iframe></div>
+      </fieldset>
+    </div>
+    <div class='contentField' style='float:left'><label>Notes</label><textarea dbtype='text' name='Request[<?php print $current->RequestID; ?>][Notes]' id='Notes' style='width:48em;white-space:normal;' class='textBox'>
 <?php print $current->Notes; ?>
          </textarea></div></div>
 </div>

@@ -10,6 +10,10 @@
 <link href='/lib/css/tiny-date-picker.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
@@ -18,6 +22,7 @@
 <style>
 body {
    font-family: 'Lexend', sans-serif;
+   box-sizing: border-box;
 }
 .dlgtitle {
    font-size:1.5em; 
@@ -103,6 +108,110 @@ div.dropdown-menu {
    box-shadow: 3px 3px 3px #0009;
    transition: all 200ms linear;
 }
+.dp-cal-footer {
+display:none;
+}
+.left {
+   justify-content: flex-start;
+}
+#map {
+   height: 33vh;
+   border: 1px solid #0009;
+}
+#details {
+   margin: 0px;
+}
+.lds-spinner {
+  color: official;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-spinner div {
+  transform-origin: 40px 40px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 37px;
+  width: 6px;
+  height: 18px;
+  border-radius: 20%;
+  background: #fff;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+#loading {
+   position:absolute;
+   bottom:0px;
+   height: 33vh;
+   background: #0009;
+   left: 0px;
+   width: 100%;
+   z-index: 99999;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   display: none;
+}
 </style>
 </head>
 <body>
@@ -114,11 +223,30 @@ div.dropdown-menu {
         <li><a href="#detail" class='detail'>Details</a></li> 
       </ul>
 
-      <div id='joblist'> </div>
-      <div id='detail'> </div>
+      <div id='joblist' class='tabpane'> </div>
+      <div id='detail' class='tabpane'> </div>
+   </div>
+   <div id='map'></div>
+   <div id='loading'>
+<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>      
    </div>
 </div>
-  <div id='calendar'></div>
+<div id='calendar'></div>
+<script src="route.js"></script>
+<script>
+(function() {
+ app.map = L.map('map', {
+     attributionControl: false,
+   zoomControl: false,
+   fadeAnimation: false,
+   zoomAnimation: false
+ }).setView([37.8437122,-122.3491274], 10);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+     maxZoom: 19,
+     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+ }).addTo(app.map);
+})();
+ </script>
 <script>
    var dp = TinyDatePicker('#tinycal', { 
       format(date) {
@@ -141,6 +269,9 @@ div.dropdown-menu {
       console.log("statechange");
    } );
    var calendar, calendarEl;
+   fetch("api.php?type=drivers").then(resp=>resp.json()).then(data=>{
+      drivers = data;
+   });
 
    function doCalendar(exclude) {
       calendarEl = document.getElementById('calendar');
@@ -161,6 +292,9 @@ div.dropdown-menu {
            right: 'resourceTimeGridDay,resourceDayGridDay,dayGridMonth'
          },
          views: {
+            resourceDayGridDay: {
+               buttonText: 'list'
+            },
            resourceTimeGridTwoDay: {
              type: 'resourceTimeGrid',
              duration: { days: 2 },
@@ -187,6 +321,7 @@ div.dropdown-menu {
             if (info.newResource && info.newResource.id) {
                 upd["newResource"] = info.newResource.id;
             } 
+            /*
             if (info.oldEvent) {
                let chkStart = cleanMilitaryTime(info.event.start);
                let chkOldStart = cleanMilitaryTime(info.oldEvent.start);
@@ -208,6 +343,7 @@ div.dropdown-menu {
                   upd["newEnd"] = cleanMilitaryTime(info.event.end);
                }
             }
+            */
             
             if (Object.keys(upd).length) {
                console.log(`New data:`);
@@ -312,6 +448,23 @@ div.dropdown-menu {
       return mytime;
    }
 
+   function makeDriverSelect(id) {
+      let out = "<select id='Driver' name='Driver'><option value='0'>Unassigned</option>";
+      if (mydrivers) {
+         let keys = Object.keys(mydrivers), sel = "", phone = "";
+         keys.forEach(key=> {
+            sel = (mydrivers[key].EmployeeID == id) ? " SELECTED" : "";
+            phone = (mydrivers[key].Phone) ? ` - ${mydrivers[key].Phone}` : "";
+               
+            out += `<option value='${mydrivers[key].EmployeeID}'${sel}>${mydrivers[key].Driver}${phone}</option>`;
+         });
+
+      }
+      out += "</select>";
+      
+      return out;
+   }
+
    function handleClick(who) { 
       
       makeRequest('GET', 'api.php?type=event&id='+who, function (err, datums) {
@@ -329,7 +482,7 @@ div.dropdown-menu {
         var driver = (myevent && myevent.EmployeeID && mydrivers && mydrivers[myevent.EmployeeID]) ? mydrivers[myevent.EmployeeID].Driver + " - " + mydrivers[myevent.EmployeeID].Phone : "Unassigned";
       
         out += `
-         <tr><th>Driver</th><td colspan='3'>${driver}</td></tr>
+         <tr><th>Driver</th><td colspan='3'>${makeDriverSelect(myevent.EmployeeID)}</td></tr>
          <tr><th>Pickup</th><td colspan='2'>${((myevent.PickupLocation) ? myevent.PickupLocation : "")}</td><td>${myevent.PickupTime}</td></tr>
          <tr><th>Dropoff</th><td colspan='2'>${((myevent.DropOffLocation) ? myevent.DropOffLocation : "")}</td><td>${myevent.DropOffTime}</td></tr>`;
         
@@ -337,11 +490,14 @@ div.dropdown-menu {
          out += `<tr><th>Final</th><td colspan='2'>${myevent.FinalDropOffLocation}</td></tr>`;
         }
 
-        out += `<tr><th>Color</th><td colspan='2'><input type='color' value='${myevent.Color}' id='color' onchange='updateColor(this.value, ${myevent.JobID})'></td></tr>`;
+        out += `<tr><th>Color</th><td colspan='3'><input type='color' value='${myevent.Color}' id='color' onchange='updateColor(this.value, ${myevent.JobID})'> <div style="display:inline-block;float:right;"><span id="distance"></span> | <span id="duration"></span></div></td></tr>`;
         out += `</table>`;
 
         document.querySelector("#detail").innerHTML = out;
         selectTab("#detail");
+
+        app.getRoute(myevent.PickupLocation, myevent.DropOffLocation);
+
         if (err) { throw err; }
         console.log(datums);
       }); 
@@ -390,11 +546,10 @@ div.dropdown-menu {
    }
    function cleanTabs(selector) {
       var tab_lists_anchors = document.querySelectorAll(selector + " li a");
-      var divs = document.querySelector(selector).getElementsByTagName("div");
-      
-      for (i = 0; i < divs.length; i++) {
-          divs[i].style.display = "none";
-      }
+      var divs = document.querySelectorAll(".tabpane");
+      divs.forEach((el) => {
+         el.style.display = "none";
+      });
 
       for (i = 0; i < tab_lists_anchors.length; i++) {
           tab_lists_anchors[i].classList.remove("active");
