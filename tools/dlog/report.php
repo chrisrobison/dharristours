@@ -477,12 +477,15 @@ EOT;
             let yrEl = document.querySelector("#year");
             let startdate = document.querySelector("#startdate");
             let enddate = document.querySelector("#enddate");
+            let drvr = document.querySelector("#driver");
+            let driver = drvr.options[drvr.selectedIndex].value;
 
             let yr = yrEl.options[yrEl.selectedIndex].value;
             let mo = moEl.options[moEl.selectedIndex].value;
             startdate.value = yr + '-' + mo + '-01';
             enddate.value = yr + '-' + mo + '-31';
-
+            
+            window.location.href = `report.php?start=${startdate.value}&end=${enddate.value}&driver=${driver}`;
         }
     };
     

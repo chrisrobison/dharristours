@@ -36,6 +36,10 @@
        width: 1080px;
        height: 441px;
       }
+      .mynotes th {
+        background:#222;
+        color:#eee;
+       }
       .remark {
        transform: rotate(28deg) translateX(30px) translateY(-10px);
        transform-origin: top left;
@@ -88,16 +92,32 @@
       .mytime {
          text-align: right;
          white-space: nowrap;
+         font-size: 0.8em;
       }
       .downtime {
          text-align: right;
          white-space: nowrap;
          background: #0002;
+         font-size: 0.9em;
+      }
+      .mynotes {
+        border: 1px solid #0006;
       }
       .mynotes, .mynotes table {
          border-collapse: collapse;
       }
-      .val {
+      .mynotes th:nth-child(3) {
+        text-align: right;
+        padding-right: 1em;
+      }
+      .mynotes th:nth-child(2) {
+        text-align: left;
+        padding-left: 0.5em;
+      }
+      .mynotes td:nth-child(2) {
+        border-left: 1px solid #ccc;
+      }
+       .val {
          display: inline-block;
          width: 5em;
       }
