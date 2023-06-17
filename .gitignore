@@ -7,6 +7,8 @@ spool
 *.eml
 *.log
 **/src/
+.*.swp
+.ea-php-cli.cache
 src
 CVS
 clients/dharristours/invoices/
@@ -21,3 +23,4 @@ neoplan/
 .dbconfig
 .auth
 hacks-latest.js
+tools/dlog/tiny-date-picker/
