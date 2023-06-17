@@ -2,11 +2,13 @@ const $ = (str) => document.querySelector(str);
 const $$ = (str) => document.querySelectorAll(str);
 
 (function() {
+    if (!window.app) window.app = {};
+
     let app = {
+        ...window.app,
         config: {
             apiKey: "5b3ce3597851110001cf62481189071ea9104ad6a88e51717cb62e65"
         },
-        init: function() {},
         data: {
             stations: {}
         },
@@ -55,7 +57,7 @@ const $$ = (str) => document.querySelectorAll(str);
         geocodeSearch: function(search) {
             var request = new XMLHttpRequest();
 
-            request.open('GET', `https://api.openrouteservice.org/geocode/search?api_key=${app.config.apiKey}&text=${encodeURIComponent(search)}`);
+           request.open('GET', `https://api.openrouteservice.org/geocode/search?api_key=${app.config.apiKey}&text=${encodeURIComponent(search)}`);
 
             request.setRequestHeader('Accept', 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8');
 
@@ -69,7 +71,47 @@ const $$ = (str) => document.querySelectorAll(str);
 
             request.send();  
         },
-        getGeoJSON: function(origin, dest) {
+        getGeoJSON2: function(origin, dest) {
+            fetch(`/portal/directions.php?start=${origin}&end=${dest}`).then(r=>r.json()).then(data=>{
+                L.geoJSON(data).addTo(app.map);
+                console.log("directions:");
+                console.dir(data);
+                let bounds = [[data.bbox[3], data.bbox[2]], [data.bbox[1], data.bbox[0]]];
+
+                app.map.fitBounds(bounds);
+
+                document.querySelector("#distance").innerHTML = Math.round(data.features[0].properties.summary.distance * 0.000621371) + " miles";
+
+                let dur = data.features[0].properties.summary.duration;
+                let hr = 0, min = Math.ceil(dur / 60);
+                if (min > 60) {
+                    hr = Math.floor(min / 60);
+                    min = (min - (hr * 60));
+                } else {
+                    hr = 0;
+                    min = Math.floor(dur / 60);
+                }
+                if (min < 10) {
+                    min = '0' + min;
+                }
+                if (hr < 10) {
+                    hr = '0' + hr;
+                }
+                document.querySelector("#duration").innerHTML = `${hr}:${min}`;
+                document.querySelector("#overlay").style.display = "none";
+                 
+            });
+        },
+        makeStaticMap: function() {
+            domtoimage.toPng($("#map")).then((dataUrl) => {
+                let img = new Image();
+                img.src = dataUrl;
+                document.body.appendChild(img);
+                $("#static")?.appendChild(img);
+                console.log(dataUrl)
+            });
+        },
+        getGeoJSON: function(coord) {
             
             let request = new XMLHttpRequest();
 
@@ -113,18 +155,21 @@ const $$ = (str) => document.querySelectorAll(str);
                 $("#overlay").style.display = "none";
                 
                 setTimeout(function() {
-                domtoimage.toPng($("#map")).then((dataUrl) => {
-                    let img = new Image();
-                    img.src = dataUrl;
-                    // document.body.appendChild(img);
-                    $("#static").appendChild(img);
-                    console.log(dataUrl)
-                }); 
-                }, 1000);
+                    if (domtoimage) {
+                        console.log("creating static image");
+                        domtoimage.toPng($("#map")).then((dataUrl) => {
+                        let img = new Image();
+                        img.src = dataUrl;
+                        document.body.appendChild(img);
+                        $("#static")?.appendChild(img);
+                        console.log(dataUrl)
+                        }); 
+                    }
+                }, 2000);
               }
             };
 
-            const body = {"coordinates":[origin, dest]};
+            const body = {"coordinates":[coord]};
 
             request.send(JSON.stringify(body));
 /*
@@ -174,9 +219,10 @@ const $$ = (str) => document.querySelectorAll(str);
                 .catch(error => console.error(error.message));
 
         },
-        getRoute: function() {
-            let address1 = $("#origin").value;
-            let address2 = $("#destination").value;
+        getRoute: function(address1="", address2="") {
+            address1 = (address1) ? address1 : $("#origin").value;
+            address2 = (address2) ? address2 : $("#destination").value;
+
             $("#overlay").style.display = "block";
             
             console.log(`getRoute: ${address1} to ${address2}`);
@@ -188,31 +234,33 @@ const $$ = (str) => document.querySelectorAll(str);
                 console.dir(values);
                 let orig = [values[0].latitude, values[0].longitude];
 
-                app.getGeoJSON([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude]);
+                app.getGeoJSON2([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude]);
             });
 
             return false;
         },
         geocodeAddress: async function(address) {
-            const apiUrl = `https://api.openrouteservice.org/geocode/search?api_key=${app.config.apiKey}&text=${address}`;
+            const apiUrl = `/portal/geocode.php?addr=${address}`;
+            // const apiUrl = `https://api.openrouteservice.org/geocode/search?api_key=${app.config.apiKey}&text=${address}`;
 
             const response = await fetch(apiUrl);
             const data = await response.json();
+            let latitude = 38.054, longitude = -122.241;
 
-            if (data.features.length === 0) {
-                throw new Error('No location found');
+            if (data.features) {
+                if (data.features.length === 0) {
+                    throw new Error('No location found');
+                }
+
+                let location = data.features[0].geometry.coordinates;
+                latitude = location[1];
+                longitude = location[0];
             }
-
-            const location = data.features[0].geometry.coordinates;
-            const latitude = location[1];
-            const longitude = location[0];
-
             return {
-                latitude,
-                longitude
+                    latitude,
+                    longitude
             };
         }
     }
     window.app = app;
-    app.init();
 })();

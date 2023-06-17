@@ -101,6 +101,10 @@
          #viewWrap { position:absolute; top:5.25em; left:0px; width:100%; bottom:0px; right:0px; }
          button,input,select,option { font-family: "Open Sans",sans-serif; font-size:1em; }
          th.field { white-space: nowrap; }
+   .alertText {
+       background: rgb(153, 0, 0);
+       color: rgb(255, 255, 255);
+    }
       </style>
    </head>
    <body>

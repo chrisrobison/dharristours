@@ -1,8 +1,12 @@
 (function() {
     const $ = str => document.querySelector(str);
     const $$ = str => document.querySelectorAll(str);
-
-    const app = {
+    
+    if (!window['app']) {
+        window.app = app = {};
+    }
+    window.app = app = {
+        ...window['app'],
         init: function() {
             fetch("nav.json").then(response=>response.json()).then(data=>{
                 app.data.nav = data;
@@ -54,8 +58,35 @@
             });
             out += (noul) ? "" : "</ul>";
             return out;
+        },
+        confirmJob: function(id) {
+            fetch("/portal/api.php?type=confirm&id="+id).then(r=>r.json()).then(data=>{
+               console.log("Job confirmed");
+               console.dir(data);
+            });
+        },
+        override: function(id) {
+            console.log(`Switch business to BusinessID ${id}`);
+            fetch("/portal/api.php?type=switch&bid="+id).then(r=>r.json()).then(data=>{
+                console.log("Business ID override");
+                console.dir(data);
+                document.querySelector("#home-iframe").contentWindow.location.reload();
+            });
+        },
+        switchUser: function(evt, email) {
+            console.log(`Switch user to ${email}`);
+            console.dir(evt);
+            fetch("switch.php?email=" + email).then(r=>r.json()).then(data=>{
+                console.log("switched user");
+                console.dir(data);
+            });;
+        },
+        loadTab: function(url="/portal/home.php", title="New Tab", name="newtab", autoshow=true) {
+            jQuery(".content-wrapper").IFrame('createTab', title, url, name, autoshow);
+            return false;
         }
+
     };
-    window.app = app;
+
     app.init();
 })();

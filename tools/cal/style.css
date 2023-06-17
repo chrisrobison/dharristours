@@ -34,15 +34,13 @@ body {
     width:400px;
   }
   #details {
-     margin:.5em 0 1em 0;
-     border:1px solid #ccc;
-     padding:0px;
-     flex-grow: 1;
+     margin:0 0 1em 0;
+     padding: 0.5em 0 0 0;
+     flex-shrink: 1;
   }
   #detail {
     overflow-y:scroll;
     position:relative;
-    height:25em;
 
   }
   .jobs {

@@ -54,6 +54,9 @@
             });
             out += (noul) ? "" : "</ul>";
             return out;
+        }, 
+        loadTab: function(url="/portal/home.php", title="New Tab", name="newtab", autoshow=true) {
+            document.querySelector(".content-wrapper"),IFrame('createTab', title, url, name, autoshow);
         }
     };
     window.app = app;

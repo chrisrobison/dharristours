@@ -27,7 +27,7 @@
       $in['Resource'] = "Job";
 //   print_r($in);
    $current = $boss->getObjectRelated($in['Resource'], $in['ID'],false);
-   $business = $boss->getObjectRelated('Business',$current->BusinessID,false);
+   $business = $boss->getObjectRelated('Business',$_SESSION['BusinessID'],false);
    $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    $bus = $boss->getObjectRelated('Bus',$current->BusID,false);
 //   print "var data = ".json_encode($current).";\n";
@@ -52,7 +52,8 @@
             background: -moz-linear-gradient(top, #f0f0f0, #b0b0b0);
             font-size: 12pt;
             color: black;
-            font-family: "Open Sans", "Helvetica Neue", Verdana, sans-serif;
+            font-family: "Lexend", "Open Sans", "Helvetica Neue", Verdana, sans-serif;
+            font-weight: 200;
         }
 
         IMG {
@@ -128,29 +129,27 @@
 
         #top_header {
             width: 5in;
-            height: .5in;
             position: relative;
             white-space: nowrap;
             border-radius: 12px;
             -webkit-border-radius: 12px;
             -moz-border-radius: 12px;
             border: 4px solid #000000;
+            padding: 0.5em;
         }
 
         #top_header div {
             float: left;
             width: 2.25in;
-            height: .5in;
             padding: .006in .05in;
             font-size: 12pt;
         }
 
         #top_header>:first-child {
-            border-right: 4px solid #000;
         }
 
         #header {
-            width: 5in;
+            width: 7in;
             height: .6in;
         }
 
@@ -182,6 +181,9 @@
             padding: 22px 22px 0px 22px;
             position: relative;
             width: 7.5in;
+            display: flex;
+            flex-direction:column;
+            justify-content: space-between;
         }
 
         .shadow {
@@ -299,7 +301,8 @@
 
         td.value {
             text-align: left;
-            font-weight: normal;
+            font-weight: 200;
+            border-bottom: 1px solid #0006;
         }
 
         .line {
@@ -357,7 +360,9 @@
             .pagebreak {
                 page-break-before: always;
             }
-
+            body {
+               background: #fff;
+            }
             /* page-break-after works, as well */
         }
 
@@ -366,6 +371,17 @@
        background: rgb(153, 0, 0);
        color: rgb(255, 255, 255);
     }
+    #top_header {
+      display: flex;
+      width: 7.25in;
+      padding: 0.5em 0px;
+      box-sizing: border-box;
+      margin-bottom: 2px;
+      justify-content: space-around;
+    }
+    #top_header > div {
+      display: inline-block;
+    }
     </style>
     <title>
    Drivers Trip Sheet</title>
@@ -373,63 +389,13 @@
 
 <body>
     <div id="main" class='shadow'>
-        <div id='top_overview'>
-            <span class='date'>
-                <?php print $current->JobDate; ?></span><br />
-            <span class='time'>
-                <?php 
-      if (is_null($current->OnSpotTime)  || $current->OnSpotTime =='') {
-         print date("g:ia", strtotime($current->PickupTime));
-      } else {
-         print $current->OnSpotTime; 
-      }
-      ?></span><br />
-            <span>
-                <?php print $business->Business; ?></span><br />
-            <span class='pass'>Pax:
-                <?php print $current->NumberOfItems; ?><br /></span>
-            <span class='pass'>Bus:
-                <?php print $bus->Bus; ?></span>
-        </div>
         <div id='top_header'>
-            <div>Driver Name: <b>
-                    <?php print $driver->Employee; ?></b><br />Job Number: <b>
-                    <?php print $current->JobID; ?></b></div>
-            <div>Date: <b>
-                    <?php print $current->JobDate; ?></b><br />Start: <b>
-                    <?php  if (is_null($current->OnSpotTime)  or $current->OnSpotTime =='') {print $current->PickupTime;} print $current->OnSpotTime;  ?></b></div>
+            <span>Driver Name: <b><?php print $driver->Employee; ?></b></span>
+            <span>Job Number: <b><?php print $current->JobID; ?></b></span>
+            <span>Pax: <b><?php print $current->NumberOfItems; ?></b></span>
+            <span>Bus: <b><?php  print $bus->BusNumber;  ?></b></span>
         </div>
         <div class="Part">
-            <table id="header">
-                <tr>
-                    <td colspan='4'>
-                        <h2>D Harris Tours, Inc.</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <td>P.O. Box 5961, Vallejo, CA 94591</td>
-                    <td>TCP 017270-B</td>
-                </tr>
-                <tr>
-                    <td>(415) 902-8542</td>
-                    <td>CA 273437</td>
-                </tr>
-                <tr>
-                    <td>juanaharrisdht@att.net</td>
-                </tr>
-                <!--tr>
-            <td>https://dharristours.com/</td>
-         </tr-->
-                <!--tr>
-	   <td>juanaharrisdht@att.net</td><td>TCP 017270-B</td> <td>CA 273437</td>
-	 </tr>
-         <tr>
-            <td>415-902-8542</td><td>PO Box 5961</td></tr>
-         <tr>
-            <td>800-853-4006 FAX</td><td>Vallejo CA 94591</td>
-	 </tr-->
-            </table>
-            <br />
             <div id='ticket'>
                 <div style="padding:4px; position:relative;text-align:center;">
                   <h2 class='center'>
@@ -438,7 +404,7 @@
                      <?php ($current->Shuttle) ? print "<span class='alertText'>SHUTTLE</span>"  : print ""; ?>
                   </h2>
                     <div class="date center">
-                        <?php print date("n/j/Y", strtotime($current->JobDate)); ?> at </div>
+                        <?php print date("l, F j, Y", strtotime($current->JobDate)); ?> at </div>
                     <div class="date center">
                         <?php  
                if (is_null($current->OnSpotTime) || $current->OnSpotTime =='') {
@@ -464,8 +430,6 @@
                      <tr>
                         <td class='field'>Contact:</td>
                         <td class='value'>
-                            <?php print $current->ContactName; ?>
-                            <?php print $current->ContactPhone; ?>
                         </td>
                     </tr>
 
@@ -520,197 +484,217 @@
             <br />
             <table width="100%">
                 <tr>
-                    <th width=70%>Driver: <b>
-                            <?php print $driver->Employee; ?></b>
+                    <th width=70% colspan=2>PLEASE CONFIRM/EXCHANGE CONTACT INFO: <b></th>
+                    <th> </th>
+                    <th rowspan="3"><div style="height:5em;width:15em;padding-left:0.5em;box-sizing:border-box;border:1px solid #000;">Overtime</div></th>
+                </tr>    
+                <tr>
+                    <th>
+                           Driver:<b> <?php print $driver->Employee; ?></b> 
+                     </th>
+                    <th>
+                     <b><?php print $driver->Cell; ?></b>
                     </th>
                 </tr>
-            </table>
-            <table>
                 <tr>
-                    <td>On Spot <span class='line'></span>:<span class='line'></span></td>
-                    <td>Mileage: <span class='line miles'></span></td>
-                    <td>PAX <span class='line pax'></span></td>
-                    <td>Depart <span class='line'></span>:<span class='line'></span></td>
-                </tr>
-                <tr>
-                    <td>Stop 1 <span class='line'></span>:<span class='line'></span></td>
-                    <td>Mileage: <span class='line miles'></span></td>
-                    <td>PAX <span class='line pax'></span></td>
-                    <td>Depart <span class='line'></span>:<span class='line'></span></td>
-                </tr>
-                <tr>
-                    <td>Stop 2 <span class='line'></span>:<span class='line'></span></td>
-                    <td>Mileage: <span class='line miles'></span></td>
-                    <td>PAX <span class='line pax'></span></td>
-                    <td>Depart <span class='line'></span>:<span class='line'></span></td>
+                  <td>
+                       Contact: <span style="border-bottom: 1px solid #0006;margin-right:1em; width: 10em;display:inline-block;"><?php print ($current->ContactName) ? $current->ContactName : $business->AttnTo;; ?> </span></td>
+                  <td>
+                     PH: <span style="border-bottom: 1px solid #0006;margin-right:1em; width: 10em;display:inline-block;"><?php print $current->ContactPhone ? $current->ContactPhone : $business->Phone; ?> </span>
+                  </td>
                 </tr>
             </table>
-            <br />
-            <table width="100%">
-                <tr>
-                    <th width=70%><b>
-                            <?php print $business->Business; ?></b>
-                    </th>
-                </tr>
-            </table>
+           <br />
             <table id='sigs'>
                 <tr>
-                    <th width=25%>Chaperone Name</th>
-                    <th width=25%>Start Time</th>
+                    <th width=25%>Spot Time</th>
+                    <th width=25%>PAX</th>
                     <th width=25%>End Time</th>
                     <th width=25%>Signature</th>
                 </tr>
+                <tr><td><br></td><td><br></td><td><br></td><td><br><br></td></tr>
                 <tr>
-                    <td><br /><br /></td>
-                    <td><br /><br /></td>
-                    <td><br /><br /></td>
-                    <td><br /><br /></td>
+                    <th width=25%>Yard Depart</th>
+                    <th width=25%>Yard Return</th>
+                    <th width=25%>Hours On Duty</th>
+                    <th width=25%>Hours Driving</th>
                 </tr>
+                <tr><td><br><br></td><td><br><br></td><td><br><br></td><td><br><br></td></tr>
             </table>
-        </div>
-    </div>
-    <div class='pagebreak'></div>
-    <br>
-    <div class='printonly'>
-        <div id='main' class='shadow'>
-            <div id='top_header'>
-                <div>Driver Name: <b>
-                        <?php print $driver->Employee; ?></b><br />Job Number: <b>
-                        <?php print $current->JobID; ?></b></div>
-                <div>Date: <b>
-                        <?php print $current->JobDate; ?></b><br />Start: <b>
-                        <?php  
-            print date("g:ia", strtotime($current->PickupTime));
-         ?></b></div>
-            </div>
-            <h3>Trip Log</h3>
-            <hr>
-            <table>
+            <table style="width:7.25in;margin:0.5em 0px;display:none;">
                 <tr>
-                    <td>Pre-trip Start Time: </td>
-                    <td><span class='line'></span>:<span class='line'></span></td>
-                    <td>Depart Yard Time: </td>
-                    <td><span class='line'></span>:<span class='line'></span></td>
-                    <td>Mileage: </td>
-                    <td><span class='line miles'></span></td>
-                </tr>
-                <tr>
-                  <td colspan="5"><b>CLOCK IN</b> USING PAYCHEX APP AFTER YOU COMPLETE THE PRETRIP</td>
+                  <td style='text-align:right;padding-right:1em;'>Were we Late?</td>
+                  <td><span style='margin-right:1em;'><span style='position:relative;top:4px;display:inline-block;height:1em;width:1em; border:2px solid #000;'></span> YES</span>  <span style='display:inline-block;height:1em;width:1em; border:2px solid #000;position:relative;top:4px;'></span> NO</td>
+                  <td style='text-align:right;padding-right:1em;'>Overtime?</td>
+                  <td><span style='margin-right:1em;'><span style='position:relative;top:4px;display:inline-block;height:1em;width:1em; border:2px solid #000;'></span> YES</span>  <span style='display:inline-block;height:1em;width:1em; border:2px solid #000;position:relative;top:4px;'></span> NO</td>
                </tr>
             </table>
-            <!-- insert dvir form here -->
-            <hr>
-            <h4 style='margin:0;float:right;font-weight:normal;margin-right:2em;'>Check ONLY if problems exists</h4>
-            <h3 style="margin:0;">Vehicle Issue Report</h3>
-            <table class='checklist'>
-                <tr>
-                    <td><span class='checkbox' id='air_compressor'></span> Air Compressor</td>
-                    <td><span class='checkbox' id='front_axle'></span> Front Axle</td>
-                    <td><span class='checkbox' id='safety_equip'></span> Safety Equipment</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='air_lines'></span> Air Lines</td>
-                    <td><span class='checkbox' id='fuel_tanks'></span> Fuel Tanks</td>
-                    <td class='indent'><span class='checkbox' id='fire_extinguisher'></span> Fire Extinguisher</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='battery'></span> Battery</td>
-                    <td><span class='checkbox' id='horn'></span> Horn</td>
-                    <td class='indent'><span class='checkbox' id='flasg_flares_fuses'></span> Flags/Flares/Fuses</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='belts_hoses'></span> Belts and Hoses</td>
-                    <td><span class='checkbox' id='lights'></span> Lights</td>
-                    <td class='indent'><span class='checkbox' id='reflective_triangles'></span> Reflective Triangles</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='body'></span> Body</td>
-                    <td class='indent'><span class='checkbox' id='head_stop'></span> Head/Stop</td>
-                    <td class='indent'><span class='checkbox' id='spare_bulb_fuses'></span> Spare Bulb and Fuses</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='brake_accessories'></span> Brake Accessories</td>
-                    <td class='indent'><span class='checkbox' id='tail_dash'></span> Tail / Dash</td>
-                    <td class='indent'><span class='checkbox' id='spare_seal_beam'></span> Spare Seal Beam</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='brakes_parking'></span> Brakes, Parking</td>
-                    <td class='indent'><span class='checkbox' id='turn_indicators'></span> Turn Indicators</td>
-                    <td><span class='checkbox' id='starter'></span> Starter</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='brakes_service'></span> Brakes, Service</td>
-                    <td class='indent'><span class='checkbox' id='clearance_marker'></span> Clearance / Marker</td>
-                    <td><span class='checkbox' id='steering'></span> Steering</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='clutch'></span> Clutch</td>
-                    <td><span class='checkbox' id='mirrors'></span> Mirrors</td>
-                    <td><span class='checkbox' id='suspension_system'></span> Suspension System</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='defroster_heater'></span> Defroster / Heater</td>
-                    <td><span class='checkbox' id='muffler'></span> Muffler</td>
-                    <td><span class='checkbox' id='tires'></span> Tires</td>
-                </tr>
-                <tr>
-                    <td><span class='checkbox' id='drive_line'></span> Drive Line</td>
-                    <td><span class='checkbox' id='oil_pressure'></span> Oil Pressure</td>
-                    <td><span class='checkbox' id='transmission'></span> Transmission</td>
-                </tr>
-
-                <tr>
-                    <td><span class='checkbox' id='engine'></span> Engine</td>
-                    <td><span class='checkbox' id='radiator'></span> Radiator</td>
-                    <td><span class='checkbox' id='rear_end'></span> Rear End</td>
-                </tr>
-
-                <tr>
-                    <td><span class='checkbox' id='exhaust'></span> Exhaust</td>
-                    <td><span class='checkbox' id='reflectors'></span> Reflectors</td>
-                    <td><span class='checkbox' id='wheels_rims'></span> Wheels &amp; Rims</td>
-                </tr>
-
-                <tr>
-                    <td><span class='checkbox' id='fluid_levels'></span> Fluid Levels</td>
-                    <td><span class='checkbox' id='windows'></span> Windows</td>
-                    <td><span class='checkbox' id='windshield_wipers'></span> Windshield Wipers</td>
-                </tr>
-
-                <tr>
-                    <td><span class='checkbox' id='frame_assembly'></span> Frame &amp; Assembly</td>
-                    <td></td>
-                    <td><span class='checkbox' id='other'></span> Other (please describe): </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            <br>
-            <hr>
-            <table style='width:100%;'>
-                <tr>
-                    <td style='text-align:right;'>Return to Yard Time: <b>CLOCK OUT</b> </td>
-                    <td><span class='line'></span>:<span class='line'></span></td>
-                    <td style='text-align:right;'>Mileage: </td>
-                    <td><span style='width:10em;' class='line miles'></span></td>
-                </tr>
-                <tr>
-                  <td></td>
-                    <td><span class='checkbox'></span> Fuel</td>
-                    <td style='text-align:right;'>Gallons:</td>
-                    <td><span class='line'></span> 
-                    Total: <span class='line'></span> </td>
-                </tr>
-                <tr><td colspan=4><hr></td></tr>
-                <tr>
-                    <td style='padding-left:2em;'>Comments:</td>
-                    <td colspan=3></td>
-                </tr>
-            </table>
+            
         </div>
+            <table id="header">
+                <tr>
+                    <td colspan='4'>
+                        <h2>D Harris Tours, Inc.</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>P.O. Box 5961, Vallejo, CA 94591</td>
+                    <td>TCP 017270-B</td>
+                </tr>
+                <tr>
+                    <td>(415) 902-8542  &nbsp; &nbsp; juanaharrisdht@att.net</td>
+                    <td>CA 273437</td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <!--tr>
+            <td>https://dharristours.com/</td>
+         </tr-->
+                <!--tr>
+	   <td>juanaharrisdht@att.net</td><td>TCP 017270-B</td> <td>CA 273437</td>
+	 </tr>
+         <tr>
+            <td>415-902-8542</td><td>PO Box 5961</td></tr>
+         <tr>
+            <td>800-853-4006 FAX</td><td>Vallejo CA 94591</td>
+	 </tr-->
+            </table>
+    </div>
+    <!--div class='pagebreak'></div-->
+
+    <div class='printonly' style="display:none">
+        <div id='main' class='shadow'>
+            <div id='top_header'>
+                <div>Driver Name: <b><?php print $driver->Employee; ?></b></div>
+                <div>Job Number: <b><?php print $current->JobID; ?></b></div>
+                <div>Date: <b><?php print $current->JobDate; ?></b><br />Bus: <b><?php print $bus->Bus; ?></b></div>
+            </div>
+            <h3>DRIVER'S DAILY LOG (24 HOURS MIDNIGHT - MIDNIGHT)</h3>Complete only 1 per day
+            <hr>
+               <table>
+                  <tr>
+                    <td>Total Hours Last 6 Days</td>
+                    <td><span class='line'></span>:<span class='line'></span></td>
+                    <td></td>
+                  </tr>
+               </table>
+            <table>
+               <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+               </tr>
+               <tr>
+                    <td><b>On-Duty Time</b> <span class='line'></span>:<span class='line'></span></td>
+                    <td>Starting Mileage:</td><td> <span class='line miles'></span></td>
+                </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Yard Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+               <tr>
+                     <td><b>Not Driving For<span class='line'></span>:<span class='line'></span></td>
+               </tr>
+                <tr>
+                    <td>Depart Time <span class='line'></span>:<span class='line'></span></td>
+                    <td>Arrive Time <span class='line'></span>:<span class='line'></span></td>
+                    <td><b>Driving For <span class='line'></span>:<span class='line'></span></td>
+               </tr>
+            </table>
+            <hr>
+            <table>
+               <tr>
+                    <td><b>Return Yard Time</b> <span class='line'></span>:<span class='line'></span></td>
+                    <td>Ending Mileage:</td><td> <span class='line miles'></span></td>
+                </tr>
+           </table>
+               <table id='sigs'>
+                  <tr>
+                     <th>Total Hrs On Duty</th>
+                     <th>Off Duty</th>
+                     <th>Driving</th>
+                     <th>Miles Driven</th>
+                     <th>Comments</th>
+                  </tr>
+                <tr><td><br></td><td><br></td><td><br></td><td><br><br></td></tr>
+                <tr><td><br><br></td><td><br><br></td><td><br><br></td><td><br><br></td></tr>
+                <tr><td><br><br></td><td><br><br></td><td><br><br></td><td><br><br></td></tr>
+               </table>
+            <table id="header">
+                <tr>
+                    <td colspan='2'>
+                        <h2>D Harris Tours, Inc.</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>P.O. Box 5961, Vallejo, CA 94591</td>
+                    <td>TCP 017270-B</td>
+                </tr>
+                <tr>
+                    <td>(415) 902-8542</td>
+                    <td>CA 273437</td>
+                </tr>
+                <tr>
+                    <td colspan=2>juanaharrisdht@att.net</td>
+                </tr>
+                <!--tr>
+            <td>https://dharristours.com/</td>
+         </tr-->
+                <!--tr>
+	   <td>juanaharrisdht@att.net</td><td>TCP 017270-B</td> <td>CA 273437</td>
+	 </tr>
+         <tr>
+            <td>415-902-8542</td><td>PO Box 5961</td></tr>
+         <tr>
+            <td>800-853-4006 FAX</td><td>Vallejo CA 94591</td>
+	 </tr-->
+            </table>
+       </div>
     </div>
 </body>
 </html>

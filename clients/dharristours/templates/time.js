@@ -700,6 +700,7 @@ function realUpAll(id) {
             $(this).height($(this).prop('scrollHeight'));
         });
     });
+    doSchoolAddress(simpleConfig.record);
 }
 //  {Select: function(id) { upAll(id); }, "New": function() { myNew(); }} 
 function myNew() {

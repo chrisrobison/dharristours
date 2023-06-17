@@ -58,10 +58,10 @@
             break;
       }
 
+      header("Content-type: application/json; charset=utf-8");
+      print json_encode($out, JSON_UNESCAPED_SLASHES);
       file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
       
-      header("Content-type: application/json; charset=utf-8");
-      print json_encode($out);
    }
 
    function updateData($link, $in) {
@@ -150,9 +150,10 @@
             $buses[$row['BusID']] = $row['BusNumber'];
          }
       }
-      
+      $buses['Special'] = 'Special';
+
       // Grab events for date range
-      $sql = "SELECT JobID, Job.Color as JobColor, Business.Color as BusinessColor, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions, Job.EmployeeID as EmployeeID, JobCancelled, Business.Business as Business FROM Job, Business where JobDate>='{$first}' AND JobDate<='{$last}' AND Business.BusinessID=Job.BusinessID";
+      $sql = "SELECT JobID, Job.Color as JobColor, Business.Color as BusinessColor, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions, Job.EmployeeID as EmployeeID, JobCancelled, Business.Business as Business FROM Job LEFT OUTER JOIN Business ON Job.BusinessID=Business.BusinessID where JobDate>='{$first}' AND JobDate<='{$last}'";
 
       $results = mysqli_query($link, $sql);
       
@@ -166,8 +167,11 @@
             $obj->date = date("m/d", strtotime($row['JobDate']));
             $obj->driverId = $row['EmployeeID'];
             
-            if (array_key_exists("driver", $in)) {
-               $obj->resourceIds = array($row['EmployeeID'], $buses[$row['BusID']]);;
+            if ((array_key_exists("driver", $in)) && (array_key_exists("bus", $in))) {
+               $bus = (!is_null($buses[$row['BusID']])) ? $buses[$row['BusID']] : "Special";
+               $obj->resourceIds = array($row['EmployeeID'], $bus);;
+            } else if ((array_key_exists("driver", $in)) && (!array_key_exists("bus", $in))) {
+               $obj->resourceId = $row['EmployeeID']; 
             } else {
                $obj->resourceId = $buses[$row['BusID']];
             }
@@ -243,12 +247,21 @@
       } else {
          $now = date("Y-m-d");
       }
+      
+      $sql = "SELECT BusID, Bus, BusNumber, InService from Bus where InService ORDER BY BusNumber";
+      $results = mysqli_query($link, $sql);
+      if ($results) {
+         while ($row = $results->fetch_assoc()) {
+            $buses[$row['BusID']] = $row['BusNumber'];
+         }
+      }
+      
       $in = $_REQUEST;
       $threedays = date("Y-m-d", strtotime("+3 days"));
       $yesterday = date("Y-m-d", strtotime($in['start']));
       $first = date("Y-m-d", strtotime($in['start']));
       $last = date("Y-m-d", strtotime($in['end']));
-      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Job.EmployeeID as EmployeeID, SpecialInstructions FROM Job where JobDate>='{$first}' AND JobDate<='{$last}' AND JobCancelled=0";
+      $sql = "SELECT JobID, Job.Job as Job, Job.Color as Color, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Job.EmployeeID as EmployeeID, SpecialInstructions, BusID FROM Job where JobDate>='{$first}' AND JobDate<='{$last}' AND JobCancelled=0";
       $results = mysqli_query($link, $sql);
       
       while ($row = $results->fetch_assoc()) {
@@ -258,18 +271,23 @@
          $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
          $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
 
-         if (array_key_exists("driver", $in)) {
+         if ((array_key_exists("driver", $in)) && (array_key_exists("bus", $in))) {
+            $bus = (!is_null($buses[$row['BusID']]))  ? $buses[$row['BusID']] : 'Special';
+            $obj->resourceIds = array($row['EmployeeID'], $bus);
+         } else if ((array_key_exists("driver", $in)) && (!array_key_exists("bus", $in))) {
             $obj->resourceId = $row['EmployeeID'];
+         } else if ((array_key_exists("bus", $in)) && (!array_key_exists("driver", $in))) {
+            $obj->resourceId = $buses[$row['BusID']];
          } else {
-            $obj->resourceId = $row['BusNumber'];
+            $obj->resourceId = $buses[$row['BusID']];
          }
 	      
-         $obj->color = $colors[$cnt];
+         $obj->color = ($row['Color'] != "#666") ? $row['Color'] : $colors[$cnt];
          $obj->url = "/grid/view.php?rsc=Job&pid=335&id={$row['JobID']}";
          $cnt++;
-	 if ($cnt > count($colors)) {
-	 	$cnt = 0;
-	}
+       if ($cnt > count($colors)) {
+         $cnt = 0;
+      }
          array_push($out, $obj);
       }
 
@@ -321,7 +339,15 @@
          
          array_push($out, $obj);
       }
+      
+      $obj = new stdClass();
+      $obj->id = "Special";
+      $obj->busID = "Special";
+      $obj->title = "Special";
+      $obj->type = "bus";
 
+      array_push($out, $obj);
+      
       return $out;
    }
 
@@ -349,6 +375,15 @@
          
          array_push($out, $obj);
       }
+      
+      $obj = new stdClass();
+      
+      $obj->id = "Special";
+      $obj->busID = "Special";
+      $obj->title = "Special";
+      $obj->type = "bus";
+
+      array_push($out, $obj);
 
       $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY LastName");
       
