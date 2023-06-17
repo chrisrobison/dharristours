@@ -29,7 +29,7 @@
       }
       $subject = escapeshellarg($job->Subject);
       $content = `./htmlmail.sh -s '{$job->Subject}' -t '{$job->Email}' -f 'Simple Software Notification <notify@simpsf.com>' https://dharristours.simpsf.com/files/email-templates/genemail.php?idx=$i`;
-      // $content = `./htmlmail.sh -s {$subject} -t 'cdr@netoasis.net' -f 'Simple Software Notification <notify@simpsf.com>' https://dharristours.simpsf.com/files/email-templates/genemail.php?idx=$i`;
+      //$content = `./htmlmail.sh -s {$subject} -t 'cdr@netoasis.net' -f 'Simple Software Notification <notify@simpsf.com>' https://dharristours.simpsf.com/files/email-templates/genemail.php?idx=$i`;
       
       $msgDate = date("D, d M Y H:i:s O");
 

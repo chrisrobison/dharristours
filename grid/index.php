@@ -19,7 +19,7 @@
    $id = $in['id'];
 
    if ($id) {
-      $record = $boss->getObject($rsc, $id);
+      $current = $record = $boss->getObject($rsc, $id);
    }
 
    $model = $boss->getModel($in['pid']);

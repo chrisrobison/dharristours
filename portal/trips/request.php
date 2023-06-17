@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+    <style>
+        label {
+            width: 6em;
+            white-space: nowrap;
+        }
+        .form-control {
+            width:40em;
+        }
+        .form-group {
+            display: flex;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -75,22 +87,6 @@
                                     <label for="jobLocation">Return</label>
                                     <input type="time" id="End" name='Request[End]' class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputDescription">Notes</label>
-                                    <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStatus">Stage</label>
-                                    <select id="inputStatus" class="form-control custom-select">
-                                        <option selected disabled>Select one</option>
-                                        <option>Resumé Sent</option>
-                                        <option>Phone Screen</option>
-                                        <option>Interviewing</option>
-                                        <option>Offer Made</option>
-                                        <option>Accepted</option>
-                                        <option>Declined</option>
-                                    </select>
-                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -110,15 +106,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputDescription">Notes</label>
-                                    <textarea id="inputDescription" class="form-control" rows="6"></textarea>
-                                </div>
-                                <div class="form-group">
-									<label for="actionItems">Action Items</label>
-									<button type="button" class="btn btn-tool" data-todo-widget="add" title="Add"><i class="fas fa-plus"></i></button>
-									<button type="button" class="btn btn-tool" data-todo-widget="remove" title="Remove"><i class="fas fa-trash"></i></button>
-                                    <ul data-widget="todo-list">
-                                        <li>Make list</li>
-                                    </ul>
+                                    <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4"></textarea>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -158,8 +146,6 @@
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../assets/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../assets/js/demo.js"></script>
 </body>
 
 </html>

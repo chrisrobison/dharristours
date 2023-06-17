@@ -1,4 +1,4 @@
-<script src='/files/templates/time.js?ver=1.38' type='text/javascript' async> </script>
+<script src='/files/templates/time.js?ver=1.38' type='text/javascript' > </script>
 <script type='text/javascript'>
    var userEmail = '<?php print htmlspecialchars($_SESSION['Email'], ENT_QUOTES); ?>';
 
@@ -50,18 +50,18 @@
 	<fieldset class='jobstatus' title="Tracking">
             <legend>Customer Request</legend>
                <div class='contentField'>
-                  <input type='checkbox' id='QuoteOnly' name='Job[<?php print $current->JobID; ?>][QuoteOnly]' dbtype='tinyint(4)' value='1'>
+                  <input type='checkbox' id='QuoteOnly' name='Job[<?php print $current->JobID; ?>][QuoteOnly]' dbtype='tinyint(4)' value='1'<?php if ($current->QuoteOnly) { print " CHECKED"; } ?>>
                   <span>Quote</span>
-                  <input type='checkbox' id='SPAB' name='Job[<?php print $current->JobID; ?>][SPAB]' dbtype='tinyint(4)' value='1'>
+                  <input type='checkbox' id='SPAB' name='Job[<?php print $current->JobID; ?>][SPAB]' dbtype='tinyint(4)' value='1'<?php if ($current->SPAB) { print " CHECKED"; } ?>>
                   <span>SPAB</span>
                
-                  <input type='checkbox' id='WheelChair' name='Job[<?php print $current->JobID; ?>][WheelChair]' dbtype='tinyint(4)' value='1'>
+                  <input type='checkbox' id='WheelChair' name='Job[<?php print $current->JobID; ?>][WheelChair]' dbtype='tinyint(4)' value='1'<?php if ($current->WheelChair) { print " CHECKED"; } ?>>
                   <span>Wheel Chair</span>
 
-                  <input type='checkbox' id='Cargo' name='Job[<?php print $current->JobID; ?>][Cargo]' dbtype='tinyint(4)' value='1'>
+                  <input type='checkbox' id='Cargo' name='Job[<?php print $current->JobID; ?>][Cargo]' dbtype='tinyint(4)' value='1'<?php if ($current->Cargo) { print " CHECKED"; } ?>>
                   <span>Cargo</span>
 
-                  <input type='checkbox' id='Shuttle' name='Job[<?php print $current->JobID; ?>][Shuttle]' dbtype='tinyint(4)' value='0'>
+                  <input type='checkbox' id='Shuttle' name='Job[<?php print $current->JobID; ?>][Shuttle]' dbtype='tinyint(4)' value='0'<?php if ($current->Shuttle) { print " CHECKED"; } ?>>
                   <span>Shuttle</span>
                </div>
                <div class='contentField'>
@@ -144,8 +144,13 @@
                </span>
                <div class='contentField'>
                   <label>Num Pax</label><input type='text' name='Job[<?php print $current->JobID; ?>][NumberOfItems]' id='NumberOfItems' value='<?php print $current->NumberOfItems; ?>' size='11' class='boxValue' style='width:6em' />
-                  <label style='width:6.5em'>Hours</label><input type='text' name='Job[<?php print $current->JobID; ?>][Hours]' id='Hours' value='<?php print $current->Hours; ?>' size='25' class='boxValue' style='width:6em;' />
-               <label>Total Miles</label><input type='text' name='Job[<?php print $current->JobID; ?>][TotalMileage]' id='TotalMileage' value='<?php print $current->TotalMileage; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label style='width:6.5em'>Est. Hours</label><input type='text' name='Job[<?php print $current->JobID; ?>][EstDuration]' id='EstDuration' value='<?php print $current->EstDuration; ?>' size='25' class='boxValue' style='width:6em;' />
+               <label>Est. Miles</label><input type='text' name='Job[<?php print $current->JobID; ?>][EstDistance]' id='EstDistance' value='<?php print $current->EstDistance; ?>' size='11' class='boxValue' style='width:6em' />
+               </div>
+               <div class='contentField'>
+                  <label>Actual Pax</label><input type='text' name='Job[<?php print $current->JobID; ?>][ActualPax]' id='ActualPax' value='<?php print $current->ActualPax; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label style='width:6.5em'>Actual Hours</label><input type='text' name='Job[<?php print $current->JobID; ?>][Hours]' id='Hours' value='<?php print $current->Hours; ?>' size='25' class='boxValue' style='width:6em;' />
+               <label>Actual Miles</label><input type='text' name='Job[<?php print $current->JobID; ?>][TotalMileage]' id='TotalMileage' value='<?php print $current->TotalMileage; ?>' size='11' class='boxValue' style='width:6em' />
                </div>
                 <div class='contentField'>
                   <label>Business</label>
@@ -166,7 +171,7 @@
                <div id='NotifyCustomer'  class='disabled' onclick='doNotify_old("business");'><span class='ui-icon ui-icon-contact'></span> Notify Immediately of Change</div>
          </div>
 
-        <fieldset id='DriverNotification' class='jobstatus' title="DriverNotification">
+        <fieldset id='DriverNotification' class='jobstatus' title="DriverNotification" style="display:none;">
             <legend>Driver Notification</legend>
             <div class='contentField'><label>Notification ID</label>
                <span id='Notify-NotifyID'></span> [ <a id='editNotify' href='#' onclick="top.loadUrl('/grid/?pid=316&id='+$('#Notify-NotifyID').val(), 'Notify');return false;">edit</a> ]
@@ -225,23 +230,23 @@
          </fieldset>
    <fieldset class='jobstatus' title="Status">
     <legend>Request Status</legend>
-                  <input type='checkbox' id='JobCompleted' name='Job[<?php print $current->JobID; ?>][JobCompleted]' dbtype='tinyint(4)' value='1'>
+                  <input type='checkbox' id='JobCompleted' name='Job[<?php print $current->JobID; ?>][JobCompleted]' dbtype='tinyint(4)' value='1'<?php if ($current->JobCompleted) { print " CHECKED"; } ?>>
     <span>Driver Completed Trip</span>
-    <input type='checkbox' id='JobCancelled' name='Job[<?php print $current->JobID; ?>][JobCancelled]' dbtype='tinyint(4)' value='1' >
+    <input type='checkbox' id='JobCancelled' name='Job[<?php print $current->JobID; ?>][JobCancelled]' dbtype='tinyint(4)' value='1'<?php if ($current->JobCancelled) { print " CHECKED"; } ?>>
     <span>Job Cancelled</span>
 </fieldset>
 <fieldset class='jobstatus' title="Invoice Status">
     <legend>Billing Status</legend>
-    	<input type='checkbox' id='NoInvoice' name='Job[<?php print $current->JobID; ?>][NoInvoice]' dbtype='tinyint(4)' value='1'>
+    	<input type='checkbox' id='NoInvoice' name='Job[<?php print $current->JobID; ?>][NoInvoice]' dbtype='tinyint(4)' value='1'<?php if ($current->NoInvoice) { print " CHECKED"; } ?>>
     	<span>No Invoice</span>
 
-    	<input type='checkbox' id='AdditionalBus' name='Job[<?php print $current->JobID; ?>][AdditionalBus]' dbtype='tinyint(4)' value='1' >
+    	<input type='checkbox' id='AdditionalBus' name='Job[<?php print $current->JobID; ?>][AdditionalBus]' dbtype='tinyint(4)' value='1'<?php if ($current->AdditionalBus) { print " CHECKED"; } ?> >
     	<span>Bus X of Many</span>
     <div class='contentField'>
-    	<input type='checkbox' id='InvoiceSatisfied' name='Job[<?php print $current->JobID; ?>][InvoiceSatisfied]' dbtype='tinyint(4)' value='1'>
+    	<input type='checkbox' id='InvoiceSatisfied' name='Job[<?php print $current->JobID; ?>][InvoiceSatisfied]' dbtype='tinyint(4)' value='1'<?php if ($current->InvoiceSatisfied) { print " CHECKED"; } ?>>
     	<span>Invoice Satisfied</span>
 
-    	<input type='checkbox' id='InvoiceOutstanding' name='Job[<?php print $current->JobID; ?>][InvoiceOutstanding]' dbtype='tinyint(4)' value='1' >
+    	<input type='checkbox' id='InvoiceOutstanding' name='Job[<?php print $current->JobID; ?>][InvoiceOutstanding]' dbtype='tinyint(4)' value='1'<?php if ($current->InvoiceOutstanding) { print " CHECKED"; } ?>>
     	<span>Invoice Outstanding</span>
 
     </div>
@@ -265,7 +270,7 @@
 
                <span id='travelStartTime'></span> 
         </div>
-	    <div class='contentField'><label>* Pickup </label><input type='text' name='Job[<?php print $current->JobID; ?>][PickupLocation]' id='PickupLocation' value='' size='50' class='boxValue'  /></div>
+	    <div class='contentField'><label>* Pickup </label><input type='text' name='Job[<?php print $current->JobID; ?>][PickupLocation]' id='PickupLocation' value='<?php print $current->PickupLocation; ?>' size='50' class='boxValue'  /></div>
             <div class='contentField'><label>Drop</label><input type='text' name='Job[<?php print $current->JobID; ?>][DropOffLocation]' id='DropOffLocation' value='<?php print $current->DropOffLocation; ?>' size='50' class='boxValue'  /></div>
               <div class='contentField'>
 	         <label>Final Drop</label>

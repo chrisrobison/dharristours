@@ -3,7 +3,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
       <title></title>
-      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
       <script src="jquery.easing.js" type="text/javascript"></script>
       <script src="jqueryFileTree.js" type="text/javascript"></script>
       <link href="jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
@@ -23,7 +23,7 @@
          function view(filename) {
             var ftype = $("li a[rel='"+filename+"']").attr('type');
             var shortpath = filename.split(config.docroot)[1];
-               top.updateStatus('Path: /files/'+shortpath);
+            if (top.updateStatus)  top.updateStatus('Path: /files/'+shortpath);
             if (ftype != "dir") {
                $("#browserFrame").attr("src", shortpath);
             } else {

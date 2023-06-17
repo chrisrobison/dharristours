@@ -112,7 +112,7 @@
             padding:0 2px;
          }
       </style>
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
       <script type='text/javascript'>
          $(document).ready(function() {
 

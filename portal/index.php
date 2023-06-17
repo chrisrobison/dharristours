@@ -17,6 +17,14 @@
     <link rel="stylesheet" href="assets/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="assets/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <style>
+        #Business {
+            width: 12em;
+        }
+        label {
+            color: #eee;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
     <div class="wrapper">
@@ -168,13 +176,58 @@
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="user" style="background:#ccc;color:#000;font-weight:bold;font-family:'HelveticaNeue',sans-serif;padding:0;display:flex;width:2em;height:2em;border-radius:50%;align-items:center;justify-content:center;">
                         <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
-                        CR
+                       <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
-                        <select id="users">
+                        <?php
+                            if ($_SESSION['Login']->Admin == 1) {
+                               print '<label for="SwitchUser">Switch Login</label><br><select id="SwitchUser" onchange="app.switchUser(event, this.options[this.selectedIndex].value)">';
+                               $logins = $boss->get("Login", "Active=1");
+                               foreach ($logins as $login) {
+                                    $sel = ($_SESSION['Login']->LoginID == $login->LoginID) ? " SELECTED" : "";
 
-                        </select>
+                                    print "<option value='{$login->Email}'$sel>{$login->LastName}, {$login->FirstName}</option>\n";
+                               }
+                               print "</select><br>";
+                               print '<label for="Business">Business</label><br><select id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
+                                
+                                $businesses = $boss->get("Business", "LoginID IS NOT NULL ORDER BY Business");
+                                foreach ($businesses as $business) {
+                                    $selected = ($_SESSION['BusinessID'] == $business->BusinessID) ? " SELECTED" : "";
+                                        
+                                    print "<option value='{$business->BusinessID}'$selected>{$business->Business}</option>\n";
+                                }
+
+                                print '</select>';
+                            } else if ($_SESSION['Login']->BusinessIDs) {
+                                $bids = explode(",", $_SESSION['Login']->BusinessIDs);
+                                $sql = "BusinessID='" . implode("' OR BusinessID='", $bids) . "'";
+                                print '<select id="Business">';
+                                $businesses = $boss->get("Business", "$sql");
+                                foreach ($businesses as $business) {
+                                    $selected = ($_SESSION['Login']->BusinessID == $business->BusinessID) ? " SELECTED" : "";
+                                        
+                                    print "<option value='{$business->BusinessID}'$selected>{$business->Business}</option>\n";
+                                }
+
+                                print '</select>';
+                            } else {
+                                print '<select id="Business">';
+                                $businesses = $boss->get("Business"); 
+                                foreach ($businesses as $business) {
+                                    $selected = ($_SESSION['Login']->BusinessID == $business->BusinessID) ? " SELECTED" : "";
+                                        
+                                    print "<option value='{$business->BusinessID}'$selected>{$business->Business}</option>\n";
+                                }
+
+                                print '</select>';
+                            }
+
+
+
+
+                        ?>
                     </div>
                 </div>
 
@@ -191,13 +244,13 @@
             <div class="nav navbar navbar-expand navbar-white navbar-light border-bottom p-0">
                 <a class="nav-link bg-light" href="#" data-widget="iframe-scrollleft"><i class="fas fa-angle-double-left"></i></a>
                 <ul class="navbar-nav" role="tablist">
-                    <li class="nav-item active" role="presentation"><a class="nav-link active" data-toggle="row" id="tab-index" href="#panel-index" role="tab" aria-controls="panel-index" aria-selected="true">CDR Resume</a></li>
+                    <li class="nav-item active" role="presentation"><a class="nav-link active" data-toggle="row" id="tab-index" href="#panel-index" role="tab" aria-controls="panel-index" aria-selected="true">Home</a></li>
                 </ul>
                 <a class="nav-link bg-light" href="#" data-widget="iframe-scrollright"><i class="fas fa-angle-double-right"></i></a>
                 <a class="nav-link bg-light" href="#" data-widget="iframe-fullscreen"><i class="fas fa-expand"></i></a>
             </div>
             <div class="tab-content">
-                <div class="tab-pane fade active show" id="panel-index" role="tabpanel" aria-labelledby="tab-index"><iframe src="home.html" style="height: 84vh;"></iframe></div>
+                <div class="tab-pane fade active show" id="panel-index" role="tabpanel" aria-labelledby="tab-index"><iframe id='home-iframe' src="home.php" style="height: 84vh;"></iframe></div>
                 <div class="tab-empty">
                     <h2 class="display-4">No tab selected!</h2>
                 </div>
@@ -243,8 +296,10 @@
     <script src="assets/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
 	<script src="assets/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
     <script src="main.js"></script>
+    <script>
+        app.init(app.getNav);
+    </script>
 </body>
 
 </html>

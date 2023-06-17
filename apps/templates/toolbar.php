@@ -48,7 +48,7 @@ $trackstyle = 'display:none;';
          print "<a id='RelateButton' title='Relate records with each other' class='simpleButton' style='$savestyle'><span class='ui-icon ui-icon-transferthick-e-w'> </span>Relate</a>";
       }
       if (($btn & 2) || ($btn & 1) || !$process) {
-         $savestyle = 'display:none;';
+   //      $savestyle = 'display:none;';
          print "<a id='SaveButton' title='Save changes to current entry' class='simpleButton disabled' style='$savestyle'><span class='ui-icon ui-icon-disk'> </span>Save</a>";
       }
       if (($btn & 4) || !$process) { 

@@ -17,7 +17,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-left:0;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -59,10 +59,8 @@
                       <th style="width: 1%">Job ID</th>
                       <th>Job</th>
                       <th>Trip Date</th>
-                      <th>Pickup</th>
                       <th>Drop off</th>
-                      <th>Status</th>
-                      <th style="width: 20%"></th>
+                      <th></th>
                   </tr>
               </thead>
               <tbody>
@@ -72,17 +70,24 @@ $tpl = <<<EOT
     <td>{{JobID}}</td>
     <td>{{Job}}</td>
     <td>{{JobDate}}</td>
-    <td>{{Pickup}}</td>
-    <td>{{DropOff}}</td>
-    <td>{{Status}}</td>
+    <td>{{DropOffLocation}}</td>
     <td class="project-actions text-right">
-        <a class="btn btn-primary btn-sm" href="view-trip.php?id={{JobID}}"><i class="fas fa-folder"></i> View</a>
-        <a class="btn btn-info btn-sm" href="edit-job.php?id={{JobID}}"><i class="fas fa-pencil-alt"></i>Edit</a>
-        <a class="btn btn-danger btn-sm" href="delete-job.php?id={{JobID}}"><i class="fas fa-trash"></i>Cancel</a>
+        <a class="btn btn-primary btn-sm" onclick="parent.app.loadTab('/portal/trips/view-trip.php?id={{JobID}}', 'Trip {{JobID}}', 'trip_{{JobID}}', true); return false;" href="/portal/trips/view-trip.php?id={{JobID}}"><i class="fas fa-folder"></i> View</a>
     </td>
 </tr>
 EOT;
 
+$now = date("Y-m-d H:i:s");
+$trips = $boss->getObject("Job", "BusinessID={$_SESSION['BusinessID']} and JobDate>'$now' AND JobCancelled=0");
+$cnt = count($trips->Job);
+for ($i=0; $i<$cnt; $i++) {
+    $job = $trips->Job[$i];
+    $out = preg_replace_callback("/\{\{([^\}]+)\}\}/s", function($matches) {
+        global $job;
+        return $job->{$matches[1]};
+    }, $tpl);
+    print $out;
+}
 ?>
               </tbody>
           </table>

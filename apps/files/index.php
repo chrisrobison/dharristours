@@ -34,8 +34,9 @@
             item.addClass('selected');
             var re = new RegExp(config.docroot);
             var shortpath = filename.replace(re, '');
+            if (top && top.updateStatus) {
                top.updateStatus('Path: /files'+shortpath);
-
+            }
             if (ftype != "dir") {
                config.file = shortpath;
                if (!filename.match(/\.(php|js|css|html|txt|jsp|py|cgi|shtml|htm)$/)) {

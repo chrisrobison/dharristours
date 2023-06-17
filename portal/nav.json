@@ -2,30 +2,31 @@
     "sidemenu": [
         {
             "title": "Home",
-            "link": "/portal",
+            "link": "/portal/home.php",
             "icon": "fas fa-home"
         },
         {
             "title": "Trips",
             "link": "#",
             "icon": "fas fa-bus",
-            "_children": [{
+            "_children": [
+                {
+                    "title": "Quotes",
+                    "link": "/portal/trips/quotes.php",
+                    "target": "iframe",
+                    "icon": "fas fa-hand-holding-dollar"
+                },
+                {
                     "title": "Upcoming Trips",
                     "link": "/portal/trips/",
                     "target": "iframe",
                     "icon": "fa fa-route"
                 },
                 {
-                    "title": "Past Trips",
-                    "link": "/portal/trips/past.php",
+                    "title": "Trip Archive",
+                    "link": "/portal/trips/archive.php",
                     "target": "iframe",
                     "icon": "fas fa-calendar-check"
-                },
-                {
-                    "title": "Quotes",
-                    "link": "/portal/trips/quotes.php",
-                    "target": "iframe",
-                    "icon": "fas fa-hand-holding-dollar"
                 }
 
             ]
@@ -60,7 +61,13 @@
             "title": "Help",
             "link": "help.html",
             "icon": "fa-solid fa-circle-question"
+        },
+        {
+            "title": "Logout",
+            "link": "/login.php?logout=true",
+            "icon": "fa-solid fa-sign-out"
         }
+
     ],
     "topmenu": [
         {

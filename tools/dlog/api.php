@@ -127,7 +127,7 @@
          $now = date("Y-m-d");
       }
       $in = $_REQUEST;
-      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Bus.BusNumber as BusNumber, SpecialInstructions FROM Job, Bus where Job.BusID=Bus.BusID AND JobDate='{$now}' AND JobCancelled=0 AND EmployeeID=".$in['EmployeeID'];
+      $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Bus.BusNumber as BusNumber, SpecialInstructions FROM Job, Bus where Job.BusID=Bus.BusID AND JobDate='{$now}' AND JobCancelled=0 AND EmployeeID='".mysqli_real_escape_string($link, $in['EmployeeID'])."'";
       $results = mysqli_query($link, $sql);
       
       while ($row = $results->fetch_assoc()) {
@@ -139,11 +139,32 @@
          $obj->busnum = $row['BusNumber'];
          $obj->start = date("c", strtotime($row['JobDate'].' '.$row['PickupTime']));
          $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
+         $obj->trips = getTrips($link, $row['BusNumber'], $row['JobDate']);
 
          array_push($out, $obj);
       }
 
       return $out;
+   }
+   
+   function getTrips($link, $bus, $date) {
+      global $in;
+      $out = array();
+
+      if ($in['jobdate']) {
+         $now = date("Y-m-d", strtotime($date));
+      } else {
+         $now = date("Y-m-d");
+      }
+
+      $sql = "SELECT * FROM TripReport where Day='$now' AND Vehicle like '%{$bus}%' ORDER BY StartTime";
+      $results = mysqli_query($link, $sql);
+      while ($row = $results->fetch_assoc()) {
+      
+         $out[] = $row;
+      }
+      return $out;
+
    }
 
    function getResources($link) {

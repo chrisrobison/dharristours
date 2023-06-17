@@ -343,7 +343,7 @@ main {
          resourceAreaHeaderClassNames: [ 'center' ],
          resources: (buses) ? buses : "api.php?type=allresources",
          events: {
-            url: "api.php?type=events&driver=1"
+            url: "api.php?type=events&driver=1&bus=1"
          },
          eventSourceSuccess: function(content, xhr) {
            console.log("eventSourceSuccess");
@@ -458,7 +458,7 @@ main {
          resourceAreaHeaderClassNames: [ 'center' ],
          resources: (drivers) ? drivers : "api.php?type=driverresources",
          events: {
-            url: "api.php?type=events&driver=1"
+            url: "api.php?type=events&driver=1&bus=1"
          },
          eventSourceSuccess: function(content, xhr) {
            console.log("eventSourceSuccess");

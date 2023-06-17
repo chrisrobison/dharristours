@@ -1,3 +1,4 @@
+<?php  if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,12 +12,17 @@
   <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+  <style>
+        table.table td {
+            vertical-align: top;
+        }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-left:0px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -55,11 +61,12 @@
           <table class="table table-striped projects">
               <thead>
                   <tr>
-                      <th style="width: 1%">ID</th>
-                      <th style="width: 25%">Origin</th>
-                      <th style="width: 25%">Destination</th>
+                      <!--th>ID</th>
+                      <th>Date</th-->
+                      <th>Trip Date</th>
+                      <th>Origin</th>
+                      <th>Destination</th>
                       <th>Pax</th>
-                      <th>Date</th>
                       <th>Pickup</th>
                       <th>Return</th>
                       <th>Round Trip</th>
@@ -67,12 +74,59 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
+<?php
+    $tpl = <<<EOT
+<tr>
+    <!--td data-id="{{RequestID}}" data-rsc="Request" data-field="RequestID">
+      {{RequestID}}
+    </td>
+    <td>{{RequestDate}}</td-->
+    <td>{{Date}}</td>
+    <td><a>{{Pickup}}</a></td>
+    <td><a>{{Destination}}</a></td>
+    <td>{{Pax}}</td>
+    <td>{{Start}}</td>
+    <td>{{End}}</td>
+    <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="RoundTrip"{{RoundTrip}}></td>
+    <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="ADA"{{ADA}}></td>
+
+    <td class="project-actions text-right">
+      <a class="btn btn-primary btn-sm" onclick="parent.$('.content-wrapper').IFrame('createTab', 'View Quote', '/portal/trips/view-quote.php?id={{RequestID}}', 'view-quote', true); return false;" href="view-quote.php?id={{RequestID}}"><i class="fas fa-folder"></i> View</a>
+    </td>
+</tr>
+EOT;
+
+    $results = $boss->getObject("Request", "Completed!=1  ORDER BY RequestDate DESC");
+   
+    $cnt = count($results->Request);
+    $out = "";
+    for ($i=0; $i<$cnt; $i++) {
+        $item = $results->Request[$i];
+
+        if ($item) {
+            $start = date("g:ia", strtotime($item->Start));
+            $end = date("g:ia", strtotime($item->End));
+            $item->Start = $start;
+            $item->End = $end;
+            $item->RoundTrip = ($item->RoundTrip) ? " CHECKED": "";
+            $item->ADA = ($item->ADA) ? " CHECKED": "";
+            $item->Date = date("M j", strtotime($item->Date)); 
+            $item->RequestDate = date("M j", strtotime($item->RequestDate)); 
+            $out .= preg_replace_callback("/\{\{(.+?)\}\}/s", function ($matches) {
+                global $item;
+                return $item->{$matches[1]};
+            }, $tpl);
+        }
+    }
+    print $out;
+?>
+                  <!--tr>
                       <td data-id="12" data-rsc="Request" data-field="RequestID">
                           12
                       </td>
                       <td><a>Ulloa Elementary, 2650 42nd Ave, SF</a></td>
                       <td><a>California State Capitol Museum</a></td>
+                      <td>32</td>
                       <td>May 22, 2023</td>
                       <td>7:00am</td>
                       <td>5:30pm</td>
@@ -96,7 +150,7 @@
                               Delete
                           </a>
                       </td>
-                  </tr>
+                  </tr-->
               </tbody>
           </table>
         </div>
@@ -130,5 +184,19 @@
 <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../assets/js/adminlte.min.js"></script>
+<script>
+(function() {
+    app = {
+        init: function() {
+
+        },
+        state: {
+
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
 </body>
 </html>

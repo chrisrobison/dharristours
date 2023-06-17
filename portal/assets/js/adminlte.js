@@ -1537,26 +1537,42 @@
     } // Static
     ;
 
-    IFrame._jQueryInterface = function _jQueryInterface(operation) {
-      var data = $__default['default'](this).data(DATA_KEY$7);
+    IFrame._jQueryInterface = function _jQueryInterface(config) {
+      if ($(SELECTOR_DATA_TOGGLE).length > 0) {
+          let data = $(this).data(DATA_KEY$7)
 
-      var _options = $__default['default'].extend({}, Default$7, $__default['default'](this).data());
-
+        //var data = $__default['default'](this).data(DATA_KEY$7);
       if (!data) {
-        data = new IFrame(this, _options);
-        $__default['default'](this).data(DATA_KEY$7, data);
+        data = $(this).data();
+       // new IFrame(this, _options);
+        // $__default['default'](this).data(DATA_KEY$7, data);
       }
 
-      if (typeof operation === 'string' && /createTab|openTabSidebar|switchTab|removeActiveTab/.test(operation)) {
+        var _options = $.extend({}, Default$7, typeof config === 'object' ? config : data);
+      localStorage.setItem('AdminLTE:IFrame:Options', JSON.stringify(_options))
+      
+      const plugin = new IFrame($(this), _options)
+
+      $(this).data(DATA_KEY$7, typeof config === 'object' ? config : data)
+
+
+      if (typeof config === 'string' && /createTab|openTabSidebar|switchTab|removeActiveTab/.test(config)) {
+        /*
         var _data;
 
         for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
           args[_key - 1] = arguments[_key];
         }
 
-        (_data = data)[operation].apply(_data, args);
+        (_data = data)[config].apply(_data, args);
+        */
+        plugin[config]()
+
       }
-    };
+    } else {
+      new IFrame($(this), JSON.parse(localStorage.getItem('AdminLTE:IFrame:Options')))._initFrameElement()
+        
+    }
 
     return IFrame;
   }();

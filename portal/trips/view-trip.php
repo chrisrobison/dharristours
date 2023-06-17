@@ -1,216 +1,271 @@
+<?php  
+    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); 
+    $in = $_REQUEST;
+    if (array_key_exists("id", $in)) {
+        $current = $boss->getObject("Job", $in['id']);
+        $business = $boss->getObject("Business", $current->BusinessID);
+        $current->ContactName = ($current->ContactName) ? $current->ContactName : $business->AttnTo;
+        $current->ContactPhone = ($current->ContactPhone) ? $current->ContactPhone : $business->Phone;
+        $current->ContactEmail = ($current->ContactEmail) ? $current->ContactEmail : $business->Email;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Project Detail</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trip Details</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+    <link rel="icon" href="/files/favicon.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
+<style>
+	footer {
+		display:none;
+	}
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+	.content-wrapper {
+		min-height: 100%;
+		flex:1;
+		display:flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	    margin-left:0px;
+        margin-top: 0px;
+    }
+    #map {
+        height: 300px;
+        width: 400px;
+    }
+    label {
+        width: 8em;
+    }
+    label.info-box-text {
+        display: inline-block;
+        width: 6em;
+    }
+    .form-control {
+        width: 38vw;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: row;
+    }
+    .time {
+        width: 6em;
+    }
+</style>
 </head>
-<body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Job Detail</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Job Detail</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Job Detail</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-              <div class="row">
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated budget</span>
-                      <span class="info-box-number text-center text-muted mb-0">2300</span>
+<body class="hold-transition sidebar-collapse">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Trip Details [<?php print $current->JobID; ?>]</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Trip Details</li>
+                            </ol>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Total amount spent</span>
-                      <span class="info-box-number text-center text-muted mb-0">2000</span>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">General</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="input_location">Trip Date</label>
+                                    <input type="text" id="input_Date" class="form-control" value="<?php print $current->JobDate; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_company">Pickup Time</label>
+                                    <input type="time" id="input_PickupTime" class="form-control time" value="<?php print $current->PickupTime; ?>">
+                                    <label for="input_company">Return Time</label>
+                                    <input type="time" id="input_DropOffTime" class="form-control time" value="<?php print $current->DropOffTime; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_location"># Passengers</label>
+                                    <input type="text" id="input_NumberOfItems" class="form-control" value="<?php print $current->NumberOfItems; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_title">Origin</label>
+                                    <input type="text" id="input_PickupLocation" class="form-control" value="<?php print $current->PickupLocation; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_title">Destination</label>
+                                    <input type="text" id="input_DropOffLocation" class="form-control" value="<?php print $current->DropOffLocation; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_title">Final Dropoff</label>
+                                    <input type="text" id="input_FinalDropOffLocation" class="form-control" value="<?php print $current->FinalDropOffLocation; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_location">ADA</label>
+                                    <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->Wheelchair) ? " checked" : "";?>>
+                                    <label for="input_location">SPAB</label>
+                                    <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->SPAB) ? " checked" : "";?>>
+                                    <label for="input_location">Cargo</label>
+                                    <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->Cargo) ? " checked" : "";?>>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_contact">Contact</label>
+                                    <input type="text" id="input_Name" class="form-control" value="<?php print $current->ContactName; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_contact">Phone</label>
+                                    <input type="text" id="input_Name" class="form-control" value="<?php print $current->ContactPhone; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_contact">Email</label>
+                                    <input type="text" id="input_Name" class="form-control" value="<?php print $current->ContactEmail; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_status">Status</label>
+                                    <select id="input_status" class="form-control custom-select">
+                                        <option>Unknown</option>
+                                        <option>Quote Requested</option>
+                                        <option>Waiting for Confirmation</option>
+                                        <option>Confirmed</option>
+                                        <option>Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                      <span class="info-box-number text-center text-muted mb-0">20</span>
+                    <div class="col-md-6">
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Notes</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="input_Notes">Notes</label>
+                                    <textarea id="input_Notes" class="form-control" rows="4"><?php print $current->Notes; ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                </div>
+                                <!--div class="form-group">
+                                    <label for="actionItems">Action Items</label><button type="button" class="btn btn-tool" data-todo-widget="add" title="Add"><i class="fas fa-plus"></i></button><button type="button" class="btn btn-tool" data-todo-widget="remove" title="Remove"><i class="fas fa-trash"></i></button>
+                                    <ul data-widget="todo-list">
+                                        <li>Make list</li>
+                                    </ul>
+                                </div-->
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Map</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0" style="position: relative;display:flex;flex-direction:row;">
+                                <div id="map"></div>
+<div class="info-box-content" style="margin-left:1em;margin-top:1em;">
+                      <label class="info-box-text text-center text-muted">Pickup</label>
+                      <span class="info-box-number text-center text-muted mb-0" id="pickup"><?php print $current->Pickup; ?></span><br>
+                      <label class="info-box-text text-center text-muted">Drop Off</label>
+                      <span class="info-box-number text-center text-muted mb-0" id="destination"><?php print $current->Destination; ?></span><br>
+                      <label class="info-box-text text-center text-muted">Duration</label>
+                      <span class="info-box-number text-center text-muted mb-0" id="duration"></span><br>
+                      <label class="info-box-text text-center text-muted">Distance</label>
+                      <span class="info-box-number text-center text-muted mb-0" id="distance"></span>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <h4>Recent Activity</h4>
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../assets/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                        <span class="description">Shared publicly - 7:45 PM today</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                      </p>
-                    </div>
-
-                    <div class="post clearfix">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../assets/img/user7-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                        </span>
-                        <span class="description">Sent you a message - 3 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 2</a>
-                      </p>
-                    </div>
-
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../assets/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                        </span>
-                        <span class="description">Shared publicly - 5 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v1</a>
-                      </p>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> AdminLTE v3</h3>
-              <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
-              <br>
-              <div class="text-muted">
-                <p class="text-sm">Client Company
-                  <b class="d-block">Deveint Inc</b>
-                </p>
-                <p class="text-sm">Project Leader
-                  <b class="d-block">Tony Chicken</b>
-                </p>
-              </div>
-
-              <h5 class="mt-5 text-muted">Project files</h5>
-              <ul class="list-unstyled">
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-                </li>
-              </ul>
-              <div class="text-center mt-5 mb-3">
-                <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                <a href="#" class="btn btn-sm btn-warning">Report contact</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0
+    <div id="overlay" style="display:none">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!--button onclick="app.confirmJob(<?php print $in['id']; ?>)" type="button" class="btn btn-block btn-primary btn-lg">Confirm Trip</button-->
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="../assets/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../assets/js/adminlte.min.js"></script>
+    <!-- jQuery -->
+    <script src="../assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <!--script src="../assets/js/adminlte.min.js"></script-->
+    <script src="/tools/quote/route.js"></script>
+    <script>
+(function() {
+    window.app.map = L.map('map', { 
+        attributionControl: false,
+      zoomControl: false,
+      fadeAnimation: false,
+      zoomAnimation: false
+    }).setView([37.8437122,-122.3491274], 10);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(app.map);
+
+    app.getRoute('<?php print $current->PickupLocation; ?>', '<?php print $current->DropOffLocation; ?>');
+
+})();
+    </script>
+    <script src="/portal/main.js"></script>
 </body>
+
 </html>
