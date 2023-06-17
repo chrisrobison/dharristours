@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 0vh;
+        }
+
+        main {
+            height: 100vh;
+            overflow: scroll;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+        canvas {
+            width: 1000px;
+            height: 200px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <canvas height="200" width="1440"></canvas>
+    </main>
+
+    <script>
+        //function $(str) { return document.querySelector(str); }
+        const $ = (str) => document.querySelector(str);
+        const $$ = (str) => document.querySelectorAll(str); 
+
+        (function() {
+            const app = {
+                init: function() {
+                    app.canvas = $("canvas");
+                    app.ctx = app.canvas.getContext("2d");
+
+                    app.ctx.clearRect(0, 0, 1440, 200);
+                    app.ctx.save();
+
+                    app.ctx.rect(0,0,1440,200);
+                    app.ctx.fillStyle = "#fff";
+                    app.ctx.fill();
+                    app.drawGrid();
+                    app.state.loaded = true;
+                },
+                state: {
+                    loaded: false
+                },
+                drawGrid: function() {
+                   for (i=0; i<5; i++) {
+                        app.ctx.lineWidth = 2;
+                        app.ctx.strokeStyle = "#ff0000";
+                        app.ctx.beginPath();
+                        app.ctx.moveTo(0, i * 50);
+                        app.ctx.lineTo(1440, i * 50); 
+                        app.ctx.stroke();
+                        app.ctx.closePath();
+
+                    }
+                    for (let i=0; i<24; i++) {
+                        app.ctx.lineWidth = 1;
+                        app.ctx.strokeStyle = "#000000";
+                        app.ctx.beginPath();
+                        app.ctx.moveTo(i * 60, 0);
+                        app.ctx.lineTo(i * 60, 200); 
+                        app.ctx.stroke();
+                        app.ctx.closePath();
+                        
+                        for (let j=0; j<5; j++) {
+                            app.ctx.strokeStyle = "#ff0000";
+                            app.ctx.lineWidth = 2;
+                            app.ctx.beginPath();
+                            app.ctx.moveTo((i * 60) + 30, (50 * j));
+                            app.ctx.lineTo((i * 60) + 30, (50 * j) - 35);
+                            app.ctx.moveTo((i * 60) + 15, (50 * j));
+                            app.ctx.lineTo((i * 60) + 15, (50 * j) - 20);
+                            app.ctx.moveTo((i * 60) + 45, (50 * j));
+                            app.ctx.lineTo((i * 60) + 45, (50 * j) - 20);
+                            app.ctx.stroke();
+                            app.ctx.closePath();
+                        }
+                    }
+ 
+                }
+            }
+            window.app = app;
+            app.init();
+        })();
+    </script>
+</body>
+
+</html>
