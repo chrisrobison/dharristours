@@ -1,0 +1,7 @@
+Vehicle,Start time,End time,Duration,Downtime,Distance,Start location,End location,Driver,Fuel consumption,Average fuel consumption
+4001  - 4001,25927000,32819000,6900000,35340000,41,"DHarris Tours, 2207 Vista Del Rio St, Vallejo 94525, US","Hoover (Herbert) Middle, 2290 14th Avenue, San Francisco 94116-1841, US",,,0
+4001  - 4001,34138000,34297000,180000,1320000,0.2,"Hoover (Herbert) Middle, 2290 14th Avenue, San Francisco 94116-1841, US","Hoover (Herbert) Middle, 2290 14th Avenue, San Francisco 94116-1841, US",,,0
+4001  - 4001,35200000,44282000,9060000,900000,86.8,"Hoover (Herbert) Middle, 2290 14th Avenue, San Francisco 94116-1841, US","Camp Wastashi Rd, Felton CA 95018, US",,,0
+4001  - 4001,45478000,53868000,8400000,1200000,96.3,"Camp Wastashi Rd, Felton CA 95018, US","492 Point San Pedro Rd, San Rafael CA 94901, US",,,0
+4001  - 4001,54677000,61614000,6960000,780000,63.5,"492 Point San Pedro Rd, San Rafael CA 94901, US","Great America Pkwy, Santa Clara CA 95054, US",,,0
+4001  - 4001,62215000,68273000,6060000,600000,54.2,"Great America Pkwy, Santa Clara CA 95054, US","Utah Ave, South San Francisco CA 94080, US",,,0
