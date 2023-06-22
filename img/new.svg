@@ -1,0 +1,41 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="112px" height="60.5px">
+<defs>
+<filter filterUnits="userSpaceOnUse" id="Filter_0" x="6.5px" y="8.5px" width="105px" height="46px"  >
+    <feOffset in="SourceAlpha" dx="0" dy="3" />
+    <feGaussianBlur result="blurOut" stdDeviation="2" />
+    <feFlood flood-color="rgb(0, 0, 0)" result="floodOut" />
+    <feComposite operator="atop" in="floodOut" in2="blurOut" />
+    <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+    <feMerge>
+    <feMergeNode/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+<filter filterUnits="userSpaceOnUse" id="Filter_1" x="-0.5px" y="-0.5px" width="43px" height="61px"  >
+    <feOffset in="SourceAlpha" dx="0" dy="2" />
+    <feGaussianBlur result="blurOut" stdDeviation="2.449" />
+    <feFlood flood-color="rgb(0, 0, 0)" result="floodOut" />
+    <feComposite operator="atop" in="floodOut" in2="blurOut" />
+    <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+    <feMerge>
+    <feMergeNode/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+
+</defs>
+<path fill-rule="evenodd"  fill="rgb(179, 1, 1)"
+ d="M13.100,45.222 L82.700,45.222 L77.900,54.083 L13.100,45.222 Z"/>
+<g filter="url(#Filter_0)">
+<path fill-rule="evenodd"  fill="rgb(250, 7, 7)"
+ d="M9.622,44.236 L28.500,11.275 L101.969,11.020 L92.041,28.883 L103.480,44.747 L9.622,44.236 Z"/>
+</g>
+<text kerning="auto" font-family="Myriad Pro" fill="rgb(0, 0, 0)" transform="matrix( 0.26259843733365, 0, 0, 0.26301489300519,33.350909930606, 35.4459168673885)" font-size="112px"><tspan font-size="112px" font-family="Futura" fill="#FFFFFF">new</tspan></text>
+<g filter="url(#Filter_1)">
+<path fill-rule="evenodd"  stroke="rgb(73, 73, 73)" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+ d="M7.500,48.444 L31.500,5.750 L7.500,48.444 Z"/>
+</g>
+</svg>
