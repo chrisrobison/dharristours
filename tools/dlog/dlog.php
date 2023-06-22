@@ -33,7 +33,7 @@
        position: absolute;
        top: 42px;
        left: 109px;
-       width: 1080px;
+       width: 59rem;
        height: 441px;
       }
       .mynotes th {
@@ -43,8 +43,8 @@
       .remark {
        transform: rotate(28deg) translateX(30px) translateY(-10px);
        transform-origin: top left;
-       font-size: 23px;
-       width: 400px;
+       font-size: 1.3rem;
+       width: 22rem;
        overflow: hidden;
        white-space: nowrap;
        text-align: left;
@@ -65,6 +65,7 @@
         flex-direction: column;
         box-shadow: 0.75em .75em 0.5em rgba(0,0,0,.25);
       }
+
       .notes > div {
             display: flex;
             flex-direction: row;
@@ -76,6 +77,23 @@
       #wrap {
         padding-bottom:12em;
         width: 80vw;
+      }
+      .headleft {
+
+      }
+
+      .headright {
+
+      }
+      .shortval {
+       font-family: "Swanky and Moo Moo", cursive;
+       font-size: 1.4rem;
+       display: inline-block;
+       height: 1.2em;
+       color: rgb(0, 51, 204);
+       padding: 0.25em;
+       width: 16rem;
+       border-bottom: 1px solid #000;
       }
       @media print {
          #form { display: none; }
@@ -125,7 +143,7 @@
          padding-left: 0.5em;
          vertical-align: top;
       }
-      .topval { width: 100%; }
+      .topval { width: 30rem; border-bottom: 1px solid #000; }
       #wrap {
         padding-bottom: 12em;
       }
@@ -138,6 +156,32 @@
         align-items: center;
         width: 100vw;
     }
+    #hours-of-service td {
+       font-family: "Lexend",sans-serif;
+       font-weight: 300;
+    }
+    .timeline {
+         background-image: linear-gradient(90deg, #fff 0%, white 30%, #ccc 25%, #ccc 65%, #fff 65%, #fff 100%);
+    width: 2rem;
+    position: relative;
+    }
+    td.timeline::after {
+    display: inline-block;
+    position: absolute;
+    height: 1vw;
+    width: 1vw;
+    background: #f00;
+    content: " ";
+    border-radius: 50%;
+    left: 0.8vw;
+    }
+    td.timeline-start::after {
+      background: #0f00;
+    }
+    td.timeline-end::after {
+      background: #ff00;
+    }
+
     .left {
         text-align: left;
     }
@@ -165,20 +209,22 @@
             </tr>
             <tr><td><br></td></tr>
             <tr>
-               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:80px;position:relative;top:.0125em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span><hr><span style='font-size:.7em'>(415) 902-8542<br>US DOT 2016332</span></td>
+               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:5rem;position:relative;top:.0125em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span><div style='border-top:1px solid #000;display:flex;justify-content:space-between;'><span style='font-size:.7em'>(415) 902-8542</span> <span style='font-size:.7em;'>DOT 2016332</span></div></td>
                <td>&nbsp;</td>
-               <td><h1 style='display:inline-block;'>DRIVER'S DAILY LOG</h1>
-               <table>
-                  <tr><th class='label'><label>Pickup:</label></td><td><span class='topval' id='logpickup'></span></td></tr>
-                  <tr><th class='label'><label>Drop-off:</label></td><td><span class='topval' id='logdropoff'></span></td></tr>
-               </table>
+               <td class='headleft'>
+                  <h1 style='display:inline-block;margin:0 auto .7rem;'>DRIVER'S DAILY LOG</h1>
+                  <table>
+                     <tr><th class='label'><label>Pickup:</label></td><td><span class='topval' id='logpickup'></span></td></tr>
+                     <tr><th class='label'><label>Drop-off:</label></td><td><span class='topval' id='logdropoff'></span></td></tr>
+                  </table>
                </td>
-               <td>
-               <table>
-                  <tr><th class='label'><label>Date:</label></td><td><span class='topval' id='logdate'></span></td></tr>
-                  <tr><th class='label'><label>Driver:</label></td><td><span class='topval' id='logdriver'></span></td></tr>
-                  <tr><th class='label'><label>Bus #:</label></td><td><span class='topval' id='busno'></span></td>
-               </tr></table></td>
+               <td class='headright'>
+                  <table>
+                     <tr><th class='label'><label>Date:</label></td><td><span class='shortval' id='logdate'></span></td></tr>
+                     <tr><th class='label'><label>Driver:</label></td><td><span class='shortval' id='logdriver'></span></td></tr>
+                     <tr><th class='label'><label>Bus #:</label></td><td><span class='shortval' id='busno'></span></td></tr>
+                  </table>
+               </td>
             </tr>
          </table>
       </div>
@@ -197,7 +243,7 @@
      <table class='mynotes'>
         <thead>
            <tr>
-              <th>Time</th><th>Location</th><th>Times</th>
+              <th></th><th>Time</th><th>Location</th><th>Times</th>
            </tr>
         </thead>
         <tbody id='mynotes'></tbody>
@@ -303,8 +349,8 @@
                console.dir(data);
                var last = 0, x, y;
                $("#busno").innerHTML = data[0]['busnum'];
-               $("#logpickup").innerHTML = data[0]['pickup'];
-               $("#logdropoff").innerHTML = data[data.length-1]['dropoff'];
+               $("#logpickup").innerHTML = app.cleanAddress(data[0]['pickup']);
+               $("#logdropoff").innerHTML = app.cleanAddress(data[data.length-1]['dropoff']);
                $("#jobid").innerHTML = data[0]['id'];
                var tots = {OffDuty:0, Sleeper:0, Driving:0, OnDuty:0, Remarks:0};
                
@@ -376,14 +422,16 @@
                }
                sxm = (startHour > 12) ? 'pm' : 'am';
                startHour = (startHour > 12) ? startHour - 12 : startHour;
-               let dt = (app.cleanTime(trip.Downtime)) ? `<tr><td class="downtime"></td><td colspan=2 class="downtime"><label>Downtime:</label> <span class="val">${app.cleanTime(trip.Downtime)}</span></td></tr>` : "";
+               let dtheight = Math.floor((trip.Downtime / 1000) / 60);
+               let len = Math.floor((trip.Duration / 1000) / 60);
+               let dt = (app.cleanTime(trip.Downtime)) ? `<tr><td class='timeline downtime' style='height:${dtheight}px;'></td><td class="downtime"></td><td colspan=2 class="downtime"><label>Downtime:</label> <span class="val">${app.cleanTime(trip.Downtime)}</span></td></tr>` : "";
                let ss = (app.cleanTime(trip.Standstill)) ? `<tr><td class="mytime"><label>Standstill:</label> <span class="val">${app.cleanTime(trip.Standstill)}</span></td></tr>` : "";
                let dur = (app.cleanTime(trip.Duration)) ? `<tr><td class="mytime"><label>Driving:</label> <span class="val">${app.cleanTime(trip.Duration)}</span></td></tr>` : "";
                let dis = (trip.Distance) ? `<tr><td class="mytime"><label>Distance:</label> <span class="val">${trip.Distance} miles</span></td></tr>` : "";
 
                mynotes += `${dt}
       <tr class='note-item'>
-         <td>${startHour}:${startMin}${sxm}</td><td class='left'>${trip.StartLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td><td rowspan="2">
+         <td class='timeline timeline-start'></td><td>${startHour}:${startMin}${sxm}</td><td class='left'>${trip.StartLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td><td rowspan="2">
             <table style="width:100%;">
             ${dur}
             ${dis}
@@ -391,7 +439,8 @@
             </table>
          </td>
       </tr>
-      <tr><td>${endHour}:${endMin}${sxm}</td> <td class='left'>${trip.EndLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td></tr>
+      <tr><td class='timeline timepad' style="height:${len}px;"></td><td colspan=2></td></tr>
+      <tr><td class='timeline timeline-end'></td><td>${endHour}:${endMin}${sxm}</td> <td class='left'>${trip.EndLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td></tr>
    </table>
 </td></tr>`;
                app.setRemark(Math.floor(startInMinutes / 60), trip.StartLocation);
@@ -460,6 +509,15 @@ console.dir(tots);
             out += `${minutes}m`;
          }
          return out;
+      },
+      cleanAddress: function(addr) {
+         if (addr) {
+            addr = addr.replace(/\(?\d\d\d\)?[\-\s]?\d\d\d\-\d\d\d\d/, '');
+            addr = addr.replace(/D\s*Harris Tours.*/, 'D Harris Tours');
+            addr = addr.replace(/CA.*/s, '');
+            addr = addr.replace(/\d\d\d\d\d\-\d\d\d\d/,'');
+         }
+         return addr; 
       },
       setRemark: function(hr, remark) {
          if (remark) {

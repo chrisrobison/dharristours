@@ -127,6 +127,13 @@
          $now = date("Y-m-d");
       }
       $in = $_REQUEST;
+
+      if (array_key_exists("driver", $in)) {
+         $driver_id = $in['driver'];
+      } else if (array_key_exists("EmployeeID", $in)) {
+         $driver_id = $in['EmployeeID'];
+      }
+
       $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, Bus.BusNumber as BusNumber, SpecialInstructions FROM Job, Bus where Job.BusID=Bus.BusID AND JobDate='{$now}' AND JobCancelled=0 AND EmployeeID='".mysqli_real_escape_string($link, $in['EmployeeID'])."'";
       $results = mysqli_query($link, $sql);
       

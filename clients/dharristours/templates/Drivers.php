@@ -21,9 +21,9 @@
          <div class='contentField'><label>Location</label><input type='text' dbtype='varchar(50)' name='Employee[<?php print $current->EmployeeID; ?>][Location]' id='Location' value='<?php print $current->Location; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><label>Address</label><input type='text' dbtype='varchar(50)' name='Employee[<?php print $current->EmployeeID; ?>][Address]' id='Address' value='<?php print $current->Address; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><label>City</label><input type='text' dbtype='varchar(50)' name='Employee[<?php print $current->EmployeeID; ?>][City]' id='City' value='<?php print $current->City; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><label>State</label><input type='text' dbtype='char(2)' name='Employee[<?php print $current->EmployeeID; ?>][State]' id='State' value='<?php print $current->State; ?>' size='2' class='boxValue' /></div>
       </div>
       <div class='fieldcolumn'>
-         <div class='contentField'><label>State</label><input type='text' dbtype='char(2)' name='Employee[<?php print $current->EmployeeID; ?>][State]' id='State' value='<?php print $current->State; ?>' size='2' class='boxValue' /></div>
          <div class='contentField'><label>Zip</label><input type='text' dbtype='varchar(10)' name='Employee[<?php print $current->EmployeeID; ?>][Zip]' id='Zip' value='<?php print $current->Zip; ?>' size='10' class='boxValue' /></div>
 <?php print $current->Notes; ?>
          <div class='contentField'><label>Vacation Hours</label><input type='text' dbtype='decimal(7,2)' name='Employee[<?php print $current->EmployeeID; ?>][VacationHours]' id='VacationHours' value='<?php print $current->VacationHours; ?>' size='50' class='boxValue' /></div>
@@ -36,6 +36,7 @@
          <div class='contentField'><label>Commission</label><input type='text' dbtype='decimal(7,2)' name='Employee[<?php print $current->EmployeeID; ?>][Commission]' id='Commission' value='<?php print $current->Commission; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><label>Supervisor</label><?php $boss->db->addResource("Employee");$arr = $boss->db->Employee->getlist();print $boss->utility->buildSelect($arr, $current->EmployeeID, "EmployeeID", "Employee", "Employee[$current->EmployeeID][Supervisor_EmployeeID]")."</div>";?>
          <div class='contentField'><label>Business </label><?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Employee[$current->EmployeeID][BusinessID]")."</div>";?>
+         <div class='contentField'><label>Driver</label><select dbtype='tinyint(1)' name='Employee[<?php print $current->EmployeeID; ?>][Driver]' id='Driver'><option value='0'>No</option><option value='1'>Yes</option><?php print $current->Driver; ?></select></div>
          <div class='contentField'><label>DLClass</label><input type='text' dbtype='varchar(100)' name='Employee[<?php print $current->EmployeeID; ?>][DLClass]' id='DLClass' value='<?php print $current->DLClass; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><label>DLEndorsement</label><input type='text' dbtype='varchar(100)' name='Employee[<?php print $current->EmployeeID; ?>][DLEndorsement]' id='DLEndorsement' value='<?php print $current->DLEndorsement; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><label>DLExpire Date</label><input type='text' dbtype='date' name='Employee[<?php print $current->EmployeeID; ?>][DLExpireDate]' id='DLExpireDate' value='<?php print $current->DLExpireDate; ?>' size='25' class='boxValue date' /></div>

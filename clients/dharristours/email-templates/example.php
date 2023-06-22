@@ -24,6 +24,14 @@
          $bus = $boss->get("Business", $obj->BusinessID);
          $obj->Business = $bus[0]->Business;
       }
+
+      if ($obj->RateID) {
+         $bus = $boss->get("Rate", $obj->RateID);
+         $obj->Rate = $bus[0]->Rate;
+         $rates = $boss->getObject("Rates", "RateID={$obj->RateID}");
+         print_r($rates);
+      }
+
     /* $obj = new stdClass();
 
      $obj->Business = "ABC School District";

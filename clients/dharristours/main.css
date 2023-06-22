@@ -49,3 +49,14 @@ p { }
 #searchfield form .biginput:focus {
   color: #858585;
 }
+
+ul.nav > li {
+position: relative;
+}
+ul.nav > li > .new-badge {
+    width: 42px;
+    padding-top: 13px;
+    position: absolute;
+    left: 14px;
+    transform: rotate(60deg);
+}

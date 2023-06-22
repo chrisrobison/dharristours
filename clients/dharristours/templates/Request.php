@@ -20,7 +20,7 @@ function updateQuoteEmail() {
         </fieldset>
         <div class='contentField'><label>Business </label><?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Request[$current->RequestID][BusinessID]")."</div>";?>
         <div class='contentField'><label>Quote </label><?php $boss->db->addResource("Quote");$arr = $boss->db->Quote->getlist();print $boss->utility->buildSelect($arr, $current->QuoteID, "QuoteID", "Quote", "Request[$current->RequestID][QuoteID]")."</div>";?>
-        <div class='contentField'><label>Rate </label><?php $boss->db->addResource("SpecialRates");$arr = $boss->db->SpecialRates->getlist();print $boss->utility->buildRatesSelect($arr, $current->SpecialRatesID, "SpecialRatesID", "SpecialRates", "Request[$current->RequestID][SpecialRatesID]")."</div>";?>
+        <div class='contentField'><label>Rate </label><?php $boss->db->addResource("Rate");$arr = $boss->db->Rate->getlist();print $boss->utility->buildRatesSelect($arr, $current->RateID, "RateID", "RateID", "Request[$current->RequestID][RateID]")."</div>";?>
         <div class='contentField'><label>UID</label><input type='text' dbtype='varchar(100)' name='Request[<?php print $current->RequestID; ?>][UID]' id='UID' value='<?php print $current->UID; ?>' size='50' class='boxValue' /></div>
     </div>
     <div class='fieldcolumn'>
@@ -46,7 +46,7 @@ function updateQuoteEmail() {
    <div class="fieldcolumn">
       <fieldset>
          <legend>Quote Email</legend>
-         <div class'contentfield'=""><iframe id="quote" style="width:800px;height:20em;" src="/files/email-templates/example.php?id=<?php print $current->SpecialRatesID; ?>"></iframe></div>
+         <div class'contentfield'=""><iframe id="quote" style="width:800px;height:30em;" src="/files/email-templates/example.php?id=<?php print $current->RateID; ?>"></iframe></div>
       </fieldset>
     </div>
     <div class='contentField' style='float:left'><label>Notes</label><textarea dbtype='text' name='Request[<?php print $current->RequestID; ?>][Notes]' id='Notes' style='width:48em;white-space:normal;' class='textBox'>

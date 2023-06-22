@@ -216,7 +216,8 @@ class Utility {
 
         return $out;
     }
-    function buildRatesSelect($list, $id, $key, $val, $name) {
+    function buildRatesSelect($list, $id, $key, $val, $name, $sortfield='') {
+      global $boss;
         $domid = preg_replace("/^.*\[.*\]\[/", '', preg_replace("/\]$/", '', $name));
         $out = "<select name='$name' id='$domid' rel='$val' class='genSelect'>";
         
@@ -224,21 +225,31 @@ class Utility {
         if (count($vals) > 1) {
             $val = $vals[1];
         }
-
-
+        if (!$sortfield) {
+            $sortfield = $val;
+        }
         foreach ($list as $l=>$item) {
-            $list[$l]->SortBy = $val;
+            $list[$l]->SortBy = $sortfield;
         }
         uasort($list, function($a, $b) {
             $val = $a->SortBy;
             return (strcmp(strtolower($a->$val), strtolower($b->$val)));
         });
         $listcount = count($list);
-        $opts = "<option value=''>--</option>";
-        
+        $opts = "<optgroup label='Select Rate'><option value=''>--</option>";
+        $optgroup = "";
         foreach ($list as $l=>$item) {
-            $s = ($list[$l]->$key == $id) ? ' SELECTED' : '';
-            $opts .= "<option value='".$list[$l]->$key."'$s>".$list[$l]->$val." [$".$list[$l]->Cost28FirstFour."/$".$list[$l]->Cost28OT."/$".$list[$l]->Cost28OneWay."]</option>";
+            if ($item->Rate != $optgroup) {
+                $opts .= "</optgroup><optgroup label=\"{$item->Rate}\">\n";
+                $optgroup = $item->Rate;
+            }
+         $rates = $boss->getObject("Rates", "RateID='{$item->RateID}'");
+            foreach ($rates->Rates as $i=>$obj) {
+                if ($obj->RatesID) {
+                    $s = ($obj->RatesID == $id) ? ' SELECTED' : '';
+                    $opts .= "<option value='".$obj->RatesID."'$s>{$obj->Rate} - {$obj->Pax} [\${$obj->FirstFour}/\${$obj->Overtime}/\${$obj->OneWay}]</option>";
+                }
+            }
         }
 
         $out .= $opts . "</select>";

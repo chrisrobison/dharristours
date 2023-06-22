@@ -45,7 +45,9 @@
                   print "<div class='navNoIcon'>".preg_replace("/^(\w).*/", "$1", $proc->Process)."</div>";
                }
                print $proc->Process."</a>";
-               
+               if ($proc->IsNew) {
+                  print "<img class='new-badge' src='/img/new.svg'>";
+               }
                // Check for process children and output accordingly
                $childs = $boss->db->Process->getlist("ParentID!=0 AND ParentID=" . $proc->ProcessID);
                if (count($childs)) {
