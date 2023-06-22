@@ -154,9 +154,12 @@ th {
     background: #000;
     color:#fff;
 }
-
+tr:nth-child(even) td {
+   background: #fff;
+}
 tr:nth-child(odd) td {
-background: #eee;
+   background: #eee;
+   border-right: #ddd;
 }
 main {
     display:flex;
@@ -229,6 +232,9 @@ header {
     font-size: 16px;
     width: 8in;
 }
+#hours-of-service th, #hours-of-service td {
+   width: 14ch;
+}
 h2 {
     display: flex;
     flex-direction: row;
@@ -240,8 +246,19 @@ h2 {
     text-transform: uppercase;
     font-weight: 400;
 }
+.iframeWrap, #iframeWrap {
+   display:flex;
+   height: 50%;
+   overflow-y: scroll;
+
+}
 #printhead {
     display: none;
+}
+.hoursWrap {
+   display: inline-block;
+   overflow: scroll;
+   width: 48rem;
 }
 header a:hover {
     color: #fff;
@@ -310,16 +327,18 @@ main {
 </head>
 <body>
 <main>
-   <div id='form'>
    <div>
-    <div>
-      <label for='driver'>Driver</label>
-      <select id='driver'> </select> &nbsp; 
-    </div>
-    <div>
-      <label for='month'>Date</label>
-      <input type='hidden' id='startdate' value=''>
-      <input type='hidden' id='enddate' value=''>
+   <div class='form'>
+      <div id='form'>
+         <div>
+          <div>
+            <label for='driver'>Driver</label>
+            <select id='driver'> </select> &nbsp; 
+          </div>
+          <div>
+            <label for='month'>Date</label>
+            <input type='hidden' id='startdate' value=''>
+            <input type='hidden' id='enddate' value=''>
 <?php
     if ($in['start']) {
         $parts = explode("-", $in['start']);
@@ -349,27 +368,30 @@ EOT;
     print "</select>";
 ?>
       
-    </div>
-    </div>
-    <div>
-      <button id='lookup'>&#x1f50d; Lookup</button>
-      <button id='print' onclick="window.print(); return false;">&#x1F5A8; Print</button>
-    </div>
-   </div>
-<div id="printhead"><h1>D Harris Tours Hours-of-Service Report</h1></div>
-<hr>
+          </div>
+       </div>
+       <div>
+         <button id='lookup'>&#x1f50d; Lookup</button>
+         <button id='print' onclick="window.print(); return false;">&#x1F5A8; Print</button>
+       </div>
+      </div>
+   <div id="printhead"><h1>D Harris Tours Hours-of-Service Report</h1></div>
+   <hr>
+</div>
+<div class='form'>
 <header>
 <h2><?php 
-    print "<a class='clean' href='?x=prevDriver&start=".date("Y-m-01", strtotime($in['start']))."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']))."'> ◀ </a>";
+    print "<a class='clean' href='index.php?x=prevDriver&start=".date("Y-m-01", strtotime($in['start']))."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']))."'> ◀ </a>";
     print $driver->LastName.", ".$driver->FirstName; 
-    print "<a class='clean' href='?x=nextDriver&start=".date("Y-m-01", strtotime($in['start']))."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']))."'> ▶ </a>";
+    print "<a class='clean' href='index.php?x=nextDriver&start=".date("Y-m-01", strtotime($in['start']))."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']))."'> ▶ </a>";
 ?></h2>
 <h2><?php 
-    print "<a class='clean' href='?start=".date("Y-m-01", strtotime($in['start']) - 86400)."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']) - 86400)."'> ◀ </a>";
+    print "<a class='clean' href='index.php?start=".date("Y-m-01", strtotime($in['start']) - 86400)."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']) - 86400)."'> ◀ </a>";
     print date("M j, Y", strtotime($in['start']))." - ".date("M j, Y", strtotime($in['end'])); 
-    print "<a class='clean' href='?start=".date("Y-m-01", strtotime($in['start']) + (86400 * 31))."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']) + (86400 * 31))."'> ▶ </a>";
+    print "<a class='clean' href='index.php?start=".date("Y-m-01", strtotime($in['start']) + (86400 * 31))."&driver=".$in['driver']."&end=".date("Y-m-t", strtotime($in['start']) + (86400 * 31))."'> ▶ </a>";
 ?></h2>
 </header>
+<div class="hoursWrap">
     <table id="hours-of-service">
         <thead>
             <tr>
@@ -402,7 +424,9 @@ EOT;
             $out .= "<td>".$day->hours->driving."</td>";
             $out .= "<td>".$day->hours->onduty."</td>";
             $out .= "<td>".$day->hours->total."</td>";
-            $out .= "<td class='details'><a target='_blank' href='/tools/dlog/?driver=".$driver->EmployeeID."&date=".date("Y-m-d", strtotime($day->date))."'><span class='linktext'>Details</span> <span class='link'></span></a></td></tr>";
+            $mydate = date("Y-m-d", strtotime($day->date));
+            $url = "/tools/dlog/dlog.php?driver=".$driver->EmployeeID."&date=".date("Y-m-d", strtotime($day->date));
+            $out .= "<td class='details'><a target='_blank' onclick=\"return parent.loadUrl('{$url}','HoS: {$driver->LastName} {$day->date}')\" href='{$url}'><span class='linktext'>Details</span> <span class='link'></span></a></td></tr>";
             print $out."\n";
             $seen[$day->date.':'.$day->busnum] = 1;
         } else {
@@ -421,6 +445,12 @@ EOT;
 ?>
         </tbody>
     </table>
+</div>
+</div>
+</div>
+<div id="iframeWrap">
+   <iframe height="100%" width="100%" id="logviewer"></iframe>
+</div>
 </main>
 <script>
 (function() {
@@ -462,7 +492,7 @@ EOT;
                 let end = document.querySelector("#enddate").value;
                 let driver = drvr.options[drvr.selectedIndex].value;
 
-                window.location.href = `report.php?start=${start}&end=${end}&driver=${driver}`;
+                window.location.href = `index.php?start=${start}&end=${end}&driver=${driver}`;
             }
         });
          var btn = document.querySelector("#lookup");
@@ -471,6 +501,16 @@ EOT;
            e.preventDefault();
            return false;
         });
+        },
+        viewLog: function(e, driverid, seldate) {
+         if (e && e.preventDefault) {
+            e.preventDefault();
+         }
+         let url = `dlog.php?driver=${driverid}&date=${seldate}`;
+         console.log(`Viewing log ${url}`);
+
+         document.querySelector("#logviewer").src = url;
+         return false;
         },
         changeDate: function() {
             let moEl = document.querySelector("#month");
@@ -485,7 +525,7 @@ EOT;
             startdate.value = yr + '-' + mo + '-01';
             enddate.value = yr + '-' + mo + '-31';
             
-            window.location.href = `report.php?start=${startdate.value}&end=${enddate.value}&driver=${driver}`;
+            window.location.href = `index.php?start=${startdate.value}&end=${enddate.value}&driver=${driver}`;
         }
     };
     

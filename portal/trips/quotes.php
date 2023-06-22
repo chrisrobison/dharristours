@@ -1,4 +1,17 @@
-<?php  if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); ?>
+<?php  
+    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); 
+    
+    $in = $_REQUEST;
+
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
+    
+    $business = $boss->getObject("Business", $busID);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +41,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Quotes</h1>
+            <h1>Quotes for <?php print $business->Business; ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -46,7 +59,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Trip Quotes</h3>
+          <h3 class="card-title">Trip Quotes for <?php print $business->Business; ?></h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -96,7 +109,7 @@
 </tr>
 EOT;
 
-    $results = $boss->getObject("Request", "Completed!=1  ORDER BY RequestDate DESC");
+    $results = $boss->getObject("Request", "Completed!=1 AND BusinessID='{$busID}' ORDER BY RequestDate DESC");
    
     $cnt = count($results->Request);
     $out = "";
