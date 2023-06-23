@@ -1,0 +1,8 @@
+.terms-wrapper {
+    line-height: 36px;
+}
+
+.login-box, .register-box {
+    width: 420px;
+    max-width: 100%;
+}
