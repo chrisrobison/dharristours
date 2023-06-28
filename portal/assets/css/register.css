@@ -3,6 +3,6 @@
 }
 
 .login-box, .register-box {
-    width: 420px;
-    max-width: 100%;
+    max-width: 468px;
+    width: 100%;
 }
