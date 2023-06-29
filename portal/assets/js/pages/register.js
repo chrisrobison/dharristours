@@ -71,7 +71,7 @@ function doRegister(e) {
 
   postData("https://dharristours.simpsf.com/portal/register.php", $.param(data), function (data) {
     console.log(data,);
-    if (data.status == 'success') window.location.href = "https://dharristours.simpsf.com/portal/login.html";
+    if (data.status == 'ok' && data.e === undefined) window.location.href = "https://dharristours.simpsf.com/portal/login.html";
   });
 
   e.preventDefault()
