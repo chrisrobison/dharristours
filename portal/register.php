@@ -18,6 +18,10 @@
             case "register":
                 $out = registerCustomer($link, $in);
                 break;
+            case "checkEmail":
+                $out = isValidEmail($link, $in);
+                break;
+
 
         }
 
@@ -28,6 +32,10 @@
     }
 
     function registerCustomer($link, $in) {
+        $out = new stdClass();
+        $out->status = "ok";
+
+
         $keys = array("Email","FirstName","LastName","Login","Passwd","Phone");
         $vals = array();
 
@@ -40,12 +48,37 @@
             }
             array_push($vals, $val);
         }
+
         $sql = "INSERT INTO Login (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
         $results = mysqli_query($link, $sql);
-        $out = new stdClass();
-        $out->status = "ok";
-        if(!$results){ $out->e = mysqli_error($link); }
+        if(!$results){
+            $out->status = "error";
+            $out->e = mysqli_error($link);
+
+        }
         return $out;
+    }
+
+    function isValidEmail($link, $in) {
+        $email = mysqli_real_escape_string($link, $in['Login']['new1']['Email']);
+
+        if($email == ''){
+            print 'false';
+            exit();
+        }
+
+        $sql = "SELECT * FROM Login WHERE Email = '" . $email . "';";
+        $results = mysqli_query($link, $sql);
+
+        if(!$results){
+            print 'false';
+            exit();
+        }
+
+        if(mysqli_num_rows($results) > 0) print 'false';
+        else print 'true';
+
+        exit();
     }
 
     function quote($str, $link) {

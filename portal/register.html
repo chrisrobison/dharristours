@@ -20,11 +20,22 @@
   </div>
 
   <div class="card">
-    <div class="card-body register-card-body">
+
+      <div class="card-body register-card-body text-center register-fail">
+          We're sorry :(<br />
+          Something went wrong when trying to create your account.<br />
+          Please <a href="mailto:juanaharrisdht@att.net">contact us</a> so that we may assist you.
+      </div>
+      <div class="card-body register-card-body text-center register-success">
+          Thank you!<br />
+          Your account has been created.<br />
+          Please <a href="login.html">login</a> to continue.
+      </div>
+    <div class="card-body register-card-body register-form">
       <p class="login-box-msg">Register a new account for<br>D. Harris Tours Customer Portal</p>
 
       <form id="registerForm">
-
+        <div class="submit-overlay"></div>
         <div class="row">
             <div class="col-6">
                 <div class="input-group mb-3">
@@ -93,12 +104,8 @@
         </div>
         <div class="row">
           <div class="col-8 terms-wrapper">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
-            </div>
+              Your data will never be shared with third parties. By creating an account you agree to our
+              <a href="#">Terms & Privacy</a>.
           </div>
           <!-- /.col -->
           <div class="col-4">

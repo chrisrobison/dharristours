@@ -1,7 +1,9 @@
+const FORM_ID = '#registerForm'
 
 $(function () {
 
-  $('#registerForm').validate({
+
+  $( $(FORM_ID)).validate({
     rules: {
       'Login[new1][FirstName]': {
         required: true,
@@ -13,8 +15,16 @@ $(function () {
         require_from_group: [1, '.contact-group'],
       },
       'Login[new1][Email]': {
-        require_from_group: [1, '.contact-group'],
+        //require_from_group: [1, '.contact-group'],
+        required: true,
         email: true,
+        remote: {
+          url: 'https://dharristours.simpsf.com/portal/register.php',
+          type: 'post',
+          data: {
+            type: 'checkEmail'
+          }
+        }
       },
       'Login[new1][Passwd]': {
         required: true,
@@ -34,6 +44,7 @@ $(function () {
       'Login[new1][Email]': {
         require_from_group: "Please enter your contact information.",
         email: "Please enter a valid email address",
+        remote: "Email already exists",
       },
       'Login[new1][Passwd]': {
         required: "Please provide a password",
@@ -54,33 +65,35 @@ $(function () {
     },
     unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid')
+    },
+    submitHandler: function(e) {
+      doRegister(e)
+      return false;
     }
   })
 })
-$(document).ready(function() {
-  $('#registerForm').submit(doRegister)
-})
+
 function doRegister(e) {
+  $(FORM_ID).addClass('submitting')
   const data = { "data": serializeForm($(":input")), "type": 'register' };
 
-  data['data']['Login']['new1']['Login'] = data['data']['Login']['new1']['FirstName'] + data['data']['Login']['new1']['LastName'];
-  if ($("#sendEmail").length) {
-    data['sendEmail'] = $("#sendEmail").val();
-  }
-  // todo - test sending of email - JJ
-
   postData("https://dharristours.simpsf.com/portal/register.php", $.param(data), function (data) {
-    console.log(data,);
-    if (data.status == 'ok' && data.e === undefined) window.location.href = "https://dharristours.simpsf.com/portal/login.html";
+    console.log(data);
+    if(data.status == 'error'){
+      $('.register-fail').show()
+      $('.register-form').hide()
+    }
+    if (data.status == 'ok') {
+      $('.register-success').show()
+      $('.register-form').hide()
+    }
   });
 
-  e.preventDefault()
+  $(FORM_ID).removeClass('submitting')
   return false;
 }
 
 function postData(url, data, callback) {
-  // check 'working' attribute in global config and only perform
-  // one transaction at a time, deferring if busy
 
     $.ajax({
       type: "POST",
@@ -106,15 +119,12 @@ function serializeForm(who) {
       if (trsc) rsc = trsc[0].replace(/[\[\]]/g, '');
       parts = key.match(/\[([^\]]+)\]/g);
       if (parts) {
-        // if (!out[rsc]) out[parts[1]] = {};
-        // if (!out[rsc][parts[2]]) out[parts[1]][parts[2]] = {};
 
         if (($(this).attr("type") == "hidden") && ($(this).attr("rel") != "data")) {
           return true;
         }
         var tmp = buildObject(out[rsc], parts, val);
         out[rsc] = $.extend(out[rsc], tmp);
-        // out[parts[1]][parts[2]][parts[3]] = val;
       }
     }
   });
@@ -126,7 +136,6 @@ function buildObject(obj, keys, val) {
   if (!obj) obj = {};
   if (keys.length > 0) {
     if (!obj[key]) obj[key] = {};
-    //obj[key] = $({}, obj[key], buildObject(obj[key], keys, val));
     obj[key] = buildObject(obj[key], keys, val);
   } else {
     obj[key] = val;
