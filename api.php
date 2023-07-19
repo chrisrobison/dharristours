@@ -11,7 +11,7 @@
    }
 
    if ($results) {
-      header("Location: application/javascript");
+      header("Content-type: application/json; charset=utf-8");
       print json_encode($results);
    }
 

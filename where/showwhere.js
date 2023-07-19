@@ -137,8 +137,6 @@ function updateBuses(buses) {
                      fontSize: '18px',
                      fontWeight: 'normal'
                   }
-
-                  
                });
                markers[i].bus = buses[i];
                bounds.extend (markers[i].position);

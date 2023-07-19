@@ -33,6 +33,7 @@
       print $cmd."\n";
       system($cmd);
   */    
+      $cmd = `cp /simple/where/latest.json /simple/where/last.json`;
       $cmd = "curl -s -S -X PUT -d @/simple/where/latest.json https://where-s-my-bus-5bb3d.firebaseio.com/bus.json";
       print $cmd."\n";
       system($cmd);

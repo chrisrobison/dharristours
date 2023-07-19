@@ -134,7 +134,7 @@
             margin: 0;
             padding: 0;
             font-size: 16px;
-            font-weight: 200;
+            font-weight: 300;
     display: flex;
     flex-direction:column;
     align-items:center;
@@ -250,7 +250,7 @@ h2 {
    display:flex;
    height: 50%;
    overflow-y: scroll;
-
+    display: none;
 }
 #printhead {
     display: none;

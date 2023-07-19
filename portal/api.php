@@ -1,11 +1,11 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT'] . '/.env');
-    include($_SERVER['DOCUMENT_ROOT'] . '/lib/auth.php');
+    include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/.env');
+    include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/lib/auth.php');
 
     $in = $_REQUEST;
     $out = array();
     $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
-    
+
     session_start();
 
     /* check connection */
@@ -61,6 +61,12 @@
             case "saveRouteMap":
                 $out = saveRouteMap($link, $in);
                 break;
+            case "register":
+                $out = registerCustomer($link, $in);
+                break;
+            case "makeRequest":
+                $out = makeRequest($link, $in);
+                break;
         }
 
         file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
@@ -69,6 +75,55 @@
         print json_encode($out);
     }
     
+    function makeRequest($link, $in) {
+        global $_REQUEST;
+        
+        $posted = file_get_contents("php://input");
+        $in = json_decode($posted);
+
+        $out = new stdClass();
+        $keys = array();
+        $vals = array();
+
+        foreach ($in->data as $key=>$val) {
+            $out->{$key} = $val;
+            $keys[] = $key;
+            $vals[] = $val;
+        }
+
+        $sql = "INSERT INTO Request (`" . implode("`,`", $keys)."`) VALUES ('" . implode("','", $vals). "');";
+
+        $result = mysqli_query($link, $sql);
+        $new = new stdClass();
+        if ($result) {
+            $newid = mysqli_insert_id($link);
+            $new->newid = $newid;
+        } else {
+            $new->error = "Error creating request";
+        }
+        
+        return $new;
+    }
+
+    function doLogin($link, $in) {
+        global $_REQUEST;
+        if (array_key_exists("email", $in) && array_key_exists("passwd", $in)) {
+           if (isset($_REQUEST['submitted'])) {
+                if ($in['email'] && $in['password']) {
+                    if ($boss->utility->login($boss, $_REQUEST)) {
+                     setcookie("email", $in['email']);
+                     setcookie("name", $_SESSION['FirstName'] . ' ' . $_SESSION['LastName']);
+                     header("Location: $url");
+                        exit;
+                    } else {
+                       $msg = "<div class='formError' style='padding:5px 5px 5px 5px'>Log in failed. Invalid username and/or password.</div>";
+                    }
+                }
+            }
+ 
+        }
+    }
+
     function saveRouteMap($link, $in) {
         $out = new stdClass();
         if ((array_key_exists("routeMap", $in)) && (array_key_exists("JobID", $in))) {
@@ -482,4 +537,18 @@
     function quote($str, $link) {
         return "'" . mysqli_real_escape_string($link, $str) . "'";
     }
+    function registerCustomer($link, $in) {
+        $keys = array("Email","FirstName","LastName","Login","Passwd","Phone");
+        $vals = array();
+
+        foreach ($keys as $key) {
+            array_push($vals, $in['data']['Login']['new1'][$key]);
+        }
+        $sql = "INSERT INTO (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
+        $results = mysqli_query($sql);
+        $out = new stdClass();
+        $out->status = "ok";
+        if(!$results){ $out->e = 1; }
+        return $out;
+    }   
 ?>

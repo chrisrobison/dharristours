@@ -219,7 +219,7 @@ class Utility {
     function buildRatesSelect($list, $id, $key, $val, $name, $sortfield='') {
       global $boss;
         $domid = preg_replace("/^.*\[.*\]\[/", '', preg_replace("/\]$/", '', $name));
-        $out = "<select name='$name' id='$domid' rel='$val' class='genSelect'>";
+        $out = "<select name='$name' id='$domid' rel='$val' class='genSelect' style='width:20em;'>";
         
         $vals = preg_split("/_/", $val);
         if (count($vals) > 1) {

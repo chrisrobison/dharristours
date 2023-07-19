@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+<link rel="stylesheet" href="/lib/css/bus-loader.css"/>
 
 <!-- Make sure you put this AFTER Leaflet's CSS -->
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
@@ -20,6 +21,7 @@
 <script src='/lib/js/tiny-date-picker.min.js'></script>
 <script src='mycal.js'></script>
 <style>
+* { box-sizing: border-box; }
 body {
    font-family: 'Lexend', sans-serif;
    box-sizing: border-box;
@@ -120,6 +122,12 @@ display:none;
 }
 #details {
    margin: 0px;
+   min-height: 37vh;
+}
+thead {
+   z-index:99999;
+   position: relative;
+   filter: drop-shadow(0px 2px 3px #0003);
 }
 .lds-spinner {
   color: official;
@@ -212,6 +220,33 @@ display:none;
    justify-content: center;
    display: none;
 }
+#mapWrap {
+   position: relative;
+   height:33vh;
+}
+#sadmac {
+   position: absolute; 
+   top: 0px;
+   left: 0px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   z-index: 99999;
+
+   height: 33vh;
+   width: 100%;
+}
+#sadmac img {
+   height: 18vh;
+}
+#sizer {
+  display: inline-block;
+  width: 8px;
+  height: 100vh;
+  cursor: ew-resize;
+  background-color:#ccc;
+}
 </style>
 </head>
 <body>
@@ -226,11 +261,13 @@ display:none;
       <div id='joblist' class='tabpane'> </div>
       <div id='detail' class='tabpane'> </div>
    </div>
-   <div id='map'></div>
-   <div id='loading'>
-<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>      
+   <div id="mapWrap">
+      <div id='map'></div>
+      <div id='loading'><div class="loader"></div></div>
+      <div id='sadmac'><img src="/img/where.svg"></div>
    </div>
 </div>
+<div class="sizer"></div>
 <div id='calendar'></div>
 <script src="route.js"></script>
 <script>
@@ -280,12 +317,12 @@ display:none;
          plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
          defaultView: 'resourceTimeGridDay',
          defaultDate: new Date(),
-         editable: true,
+         editable: false,
          selectable: true,
-         droppable: true,
+         droppable: false,
          eventLimit: true, // allow "more" link when too many events
          eventResourceEditable: true,
-         eventDurationEditable: true,
+         eventDurationEditable: false,
          header: {
            left: 'prev,next today',
            center: 'title',
@@ -447,9 +484,11 @@ display:none;
       }
       return mytime;
    }
+   function updateDriver(id) {
 
+   }
    function makeDriverSelect(id) {
-      let out = "<select id='Driver' name='Driver'><option value='0'>Unassigned</option>";
+      let out = "<select id='Driver' name='Driver' onchange='updateDriver(this.options[this.selectedIndex].value)'><option value='0'>Unassigned</option>";
       if (mydrivers) {
          let keys = Object.keys(mydrivers), sel = "", phone = "";
          keys.forEach(key=> {

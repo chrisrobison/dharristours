@@ -29,7 +29,7 @@ if (isset($_REQUEST['check']) && $in['email'] && $in['password']) {
         } else {
             echo 'false';
         }
-            exit;
+        exit;
 }
 
 if (isset($_REQUEST['redirect']) && $in['email'] && $in['password']) {
@@ -42,4 +42,5 @@ if (isset($_REQUEST['redirect']) && $in['email'] && $in['password']) {
             $msg = "<div class='formError' style='padding:5px 5px 5px 5px'>Log in failed. Invalid username and/or password.</div>";
         }
 }
+
 

@@ -24,6 +24,8 @@
         label {
             color: #eee;
         }
+        .main-footer {
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
@@ -164,7 +166,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="/portal/" class="brand-link">
                 <img src="/clients/dharristours/img/bus-logo.png" alt="Job Hunt Logo" class="brand-image" style="opacity: .8;filter:invert(1);">
                 <span class="brand-text font-weight-light">D Harris Tours</span>
 
@@ -203,7 +205,7 @@
                             } else if ($_SESSION['Login']->BusinessIDs) {
                                 $bids = explode(",", $_SESSION['Login']->BusinessIDs);
                                 $sql = "BusinessID='" . implode("' OR BusinessID='", $bids) . "'";
-                                print '<select id="Business">';
+                               print '<label for="Business">Business</label><br><select id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
                                 $businesses = $boss->get("Business", "$sql");
                                 foreach ($businesses as $business) {
                                     $selected = ($_SESSION['Login']->BusinessID == $business->BusinessID) ? " SELECTED" : "";
@@ -212,18 +214,7 @@
                                 }
 
                                 print '</select>';
-                            } else {
-                                print '<select id="Business">';
-                                $businesses = $boss->get("Business"); 
-                                foreach ($businesses as $business) {
-                                    $selected = ($_SESSION['Login']->BusinessID == $business->BusinessID) ? " SELECTED" : "";
-                                        
-                                    print "<option value='{$business->BusinessID}'$selected>{$business->Business}</option>\n";
-                                }
-
-                                print '</select>';
-                            }
-
+                            } 
 
 
 
@@ -263,11 +254,6 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="https://cdr2.com">Simple Software</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-				<b>Version</b> <span id='version'>1.0.3</span>
-            </div>
         </footer>
 
         <!-- Control Sidebar -->

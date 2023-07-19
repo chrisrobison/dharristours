@@ -43,12 +43,14 @@
                 height: 54px;
                 width: 160px;
                 background-size: contain;
+                display: inline-block;
         }
         .loader {
   position: relative;
   width: 130px;
   height: 100px;
   background-repeat: no-repeat;
+  animation: skew 4s linear infinite ;
 }
 .loader:after {
   content: "";
@@ -89,6 +91,13 @@
                 z-index:999;
                 transform: skewX(-30deg);
         }
+@keyframes skew {
+    0% { transform: skewX(-30deg) translateX(-300px); }
+    25% { transform: skewX(-28deg) translateX(-150px); }
+    50% { transform: skewX(-30deg) translateX(0px); }
+    75% { transform: skewX(-28deg) translateX(150px); }
+    100% { transform: skewX(-30deg) translateX(300px); }
+}
 
 @keyframes wheelSk {
   0%, 50%, 100% { transform: translatey(0) }

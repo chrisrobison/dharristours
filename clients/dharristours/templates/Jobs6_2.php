@@ -22,6 +22,22 @@
 
       }
    }
+   function makeChild() {
+      var parentID = simpleConfig.id;
+      doCopy(simpleConfig.id);
+
+      document.querySelector("#NoInvoice").checked = true;
+      document.querySelector("#AdditionalBus").checked = true;
+      document.querySelector("#DriverNotified").checked = false;
+      document.querySelector("#QuoteAmount").value = 0;
+      document.querySelector("#BusID").selectedIndex = 0;
+      document.querySelector("#EmployeeID").selectedIndex = 0;
+      document.querySelector("#ParentID").value = parentID;
+      let jobtitle = document.querySelector("#Job").value;   
+      document.querySelector("#Job").value = "Bus for "+jobtitle + " ["+parentID+"]";
+      document.querySelector("#ParentTitle").innerHTML = "Bus for "+jobtitle + " ["+parentID+"]";
+   return false;
+   }
 </script>
 <div class='tableGroup'>
    <div class='formHeading'>
@@ -41,6 +57,8 @@
                <li id='driverLogButton' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#DriverLog", "btnDrvLog"); return false;'><span class='ui-icon ui-icon-clipboard'></span> Print Driver Log</li>
                <li id='confirmButton' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#Confirmation", "btnConfWin"); return false;'><span class='ui-icon ui-icon-print'></span> Print Confirmation</li>
                <li id='subLog' class='disabled' onclick='$(".menu").slideUp(75); openWin("<?php print $boss->app->Assets; ?>/templates/JobToPrint.php?ID="+simpleConfig.id+"#DriverLogExternal", "btnLogWin"); return false;'><span class='ui-icon ui-icon-document-b'></span> Print Sub Log</li>
+		         <li class='divider'><hr /></li>
+               <li id='subLog' onclick='$(".menu").slideUp(75); makeChild(); return false;'><span class='ui-icon ui-icon-document-b'></span> Add Bus</li>
             </ul>
          </div>
       </div>
@@ -66,11 +84,12 @@
                </div>
                <div class='contentField'>
 		  <label>Job</label>
-                  <input type='text' name='Job[<?php print $current->JobID; ?>][Job]' id='Job' value='<?php print $current->Job; ?>' size='100' style='width:25em;' class='boxValue' /> 
+                  <input type='text' placeholder="Customer/District | School | Team | (Dest) | Misc" name='Job[<?php print $current->JobID; ?>][Job]' id='Job' value='<?php print $current->Job; ?>' size='100' style='width:25em;' class='boxValue' /> 
                </div>
                <div class='contentField'>
-                  <label>Format</label>
-                   <b>Customer/District | School | Team | (Dest) | Misc</b> 
+                  <label>Parent</label>
+                  <span id="ParentTitle"></span>
+                  <input type='hidden' name='Job[<?php print $current->JobID; ?>][ParentID]' id='ParentID' value='<?php print $current->ParentID; ?>' size='100' style='width:25em;' class='boxValue' /> 
                </div>
             <div class='contentField'>
 	         	       	  <a href="#"  onclick="getEstPrice()" class='simpleButton'><span class="ui-icon ui-icon-calculator"></span>Estimate Price</a><span id='estPrice' class="ui-widget-content"></span>

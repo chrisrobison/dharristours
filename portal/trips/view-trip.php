@@ -8,6 +8,16 @@
         $current->ContactPhone = ($current->ContactPhone) ? $current->ContactPhone : $business->Phone;
         $current->ContactEmail = ($current->ContactEmail) ? $current->ContactEmail : $business->Email;
     }
+    
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+    $now = date("Y-m-d H:i:s");
+    $shortnow = date("Y-m-d");
+    $yr = date("Y");
+     
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,16 +30,38 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/portal/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="/portal/assets/css/adminlte.min.css">
     <link rel="icon" href="/files/favicon.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+<link rel="stylesheet" href="/lib/css/bus-loader.css"/>
+<style>
+    .map, #map {
+        display:inline-block;
+        height: 230px;
+        width: 216px;
+    }
+    .map-form td {
+        vertical-align: top;
+    }
+    .map-card {
+        position: relative;
+        display:flex;
+        flex-direction:row;
+    }
+    @media only screen and (max-width:450px) {
+        .map {
+            width: 100%;
+        }
+        .map-card {
+            flex-direction: column;
 
+        }
+    }
+</style>
  <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
 <style>
 	footer {
@@ -48,16 +80,16 @@
 	    margin-left:0px;
         margin-top: 0px;
     }
-    #map {
-        height: 300px;
-        width: 400px;
+    #map, .map {
+        height: 200px;
+        width: 300px;
     }
     label {
-        width: 8em;
+        width: 8rem;
     }
     label.info-box-text {
         display: inline-block;
-        width: 6em;
+        width: 6rem;
     }
     .form-control {
         width: 38vw;
@@ -67,7 +99,41 @@
         flex-direction: row;
     }
     .time {
-        width: 6em;
+        width: 6rem;
+    }
+    .overlay {
+        position: absolute;
+        top:0px;
+        left:0px;
+        width: 300px;
+        height: 200px;
+        display: flex;
+        background-color: #0003;
+        z-index: 9999;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .checks label {
+        width: 4rem;
+    }
+    .checks {
+        width: 10rem;
+        text-align: center;
+    }
+    input[type="checkbox"] {
+        width: 10rem;
+    }
+    .map-form td {
+        vertical-align: top;
+    }
+    @media only screen and (max-width:450px) {
+        input[type="checkbox"] {
+            width: 6rem;
+        }
+        .form-control {
+            width: 100%;
+        }
     }
 </style>
 </head>
@@ -123,24 +189,31 @@
                                     <input type="text" id="input_NumberOfItems" class="form-control" value="<?php print $current->NumberOfItems; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_title">Origin</label>
+                                    <label for="input_title">Origin</label><br>
                                     <input type="text" id="input_PickupLocation" class="form-control" value="<?php print $current->PickupLocation; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_title">Destination</label>
+                                    <label for="input_title">Destination</label><br>
                                     <input type="text" id="input_DropOffLocation" class="form-control" value="<?php print $current->DropOffLocation; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_title">Final Dropoff</label>
+                                    <label for="input_title">Final Dropoff</label><br>
                                     <input type="text" id="input_FinalDropOffLocation" class="form-control" value="<?php print $current->FinalDropOffLocation; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_location">ADA</label>
-                                    <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->Wheelchair) ? " checked" : "";?>>
-                                    <label for="input_location">SPAB</label>
-                                    <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->SPAB) ? " checked" : "";?>>
-                                    <label for="input_location">Cargo</label>
-                                    <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->Cargo) ? " checked" : "";?>>
+                                    <label>Options</label>
+                                    <div class="checks">
+                                        <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->Wheelchair) ? " checked" : "";?>>
+                                        <label for="input_location">ADA</label>
+                                    </div>
+                                    <div class="checks">
+                                        <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->SPAB) ? " checked" : "";?>>
+                                        <label for="input_location">SPAB</label>
+                                    </div>
+                                    <div class="checks">
+                                        <input type="checkbox" id="input_location" class="form-control" value="1"<?php print ($current->Cargo) ? " checked" : "";?>>
+                                        <label for="input_location">Cargo</label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="input_contact">Contact</label>
@@ -168,8 +241,6 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-                    </div>
-                    <div class="col-md-6">
                         <div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Notes</h3>
@@ -197,7 +268,89 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-                        <div class="card card-info">
+                    </div>
+                    <div class="col-md-6">
+<?php
+    $todaysJobs = $boss->getObject("Job", "BusinessID='{$busID}' and (JobID='{$in['id']}' OR ParentID='{$in['id']}') and JobCancelled=0");
+    
+    $business = $boss->getObject("Business", $busID);
+    $bus = $boss->getObject("Bus", "Active=1");
+    $buses = array(); 
+    $pax = array();
+    foreach ($bus->Bus as $obj) {
+        $buses[$obj->BusID] = $obj->BusNumber;
+        $pax[$obj->BusID] = $obj->Capacity;
+    }
+
+    $emps = $boss->getObject("Employee", "Active=1 and Driver=1");
+    $employees = array();
+    foreach ($emps->Employee as $emp) {
+        if ($emp->EmployeeID) {
+            $employees[$emp->EmployeeID] = $emp;
+        }
+    }
+?>
+<?php 
+    $cnt = 0;
+    foreach ($todaysJobs->Job as $job) {
+    if ($job->JobID) {
+        $starttime = date("g:ia", strtotime($job->PickupTime));
+        $endtime = date("g:ia", strtotime($job->DropOffTime));
+
+?>
+<div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Bus <?php print $buses[$job->BusID] . " [" . $pax[$job->BusID] ." Passengers]" ; ?></h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0 map-card">
+                            <div class="map" id="map<?php print $cnt; ?>"></div>
+                            <div class="info-box-content" style="margin-left:1em;margin-top:1em;">
+                                <table class='map-form'>
+                                    <tr>
+                                        <td><label class="info-box-text text-center text-muted">Driver</label></td>
+                                        <td colspan='3'><span class="info-box-number text-center text-muted mb-0" id="driver<?php print $cnt; ?>"><?php print $employees[$job->EmployeeID]->FirstName . " " . $employees[$job->EmployeeID]->LastName . " - " . $employees[$job->EmployeeID]->Cell; ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="info-box-text text-center text-muted">Pickup</label></td>
+                                        <td colspan='3'><span class="info-box-number text-center text-muted mb-0" id="pickup<?php print $cnt; ?>"><?php print preg_replace("/,/", ",<br>", preg_replace("/\(?\d\d\d\)?\s*\d\d\d\D\d\d\d\d/", '', $job->PickupLocation)) . ' - ' . $job->PickupTime; ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="info-box-text text-center text-muted">Drop Off</label></td>
+                                        <td colspan='3'><span class="info-box-number text-center text-muted mb-0" id="destination<?php print $cnt; ?>"><?php print $job->DropOffLocation . " - " . $job->DropOffTime; ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="info-box-text text-center text-muted">Duration</label></td>
+                                        <td style='width:5rem'><span class="info-box-number text-center text-muted mb-0" id="duration<?php print $cnt; ?>"></span></td>
+                                        <td><label class="info-box-text text-center text-muted">Pickup Time</label></td>
+                                        <td><span class="info-box-number text-center text-muted mb-0" id="PickupTime<?php print $cnt; ?>"><?php print $starttime; ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="info-box-text text-center text-muted">Distance</label></td>
+                                        <td><span class="info-box-number text-center text-muted mb-0" id="distance<?php print $cnt; ?>"></span></td>
+                                        <td><label class="info-box-text text-center text-muted">DropOff Time</label></td>
+                                        <td><span class="info-box-number text-center text-muted mb-0" id="DropOffTime<?php print $cnt; ?>"><?php print $endtime; ?></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class='overlay' id="overlay<?php print $cnt; ?>" style="display:none">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+<?php
+    $cnt++;
+    }
+} ?>
+
+                        <!--div class="card card-info">
                             <div class="card-header">
                                 <h3 class="card-title">Map</h3>
 
@@ -207,26 +360,34 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-body p-0" style="position: relative;display:flex;flex-direction:row;">
-                                <div id="map"></div>
-<div class="info-box-content" style="margin-left:1em;margin-top:1em;">
-                      <label class="info-box-text text-center text-muted">Pickup</label>
-                      <span class="info-box-number text-center text-muted mb-0" id="pickup"><?php print $current->Pickup; ?></span><br>
-                      <label class="info-box-text text-center text-muted">Drop Off</label>
-                      <span class="info-box-number text-center text-muted mb-0" id="destination"><?php print $current->Destination; ?></span><br>
-                      <label class="info-box-text text-center text-muted">Duration</label>
-                      <span class="info-box-number text-center text-muted mb-0" id="duration"></span><br>
-                      <label class="info-box-text text-center text-muted">Distance</label>
-                      <span class="info-box-number text-center text-muted mb-0" id="distance"></span>
-                    </div>
-    <div id="overlay" style="display:none">
-        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    </div>
+                            <div class="card-body p-0 map-card">
+                                <div class="map" id="map"></div>
+                                <div class="info-box-content" style="margin-left:1em;margin-top:1em;">
+                                    <table class='map-form'>
+                                        <tr>
+                                            <td><label class="info-box-text text-center text-muted">Pickup</label></td>
+                                            <td><span class="info-box-number text-center text-muted mb-0" id="pickup"><?php print preg_replace("/,/", ",<br>", preg_replace("/\(?\d\d\d\)?\s*\d\d\d\D\d\d\d\d/", '', $current->PickupLocation)); ?></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label class="info-box-text text-center text-muted">Drop Off</label></td>
+                                            <td><span class="info-box-number text-center text-muted mb-0" id="destination"><?php print $current->DropOffLocation; ?></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label class="info-box-text text-center text-muted">Duration</label></td>
+                                            <td><span class="info-box-number text-center text-muted mb-0" id="duration"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label class="info-box-text text-center text-muted">Distance</label></td>
+                                            <td><span class="info-box-number text-center text-muted mb-0" id="distance"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div id="overlay" style="display:none">
+                                    <div class="loader"></div>
+                                </div>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
-                    </div>
+                    </div-->
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -247,25 +408,40 @@
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <!--script src="../assets/js/adminlte.min.js"></script-->
-    <script src="/tools/quote/route.js"></script>
+    <script src="/portal/route.js"></script>
     <script>
 (function() {
-    window.app.map = L.map('map', { 
-        attributionControl: false,
-      zoomControl: false,
-      fadeAnimation: false,
-      zoomAnimation: false
-    }).setView([37.8437122,-122.3491274], 10);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(app.map);
+    if (!app.maps) {
+        app.maps = [];
+    } 
 
-    app.getRoute('<?php print $current->PickupLocation; ?>', '<?php print $current->DropOffLocation; ?>');
+    app.jobs = <?php print json_encode($todaysJobs->Job); ?>;
+    let keys = Object.keys(app.jobs);
+    let tmpmap;
+
+    keys.forEach((key, idx)=>{
+        let job = app.jobs[key];
+
+        if (job.JobID) {
+            tmpmap = L.map(document.querySelector(`#map${idx}`), {
+                center: [37.8437122, -122.3491274],
+                zoom: 10,
+                  zoomControl: false,
+                  fadeAnimation: false,
+                  zoomAnimation: false
+                });
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '<b></b>'
+}).addTo(tmpmap);
+            app.maps.push(tmpmap);
+            
+            app.getRoute(job.PickupLocation, job.DropOffLocation, idx);
+        }
+    });
+
 
 })();
     </script>
-    <script src="/portal/main.js"></script>
 </body>
 
 </html>

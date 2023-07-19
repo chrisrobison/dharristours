@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.19px" height="63.19px">
+<defs>
+<radialGradient id="PSgrad_0">
+  <stop offset="0%" stop-color="rgb(184,215,233)"  stop-opacity="0.3" />
+  <stop offset="13%" stop-color="rgb(187,224,248)" stop-opacity="0.3" />
+  <stop offset="25%" stop-color="rgb(179,210,249)" stop-opacity="0.3" />
+  <stop offset="38%" stop-color="rgb(147,189,238)" stop-opacity="0.3" />
+  <stop offset="50%" stop-color="rgb(133,171,221)" stop-opacity="0.3" />
+  <stop offset="62%" stop-color="rgb(116,153,205)" stop-opacity="0.3" />
+  <stop offset="75%" stop-color="rgb(106,139,190)" stop-opacity="0.3" />
+  <stop offset="87%" stop-color="rgb(91,124,176)"  stop-opacity="0.3" />
+  <stop offset="100%" stop-color="rgb(78,105,153)" stop-opacity="0.3" />
+</radialGradient>
+
+</defs>
+<path fill-rule="evenodd"  stroke="rgb(0, 0, 0)" stroke-width="2px" stroke-linecap="butt" stroke-linejoin="miter" fill="rgb(87, 87, 87)"
+ d="M43.059,36.274 L59.607,52.424 C59.607,52.424 61.049,54.320 60.604,56.212 C60.265,57.657 58.598,59.171 57.215,59.202 C55.832,59.234 53.626,57.408 53.626,57.408 L37.277,41.657 L43.059,36.274 Z"/>
+<path fill-rule="evenodd"  opacity="0.302" fill="rgb(255, 255, 255)"
+ d="M24.222,3.308 C35.756,3.308 45.105,12.658 45.105,24.191 C45.105,35.725 35.756,45.074 24.222,45.074 C12.689,45.074 3.339,35.725 3.339,24.191 C3.339,12.658 12.689,3.308 24.222,3.308 Z"/>
+<path stroke="rgb(13, 13, 11)" stroke-width="1.196px" stroke-linecap="butt" stroke-linejoin="miter" fill="url(#PSgrad_0)"
+ d="M24.222,3.308 C35.756,3.308 45.105,12.658 45.105,24.191 C45.105,35.725 35.756,45.074 24.222,45.074 C12.689,45.074 3.339,35.725 3.339,24.191 C3.339,12.658 12.689,3.308 24.222,3.308 Z"/>
+<path fill-rule="evenodd"  stroke="rgb(44, 44, 44)" stroke-width="3.19px" stroke-linecap="butt" stroke-linejoin="miter" fill="none"
+ d="M24.516,3.378 C36.076,3.378 45.448,12.750 45.448,24.310 C45.448,35.871 36.076,45.242 24.516,45.242 C12.955,45.242 3.584,35.871 3.584,24.310 C3.584,12.750 12.955,3.378 24.516,3.378 Z"/>
+<path fill-rule="evenodd"  stroke="rgb(163, 39, 31)" stroke-width="0.399px" stroke-linecap="butt" stroke-linejoin="miter" fill="rgb(216, 80, 64)"
+ d="M23.919,9.956 C31.902,10.072 34.717,15.864 34.685,19.526 C34.950,25.441 28.047,29.132 24.916,38.268 C21.177,29.008 14.841,26.432 14.748,19.327 C14.654,15.753 18.480,10.028 23.919,9.956 Z"/>
+<path fill-rule="evenodd"  fill="rgb(163, 39, 31)"
+ d="M24.716,16.137 C26.776,16.207 28.462,17.406 28.505,19.925 C28.541,22.065 26.714,23.746 24.916,23.713 C22.857,23.676 21.128,22.104 21.128,20.125 C21.128,17.403 23.035,16.080 24.716,16.137 Z"/>
+</svg>

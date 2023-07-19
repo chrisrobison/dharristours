@@ -1,4 +1,18 @@
-<?php  if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); ?>
+<?php  
+   include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/.env');
+   include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/lib/auth.php');
+
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+    $now = date("Y-m-d H:i:s");
+    $shortnow = date("Y-m-d");
+    $yr = date("Y");
+
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
+    $business = $boss->getObject("Business", $busID);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +23,9 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/portal/assets/fontawesome-free-6.4.0-web/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/portal/assets/css/adminlte.min.css">
   <style>
     table.table td { vertical-align: top; }
   </style>
@@ -26,7 +40,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Trips</h1>
+            <h1>Trip Archive for <?php print $business->Business; ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -42,38 +56,33 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card">
+      <div class="card card-primary">
         <div class="card-header">
           <h3 class="card-title">Trips</h3>
 
           <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
           </div>
         </div>
         <div class="card-body p-0">
           <table class="table table-striped projects">
               <thead>
                   <tr>
-                      <th style="width: 1%">Job ID</th>
-                      <th>Job</th>
                       <th>Trip Date</th>
-                      <th>Status</th>
+                      <th>Job</th>
+                      <th>Pax</th>
+                      <th>Buses</th>
                       <th></th>
                   </tr>
               </thead>
               <tbody>
 <?php
+
 $tpl = <<<EOT
 <tr id="rowTemplate">
-    <td>{{JobID}}</td>
-    <td>{{Job}}</td>
     <td style="white-space:nowrap;">{{JobDate}}</td>
-    <td>{{JobCompleted}}</td>
+    <td>{{Job}}</td>
+    <td>{{NumberOfItems}}</td>
+    <td>{{BusCount}}</td>
     <td class="project-actions text-right">
         <a class="btn btn-primary btn-sm" onclick="parent.app.loadTab('/portal/trips/view-trip.php?id={{JobID}}','Trip {{JobID}}', 'trip_{{JobID}}', true); return false;" href="view-trip.php?id={{JobID}}"><i class="fas fa-folder"></i> View</a>
     </td>
@@ -81,15 +90,25 @@ $tpl = <<<EOT
 EOT;
 
 $now = date("Y-m-d H:i:s");
-$trips = $boss->getObject("Job", "BusinessID={$_SESSION['BusinessID']} and JobDate<'$now' AND JobCancelled=0 ORDER BY JobDate DESC LIMIT 100");
+$trips = $boss->getObject("Job", "BusinessID={$_SESSION['BusinessID']} and JobDate<'$now' AND JobCancelled=0 AND ParentID=0 ORDER BY JobDate DESC LIMIT 100");
+
 $cnt = count($trips->Job);
 for ($i=0; $i<$cnt; $i++) {
-    $job = $trips->Job[$i];
-    $out = preg_replace_callback("/\{\{([^\}]+)\}\}/s", function($matches) {
-        global $job;
-        return $job->{$matches[1]};
-    }, $tpl);
-    print $out;
+    if ($trips->Job[$i]->JobID) {
+        $job = $trips->Job[$i];
+
+        $trips->Job[$i]->BusCount = ceil($job->NumberOfItems / 45);
+        $prettyDate = date("M j, Y", strtotime($job->JobDate));
+        $out = preg_replace_callback("/\{\{([^\}]+)\}\}/s", function($matches) {
+            global $job;
+            global $prettyDate;
+            if ($matches[1] == "JobDate") {
+                return $prettyDate;
+            }
+            return $job->{$matches[1]};
+        }, $tpl);
+        print $out;
+    }
 }
 ?>
               </tbody>
@@ -120,10 +139,10 @@ for ($i=0; $i<$cnt; $i++) {
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../assets/jquery/jquery.min.js"></script>
+<script src="/portal/assets/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/portal/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../assets/js/adminlte.min.js"></script>
+<script src="/portal/assets/js/adminlte.min.js"></script>
 </body>
 </html>

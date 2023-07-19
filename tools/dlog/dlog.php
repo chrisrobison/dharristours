@@ -25,16 +25,14 @@
    <style>
       .hoursWrap {
         position:relative;
+
       }
       #hours {
          
       }
       canvas {
-       position: absolute;
-       top: 42px;
-       left: 109px;
-       width: 59rem;
-       height: 441px;
+       width: 100%;
+       height: auto;
       }
       .mynotes th {
         background:#222;
@@ -74,6 +72,9 @@
       .notes > div > div {
         display: inline-block;
       }
+      .note-item td {
+         border-top: 1px solid #ccc;
+      }
       #wrap {
         padding-bottom:12em;
         width: 80vw;
@@ -110,7 +111,7 @@
       .mytime {
          text-align: right;
          white-space: nowrap;
-         font-size: 0.8em;
+         font-size: 0.9em;
       }
       .downtime {
          text-align: right;
@@ -145,7 +146,7 @@
       }
       .topval { width: 30rem; border-bottom: 1px solid #000; }
       #wrap {
-        padding-bottom: 12em;
+        padding-bottom: 
       }
       #notes {
 
@@ -161,19 +162,26 @@
        font-weight: 300;
     }
     .timeline {
-         background-image: linear-gradient(90deg, #fff 0%, white 30%, #ccc 25%, #ccc 65%, #fff 65%, #fff 100%);
+         background-image: linear-gradient(90deg, #fff 0%, white 60%, #ccc 25%, #ccc 65%, #fff 65%, #fff 100%);
     width: 2rem;
     position: relative;
+    vertical-align: top;
     }
-    td.timeline::after {
-    display: inline-block;
-    position: absolute;
-    height: 1vw;
-    width: 1vw;
-    background: #f00;
-    content: " ";
-    border-radius: 50%;
-    left: 0.8vw;
+    .mystop, .stop, .mystart {
+        background-color: #0c0;
+        color: #fff;
+        height: 2vw;
+        width: 2vw;
+        text-align: center;
+        border-radius: 50%;
+        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .mystop, .stop {
+        background-color: #c00;
     }
     td.timeline-start::after {
       background: #0f00;
@@ -189,6 +197,12 @@
         
 
     }
+    #topform, .topform {
+        font-size: 1vw;
+    }
+    button {
+      height: 2rem;
+    }
    </style>
 </head>
 <body>
@@ -198,6 +212,9 @@
       <select id='driver'> </select> &nbsp; 
       <label for='date'>Date:</label>
       <input type='text' id='date' size='10' class='is-below'>
+      <button onclick="app.gotoDay('prev'); return false;">◀︎</button>
+      <button onclick="app.gotoDay('next'); return false;">▶︎</button>
+
       <button id='lookup'>&#x1f50d; Lookup</button>
       <button id='print' onclick="window.print(); return false;">&#x1F5A8; Print</button>
    </div>
@@ -209,7 +226,7 @@
             </tr>
             <tr><td><br></td></tr>
             <tr>
-               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:5rem;position:relative;top:.0125em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span><div style='border-top:1px solid #000;display:flex;justify-content:space-between;'><span style='font-size:.7em'>(415) 902-8542</span> <span style='font-size:.7em;'>DOT 2016332</span></div></td>
+               <td class='carrier' rowspan=3><img src='path851.png' style='float:left;height:4vw;position:relative;top:.0125em;left:.5em;padding-right:1em;'><span style='padding-right:.25em;'>D Harris Tours<br>153 Utah St.<br>SSF, CA 94080 </span><div style='border-top:1px solid #000;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;'><span style='font-size:.7em'>(415) 902-8542</span><br><span style='font-size:.7em;'>DOT 2016332</span></div></td>
                <td>&nbsp;</td>
                <td class='headleft'>
                   <h1 style='display:inline-block;margin:0 auto .7rem;'>DRIVER'S DAILY LOG</h1>
@@ -231,7 +248,7 @@
       <div class="hoursWrap">
          <table id='hoursTable' class='timetable'>
          </table>
-         <canvas id="hours" width="1440" height="400"></canvas>
+         <canvas id="hours" width="1670" height="700"></canvas>
       </div>
     </div>
     <div class="pagebreak"></div>
@@ -243,7 +260,7 @@
      <table class='mynotes'>
         <thead>
            <tr>
-              <th></th><th>Time</th><th>Location</th><th>Times</th>
+              <th></th><th style='text-align:center;'>Time</th><th style='text-align:left;'>Location</th><th style='text-align:right'>Times</th>
            </tr>
         </thead>
         <tbody id='mynotes'></tbody>
@@ -257,6 +274,20 @@
    const app = {
       config: {
          workStates: ['Off Duty', 'Sleeper', 'Driving', 'On Duty', 'Remarks']
+      },
+      gotoDay: function(when) {
+        let date = new Date(app.state.date + ' 00:00:00');
+        let newdate;
+
+        if (when == "next") {
+           newdate = new Date(date.getTime() + 86400000);
+           when = newdate.toISOString().substring(0, 10);
+           console.dir(newdate);
+        } else if (when ==  "prev") {
+           newdate = new Date(date.getTime() - 86400000);
+           when = newdate.toISOString().substring(0, 10);
+        }
+        document.location.href = `dlog.php?driver=${app.state.driver}&date=${when}`;
       },
       init: function() {
          app.initCanvas();
@@ -325,7 +356,8 @@
       state: {
         date: "<?php if (array_key_exists('date', $in)) { print $in['date']; } ?>",
         localdate: "<?php if (array_key_exists('date', $in)) { print date("n/d/Y", strtotime($in['date'])); } ?>",
-        driver: "<?php if (array_key_exists('driver', $in)) { print $in['driver']; } ?>"
+        driver: "<?php if (array_key_exists('driver', $in)) { print $in['driver']; } ?>",
+        remcount: 0
       },
       fetchJobs: function(e) {
          var drvr = document.querySelector("#driver");
@@ -361,23 +393,39 @@
       updateTrips: function(trips) {
          console.log("in updateTrips");
          console.dir(trips);
-         let onduty = 0, mynotes = "";
-
+         let onduty = 0, mynotes = "", mystop = 1;
          if (trips["trips"]) {
             let tots = { OffDuty: 0, Sleeper: 0, Driving: 0, OnDuty: 0, Remarks: 0 }
             let startHour, endHour, lastEndTime = 0, i, cell, startInMinutes, endInMinutes;
             trips["trips"].sort((a, b) => b.startHour - a.startHour);
-
+            
+            let offset = 115,
+                offsetY = 30,
+                dtfirst = 0;
+         
             trips["trips"].forEach((trip, tidx)=>{
+/*  Rounds down to nearest quarter hour */
+//                trip.StartTime = (Math.floor((trip.StartTime / 1000) / (15 * 60)) * (15 * 60)) * 1000;
+//                trip.EndTime = (Math.floor((trip.EndTime / 1000) / (15 * 60)) * (15 * 60)) * 1000;
+
                startHour = (((trip.StartTime / 1000) / 60) / 60);
                endHour = (((trip.EndTime / 1000) / 60) / 60);
                startMin = Math.round((startHour - Math.floor(startHour)) * 60); // (startHour * 60) - ((trip.StartTime / 1000) / 60);
+               if (startMin == 60) {
+                startHour++;
+                startMin = 0;
+               }
                startMin = (startMin < 10) ? "0" + startMin : startMin;
+               
                endMin = Math.round((endHour - Math.floor(endHour)) * 60); // (endHour * 60) - ((trip.EndTime / 1000) / 60);
+               if (endMin == 60) {
+                endHour++;
+                endMin = 0;
+               }
                endMin = (endMin < 10) ? "0" + endMin : endMin;
                startHour = Math.floor(startHour);
                endHour = Math.floor(endHour);
-               
+
                startInMinutes = Math.floor((trip.StartTime / 1000) / 60);
                endInMinutes = Math.floor((trip.EndTime / 1000) / 60);
 
@@ -387,30 +435,30 @@
                app.ctx.strokeStyle = "#ff0000";
 
                app.ctx.beginPath();
-               app.ctx.moveTo(startInMinutes, 125);
-               app.ctx.lineTo(endInMinutes, 125);
+               app.ctx.moveTo(startInMinutes + offset, 125 + offsetY);
+               app.ctx.lineTo(endInMinutes + offset , 125 + offsetY);
                app.ctx.stroke();
                app.ctx.closePath()
                
                duty = (onduty) ? "On Duty" : "Off Duty";
 
-               let yPos = (app.config.workStates.indexOf(duty) * 50) + 25;
+               let yPos = (app.config.workStates.indexOf(duty) * 50) + 30;
                console.log(`yPos: ${yPos}`);
                app.ctx.lineWidth = 5;
                app.ctx.strokeStyle = "#ff0000";
 
                app.ctx.beginPath();
-               app.ctx.moveTo(lastEndTime, yPos);
-               app.ctx.lineTo(startInMinutes, yPos);
-               app.ctx.lineTo(startInMinutes, 125);
+               app.ctx.moveTo(lastEndTime + offset, yPos + offsetY);
+               app.ctx.lineTo(startInMinutes + offset, yPos + offsetY);
+               app.ctx.lineTo(startInMinutes + offset, 125 + offsetY);
                
                if (tidx < trips["trips"].length - 1) {
-                  app.ctx.moveTo(endInMinutes, 125);
-                  app.ctx.lineTo(endInMinutes, 175);
+                  app.ctx.moveTo(endInMinutes + offset, 125 + offsetY);
+                  app.ctx.lineTo(endInMinutes + offset, 180 + offsetY);
             
                } else {
-                  app.ctx.moveTo(endInMinutes, 125);
-                  app.ctx.lineTo(endInMinutes, 25);
+                  app.ctx.moveTo(endInMinutes + offset, 125 + offsetY);
+                  app.ctx.lineTo(endInMinutes + offset, 25 + offsetY);
                }
                
                app.ctx.stroke();
@@ -422,29 +470,38 @@
                }
                sxm = (startHour > 12) ? 'pm' : 'am';
                startHour = (startHour > 12) ? startHour - 12 : startHour;
-               let dtheight = Math.floor((trip.Downtime / 1000) / 60);
+               
+               if (!trip.Downtime || trip.Downtime == 0) {
+                  trip.Downtime = ((startInMinutes - lastEndTime) * 60) * 1000;
+               }
+               
+               let dtheight = 30;
                let len = Math.floor((trip.Duration / 1000) / 60);
-               let dt = (app.cleanTime(trip.Downtime)) ? `<tr><td class='timeline downtime' style='height:${dtheight}px;'></td><td class="downtime"></td><td colspan=2 class="downtime"><label>Downtime:</label> <span class="val">${app.cleanTime(trip.Downtime)}</span></td></tr>` : "";
+               
+               let dt = (dtfirst) ? `<tr><td class='timeline downtime'></td><td class="downtime"></td><td colspan=2 class="downtime"><label>On Duty:</label> <span class="val">${app.cleanTime(trip.Downtime)}</span></td></tr>` : "";
                let ss = (app.cleanTime(trip.Standstill)) ? `<tr><td class="mytime"><label>Standstill:</label> <span class="val">${app.cleanTime(trip.Standstill)}</span></td></tr>` : "";
                let dur = (app.cleanTime(trip.Duration)) ? `<tr><td class="mytime"><label>Driving:</label> <span class="val">${app.cleanTime(trip.Duration)}</span></td></tr>` : "";
                let dis = (trip.Distance) ? `<tr><td class="mytime"><label>Distance:</label> <span class="val">${trip.Distance} miles</span></td></tr>` : "";
-
-               mynotes += `${dt}
-      <tr class='note-item'>
-         <td class='timeline timeline-start'></td><td>${startHour}:${startMin}${sxm}</td><td class='left'>${trip.StartLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td><td rowspan="2">
-            <table style="width:100%;">
-            ${dur}
-            ${dis}
-            ${ss}
-            </table>
-         </td>
-      </tr>
-      <tr><td class='timeline timepad' style="height:${len}px;"></td><td colspan=2></td></tr>
-      <tr><td class='timeline timeline-end'></td><td>${endHour}:${endMin}${sxm}</td> <td class='left'>${trip.EndLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td></tr>
-   </table>
-</td></tr>`;
-               app.setRemark(Math.floor(startInMinutes / 60), trip.StartLocation);
-               app.setRemark(Math.floor(endInMinutes / 60), trip.EndLocation);
+                
+                if (!trip.StartLocation.match(/odometer corrected/i)) {
+                   mynotes += `${dt}
+          <tr class='note-item'>
+             <td class='timeline timeline-start'><a name="stop${mystop}" class='mystart'>${mystop}</a></td><td>${startHour}:${startMin}${sxm}</td><td class='left'>${trip.StartLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td><td rowspan="2">
+                <table style="width:100%;">
+                  <tr><td colspan="3">&nbsp;</td></tr>
+                ${dur}
+                ${dis}
+                </table>
+             </td>
+          </tr>
+          <tr><td class='timeline timepad'></td><td colspan=3>&nbsp;</td></tr>
+          <tr><td class='timeline timeline-end'><a name="stop${mystop+1}" class='mystop'>${mystop+1}</a></td><td>${endHour}:${endMin}${sxm}</td> <td class='left'>${trip.EndLocation.replace(/(.+)\s\d\d\d\d\d.*/,'$1')}</td></tr>
+       </table>
+    </td></tr>`;
+                    mystop+=2;
+                   app.setRemark(startInMinutes, trip.StartLocation, false);
+                   app.setRemark(endInMinutes, trip.EndLocation, true);
+                }
 
                tots.Driving += Math.floor((trip.Duration / 1000) / 60);
 
@@ -456,24 +513,36 @@
                }
                
                lastEndTime = endInMinutes;
+               dtfirst = 1;
             });
             
 
+               app.ctx.lineWidth = 5;
+               app.ctx.strokeStyle = "#ff0000";
             tots.OffDuty += 1440 - lastEndTime;
             app.ctx.beginPath();
-            app.ctx.moveTo(endInMinutes, 125);
-            app.ctx.lineTo(endInMinutes, 25);
-            app.ctx.lineTo(1440, 25);
+            app.ctx.moveTo(endInMinutes + offset, 125 + offsetY);
+            app.ctx.lineTo(endInMinutes + offset, 25 + offsetY);
+            app.ctx.lineTo(1440+offset, 25 + offsetY);
             app.ctx.stroke();
             app.ctx.closePath();
+
+            tots.OffDuty = 1440 - tots.Driving - tots.OnDuty;
 console.log("Totals:");
 console.dir(tots);
             let timeTotal = 0;
-            for (i in app.config.workStates) {
-               var wstxt = app.config.workStates[i];
+            for (let k=0; k<app.config.workStates.length; k++ ) {
+               var wstxt = app.config.workStates[k];
                wstxt = wstxt.replace(/\s* /g, '');
                
-               timeTotal += Math.round(tots[wstxt] / 60);
+                app.ctx.font = "30px \"Helvetica Neue\",sans-serif";
+                 app.ctx.font = "30px \"Swanky and Moo Moo\",cursive,\"Helvetica Neue\",sans-serif";
+                app.ctx.fillStyle = "#00c";
+                app.ctx.textAlign = "center";
+                // let tot = Math.round(tots[wstxt] / 6) / 10;
+                let tot = ((Math.round((tots[wstxt] * 60) / (15 * 60)) * (15 * 60)) / 60) / 60;
+               if (k != 4) app.ctx.fillText(tot, 1440 + 115 + 40 + (Math.floor(Math.random() * 10) - 5), (k * 50) + 70);
+               timeTotal += tots[wstxt] / 60;
 
                var el = $("#" +  wstxt + "_total");
                if (el) {
@@ -481,7 +550,11 @@ console.dir(tots);
                }
                tots.Remarks += Math.round(tots[wstxt] / 60);
             }
-
+            let grid = $("#hours");
+            let td = $("#hoursTable");
+            td.style.display = "none";
+            app.ctx.textAlign = "center";
+            app.ctx.fillText(Math.round(timeTotal), 1440 + 115 + 40, (4 * 50) + 90);
             $("#Remarks_total").innerHTML = timeTotal;
             $("#mynotes").innerHTML = mynotes;
          }
@@ -496,17 +569,29 @@ console.dir(tots);
 
          let out = "";
          if (days > 0) {
-            out += `${days}d `;
+            out += `${days}:`;
             hours = hours - (days * 24);
-            out += `${hours}h `;
+            out += `${hours}:`;
             //minutes = minutes - (hours * 60);
-            out += `${minutes}m`;
+            if (minutes < 10) {
+               out += `0${minutes}`;
+            } else {
+               out += `${minutes}`;
+            }
          } else if (hours > 0) {
-            out += `${hours}h `;
+            out += `${hours}:`;
             //minutes = minutes - (hours * 60);
-            out += `${minutes}m`;
+            if (minutes < 10) {
+               out += `0${minutes}`;
+            } else {
+               out += `${minutes}`;
+            }
          } else if (minutes > 0) {
-            out += `${minutes}m`;
+            if (minutes < 10) {
+               out += `0:0${minutes}`;
+            } else {
+               out += `0:${minutes}`;
+            }
          }
          return out;
       },
@@ -519,24 +604,77 @@ console.dir(tots);
          }
          return addr; 
       },
-      setRemark: function(hr, remark) {
+      setRemark: function(minutes, remark, isEnd=false) {
          if (remark) {
             remark = remark.replace(/\(?\d\d\d\)?[\-\s]?\d\d\d\-\d\d\d\d/, '');
             remark = remark.replace(/D\s*Harris Tours.*/, 'D Harris Tours');
             remark = remark.replace(/CA.*/s, '');
             remark = remark.replace(/\d\d\d\d\d\-\d\d\d\d/,'');
+            remark = remark.replace(/\s*,\s*US/, '');
+            remark = remark.replace(/San Francisco/, 'SF');
+            let rparts = remark.split(/\,/);
+            console.dir(rparts);
+            if (rparts.length > 2) {
+                /// remark = rparts[0] + ",\r\n" + rparts[1] + ', ' + rparts[2];
+                let placename = rparts.splice(0, 1);
+                remark = rparts.join(', ');
+                console.log(`new remark: ${remark}`);
+            }
          }
          var city = app.guessCity(remark);
          if (app.lastHourRemark != remark) {
+            let hr = (isEnd) ? Math.ceil(minutes / 60) : Math.floor(minutes / 60);
             var remarkCell = document.querySelector("#Remarks_"+hr);
             if (remarkCell) {
                if (remark!= "Not Driving") {
-                  remarkCell.innerHTML = "<div class='remark'>" + remark + "</div>";
+                 remarkCell.innerHTML = "<div class='remark'>" + remark + "</div>";
                }
             }
+
+            if (remark!= "Not Driving") {
+                let offY = (app.state.remcount ) * 10;
+                let offX = 115;
+
+                 app.ctx.save();
+                 app.ctx.beginPath();
+                 app.ctx.strokeStyle = "#000";
+                 app.ctx.lineWidth = 3;
+
+                 app.ctx.moveTo(minutes + offX, 295);
+                 app.ctx.lineTo(minutes + offX, 330 + offY);
+                app.ctx.stroke();
+                 app.ctx.translate(minutes + offX + 5, 320 + offY);
+                 app.ctx.rotate(-(Math.PI/180) * 30);
+                 app.ctx.textAlign = "right";
+                 app.ctx.fillStyle = "#2222dd";
+                 app.ctx.font = "30px \"Swanky and Moo Moo\",cursive,\"Helvetica Neue\",sans-serif";
+                 let txtw = app.ctx.measureText('  ' + remark);
+                 app.ctx.fillText(remark + '  ', 0, 0);
+                 app.ctx.closePath();
+                 app.ctx.beginPath();
+                 app.ctx.arc(-txtw.width -20, 5, 20, 0, 2 * Math.PI);
+                 app.ctx.fillStyle = (isEnd) ? "#cc0000" : "#00cc00";
+                 app.ctx.fill();
+                 app.ctx.fillStyle = "#fff";
+                 app.ctx.font = "24px \"Helvetica Neue\",sans-serif";
+                 app.ctx.textAlign = "center";
+                 app.ctx.fillText(app.state.remcount + (isEnd ? 1: 1), -txtw.width-20, 12);
+        
+                 app.ctx.strokeStyle = "#000";
+                 //app.ctx.moveTo(-txtw.width-20, 10);
+                 app.ctx.moveTo(-10, 5);
+                 app.ctx.lineTo(-txtw.width , 10);
+                 app.ctx.stroke();
+                app.state.remcount++;
+
+                 app.ctx.closePath();
+                 app.ctx.restore();
+            }
+
             app.lastHourRemark = remark;
+         } else {
+            app.state.remcount++;
          }
- 
       },
       setHour: function(type, hour, val, min) {
          var cell = document.querySelector("#"+type+"_"+hour);
@@ -584,17 +722,25 @@ console.dir(tots);
          out += "<th></th><th class='totalhours'>Total<br>Hours</th></tr></thead>\n";
          
          // Now generate timelines for each app.conf.workStates
-         out += "<tbody>";
+         out += "<tbody id='hoursBody'>";
+         
+         
          var wsCount = app.config.workStates.length;
+         var first = 0;
          for (var i=0; i < wsCount; i++) {
-            out += "<tr>";
+            if (!first) out += "<tr>";
             workstate = app.config.workStates[i];
             wrk = workstate.replace(/\W/, '');
             out += "<th>" + (i + 1) + ". " + workstate + "</th>";
-
-            for (var j=0; j < 24; j++) {
+            
+            if (!first) {
+                out += "<td id='hoursGrid' colspan='24' rowspan='4'></td>";
+                first = 1;
+            }
+            /* for (var j=0; j < 24; j++) {
                out += "<td id='" + wrk + "_" + j + "'></td>";
             }
+            */
             out += "<td colspan='2' class='totalhours'><div id='" + wrk + "_total' class='total'></div></td>";
             out += "</tr>\n";
 
@@ -614,45 +760,96 @@ console.dir(tots);
           app.canvas = $("canvas");
           app.ctx = app.canvas.getContext("2d");
 
-          app.ctx.clearRect(0, 0, 1440, 200);
+          app.ctx.clearRect(0, 0, 1440 + 230, 300);
           app.ctx.save();
 
-          app.ctx.rect(0,0,1440,200);
+          app.ctx.rect(0,0,1440 + 230, 300);
           app.ctx.fillStyle = "#fff";
           app.ctx.fill();
           app.drawGrid();
           app.state.loaded = true;
       },
       drawGrid: function() {
-         for (i=0; i<5; i++) {
+        let offsetY = 30, offsetX = 115, myY;
+        app.ctx.fillStyle = "#000000";
+        app.ctx.fillRect(0, 0, 1440+230, 30);
+        app.ctx.fillRect(0, 230, 1440+230, 25);
+        for (let i=0; i<24; i++) {
+            show = i;
+            xm = '';
+            if (show > 12) {
+                show -= 12;
+            }
+            if (show == 12) {
+                xm = 'p';
+            }
+            if (show==0) {
+                show = 12;
+                xm = 'a';
+            }
+            app.ctx.fillStyle = "#fff";
+            app.ctx.font = "22px \"Helvetica Neue\"";
+            app.ctx.fillText(show + xm, i * (1440 / 24) + 105, 25);
+            app.ctx.font = "16px \"Helvetica Neue\"";
+            app.ctx.fillText(show + xm, i * (1440 / 24) + 105, 248);
+        }
+        app.ctx.fillStyle = "#fff";
+        app.ctx.font = "22px \"Helvetica Neue\",sans-serif";
+        app.ctx.fillText("Total Hours", 1440+115, 25);
+         app.ctx.beginPath();
+         app.ctx.moveTo(1440 + offsetX, 0);
+         app.ctx.lineTo(1440 + offsetX, 265 + offsetY); 
+         app.ctx.stroke();
+         app.ctx.moveTo(offsetX, 296);
+         app.ctx.lineTo(1440 + offsetX + 115, 296); 
+         app.ctx.stroke();
+          app.ctx.closePath();
+
+   for (i=0; i<5; i++) {
              app.ctx.lineWidth = 2;
              app.ctx.strokeStyle = "#ff0000";
              app.ctx.beginPath();
-             app.ctx.moveTo(0, i * 50);
-             app.ctx.lineTo(1440, i * 50); 
+             app.ctx.moveTo(0 + offsetX, (i * 50) + offsetY);
+             app.ctx.lineTo(1440 + offsetX, (i * 50) + offsetY); 
              app.ctx.stroke();
              app.ctx.closePath();
+             
+             myY = (i!=4) ? 0 : 15;
+             app.ctx.font = "18px 'Helvetica Neue',sans-serif";
+             app.ctx.fillStyle = "#000";
+             app.ctx.fillText((i+1)+". " + app.config.workStates[i].toUpperCase(), 0, ((i + 1) * 50) + (offsetY/2) + myY);
+             
+             app.ctx.strokeStyle = "#000";
+             app.ctx.lineWidth = 2;
+             
+          app.ctx.beginPath();
+         app.ctx.moveTo(1440 + offsetX, (i * 50) + offsetY);
+         app.ctx.lineTo(1440 + (offsetX * 2), (i * 50) + offsetY); 
+         app.ctx.stroke();
+         app.ctx.closePath();
 
-         }
+}
          for (let i=0; i<24; i++) {
             app.ctx.lineWidth = 1;
             app.ctx.strokeStyle = "#000000";
             app.ctx.beginPath();
-            app.ctx.moveTo(i * 60, 0);
-            app.ctx.lineTo(i * 60, 200); 
+            app.ctx.moveTo((i * 60) + offsetX, 0 + offsetY);
+            app.ctx.lineTo((i * 60) + offsetX, 265 + offsetY); 
             app.ctx.stroke();
             app.ctx.closePath();
             
             for (let j=0; j<5; j++) {
+                myY = (j!=4) ? offsetY + 10 : offsetY + 18;
+                
                 app.ctx.strokeStyle = "#ff0000";
                 app.ctx.lineWidth = 2;
                 app.ctx.beginPath();
-                app.ctx.moveTo((i * 60) + 30, (50 * j));
-                app.ctx.lineTo((i * 60) + 30, (50 * j) - 35);
-                app.ctx.moveTo((i * 60) + 15, (50 * j));
-                app.ctx.lineTo((i * 60) + 15, (50 * j) - 20);
-                app.ctx.moveTo((i * 60) + 45, (50 * j));
-                app.ctx.lineTo((i * 60) + 45, (50 * j) - 20);
+                app.ctx.moveTo((i * 60) + 30 + offsetX, (50 * j) + (myY * 2));
+                app.ctx.lineTo((i * 60) + 30 + offsetX, ((50 * j) - 35) + (myY * 2));
+                app.ctx.moveTo((i * 60) + 15 + offsetX, (50 * j) + (myY * 2));
+                app.ctx.lineTo((i * 60) + 15 + offsetX, ((50 * j) - 20) + (myY * 2));
+                app.ctx.moveTo((i * 60) + 45 + offsetX, (50 * j) + (myY * 2));
+                app.ctx.lineTo((i * 60) + 45 + offsetX, ((50 * j) - 20) + (myY * 2)) ;
                 app.ctx.stroke();
                 app.ctx.closePath();
             }

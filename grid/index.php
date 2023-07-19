@@ -44,6 +44,7 @@
       <link href="/lib/css/Aristo/jquery-ui-1.8.5.custom.css" type="text/css" rel="stylesheet" />
       <link href="/lib/css/core.css?ver=4.02" type="text/css" rel="stylesheet" />
       <link href="/lib/css/print.css" type="text/css" rel="stylesheet" media="print" />
+      <link href="/lib/css/bus-loader.css" type="text/css" rel="stylesheet" />
       <link href="<?php print $boss->app->Assets . '/' . $boss->app->CSS; ?>" type="text/css" rel="stylesheet" />
     </head>
    <body>
@@ -88,7 +89,7 @@
          ?>
          <div id='formContainer'<?php if (!$process->NoTable) print " style='display:none'"; ?>>
             <div id='loading'>
-               <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+               <div class='loader'></div>
             </div>
             <form id="simpleForm" name="simpleForm" method="POST" autocomplete="on">
                <input type="hidden" id="cmd" name="x" value="get" />

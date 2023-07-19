@@ -1,0 +1,14 @@
+{
+  "name": "portal",
+  "version": "1.0.0",
+  "description": "Responsive web app to collect and organize all the information generated while looking for a job.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@github/auto-complete-element": "^3.5.0"
+  }
+}

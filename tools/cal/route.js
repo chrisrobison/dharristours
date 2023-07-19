@@ -73,6 +73,7 @@ const $$ = (str) => document.querySelectorAll(str);
                 }
                 $("#duration").innerHTML = `${hr}h ${min}m`;
                 $("#loading").style.display = "none";
+                $("#sadmac").style.display = "none";
               }
             };
 
@@ -108,15 +109,21 @@ const $$ = (str) => document.querySelectorAll(str);
             // let address1 = $("#origin").value;
             // let address2 = $("#destination").value;
             $("#loading").style.display = "flex";
-            
+            $("#sadmac").style.display = "none";
+
             console.log(`getRoute: ${address1} to ${address2}`);
 
             let g1 = app.geocodeAddress(address1);// .then(coord=>{ app.data.origin = coord; console.log("geocode1"); console.dir(coord); });
             let g2 = app.geocodeAddress(address2);// .then(coord=>{ app.data.dest = coord; console.log("geocode2"); console.dir(coord); });
             Promise.all([ g1, g2]).then((values) => {
                 let orig = [values[0].latitude, values[0].longitude];
-
-                app.getGeoJSON([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude]);
+                
+                if (values[0] && values[1]) {
+                    app.getGeoJSON([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude]);
+                } else {
+                    $("#loading").style.display = "none";
+                    $("#sadmac").style.display = "flex";
+                }
             });
 
             return false;
@@ -127,7 +134,8 @@ const $$ = (str) => document.querySelectorAll(str);
             const data = await response.json();
 
             if (data.features.length === 0) {
-                throw new Error('No location found');
+                console.log('No location found');
+                return;
             }
 
             const location = data.features[0].geometry.coordinates;

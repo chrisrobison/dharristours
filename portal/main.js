@@ -45,16 +45,18 @@
             let mopen = 0;
 
             arr.forEach(item => {
-                haschild = item.hasOwnProperty("_children");
-                toggle = (haschild) ? arrow : "";
-                menuopen = (!mopen && noul && haschild) ? " menu-open" : '';
+                if (!item['hidden']) {
+                    haschild = item.hasOwnProperty("_children");
+                    toggle = (haschild) ? arrow : "";
+                    menuopen = (!mopen && noul && haschild) ? " menu-open" : '';
 
-                out += `<li class="nav-item${menuopen}"><a href="${item.link}" class="nav-link"><i class="nav-icon ${item.icon}"></i><p>${item.title}${toggle}</p></a>`;
-                if (haschild) {
-                    out += app.makeList(item["_children"]);
+                    out += `<li class="nav-item${menuopen}"><a href="${item.link}" class="nav-link"><i class="nav-icon ${item.icon}"></i><p>${item.title}${toggle}</p></a>`;
+                    if (haschild) {
+                        out += app.makeList(item["_children"]);
+                    }
+                    out += "</li>";
+                    mopen = 0;
                 }
-                out += "</li>";
-                mopen = 0;
             });
             out += (noul) ? "" : "</ul>";
             return out;
