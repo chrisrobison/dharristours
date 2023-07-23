@@ -1,5 +1,5 @@
 <?php  
-    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); 
+    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
     $in = $_REQUEST;
     if (array_key_exists("id", $in)) {
         $current = $boss->getObject("Request", $in['id']);
@@ -25,9 +25,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/portal/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <!-- Theme style -->
+    <!--<link rel="stylesheet" href="assets/css/icheck-bootstrap.min.css">-->
     <link rel="stylesheet" href="/portal/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="assets/css/customform.css">
+    <link rel="stylesheet" href="assets/js/plugins/summernote/summernote-bs4.min.css">
     <link rel="icon" href="/files/favicon.png">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
 
  <!-- Make sure you put this AFTER Leaflet's CSS -->
  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
@@ -282,7 +285,7 @@ background-repeat: no-repeat;
             <section class="content">
             <form>
                 <div class="row">
-                    )<div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Trip Information</h3>
@@ -417,6 +420,13 @@ EOT;
                         ?>
                     </div>
                 </div>
+                                <div class="row">
+                                    <?php
+                                    $MSG_RESOURCE_ID = $current->RequestID;
+                                    $MSG_RESOURCE_TYPE = "quote";
+                                    include_once '../stubs/message-thread.php';
+                                    ?>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -506,6 +516,10 @@ EOT;
     <script src="/portal/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/portal/assets/fontawesome-free-6.4.0-web/js/all.min.js"></script>
     <script src="/portal/assets/js/adminlte.min.js"></script>
+    <script src="assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="assets/js/plugins/jquery-validation/additional-methods.js"></script>
+    <script src="assets/js/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="assets/js/pages/message.js"></script>
     <script src="/portal/route.js"></script>
     <script>
 (function() {

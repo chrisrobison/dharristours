@@ -6,16 +6,6 @@
             "icon": "fas fa-home"
         },
         {
-            "title": "Reserve a Bus",
-            "link": "/portal/trips/request.php",
-            "icon": "fas fa-file-pen"
-        },
-        {
-            "title": "Where's My Bus?",
-            "link": "/portal/showwhere.php",
-            "icon": "fas fa-file-pen"
-        },
-        {
             "title": "Trips",
             "link": "#",
             "icon": "fas fa-bus",
@@ -47,31 +37,34 @@
             "icon": "fas fa-file-invoice",
 			"_children": [
 				{
-					"title": "Business Profile",
+					"title": "Profile",
 					"link": "/portal/account/profile.php",
 					"icon": "fas fa-user"
 				},{
-					"title": "Invoices",
-					"link": "/portal/account/invoices.php",
+					"title": "Billing",
+					"link": "/portal/account/billing.php",
 					"icon": "fas fa-file-invoice"
 				}
             ]
         },
         {
-            "title": "Contact Us",
+            "title": "Request Quote",
+            "link": "/portal/trips/request.php",
+            "icon": "fas fa-file-pen"
+        },
+        {
+            "title": "Contact",
             "link": "contact.php",
-            "icon": "fas fa-envelope",
-            "hidden": true
+            "icon": "fas fa-envelope"
         },
         {
             "title": "Help",
             "link": "help.html",
-            "icon": "fa-solid fa-circle-question",
-            "hidden": true
+            "icon": "fa-solid fa-circle-question"
         },
         {
             "title": "Logout",
-            "link": "/login.php?logout=true",
+            "link": "/login.php?logout=true&redirect=https://dharristours.simpsf.com/portal/login.html",
             "icon": "fa-solid fa-sign-out"
         }
 
