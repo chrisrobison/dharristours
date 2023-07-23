@@ -1,13 +1,13 @@
 <?php
-if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
 include($_SERVER['DOCUMENT_ROOT'] . '/.env');
+include($_SERVER['DOCUMENT_ROOT'] . '/lib/auth.php');
 
 session_start();
 
 $in = $_REQUEST;
 $out = array();
 
-$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "ss_dharris_tours");//SS_DHarrisTours
+$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");//ss_dharris_tours
 
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -73,7 +73,7 @@ function postMessage($link, $in) {
         array_push($vals, $val);
     }
     array_push($keys, 'user_id');
-    array_push($vals, $_SESSION['UserID']);
+    array_push($vals, $_SESSION['Login']->LoginID);
 
     $sql = "INSERT INTO messagethread (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
     $results = mysqli_query($link, $sql);
