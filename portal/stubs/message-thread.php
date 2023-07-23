@@ -1,4 +1,6 @@
 <?php
+// make sure to define $MSG_RESOURCE_ID in the file that includes this stub
+// make sure to define $MSG_RESOURCE_TYPE in the file that includes this stub
 ?>
 <!-- Main content -->
 <section class="content">
@@ -29,7 +31,7 @@
       <form id="messageForm">
         <div class="submit-overlay"></div>
         <input type="hidden" name="resource_id" value="<?= $MSG_RESOURCE_ID ?>" />
-        <input type="hidden" name="resource_type" value="<?= $MSG_RESOURCE_TYPE ?>" /><!-- todo - get resource type from page - JJ -->
+        <input type="hidden" name="resource_type" value="<?= $MSG_RESOURCE_TYPE ?>" />
         <div class="form-group">
           <textarea id="compose-textarea" name="content" class="form-control" required></textarea>
         </div>
