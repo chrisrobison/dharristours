@@ -1,3 +1,6 @@
+# Spool directory
+spool
+
 # Logs
 logs
 *.log

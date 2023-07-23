@@ -80,21 +80,27 @@
         
         $posted = file_get_contents("php://input");
         $in = json_decode($posted);
-
-        $out = new stdClass();
-        $keys = array();
-        $vals = array();
-
-        foreach ($in->data as $key=>$val) {
-            $out->{$key} = $val;
-            $keys[] = $key;
-            $vals[] = $val;
-        }
-
-        $sql = "INSERT INTO Request (`" . implode("`,`", $keys)."`) VALUES ('" . implode("','", $vals). "');";
-
-        $result = mysqli_query($link, $sql);
+        $result = "";
         $new = new stdClass();
+
+        if (isset($in->data)) {
+            $out = new stdClass();
+            $keys = array();
+            $vals = array();
+
+            foreach ($in->data as $key=>$val) {
+                $out->{$key} = $val;
+                $keys[] = $key;
+                $vals[] = $val;
+            }
+
+            $sql = "INSERT INTO Request (`" . implode("`,`", $keys)."`) VALUES ('" . implode("','", $vals). "');";
+
+            $result = mysqli_query($link, $sql);
+        } else {
+            $new->error = "Invalid request data.";
+            return $new;
+        }
         if ($result) {
             $newid = mysqli_insert_id($link);
             $new->newid = $newid;

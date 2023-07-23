@@ -7,19 +7,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add Job | My Job Hunt</title>
+    <title>D Harris Tours | Reserve a Bus</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/portal/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 <!-- Theme style -->
-    <link rel="stylesheet" href="../assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="/portal/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
     <link rel="stylesheet" href="/lib/css/bus-loader.css"/>
     <link rel="stylesheet" href="/portal/assets/animate.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
-    <script type="module" src="../node_modules/@github/auto-complete-element/dist/bundle.js"></script>
+    <script type="module" src="/portal/node_modules/@github/auto-complete-element/dist/bundle.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <style>
         li[aria-selected=true] {
@@ -83,8 +83,8 @@
             background: #f4f6f9;
         }
     #map, .map {
-        height: 300px;
-        width: 300px;
+        height: 23rem;
+        width: 26rem;
         display:inline-block;
     }
     .map-form td {
@@ -178,6 +178,19 @@ background-repeat: no-repeat;
     .waypoint-trash {
         font-size: 1.3rem;width: 2rem;text-align: center;color: #0005;
     }
+    .timeline>div>.timeline-item {
+        margin-left: 70px;
+    }
+    .timeline:before {
+        left:33px;
+    }
+    .timeline>div>.fa, .timeline>div>.fab, .timeline>div>.fad, .timeline>div>.fal, .timeline>div>.far, .timeline>div>.fas, .timeline>div>.ion, .timeline>div>.svg-inline--fa {
+        width: 20px;
+        height: 20px;
+    }
+    .timeline>div>.timeline-item>.timeline-header {
+        min-height: 2.4rem;
+    }
     </style>
 </head>
 
@@ -205,46 +218,46 @@ background-repeat: no-repeat;
 
             <!-- Main content -->
             <section class="content">
-                <form onsubmit="app.makeRequest(event);return false;">
+                <form onsubmit="return app.makeRequest(event);">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Trip Information</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="jobTitle">Trip Date</label>
-                                            <div class="col-6">
+                                            <div class="col-8">
                                                 <input type="date" id="Date" name='Date' value="<?php print (array_key_exists('Date', $in)) ? $in['Date'] : ''; ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="jobCompany">Passengers</label>
-                                            <div class="col-6">
-                                                <input type="number" id="Passengers" placeholder="# of passengers" name='Pax' value="<?php print array_key_exists('Pax', $in) ? $in['Pax'] : ''; ?>" class="form-control">
+                                            <div class="col-4">
+                                                <input type="number" id="Passengers" placeholder="# of Pax" name='Pax' value="<?php print array_key_exists('Pax', $in) ? $in['Pax'] : ''; ?>" class="form-control">
                                             </div>
                                         </div>
+                                    </div>
+                                     <div class="col-sm-4">
+                                       <div class="checks">
+                                           <label for="input_RoundTrip">Round Trip</label>
+                                           <input type="checkbox" id="input_RoundTrip" onchange="app.roundTrip(event)" class="form-control" value="1">
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="form-group input-group">
                                     
                                     <label for="jobLocation">Pickup</label>
-                                    <auto-complete id="PickupAC" data-autoselect="true" src="/portal/address.php" for="Pickup-popup" style="width:100%" class="input-group">
+                                    <auto-complete id="PickupAC" data-autoselect="true" src="/portal/address2.php" for="Pickup-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-icon form-icon" ><img src="/portal/assets/mappin.svg"></div>
                                         </div>
-                                        <input type="text" name="Pickup" id="Pickup" name='Pickup' class="form-control" value="<?php print array_key_exists('Pickup', $in) ? $in['Pickup'] : ''; ?>" onchange="app.addStop(this.name, this.value, event, true, false)" />
+                                        <input type="text" name="Pickup" id="Pickup" name='Pickup' class="form-control" value="<?php print array_key_exists('Pickup', $in) ? $in['Pickup'] : ''; ?>" />
                                         <div class="input-group-append"><button type="button" class="btn btn-info" style="float:right;" onclick="app.addWaypoint(); return false;"><img src="/portal/assets/addstop.svg" style="height:22px;width:22px;"> Add Stop</button></div>
                                         <!--button id="Pickup-clear">X</button-->
                                         <ul class="acpopup" id="Pickup-popup"></ul>
@@ -258,15 +271,15 @@ background-repeat: no-repeat;
                                </div>
                                <div class="form-group">
                                     <label for="jobLocation">Final Dropoff</label>
-                                    <auto-complete id="FinalDropOffAC" data-autoselect="true" src="/portal/address.php" for="FinalDropOff-popup" style="width:100%" class="input-group">
+                                    <auto-complete id="FinalDropOffAC" data-autoselect="true" src="/portal/address2.php" for="FinalDropOff-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-icon form-icon" >
                                                 <img src="/portal/assets/finishflag.svg">
                                             </div>
                                         </div>
-                                        <input type="text" name="FinalDropOff" id="FinalDropOff" name='FinalDropOff' class="form-control" value="<?php print (array_key_exists('FinalDropOff', $in)) ? $in['FinalDropOff'] : ''; ?>" onchange="app.addStop(this.name, this.value, event)">
+                                        <input type="text" name="FinalDropOff" id="FinalDropOff" name='FinalDropOff' class="form-control" onchange="return app.stopChanged(this.id, this.value,event)" value="<?php print (array_key_exists('FinalDropOff', $in)) ? $in['FinalDropOff'] : ''; ?>" />
                                         <div class="input-group-append">
-                                            <button id='updateRoutesButton' class="input-group-icon " onclick="return app.updateRoutes()"><i class="fa-solid fa-route"></i></button>
+                                            <button id='updateRoutesButton' class="input-group-icon " onclick="return app.updateRoutes(event)"><i class="fa-solid fa-route"></i></button>
                                         </div>
                                         <!--button id="DropOff-clear">X</button-->
                                         <ul class="acpopup" id="FinalDropOff-popup"></ul>
@@ -276,13 +289,13 @@ background-repeat: no-repeat;
                                    <div class="col-sm-3">
                                        <div class="form-group">
                                            <label for="jobLocation">Pick-up Time</label>
-                                           <input type="time" id="Start" name='Request[Start]' class="form-control" style="width:7rem;">
+                                           <input type="time" id="Start" step="900" name="Request[Start]" class="form-control" style="width:8rem;">
                                        </div>
                                    </div>
                                    <div class="col-sm-3">
                                        <div class="form-group">
                                            <label for="jobLocation">Return Time</label>
-                                           <input type="time" id="End" name='Request[End]' class="form-control" style="width:7rem;">
+                                           <input type="time" id="End" step="900" name="Request[End]" class="form-control" style="width:8rem;">
                                        </div>
                                    </div>
                                    <div class="col-sm-6">
@@ -309,13 +322,21 @@ background-repeat: no-repeat;
                                     <label for="inputDescription">Notes</label>
                                     <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4"></textarea>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align:right;">
+                                        <a href="#" class="btn btn-secondary">Cancel</a>
+                                        <input type="submit" value="Preview Route" class="btn btn-warning" onclick="return app.updateRoutes(event);">
+                                        <input type="submit" value="Create New Request" class="btn btn-success">
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>
                     <a name="map"></a>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Map</h3>
@@ -328,15 +349,35 @@ background-repeat: no-repeat;
                                     <div class="map" id="map0"></div>
                                     <div id="overlay0" class="overlay"></div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-flex">
-                                        <img src="/portal/assets/startingline.svg" height="32" width="32" style="float: left; height: 1.2rem; width: 1.5rem; margin: 0.25rem;">
-                                        <label>Pickup</label>
-                                        <div class="showval" id="pickup0"></div>
+                                <div class="timeline">
+                                    <div class="time-label">
+                                        <span class="bg-secondary showval" id="showDate">Route</span>
                                     </div>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    <div>
+                                        <i class="fas fa-location-dot bg-green"></i>
+                                        <div class="timeline-item">
+                                            <div style="display:inline-block;" class="time"><i class="fas fa-clock"></i> <span class="" id="pickup0Time"></span></div>
+                                            <h3 class="timeline-header" id="pickup0"></h3>
+
+                                            <div class="timeline-body" style="display:none;"> </div>
+                                        </div>
+                                    </div>
+                                    <!-- END timeline item -->
                                     <div class="map-stops" id="map-waypoints">
-                                        
                                     </div>
+                                    <!-- timeline item -->
+                                    <div>
+                                        <i class="fas fa-flag-checkered bg-red"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fas fa-clock"></i> <span id="WaypointFinalTime"></span></span>
+                                            <h3 class="timeline-header no-border" id="destination0"></h3>
+                                        </div>
+                                    </div>
+                                    <!-- END timeline item -->
+                                </div>
+                                 <div class="form-flex">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="jobTitle">Total Distance</label>
@@ -352,12 +393,6 @@ background-repeat: no-repeat;
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <a href="#" class="btn btn-secondary">Cancel</a>
-                        <input type="submit" value="Create New Request" class="btn btn-success">
                     </div>
                 </div>
                 </form>
@@ -379,14 +414,13 @@ background-repeat: no-repeat;
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="../assets/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="../assets/js/adminlte.min.js"></script>
+    <script src="/portal/assets/jquery/jquery.min.js"></script>
+    <script src="/portal/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/portal/assets/fontawesome-free-6.4.0-web/js/all.min.js"></script>
+    <script src="/portal/assets/js/adminlte.min.js"></script>
     <script src="/portal/route.js"></script>
     <script>
+(function() {
 const picker = new easepick.create({
     element: "#Date",
     css: [
@@ -416,6 +450,7 @@ app.maps[0] = map;
 document.querySelector("#PickupAC").addEventListener("auto-complete-change", function(evt) {
     console.log("Pickup autocomplete");
     console.dir(evt);
+    evt.re
 });
 
 let params = <?php print json_encode($in); ?>;
@@ -423,14 +458,39 @@ if (params["Waypoint1"]) {
     
 }
 let puac = document.querySelector("#PickupAC");
-puac.addEventListener("auto-complete-change", function(event) {
-    app.acSelect(event.target, event);
+puac.addEventListener("auto-complete-change", function(evt) {
+    app.acSelect(evt.relatedTarget, evt);
 });
+
+let pu = document.querySelector("#Pickup");
+pu.addEventListener("change", function(evt) {
+    console.log("Pickup was changed");
+    console.dir(evt);
+    if (app.data.roundtrip && evt.target.id == "Pickup") {
+        document.querySelector("#FinalDropOff").value = evt.target.value;
+        if (app.data.stops.Pickup.coord) {
+            app.data.stops.FinalDropOff.coord = [app.data.stops.Pickup.coord[0], app.data.stops.Pickup.coord[1]];
+        }
+    }
+    app.addStop(evt.target.id, evt.target.value, evt, true, false);
+});
+
 
 let fdoac = document.querySelector("#FinalDropOffAC");
 fdoac.addEventListener("auto-complete-change", function(event) {
-    app.acSelect(event.target, event);
+    app.acSelect(event.relatedTarget, event);
 });
+
+let fdo = document.querySelector("#FinalDropOff");
+fdo.addEventListener("change", function(evt) {
+    console.log("FinalDropOff was changed");
+    console.dir(evt);
+
+    app.addStop(evt.target.id, evt.target.value, evt, false, true);
+});
+
+
+})();
     </script>
 </body>
 

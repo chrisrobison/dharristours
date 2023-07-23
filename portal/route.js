@@ -1,4 +1,3 @@
-
 (function() {
     if (!window.app) window.app = {};
 
@@ -11,6 +10,7 @@
             apiKey: "5b3ce3597851110001cf62481189071ea9104ad6a88e51717cb62e65"
         },
         data: {
+            roundtrip: 0,
             stations: {},
             busIcon: L.icon({ iconUrl: "/portal/assets/bus4sm.png", iconSize: [40, 17], iconAnchor: [40, 17], popupAnchor: [0, 0] }),
             pinIcon: L.icon({ iconUrl: "/portal/assets/mappin.svg", iconSize: [20, 32], iconAnchor: [10, 16], popupAnchor: [0, 0] }),
@@ -33,27 +33,43 @@
         addMarker: async function(address) {
             let coord = await app.geocodeAddress(address);
         },
+        roundTrip: function(evt) {
+            console.log("roundtrip");
+            console.dir(evt);
+            if (evt.target.checked) {
+                app.data.roundtrip = 1;
+                document.querySelector("#FinalDropOffAC").setAttribute("readonly", true);
+                document.querySelector("#FinalDropOff").setAttribute("readonly", true);
+            } else {
+                app.data.roundtrip = 0;
+                document.querySelector("#FinalDropOffAC").removeAttribute("readonly");
+                document.querySelector("#FinalDropOff").removeAttribute("readonly");
+            }
+        },
         addStop: async function(who, what, evt, isOrigin=false, isFinal=false) {
             let btn = document.querySelector("#updateRoutesButton");
             if (btn) {
                 setTimeout(function() { let btn = document.querySelector("#updateRoutesButton"); btn.classList.add("animate__animated"); btn.classList.add("animate__rubberBand"); btn.classList.add("animate__infinite"); }, 500);
             }
             let addr = await app.geocodeAddress(what);
-            
-            let stop = { coord: [addr.latitude, addr.longitude], source: who, address: what};
+            if (addr) {
+                let stop = { coord: [addr.latitude, addr.longitude], source: who, address: what};
+    console.log("addStop");
+    console.log(`who: ${who} what: ${what}`);
+    console.dir(stop);
+                let tmpmark = L.marker([addr.latitude, addr.longitude], {icon: app.data.pinIcon});
+                app.state.markers.push(tmpmark);
+                tmpmark.addTo(app.maps[0]);
 
-            let tmpmark = L.marker([addr.latitude, addr.longitude], {icon: app.data.pinIcon});
-            app.state.markers.push(tmpmark);
-            tmpmark.addTo(app.map);
-
-            if (!isOrigin && !isFinal) {
-                app.data.stops[who] = stop;
-            } else if (isOrigin) {
-                app.data.origin = stop;
-            } else if (isFinal) {
-                app.data.final = stop;
+                if (!isOrigin && !isFinal) {
+                    app.data.stops[who] = stop;
+                } else if (isOrigin) {
+                    app.data.origin = app.data.stops.Pickup = stop;
+                } else if (isFinal) {
+                    app.data.final = app.data.stops.FinalDropOff = stop;
+                }
+                app.data.stops[who].address = document.querySelector(`#${who}`).value;
             }
-            app.data.stops[who].address = document.querySelector(`#${who}`).value;
         },
         removeWaypoint: function(who) {
             document.querySelector(`#Waypoint${who}Wrap`).parentNode.removeChild(document.querySelector(`#Waypoint${who}Wrap`));
@@ -74,7 +90,12 @@
                 app.data.waypoints.push(el);
             };
         },
-        updateRoutes: function() {
+        stopChanged: function(who, what) {
+            console.log(`stopChanged: who ${who} what ${what}`);
+        },
+        updateRoutes: function(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
             let mapstops = "";
             document.querySelector("#map0").scrollIntoView();
             if (!app.data.stops.Pickup || !app.data.stops.FinalDropOff) {
@@ -82,19 +103,32 @@
             }
             app.data.stops.Pickup.address = document.querySelector("#Pickup").value;
             app.data.stops.FinalDropOff.address = document.querySelector("#FinalDropOff").value;
-            let out = [[app.data.stops.Pickup.coord[1], app.data.stops.Pickup.coord[0]]];
-            document.querySelector("#pickup0").innerHTML = app.data.stops.Pickup.address;
 
+            let out = [];
+            if (app.data.stops.Pickup.coord) {
+                out = [[app.data.stops.Pickup.coord[1], app.data.stops.Pickup.coord[0]]];
+            }
+            document.querySelectorAll(".waypoint").forEach(el=>el.parentNode.removeChild(el));
+            document.querySelector("#showDate").innerHTML = document.querySelector("#Date").value;
+            document.querySelector("#pickup0").innerHTML = app.data.stops.Pickup.address.replace(/CA.*/, '');
+            document.querySelector("#destination0").innerHTML = app.data.stops.FinalDropOff.address.replace(/CA.*/, '');
+            document.querySelector("#pickup0Time").innerHTML = document.querySelector("#Start").value;
+            
+            let anchor = document.querySelector("#map-waypoints");
             for (let i=0; i<app.data.waypoints.length; i++) {
                 let key = `Waypoint${i+1}`;
                 let wp = app.data.stops[key];
-                wp.address = document.querySelector(`#${key}`).value;
-                mapstops += `<div class='waypointMetrics' id='wp-segment${i}'></div><div class='form-flex'><img src="/portal/assets/mappin.svg" height="32" width="32" style="float: left; height: 26px; width: 19px; margin: 0.25rem;"><label>Stop ${i+1}</label><div class='showval'>${wp.address}</div></div>`;
+                wp.address = document.querySelector(`#${key}`).value.replace(/CA.*/, '');
+                let node = document.createElement("div");
+                node.className = "waypoint";
+                node.innerHTML = `<i class="fas fa-location-dot bg-blue"></i><div class="timeline-item"><span class="time"><i class="fas fa-clock"></i> <span id="wp-segment${i}"></span></span><h3 class="timeline-header no-border" id="Waypoint${i+1}">${wp.address}</h3></div>`;
+                anchor.insertAdjacentElement("beforebegin", node);
+                // mapstops += `<div><i class="fas fa-location-dot bg-blue"></i><div class="timeline-item"><span class="time"><i class="fas fa-clock"></i> <span id="Waypoint${i+1}Time"></span></span><h3 class="timeline-header no-border" id="Waypoint${i+1}">${wp.address}</h3></div></div>`;
+                // mapstops += `<div class='waypointMetrics' id='wp-segment${i}'></div><div class='form-flex'><img src="/portal/assets/mappin.svg" height="32" width="32" style="float: left; height: 26px; width: 19px; margin: 0.25rem;"><label>Stop ${i+1}</label><div class='showval'>${wp.address}</div></div>`;
                 out.push([app.data.stops[`Waypoint${i+1}`].coord[1], app.data.stops[`Waypoint${i+1}`].coord[0]]);
             }
-            mapstops += `<div class='waypointMetrics' id='wp-segment${app.data.waypoints.length}'></div><div class='form-flex'><img src="/portal/assets/finishflag.svg" height="32" width="32" style="float: left; height: 1.2rem; width: 1.5rem; margin: 0.25rem;"><label>Final Dropoff</label><div class='showval'>${app.data.stops.FinalDropOff.address}</div></div>`;
-            document.querySelector("#map-waypoints").innerHTML = mapstops;
-
+            // mapstops += `<div class='waypointMetrics' id='wp-segment${app.data.waypoints.length}'></div><div class='form-flex'><img src="/portal/assets/finishflag.svg" height="32" width="32" style="float: left; height: 1.2rem; width: 1.5rem; margin: 0.25rem;"><label>Final Dropoff</label><div class='showval'>${app.data.stops.FinalDropOff.address}</div></div>`;
+            //document.querySelector("#map-waypoints").innerHTML = mapstops;
             out.push([app.data.stops.FinalDropOff.coord[1], app.data.stops.FinalDropOff.coord[0]]);
             let obj = { "coordinates": out };
             let json = JSON.stringify(obj);
@@ -110,12 +144,55 @@
                 let dur = app.cleanTime(data.features[0].properties.summary.duration);
                 
                 document.querySelector(`#duration0`).innerHTML = dur;
-                
-                data.features[0].properties.segments.forEach((item, idx) => {
-                    document.querySelector(`#wp-segment${idx}`).innerHTML = app.cleanTime(item.duration) + ' | ' + (Math.floor((item.distance * 0.000621371) * 10) / 10) + " miles";
-                });
+                let segs =  data.features[0].properties.segments;
+                for (let i=0; i< segs.length-1; i++) {
+                    let item = segs[i]; 
+                    document.querySelector(`#wp-segment${i}`).innerHTML = app.cleanTime(item.duration) ;// + ' | ' + (Math.floor((item.distance * 0.000621371) * 10) / 10) + " miles";
+                };
+                document.querySelector(`#WaypointFinalTime`).innerHTML = app.cleanTime(segs[segs.length-1].duration)
             });
             return false;
+        },
+        getRouteMulti: async function(json) {
+            let waypoints = app.data.record.Destination.split(/\|/);
+            let addrs = [app.data.record.Pickup].concat(waypoints);
+            addrs.push(app.data.record.Return);
+
+            let coord = [];
+            let mrks = L.featureGroup().addTo(app.maps[0]);
+
+            for (let i=0; i<addrs.length; i++) {
+                let addr = addrs[i];
+                let wpcoord = await app.geocodeAddress(addr);
+                let mrk = L.marker([wpcoord['latitude'], wpcoord['longitude']]);
+                mrks.addLayer(mrk);
+                if (wpcoord) coord.push([wpcoord["longitude"], wpcoord["latitude"]]);
+
+            }
+            let myobj = { coordinates: coord };
+
+            let myjson = encodeURIComponent(JSON.stringify(myobj));
+            fetch(`/portal/multistops.php?json=${myjson}`).then(r=>r.json()).then(data=>{
+                console.log("getRouteMulti");
+                console.dir(data);
+                app.data.routes = data;
+                let feature = L.geoJSON(data).addTo(app.maps[0]);
+                app.maps[0].fitBounds(feature.getBounds());
+                document.querySelector("#distance0").innerHTML = Math.round(data.features[0].properties.summary.distance * 0.000621371) + " miles";
+                
+                let dur = app.cleanTime(data.features[0].properties.summary.duration);
+                
+                document.querySelector(`#duration0`).innerHTML = dur;
+                let segs =  data.features[0].properties.segments, el, item;
+                for (let i=0; i< segs.length-1; i++) {
+                    item = segs[i]; 
+                    el = document.querySelector(`#wp-segment${i}`);
+                    if (el) el.innerHTML = app.cleanTime(item.duration) ;
+                };
+                el = document.querySelector(`#WaypointFinalTime`);
+                if (el) el.innerHTML = app.cleanTime(segs[segs.length-1].duration);
+            });
+
         },
         cleanTime: function(totsec) {
             if (totsec > 0) {
@@ -130,17 +207,15 @@
                 if (min < 10) {
                     min = '0' + min;
                 }
-                if ((hr < 10) && (hr != 0)) {
-                    hr = '0' + hr;
-                }
+//                if ((hr < 10) && (hr != 0)) { hr = '0' + hr; }
                 if (hr > 0) {
-                    return `${hr}h ${min}m`;
+                    return `${hr}:${min}`;
                 } else if (hr == 0) {
-                    return `${min}m`;
+                    return `0:${min}`;
                 }
-                return `${hr}h ${min}m`;
+                return `${hr}:${min}`;
             } else {
-                return '0h 00m';
+                return '0:00';
             }
          
         },
@@ -159,25 +234,37 @@
             el.className = "form-group";
             let ac = document.createElement("auto-complete");
             ac.id = `Waypoint${stopNum}AC`;
-            ac.setAttribute("src", "/portal/address.php");
+            ac.setAttribute("src", "/portal/address2.php");
             ac.setAttribute("for", `Waypoint${stopNum}-popup`);
             ac.style ="width:100%;";
             ac.className = "input-group";
             ac.addEventListener("auto-complete-change", function(event) {
                 app.acSelect(event.relatedTarget, event);
             });
-            ac.innerHTML = `<div class="input-group-prepend"><div class="input-group-icon waypoint-icon"><img src="/portal/assets/mappin.svg"><\/div><\/div><input type="text" name="Waypoint${stopNum}" id="Waypoint${stopNum}" value="${value}" name='Waypoint[Address]' class="form-control" onchange="app.addStop('Waypoint${stopNum}', this.value, event)"><div class="input-group-append"><button onclick="return app.removeWaypoint(${stopNum})" class="input-group-icon"><i class="far fa-trash-alt waypoint-trash"><\/i><\/button><\/div><ul class="acpopup" id="Waypoint${stopNum}-popup"><\/ul>`;
+            ac.innerHTML = `<div class="input-group-prepend"><div class="input-group-icon waypoint-icon"><img src="/portal/assets/mappin.svg"><\/div><\/div><input type="text" name="Waypoint${stopNum}" id="Waypoint${stopNum}" value="${value}" name='Waypoint[Address]' class="form-control"><div class="input-group-append"><button onclick="return app.removeWaypoint(${stopNum})" class="input-group-icon"><i class="far fa-trash-alt waypoint-trash"><\/i><\/button><\/div><ul class="acpopup" id="Waypoint${stopNum}-popup" onclick="app.doClickAC('Waypoint${stopNum}', event)"><\/ul>`;
+            ac.querySelector("input").addEventListener("change", function(evt) {
+                console.log(`${this.id} was changed`);
+                console.dir(evt);
+                app.addStop(evt.target.id, evt.target.value, evt, false, false);
+            });
             el.innerHTML = `<label for="Waypoint${stopNum}AC">Stop #${stopNum}</label>`;
             el.appendChild(ac);
+            setTimeout(function() { document.querySelector(`#Waypoint${stopNum}`).focus(); }, 200);
+            ac.querySelector("input").focus();
 
             return el;
         },
-        acSelect: function( el, evt) {
+        doClickAC: function(who, evt) {
+            console.log(`doClickAC\n${who}`);
+            console.dir(evt);
+        },
+        acSelect: async function( el, evt) {
             console.log("acSelect");
             console.dir(evt);
             let selected = evt.target;
             if (!(selected instanceof HTMLElement)) return;
-            
+            console.log(`selected: ${selected}`);
+
             const value = evt.relatedTarget.value;
             if (!app.data.stops[evt.relatedTarget.id]) {
                 app.data.stop[evt.relatedTarget.id] = {};
@@ -186,6 +273,17 @@
 
             app.data.stops[evt.relatedTarget.id].address = value;
             console.log(`Selected autocomplete item: ${value}`);
+            
+            let coord = await app.geocodeAddress(value);
+            app.data.stops[evt.relatedTarget.id] = {address: value, coord: coord};
+
+            if (app.data.roundtrip && evt.relatedTarget.id == "Pickup") {
+                document.querySelector("#FinalDropOff").value = value;
+                app.data.stops.FinalDropOff.coord = [coord.latitude, coord.longitude];
+                app.data.stops.FinalDropOff.address = value;
+            }
+
+            app.addStop(el.id, value, event);
         },
         makeRequest: function(evt) {
             evt.stopPropagation();
@@ -203,6 +301,8 @@
             req.Return = app.data.stops.FinalDropOff.address;
             req.Start = document.querySelector("#Start").value;
             req.End = document.querySelector("#End").value;
+            req.RoundTrip = (document.querySelector("#input_RoundTrip").checked) ? true : false;
+            req.Cargo = (document.querySelector("#input_Cargo").checked) ? true : false;
             req.ADA = (document.querySelector("#input_ADA").checked) ? true : false;
             req.SPAB = (document.querySelector("#input_SPAB").checked) ? true : false;
             req.Pax = document.querySelector("#Passengers").value;
@@ -508,7 +608,7 @@
 
             const response = await fetch(apiUrl);
             const data = await response.json();
-            let latitude = 38.054, longitude = -122.241;
+            let latitude , longitude ;
 
             if (data.features) {
                 if (data.features.length === 0) {

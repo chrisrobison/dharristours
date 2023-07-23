@@ -2,8 +2,7 @@
     if (!window.app) window.app = app = {};
 
     app = {
-        init: function() {
-        },
+        ...window["app"],
         /**
         * Starting point for running the program. Authenticates the user.
         * @param {function()} onAuthSuccess - Called when authentication succeeds.
@@ -92,7 +91,7 @@
         state: {
             infoWindows: [],
             markers: [],
-            makers: [],
+            markers: [],
             iconPath: '/where/img',
             trafficLayer: {},
             bounds: {},
@@ -284,6 +283,6 @@
         }
     };
     window.app = app;
-    app.init();
+
 })();
 
