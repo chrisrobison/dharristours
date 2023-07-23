@@ -1,3 +1,20 @@
+<?php
+    include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/.env');
+    include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/lib/auth.php');
+
+    $in = $_REQUEST;
+    $out = array();
+    $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
+
+    session_start();
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
+    $current = $boss->getObject("Business", $busID);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +32,7 @@
 </head>
 <body class="hold-transition sidebar-collapse iframe-mode">
 <div class="wrapper">
-
+<form onsubmit="return false;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -49,21 +66,25 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="input_Business">Organization</label>
-                <input type="text" id="input_Business" class="form-control">
+                <input type="text" id="input_Business" class="form-control" value="<?php print $current->Business; ?>">
               </div>
               <div class="form-group">
                 <label for="input_Name">Contact Name</label>
-                <input type="text" id="input_Name" class="form-control">
+                <input type="text" id="input_Name" class="form-control" value="<?php print $current->Contact; ?>">
               </div>
               <div class="form-group">
                 <label for="input_Address">Address</label>
-                <input type="text" id="input_Address" class="form-control">
+                <input type="text" id="input_Address1" class="form-control" value="<?php print $current->Address1; ?>">
+              </div>
+              <div class="form-group">
+                <label for="input_Address">Address 2</label>
+                <input type="text" id="input_Address2" class="form-control" value="<?php print $current->Address2; ?>">
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="input_City">City</label>
-                    <input type="text" id="input_City" class="form-control">
+                    <input type="text" id="input_City" class="form-control" value="<?php print $current->City; ?>">
                   </div>
                 </div>
                 <div class="col-sm-2">
@@ -76,7 +97,7 @@
                             <option value="AS">American Samoa</option>
                             <option value="AZ">Arizona</option>
                             <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
+                            <option value="CA" SELECTED>California</option>
                             <option value="CO">Colorado</option>
                             <option value="CT">Connecticut</option>
                             <option value="DE">Delaware</option>
@@ -136,21 +157,17 @@
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="input_Zip">Postal Code</label>
-                    <input type="text" id="input_Zip" class="form-control">
+                    <input type="text" id="input_Zip" class="form-control" value="<?php print $current->Zip; ?>">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="input_Email">Email</label>
-                <input type="text" id="input_Email" class="form-control">
+                <input type="text" id="input_Email" class="form-control" value="<?php print $current->Email; ?>">
               </div>
               <div class="form-group">
                 <label for="input_Phone">Phone</label>
-                <input type="text" id="input_Phone" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="input_Notes">Notes</label>
-                <textarea id="input_Notes" class="form-control" rows="4"></textarea>
+                <input type="text" id="input_Phone" class="form-control" value="<?php print $current->Phone; ?>">
               </div>
             </div>
             <!-- /.card-body -->
@@ -169,32 +186,28 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label for="inputEstimatedBudget">Receive Email Notifications</label>
-                <input type="number" id="inputEstimatedBudget" class="form-control">
+                <label for="inputEstimatedBudget">Receive Notification Emails</label>
+                <input type="checkbox" id="input_Notifications" class="form-control" checked>
               </div>
               <div class="form-group">
-                <label for="inputSpentBudget">Total amount spent</label>
-                <input type="number" id="inputSpentBudget" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputEstimatedDuration">Estimated project duration</label>
-                <input type="number" id="inputEstimatedDuration" class="form-control">
+                <label for="input_Notes">Notes</label>
+                <textarea id="input_Notes" class="form-control" rows="4"><?php print $current->Notes; ?></textarea>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        </div>
-      </div>
       <div class="row">
         <div class="col-12">
           <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Create new Porject" class="btn btn-success float-right">
+          <input onclick="return doSave(event);" type="submit" value="Save Changes" class="btn btn-success">
+        </div>
+      </div>
         </div>
       </div>
     </section>
     <!-- /.content -->
   </div>
+  </form>
 </div>
 <!-- ./wrapper -->
 
@@ -206,5 +219,24 @@
 <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../assets/js/adminlte.min.js"></script>
+<script>
+    function doSave(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        let rec = {};
+        document.querySelectorAll(".form-control").forEach(item=> {
+            if (matches = item.id.match(/input_(.*)/)) {
+                rec[matches[1]] = item.value;
+            }
+        });
+        let out = { profile: rec};
+
+        fetch("api.php?action=saveProfile&profile="+JSON.stringify(rec)).then(r=>r.json()).then(data=>{
+            console.log(`saveProfile`);
+            console.dir(data);
+        });
+        return false;
+    }
+</script>
 </body>
 </html>

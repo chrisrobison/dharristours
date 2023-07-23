@@ -13,6 +13,12 @@
          printf("Connect failed: %s\n", mysqli_connect_error());
          exit();
     }
+    
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
 
     if ($in['type']) {
         switch($in['type']) {
@@ -67,6 +73,9 @@
             case "makeRequest":
                 $out = makeRequest($link, $in);
                 break;
+            case "saveProfile":
+                $out = saveProfile($link, $in, $busID);
+                break;
         }
 
         file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
@@ -75,6 +84,22 @@
         print json_encode($out);
     }
     
+    function saveProfile($link, $in, $busID) {
+        $upd = array();
+        foreach ($in['profile'] as $key=>$val) {
+            $upd[] = $key."='".preg_replace("/\'/","\'", $val)."'";
+        }
+        $sql = "UPDATE Business set ".join(", ", $upd)." WHERE BusinessID='$busID'";
+        $results = mysqli_query($sql);
+        $out = new stdClass();
+        if (mysqli_affected_rows($link)) {
+            $out->status = "ok";
+        } else {
+            $out->status = "error";
+        }
+        return $out;
+    }
+
     function makeRequest($link, $in) {
         global $_REQUEST;
         

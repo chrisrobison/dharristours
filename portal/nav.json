@@ -45,18 +45,15 @@
             "title": "Account",
             "link": "/portal/account/index.php",
             "icon": "fas fa-file-invoice",
-            "hidden": true,
 			"_children": [
 				{
-					"title": "Profile",
+					"title": "Business Profile",
 					"link": "/portal/account/profile.php",
-					"icon": "fas fa-user",
-                    "hidden": true
+					"icon": "fas fa-user"
 				},{
-					"title": "Billing",
-					"link": "/portal/account/billing.php",
-					"icon": "fas fa-file-invoice",
-                    "hidden": true
+					"title": "Invoices",
+					"link": "/portal/account/invoices.php",
+					"icon": "fas fa-file-invoice"
 				}
             ]
         },

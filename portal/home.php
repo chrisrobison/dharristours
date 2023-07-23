@@ -2,11 +2,11 @@
     if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); 
     $in = $_REQUEST;
 
-    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
     $now = date("Y-m-d H:i:s");
     $shortnow = date("Y-m-d");
-    $yr = date("Y");
+    $yr = date("Y-01-01");
     
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
     if (array_key_exists("BusinessID", $_SESSION)) {
         $busID = $_SESSION['BusinessID'];
     }
