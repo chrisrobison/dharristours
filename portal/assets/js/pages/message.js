@@ -54,7 +54,7 @@ function postMessage(e) {
 
   const data = { data: {...serializeForm()}, "type": 'post' };
 
-  postData("messages.php", $.param(data), function (data) {
+  postData("/portal/messages.php", $.param(data), function (data) {
     console.log(data);
     if(data.status == 'error'){
       $('.message-fail').show()
@@ -75,7 +75,7 @@ function getMessages() {
 
   const data = { data: {...serializeForm()}, "type": 'get' };
 
-  postData("messages.php", $.param(data), function (data) {
+  postData("/portal/messages.php", $.param(data), function (data) {
     if (data.status !== 'ok') return
     const messageList= data.data
     $('.message-list').html(
@@ -122,7 +122,7 @@ const formatTitle = (firstName, lastName, login, email) =>
         ? `${firstName} ${lastName}`
         : login || email
 const formatTime = time => time //todo - format time - JJ
-const formatImg = img => img || 'assets/img/person.png'
+const formatImg = img => img || '/portal/assets/img/person.png'
 const PostTemplate = ({ content, time, img, title }) => `
   <div class="post">
     <div class="user-block">

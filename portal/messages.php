@@ -47,7 +47,7 @@ function getMessages($link, $in) {
 
     $sql = "SELECT m.id, m.content, m.created_at, l.FirstName, l.LastName, l.Login, l.Email, l.Picture 
         FROM messagethread m 
-        LEFT JOIN login l ON m.user_id = l.LoginID 
+        LEFT JOIN Login l ON m.user_id = l.LoginID 
         WHERE m.resource_id = '".$vals[0]."' AND m.resource_type = '".$vals[1]."'";
 
     $results = mysqli_query($link, $sql);
@@ -55,7 +55,7 @@ function getMessages($link, $in) {
         $out->status = "error";
         $out->e = mysqli_error($link);
     }
-    $out->data= $results->fetch_all(MYSQLI_ASSOC);
+    if($results) $out->data= $results->fetch_all(MYSQLI_ASSOC);
     return $out;
 }
 
