@@ -504,11 +504,13 @@ EOT;
                 </div>
             </form>
                 <div class="row">
-                    <?php
-                    $MSG_RESOURCE_ID = $current->RequestID;
-                    $MSG_RESOURCE_TYPE = "quote";
-                    include_once '../stubs/message-thread.php';
-                    ?>
+                    <div class="col-md-6">
+                        <?php
+                        $MSG_RESOURCE_ID = $current->RequestID;
+                        $MSG_RESOURCE_TYPE = "quote";
+                        include_once '../stubs/message-thread.php';
+                        ?>
+                    </div>
                 </div>
             </section>
         </div>
