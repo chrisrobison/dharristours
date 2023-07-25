@@ -19,7 +19,7 @@ require_once("dbobj_class.php");
  *
  *
  */
-if (!class_exists(obj)) {
+if (!class_exists('obj')) {
 class obj {
    /**
     *
@@ -88,7 +88,7 @@ class TABLE extends dbobj {
             eval("class ".$rcs." extends dbobj { function ".$rcs.'() { $this->resource = "'.$rcs.'"; $this->host = "' . $this->dbhost . '"; $this->db = "'.(($db) ? $db : $this->dbname).'"; } }');
          }
       }
-      if ($target) {
+      if (isset($target)) {
          $this->$target->$rcs = new $rcs();
          $this->$target->$rcs->select_db($db);
       } else {

@@ -17,7 +17,7 @@ class boss {
     * Main object constructor 
     *
     **/
-   function &boss($server="") {
+   function boss($server="") {
       $this->app = $this->getAppInfo($server);
       $this->share = new obj('SS_Share', 'pimp', 'pimpin', 'localhost');
       $this->db = new obj($this->app->DB, $this->app->DBUser, $this->app->DBPwd, $this->app->DBHost);
@@ -117,7 +117,7 @@ class boss {
    
    function get($resource, $id='') {
       
-      if ($resource) {     
+      if (isset($resource)) {     
          $this->db->addResource($resource);
          
          // Perform 'get' if we have a numeric ID
@@ -1734,7 +1734,7 @@ class _Process extends boss {
     * @param   int   $pid - ProcessID of record to retrieve from the 'Process' table [optional]
     *
     **/
-   function get($pid='') {
+   function get($pid='', $resource='Process') {
       $this->db->linkResource('Action', 'ProcessID', 'ProcessID');
       $pid = (!$pid) ? $this->ProcessID : $pid;
 
@@ -1956,7 +1956,8 @@ class _Process extends boss {
     * Attach processes 
     *
     **/
-   function addAction($pid) {
+   function addAction($process='', $resource='Action') {
+      $pid = $process;
       $this->dbobj->addResource('Action');
       for ($m=0; $m<count($this->Processes); $m++) {
          $tmparr = new _Action($this->Processes[$m]->ProcessID, $pid, $this->dbobj);
@@ -1992,7 +1993,7 @@ class _Action extends boss {
     * associated with each process.
     *
     **/
-   function get($aid='') {
+   function get($aid='', $resource='') {
       $aid = (!$aid) ? $this->ActionID : $aid;
       $this->db->linkResource('Operation', 'ActionID', 'ActionID');
 

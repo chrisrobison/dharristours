@@ -1,6 +1,6 @@
 <?php
 /**
- * dbd_mysql_class.php - provide an abstracted object-oriented interface for MySQL DB access
+ * dbd_mysqli_class.php - provide an abstracted object-oriented interface for MySQL DB access
  *
  * @author Christopher D. Robison <cdr@netoasis.net>
  * @copyright (c) Copyright, 2004 - All Rights Reserved
@@ -103,34 +103,34 @@ function &connect($forcedb='', $dbuser='', $dbpass='', $dbhost='localhost') {
    $this->errstr = "";
    $this->db = $forcedb;
 
-   if (!$dbhost) $dbhost = (!$host) ? 'localhost' : $host;
-   if (!$dbuser) $dbuser = (!$user) ? 'pimp' : $user;
-   if (!$dbpass) $dbpass = (!$pass) ? 'pimpin' : $pass;
-   if (!$db) $db = (!$forcedb) ? 'sys' : $forcedb;
+   if (!$dbhost) $dbhost = (!isset($host)) ? 'localhost' : $host;
+   if (!$dbuser) $dbuser = (!isset($user)) ? 'pimp' : $user;
+   if (!$dbpass) $dbpass = (!isset($pass)) ? 'pimpin' : $pass;
+   if (!isset($db)) $db = (!isset($forcedb)) ? 'sys' : $forcedb;
 
-   if (!$this->db) $this->db = (!$db) ? 'sys' : $db;
+   if (!$this->db) $this->db = (!isset($db)) ? 'sys' : $db;
    if ($forcedb) $db = $this->db = $forcedb;
 
    $this->errstr = "";
  
    # Connect if not already connected
    if (!$this->connid)  {
-      $this->connid = mysql_connect( $dbhost, 
+      $this->connid = mysqli_connect( $dbhost, 
                                       $dbuser,
                                       $dbpass,
                                       false,
                                       65536
                                      );
 
-      # Use mysql_errno()/mysql_error() if they work for
+      # Use mysqli_errno()/mysqli_error() if they work for
       # connection errors; use $php_errormsg otherwise
       if (!$this->connid) {
          
-         # mysql_errno() returns nonzero if it's
+         # mysqli_errno() returns nonzero if it's
          # functional for connection errors
-         if (mysql_errno()) {
-            $this->errno = mysql_errno();
-            $this->errstr = mysql_error();
+         if (mysqli_errno($this->connid)) {
+            $this->errno = mysqli_errno($this->connid);
+            $this->errstr = mysqli_error($this->connid);
          } else {
             $this->errno = -1;
             $this->errstr = $php_errormsg;
@@ -150,7 +150,7 @@ function get_connection() {
    return($this->connid);
 }
 
-function &select_db($db) {
+function select_db($db) {
    global $dbuser;
    global $dbpass;
    if (!$this->connid) $this->connid = $this->connect($db, $dbuser, $dbpass);
@@ -160,14 +160,14 @@ function &select_db($db) {
       # select database if one has been specified
       if (isset($this->db) && $this->db != "") {
 
-         if (!@mysql_select_db($this->db, $this->connid)) {
+         if (!@mysqli_select_db($this->connid, $this->db)) {
 
-            $this->errno = mysql_errno();
-            $this->errstr = mysql_error();
+            $this->errno = mysqli_errno($this->connid);
+            $this->errstr = mysqli_error($this->connid);
             $this->error("Cannot select database: ".$this->db);
             return(FALSE);
          } else {
-            return(TRUE);
+            return($db);
          }
          
       }
@@ -183,7 +183,7 @@ function disconnect() {
 
    # Close any open connections
    if ($this->connid != 0)    {
-      mysql_close($this->connid);
+      mysqli_close($this->connid);
       $this->connid = 0;
       unset($this->user);
       unset($this->host);
@@ -203,7 +203,7 @@ function disconnect() {
  * Quote function to escape string in preparation for use in a SQL statement.
  * 
  * This convenience function discovers the best method to use for quoting, preferring
- * the mysql_escape_string() function, if it exists, and falls back to the builtin addslashes().  
+ * the mysqli_escape_string() function, if it exists, and falls back to the builtin addslashes().  
  *
  * You may optionally pass a 'true' value as a 3rd argument to this method to have an empty values 
  * return NULL and not an empty string('').  
@@ -221,7 +221,7 @@ function sql_quote($str, $quote="'", $null=false) {
    }
    if (get_magic_quotes_gpc()) $str = stripslashes($str);
 
-   $func = function_exists("mysql_real_escape_string") ? "mysql_real_escape_string" : "addslashes";
+   $func = function_exists("mysqli_real_escape_string") ? "mysqli_real_escape_string" : "addslashes";
 
    return($quote . $func($str) . $quote);
 }
@@ -297,9 +297,9 @@ function execute($arg = "") {
 
    $this->num_rows = 0;
 
-   $this->result = mysql_query($query_str, $this->connid);
-   $this->errno = mysql_errno();
-   $this->errstr = mysql_error();
+   $this->result = mysqli_query($this->connid, $query_str);
+   $this->errno = mysqli_errno($this->connid);
+   $this->errstr = mysqli_error($this->connid);
    
    if ($this->errno) {
       $this->error("Cannot execute query: $query_str [".$this->errstr."]");
@@ -307,7 +307,7 @@ function execute($arg = "") {
    }
    # get number of affected rows for non-SELECT; this also returns
    # number of rows for a SELECT
-   $this->num_rows = mysql_affected_rows($this->connid);
+   $this->num_rows = mysqli_affected_rows($this->connid);
    
    return($this->result);
 }
@@ -323,7 +323,7 @@ function free_result() {
 #@ _FREE_RESULT_
 
    if ($this->result)
-      mysql_free_result($this->result);
+      mysqli_free_result($this->result);
       unset($this->row);
    $this->result = 0;
    return(TRUE);
@@ -340,9 +340,9 @@ function free_result() {
 function fetch_array() {
 #@ _FETCH_ARRAY_
 
-   $this->row = mysql_fetch_array($this->result);
-   $this->errno = mysql_errno();
-   $this->errstr = mysql_error();
+   $this->row = mysqli_fetch_array($this->result);
+   $this->errno = mysqli_errno($this->connid);
+   $this->errstr = mysqli_error($this->connid);
    
    if ($this->errno) {
       $this->error("fetch_array error");
@@ -366,9 +366,9 @@ function fetch_array() {
 function fetch_row() {
 #@ _FETCH_ROW_
 
-   $this->row = mysql_fetch_row($this->result);
-   $this->errno = mysql_errno();
-   $this->errstr = mysql_error();
+   $this->row = mysqli_fetch_row($this->result);
+   $this->errno = mysqli_errno($this->connid);
+   $this->errstr = mysqli_error($this->connid);
    
    if ($this->errno) {
       $this->error("fetch_row error");
@@ -395,11 +395,11 @@ function fetch_object($nothis='') {
    $this->select_db($this->db);
    
    if ($this->result) {
-      $tmpobj = mysql_fetch_object($this->result);
+      $tmpobj = mysqli_fetch_object($this->result);
    
       if (!$nothis) $this->data = $tmpobj;
-      $this->errno = mysql_errno();
-      $this->errstr = mysql_error();
+      $this->errno = mysqli_errno($this->connid);
+      $this->errstr = mysqli_error($this->connid);
    } else {
       $this->error("fetch_object error: no valid result resource to fetch: ".print_r($this->result, true));
       return(FALSE);
@@ -426,7 +426,7 @@ function fetch_object($nothis='') {
  */
 function get_insert_id() {
 
-   return(mysql_insert_id($this->connid));
+   return(mysqli_insert_id($this->connid));
 }
 
 
@@ -436,7 +436,7 @@ function get_insert_id() {
  */
 function get_num_fields_count() {
 
-   return(mysql_num_fields($this->result));
+   return(mysqli_num_fields($this->result));
 }
 
 
@@ -446,7 +446,7 @@ function get_num_fields_count() {
  */
 function fetch_field($i) {
 
-   return(mysql_fetch_field($this->result, $i));
+   return(mysqli_fetch_field($this->result, $i));
 }
 
 /**
@@ -462,13 +462,13 @@ function list_databases($db='') {
    $this->databases = array();
    $databases = array();
    
-   while ($row = mysql_fetch_array($result)) {
+   while ($row = mysqli_fetch_array($result)) {
       $this->databases[] = $row[0];
       $databases[] = $row[0];
    }
 
-   //$result->errno = mysql_errno();
-   //$result->errstr = mysql_error();
+   //$result->errno = mysqli_errno();
+   //$result->errstr = mysqli_error();
    
    if ($result->errno) {
       $this->status = "error";
@@ -481,7 +481,7 @@ function list_databases($db='') {
       return($databases);
    }
 
-   mysql_free_result($result);
+   mysqli_free_result($result);
 }
 
 
@@ -499,13 +499,13 @@ function list_tables($db='') {
    $this->tables = array();
    $tables = array();
    
-   while ($row = mysql_fetch_array($result)) {
+   while ($row = mysqli_fetch_array($result)) {
       $this->tables[] = $row[0];
       $tables[] = $row[0];
    }
 
-   // $result->errno = mysql_errno();
-   // $result->errstr = mysql_error();
+   // $result->errno = mysqli_errno();
+   // $result->errstr = mysqli_error();
    
    if ($result->errno) {
       $this->status = "error";
@@ -518,7 +518,7 @@ function list_tables($db='') {
       return($tables);
    }
 
-   mysql_free_result($result);
+   mysqli_free_result($result);
 }
 
 /**
@@ -545,7 +545,7 @@ function fetch_fields($table='') {
       $this->error("fetch_fields error");
       return(FALSE);
    } else {
-      while ($row = mysql_fetch_object($result)) {
+      while ($row = mysqli_fetch_object($result)) {
          if (($row->Key == 'PRI') && (!$this->primary_key)) $this->primary_key = $row->Field;
          if ($row->Key == 'PRI') $this->primary_keys[] = $row->Field;
          array_push($fieldlist, $row->Field);
@@ -555,15 +555,15 @@ function fetch_fields($table='') {
    } 
    
    if ($result) {
-      //$result->errno = mysql_errno();
-      //$result->errstr = mysql_error();
+      //$result->errno = mysqli_errno();
+      //$result->errstr = mysqli_error();
    } 
    if (is_array($fieldlist)) {
       $this->status = "ok";
       return($fieldlist);
    }
 
-   mysql_free_result($result);
+   mysqli_free_result($result);
 }
 /**
  * Returns primary key for specified table or current resource
@@ -582,7 +582,7 @@ function primary_key($table='') {
    $result = $this->execute("show columns from `$table`");
    $keys = array();
 
-   while ($row = mysql_fetch_object($result)) {
+   while ($row = mysqli_fetch_object($result)) {
       if ($row->Key == 'PRI') {
          if (!$primary_key) $primary_key = $row->Field;
          $keys[] = $row->Field;
