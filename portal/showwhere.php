@@ -18,8 +18,12 @@
       * {
         box-sizing: border-box;
       }
+      body {
+
+      }
       #map {
-        height: 90vh;
+        height: 95vh;
+
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -133,13 +137,14 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
     <script src="assets/MovingMarker.js"></script>
     <script defer src="/where/init-firebase.js"></script>  
-    <script defer src="/where/markerclustererplus.min.js"></script>  
     <script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.min.js"></script>
     <script defer src="/portal/showwhere.js"> </script>
   </head>
   <body>
     <div id="map"></div>
-    <input type="range" id="history" name="history" min="0" max="100" onchange="app.showHistory(this.value)" /><button style='font-size:1.1em' class='control' onclick='return app.playHistory()'>▸</button><button class='control' onclick='return app.stopHistory()'>◼</button><br><span id="currentTime"></span>
+    <form onsubmit="return false;">
+    <input type="range" id="history" name="history" min="0" max="100" onchange="app.showHistory(this.value)" /><button style='font-size:1.1em' class='control' onclick='return app.playHistory(event)'>▸</button><button class='control' onclick='return app.stopHistory(event)'>◼</button><span id="currentTime"></span>
+    </form>
 <script>
 (function() {
 L.Marker.rotatedMarker= L.Marker.extend({
@@ -220,18 +225,26 @@ L.Marker.rotatedMarker= L.Marker.extend({
             cursor: 0,
             playing: 0,
 <?php
-$filter = " WHERE 1=1 AND ";
+$filter = " WHERE ";
 if (array_key_exists('date', $in)) {
-    $filter .= "(Created>'{$in['date']} 00:00:00' AND Created<'{$in['date']} 23:59:59'";
+    $filter .= "(Created>'{$in['date']} 08:00:00' AND Created<'{$in['date']} 18:00:00'";
+}
+if (array_key_exists('start', $in)) {
+    if (!array_key_exists('end', $in)) {
+        $in['end'] = date("Y-m-d H:i:s", strtotime($in['start']) + 43200);
+    }
+    $filter .= "(Created>'{$in['start']}' AND Created<'{$in['end']}')";
 }
 
-$sql = "select * from WebfleetBus order by Created desc limit 100;";
-$results = mysqli_query($link, $sql);
-$json = array();
-while ($row = mysqli_fetch_object($results)) {
-   $json[] = json_decode($row->JSON); 
+$sql = "select * from WebfleetBus {$filter} order by Created limit 100;";
+
+if ($results = mysqli_query($link, $sql)) {
+    $json = array();
+    while ($row = mysqli_fetch_object($results)) {
+       $json[] = json_decode($row->JSON); 
+    }
+    print "history: " . json_encode($json)."\n";
 }
-print "history: " . json_encode($json)."\n";
 ?>
         
         },
@@ -249,14 +262,21 @@ print "history: " . json_encode($json)."\n";
         showHistory: function(when) {
             app.map.removeLayer(app.state.markerClusterGroup);
             app.update(app.data.history[when]);
+            console.dir(app.data.history[when]);
         },
-        playHistory: function() {
+        playHistory: function(evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
             app.data.cursor = document.querySelector("#history").value;
             app.data.playing = 1;
             setTimeout(app.stepHistory, 1000);
+            return false;
         },
-        stopHistory: function() {
+        stopHistory: function(evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
             app.data.playing = 0;
+            return false;
         },
         stepHistory: function() {
             app.data.cursor++;
@@ -266,7 +286,7 @@ print "history: " . json_encode($json)."\n";
             }
 
             document.querySelector("#history").value = app.data.cursor;
-            document.querySelector("#currentTime").innerHTML = app.data.history[app.data.cursor][0].pos_time.replace(/^\S*\s/, '');
+            document.querySelector("#currentTime").innerHTML = app.data.history[app.data.cursor][0].msgtime;
 
             app.map.removeLayer(app.state.markerClusterGroup);
             app.update(app.data.history[app.data.cursor]);

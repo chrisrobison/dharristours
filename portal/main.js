@@ -72,7 +72,7 @@
             fetch("/portal/api.php?type=switch&bid="+id).then(r=>r.json()).then(data=>{
                 console.log("Business ID override");
                 console.dir(data);
-                document.querySelector("#home-iframe").contentWindow.location.reload();
+                document.querySelectorAll("iframe").forEach(item=>{ item.contentWindow.location.reload() });
             });
         },
         switchUser: function(evt, email) {
@@ -81,6 +81,7 @@
             fetch("switch.php?email=" + email).then(r=>r.json()).then(data=>{
                 console.log("switched user");
                 console.dir(data);
+                document.querySelectorAll("iframe").forEach(item=>{ item.contentDocument.location.reload() });
             });;
         },
         loadTab: function(url="/portal/home.php", title="New Tab", name="newtab", autoshow=true) {

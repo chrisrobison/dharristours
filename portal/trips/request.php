@@ -1,5 +1,13 @@
 <?php
+    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); 
     $in = $_REQUEST;
+    session_start();
+
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -450,7 +458,7 @@ app.maps[0] = map;
 document.querySelector("#PickupAC").addEventListener("auto-complete-change", function(evt) {
     console.log("Pickup autocomplete");
     console.dir(evt);
-    evt.re
+
 });
 
 let params = <?php print json_encode($in); ?>;
@@ -488,7 +496,7 @@ fdo.addEventListener("change", function(evt) {
 
     app.addStop(evt.target.id, evt.target.value, evt, false, true);
 });
-
+app.data.session = <?php print json_encode($_SESSION); ?>;
 
 })();
     </script>

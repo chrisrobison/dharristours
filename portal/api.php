@@ -76,6 +76,9 @@
             case "saveProfile":
                 $out = saveProfile($link, $in, $busID);
                 break;
+            case "saveLogin":
+                $out = saveLogin($link, $in);
+                break;
         }
 
         file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
@@ -86,11 +89,37 @@
     
     function saveProfile($link, $in, $busID) {
         $upd = array();
-        foreach ($in['profile'] as $key=>$val) {
+        $json = json_decode($in['profile']);
+        
+        foreach ($json as $key=>$val) {
             $upd[] = $key."='".preg_replace("/\'/","\'", $val)."'";
         }
         $sql = "UPDATE Business set ".join(", ", $upd)." WHERE BusinessID='$busID'";
+        file_put_contents("/tmp/geocode.log", $sql."\n", FILE_APPEND);
+        $results = mysqli_query($link, $sql);
+        $out = new stdClass();
+        if (mysqli_affected_rows($link)) {
+            $out->status = "ok";
+        } else {
+            $out->status = "error";
+        }
+        return $out;
+    }
+
+    function saveLogin($link, $in) {
+        global $boss;
+        $before = $boss->getObject("Login", $_SESSION['LoginID']);
+        $upd = array();
+        
+        foreach ($in['profile'] as $key=>$val) {
+            $upd[] = $key."='".preg_replace("/\'/","\'", $val)."'";
+        }
+
+        $sql = "UPDATE Login set ".join(", ", $upd)." WHERE LoginID='{$_SESSION['LoginID']}';";
+print $sql;
+        file_put_contents("/tmp/geocode.log", $sql."\n", FILE_APPEND);
         $results = mysqli_query($sql);
+        
         $out = new stdClass();
         if (mysqli_affected_rows($link)) {
             $out->status = "ok";
@@ -112,6 +141,7 @@
             $out = new stdClass();
             $keys = array();
             $vals = array();
+            $in->data->RequestDate = date("Y-m-d h:i:s");
 
             foreach ($in->data as $key=>$val) {
                 $out->{$key} = $val;
@@ -123,13 +153,16 @@
 
             $result = mysqli_query($link, $sql);
         } else {
+            $new->status = "error";
             $new->error = "Invalid request data.";
             return $new;
         }
         if ($result) {
             $newid = mysqli_insert_id($link);
+            $new->status = "ok";
             $new->newid = $newid;
         } else {
+            $new->status = "error";
             $new->error = "Error creating request";
         }
         

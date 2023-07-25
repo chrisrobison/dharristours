@@ -12,7 +12,7 @@
     if (array_key_exists("BusinessID", $_SESSION)) {
         $busID = $_SESSION['BusinessID'];
     }
-
+    $business = $boss->getObject("Business", $busID);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +46,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Account Billing History</h1>
+                            <h1>Account Billing History for <?php print $business->Business; ?></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -71,7 +71,7 @@
                   <ul class="pagination pagination-sm float-right">
 <?php
     $curpage = (array_key_exists('page', $in)) ? $in['page'] : 0;
-    $sql = "SELECT * FROM Invoice, Job  WHERE Invoice.BusinessID='$busID' AND Invoice.JobID=Job.JobID ";
+    $sql = "SELECT * FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID AND Job.BusinessID!=0 AND Job.JobDate<now()";
     $results = mysqli_query($link, $sql);
 
     $rows = mysqli_num_rows($results);
@@ -96,16 +96,18 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>#</th>
+                      <th>Job</th>
                       <th>Invoice</th>
                       <th>Date</th>
-                      <th>Amount</th>
+                      <th>Balance</th>
                       <th>Status</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
 <?php
-    $sql = "SELECT * FROM Invoice, Job  WHERE Invoice.BusinessID='$busID' AND Invoice.JobID=Job.JobID LIMIT ".($curpage * 10).", 10;";
+    $sql = "SELECT * FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID AND Job.JobDate<now() ORDER BY InvoiceDate DESC LIMIT ".($curpage * 10).", 10 ;";
     $results = mysqli_query($link, $sql);
 for ($i=0; $i<10; $i++) {
    if ( $row = mysqli_fetch_object($results)) {
@@ -114,7 +116,7 @@ for ($i=0; $i<10; $i++) {
         } else {
             $paid = "<span class='badge bg-danger'>DUE</span>";
         }
-        print "<tr><td>{$row->Job}</td><td>".date("m/d/Y", strtotime($row->InvoiceDate))."</td><td>\${$row->InvoiceAmt}</td><td>$paid</td><td><a target='_blank' href='/files/invoices/{$row->InvoiceID}.html'><i class='fa-solid fa-eye'></i></a></td></tr>";
+        print "<tr><td>{$row->InvoiceID}</td><td>{$row->JobID}</td><td>{$row->Job}</td><td>".date("m/d/Y", strtotime($row->InvoiceDate))."</td><td>\${$row->Balance}</td><td>$paid</td><td><a target='_blank' href='/files/invoices/{$row->InvoiceID}.html'><i class='fa-solid fa-eye'></i></a></td></tr>";
     }
 }
 ?>

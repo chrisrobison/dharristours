@@ -6,6 +6,16 @@
             "icon": "fas fa-home"
         },
         {
+            "title": "Reserve a Bus",
+            "link": "/portal/trips/request.php",
+            "icon": "fas fa-file-pen"
+        },
+        {
+            "title": "Where's My Bus?",
+            "link": "/portal/showwhere.php",
+            "icon": "fas fa-file-pen"
+        },
+        {
             "title": "Trips",
             "link": "#",
             "icon": "fas fa-bus",
@@ -37,30 +47,27 @@
             "icon": "fas fa-file-invoice",
 			"_children": [
 				{
-					"title": "Profile",
+					"title": "Business Profile",
 					"link": "/portal/account/profile.php",
 					"icon": "fas fa-user"
 				},{
-					"title": "Billing",
-					"link": "/portal/account/billing.php",
+					"title": "Invoices",
+					"link": "/portal/account/invoices.php",
 					"icon": "fas fa-file-invoice"
 				}
             ]
         },
         {
-            "title": "Request Quote",
-            "link": "/portal/trips/request.php",
-            "icon": "fas fa-file-pen"
-        },
-        {
-            "title": "Contact",
+            "title": "Contact Us",
             "link": "contact.php",
-            "icon": "fas fa-envelope"
+            "icon": "fas fa-envelope",
+            "hidden": true
         },
         {
             "title": "Help",
             "link": "help.html",
-            "icon": "fa-solid fa-circle-question"
+            "icon": "fa-solid fa-circle-question",
+            "hidden": true
         },
         {
             "title": "Logout",

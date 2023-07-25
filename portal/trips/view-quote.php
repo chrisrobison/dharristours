@@ -1,5 +1,5 @@
 <?php  
-    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
+    if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); 
     $in = $_REQUEST;
     if (array_key_exists("id", $in)) {
         $current = $boss->getObject("Request", $in['id']);
@@ -25,12 +25,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/portal/assets/fontawesome-free-6.4.0-web/css/all.min.css">
     <!-- Theme style -->
-    <!--<link rel="stylesheet" href="assets/css/icheck-bootstrap.min.css">-->
     <link rel="stylesheet" href="/portal/assets/css/adminlte.min.css">
-    <link rel="stylesheet" href="/portal/assets/css/customform.css">
-    <link rel="stylesheet" href="/portal/assets/js/plugins/summernote/summernote-bs4.min.css">
     <link rel="icon" href="/files/favicon.png">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
 
  <!-- Make sure you put this AFTER Leaflet's CSS -->
  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
@@ -410,7 +407,7 @@ EOT;
 <div class="alert alert-info alert-dismissible">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
   <h5><i class="icon fas fa-info"></i>Quote not yet available</h5>
-  We're sorry, but we have not had a chance to respond to your bus reservation request yet.<br>Please be assured that your trip is <em>our</em> <u>top priority<u> and we will be sending a quote for your trip shortly. <br><br> Thank you for choosing D Harris Tours!
+  We're sorry, but we have not had a chance to respond to your bus reservation request yet.<br>Please be assured that your trip is <em>our</em> <u>top priority</u> and we will be sending a quote for your trip shortly. <br><br> Thank you for choosing D Harris Tours!
 </div>
 EOT;
                             } else {
@@ -420,14 +417,13 @@ EOT;
                         ?>
                     </div>
                 </div>
-
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>
                     <a name="map"></a>
-                    <div class="col-md-12">
+                    <div class="col-md-3">
                         <div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Map</h3>
@@ -502,16 +498,6 @@ EOT;
                         <!-- /.card -->
                     </div>
                 </div>
-            </form>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        $MSG_RESOURCE_ID = $current->RequestID;
-                        $MSG_RESOURCE_TYPE = "quote";
-                        include_once '../stubs/message-thread.php';
-                        ?>
-                    </div>
-                </div>
             </section>
         </div>
 
@@ -520,10 +506,6 @@ EOT;
     <script src="/portal/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/portal/assets/fontawesome-free-6.4.0-web/js/all.min.js"></script>
     <script src="/portal/assets/js/adminlte.min.js"></script>
-    <script src="/portal/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/portal/assets/js/plugins/jquery-validation/additional-methods.js"></script>
-    <script src="/portal/assets/js/plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="/portal/assets/js/pages/message.js"></script>
     <script src="/portal/route.js"></script>
     <script>
 (function() {

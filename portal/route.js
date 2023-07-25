@@ -308,7 +308,11 @@
             req.Pax = document.querySelector("#Passengers").value;
             req.Date = document.querySelector("#Date").value;
             req.Notes = document.querySelector("#Notes").value;
-            
+            req.BusinessID = app.data.session["BusinessID"];
+            req.Name = app.data.session["Login"].FirstName + ' ' + app.data.session['Login'].LastName;
+            req.Phone = app.data.session['Login'].Phone;
+            req.Email = app.data.session['Login'].Email;
+
             app.postData("/portal/api.php?type=makeRequest", { data: req }).then(data=>{
                 if (data.newid) {
                     document.location.href = `/portal/trips/view-quote.php?id=${data.newid}`;
@@ -561,9 +565,13 @@
             let g1 = app.geocodeAddress(address1);// .then(coord=>{ app.data.origin = coord; console.log("geocode1"); console.dir(coord); });
             let g2 = app.geocodeAddress(address2);// .then(coord=>{ app.data.dest = coord; console.log("geocode2"); console.dir(coord); });
             Promise.all([ g1, g2]).then((values) => {
-                let orig = [values[0].latitude, values[0].longitude];
+                if (values && values.length > 1) {
+                    // let orig = [values[0].latitude, values[0].longitude];
 
-                app.getGeoJSON2([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude], mapidx);
+                    if (values[1] && values[0]) {
+                        app.getGeoJSON2([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude], mapidx);
+                    }
+                }
             });
 
             return false;

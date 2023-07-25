@@ -30,6 +30,12 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../assets/css/adminlte.min.css">
   <link rel="icon" href="/files/favicon.png">
+  <style>
+    section.content {
+        padding-left: 1rem;
+    }
+
+  </style>
 </head>
 <body class="hold-transition sidebar-collapse iframe-mode">
 <div class="wrapper">
@@ -83,7 +89,11 @@
               </div>
               <div class="form-group">
                 <label for="input_Email">Email</label>
-                <input type="text" id="input_HomePhone" class="form-control" value="<?php print $current->HomePhone; ?>">
+                <input type="text" id="input_Email" class="form-control" value="<?php print $current->Email; ?>">
+              </div>
+              <div class="form-group">
+                <label for="input_Email">Alt. Email</label>
+                <input type="text" id="input_AltEmail" class="form-control" value="<?php print $current->AltEmail; ?>">
               </div>
             </div>
             <!-- /.card-body -->
@@ -104,14 +114,10 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="../assets/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../assets/js/adminlte.min.js"></script>
+<script src="/portal/assets/jquery/jquery.min.js"></script>
+<script src="/portal/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/portal/assets/fontawesome-free-6.4.0-web/js/all.min.js"></script>
+<script src="/portal/assets/js/adminlte.min.js"></script>
 <script>
     function doSave(evt) {
         evt.stopPropagation();
@@ -124,7 +130,7 @@
         });
         let out = { profile: rec};
 
-        fetch("api.php?action=saveProfile&profile="+JSON.stringify(rec)).then(r=>r.json()).then(data=>{
+        fetch("/portal/api.php?action=saveLogin&profile="+JSON.stringify(rec)).then(r=>r.json()).then(data=>{
             console.log(`saveProfile`);
             console.dir(data);
         });

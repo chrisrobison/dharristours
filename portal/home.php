@@ -4,7 +4,9 @@
 
     $now = date("Y-m-d H:i:s");
     $shortnow = date("Y-m-d");
-    $yr = date("Y-01-01");
+    $yr = date("Y");
+    $today = date("d");
+    $tomonth = date("m");
     
     $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
     if (array_key_exists("BusinessID", $_SESSION)) {
@@ -12,19 +14,18 @@
     }
     
     if ($busID==332) {
-        $sql = "SELECT sum(NumberOfItems) as Pax, sum(TotalMileage) as Miles, sum(Hours) as Hours FROM Job WHERE JobDate>='$yr'";
+        $sql = "SELECT sum(NumberOfItems) as Pax, sum(TotalMileage) as Miles, sum(Hours) as Hours FROM Job WHERE JobDate>='$yr-01-01'";
     } else {
-        $sql = "SELECT sum(NumberOfItems) as Pax, sum(TotalMileage) as Miles, sum(Hours) as Hours FROM Job WHERE BusinessID='{$busID}' and JobDate>='$yr'";
+        $sql = "SELECT sum(NumberOfItems) as Pax, sum(TotalMileage) as Miles, sum(Hours) as Hours FROM Job WHERE BusinessID='{$busID}' and JobDate>='$yr-01-01'";
     }
     $boss->db->dbobj->execute($sql);
     $stats = $boss->db->dbobj->fetch_object();
     
     if ($busID==332) {
-        $sql = "SELECT count(JobID) as Trips FROM Job";
+        $sql = "SELECT count(JobID) as Trips FROM Job WHERE (JobDate>='$yr-01-01' AND JobDate<now()) AND JobCancelled=0";
     } else {
-        $sql = "SELECT count(JobID) as Trips FROM Job WHERE BusinessID='{$busID}'";
+        $sql = "SELECT count(JobID) as Trips FROM Job WHERE BusinessID='{$busID}' AND JobDate<now() AND JobCancelled=0";
     }
-
     $boss->db->dbobj->execute($sql);
     $trips = $boss->db->dbobj->fetch_object();
     $stats->Trips = $trips->Trips;

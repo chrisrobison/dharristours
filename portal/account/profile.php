@@ -38,12 +38,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Profile</h1>
+            <h1>Company Profile for <?php print $current->Business; ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Profile</li>
+              <li class="breadcrumb-item active">Company Info</li>
             </ol>
           </div>
         </div>
@@ -70,7 +70,7 @@
               </div>
               <div class="form-group">
                 <label for="input_Name">Contact Name</label>
-                <input type="text" id="input_Name" class="form-control" value="<?php print $current->Contact; ?>">
+                <input type="text" id="input_Contact" class="form-control" value="<?php print $current->Contact; ?>">
               </div>
               <div class="form-group">
                 <label for="input_Address">Address</label>
@@ -231,9 +231,15 @@
         });
         let out = { profile: rec};
 
-        fetch("api.php?action=saveProfile&profile="+JSON.stringify(rec)).then(r=>r.json()).then(data=>{
+        fetch("/portal/api.php?type=saveProfile&profile="+JSON.stringify(rec)).then(r=>r.json()).then(data=>{
             console.log(`saveProfile`);
             console.dir(data);
+            if (data.status == 'ok') {
+                $(document).Toasts('create', {
+                    title: "Success",
+                    body: "Your information has been saved."
+                });
+            }
         });
         return false;
     }
