@@ -9,6 +9,11 @@
     $tomonth = date("m");
     
     $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+
+    if (!$busID && $_SESSION['Login']->BusinessIDs) {
+        $busID = explode(",", $_SESSION['Login']->BusinessIDs)[0];
+    }
+
     if (array_key_exists("BusinessID", $_SESSION)) {
         $busID = $_SESSION['BusinessID'];
     }
@@ -147,7 +152,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                   <div class="icon">
                     <i class="fa-sharp fa-solid fa-bus-simple"></i>
                   </div>
-                  <a href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -161,7 +166,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                   <div class="icon">
                     <i class="fa-sharp fa-solid fa-users"></i>
                   </div>
-                  <a href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>            
             <div class="col-lg-3 col-6">
@@ -175,7 +180,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                   <div class="icon">
                     <i class="fa-sharp fa-solid fa-road"></i>
                   </div>
-                  <a href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -189,7 +194,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                   <div class="icon">
                     <i class="fa-solid fa-clock"></i>
                   </div>
-                  <a href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -228,7 +233,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
 
                 </p>
 
-                <a href="/trips/" class="card-link">View more...</a>
+                <a href="/portal/trips/" class="card-link">View more...</a>
               </div>
             </div>
             <!--div class="card card-primary card-outline">
@@ -317,7 +322,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
     }
 } ?>
                 </p>
-                <a href="/portal/trips/view-trip.php?id=<?php print $job->JobID; ?>" class="card-link">Trip details</a>
+                <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Quote {{RequestID}}', '/portal/trips/view-trip.php?id=<?php print $job->JobID; ?>', 'view-quote', true); return false;" href="/portal/trips/view-trip.php?id=<?php print $job->JobID; ?>" class="card-link">Trip details</a>
               </div>
             </div><!-- /.card -->
           </div>
@@ -413,6 +418,7 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                     try {
                         tmpmarker.addTo(tmpmap);
 
+                        app.state.maps.push(tmpmap);
                         app.maps.push(tmpmap);
                         app.getRoute(job.PickupLocation, job.DropOffLocation, idx);
                     } catch(err) {

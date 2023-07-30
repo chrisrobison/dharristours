@@ -189,15 +189,23 @@
                                     <input type="text" id="input_NumberOfItems" class="form-control" value="<?php print $current->NumberOfItems; ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_title">Origin</label><br>
+                                    <label for="input_title">Origin</label>
                                     <input type="text" id="input_PickupLocation" class="form-control" value="<?php print $current->PickupLocation; ?>">
                                 </div>
+<?php
+    $stops = preg_split("/\|/", $current->DropOffLocation);
+    foreach ($stops as $idx=>$stop) {
+?>
                                 <div class="form-group">
-                                    <label for="input_title">Destination</label><br>
-                                    <input type="text" id="input_DropOffLocation" class="form-control" value="<?php print $current->DropOffLocation; ?>">
+                                    <label for="input_title">Stop #<?php print $idx + 1; ?></label>
+                                    <input type="text" id="input_Stop<?php print $idx + 1; ?>" class="form-control" value="<?php print $stop; ?>">
                                 </div>
+
+<?php
+    }
+?>
                                 <div class="form-group">
-                                    <label for="input_title">Final Dropoff</label><br>
+                                    <label for="input_title">Final Dropoff</label>
                                     <input type="text" id="input_FinalDropOffLocation" class="form-control" value="<?php print $current->FinalDropOffLocation; ?>">
                                 </div>
                                 <div class="form-group">
@@ -230,17 +238,23 @@
                                 <div class="form-group">
                                     <label for="input_status">Status</label>
                                     <select id="input_status" class="form-control custom-select">
+                                        <?php 
+                                            $confirmed = (strtotime($current->JobDate) < time()) ? " SELECTED" : "";
+                                            $completed = (strtotime($current->JobDate) > time()) ? " SELECTED" : "";
+                                        ?>
                                         <option>Unknown</option>
                                         <option>Quote Requested</option>
                                         <option>Waiting for Confirmation</option>
-                                        <option>Confirmed</option>
-                                        <option>Completed</option>
+                                        <option<?php print $confirmed; ?>>Confirmed</option>
+                                        <option<?php print $completed; ?>>Completed</option>
                                     </select>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
+                    </div>
+                    <div class="col-md-6">
                         <div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Notes</h3>
@@ -258,18 +272,10 @@
                                 </div>
                                 <div class="form-group">
                                 </div>
-                                <!--div class="form-group">
-                                    <label for="actionItems">Action Items</label><button type="button" class="btn btn-tool" data-todo-widget="add" title="Add"><i class="fas fa-plus"></i></button><button type="button" class="btn btn-tool" data-todo-widget="remove" title="Remove"><i class="fas fa-trash"></i></button>
-                                    <ul data-widget="todo-list">
-                                        <li>Make list</li>
-                                    </ul>
-                                </div-->
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-                    </div>
-                    <div class="col-md-6">
 <?php
     $todaysJobs = $boss->getObject("Job", "BusinessID='{$busID}' and (JobID='{$in['id']}' OR ParentID='{$in['id']}') and JobCancelled=0");
     

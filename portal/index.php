@@ -175,13 +175,15 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="user" style="background:#ccc;color:#000;font-weight:bold;font-family:'HelveticaNeue',sans-serif;padding:0;display:flex;width:2em;height:2em;border-radius:50%;align-items:center;justify-content:center;">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="flex-direction:column;">
+                    <div style="display:flex;flex-direction:row;">
+                        <div class="user" style="background:#ccc;color:#000;font-weight:bold;font-family:'Lexend',sans-serif;padding:0;display:flex;width:2em;height:2em;border-radius:50%;align-items:center;justify-content:center;margin-right:0.5rem;">
                         <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
                        <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
+                        </div>
+                        <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
                         <?php
                             if ($_SESSION['Login']->Admin == 1) {
                                print '<label for="SwitchUser">Switch Login</label><br><select id="SwitchUser" onchange="app.switchUser(event, this.options[this.selectedIndex].value)">';

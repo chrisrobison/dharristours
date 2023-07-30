@@ -22,8 +22,10 @@
             waypoints: [],
             waypoint: 0
         },
+        maps: [],
         state: {
-            markers:[]
+            markers:[],
+            maps: []
 
         },
         addLeg: function() {
@@ -40,6 +42,10 @@
                 app.data.roundtrip = 1;
                 document.querySelector("#FinalDropOffAC").setAttribute("readonly", true);
                 document.querySelector("#FinalDropOff").setAttribute("readonly", true);
+
+                if (app.data.waypoint==0) {
+                   app.addWaypoint(); 
+                }
             } else {
                 app.data.roundtrip = 0;
                 document.querySelector("#FinalDropOffAC").removeAttribute("readonly");
@@ -231,7 +237,7 @@
         makeWaypoint: function(stopNum, value="") {
             let el = document.createElement("div");
             el.id = `Waypoint${stopNum}Wrap`;
-            el.className = "form-group";
+            el.className = "form-group input-group";
             let ac = document.createElement("auto-complete");
             ac.id = `Waypoint${stopNum}AC`;
             ac.setAttribute("src", "/portal/address2.php");
@@ -247,8 +253,8 @@
                 console.dir(evt);
                 app.addStop(evt.target.id, evt.target.value, evt, false, false);
             });
-            el.innerHTML = `<label for="Waypoint${stopNum}AC">Stop #${stopNum}</label>`;
-            el.appendChild(ac);
+            el.innerHTML = `<label for="Waypoint${stopNum}">Stop #${stopNum} <a onclick="app.toggleTime('Stop${stopNum}')"><i class="fa-regular fa-clock"></i><i class="fa-solid fa-caret-right"></i></a></label><div id="Stop${stopNum}Times" class="times"><select id="Stop${stopNum}TimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2'>Depart By</option></select><input type="time" id="Stop${stopNum}Time" step="900" style="width:8rem;" class="form-control"><a onclick="return app.toggleTime('Stop${stopNum}')" class='closetime'>x</a></div>`;
+el.appendChild(ac);
             setTimeout(function() { document.querySelector(`#Waypoint${stopNum}`).focus(); }, 200);
             ac.querySelector("input").focus();
 
@@ -299,6 +305,7 @@
             }
             req.Destination = wps.join("|");
             req.Return = app.data.stops.FinalDropOff.address;
+            req.Request = "Quote request for " + app.data.session.Business.Business;
             req.Start = document.querySelector("#Start").value;
             req.End = document.querySelector("#End").value;
             req.RoundTrip = (document.querySelector("#input_RoundTrip").checked) ? true : false;
@@ -315,7 +322,7 @@
 
             app.postData("/portal/api.php?type=makeRequest", { data: req }).then(data=>{
                 if (data.newid) {
-                    document.location.href = `/portal/trips/view-quote.php?id=${data.newid}`;
+                    parent.app.loadTab(`/portal/trips/view-quote.php?id=${data.newid}`, `Quote ${data.newid}`, `quote${data.newid}`, true, event);;
                 }
             });;
 /*
@@ -384,35 +391,37 @@
 
             request.send();  
         },
-        getGeoJSON2: function(origin, dest, mapidx) {
+        getGeoJSON2: function(orig, dest, mapidx) {
             let tgtmap = document.querySelector(`map${mapidx}`);
 
-            fetch(`/portal/directions.php?start=${origin}&end=${dest}`).then(r=>r.json()).then(data=>{
-                L.geoJSON(data).addTo(app.maps[mapidx]);
-                console.log("directions:");
-                console.dir(data);
-                let bounds = [[data.bbox[3], data.bbox[2]], [data.bbox[1], data.bbox[0]]];
-                app.maps[mapidx].fitBounds(bounds, {padding: [50, 50]} );
+            fetch(`/portal/directions.php?start=${orig}&end=${dest}`).then(r=>r.json()).then(data=>{
+                if (app.maps && app.maps[mapidx]) {
+                    L.geoJSON(data).addTo(app.maps[mapidx]);
+                    console.log("directions:");
+                    console.dir(data);
+                    let bounds = [[data.bbox[3], data.bbox[2]], [data.bbox[1], data.bbox[0]]];
+                    app.maps[mapidx].fitBounds(bounds, {padding: [50, 50]} );
 
-                document.querySelector(`#distance${mapidx}`).innerHTML = Math.round(data.features[0].properties.summary.distance * 0.000621371) + " miles";
+                    document.querySelector(`#distance${mapidx}`).innerHTML = Math.round(data.features[0].properties.summary.distance * 0.000621371) + " miles";
 
-                let dur = data.features[0].properties.summary.duration;
-                let hr = 0, min = Math.ceil(dur / 60);
-                if (min > 60) {
-                    hr = Math.floor(min / 60);
-                    min = (min - (hr * 60));
-                } else {
-                    hr = 0;
-                    min = Math.floor(dur / 60);
+                    let dur = data.features[0].properties.summary.duration;
+                    let hr = 0, min = Math.ceil(dur / 60);
+                    if (min > 60) {
+                        hr = Math.floor(min / 60);
+                        min = (min - (hr * 60));
+                    } else {
+                        hr = 0;
+                        min = Math.floor(dur / 60);
+                    }
+                    if (min < 10) {
+                        min = '0' + min;
+                    }
+                    if (hr < 10) {
+                        hr = '0' + hr;
+                    }
+                    document.querySelector(`#duration${mapidx}`).innerHTML = `${hr}:${min}`;
+                    document.querySelector(`#overlay${mapidx}`).style.display = "none";
                 }
-                if (min < 10) {
-                    min = '0' + min;
-                }
-                if (hr < 10) {
-                    hr = '0' + hr;
-                }
-                document.querySelector(`#duration${mapidx}`).innerHTML = `${hr}:${min}`;
-                document.querySelector(`#overlay${mapidx}`).style.display = "none";
                  
             });
         },
@@ -509,8 +518,8 @@
             });
             */
         },
-        calculateDistanceInMiles: async function(origin, destination) {
-            const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${app.config.apiKey}&start=${origin}&end=${destination}`;
+        calculateDistanceInMiles: async function(orig, destination) {
+            const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${app.config.apiKey}&start=${orig}&end=${destination}`;
 
             const response = await fetch(apiUrl);
             const data = await response.json();
@@ -525,10 +534,10 @@
             return distanceInMiles;
         },
         getMiles: function(orig, dest) {
-            const origin = orig ? orig : '-122.241661,38.054248'; // "longitude,latitude" of origin
-            const destination = dest ? dest : '-122.401636,37.646312'; // longitude,latitude of destination
+            orig = orig ? orig : '-122.241661,38.054248'; // "longitude,latitude" of origin
+            let destination = dest ? dest : '-122.401636,37.646312'; // longitude,latitude of destination
 
-            app.calculateDistanceInMiles(origin, destination)
+            app.calculateDistanceInMiles(orig, destination)
                 .then(distance => console.log(`Distance: ${distance} mi`))
                 .catch(error => console.error(error.message));
 
@@ -541,7 +550,8 @@
             if (!address1 || !address2) {
                 return false;
             }
-            
+            console.log(`getRoute: a1: ${address1} a2: ${address2} mapidx: ${mapidx}`);
+
             let overlay = document.querySelector(`#overlay${mapidx}`);
             if (overlay) {
                 overlay.style.display = "block";
@@ -631,6 +641,9 @@
                     latitude,
                     longitude
             };
+        },
+        toggleTime: function(who) {
+            document.querySelector(`#${who}Times`).classList.toggle("showtime");
         }
     }
     window.app = app;

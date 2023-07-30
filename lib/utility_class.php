@@ -609,6 +609,8 @@ class Utility {
                         $_SESSION['Login'] = $user;
                         $_SESSION['Admin'] = true;
                     }
+                    $business = $boss->getObject("Business", $user->BusinessID);
+                    $_SESSION['Business'] = $business;
                     $_SESSION['LoginID'] = $user->LoginID;
                     $_SESSION['UserID'] = $user->LoginID;
                     $_SESSION['BusinessID'] = $user->BusinessID;
@@ -658,6 +660,8 @@ class Utility {
             $_SESSION['LastName'] = $login->LastName;
             $_SESSION['Access'] = $login->Access;
             $_SESSION['ProcessAccess'] = $login->ProcessAccess;
+            $_SESSION['BusinessID'] = $login->BusinessID;
+            $_SESSION['BusinessIDs'] = $login->BusinessIDs;
             $_SESSION['Valid'] = "Yes";
             session_write_close();
             return true;

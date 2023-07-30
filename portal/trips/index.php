@@ -63,7 +63,6 @@
           <table class="table table-striped projects">
               <thead>
                   <tr>
-                      <th style="width: 1%">#</th>
                       <th>Job</th>
                       <th>Trip Date</th>
                       <th>Time</th>
@@ -76,7 +75,6 @@
 <?php
 $tpl = <<<EOT
 <tr id="rowTemplate">
-    <td>{{JobID}}</td>
     <td>{{Job}}</td>
     <td>{{JobDate}}</td>
     <td>{{PickupTime}}</td>

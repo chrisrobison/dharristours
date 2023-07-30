@@ -92,7 +92,7 @@
         }
     #map, .map {
         height: 23rem;
-        width: 26rem;
+        width: 100%;
         display:inline-block;
     }
     .map-form td {
@@ -102,6 +102,7 @@
         position: relative;
         display:flex;
         flex-direction:column;
+        overflow: hidden;
     }
     legend {
       font-size: 16px;
@@ -135,6 +136,54 @@
         padding-left:4px;
         background-color:#e9ecef;
         border:1px solid #ced4da;
+    }
+    .times {
+        display: inline-block;
+        position: absolute;
+        top: 0px;
+        left: 5rem;
+        width: 0rem;
+        background:#ddd;
+        box-shadow: 3px 3px 3px #0006;
+        z-index: 99999;
+        color: #000;
+        height: 2.1rem;
+        font-size: 0.9em;
+        transition: width 1s;
+        overflow: hidden;
+    }
+    .closetime {
+        border-radius: 50%;
+        border: 1px solid #0006;
+        position: absolute;
+        right: 4px;
+        top: 0.6rem;
+        width: 13px;
+        height: 13px;
+        padding: 0px;
+        margin: 0px;
+        line-height: 8px;
+        text-align: center;
+        color: #0006;
+        cursor: pointer;
+    }
+    .times.showtime {
+        width: 16rem;
+        position: absolute;
+        top: -5px;
+    }
+    .times select {
+        border-radius: 4px;
+        float: left;
+        border: 1px solid #0003;
+        height: 2rem;
+    }
+    .times input {
+        height: 2rem;
+    }
+
+    .showtime {
+        display: inline-block;
     }
     .input-group-icon {
         display: flex;
@@ -237,7 +286,7 @@ background-repeat: no-repeat;
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="jobTitle">Trip Date</label>
+                                            <label for="jobTitle"><i class="fa-regular fa-calendar"></i> Trip Date</label>
                                             <div class="col-8">
                                                 <input type="date" id="Date" name='Date' value="<?php print (array_key_exists('Date', $in)) ? $in['Date'] : ''; ?>" class="form-control">
                                             </div>
@@ -245,22 +294,26 @@ background-repeat: no-repeat;
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="jobCompany">Passengers</label>
-                                            <div class="col-4">
+                                            <label for="jobCompany"><i class="fa-solid fa-users"></i> Passengers</label>
+                                            <div class="col-5">
                                                 <input type="number" id="Passengers" placeholder="# of Pax" name='Pax' value="<?php print array_key_exists('Pax', $in) ? $in['Pax'] : ''; ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                      <div class="col-sm-4">
                                        <div class="checks">
-                                           <label for="input_RoundTrip">Round Trip</label>
-                                           <input type="checkbox" id="input_RoundTrip" onchange="app.roundTrip(event)" class="form-control" value="1">
+                                           <label for="input_RoundTrip" style="width:10rem;"><i class="fa-solid fa-repeat"></i> Round Trip</label>
+                                           <input type="checkbox" id="input_RoundTrip" style="width:10rem;" onchange="app.roundTrip(event)" class="form-control" value="1">
                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group input-group">
                                     
-                                    <label for="jobLocation">Pickup</label>
+                                    <label for="jobLocation">Pickup <a onclick="app.toggleTime('Pickup')"><i class="fa-regular fa-clock"></i><i class="fa-solid fa-caret-right"></i></a></label>
+                                    <div id="PickupTimes" class="times">
+                                        <select id="PickupTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2'>Depart By</option></select>
+                                        <input type="time" id="PickupTime" step="900" style="width:8rem;" class="form-control"><a onclick="return app.toggleTime('Pickup')" class='closetime'>x</a>
+                                    </div>
                                     <auto-complete id="PickupAC" data-autoselect="true" src="/portal/address2.php" for="Pickup-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-icon form-icon" ><img src="/portal/assets/mappin.svg"></div>
@@ -277,8 +330,12 @@ background-repeat: no-repeat;
                                 <div id="waypoints">
                                 
                                </div>
-                               <div class="form-group">
-                                    <label for="jobLocation">Final Dropoff</label>
+                               <div class="form-group input-group">
+                                    <label for="jobLocation">Final Dropoff <a onclick="app.toggleTime('FinalDropOff')"><i class="fa-regular fa-clock"></i><i class="fa-solid fa-caret-right"></i></a></label>
+                                    <div id="FinalDropOffTimes" class="times">
+                                        <select id="FinalDropOffTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2'>Depart By</option></select>
+                                        <input type="time" id="FinalDropOffTime" step="900" style="width:8rem;" class="form-control"><a onclick="return app.toggleTime('FinalDropOff')" class='closetime'>x</a>
+                                    </div>
                                     <auto-complete id="FinalDropOffAC" data-autoselect="true" src="/portal/address2.php" for="FinalDropOff-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-icon form-icon" >
@@ -344,7 +401,7 @@ background-repeat: no-repeat;
                         <!-- /.card -->
                     </div>
                     <a name="map"></a>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Map</h3>

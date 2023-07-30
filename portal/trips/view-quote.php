@@ -56,7 +56,7 @@
         width: 400px;
     }
     label {
-        width: 8em;
+        width: 7em;
     }
     label.info-box-text {
         display: inline-block;
@@ -132,7 +132,7 @@
         }
     #map, .map {
         height: 23rem;
-        width: 26rem;
+        width: 100%;
         display:inline-block;
     }
     .map-form td {
@@ -142,6 +142,7 @@
         position: relative;
         display:flex;
         flex-direction:column;
+        overflow: hidden;
     }
     legend {
       font-size: 16px;
@@ -234,6 +235,7 @@ background-repeat: no-repeat;
     }
     .timeline:before {
         left:33px;
+        margin: 50px 0 20px 0;
     }
     .timeline>div>.fa, .timeline>div>.fab, .timeline>div>.fad, .timeline>div>.fal, .timeline>div>.far, .timeline>div>.fas, .timeline>div>.ion, .timeline>div>.svg-inline--fa {
         width: 20px;
@@ -295,7 +297,7 @@ background-repeat: no-repeat;
 
                                           <div class="info-box-content">
                                             <span class="info-box-text">Trip Date</span>
-                                            <span style="white-space:nowrap;" class="info-box-number"><?php print date("M j, Y", strtotime($current->Date)); ?></span>
+                                            <span style="white-space:nowrap;" class="info-box-number"><?php print date("M j", strtotime($current->Date)); ?></span>
                                           </div>
                                           <!-- /.info-box-content -->
                                         </div>
@@ -394,8 +396,44 @@ EOT;
                                </div>
                                 <!-- /.row -->
                                 <div class="form-group">
+                                    <fieldset style="display:flex;flex-direction:row;align-items:center;justify-content:space-around;width:100%;">
+                                        <legend style="font-size:1.4rem;">Quote</legend>
+                                        <table style='width:100%;border-collapse:collapse;border:1px solid #0006;'>
+                                            <thead>
+                                                <tr>
+                                                    <th>Bus #</th>
+                                                    <th>Capacity</th>
+                                                    <th>1st 4 hours</th>
+                                                    <th>Overtime/hr</th>
+                                                    <th>One Way</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+<?php
+    $qids = preg_split("/,/", $current->RatesIDs);
+    $tots = 0;
+    $totpax = 0;
+    $totot = 0;
+    $totow = 0;
+
+    foreach ($qids as $cnt=>$qid) {
+        $quote = $boss->getObject("Rates", $qid);
+        $tots += $quote->FirstFour;
+        $totpax += $quote->Pax;
+        $totot += $quote->Overtime;
+        $totow += $quote->OneWay;
+
+        print "<tr><td>".($cnt + 1)."</td><td>".$quote->Pax." Passengers</td><td>$".$quote->FirstFour."</td><td>$".$quote->Overtime."</td><td>$".$quote->OneWay."</td></tr>\n";
+    }
+    print "<tr><td style='border-top:2px solid #000;'>Total</td><td style='border-top:2px solid #000;'>$totpax Passengers</td><td style='border-top:2px solid #000;'>$".number_format($tots)."</td><td style='border-top:2px solid #000;'>$".number_format($totot)."</td><td style='border-top:2px solid #000;'>$".number_format($totow)."</td></tr>\n";
+?>
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputDescription">Notes</label>
-                                    <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4" ></textarea>
+                                    <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4" ><?php print $current->Notes; ?></textarea>
                                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -423,7 +461,7 @@ EOT;
                         <!-- /.card -->
                     </div>
                     <a name="map"></a>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Map</h3>

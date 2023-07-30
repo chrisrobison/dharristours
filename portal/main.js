@@ -84,7 +84,11 @@
                 document.querySelectorAll("iframe").forEach(item=>{ item.contentDocument.location.reload() });
             });;
         },
-        loadTab: function(url="/portal/home.php", title="New Tab", name="newtab", autoshow=true) {
+        loadTab: function(url="/portal/home.php", title="New Tab", name="newtab", autoshow=true, evt) {
+            if (evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
             jQuery(".content-wrapper").IFrame('createTab', title, url, name, autoshow);
             return false;
         }

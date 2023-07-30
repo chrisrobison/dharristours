@@ -19,14 +19,19 @@
    
    if (($in['x'] == "save") || ($in['x'] == "new")) {
       $form = array();
-      if ($_POST['data']) {
+      if (array_key_exists('data', $_POST)) {
          $form = $_POST['data'];
-      } else if ($_GET['data']) {
+      } else if (array_key_exists('data', $_GET)) {
          $form = $_GET['data'];
+      } else if (array_key_exists('json', $in)) {
+         $json = $in['json'];
+         $form = json_decode($in['json']);
       } else {
          $form[$rsc] = $_POST[$rsc];
       }
-      unset($form['Track']);
+      if (is_array($form) && array_key_exists("Track", $form)) {
+         unset($form['Track']);
+      }
       $upd = $boss->cleanObject($form, true);
       $result = $boss->storeObject($upd);
       
@@ -60,7 +65,15 @@
       // TODO: Add check here for good value of $newid and if found empty, 
       //       throw an error back to client instead of the cheerful, optimistic drivel which follows
       $current = $boss->getObject($in['rsc'], $newid);
-
+      
+      if ($json) {
+         $out = new stdClass();
+         $out->record = $current;
+         $out->id = $newid;
+         header("Content-type: application/json");
+         print json_encode($out);
+         exit;
+      }
       $out = "<script type='text/javascript'>";
       if ($in['x'] == 'new') $out .= "$('#mygrid').trigger('reloadGrid');";
       $out .= "\ntry { \nif (simpleConfig) { simpleConfig.record = " . json_encode($current) . "; simpleConfig.id='{$newid}'; }\ntop.updateStatus('Saved ".$in['rsc']." ID $newid');\nif (fillForm) { fillForm('{$in['rsc']}','{$newid}',simpleConfig.record); updateForm($('#simpleForm'), '{$newid}', simpleConfig.record ); }\n} catch(e) { console.dir(e); }\n</script>";

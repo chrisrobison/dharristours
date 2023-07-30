@@ -237,7 +237,8 @@
             if (data.status == 'ok') {
                 $(document).Toasts('create', {
                     title: "Success",
-                    body: "Your information has been saved."
+                    body: "Your information has been saved.",
+                    class: "bg-success"
                 });
             }
         });

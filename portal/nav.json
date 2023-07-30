@@ -13,7 +13,7 @@
         {
             "title": "Where's My Bus?",
             "link": "/portal/showwhere.php",
-            "icon": "fas fa-file-pen"
+            "icon": "fas fa-map-location-dot"
         },
         {
             "title": "Trips",
@@ -47,13 +47,34 @@
             "icon": "fas fa-file-invoice",
 			"_children": [
 				{
-					"title": "Business Profile",
-					"link": "/portal/account/profile.php",
+					"title": "Account Settings",
+					"link": "/portal/account/account.php",
 					"icon": "fas fa-user"
 				},{
-					"title": "Invoices",
+					"title": "Company Profile",
+					"link": "/portal/account/profile.php",
+					"icon": "fas fa-building"
+				},{
+					"title": "Billing",
 					"link": "/portal/account/invoices.php",
-					"icon": "fas fa-file-invoice"
+					"icon": "fas fa-file-invoice",
+                    "_children": [
+                        {
+                            "title": "Invoices Due",
+                            "link": "/portal/account/invoices.php?x=due",
+                            "icon": "fas fa-clock"
+                        },
+                        {
+                            "title": "Paid Invoices",
+                            "link": "/portal/account/invoices.php?x=paid",
+                            "icon": "fas fa-money-bill-1-wave"
+                        },
+                        {
+                            "title": "All Invoices",
+                            "link": "/portal/account/invoices.php?x=all",
+                            "icon": "fas fa-vault"
+                        }
+                    ]
 				}
             ]
         },

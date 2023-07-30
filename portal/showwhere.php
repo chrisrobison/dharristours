@@ -5,6 +5,28 @@
     $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
     
     $in = $_REQUEST;
+    
+    $busID = (array_key_exists('busID', $in)) ? $in['busID'] : $_SESSION['Login']->BusinessID;
+    if (array_key_exists("BusinessID", $_SESSION)) {
+        $busID = $_SESSION['BusinessID'];
+    }
+    
+    if ($busID==332) {
+        $now = date("Y-m-d");
+        $jobs = $boss->getObject("Job", "JobCancelled=0 AND JobDate='$now'");
+    } else {
+        $jobs = $boss->getObject("Job", "JobCancelled=0 AND BusinessID='{$busID}' AND JobDate='$now'");
+    }
+    $showbus = array();
+    $buses = array();
+    $busesObj = $boss->getObject("Bus");
+    foreach ($busesObj->Bus as $bus) {
+       $buses[$bus->BusID] = $bus->BusNumber; 
+    }
+
+    foreach ($jobs->Job as $idx=>$job) {
+        $showbus[$buses[$job->BusID]] = 1;
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -190,14 +212,14 @@ L.Marker.rotatedMarker= L.Marker.extend({
     app = {
         ...window["app"],
         init: function() {
-            app.getCurrentPositions();
-            
             app.map = L.map('map').setView([37.81, -122.29], 11);
             let osmmap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
             let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] });
             app.state.basemaps = { "OpenStreetMap": osmmap, "GoogleMaps": googleHybrid };
-            app.state.layerControl = L.control.layers(app.state.basemaps).addTo(app.map);
+            app.layerControl = L.control.layers(app.state.basemaps).addTo(app.map);
 
+            app.getCurrentPositions();
+            
             app.map.addLayer(osmmap);
             app.state.loaded = true;
         },
@@ -220,23 +242,26 @@ L.Marker.rotatedMarker= L.Marker.extend({
             buses: [],
             basemaps: {},
             overlays: {},
+            layerControl: {}
         }, 
         data: {
+            buses: <?php print json_encode($buses); ?>,
+            showbus: <?php print json_encode($showbus); ?>,
             cursor: 0,
             playing: 0,
 <?php
-$filter = " WHERE ";
+$filter = " WHERE 1=1 ";
 if (array_key_exists('date', $in)) {
-    $filter .= "(Created>'{$in['date']} 08:00:00' AND Created<'{$in['date']} 18:00:00'";
+    $filter .= " AND (Created>'{$in['date']} 08:00:00' AND Created<'{$in['date']} 18:00:00'";
 }
 if (array_key_exists('start', $in)) {
     if (!array_key_exists('end', $in)) {
         $in['end'] = date("Y-m-d H:i:s", strtotime($in['start']) + 43200);
     }
-    $filter .= "(Created>'{$in['start']}' AND Created<'{$in['end']}')";
+    $filter .= " AND (Created>'{$in['start']}' AND Created<'{$in['end']}')";
 }
 
-$sql = "select * from WebfleetBus {$filter} order by Created limit 100;";
+$sql = "SELECT * FROM WebfleetBus {$filter} ORDER BY Created DESC LIMIT 100;";
 
 if ($results = mysqli_query($link, $sql)) {
     $json = array();
@@ -247,6 +272,22 @@ if ($results = mysqli_query($link, $sql)) {
 }
 ?>
         
+        },
+        getLastHeadings: function() {
+            app.state.headings = {};
+            app.data.history.forEach(item=>{ 
+                item.forEach( bus=>{
+                    if (bus.course) {
+                        if (!app.state.headings[bus.objectname]) {
+                            app.state.headings[bus.objectname] = {msgid:0,heading:0};
+                        }
+                        if (app.state.headings[bus.objectname].msgid < bus.msgid) {
+                            app.state.headings[bus.objectname].msgid = bus.msgid;
+                            app.state.headings[bus.objectname].heading = bus.course;
+                        }
+                    }    
+                });
+            }); 
         },
         getParams: function() {
             let query = location.search.replace(/^\?/, '');
@@ -286,7 +327,7 @@ if ($results = mysqli_query($link, $sql)) {
             }
 
             document.querySelector("#history").value = app.data.cursor;
-            document.querySelector("#currentTime").innerHTML = app.data.history[app.data.cursor][0].msgtime;
+            document.querySelector("#currentTime").innerHTML = app.data.history[app.data.cursor][0].pos_time;
 
             app.map.removeLayer(app.state.markerClusterGroup);
             app.update(app.data.history[app.data.cursor]);
@@ -296,10 +337,15 @@ if ($results = mysqli_query($link, $sql)) {
             }
         },
         update: function(data) {
+            if (app.state.markerClusterGroup) {
+                app.map.removeLayer(app.state.markerClusterGroup);
+            }
+            app.getLastHeadings();
             let query = app.getParams();
             if (query && query['bus']) {
                 app.state.showBus = query['bus'].split(/\D/);
             }
+            document.querySelector("#currentTime").innerHTML = data[0].pos_time;
 
             app.state.area = new L.FeatureGroup();
             app.state.markerClusterGroup = L.markerClusterGroup({
@@ -319,12 +365,17 @@ if ($results = mysqli_query($link, $sql)) {
             });
             let coord, tmpmark;
             data.forEach(item=>{
-                if (!app.state.showBus || (app.state.showBus == item.objectname) || (app.state.showBus.includes(item.objectname))) {
+                //if (!app.state.showBus || (app.state.showBus == item.objectname) || (app.state.showBus.includes(item.objectname))) {
+                if (app.data.showbus[item.objectname]) {
                     coord = [item.longitude_mdeg / 1000000, item.latitude_mdeg / 1000000];
+                    if (!item.course && app.state.headings[item.objectname] && app.state.headings[item.objectname.heading]) {
+                        item.course = app.state.headings[item.objectname].heading;
+                    }
                     tmpmark = L.marker([item.latitude_mdeg / 1000000, item.longitude_mdeg / 1000000], {icon: app.makeIcon('#' + item.objectname), rotationAngle: item.course, rotationOrigin: "center center" } );
+                    app.layerControl.addOverlay(tmpmark, 'Bus #' + item.objectname);
                     //tmpmark.setIconAngle(item.course);
     
-                    app.getBusDetails(item.objectname, item.postext, tmpmark);
+                    app.getBusDetails(item.objectname, item.postext, tmpmark, item);
                     //tmpmark.bindPopup(`Bus #${item.objectname}`);
 
                     app.state.markerClusterGroup.addLayer(tmpmark);
@@ -335,16 +386,16 @@ if ($results = mysqli_query($link, $sql)) {
             //app.state.area.addTo(app.map);
             app.map.addLayer(app.state.markerClusterGroup);
             app.map.fitBounds(app.state.area.getBounds());
-
+            setTimeout(app.getCurrentPositions, 60000);
         },
-        getBusDetails: function(bus, addr, marker) {
+        getBusDetails: function(bus, addr, marker, rec) {
             let url = 'https://dharristours.simpsf.com/where/businfo.php?bus=' + bus;
             fetch(url).then(res => res.json()).then((out) => {
               var html = "<h2>Bus #" + bus;
               if (out && out[0] && out[0].Driver) {
                   html += " - " + out[0].Driver;
               }
-              html += "</h2>" + addr + "<br>\n";
+              html += "</h2><div style='float:right;'>" + rec.pos_time + "</div><div>" +  addr + "</div>\n";
               if (out.length) {
                  html += "<table class='details'>";
                  html += "<tr><th>Job ID</th><th>Job</th><th>Driver</th><th>Locations</th></tr>";

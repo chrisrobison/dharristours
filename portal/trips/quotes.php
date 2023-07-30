@@ -104,7 +104,7 @@
     <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="ADA"{{ADA}}></td>
 
     <td class="project-actions text-right">
-      <a class="btn btn-primary btn-sm" onclick="parent.$('.content-wrapper').IFrame('createTab', 'View Quote', '/portal/trips/view-quote.php?id={{RequestID}}', 'view-quote', true); return false;" href="view-quote.php?id={{RequestID}}"><i class="fas fa-folder"></i> View</a>
+      <a class="btn btn-primary btn-sm" onclick="parent.$('.content-wrapper').IFrame('createTab', 'Quote {{RequestID}}', '/portal/trips/view-quote.php?id={{RequestID}}', 'view-quote', true); return false;" href="view-quote.php?id={{RequestID}}"><i class="fas fa-folder"></i> View</a>
     </td>
 </tr>
 EOT;
