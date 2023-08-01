@@ -18,17 +18,17 @@
     <title>D Harris Tours | Reserve a Bus</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&family=Lexend:200..900&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/portal/assets/fontawesome-free-6.4.0-web/css/all.min.css">
 <!-- Theme style -->
     <link rel="stylesheet" href="/portal/assets/css/adminlte.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
-    <link rel="stylesheet" href="/lib/css/bus-loader.css"/>
-    <link rel="stylesheet" href="/portal/assets/animate.min.css"/>
+    <link rel="stylesheet" href="/portal/node_modules/leaflet/dist/leaflet.css" >
+    <link rel="stylesheet" href="/lib/css/bus-loader.css">
+    <link rel="stylesheet" href="/portal/assets/animate.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
     <script type="module" src="/portal/node_modules/@github/auto-complete-element/dist/bundle.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="/portal/node_modules/leaflet/dist/leaflet.js"></script>
     <style>
         li[aria-selected=true] {
             background-color:#ff0;
@@ -139,26 +139,19 @@
     }
     .times {
         display: inline-block;
-        position: absolute;
         top: 0px;
-        left: 5rem;
-        width: 0rem;
-        background:#ddd;
-        box-shadow: 3px 3px 3px #0006;
+        width: 20rem;
+        background:#fff;
         z-index: 99999;
         color: #000;
         height: 2.1rem;
         font-size: 0.9em;
         transition: width 1s;
         overflow: hidden;
+        position: relative;
     }
     .closetime {
-        border-radius: 50%;
-        border: 1px solid #0006;
-        position: absolute;
-        right: 4px;
         top: 0.6rem;
-        width: 13px;
         height: 13px;
         padding: 0px;
         margin: 0px;
@@ -169,8 +162,6 @@
     }
     .times.showtime {
         width: 16rem;
-        position: absolute;
-        top: -5px;
     }
     .times select {
         border-radius: 4px;
@@ -240,6 +231,8 @@ background-repeat: no-repeat;
     }
     .timeline:before {
         left:33px;
+        margin-top:50px;
+        margin-bottom: 20px;
     }
     .timeline>div>.fa, .timeline>div>.fab, .timeline>div>.fad, .timeline>div>.fal, .timeline>div>.far, .timeline>div>.fas, .timeline>div>.ion, .timeline>div>.svg-inline--fa {
         width: 20px;
@@ -309,10 +302,10 @@ background-repeat: no-repeat;
                                 </div>
                                 <div class="form-group input-group">
                                     
-                                    <label for="jobLocation">Pickup <a onclick="app.toggleTime('Pickup')"><i class="fa-regular fa-clock"></i><i class="fa-solid fa-caret-right"></i></a></label>
+                                    <label for="jobLocation">Pickup <a onclick="app.toggleTime('Pickup')"><i class="fa-regular fa-clock"></i></a></label>
                                     <div id="PickupTimes" class="times">
-                                        <select id="PickupTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2'>Depart By</option></select>
-                                        <input type="time" id="PickupTime" step="900" style="width:8rem;" class="form-control"><a onclick="return app.toggleTime('Pickup')" class='closetime'>x</a>
+                                        <select id="PickupTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2' SELECTED>Depart By</option></select>
+                                        <input type="time" id="PickupTime" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('Pickup')" class='closetime'>(optional)</a>
                                     </div>
                                     <auto-complete id="PickupAC" data-autoselect="true" src="/portal/address2.php" for="Pickup-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
@@ -331,10 +324,10 @@ background-repeat: no-repeat;
                                 
                                </div>
                                <div class="form-group input-group">
-                                    <label for="jobLocation">Final Dropoff <a onclick="app.toggleTime('FinalDropOff')"><i class="fa-regular fa-clock"></i><i class="fa-solid fa-caret-right"></i></a></label>
+                                    <label for="jobLocation">Final Dropoff <a onclick="app.toggleTime('FinalDropOff')"><i class="fa-regular fa-clock"></i></a></label>
                                     <div id="FinalDropOffTimes" class="times">
-                                        <select id="FinalDropOffTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2'>Depart By</option></select>
-                                        <input type="time" id="FinalDropOffTime" step="900" style="width:8rem;" class="form-control"><a onclick="return app.toggleTime('FinalDropOff')" class='closetime'>x</a>
+                                        <select id="FinalDropOffTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2' SELECTED>Depart By</option></select>
+                                        <input type="time" id="FinalDropOffTime" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('FinalDropOff')" class='closetime'>(optional)</a>
                                     </div>
                                     <auto-complete id="FinalDropOffAC" data-autoselect="true" src="/portal/address2.php" for="FinalDropOff-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">

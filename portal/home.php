@@ -80,8 +80,8 @@
   <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/adminlte.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
-<style>
+  <link rel="stylesheet" href="/portal/node_modules/leaflet/dist/leaflet.css">
+  <style>
     .map, #map {
         display:inline-block;
         height: 230px;
@@ -106,8 +106,8 @@
     }
 </style>
   <!-- Make sure you put this AFTER Leaflet's CSS -->
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
+  <script src="/portal/node_modules/leaflet/dist/leaflet.js"></script>
+  <script src="/portal/assets/dom-to-image.js"></script>
 <script>
 let buses;
 fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{

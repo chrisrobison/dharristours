@@ -223,6 +223,20 @@
                                         <label for="input_location">Cargo</label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Contact</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
                                 <div class="form-group">
                                     <label for="input_contact">Contact</label>
                                     <input type="text" id="input_Name" class="form-control" value="<?php print $current->ContactName; ?>">
@@ -239,8 +253,8 @@
                                     <label for="input_status">Status</label>
                                     <select id="input_status" class="form-control custom-select">
                                         <?php 
-                                            $confirmed = (strtotime($current->JobDate) < time()) ? " SELECTED" : "";
-                                            $completed = (strtotime($current->JobDate) > time()) ? " SELECTED" : "";
+                                            $confirmed = " SELECTED"; // (strtotime($current->JobDate) < time()) ? " SELECTED" : "";
+                                            $completed = (strtotime($current->JobDate) < time()) ? " SELECTED" : "";
                                         ?>
                                         <option>Unknown</option>
                                         <option>Quote Requested</option>

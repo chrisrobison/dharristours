@@ -395,6 +395,9 @@ EOT;
                                    </div>
                                </div>
                                 <!-- /.row -->
+<?php
+    if ($current->RatesIDs) {
+?>
                                 <div class="form-group">
                                     <fieldset style="display:flex;flex-direction:row;align-items:center;justify-content:space-around;width:100%;">
                                         <legend style="font-size:1.4rem;">Quote</legend>
@@ -431,6 +434,9 @@ EOT;
                                         </table>
                                     </fieldset>
                                 </div>
+<?php
+    }
+?>
                                 <div class="form-group">
                                     <label for="inputDescription">Notes</label>
                                     <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4" ><?php print $current->Notes; ?></textarea>

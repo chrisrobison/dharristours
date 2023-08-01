@@ -81,7 +81,7 @@ $tpl = <<<EOT
     <td>{{NumberOfItems}} <i class="fa-solid fa-person"></i></td>
     <td><i class="fa-regular fa-flag"></i> {{PickupLocation}}<br><i class="fa-solid fa-flag-checkered"></i> {{DropOffLocation}}</td>
     <td class="project-actions text-right">
-        <a class="btn btn-primary btn-sm" onclick="parent.app.loadTab('/portal/trips/view-trip.php?id={{JobID}}', 'Trip {{JobID}}', 'trip_{{JobID}}', true); return false;" href="/portal/trips/view-trip.php?id={{JobID}}"><i class="fas fa-folder"></i> View</a>
+        <a class="btn btn-primary btn-sm" onclick="return parent.app.loadTab('/portal/trips/view-trip.php?id={{JobID}}', 'Trip {{JobID}}', 'trip_{{JobID}}', true, event); return false;" href="/portal/trips/view-trip.php?id={{JobID}}"><i class="fas fa-folder"></i> View</a>
     </td>
 </tr>
 EOT;

@@ -253,7 +253,7 @@
                 console.dir(evt);
                 app.addStop(evt.target.id, evt.target.value, evt, false, false);
             });
-            el.innerHTML = `<label for="Waypoint${stopNum}">Stop #${stopNum} <a onclick="app.toggleTime('Stop${stopNum}')"><i class="fa-regular fa-clock"></i><i class="fa-solid fa-caret-right"></i></a></label><div id="Stop${stopNum}Times" class="times"><select id="Stop${stopNum}TimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2'>Depart By</option></select><input type="time" id="Stop${stopNum}Time" step="900" style="width:8rem;" class="form-control"><a onclick="return app.toggleTime('Stop${stopNum}')" class='closetime'>x</a></div>`;
+            el.innerHTML = `<label for="Waypoint${stopNum}">Stop #${stopNum} <a onclick="app.toggleTime('Stop${stopNum}')"><i class="fa-regular fa-clock"></i></a></label><div id="Stop${stopNum}Times" class="times"><select id="Stop${stopNum}TimeType"><option value='0'>-- Pick Type --</option><option value='1' SELECTED>Arrive By</option><option value='2'>Depart By</option></select><input type="time" id="Stop${stopNum}Time" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('Stop${stopNum}')" class='closetime'>(optional)</a></div>`;
 el.appendChild(ac);
             setTimeout(function() { document.querySelector(`#Waypoint${stopNum}`).focus(); }, 200);
             ac.querySelector("input").focus();

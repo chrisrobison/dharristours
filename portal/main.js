@@ -85,6 +85,9 @@
             });;
         },
         loadTab: function(url="/portal/home.php", title="New Tab", name="newtab", autoshow=true, evt) {
+            document.querySelector("#overlay").style.display = "block";
+            setTimeout(function() { document.querySelector("#overlay").style.display = "none"; }, 3000);
+
             if (evt) {
                 evt.preventDefault();
                 evt.stopPropagation();

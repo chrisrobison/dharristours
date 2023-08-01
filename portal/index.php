@@ -17,15 +17,48 @@
     <link rel="stylesheet" href="assets/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="assets/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/lib/css/bus-loader.css">
     <style>
-        #Business {
-            width: 12em;
-        }
-        label {
-            color: #eee;
-        }
-        .main-footer {
-        }
+    #overlay {
+        position: absolute; 
+        z-index: 99999;
+        top: 0px;
+        left: 0px;
+        height: 100vh;
+        width: 100vw;
+        background-color: #0002;
+        display:none;
+    }
+    #loader {
+        position: absolute; 
+        z-index: 99999;
+        top: 50%;
+        left: 50%;
+    }
+    #Business {
+        width: 12em;
+    }
+    label {
+        color: #eee;
+    }
+    .main-footer {
+    }
+
+    .navbar-nav[role=tablist] .nav-item {
+        border-right: 1px solid #0006;
+        border-left: 1px solid #fff6;
+        background: #0002;
+        border-top-left-radius: 1rem;
+        position: relative;
+        border-top-right-radius: 1rem;
+        top: 0.6rem;
+    }
+    .navbar-nav[role=tablist] .nav-item.active {
+        background: #f9f9f9;
+        top: 5px;
+        box-shadow: -2px 0px 2px #0003;
+        z-index: 999;
+    }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
@@ -265,7 +298,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-
+<div id="overlay"><div class="loader" id="loader"></div></div>
     <!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -287,6 +320,8 @@
     <script src="main.js"></script>
     <script>
         app.init(app.getNav);
+            document.querySelector("#overlay").style.display = "block";
+            setTimeout(function() { document.querySelector("#overlay").style.display = "none"; }, 3000);
     </script>
 </body>
 

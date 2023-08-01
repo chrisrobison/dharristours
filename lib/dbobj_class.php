@@ -643,17 +643,13 @@ class dbobj extends dbd_mysql {
 
       $this->action = "getlist";
       
-      if (is_array($this->_fields)) {
-        $fields = (count($this->_fields)) ? '`' . join('`,`', $this->_fields) . '`' : '*';
-      } else {
-        $fields = "*";
-      }
-
+      $fields = (count($this->_fields)) ? '`' . join('`,`', $this->_fields) . '`' : '*';
+      
       $query = "select SQL_CALC_FOUND_ROWS $fields from `$table`";
       if ($link) $query .= ",$link";
          
       if ($cond) $query .= " where ".$cond;
-      if (is_array($this->_sort) && count($this->_sort)) $query .= ' ' . join(',', $this->_sort);
+      if (count($this->_sort)) $query .= ' ' . join(',', $this->_sort);
 
       if ($extra) $query .= ' '.$extra;
       // print ">>>> query 1: $query\n";
@@ -671,7 +667,7 @@ class dbobj extends dbd_mysql {
       //print_r($row);
       $this->rows = $row->total;
       
-      if (isset($this->_links) && count($this->_links) > 0) {
+      if (count($this->_links) > 0) {
          $currow = 0;
          foreach ($rows as $idx=>$row) {
             $lcond = array();
@@ -707,12 +703,9 @@ class dbobj extends dbd_mysql {
       return($rows);
    }
 
-   function list_tables($db='') {
+   function list_tables( ) {
       $table = (!$table) ? $this->resource : $table;
-      
-      if ($db) {
-        $this->db = $db;
-      }
+
       $this->select_db($this->db);
       $this->tables = parent::list_tables();      
    }
