@@ -5,12 +5,12 @@
 
     $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
 
-    $sql = "select * from Invoice, Job, Business where Invoice.JobID=Job.JobID AND Business.BusinessID=Job.BusinessID;";
+    $sql = "select * from Request ";
     $results = mysqli_query($link, $sql);
     $updates = array();
 
     while ($row = mysqli_fetch_object($results)) {
-        $sql = "UPDATE Invoice set BusinessID={$row->BusinessID} where InvoiceID={$row->InvoiceID};";
+        $sql = "UPDATE Request set Instructions='".preg_replace("/\'/","\'", $row->Notes)."' where RequestID={$row->RequestID};";
         array_push($updates, $sql);
     }
 

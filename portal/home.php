@@ -50,6 +50,18 @@
         $todaysJobs = $boss->getObject("Job", "BusinessID='{$busID}' and JobDate='{$shortnow}' and JobCancelled=0");
     }
 
+    if ($busID==332) {
+        $lastmonth = date("Y-m-d", strtotime("30 days ago"));
+        $lastyear = date("Y-m-d", strtotime("365 days ago"));
+
+        $invoices = $boss->getObjectRelated("Invoice", "Balance>0 and InvoiceDate<'{$lastmonth}' and InvoiceDate>'{$lastyear}'");
+        $sql = "select sum(Balance) as PastDue from Invoice where Balance>0 and InvoiceDate<'{$lastmonth}' and InvoiceDate>'{$lastyear}'";
+        $boss->db->dbobj->execute($sql);
+        $pastdue = $boss->db->dbobj->fetch_object();
+        $stats->OverdueInvoices = count($invoices->Invoice["_ids"]);
+
+        $stats->PastDue = $pastdue->PastDue;
+    }
     $business = $boss->getObject("Business", $busID);
     $bus = $boss->getObject("Bus", "Active=1");
     $buses = array(); 
@@ -169,6 +181,77 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                   <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>            
+<?php
+if ($busID==336662) {
+?>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><?php print number_format($stats->OverdueInvoices); ?></h3>
+
+                    <p>Invoices Past Due</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-sharp fa-solid fa-hand-holding-dollar"></i>
+                  </div>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/account/invoices.php', 'invoices', true); return false;" href="/portal/account/invoices.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3>$<?php print number_format($stats->PastDue); ?></h3>
+                    <p>in Unpaid Invoices</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-money-bill-1-wave"></i>
+                  </div>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/account/invoices.php?x=due', 'invoices-due', true); return false;" href="/portal/account/invoices.php?x=due" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+<?php
+
+} else {
+$overdue = date("Y-m-d", strtotime("30 days ago"));
+$invoices = $boss->getObject("Invoice", "BusinessID='$busID' AND Balance>0 AND InvoiceDate<'$overdue'");
+if (count($invoices->_ids)) {
+?>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><?php print number_format($stats->Miles); ?></h3>
+
+                    <p>Miles Traveled</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-sharp fa-solid fa-road"></i>
+                  </div>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><?php print count($invoices->_ids); ?></h3>
+                    <p>Invoices Due</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-money-bill-1-wave"></i>
+                  </div>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/account/invoices.php?x=due', 'invoices-due', true); return false;" href="/portal/account/invoices.php?x=due" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+<?php
+} else {
+?>
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-warning">
@@ -197,6 +280,10 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                   <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+<?php
+}
+}
+?>
         </div>
         <div class="row">
           <div class="col-lg-6">

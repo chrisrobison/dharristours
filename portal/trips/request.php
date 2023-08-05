@@ -142,7 +142,6 @@
         top: 0px;
         width: 20rem;
         background:#fff;
-        z-index: 99999;
         color: #000;
         height: 2.1rem;
         font-size: 0.9em;
