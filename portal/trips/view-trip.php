@@ -333,6 +333,10 @@
                             <div class="info-box-content" style="margin-left:1em;margin-top:1em;">
                                 <table class='map-form'>
                                     <tr>
+                                        <td><label class="info-box-text text-center text-muted">Bus</label></td>
+                                        <td colspan='3'><span class="info-box-number text-center text-muted mb-0" id="bus<?php print $cnt; ?>">#<?php print $buses[$job->BusID]. " - " . $pax[$job->BusID]." Passengers";  ?></span></td>
+                                    </tr>
+                                     <tr>
                                         <td><label class="info-box-text text-center text-muted">Driver</label></td>
                                         <td colspan='3'><span class="info-box-number text-center text-muted mb-0" id="driver<?php print $cnt; ?>"><?php print $employees[$job->EmployeeID]->FirstName . " " . $employees[$job->EmployeeID]->LastName . " - " . $employees[$job->EmployeeID]->Cell; ?></span></td>
                                     </tr>

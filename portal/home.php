@@ -107,6 +107,10 @@
         display:flex;
         flex-direction:row;
     }
+    .small-box .icon {
+     display: inline-block; 
+}
+
     @media only screen and (max-width:450px) {
         .map {
             width: 100%;
@@ -136,13 +140,9 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"><?php print $business->Business; ?> Customer Portal</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-            </ol>
+          <div class="col-sm-12">
+            <h1 class="m-0">D Harris Tours Transit Portal</h1>
+            <h2 class="m-0">For <?php print $business->Business; ?></h2>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -287,56 +287,6 @@ if (count($invoices->_ids)) {
         </div>
         <div class="row">
           <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Upcoming Trips for <?php print $business->Business; ?></h5>
-
-                <p class="card-text">
-               <?php
-                    $now = date("Y-m-d");
-
-                    if ($busID == 332) {
-                        $results = $boss->getObject("Job", "JobDate>='$now' AND JobCancelled=0 AND ParentID=0 ORDER BY JobDate ASC LIMIT 10");
-                    } else {
-                        $results = $boss->getObject("Job", "JobDate>='$now' and BusinessID='$busID' AND JobCancelled!=1 AND ParentID=0 ORDER BY JobDate ASC LIMIT 10");
-                    }
-                    
-                    if ($results->Job) {
-                        foreach ($results->Job as $job) {
-                           
-                            if ($job->JobID) {
-                                $place = $job->DropOffLocation;
-                                if (preg_match("/\((.+?)\)/", $job->Job, $matches)) {
-                                    $place = $matches[1];
-                                }
-                                $day = date("M j, Y", strtotime($job->JobDate));
-                                print "<div><a style='color:#000;' href='/portal/trips/view-trip.php?id={$job->JobID}' onclick='parent.app.loadTab(\"/portal/trips/view-trip.php?id={$job->JobID}\", \"{$job->Job}\", \"job{$job->JobID}\", true); return false'>{$day}: <blockquote>".$job->PickupLocation."<br>".$place."<br>".$job->NumberOfItems." Passengers</blockquote></a></div>";
-                            }
-                        }
-                    } else {
-                        print "<div>No upcoming trips</div>";
-                    }
-               ?>
-
-                </p>
-
-                <a href="/portal/trips/" class="card-link">View more...</a>
-              </div>
-            </div>
-            <!--div class="card card-primary card-outline">
-              <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div-->
-        </div>
-          <!-- /.col-md-6 -->
-          <div class="col-lg-6">
             <div class="card card-primary card-outline">
               <div class="card-body">
                 <h5 class="card-title">Today's Trips</h5>
@@ -413,6 +363,55 @@ if (count($invoices->_ids)) {
               </div>
             </div><!-- /.card -->
           </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Upcoming Trips for <?php print $business->Business; ?></h5>
+
+                <p class="card-text">
+               <?php
+                    $now = date("Y-m-d");
+
+                    if ($busID == 332) {
+                        $results = $boss->getObject("Job", "JobDate>='$now' AND JobCancelled=0 AND ParentID=0 ORDER BY JobDate ASC LIMIT 10");
+                    } else {
+                        $results = $boss->getObject("Job", "JobDate>='$now' and BusinessID='$busID' AND JobCancelled!=1 AND ParentID=0 ORDER BY JobDate ASC LIMIT 10");
+                    }
+                    
+                    if ($results->Job) {
+                        foreach ($results->Job as $job) {
+                           
+                            if ($job->JobID) {
+                                $place = $job->DropOffLocation;
+                                if (preg_match("/\((.+?)\)/", $job->Job, $matches)) {
+                                    $place = $matches[1];
+                                }
+                                $day = date("M j, Y", strtotime($job->JobDate));
+                                print "<div><a style='color:#000;' href='/portal/trips/view-trip.php?id={$job->JobID}' onclick='parent.app.loadTab(\"/portal/trips/view-trip.php?id={$job->JobID}\", \"{$job->Job}\", \"job{$job->JobID}\", true); return false'>{$day}: <blockquote>".$job->PickupLocation."<br>".$place."<br>".$job->NumberOfItems." Passengers</blockquote></a></div>";
+                            }
+                        }
+                    } else {
+                        print "<div>No upcoming trips</div>";
+                    }
+               ?>
+
+                </p>
+
+                <a href="/portal/trips/" class="card-link">View more...</a>
+              </div>
+            </div>
+            <!--div class="card card-primary card-outline">
+              <div class="card-header">
+                <h5 class="m-0">Featured</h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Special title treatment</h6>
+
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div-->
+        </div>
           <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->

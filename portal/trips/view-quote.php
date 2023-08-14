@@ -456,8 +456,6 @@ EOT;
   We're sorry, but we have not had a chance to respond to your bus reservation request yet.<br>Please be assured that your trip is <em>our</em> <u>top priority</u> and we will be sending a quote for your trip shortly. <br><br> Thank you for choosing D Harris Tours!
 </div>
 EOT;
-                            } else if ($current->JobID) {
-                                print "<div class='alert alert-info alert-dismissible'>Your trip has been scheduled and your bus reserved.  As your request for a quote is now an actual reservation, you should refer to <a href='/portal/trips/view-trip.php?id={$current->JobID}' onclick=\"return parent.app.loadTab('/portal/trips/view-trip.php?id={$current->JobID}', 'Trip {$current->JobID}', 'trip_{$current->JobID}', true, event);\">Trip {$current->JobID}</a> in the <a href=\"/portal/trips/\" onclick=\"return parent.app.loadTab('/portal/trips/view-trip.php?id={$current->JobID}', 'Trip {$current->JobID}', 'trip_{$current->JobID}', true, event); \"><q>Upcoming Trips</q></a> section of the D Harris Tours Customer Portal.</div>";
                             } else {
                                 print "<h2>Waiting for job confirmation from D Harris Tours</h2>";
                             }

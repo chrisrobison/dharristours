@@ -47,6 +47,12 @@
         .pagination li.page-item a.page-link {
             color: #00c;
         }
+        table td.tableTitle {
+            border-top: 5px solid #06f;
+        }
+        table tr.secondLine td {
+            background-color:#eee;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
     <script type="module" src="/portal/node_modules/@github/auto-complete-element/dist/bundle.js"></script>
@@ -94,14 +100,36 @@
 
     if ($rows > 10) {
         print '<li class="page-item"><a class="page-link" href="?page=0">«</a></li>';
-        $pages = ceil($rows / 10);
-        $pages = ($pages > 5) ? 5 : $pages;
+        $totpages = ceil($rows / 10);
 
-        for ($i=$curpage; $i<$pages; $i++) {
+        $pages = ($pages > 5) ? 5 : $totpages;
+        $start = $curpage - 2;
+        if ($start < 0) {
+            $start = 0;
+        }
+        $active = ($curpage == 0) ? " style='background:#ff0;' " : '';
+        print '<li class="page-item"><a class="page-link" '.$active.'href="?page=0">1</a></li>';
+        if ($start == 0) {
+            $start = 1;
+        }
+        if ($start>1) {
+            print "<li class='page-item'><a class='page-link'>...</a></li>";
+        }
+        $end = $curpage + 3;
+       
+        if ($end > $totpages - 1) {
+            $end = $totpages - 1;
+        }
+        for ($i=$start; $i<$end; $i++) {
             $active = ($curpage == $i) ? " style='background:#ff0;' " :"";
             print '<li class="page-item"><a class="page-link" '.$active.'href="?page='.$i.'">'.($i+1).'</a></li>';
         }
-        print '<li class="page-item"><a class="page-link" href="?page='.ceil($rows / 10).'">»</a></li>';
+        $active = ($curpage == $end) ? " style='background:#ff0;' " : '';
+        if ($end != $totpages-1) {
+            print "<li class='page-item'><a class='page-link'>...</a></li>";
+        }
+        print '<li class="page-item"><a class="page-link" '.$active.'href="?page='.($pages-1).'">'.$pages.'</a></li>';
+        print '<li class="page-item"><a class="page-link" href="?page='.(ceil($rows / 10) - 1).'">»</a></li>';
     }
 ?>
                   </ul>
@@ -131,8 +159,8 @@ for ($i=0; $i<10; $i++) {
             $paid = "<span class='badge bg-danger'>DUE</span>";
         }
         $url = "/files/templates/print/InvoiceReport.php?z=".base64_encode("ID=".$row->InvoiceID);
-        print "<tr><td>{$row->Job}</td><td>".date("M j", strtotime($row->InvoiceDate))."</td><td>\${$row->Balance}</td><td>$paid</td>";
-        print "<td><a target='_blank' onclick=\"parent.$('.content-wrapper').IFrame('createTab', 'Invoice {$row->InvoiceID}', '$url', 'invoice_{$row->InvoiceID}', true); return false;\"";
+        print "<tr><td class='tableTitle' colspan='5'>{$row->Job}</td></tr><tr class='secondLine'><td></td><td>".date("M j", strtotime($row->InvoiceDate))."</td><td>\$".round($row->Balance)."</td><td style='width:4rem'>$paid</td>";
+        print "<td style='width:4rem'><a target='_blank' onclick=\"parent.$('.content-wrapper').IFrame('createTab', 'Invoice {$row->InvoiceID}', '$url', 'invoice_{$row->InvoiceID}', true); return false;\" ";
         print "href='{$url}'><i class='fa-solid fa-eye'></i></a></td></tr>";
 //        print "<tr><td colspan='4'>{$row->Job}</td></tr>";
     }
