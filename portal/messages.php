@@ -13,7 +13,7 @@ $_SESSION['Login']->LoginID = 5;
 $in = $_REQUEST;
 $out = array();
 
-$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "ss_dharris_tours");//ss_dharris_tours
+$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");//ss_dharris_tours
 
 /* check connection */
 if (mysqli_connect_errno()) {
