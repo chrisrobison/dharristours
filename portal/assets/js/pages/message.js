@@ -97,7 +97,7 @@ function getMessages() {
 
   const data = { data: {...serializeForm()}, "type": 'get' };
 console.log('why')
-  postData("/dharristours/portal/messages.php", $.param(data), function (data) {
+  postData("/portal/messages.php", $.param(data), function (data) {
     if (data.status !== 'ok') return
     const messageList= data.data
     $('.message-list').html(
