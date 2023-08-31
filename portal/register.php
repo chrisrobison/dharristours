@@ -36,7 +36,7 @@
         $out->status = "ok";
 
 
-        $keys = array("Email","FirstName","LastName","Login","Passwd","Phone");
+        $keys = array("Email","FirstName","LastName","Passwd","Phone");
         $vals = array();
 
         foreach ($keys as $key) {
@@ -48,6 +48,16 @@
             }
             array_push($vals, $val);
         }
+
+        array_push($keys, 'Login');
+        array_push($vals, mysqli_real_escape_string($link, $in['data']['Login']['new1']['Email']));
+        array_push($keys, 'InitialProcess');
+        array_push($vals, 216);
+        array_push($keys, 'Access');
+        array_push($vals, 8);
+        array_push($keys, 'ProcessAccess');
+        array_push($vals, 1);
+
 
         $sql = "INSERT INTO Login (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
         $results = mysqli_query($link, $sql);
@@ -85,4 +95,3 @@
         return "'" . mysqli_real_escape_string($link, $str) . "'";
     }
 ?>
-
