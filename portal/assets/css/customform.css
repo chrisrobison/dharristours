@@ -32,3 +32,30 @@
 .card-header.no-left-padd {
     padding-left: 0;
 }
+
+.message-content {
+    position: relative;
+}
+.message-content .read-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.read-status.read .message-content .read-icon {
+    display: none;
+}
+.read-status.unread .message-content .read-icon {
+    transition: opacity 3s ease-in-out;
+}
+.read-status.unread .message-content .read-icon.fa-eye-slash {
+    opacity: 0.5;
+}
+.read-status.unread.reading .message-content .read-icon.fa-eye-slash {
+    opacity: 0;
+}
+.read-status.unread .message-content .read-icon.fa-eye {
+    opacity: 0;
+}
+.read-status.unread.reading .message-content .read-icon.fa-eye {
+    opacity: 1;
+}

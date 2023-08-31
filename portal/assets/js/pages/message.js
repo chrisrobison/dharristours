@@ -48,8 +48,29 @@ $(function () {
   })
 })
 
+$.fn.isInViewport = function() {
+  var elementTop = $(this).offset().top;
+  var elementBottom = elementTop + $(this).outerHeight();
+
+  var viewportTop = $(window).scrollTop();
+  var viewportBottom = viewportTop + $(window).height();
+
+  return (elementBottom > viewportTop && elementTop < viewportBottom) || (elementTop < viewportTop && elementBottom > viewportBottom);
+};
+
+$(document).ready(function () {
+  $(window).scroll(function () {
+
+    console.log('scroll')
+    $('.read-status.unread:visible:not(.reading)').each(function () {
+      console.log(this)
+      if( $(this).isInViewport()) $(this).addClass('reading')
+    })
+  })
+})
 function postMessage(e) {
   $(FORM_ID).addClass('submitting')
+  $('.message-fail').hide()
   console.log(serializeForm())
 
   const data = { data: {...serializeForm()}, "type": 'post' };
@@ -60,6 +81,7 @@ function postMessage(e) {
       $('.message-fail').show()
     }
     if (data.status == 'ok') {
+      getMessages()
       $('.message-success').show()
       $(FORM_ID).hide()
     }
@@ -74,22 +96,23 @@ function getMessages() {
   console.log(serializeForm())
 
   const data = { data: {...serializeForm()}, "type": 'get' };
-
-  postData("/portal/messages.php", $.param(data), function (data) {
+console.log('why')
+  postData("/dharristours/portal/messages.php", $.param(data), function (data) {
     if (data.status !== 'ok') return
     const messageList= data.data
     $('.message-list').html(
         messageList
             .map(message => ({
+              id: message.id,
               content: message.content,
               time: formatTime(message.created_at),
               img: formatImg(message.img),
-              title:  formatTitle(message.FirstName, message.LastName, message.Login, message.Email)
+              title:  formatTitle(message.FirstName, message.LastName, message.Login, message.Email),
+              unread: message.unread,
             }))
             .map(PostTemplate)
             .join(''));
 
-    console.log(data);
   });
 
   $(FORM_ID).removeClass('submitting')
@@ -123,14 +146,18 @@ const formatTitle = (firstName, lastName, login, email) =>
         : login || email
 const formatTime = time => time //todo - format time - JJ
 const formatImg = img => img || '/portal/assets/img/person.png'
-const PostTemplate = ({ content, time, img, title }) => `
-  <div class="post">
+const PostTemplate = ({ id, content, time, img, title, unread }) => `
+  <div class="post read-status ${unread ? 'unread' : 'read' } marked">
     <div class="user-block">
       <img class="img-circle img-bordered-sm" src="${img}" alt="user image">
       <span class="username">${title}</span>
       <span class="description">${time}</span>
     </div>
     <!-- /.user-block -->
-    <div class="message-content">${content}</div>
+    <div class="message-content">
+        ${content}
+        <i class="read-icon fas fa-eye-slash" data-id="${id}"></i>
+        <i class="read-icon fas fa-eye" data-id="${id}"></i>
+    </div>
   </div>
 `;
