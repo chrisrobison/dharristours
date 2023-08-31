@@ -3,11 +3,17 @@ include($_SERVER['DOCUMENT_ROOT'] . '/.env');
 include($_SERVER['DOCUMENT_ROOT'] . '/lib/auth.php');
 
 session_start();
+/*
+ $_SESSION = array(
+    'Login' => new stdClass()
+);
+$_SESSION['Login']->LoginID = 5;
+*/
 
 $in = $_REQUEST;
 $out = array();
 
-$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");//ss_dharris_tours
+$link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "ss_dharris_tours");//ss_dharris_tours
 
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -45,7 +51,10 @@ function getMessages($link, $in) {
         array_push($vals, $val);
     }
 
-    $sql = "SELECT m.id, m.content, m.created_at, l.FirstName, l.LastName, l.Login, l.Email, l.Picture 
+    $loggedInUser = $_SESSION['Login']->LoginID;
+
+    $sql = "SELECT m.id, m.content, m.created_at, l.FirstName, l.LastName, l.Login, l.Email, l.Picture,
+        CASE WHEN m.read = 0 AND m.user_id != '".$loggedInUser."' THEN 1 ELSE 0 END AS unread
         FROM messagethread m 
         LEFT JOIN Login l ON m.user_id = l.LoginID 
         WHERE m.resource_id = '".$vals[0]."' AND m.resource_type = '".$vals[1]."'";
@@ -81,6 +90,22 @@ function postMessage($link, $in) {
         $out->status = "error";
         $out->e = mysqli_error($link);
 
+    }
+    return $out;
+}
+
+function markMessageRead($link, $in) {
+    $out = new stdClass();
+    $out->status = "ok";
+
+
+    $id = mysqli_real_escape_string($link, $in['data']['id']);
+    $sql = "UPDATE messagethread SET `read` = 1 WHERE id = '".$id."'";
+
+    $result = mysqli_query($link, $sql);
+    if(!$result){
+        $out->status = "error";
+        $out->e = mysqli_error($link);
     }
     return $out;
 }
