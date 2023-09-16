@@ -1,4 +1,4 @@
-<?php  // if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); ?>
+<?php  if (!$boss) require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -183,7 +183,7 @@
                                print "</select><br>";
                                print '<label for="Business">Business</label><br><select id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
                                 
-                                $businesses = $boss->get("Business", "LoginID IS NOT NULL ORDER BY Business");
+                                $businesses = $boss->get("Business", "1=1  ORDER BY Business");
                                 foreach ($businesses as $business) {
                                     $selected = ($_SESSION['BusinessID'] == $business->BusinessID) ? " SELECTED" : "";
                                         
