@@ -573,7 +573,7 @@ EOT;
           MSG_RESOURCE_TYPE: "<?= $MSG_RESOURCE_TYPE ?>",
         }
     </script>
-    <script src="/portal/assets/js/pages/notification.js"></script>
+    <script src="/portal/assets/js/pages/notifications.js"></script>
     <script>
 (function() {
     let current = <?php print json_encode($current);?>;
