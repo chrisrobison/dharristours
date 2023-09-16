@@ -61,9 +61,7 @@ $.fn.isInViewport = function() {
 $(document).ready(function () {
   $(window).scroll(function () {
 
-    console.log('scroll')
     $('.read-status.unread:visible:not(.reading)').each(function () {
-      console.log(this)
       if( $(this).isInViewport()) $(this).addClass('reading')
     })
   })
@@ -71,12 +69,10 @@ $(document).ready(function () {
 function postMessage(e) {
   $(FORM_ID).addClass('submitting')
   $('.message-fail').hide()
-  console.log(serializeForm())
 
   const data = { data: {...serializeForm()}, "type": 'post' };
 
   postData("/portal/messages.php", $.param(data), function (data) {
-    console.log(data);
     if(data.status == 'error'){
       $('.message-fail').show()
     }
@@ -93,10 +89,8 @@ function postMessage(e) {
 
 function getMessages() {
   $(FORM_ID).addClass('submitting')
-  console.log(serializeForm())
 
   const data = { data: {...serializeForm()}, "type": 'get' };
-console.log('why')
   postData("/portal/messages.php", $.param(data), function (data) {
     if (data.status !== 'ok') return
     const messageList= data.data
@@ -153,11 +147,10 @@ const PostTemplate = ({ id, content, time, img, title, unread }) => `
       <span class="username">${title}</span>
       <span class="description">${time}</span>
     </div>
-    <!-- /.user-block -->
     <div class="message-content">
         ${content}
-        <i class="read-icon fas fa-eye-slash" data-id="${id}"></i>
-        <i class="read-icon fas fa-eye" data-id="${id}"></i>
     </div>
   </div>
 `;
+/*<i class="read-icon fas fa-eye-slash" data-id="${id}"></i>
+        <i class="read-icon fas fa-eye" data-id="${id}"></i>*/
