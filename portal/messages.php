@@ -101,25 +101,12 @@ function postMessage($link, $in) {
         $out->e = mysqli_error($link);
 
     }
-    return $out;
-}
-
-function getNotifications($link){
-    $out = new stdClass();
-    $out->status = "ok";
-
-    $loginID = $_SESSION['Login']->LoginID;
-
-    $sql = "SELECT * FROM MessageThreadNotification WHERE recipient = '".$loginID."'";
-
-    $results = mysqli_query($link, $sql);
-    if(!$results){
-        $out->status = "error";
-        $out->e = mysqli_error($link);
+    if($results){
+        updateNotifications($link, $resource_id, $resource_type, $loginID);
     }
-    if($results) $out->data= $results->fetch_all(MYSQLI_ASSOC);
     return $out;
 }
+
 
 function updateNotifications($link, $resource_id, $resource_type, $loginID) {
     $sql = "SELECT Subscriber from MessageThreadSubscribers WHERE ResourceID = '".$resource_id."' AND ResourceType = '".$resource_type."''";
@@ -146,6 +133,23 @@ function updateNotifications($link, $resource_id, $resource_type, $loginID) {
     }
     if(!$isSubscriber) addSubscriber($link, $resource_id, $resource_type, $loginID);
 
+}
+
+function getNotifications($link){
+    $out = new stdClass();
+    $out->status = "ok";
+
+    $loginID = $_SESSION['Login']->LoginID;
+
+    $sql = "SELECT * FROM MessageThreadNotification WHERE recipient = '".$loginID."'";
+
+    $results = mysqli_query($link, $sql);
+    if(!$results){
+        $out->status = "error";
+        $out->e = mysqli_error($link);
+    }
+    if($results) $out->data= $results->fetch_all(MYSQLI_ASSOC);
+    return $out;
 }
 
 function addSubscriber($link, $resource_id, $resource_type, $loginID) {
