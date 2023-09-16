@@ -568,6 +568,12 @@ EOT;
     <script src="/portal/assets/js/pages/message.js"></script>
     <script src="/portal/route.js"></script>
     <script>
+        window.msgthreadnotification = {
+          MSG_RESOURCE_ID: <?= $MSG_RESOURCE_ID ?>,
+          MSG_RESOURCE_TYPE: "<?= $MSG_RESOURCE_TYPE ?>",
+        }
+    </script>
+    <script>
 (function() {
     let current = <?php print json_encode($current);?>;
 

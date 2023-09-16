@@ -1,12 +1,16 @@
 // Load notifications
 $(document).ready(function () {
-  getNotifications()
+  if(!window.msgthreadnotification){
+    getNotifications()
+    return
+  }
+  if(window.msgthreadnotification.MSG_RESOURCE_ID && window.msgthreadnotification.MSG_RESOURCE_TYPE) clearNotification()
 })
 
 function getNotifications() {
   console.log('getNotifications')
   const data = { data: {}, "type": 'getNotifications' };
-  postData("/dharristours/portal/messages.php", $.param(data), function (data) {
+  postData("/portal/messages.php", $.param(data), function (data) {
     if (data.status !== 'ok') return
 
     const notifications = data.data
@@ -22,6 +26,18 @@ function getNotifications() {
             }))
             .map(NotificationTemplate)
             .join(''));
+  });
+
+}
+function clearNotification() {
+  console.log('clearNotification')
+  const data = { data: {
+      resource_id: window.msgthreadnotification.MSG_RESOURCE_ID,
+      resource_type: window.msgthreadnotification.MSG_RESOURCE_ID
+    }, "type": 'clearNotification' };
+  postData("/portal/messages.php", $.param(data), function (data) {
+    console.log(data)
+    if (data.status !== 'ok') return
   });
 
 }
