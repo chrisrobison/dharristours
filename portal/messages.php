@@ -36,6 +36,9 @@ if ($in['type']) {
         case "getNotifications":
             $out = getNotifications($link);
             break;
+        case "clearNotifications":
+            $out = clearNotification($link, $in);
+            break;
     }
 
     //file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
@@ -149,6 +152,25 @@ function getNotifications($link){
         $out->e = mysqli_error($link);
     }
     if($results) $out->data= $results->fetch_all(MYSQLI_ASSOC);
+    return $out;
+}
+
+function clearNotification($link, $in){
+    $out = new stdClass();
+    $out->status = "ok";
+
+    $loginID = $_SESSION['Login']->LoginID;
+
+    $resource_id = mysqli_real_escape_string($link, $in['data']['resource_id']);
+    $resource_type = mysqli_real_escape_string($link, $in['data']['resource_type']);
+
+    $sql = "UPDATE MessageThreadNotification SET NewMessageCount = 0 WHERE Recipient = '".$loginID."' AND ResourceID = '".$resource_id."' AND ResourceType = '".$resource_type."'";
+
+    $results = mysqli_query($link, $sql);
+    if(!$results){
+        $out->status = "error";
+        $out->e = mysqli_error($link);
+    }
     return $out;
 }
 
