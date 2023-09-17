@@ -99,42 +99,55 @@ function postMessage($link, $in) {
 
     $sql = "INSERT INTO messagethread (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
     $results = mysqli_query($link, $sql);
+
     if(!$results){
         $out->status = "error";
         $out->e = mysqli_error($link);
+    }
 
-    }
     if($results){
-        updateNotifications($link, $resource_id, $resource_type, $loginID);
+        $out->data = updateNotifications($link, $resource_id, $resource_type, $loginID);
     }
+
     return $out;
 }
 
 
 function updateNotifications($link, $resource_id, $resource_type, $loginID) {
-    $sql = "SELECT Subscriber from MessageThreadSubscribers WHERE ResourceID = '".$resource_id."' AND ResourceType = '".$resource_type."''";
+    $sql = "SELECT Subscriber from MessageThreadSubscribers WHERE ResourceID = '$resource_id' AND ResourceType = '$resource_type'";
 
     $results = mysqli_query($link, $sql);
-    if(!$results) return;
+    if(!$results){
+        return mysqli_error($link);
+    }
 
     $subscribers = $results->fetch_all(MYSQLI_ASSOC);
     $isSubscriber = false;
+
+    $responses = array();
     foreach($subscribers as $subscriber) {
+        $responses[]='next subscriber is '.$subscriber['Subscriber'];
+
         if($subscriber['Subscriber'] != $loginID) {
-            $sql = "
-                BEGIN;
-                SELECT NewMessageCount FROM MessageThreadNotification 
-                    WHERE Recipient = '$loginID' AND ResourceID = '$resource_id' AND ResourceType = '$resource_type' FOR UPDATE;
-                INSERT INTO MessageThreadNotification (Recipient, ResourceID, ResourceType, NewMessageCount) 
-                    VALUES ('$loginID', '$resource_id', '$resource_type', 1) 
-                    ON DUPLICATE KEY UPDATE NewMessageCount = NewMessageCount + 1;
-                COMMIT;
-                ";
+            mysqli_begin_transaction($link);
+
+            $sql = "SELECT NewMessageCount FROM MessageThreadNotification WHERE Recipient=$loginID AND ResourceID=$resource_id AND ResourceType = '$resource_type' FOR UPDATE;";
             mysqli_query($link, $sql);
+            $sql = "INSERT INTO MessageThreadNotification (Recipient, ResourceID, ResourceType, NewMessageCount) VALUES ('$loginID', '$resource_id', '$resource_type', 1) ON DUPLICATE KEY UPDATE NewMessageCount = NewMessageCount + 1;";
+            mysqli_query($link, $sql);
+
+            $results = mysqli_commit($link);
+            if(!$results) {
+                $responses[] = mysqli_error($link);
+            }
         }
         if($subscriber['Subscriber'] == $loginID) $isSubscriber = true;
     }
-    if(!$isSubscriber) addSubscriber($link, $resource_id, $resource_type, $loginID);
+    if(!$isSubscriber){
+        $responses[]= addSubscriber($link, $resource_id, $resource_type, $loginID);
+    }
+
+    return join(',',$responses);
 
 }
 
@@ -144,7 +157,7 @@ function getNotifications($link){
 
     $loginID = $_SESSION['Login']->LoginID;
 
-    $sql = "SELECT * FROM MessageThreadNotification WHERE recipient = '".$loginID."'";
+    $sql = "SELECT NewMessageCount, ResourceID, ResourceType  FROM MessageThreadNotification WHERE Recipient = '".$loginID."' ORDER BY LastModified DESC";
 
     $results = mysqli_query($link, $sql);
     if(!$results){
@@ -176,7 +189,11 @@ function clearNotification($link, $in){
 
 function addSubscriber($link, $resource_id, $resource_type, $loginID) {
     $sql = "INSERT INTO MessageThreadSubscribers (ResourceID, ResourceType, Subscriber) VALUES ('".$resource_id."', '".$resource_type."', '".$loginID."')";
-    mysqli_query($link, $sql);
+    $results = mysqli_query($link, $sql);
+    if(!$results){
+        return mysqli_error($link);
+    }
+    return "";
 }
 
 function markMessageRead($link, $in) {
