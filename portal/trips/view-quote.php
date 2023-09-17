@@ -568,8 +568,7 @@ EOT;
     <script src="/portal/assets/js/pages/message.js"></script>
     <script src="/portal/route.js"></script>
     <script>
-      console.log('fish')
-      const MsgThreadNotification = {
+      MsgThreadNotification = {
           MSG_RESOURCE_ID: <?= $MSG_RESOURCE_ID ?>,
           MSG_RESOURCE_TYPE: "<?= $MSG_RESOURCE_TYPE ?>",
         }
