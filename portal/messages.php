@@ -36,7 +36,7 @@ if ($in['type']) {
         case "getNotifications":
             $out = getNotifications($link);
             break;
-        case "clearNotifications":
+        case "clearNotification":
             $out = clearNotification($link, $in);
             break;
     }
@@ -126,14 +126,14 @@ function updateNotifications($link, $resource_id, $resource_type, $loginID) {
 
     $responses = array();
     foreach($subscribers as $subscriber) {
-        $responses[]='next subscriber is '.$subscriber['Subscriber'];
+        $subscriberID = $subscriber['Subscriber'];
 
-        if($subscriber['Subscriber'] != $loginID) {
+        if($subscriberID != $loginID) {
             mysqli_begin_transaction($link);
 
             $sql = "SELECT NewMessageCount FROM MessageThreadNotification WHERE Recipient=$loginID AND ResourceID=$resource_id AND ResourceType = '$resource_type' FOR UPDATE;";
             mysqli_query($link, $sql);
-            $sql = "INSERT INTO MessageThreadNotification (Recipient, ResourceID, ResourceType, NewMessageCount) VALUES ('$loginID', '$resource_id', '$resource_type', 1) ON DUPLICATE KEY UPDATE NewMessageCount = NewMessageCount + 1;";
+            $sql = "INSERT INTO MessageThreadNotification (Recipient, ResourceID, ResourceType, NewMessageCount) VALUES ('$subscriberID', '$resource_id', '$resource_type', 1) ON DUPLICATE KEY UPDATE NewMessageCount = NewMessageCount + 1;";
             mysqli_query($link, $sql);
 
             $results = mysqli_commit($link);
@@ -141,7 +141,8 @@ function updateNotifications($link, $resource_id, $resource_type, $loginID) {
                 $responses[] = mysqli_error($link);
             }
         }
-        if($subscriber['Subscriber'] == $loginID) $isSubscriber = true;
+
+        if($subscriberID == $loginID) $isSubscriber = true;
     }
     if(!$isSubscriber){
         $responses[]= addSubscriber($link, $resource_id, $resource_type, $loginID);
@@ -157,7 +158,7 @@ function getNotifications($link){
 
     $loginID = $_SESSION['Login']->LoginID;
 
-    $sql = "SELECT NewMessageCount, ResourceID, ResourceType  FROM MessageThreadNotification WHERE Recipient = '".$loginID."' ORDER BY LastModified DESC";
+    $sql = "SELECT NewMessageCount, ResourceID, ResourceType  FROM MessageThreadNotification WHERE Recipient = '".$loginID."' AND NewMessageCount > 0 ORDER BY LastModified DESC";
 
     $results = mysqli_query($link, $sql);
     if(!$results){

@@ -5,6 +5,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Booze Cluez">
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/portal/assets/touch-icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/portal/assets/touch-icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/portal/assets/touch-icon-167.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/portal/assets/touch-icon-120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/portal/assets/touch-icon-114.png">
+      <link rel="apple-touch-icon" sizes="87x87" href="/portal/assets/touch-icon-87.png">
+      <link rel="apple-touch-icon" sizes="80x80" href="/portal/assets/touch-icon-80.png">
+    
     <title>D Harris Tours Customer Portal</title>
 	
 	<link rel="icon" type="image/png" href="/clients/dharristours/img/bus-logo-white.png" />
@@ -20,6 +32,8 @@
     <link rel="stylesheet" href="/lib/css/bus-loader.css">
     <link rel="stylesheet" href="assets/css/notifications.css">
     <style>
+    body {
+    }
     #overlay {
         position: absolute;
         z-index: 99999;
@@ -193,7 +207,12 @@
                                 print '</select>';
                             } else if ($_SESSION['Login']->BusinessIDs) {
                                 $bids = explode(",", $_SESSION['Login']->BusinessIDs);
-                                $sql = "BusinessID='" . implode("' OR BusinessID='", $bids) . "'";
+
+                                if ($_SESSION['Login']->Admin == 1) {
+                                    $sql = "";
+                                } else {
+                                    $sql = "BusinessID='" . implode("' OR BusinessID='", $bids) . "'";
+                                }
                                print '<label for="Business">Business</label><br><select id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
                                 $businesses = $boss->get("Business", "$sql");
                                 foreach ($businesses as $business) {

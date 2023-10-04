@@ -30,7 +30,7 @@ if (isset($_COOKIE['email'])) {
 if ($_REQUEST['logout']) {	
    $boss->utility->logout($boss);
    // header("Location: /index.php");
-   print "<script type='text/javascript'>\ntop.location.href='/index.php';\n</script>\n";
+   print "<script type='text/javascript'>\ntop.location.href='/portal/login.html?url=/apps/';\n</script>\n";
    exit;
 } else if (isset($_REQUEST['submitted'])) {
 	if ($in['email'] && $in['password']) {

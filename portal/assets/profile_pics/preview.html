@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color:#000;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 0vh;
+        }
+
+        main {
+            background-color: #000;
+            color: #ddd;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+        }
+        .profile {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+        .profile img {
+            width: 100px;
+            height: 100px;
+        }
+        #output {
+            background:#fff;
+            color: #000;
+            height: 5rem;
+            width: 100vw;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<div id="output"></div>
+<main>
+
+</main>
+<script>
+const $ = str => document.querySelector(str);
+const $$ = str => document.querySelectorAll(str);
+
+(function() {
+    const app = {
+        data: {
+            pics: [],
+            women: [],
+            females: [],
+            males: []
+        },
+        state: {
+            loaded: false
+        },
+        init: function() {
+            let out = "<fieldset><legend>Female</legend>";
+            for (let i=1; i<29; i++) {
+                let fn = i;
+                if (fn < 10) { fn = '0' + fn; }
+                out += `<div class='profile'><img src='female_${fn}.svg'></div>`;
+                app.data.females[`female_${fn}`] = 0;
+            }
+            out += "</fieldset><fieldset><legend>Male</legend>";
+            
+            for (let i=1; i<27; i++) {
+                let fn = i;
+                if (fn < 10) { fn = '0' + fn; }
+                out += `<div class='profile'><img src='male_${fn}.svg'></div>`;
+                app.data.males[`male_${fn}`] = 0;
+            }
+            out += "</fieldset>";
+            $("main").innerHTML = out;
+            app.state.loaded = true;
+        },
+        togglePic: function(who) {
+            app.data.pics[who] ^= 1;
+            if (app.data.pics[who] === 1) {
+                app.data.women.push(who);
+                $("#output").innerHTML += who + ",";
+            }
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
+
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
+
+</html>

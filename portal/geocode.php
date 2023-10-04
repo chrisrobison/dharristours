@@ -9,13 +9,30 @@
     $abbrevReplace = array('St', 'Ave', 'Rd', 'Hwy', 'Blvd', 'Ct', 'Cir');
     $in['addr'] = preg_replace($abbrevMatch, $abbrevReplace, $in['addr']);
     $in['addr'] = preg_replace("/\s/", '%', $in['addr']);
-
-    $sql = "select * from Address where FullAddress like '%{$in['addr']}%';";
+    
+    $parts = preg_split("/\,/", $in['addr']);
+    
+    $search = array();
+    foreach ($parts as $idx=>$part) {
+        $search[] = "'%{$part}%'";
+    }
+    $searchStr = join(" AND FullAddress like ", $search);
+    $sql = "select * from Address where FullAddress like $searchStr;";
     
     if ($results = mysqli_query($link, $sql)) {
         if (mysqli_num_rows($results)) {
             $row = mysqli_fetch_object($results);
             $out = new stdClass();
+            $out->id = $row->AddressID;
+            $out->name = $row->Name;
+            $out->address = $row->Address;
+            $out->city = $row->City;
+            $out->state = $row->State;
+            $out->zip = $row->Zip;
+            $out->lat = $row->Latitude;
+            $out->lon = $row->Longitude;
+            $out->full = $row->FullAddress;
+
             $out->features = array();
             $out->features[0] = new stdClass();
             $out->features[0]->geometry = new stdClass();
@@ -30,7 +47,7 @@
     $in['addr'] = urlencode($in['addr']);
 
     $results = `
-curl --include 'https://nominatim.openstreetmap.org/search?q={$in['addr']}&format=geojson' \
+curl --include 'https://nominatim.openstreetmap.org/search?q={$in['addr']}&format=geojson&boundary.rect.min_lon=-124.011&boundary.rect.min_lat=37.166&boundary.rect.max_lon=-120&boundary.rect.max_lat=39.12' \
   -H 'authority: nominatim.openstreetmap.org' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
   -H 'accept-language: en-US,en;q=0.9' \

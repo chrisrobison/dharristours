@@ -29,10 +29,10 @@
         <input type="hidden" name="x" value="login">
         <input type="hidden" name="login" value="Login">
         <input type="hidden" name="redirect" value="true">
-        <input type="hidden" name="url" value="/portal/index.php">
+        <input type="hidden" name="url2" id="url2" value="/portal/index.php">
 
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email">
+          <input id="email" type="email" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -86,5 +86,14 @@
 <script src="assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="assets/js/plugins/jquery-validation/additional-methods.js"></script>
 <script src="assets/js/pages/login.js"></script>
+<script>
+(function() {
+    const loginForm = document.querySelector("loginForm");
+    if (loginForm) {
+        loginForm.action += document.location.search;
+    }
+    document.querySelector("#email").focus();
+})();
+</script>
 </body>
 </html>

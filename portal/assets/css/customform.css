@@ -22,7 +22,7 @@
     display: block;
 }
 
-.register-fail, .register-success {
+.register-fail, .register-success, .register-exists {
     display: none;
 }
 .message-fail, .message-success {

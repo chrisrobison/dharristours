@@ -67,8 +67,9 @@
           <table class="table table-striped projects">
               <thead>
                   <tr>
+                      <th></th>
+                      <th>#</th>
                       <th>Trip Date</th>
-                      <th>Job</th>
                       <th>Pax</th>
                       <th>Buses</th>
                       <th></th>
@@ -78,13 +79,17 @@
 <?php
 
 $tpl = <<<EOT
+<tr>
+    <td colspan="6" style="border-top:4px solid #0077ff;padding-left:0.25rem;">{{Job}}</td>
+</tr>
 <tr id="rowTemplate">
+    <td style="width:20%"></td>
+    <td>{{JobID}}</td>
     <td style="white-space:nowrap;">{{JobDate}}</td>
-    <td>{{Job}}</td>
     <td>{{NumberOfItems}}</td>
     <td>{{BusCount}}</td>
     <td class="project-actions text-right">
-        <a class="btn btn-primary btn-sm" onclick="parent.app.loadTab('/portal/trips/view-trip.php?id={{JobID}}','Trip {{JobID}}', 'trip_{{JobID}}', true); return false;" href="view-trip.php?id={{JobID}}"><i class="fas fa-folder"></i> View</a>
+        <a class="btn btn-primary btn-sm" onclick="parent.app.loadTab('/portal/trips/view-trip.php?id={{JobID}}','Trip {{JobID}}', 'trip_{{JobID}}', true); return false;" href="view-trip.php?id={{JobID}}"><i class="fas fa-up-right-from-square"></i></a>
     </td>
 </tr>
 EOT;

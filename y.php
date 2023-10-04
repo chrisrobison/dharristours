@@ -1,14 +1,10 @@
 <?php
    include("lib/boss_class.php");
 
-   $boss = new boss("admin.dev.sscsf.com");
+   $boss = new boss("dharristours.simpsf.com");
 
-   $boss->db->dbobj->execute("use SS_System");
-   $boss->db->addResource("App");
-   $results = $boss->db->App->getlist();
+   $results = $boss->getObjectRelated("Job", 30079);
 print_r($results);
-print_r($boss->db);
 
-   print_r($boss->db->dbobj->fields);
 
 ?>

@@ -54,28 +54,28 @@
 					"title": "Company Profile",
 					"link": "/portal/account/profile.php",
 					"icon": "fas fa-building"
-				},{
-					"title": "Billing",
-					"link": "/portal/account/invoices.php",
-					"icon": "fas fa-file-invoice",
-                    "_children": [
-                        {
-                            "title": "Invoices Due",
-                            "link": "/portal/account/invoices.php?x=due",
-                            "icon": "fas fa-clock"
-                        },
-                        {
-                            "title": "Paid Invoices",
-                            "link": "/portal/account/invoices.php?x=paid",
-                            "icon": "fas fa-money-bill-1-wave"
-                        },
-                        {
-                            "title": "All Invoices",
-                            "link": "/portal/account/invoices.php?x=all",
-                            "icon": "fas fa-vault"
-                        }
-                    ]
 				}
+            ]
+        },{
+            "title": "Billing",
+            "link": "/portal/account/invoices.php",
+            "icon": "fas fa-file-invoice",
+            "_children": [
+                {
+                    "title": "Make Payment",
+                    "link": "/portal/payments/?x=due",
+                    "icon": "fas fa-credit-card"
+                },
+                {
+                    "title": "Unpaid Invoices",
+                    "link": "/portal/account/invoices.php?x=due",
+                    "icon": "fas fa-money-bill-1-wave"
+                },
+                {
+                    "title": "Invoice Archive",
+                    "link": "/portal/account/invoices.php?x=all",
+                    "icon": "fas fa-vault"
+                }
             ]
         },
         {
@@ -92,7 +92,7 @@
         },
         {
             "title": "Logout",
-            "link": "/login.php?logout=true&redirect=https://dharristours.simpsf.com/portal/login.html",
+            "link": "/portal/login.php?logout=true&redirect=/portal/login.html",
             "icon": "fa-solid fa-sign-out"
         }
 

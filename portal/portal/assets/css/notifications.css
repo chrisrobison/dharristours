@@ -1,0 +1,8 @@
+#notificationList a.nav-link.dropdown-item {
+    color: black;
+    height: auto;
+}
+#notificationList .title {
+    text-transform: capitalize;
+    font-variant: small-caps;
+}

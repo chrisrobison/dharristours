@@ -32,11 +32,18 @@ if (isset($_REQUEST['check']) && $in['email'] && $in['password']) {
         exit;
 }
 
+if ($_REQUEST['logout']) {	
+   $boss->utility->logout($boss);
+   // header("Location: /index.php");
+   print "<script type='text/javascript'>\ntop.location.href='/portal/login.html?url=/portal/';\n</script>\n";
+   exit;
+}
+
 if (isset($_REQUEST['redirect']) && $in['email'] && $in['password']) {
         if ($boss->utility->login($boss, $_REQUEST)) {
             setcookie("email", $in['email']);
             setcookie("name", $_SESSION['FirstName'] . ' ' . $_SESSION['LastName']);
-            header("Location: $url");
+            header("Location: {$url}");
             exit;
         } else {
             $msg = "<div class='formError' style='padding:5px 5px 5px 5px'>Log in failed. Invalid username and/or password.</div>";

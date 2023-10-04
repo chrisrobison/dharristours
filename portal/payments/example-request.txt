@@ -1,0 +1,50 @@
+curl https://connect.squareupsandbox.com/v2/online-checkout/payment-links \
+  -X POST \
+  -H 'Square-Version: 2023-08-16' \
+  -H 'Authorization: Bearer EAAAED7CKByFBqyR1MXInO4l-iPbZc0H9bfgX-xpRgs9WQzRbWAKA_OJywV-XwIM' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "idempotency_key": "9e471a1e-a6f9-4362-8ac0-5851a4f1697a",
+    "order": {
+      "location_id": "LVR1SE093GTP9",
+      "line_items": [
+        {
+          "name": "Trip to Oakland Zoo - 10/21/2023 - 25 Pax ",
+          "quantity": "1",
+          "base_price_money": {
+            "currency": "USD",
+            "amount": 65000
+          },
+          "note": "Extra mileage included"
+        },
+        {
+          "name": "Trip to Oakland Zoo - 10/22/2023 - 25 Pax",
+          "quantity": "1",
+          "base_price_money": {
+            "amount": 65000,
+            "currency": "USD"
+          }
+        },
+        {
+          "name": "Study Trip",
+          "quantity": "1",
+          "base_price_money": {
+            "amount": 65000,
+            "currency": "USD"
+          }
+        }
+      ],
+      "customer_id": "456"
+    },
+    "pre_populated_data": {
+      "buyer_address": {
+        "address_line_1": "621 Holloway Ave",
+        "country": "US",
+        "administrative_district_level_1": "CA",
+        "locality": "San Francisco",
+        "postal_code": "94112"
+      },
+      "buyer_email": "cdr@netoasis.net",
+      "buyer_phone_number": "415-810-6991"
+    }
+  }'

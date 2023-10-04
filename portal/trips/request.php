@@ -49,6 +49,9 @@
     input[type="checkbox"] {
         width: 5rem;
     }
+    input[type="checkbox"]:focus {
+        outline: 1px dotted #f00;
+    }
     .checks {
       width: 5rem;
       text-align: center;
@@ -160,7 +163,10 @@
         cursor: pointer;
     }
     .times.showtime {
-        width: 16rem;
+        width: 0rem;
+    }
+    :focus {
+        outline: 2px dashed #f009;
     }
     .times select {
         border-radius: 4px;
@@ -240,6 +246,24 @@ background-repeat: no-repeat;
     .timeline>div>.timeline-item>.timeline-header {
         min-height: 2.4rem;
     }
+    span.easepick-wrapper {
+        display: none;
+    }
+    span.easepick-wrapper::before {
+  content: " Select Trip Date ▼";
+  background: #c00;
+  height: 2rem;
+  width: 19.6rem;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0.25rem 1rem;
+  z-index: 11;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000;
+}
+
     </style>
 </head>
 
@@ -253,7 +277,7 @@ background-repeat: no-repeat;
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Bus Reservation Request</h1>
+                            <h1>Bus Reservation Request for <?php print $_SESSION['Business']->Business; ?></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -280,7 +304,7 @@ background-repeat: no-repeat;
                                         <div class="form-group">
                                             <label for="jobTitle"><i class="fa-regular fa-calendar"></i> Trip Date</label>
                                             <div class="col-8">
-                                                <input type="date" id="Date" name='Date' value="<?php print (array_key_exists('Date', $in)) ? $in['Date'] : ''; ?>" class="form-control">
+                                                <input style="width:9rem;" id="Date" name='Date' value="<?php print (array_key_exists('Date', $in)) ? $in['Date'] : ''; ?>" class="form-control" style="background-color:#fff !important">
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +312,7 @@ background-repeat: no-repeat;
                                         <div class="form-group">
                                             <label for="jobCompany"><i class="fa-solid fa-users"></i> Passengers</label>
                                             <div class="col-5">
-                                                <input type="number" id="Passengers" placeholder="# of Pax" name='Pax' value="<?php print array_key_exists('Pax', $in) ? $in['Pax'] : ''; ?>" class="form-control">
+                                                <input style="width:4rem;" min="10" type="number" id="Passengers" placeholder="# of Pax" name='Pax' value="<?php print array_key_exists('Pax', $in) ? $in['Pax'] : ''; ?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +328,7 @@ background-repeat: no-repeat;
                                     <label for="jobLocation">Pickup <a onclick="app.toggleTime('Pickup')"><i class="fa-regular fa-clock"></i></a></label>
                                     <div id="PickupTimes" class="times">
                                         <select id="PickupTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2' SELECTED>Depart By</option></select>
-                                        <input type="time" id="PickupTime" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('Pickup')" class='closetime'>(optional)</a>
+                                        <input type="time" id="PickupTime" step="900" style="width:8rem;display:inline-block;" onchange="app.setPickup(this.value)" class="form-control"><a onclick="return app.toggleTime('Pickup')" class='closetime'>(optional)</a>
                                     </div>
                                     <auto-complete id="PickupAC" data-autoselect="true" src="/portal/address2.php" for="Pickup-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
@@ -326,7 +350,7 @@ background-repeat: no-repeat;
                                     <label for="jobLocation">Final Dropoff <a onclick="app.toggleTime('FinalDropOff')"><i class="fa-regular fa-clock"></i></a></label>
                                     <div id="FinalDropOffTimes" class="times">
                                         <select id="FinalDropOffTimeType"><option value='0'>-- Pick Type --</option><option value='1'>Arrive By</option><option value='2' SELECTED>Depart By</option></select>
-                                        <input type="time" id="FinalDropOffTime" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('FinalDropOff')" class='closetime'>(optional)</a>
+                                        <input onchange="app.updateFinalTime()" type="time" id="FinalDropOffTime" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('FinalDropOff')" class='closetime'>(optional)</a>
                                     </div>
                                     <auto-complete id="FinalDropOffAC" data-autoselect="true" src="/portal/address2.php" for="FinalDropOff-popup" style="width:100%" class="input-group">
                                         <div class="input-group-prepend">
@@ -375,6 +399,23 @@ background-repeat: no-repeat;
                                    </div>
                                </div>
                                 <!-- /.row -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="PaymentMethod">Payment Method</label>
+                                        <select id="PaymentMethod" name="Request[PaymentMethod]" onchange="updatePayment(this)">
+                                            <option>-- Select Payment Method --</option>
+                                            <option value="Credit Card">Credit Card</option>
+                                            <option value="Check">Check</option>
+                                            <option value="Purchase Order">Purchase Order</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6" id="PaymentNumberWrap" style="display:none;">
+                                        <label for="PaymentNumber">PO Number</label>
+                                        <input type="text" class="form-control" name="Request[PaymentNumber]" id="PaymentNumber">
+                                    </div> 
+                                </div>
+                                <!-- /.row -->
+
                                 <div class="form-group">
                                     <label for="inputDescription">Notes</label>
                                     <textarea id="Notes" name="Request[Notes]" class="form-control" rows="4"></textarea>
@@ -441,7 +482,7 @@ background-repeat: no-repeat;
                                             <span class='val' id="distance0"></span>
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="duration0">Total Duration</label>
+                                            <label for="duration0">Total Drive Time</label>
                                             <span class='val' id='duration0'></span>
                                         </div>
                                     </div>
@@ -483,15 +524,34 @@ const picker = new easepick.create({
     css: [
         "https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"
     ],
-    zIndex: 10,
-    TimePlugin: {
+    setup(picker) { 
+        picker.on("view", (e) => { 
+            const { view, date, target } = e.detail;
+picker.ui.container.style.top = "0px";
+picker.ui.container.style.left = "0px";
+picker.ui.container.querySelector("header").style.padding = "0px";
+        });
+    },
+    readonly: false,
+    header: "Trip Date",
+    zIndex: 10
+    /* TimePlugin: {
         stepMinutes: 15,
         format12: true
     },
     plugins: [
         "TimePlugin"
     ]
+    */
 });
+picker.on("hide", function() { document.querySelector(".easepick-wrapper").style.display = "none"; });
+picker.on("show",  function() { document.querySelector(".easepick-wrapper").style.display = "inline-block"; picker.renderAll(); });
+picker.on("select", function(e) { document.querySelector("#Passengers").focus(); });
+window.picker = picker;
+
+picker.ui.container.style.top = "0px";
+picker.ui.container.style.left = "0px";
+
 let map = app.map = L.map(document.querySelector(`#map0`), {
     center: [37.8437122, -122.3491274],
     zoom: 10,
@@ -546,8 +606,21 @@ fdo.addEventListener("change", function(evt) {
     app.addStop(evt.target.id, evt.target.value, evt, false, true);
 });
 app.data.session = <?php print json_encode($_SESSION); ?>;
+$("#Date").focus();
+setTimeout(function() { $("#Date").click(); 
+picker.ui.container.style.top = "0px";
+picker.ui.container.style.left = "0px";
+}, 1000);
 
 })();
+function updatePayment(el) {
+    if (el.value == "Purchase Order") {
+        document.querySelector("#PaymentNumberWrap").style.display = "inline-block";
+    } else {
+        document.querySelector("#PaymentNumberWrap").style.display = "none";
+
+    }
+}
     </script>
 </body>
 

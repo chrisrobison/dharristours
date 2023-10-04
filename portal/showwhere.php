@@ -326,8 +326,6 @@ if ($results = mysqli_query($link, $sql)) {
                 app.data.cursor = 0;
             }
 
-            document.querySelector("#history").value = app.data.cursor;
-            document.querySelector("#currentTime").innerHTML = app.data.history[app.data.cursor][0].pos_time;
 
             app.map.removeLayer(app.state.markerClusterGroup);
             app.update(app.data.history[app.data.cursor]);
@@ -345,6 +343,7 @@ if ($results = mysqli_query($link, $sql)) {
             if (query && query['bus']) {
                 app.state.showBus = query['bus'].split(/\D/);
             }
+
             document.querySelector("#currentTime").innerHTML = data[0].pos_time;
 
             app.state.area = new L.FeatureGroup();

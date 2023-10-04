@@ -1,0 +1,193 @@
+[{
+    "name": "AT&T",
+    "sms": "number@txt.att.net",
+    "mms": "number@mms.att.net",
+    "alt_sms": "number@mmode.com"
+}, {
+    "name": "T-Mobile",
+    "sms": "number@tmomail.net",
+    "mms": "number@tmomail.net"
+}, {
+    "name": "Airfire Mobile",
+    "sms": "number@sms.airfiremobile.com"
+}, {
+    "name": "Alaska Communications",
+    "sms": "number@msg.acsalaska.com"
+}, {
+    "name": "Alltel (Allied Wireless)",
+    "sms": "number@message.alltel.com",
+    "mms": "number@mms.alltelwireless.com",
+    "alt_mms": "number@message.alltel.com"
+}, {
+    "name": "Ameritech",
+    "sms": "number@paging.acswireless.com"
+}, {
+    "name": "Assurance Wireless",
+    "sms": "number@vmobl.com"
+}, {
+    "name": "Formerly Cingular",
+    "sms": "number@txt.att.net",
+    "alt_sms": "number@cingularme.com",
+    "alt_sms1": "number@mobile.mycingular.com",
+    "alt_sms2": "number@page.att.net",
+    "alt_sms3": "number@sms.smartmessagingsuite.com"
+}, {
+    "name": "BellSouth",
+    "sms": "number@bellsouth.cl"
+}, {
+    "name": "Bluegrass Cellular",
+    "mms": "number@mms.myblueworks.com"
+}, {
+    "name": "Boost Mobile",
+    "mms": "number@myboostmobile.com"
+}, {
+    "name": "Cellcom",
+    "sms": "number@cellcom.quiktxt.com"
+}, {
+    "name": "Cellular South",
+    "sms": "number@csouth1.com"
+}, {
+    "name": "Chariton Valley Wireless",
+    "sms": "number@sms.cvalley.net"
+}, {
+    "name": "Chat Mobility",
+    "sms": "number@mail.msgsender.com"
+}, {
+    "name": "Cincinnati Bell",
+    "mms": "number@mms.gocbw.com"
+}, {
+    "name": "Cingular (Postpaid)",
+    "sms": "number@cingular.com",
+    "mms": "number@mobile.mycingular.com"
+}, {
+    "name": "Cleartalk",
+    "sms": "number@sms.cleartalk.us"
+}, {
+    "name": "Consumer Cellular",
+    "sms": "number@cingularme.com"
+}, {
+    "name": "Cricket",
+    "sms": "number@sms.mycricket.com",
+    "mms": "number@mms.mycricket.com"
+}, {
+    "name": "C Spire Wireless",
+    "sms": "number@cspire1.com"
+}, {
+    "name": "DTC",
+    "sms": "number@sms.advantagecell.net"
+}, {
+    "name": "Edge Wireless",
+    "sms": "number@sms.edgewireless.com"
+}, {
+    "name": "Element Mobile",
+    "sms": "number@SMS.elementmobile.net"
+}, {
+    "name": "Esendex",
+    "sms": "number@echoemail.net"
+}, {
+    "name": "General Communications Inc.",
+    "sms": "number@mobile.gci.net"
+}, {
+    "name": "Golden State Cellular",
+    "sms": "number@gscsms.com"
+}, {
+    "name": "Greatcall",
+    "sms": "number@vtxt.com"
+}, {
+    "name": "Hawaiian Telcom Wireless",
+    "sms": "number@hawaii.sprintpcs.com"
+}, {
+    "name": "Helio",
+    "sms": "number@myhelio.com"
+}, {
+    "name": "I wireless (T-Mobile)",
+    "sms": "number.iws@iwspcs.net"
+}, {
+    "name": "i-wireless (Sprint PCS)",
+    "sms": "number@iwirelesshometext.com"
+}, {
+    "name": "Kajeet",
+    "sms": "number@mobile.kajeet.net"
+}, {
+    "name": "LongLines",
+    "sms": "number@text.longlines.com"
+}, {
+    "name": "MetroPCS",
+    "sms": "number@mymetropcs.com"
+}, {
+    "name": "Nextech",
+    "sms": "number@sms.ntwls.net"
+}, {
+    "name": "Page Plust Cellular (V MVNO)",
+    "mms": "number@mypixmessages.com"
+}, {
+    "name": "Pocket Wireless",
+    "sms": "number@sms.pocket.com"
+}, {
+    "name": "Qwest Wireless",
+    "sms": "number@qwestmp.com"
+}, {
+    "name": "Red Pocket Mobile",
+    "sms": "number@txt.att.net",
+    "mms": "number@mms.att.net"
+}, {
+    "name": "Simple Mobile",
+    "sms": "number@smtext.com"
+}, {
+    "name": "Southernlinc",
+    "sms": "number@page.southernlinc.com"
+}, {
+    "name": "South Central Communication",
+    "sms": "number@rinasms.com"
+}, {
+    "name": "Sprint",
+    "sms": "number@messaging.sprintpcs.com",
+    "mms": "number@pm.sprint.com"
+}, {
+    "name": "Straight Talk",
+    "sms": "number@vtext.com"
+}, {
+    "name": "Solavei",
+    "sms": "number@tmomail.net"
+}, {
+    "name": "Syringa Wireless",
+    "sms": "number@rinasms.com"
+}, {
+    "name": "Teleflip",
+    "sms": "number@teleflip.com"
+}, {
+    "name": "TracFone (prepaid)",
+    "sms": "number@mmst5.tracfone.com"
+}, {
+    "name": "Unicel",
+    "sms": "number@utext.com"
+}, {
+    "name": "US Cellular",
+    "sms": "number@mail.uscc.net",
+    "mms": "number@mms.uscc.net"
+}, {
+    "name": "USA Mobility",
+    "sms": "number@usamobility.net"
+}, {
+    "name": "Verizon Wireless",
+    "sms": "number@vtext.com",
+    "mms": "number@mms.alltel.net",
+    "alt": "number@vzwpix.com"
+}, {
+    "name": "Viaro",
+    "sms": "number@viaerosms.com",
+    "mms": "number@mmsviaero.com"
+}, {
+    "name": "Virgin Mobile",
+    "sms": "number@vxtras.com"
+}, {
+    "name": "Voyager Mobile",
+    "sms": "number@text.voyagermobile.com"
+}, {
+    "name": "West Central Wireless",
+    "sms": "number@sms.wcc.net"
+}, {
+    "name": "XIT Communications",
+    "sms": "number@sms.xit.net"
+}]
+

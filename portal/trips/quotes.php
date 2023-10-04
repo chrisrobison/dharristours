@@ -43,12 +43,6 @@
           <div class="col-sm-6">
             <h1>Quotes for <?php print $business->Business; ?></h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/portal/trips/">Trips</a></li>
-              <li class="breadcrumb-item active">Quotes</li>
-            </ol>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -58,7 +52,7 @@
 
       <!-- Default box -->
       <div class="card">
-        <div class="card-header">
+        <!--div class="card-header">
           <h3 class="card-title">Trip Quotes for <?php print $business->Business; ?></h3>
 
           <div class="card-tools">
@@ -69,19 +63,19 @@
               <i class="fas fa-times"></i>
             </button>
           </div>
-        </div>
+        </div-->
         <div class="card-body p-0">
           <table class="table table-striped projects">
               <thead>
                   <tr>
-                      <!--th>ID</th>
-                      <th>Date</th-->
+                      <th>ID</th>
+                      <!--th>Date</th-->
                       <th>Trip Date</th>
                       <th>Origin</th>
                       <th>Destination</th>
                       <th>Pax</th>
-                      <th>Pickup</th>
-                      <th>Return</th>
+                      <!--th>Pickup</th>
+                      <th>Return</th-->
                       <th>Round Trip</th>
                       <th>ADA</th>
                   </tr>
@@ -90,16 +84,16 @@
 <?php
     $tpl = <<<EOT
 <tr>
-    <!--td data-id="{{RequestID}}" data-rsc="Request" data-field="RequestID">
+    <td data-id="{{RequestID}}" data-rsc="Request" data-field="RequestID">
       {{RequestID}}
     </td>
-    <td>{{RequestDate}}</td-->
+    <!--td>{{RequestDate}}</td-->
     <td>{{Date}}</td>
     <td><a>{{Pickup}}</a></td>
     <td><a>{{Destination}}</a></td>
     <td>{{Pax}}</td>
-    <td>{{Start}}</td>
-    <td>{{End}}</td>
+    <!--td>{{Start}}</td>
+    <td>{{End}}</td-->
     <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="RoundTrip"{{RoundTrip}}></td>
     <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="ADA"{{ADA}}></td>
 

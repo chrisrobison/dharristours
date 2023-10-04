@@ -51,9 +51,15 @@ function doLogin(e) {
 
   postData("https://dharristours.simpsf.com/portal/login.php", $.param(data), function (data) {
     console.log(data);
-    if(data === 'true'){
-      checked = true
-      $(FORM_ID).submit()
+    if (data === 'true') {
+      checked = true;
+      let form = document.querySelector(FORM_ID);
+      if (form) {
+        form.action += document.location.search;
+        document.querySelector("#url2").value = decodeURIComponent(document.location.search.replace(/^\?/, ''));
+        console.log(`Submitting form to ${form.action}`);       // <---only doing all this to debug why '?url=...' query string not 
+        form.submit()                                           //     being passed 
+      }
     }
   });
 

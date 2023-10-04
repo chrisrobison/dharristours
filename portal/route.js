@@ -35,28 +35,38 @@
         addMarker: async function(address) {
             let coord = await app.geocodeAddress(address);
         },
-        roundTrip: function(evt) {
+        roundTrip: async function(evt) {
             console.log("roundtrip");
             console.dir(evt);
             if (evt.target.checked) {
+                let pu = document.querySelector("#Pickup").value;
+                let fdo = document.querySelector("#FinalDropOff").value;
+
                 app.data.roundtrip = 1;
                 document.querySelector("#FinalDropOffAC").setAttribute("readonly", true);
+                
+                document.querySelector("#FinalDropOff").value = pu;
                 document.querySelector("#FinalDropOff").setAttribute("readonly", true);
-
+                if (!app.data.stops.Pickup.coord && app.data.stops.Pickup.address) {
+                    app.data.stops.Pickup.coord = await app.geocodeAddress(app.data.stops.Pickup.address);
+                }
+                if (app.data.stops.Pickup && app.data.stops.Pickup.coord) {
+                    app.data.stops.FinalDropOff.coord = [app.data.stops.Pickup.coord[1], app.data.stops.Pickup.coord[0]];
+                }
+                
                 if (app.data.waypoint==0) {
-                   app.addWaypoint(); 
+                   app.addWaypoint(fdo); 
                 }
             } else {
                 app.data.roundtrip = 0;
                 document.querySelector("#FinalDropOffAC").removeAttribute("readonly");
+                document.querySelector("#FinalDropOff").value = "One Way Transfer";
                 document.querySelector("#FinalDropOff").removeAttribute("readonly");
             }
         },
         addStop: async function(who, what, evt, isOrigin=false, isFinal=false) {
-            let btn = document.querySelector("#updateRoutesButton");
-            if (btn) {
-                setTimeout(function() { let btn = document.querySelector("#updateRoutesButton"); btn.classList.add("animate__animated"); btn.classList.add("animate__rubberBand"); btn.classList.add("animate__infinite"); }, 500);
-            }
+            // let btn = document.querySelector("#updateRoutesButton");
+            // if (btn) { setTimeout(function() { let btn = document.querySelector("#updateRoutesButton"); btn.classList.add("animate__animated"); btn.classList.add("animate__rubberBand"); btn.classList.add("animate__infinite"); }, 500); }
             let addr = await app.geocodeAddress(what);
             if (addr) {
                 let stop = { coord: [addr.latitude, addr.longitude], source: who, address: what};
@@ -99,11 +109,27 @@
         stopChanged: function(who, what) {
             console.log(`stopChanged: who ${who} what ${what}`);
         },
-        updateRoutes: function(evt) {
+        checkCoords: async function(data) {
+            let out = {};
+             let keys = Object.keys(data);
+             for (let i=0; i<keys.length; i++) {
+                key = keys[i];
+                let item = data[key];
+                if (item && (!item.coord || item.coord.length<2)) {
+                    let geocodeResp = await fetch("/portal/geocode.php?addr="+encodeURIComponent(item.address));
+                    let coord = await geocodeResp.json();
+                    app.data[key].coord = [coord.lon, coord.lat];
+                    out[key] = { address: item.address, coord: [coord.lon, coord.lat] };
+                }
+             }
+             return out;
+        },
+        updateRoutes: async function(evt) {
             evt.stopPropagation();
             evt.preventDefault();
             let mapstops = "";
             document.querySelector("#map0").scrollIntoView();
+            //let coords = await app.checkCoords(app.data.stops);
             if (!app.data.stops.Pickup || !app.data.stops.FinalDropOff) {
                 return;
             }
@@ -116,15 +142,15 @@
             }
             document.querySelectorAll(".waypoint").forEach(el=>el.parentNode.removeChild(el));
             document.querySelector("#showDate").innerHTML = document.querySelector("#Date").value;
-            document.querySelector("#pickup0").innerHTML = app.data.stops.Pickup.address.replace(/CA.*/, '');
-            document.querySelector("#destination0").innerHTML = app.data.stops.FinalDropOff.address.replace(/CA.*/, '');
+            document.querySelector("#pickup0").innerHTML = app.data.stops.Pickup.address;
+            document.querySelector("#destination0").innerHTML = app.data.stops.FinalDropOff.address;
             document.querySelector("#pickup0Time").innerHTML = document.querySelector("#Start").value;
             
             let anchor = document.querySelector("#map-waypoints");
             for (let i=0; i<app.data.waypoints.length; i++) {
                 let key = `Waypoint${i+1}`;
                 let wp = app.data.stops[key];
-                wp.address = document.querySelector(`#${key}`).value.replace(/CA.*/, '');
+                wp.address = document.querySelector(`#${key}`).value;
                 let node = document.createElement("div");
                 node.className = "waypoint";
                 node.innerHTML = `<i class="fas fa-location-dot bg-blue"></i><div class="timeline-item"><span class="time"><i class="fas fa-clock"></i> <span id="wp-segment${i}"></span></span><h3 class="timeline-header no-border" id="Waypoint${i+1}">${wp.address}</h3></div>`;
@@ -229,7 +255,7 @@
             app.data.waypoint++;
             let WaypointNumber = app.data.waypoint;
 
-            let el = app.makeWaypoint(WaypointNumber);
+            let el = app.makeWaypoint(WaypointNumber, address);
             app.data.stops[`Waypoint${WaypointNumber}`] = { id: WaypointNumber, address:"" };
             document.querySelector("#waypoints").appendChild(el);
             app.data.waypoints.push(el);
@@ -255,10 +281,20 @@
             });
             el.innerHTML = `<label for="Waypoint${stopNum}">Stop #${stopNum} <a onclick="app.toggleTime('Stop${stopNum}')"><i class="fa-regular fa-clock"></i></a></label><div id="Stop${stopNum}Times" class="times"><select id="Stop${stopNum}TimeType"><option value='0'>-- Pick Type --</option><option value='1' SELECTED>Arrive By</option><option value='2'>Depart By</option></select><input type="time" id="Stop${stopNum}Time" step="900" style="width:8rem;display:inline-block;" class="form-control"><a onclick="return app.toggleTime('Stop${stopNum}')" class='closetime'>(optional)</a></div>`;
 el.appendChild(ac);
-            setTimeout(function() { document.querySelector(`#Waypoint${stopNum}`).focus(); }, 200);
-            ac.querySelector("input").focus();
+            if (document.querySelector("#Pickup").value == "") {
+                setTimeout(function() { document.querySelector(`#Pickup`).focus(); }, 200);
+            } else {
+                setTimeout(function() { document.querySelector(`#Waypoint${stopNum}`).focus(); }, 200);
+                ac.querySelector("input").focus();
+            }
 
             return el;
+        },
+        getSelected: function(wh, type="value") {
+            let el = document.querySelector(`#${who}`);
+            if (el) {
+                return el.options[el.selectedIndex][type];
+            }
         },
         doClickAC: function(who, evt) {
             console.log(`doClickAC\n${who}`);
@@ -270,7 +306,8 @@ el.appendChild(ac);
             let selected = evt.target;
             if (!(selected instanceof HTMLElement)) return;
             console.log(`selected: ${selected}`);
-
+            console.log("acSelect element:");
+            console.dir(el);
             const value = evt.relatedTarget.value;
             if (!app.data.stops[evt.relatedTarget.id]) {
                 app.data.stop[evt.relatedTarget.id] = {};
@@ -299,10 +336,35 @@ el.appendChild(ac);
             
             req.Pickup = app.data.stops.Pickup.address;
             let wps = [];
+            let times = [];
+            let pu = {};
+            pu.time = document.querySelector("#PickupTime").value;
+            pu.type = document.querySelector("#PickupTimeType").options[document.querySelector("#PickupTimeType").selectedIndex].text;
+            pu.title = "Pickup";
 
+            times.push(pu); 
             for (let i=0; i<app.data.waypoint; i++) {
                 wps.push(app.data.stops[`Waypoint${i+1}`].address);
+                let tt = document.querySelector(`#Stop${i+1}TimeType`);
+                let ttype;
+                if (tt) {
+                    ttype = tt.options[tt.selectedIndex].text;
+                }
+                let tk = `Stop${i+1}`;
+                let t = { 
+                    type: ttype,
+                    time: document.querySelector(`#Stop${i+1}Time`).value,
+                    title: tk
+                };
+                times.push(t);
             }
+            let dot = {};
+            dot.time = document.querySelector("#FinalDropOffTime").value;
+            dot.type = document.querySelector("#FinalDropOffTimeType").options[document.querySelector("#FinalDropOffTimeType").selectedIndex].text;
+            dot.title = "FinalDropOff";
+
+            times.push(dot); 
+            
             req.Destination = wps.join("|");
             req.Return = app.data.stops.FinalDropOff.address;
             req.Request = "Quote request for " + app.data.session.Business.Business;
@@ -316,6 +378,8 @@ el.appendChild(ac);
             req.Date = document.querySelector("#Date").value;
             req.Notes = document.querySelector("#Notes").value;
             req.BusinessID = app.data.session["BusinessID"];
+            req.Times = JSON.stringify(times);
+
             req.Name = app.data.session["Login"].FirstName + ' ' + app.data.session['Login'].LastName;
             req.Phone = app.data.session['Login'].Phone;
             req.Email = app.data.session['Login'].Email;
@@ -336,6 +400,22 @@ el.appendChild(ac);
             });
             */
             return false;
+        },
+        setPickup: function(val) {
+            if (val) {
+                let parts = val.split(/\:/);
+                let min = parseInt(parts[1]);
+                min += parseInt(parts[0]) * 60;
+                min -= 15;
+                let hr = ~~(min / 60);
+                min -= hr * 60;
+
+                if (hr < 10) hr = '0' + hr;
+                if (min < 10) min = '0' + min;
+                let newval = hr + ':' + min;
+
+                document.querySelector("#Start").value = newval;
+            }
         },
         postData: async function(url = "", data = {}) {
             const response = await fetch(url, {
@@ -561,7 +641,7 @@ el.appendChild(ac);
             let newaddr1 = await app.cleanAddress(address1);
             let newaddr2 = await app.cleanAddress(address2);
             
-            console.log(`clean addr 1: ${newaddr1}\nclean addr 2: ${newaddr2}\n`);
+            console.log(`clean addr 1: ${newaddr1}\n  old addr 1: ${address1}\nclean addr 2: ${newaddr2}\n  old addr 2: ${address2}`);
             if (newaddr1) {
                 address1 = newaddr1;
             }
@@ -587,12 +667,14 @@ el.appendChild(ac);
             return false;
         },
         cleanAddress: async function(address) {
-            let clean = {}, cleanTxt = "", city;
-            address = address.replace(/SF/g, "San Francisco");
-            address = address.replace(/CA/g, "");
-            address = address.replace(/\(.*/, '');
-            let parts = address.split(/,/);
-            console.log(address);
+            let clean = {}, cleanTxt = "", city = "", newAddr = "", tmpAddr;
+            
+            tmpAddress = address.replace(/SF/g, "San Francisco");
+            // tmpAddress = tmpAddress.replace(/\s*CA\s*/g, "");
+            tmpAddress = tmpAddress.replace(/\(.*/, '');
+            let parts = tmpAddress.split(/,/);
+            console.log(`cleaning: ${tmpAddress}`);
+            console.dir(parts);
             if (matches = address.match(/(\d+\s[^,]+),\s*([^,]+)/)) {
                 console.log("***Matches:");
                 console.dir(matches);
@@ -604,19 +686,50 @@ el.appendChild(ac);
                 cleanTxt = matches[1] + ', ' + city + ', CA';
                 return cleanTxt;
             }
-            const resp = await fetch(`https://nominatim.openstreetmap.org/search/${address}?format=geojson&addressdetails=1&limit=1&polygon_svg=1`);
-            const data = await resp.json();
-            if (data && data.features && data.features.length) {
-                let addr = data.features[0].properties.address;
-                let state = addr.state;
-                if (addr['ISO3166-2-lvl4']) {
-                    state = addr['ISO3166-2-lvl4'].substring(addr['ISO3166-2-lvl4'].length - 2)
+            
+            let r = await fetch(`/portal/geocode.php?addr=${parts[0]}`);
+            let d = await r.json();
+            if (d && d.full) {
+                cleanTxt = d.full;
+                return cleanTxt;
+            }
+            if (d && d.features && d.features.length && d.features[0] && d.features[0].properties && d.features[0].properties.address) {
+                let a = d.features[0].properties.address;
+                let s = a.state;
+                if (a['ISO3166-2-lvl4']) {
+                    s = a['ISO3166-2-lvl4'].substring(a['ISO3166-2-lvl4'].length - 2);
                 }
-                cleanTxt = addr.house_number + ' ' + addr.road + ', ' + addr.city + ' ' + state + ' ' + addr.postcode;
-                clean.address = addr.house_number + ' ' + addr.road;
-                clean.city = addr.city;
-                clean.state = state;
-                clean.zip = addr.postcode;
+
+                let c = [];
+                if (d.name) {
+                    c.push(d.name);
+                }
+                if (d.address) {
+                    c.push(d.address);
+                }
+                if (d.city) c.push(d.city);
+                if (d.state) c.push(d.state);
+                if (d.zip) c.push(d.zip);
+                
+                cleanTxt = c.join(", "); 
+            } else {
+                if (d && d.features && d.features.length) {
+                    let addr = d.features[0].properties.address;
+                    let state = 'CA';
+                    if (addr) {
+                        if (addr && addr.state) {
+                           state = addr.state;
+                        }
+                        if (addr && addr['ISO3166-2-lvl4']) {
+                            state = addr['ISO3166-2-lvl4'].substring(addr['ISO3166-2-lvl4'].length - 2)
+                        }
+                        cleanTxt = addr.house_number + ' ' + addr.road + ', ' + addr.city + ' ' + state + ' ' + addr.postcode;
+                        clean.address = addr.house_number + ' ' + addr.road;
+                        clean.city = addr.city;
+                        clean.state = state;
+                        clean.zip = addr.postcode;
+                    }
+                }
             }
             return cleanTxt;
         },
@@ -644,6 +757,12 @@ el.appendChild(ac);
         },
         toggleTime: function(who) {
             document.querySelector(`#${who}Times`).classList.toggle("showtime");
+        },
+        updateFinalTime: function() {
+            let ty = document.querySelector("#FinalDropOffTimeType");
+            let type = ty.options[ty.selectedIndex].text;
+            let ttime = document.querySelector("#FinalDropOffTime").value;
+            document.querySelector("#End").value = ttime;
         }
     }
     window.app = app;

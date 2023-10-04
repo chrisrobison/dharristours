@@ -45,19 +45,35 @@
     }
     
     if ($busID==332) {
-        $todaysJobs = $boss->getObject("Job", "JobDate='{$shortnow}' and JobCancelled=0");
+        $todaysJobs = $boss->getObject("Job", "JobDate='{$shortnow}' and JobCancelled=0 and Job not like '%CANCELLED%'");
     } else {
         $todaysJobs = $boss->getObject("Job", "BusinessID='{$busID}' and JobDate='{$shortnow}' and JobCancelled=0");
     }
 
+    $checkDue = true;       //  <----- Set to true to check for unpaid invoices
     if ($busID==332) {
         $lastmonth = date("Y-m-d", strtotime("30 days ago"));
-        $lastyear = date("Y-m-d", strtotime("365 days ago"));
+        $now = date("Y-m-d");
+        $lastyear = date("Y-01-01", strtotime("365 days ago"));
 
         $invoices = $boss->getObjectRelated("Invoice", "Balance>0 and InvoiceDate<'{$lastmonth}' and InvoiceDate>'{$lastyear}'");
-        $sql = "select sum(Balance) as PastDue from Invoice where Balance>0 and InvoiceDate<'{$lastmonth}' and InvoiceDate>'{$lastyear}'";
+        $sql = "select sum(Balance) as PastDue from Invoice, Job WHERE Job.JobCancelled=0 AND Job.InvoiceSatisfied=0 AND Invoice.JobID=Job.JobID AND Balance>0 AND Job.JobDate<'{$now}' AND InvoiceDate>'{$lastyear}'";
         $boss->db->dbobj->execute($sql);
         $pastdue = $boss->db->dbobj->fetch_object();
+
+        $stats->OverdueInvoices = count($invoices->Invoice["_ids"]);
+
+        $stats->PastDue = $pastdue->PastDue;
+    } else if ($checkDue) {
+        $lastmonth = date("Y-m-d" );
+        $now = date("Y-m-d");
+        $lastyear = date("Y-01-01", strtotime("last year"));
+
+        $invoices = $boss->getObjectRelated("Invoice", "Balance>0 AND BusinessID='{$busID}'");
+        $sql = "select sum(Balance) as PastDue from Invoice WHERE Balance>0 AND BusinessID='{$busID}'";
+        $boss->db->dbobj->execute($sql);
+        $pastdue = $boss->db->dbobj->fetch_object();
+
         $stats->OverdueInvoices = count($invoices->Invoice["_ids"]);
 
         $stats->PastDue = $pastdue->PastDue;
@@ -182,11 +198,11 @@ fetch("/portal/api.php?type=resources").then(r=>r.json()).then(data=>{
                 </div>
             </div>            
 <?php
-if ($busID==336662) {
+if (($busID==332) || ($stats->OverdueInvoices > 0)) {
 ?>
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-danger">
+                <div class="small-box bg-warning">
                   <div class="inner">
                     <h3><?php print number_format($stats->OverdueInvoices); ?></h3>
 
@@ -195,7 +211,7 @@ if ($busID==336662) {
                   <div class="icon">
                     <i class="fa-sharp fa-solid fa-hand-holding-dollar"></i>
                   </div>
-                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/account/invoices.php', 'invoices', true); return false;" href="/portal/account/invoices.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/account/invoices.php?x=due', 'invoices', true); return false;" href="/portal/accounts/invoices.php?x=due" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -208,7 +224,7 @@ if ($busID==336662) {
                   <div class="icon">
                     <i class="fa-solid fa-money-bill-1-wave"></i>
                   </div>
-                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/account/invoices.php?x=due', 'invoices-due', true); return false;" href="/portal/account/invoices.php?x=due" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Invoices', '/portal/payments/?x=due', 'invoices-due', true); return false;" href="/portal/payments/?x=due" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -217,7 +233,7 @@ if ($busID==336662) {
 
 } else {
 $overdue = date("Y-m-d", strtotime("30 days ago"));
-$invoices = $boss->getObject("Invoice", "BusinessID='$busID' AND Balance>0 AND InvoiceDate<'$overdue'");
+$invoices = $boss->getObject("Invoice", "BusinessID='$busID' AND Balance>0");
 if (count($invoices->_ids)) {
 ?>
             <div class="col-lg-3 col-6">
@@ -270,14 +286,14 @@ if (count($invoices->_ids)) {
                 <!-- small box -->
                 <div class="small-box bg-primary">
                   <div class="inner">
-                    <h3><?php print number_format($stats->Hours); ?></h3>
+                    <h3>0</h3>
 
-                    <p>Total Hours</p>
+                    <p>Invoices Due</p>
                   </div>
                   <div class="icon">
-                    <i class="fa-solid fa-clock"></i>
+                    <i class="fa-solid fa-money-bill-i-wave"></i>
                   </div>
-                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/trips/archive.php', 'view-quote', true); return false;" href="/portal/trips/archive.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a onclick="parent.$('.content-wrapper').IFrame('createTab', 'Job Archive', '/portal/payments/', 'view-quote', true); return false;" href="/portal/payments/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 <?php

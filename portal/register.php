@@ -13,6 +13,15 @@
          exit();
     }
 
+    $sql = "SELECT * FROM Login WHERE Email='". $in['data']['Login']['new1']['Email']."'";
+    $results = mysqli_query($link, $sql);
+    
+    if ($results && mysqli_num_rows($results)) {
+        
+        $rec = mysqli_fetch_assoc($results);
+        print "<p>Login already exists. <a href='/login.php?url=/portal/'>Login here</a> or use a different email address.</p>";
+    }
+
     if ($in['type']) {
         switch($in['type']) {
             case "register":

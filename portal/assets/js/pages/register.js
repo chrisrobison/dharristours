@@ -87,6 +87,10 @@ function doRegister(e) {
       $('.register-success').show()
       $('.register-form').hide()
     }
+    if (data.status == 'exists') {
+      $('.register-exists').show()
+      $('.register-form').hide()
+    }
   });
 
   $(FORM_ID).removeClass('submitting')

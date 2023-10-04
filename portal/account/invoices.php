@@ -14,6 +14,9 @@
     }
     $business = $boss->getObject("Business", $busID);
     
+    if (array_key_exists("x", $_SESSION) && !array_key_exists("x", $in)) {
+        $in['x'] = $_SESSION['x'];
+    }
     if (array_key_exists("x", $in)) {
         if ($in['x'] == "due") {
             $xtra = " AND Balance>0";
@@ -27,8 +30,11 @@
             $heading = "All Invoices";
             $title = "Account Billing History";
         }
+        $_SESSION['x'] = $in['x'];
+    } else {
+        $heading = "All Invoices";
+        $title = "Account Billing History";
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

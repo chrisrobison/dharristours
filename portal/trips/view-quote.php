@@ -247,7 +247,7 @@ background-repeat: no-repeat;
         min-height: 2.4rem;
     }
     .waypoint-input {
-        width: 75%;
+        width: 72%;
     }
     input[type="checkbox"] {
         width: 8rem;
@@ -568,7 +568,7 @@ EOT;
     <script src="/portal/assets/js/pages/message.js"></script>
     <script src="/portal/route.js"></script>
     <script>
-      MsgThreadNotification = {
+      window.MsgThreadNotification = {
           MSG_RESOURCE_ID: <?= $MSG_RESOURCE_ID ?>,
           MSG_RESOURCE_TYPE: "<?= $MSG_RESOURCE_TYPE ?>",
         }

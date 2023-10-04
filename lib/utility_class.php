@@ -236,7 +236,7 @@ class Utility {
             return (strcmp(strtolower($a->$val), strtolower($b->$val)));
         });
         $listcount = count($list);
-        $opts = "<optgroup label='Select Rate'><option value=''>--</option>";
+        $opts = "<optgroup data-RatesID='0' label='Select Rate'><option value=''>--</option>";
         $optgroup = "";
         foreach ($list as $l=>$item) {
             if ($item->Rate != $optgroup) {
