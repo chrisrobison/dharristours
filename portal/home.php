@@ -70,7 +70,7 @@
         $lastyear = date("Y-01-01", strtotime("last year"));
 
         $invoices = $boss->getObjectRelated("Invoice", "Balance>0 AND BusinessID='{$busID}'");
-        $sql = "select sum(Balance) as PastDue from Invoice WHERE Balance>0 AND BusinessID='{$busID}'";
+        $sql = "select sum(Invoice.Balance) as PastDue from Invoice, Job WHERE Invoice.Balance>0 AND (Job.BusinessID='{$busID}' || Invoice.BusinessID='{$busID}') and Invoice.JobID=Job.JobID";
         $boss->db->dbobj->execute($sql);
         $pastdue = $boss->db->dbobj->fetch_object();
 

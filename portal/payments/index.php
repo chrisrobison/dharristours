@@ -103,7 +103,7 @@
                         <div class="col-sm-6">
                             <h1><?php print $title; ?> for <?php print $business->Business; ?></h1>
                         </div>
-                        <div class="col-sm-6" style="text-align: center;font-size: 1.4rem;background: #c00;text-shadow: 2px 2px 0px #0009;color: #fff;font-weight: bold">
+                        <div class="col-sm-6" style="text-align: center;font-size: 1.4rem;background: #c00;text-shadow: 2px 2px 0px #0009;color: #fff;font-weight: bold; display:none;">
                         <i style="color:#ff0;filter:drop-shadow(2px 2px 0px #000);" class="fa-solid fa-triangle-exclamation"></i>
                         <?php print "$".number_format($tot)." Due for $invcnt Trips"; ?>
                         </div>
@@ -137,7 +137,7 @@
                   </thead>
                   <tbody onclick="app.loadInvoice(event)">
 <?php
-    $sql = "SELECT * FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID and Invoice.Balance>0 $xtra ORDER BY InvoiceDate DESC LIMIT ".($curpage * 50).", 50 ;";
+    $sql = "SELECT Invoice.InvoiceID as InvoiceID, Job.Job as Job, Invoice.InvoiceDate as InvoiceDate, Invoice.Balance as Balance FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID and Invoice.Balance>0 $xtra ORDER BY InvoiceDate DESC LIMIT ".($curpage * 50).", 50 ;";
     $results = mysqli_query($link, $sql);
     $tot = 0;
     $invids = array();

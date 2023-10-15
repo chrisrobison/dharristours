@@ -328,14 +328,23 @@
          print $out;
          exit;
       } else if ($in['rows']) {
+         $rows = array();
       	$cnt = 0;
          if ($dbh) {
-            while ($row = mysql_fetch_object($dbh)) { $rows[] = $row; $cnt++; }
+            while ($row = mysql_fetch_object($dbh)) { 
+               $newrow = new stdClass();
+
+               foreach ($row as $key=>$val) {
+                  $newrow->$key = mb_convert_encoding($val, 'UTF-8', 'UTF-8');
+               }
+               $rows[] = $newrow; $cnt++; 
+
+            }
          }
          $dbr = $sys->{$rsc}->execute("select FOUND_ROWS() as total");
          $row = mysql_fetch_object($dbr);
          $total = $row->total;
-         $out .= '{"page":'.$in['page'].',"total":'.ceil($total / $count).',"records":'.$total.',"totalrows":'.$row->total.', "rows":'.json_encode($rows).'}';
+         $out .= '{"page":'.$in['page'].',"total":'.ceil($total / $count).',"records":'.$total.',"totalrows":'.$row->total.', "rows":'.json_encode($rows, JSON_UNESCAPED_UNICODE).'}';
          
          $boss->headers('json');
          print $out;

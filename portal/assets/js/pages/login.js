@@ -3,21 +3,14 @@ let checked = false
 
 $(function () {
 
-
+/*
   $( $(FORM_ID)).validate({
     rules: {
-      'email': {
-        required: true,
-        email: true,
-      },
       'password': {
         required: true,
       },
     },
     messages: {
-      'email': {
-        email: "Please enter a valid email address",
-      },
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {
@@ -41,15 +34,15 @@ $(function () {
       }
     }
   })
+*/
 })
-
 function doLogin(e) {
   $(FORM_ID).addClass('submitting')
   console.log(serializeForm())
 
-  const data = { ...serializeForm(), "check": 'true' };
+  const out = { ...serializeForm(), "check": 'true' };
 
-  postData("https://dharristours.simpsf.com/portal/login.php", $.param(data), function (data) {
+  postData("https://dharristours.simpsf.com/portal/login.php", $.param(out), function (data) {
     console.log(data);
     if (data === 'true') {
       checked = true;

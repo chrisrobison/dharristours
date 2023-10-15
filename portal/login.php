@@ -6,16 +6,19 @@ if ($_SERVER['SERVER_PORT'] != 443) {
 }
 */
 require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/boss_class.php");
-session_start();
 
-
-$in = $_REQUEST;
+$in = $_POST;
 $boss = new boss();
 
-$url = $_REQUEST['url'];
+if (array_key_exists("url", $_POST)) {
+    $url = $_POST['url'];
+} 
+
+if (array_key_exists("url2", $_POST)) {
+    $url = $_POST['url2'];
+} 
+
 if (!$url || $url=='%2F') $url = "/portal/index.php";
-
-
 
 if (isset($_COOKIE['email'])) {
     unset($_COOKIE['email']);
@@ -23,8 +26,8 @@ if (isset($_COOKIE['email'])) {
     setcookie('email', null, -1, '/');
 }
 
-if (isset($_REQUEST['check']) && $in['email'] && $in['password']) {
-        if ($boss->utility->login($boss, $_REQUEST)) {
+if (isset($_POST['check']) && isset($in['email']) && isset($in['password'])) {
+        if ($boss->utility->login2($boss, $_REQUEST)) {
             echo 'true';
         } else {
             echo 'false';
@@ -40,14 +43,16 @@ if ($_REQUEST['logout']) {
 }
 
 if (isset($_REQUEST['redirect']) && $in['email'] && $in['password']) {
-        if ($boss->utility->login($boss, $_REQUEST)) {
+        if ($boss->utility->login2($boss, $_REQUEST)) {
             setcookie("email", $in['email']);
             setcookie("name", $_SESSION['FirstName'] . ' ' . $_SESSION['LastName']);
             header("Location: {$url}");
             exit;
         } else {
             $msg = "<div class='formError' style='padding:5px 5px 5px 5px'>Log in failed. Invalid username and/or password.</div>";
+            print $msg;
         }
+
 }
 
 

@@ -1,99 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>D Harris Tours Customer Portal | Log in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>D Harris Tours Customer Portal | Log in</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="assets/css/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="assets/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="assets/css/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="assets/css/adminlte.min.css">
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a style="font-family:'HelveticaNeue';font-weight:bold;" href="/portal"><img src="assets/img/buslogotrans.png" width="250"></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Login to access <br>D Harris Tours Customer Portal</p>
-
-      <form id="loginForm" method="post" action="https://dharristours.simpsf.com/portal/login.php">
-        <div class="submit-overlay"></div>
-        <input type="hidden" name="x" value="login">
-        <input type="hidden" name="login" value="Login">
-        <input type="hidden" name="redirect" value="true">
-        <input type="hidden" name="url2" id="url2" value="/portal/index.php">
-
-        <div class="input-group mb-3">
-          <input id="email" type="email" name="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
+    <div class="login-box">
+        <div class="login-logo">
+            <a style="font-family:'HelveticaNeue';font-weight:bold;" href="/portal"><img src="assets/img/buslogotrans.png" width="250"></a>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" name="remember" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      <!-- /.social-auth-links -->
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Login to access <br>D Harris Tours Customer Portal</p>
 
-      <!--<p class="mb-1">
+                <form id="loginForm" method="post" onsubmit="return doSubmit(event)" action="https://dharristours.simpsf.com/portal/login.php">
+                    <div class="submit-overlay"></div>
+                    <input type="hidden" name="x" value="login">
+                    <input type="hidden" name="login" value="Login">
+                    <input type="hidden" name="redirect" value="true">
+                    <input type="hidden" name="url2" id="url2" value="/app/index.php">
+
+                    <div class="input-group mb-3">
+                        <input id="email" type="text" name="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" name="remember" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <!-- /.social-auth-links -->
+
+                <!--<p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
       </p>-->
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Signup for a free account</a>
-      </p>
+                <p class="mb-0">
+                    <a href="register.html" class="text-center">Signup for a free account</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
     </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
+    <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="assets/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="assets/js/adminlte.min.js"></script>
-<script src="assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="assets/js/plugins/jquery-validation/additional-methods.js"></script>
-<script src="assets/js/pages/login.js"></script>
-<script>
-(function() {
-    const loginForm = document.querySelector("loginForm");
-    if (loginForm) {
-        loginForm.action += document.location.search;
-    }
-    document.querySelector("#email").focus();
-})();
-</script>
+    <!-- jQuery -->
+    <script src="assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="assets/js/adminlte.min.js"></script>
+    <script src="assets/js/pages/login.js?NOCACHE=79a9bc012"></script>
+    <script>
+        (function() {
+            const loginForm = document.querySelector("loginForm");
+            if (loginForm) {
+                loginForm.action += document.location.search;
+            }
+            document.querySelector("#email").focus();
+
+
+        })();
+
+        function doSubmit(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            let form = document.querySelector("#loginForm");
+            if (!checked) {
+                doLogin(form)
+                return false
+            } else {
+                const formData = new FormData(form)
+                formData.append('redirect', 'true')
+                form.submit()
+            }
+            return false;
+        }
+    </script>
 </body>
+
 </html>

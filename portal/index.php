@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Booze Cluez">
+    <meta name="apple-mobile-web-app-title" content="D Harris Tours">
     <link rel="apple-touch-icon" href="touch-icon-iphone.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/portal/assets/touch-icon-152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/portal/assets/touch-icon-180.png">
@@ -33,6 +33,12 @@
     <link rel="stylesheet" href="assets/css/notifications.css">
     <style>
     body {
+        height:100vh;
+        width: 100vw;
+        overscroll-behavior: none;
+        touch-action: none;
+        overflow: hidden;
+        position: fixed;
     }
     #overlay {
         position: absolute;

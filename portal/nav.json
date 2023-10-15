@@ -92,7 +92,7 @@
         },
         {
             "title": "Logout",
-            "link": "/portal/login.php?logout=true&redirect=/portal/login.html",
+            "link": "/login.php?logout=true",
             "icon": "fa-solid fa-sign-out"
         }
 

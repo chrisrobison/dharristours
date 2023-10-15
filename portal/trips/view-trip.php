@@ -118,11 +118,11 @@
         width: 4rem;
     }
     .checks {
-        width: 10rem;
+        width: 7rem;
         text-align: center;
     }
     input[type="checkbox"] {
-        width: 10rem;
+        width: 7rem;
     }
     .map-form td {
         vertical-align: top;

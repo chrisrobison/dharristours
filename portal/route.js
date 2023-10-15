@@ -503,6 +503,9 @@ el.appendChild(ac);
                     document.querySelector(`#overlay${mapidx}`).style.display = "none";
                 }
                  
+            }).catch(error=>{
+                console.log(error); 
+                document.querySelectorAll(".overlay").forEach(el=>el.style.display="none");
             });
         },
         makeStaticMap: function() {

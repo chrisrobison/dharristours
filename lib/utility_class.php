@@ -573,23 +573,92 @@ class Utility {
             $obj->Login->get($data['email'], 'Email');
             if (!count($obj->Login->Login)) $obj->Login->get(preg_replace("/@.*/", '', $data['email']), 'Login');
             $user = $obj->Login->Login[0];
-            
             if (!$user->LoginID) {
                 $sys = new obj('SS_System', 'pimp', 'pimpin', 'localhost');
                 $sys->addResource('Login');
                 $dbh = $sys->Login->execute("select * from SS_System.Login where Email='".mysql_real_escape_string($data['email'])."'");
                 if ($dbh) {
-		     $user = mysql_fetch_object($dbh);
-		     $admin = true;
-		     $dbr = $sys->Login->execute("select sum(a.Access) as ModuleAccess from (select distinct(Access) from Module) as a");
-		     $mrec = mysql_fetch_object($dbr);
-		     $user->Access = $mrec->ModuleAccess;
-// select sum(a.Access) from (select distinct(Access) from Process) as a
-		     $dbp = $sys->Login->execute("select sum(a.Access) as ProcessAccess from (select distinct(Access) from Process) as a");
-		     $prec = mysql_fetch_object($dbp);
-		     $user->ProcessAccess = $prec->ProcessAccess;
-	     }
+                     $user = mysql_fetch_object($dbh);
+                     $admin = true;
+                     $dbr = $sys->Login->execute("select sum(a.Access) as ModuleAccess from (select distinct(Access) from Module) as a");
+                     $mrec = mysql_fetch_object($dbr);
+                     $user->Access = $mrec->ModuleAccess;
+        // select sum(a.Access) from (select distinct(Access) from Process) as a
+                     $dbp = $sys->Login->execute("select sum(a.Access) as ProcessAccess from (select distinct(Access) from Process) as a");
+                     $prec = mysql_fetch_object($dbp);
+                     $user->ProcessAccess = $prec->ProcessAccess;
+                 }
             }
+            if (!$user->LoginID) {
+                return false;
+            } else {
+                if (($data['password'] != $user->Passwd) && (sha1($data['password']) != $user->Passwd)) {
+                    return false;
+                } else {
+                    $upd = array('LoginID'=>$user->LoginID, 'LoggedIn'=>'1', 'LastLogin'=>date('YmdHis'));
+                    if (!$admin) {
+                        $obj->Login->update($user->LoginID, $upd);
+                        $obj->Login->get($user->Email, 'Email');
+                        if (count($obj->Login->Login)) $_SESSION['Login'] = $obj->Login->Login[0];
+
+                        $obj->addResource('Employee');
+                        if ($obj->Employee) $obj->Employee->get($user->Email, 'Email');
+                        if (count($obj->Employee->Employee)) $_SESSION['Employee'] = $obj->Employee->Employee[0];
+                    } else {
+                        $_SESSION['Login'] = $user;
+                        $_SESSION['Admin'] = true;
+                    }
+                    $business = $boss->getObject("Business", $user->BusinessID);
+                    $_SESSION['Business'] = $business;
+                    $_SESSION['LoginID'] = $user->LoginID;
+                    $_SESSION['UserID'] = $user->LoginID;
+                    $_SESSION['BusinessID'] = $user->BusinessID;
+                    $_SESSION['Email'] = $user->Email;
+                    $_SESSION['FirstName'] = $user->FirstName;
+                    $_SESSION['LastName'] = $user->LastName;
+                    $_SESSION['Access'] = $user->Access;
+                    $_SESSION['ProcessAccess'] = $user->ProcessAccess;
+                    $_SESSION['Valid']='Yes';
+                    session_write_close();
+
+                    return true;
+                }
+            }
+        }
+    }
+    function login2($boss, $data) {
+        $obj = $boss->db;
+        $obj->addResource('Login');
+        $daystoexpire = ($data['remember']) ? 7 : 2;
+        $expireTime = 60 * 60 * 24 * $daystoexpire; // 2 days
+        session_set_cookie_params($expireTime);
+        
+        if (!session_id()) {
+            session_start();
+        } else {
+            session_regenerate_id(true);
+        }
+        if ($data['email']) {
+            $obj->Login->get($data['email'], 'Email');
+            if (!count($obj->Login->Login)) $obj->Login->get(preg_replace("/@.*/", '', $data['email']), 'Login');
+            $user = $obj->Login->Login[0];
+            if (!$user->LoginID) {
+                $sys = new obj('SS_System', 'pimp', 'pimpin', 'localhost');
+                $sys->addResource('Login');
+                $dbh = $sys->Login->execute("select * from SS_System.Login where Email='".mysql_real_escape_string($data['email'])."'");
+                if ($dbh) {
+                     $user = mysql_fetch_object($dbh);
+                     $admin = true;
+                     $dbr = $sys->Login->execute("select sum(a.Access) as ModuleAccess from (select distinct(Access) from Module) as a");
+                     $mrec = mysql_fetch_object($dbr);
+                     $user->Access = $mrec->ModuleAccess;
+        // select sum(a.Access) from (select distinct(Access) from Process) as a
+                     $dbp = $sys->Login->execute("select sum(a.Access) as ProcessAccess from (select distinct(Access) from Process) as a");
+                     $prec = mysql_fetch_object($dbp);
+                     $user->ProcessAccess = $prec->ProcessAccess;
+                 }
+            }
+            
             if (!$user->LoginID) {
                 return false;
             } else {
@@ -670,15 +739,18 @@ class Utility {
     function logout($boss) {
         $obj = $boss->db;
         $obj->addResource('Login');
+        
+        unset($_SESSION['Name']);
+        unset($_SESSION['Email']);
 
         if ($_SESSION['UserID']) {
             $upd = array('LoginID'=>$_SESSION['UserID'], 'LoggedIn'=>'0');
             $obj->Login->update($_SESSION['UserID'], $upd);
             
-            session_unset();	
-            session_destroy();
-            session_write_close();
         }
+        session_unset();	
+        session_destroy();
+        session_write_close();
     }
     
     function getImages($path) {

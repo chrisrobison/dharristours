@@ -30,7 +30,7 @@ if (isset($_COOKIE['email'])) {
 if ($_REQUEST['logout']) {	
    $boss->utility->logout($boss);
    // header("Location: /index.php");
-   print "<script type='text/javascript'>\ntop.location.href='/portal/login.html?url=/apps/';\n</script>\n";
+   print "<script type='text/javascript'>\ntop.location.href='/login.php?url=/apps/';\n</script>\n";
    exit;
 } else if (isset($_REQUEST['submitted'])) {
 	if ($in['email'] && $in['password']) {
@@ -49,8 +49,21 @@ if ($_REQUEST['logout']) {
 <html>
    <head>
       <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="D Harris Tours">
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/portal/assets/touch-icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/portal/assets/touch-icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/portal/assets/touch-icon-167.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/portal/assets/touch-icon-120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/portal/assets/touch-icon-114.png">
+      <link rel="apple-touch-icon" sizes="87x87" href="/portal/assets/touch-icon-87.png">
+      <link rel="apple-touch-icon" sizes="80x80" href="/portal/assets/touch-icon-80.png">
+
       <title><?php print $boss->app->App; ?> - Simple Workplace</title>
-      <link rel='stylesheet' type='text/css' href='/lib/css/core.css' />
       <link rel='stylesheet' type='text/css' href='/lib/css/default.css' />
       <link href="/lib/css/Aristo/jquery-ui-1.8.5.custom.css" type="text/css" rel="stylesheet" />
       <link rel="stylesheet" type="text/css" href="/lib/css/core.css" />
@@ -70,6 +83,7 @@ if ($_REQUEST['logout']) {
          }
       ?>
        <style>
+         * { box-sizing: border-box; }
          body { background-color: #306090; color:#ffffff; }
          #loginForm .centered .simpleButton {
             float:right;
@@ -99,6 +113,35 @@ if ($_REQUEST['logout']) {
             /* #prompt { position: absolute; top: 0px; bottom:0px; left:0px; right:0px; width:100%; height:100%; z-index:99999;} */
             input { -webkit-focus-ring: transparent; }
             .fieldLabel3 { width:5em; }
+            #loginDialog { border-radius: 0; font-size: 18px; width: 600px; }
+            .newlabel { text-align: right; width: 8rem;padding-right: 1rem; padding-top: 4px;}
+            .loginRow { height: auto; display: flex; flex-direction: row; }
+            #loginDialog .loginRow input { font-size: 18px; border-radius:0; border:0; width: 22rem;}
+            #loginForm .centered .simpleButton { 
+    width: 9rem;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #fff;
+    background: #000;
+    margin: 0 auto;
+    text-shadow:0;
+    font-family: "Helvetica",sans-serif;
+    border-radius: 0;
+            }
+            #loginDialog div.dialogTitlebar { height: 3rem; }
+            .loginRow3 { text-align: center; }
+            @media  only screen and (max-width:450px) {
+               body { font-size: 18px; }
+               #loginDialog {
+                  font-size: 22px; width: 100vw;
+               }
+               #loginDialog div.dialogTitlebar { height: 4rem; }
+               .loginRow { height: auto; display: flex; flex-direction: column; margin: 0.5rem 0; padding: 0; }
+               #loginDialog .loginRow input { font-size: 24px; border-radius:0; border:0; width: 80vw;}
+               .newlabel { text-align: left; width: auto; padding-top: 0; padding-right: 0; }         
+               .loginRow3 { display: flex; flex-direction: column; }
+            }
       </style>
       <link rel='stylesheet' type='text/css' href='<?php print $boss->app->Assets . '/' . $boss->app->CSS; ?>' />
    </head>
@@ -113,18 +156,18 @@ if ($_REQUEST['logout']) {
                <div id='loginTitle' class='dialogTitlebar'>Login</div>
                   <div id='loginBody'>
                      <div class='loginRow'>
-                        <span class='fieldLabel3' style='white-space:nowrap;'>Email</span>
-                        <input type="text" id='loginEmail' name="email" size="30" value="<?php print $_REQUEST['email']; ?>" class='fieldLabel'  style='width:18em;text-align:left;' autocomplete="no" />
+                        <div class='newlabel' style='white-space:nowrap;'>Email</div>
+                        <input type="text" id='loginEmail' name="email" size="30" value="<?php print $_REQUEST['email']; ?>" class='fieldLabel'  style='text-align:left;' autocomplete="no" />
                      </div>
                      <div class='loginRow'>
-                        <span class='fieldLabel3'>Password</span>
-                        <input name="password" type="password" size="30" value="" class='fieldLabel' style='width:18em;text-align:left;' autocomplete="no" />
+                        <div class='newlabel'>Password</div>
+                        <input name="password" type="password" size="30" value="" class='fieldLabel' style='text-align:left;' autocomplete="no" />
                      </div>
                      <div class='loginRow3'>
-                        <input name="remember" type="checkbox"  checked="checked" value="true" /> Remember me for 1 week
+                        <span><input name="remember" type="checkbox"  checked="checked" value="true" /> Remember me</span>
+                        <input name="login" type="submit" id="login" value="Login" class='ui-state-default simpleButton' />
                      </div>
                      <div class='loginRow ctl'>
-                         <input name="login" type="submit" id="login" value="Login" class='ui-state-default simpleButton' />
                       <a id="forgot" href="#ForgotPassword" style='display:inline-block;margin-top:1em;color:#0033aa;'>Forgot your password?</a>
                       </div>
                    </div>
@@ -164,28 +207,6 @@ if ($_REQUEST['logout']) {
          <input type="hidden" name="submitted" value="true">
          <input type="hidden" name="sendforgot" value="true">
       </form>
-  <!--[if IE]>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
-    <style>
-     .chromeFrameInstallDefaultStyle {
-       margin-top:-250px;
-       border: 5px solid black;
-     }
-    </style>
-    <div id="prompt">
-      <h1>This application requires installation of the Google chrome frame plugin.</h1>
-    </div>
-    <script>
-     // The conditional ensures that this code will only execute in IE,
-     // Therefore we can use the IE-specific attachEvent without worry
-     window.attachEvent("onload", function() {
-       CFInstall.check({
-         mode: "inline", // the default
-         node: "prompt"
-       });
-     });
-    </script>
-  <![endif]-->
    </body>
    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
