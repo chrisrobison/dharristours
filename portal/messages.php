@@ -4,14 +4,14 @@ include($_SERVER['DOCUMENT_ROOT'] . '/lib/auth.php');
 
 session_start();
 
- /*
-  * For testing purposes
- //include($_SERVER['DOCUMENT_ROOT'] . '/lib/auth.php');
- $_SESSION = array(
-    'Login' => new stdClass()
+/*
+ * For testing purposes
+//include($_SERVER['DOCUMENT_ROOT'] . '/lib/auth.php');
+$_SESSION = array(
+   'Login' => new stdClass()
 );
 $_SESSION['Login']->LoginID = 5;
- */
+*/
 
 
 $in = $_REQUEST;
@@ -91,6 +91,13 @@ function postMessage($link, $in) {
         $val = mysqli_real_escape_string($link, $val);
         array_push($vals, $val);
     }
+
+    if($vals[0] == "") {
+        $out->status = "error";
+        $out->e = "Message cannot be empty";
+        return $out;
+    }
+
     $resource_id = $vals[1];
     $resource_type = $vals[2];
     $loginID = $_SESSION['Login']->LoginID;
