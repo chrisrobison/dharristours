@@ -115,6 +115,10 @@ function postMessage($link, $in) {
 
 function updateNotifications($link, $resource_id, $resource_type, $loginID) {
     $sql = "SELECT Subscriber from MessageThreadSubscribers WHERE ResourceID = '$resource_id' AND ResourceType = '$resource_type'";
+    $isAdmin = $_SESSION['Login']->Admin == 1;
+    $ADMIN_SUBSCRIBER_ID = 0;
+    $isAdminSubscribed = false;
+
 
     $results = mysqli_query($link, $sql);
     if(!$results){
@@ -127,6 +131,21 @@ function updateNotifications($link, $resource_id, $resource_type, $loginID) {
     $responses = array();
     foreach($subscribers as $subscriber) {
         $subscriberID = $subscriber['Subscriber'];
+        if($subscriberID == $ADMIN_SUBSCRIBER_ID ) $isAdminSubscribed = true;
+    }
+    if(!$isAdminSubscribed){
+        $responses[]= addSubscriber($link, $resource_id, $resource_type, $ADMIN_SUBSCRIBER_ID);
+    }
+    if(!$isAdmin && !$isAdminSubscribed){
+        $subscribers[] = array('Subscriber' => $ADMIN_SUBSCRIBER_ID);
+    }
+
+    foreach($subscribers as $subscriber) {
+        $subscriberID = $subscriber['Subscriber'];
+
+        if($subscriberID == $ADMIN_SUBSCRIBER_ID && $isAdmin) continue;
+
+        if($subscriberID == $loginID) $isSubscriber = true;
 
         if($subscriberID != $loginID) {
             mysqli_begin_transaction($link);
@@ -142,7 +161,7 @@ function updateNotifications($link, $resource_id, $resource_type, $loginID) {
             }
         }
 
-        if($subscriberID == $loginID) $isSubscriber = true;
+
     }
     if(!$isSubscriber){
         $responses[]= addSubscriber($link, $resource_id, $resource_type, $loginID);
@@ -165,6 +184,7 @@ function getNotifications($link){
         $out->status = "error";
         $out->e = mysqli_error($link);
     }
+
     if($results) $out->data= $results->fetch_all(MYSQLI_ASSOC);
     return $out;
 }
@@ -174,11 +194,16 @@ function clearNotification($link, $in){
     $out->status = "ok";
 
     $loginID = $_SESSION['Login']->LoginID;
+    $isAdmin = $_SESSION['Login']->Admin == 1;
+    $ADMIN_SUBSCRIBER_ID = 0;
 
     $resource_id = mysqli_real_escape_string($link, $in['data']['resource_id']);
     $resource_type = mysqli_real_escape_string($link, $in['data']['resource_type']);
 
-    $sql = "UPDATE MessageThreadNotification SET NewMessageCount = 0 WHERE Recipient = '".$loginID."' AND ResourceID = '".$resource_id."' AND ResourceType = '".$resource_type."'";
+    $where = " WHERE Recipient = '".$loginID."' ";
+    if($isAdmin) $where = " WHERE Recipient IN ['".$loginID."','".$ADMIN_SUBSCRIBER_ID."'] ";
+
+    $sql = "UPDATE MessageThreadNotification SET NewMessageCount = 0 ".$where." AND ResourceID = '".$resource_id."' AND ResourceType = '".$resource_type."'";
 
     $results = mysqli_query($link, $sql);
     if(!$results){
