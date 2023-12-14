@@ -201,7 +201,7 @@ function clearNotification($link, $in){
     $resource_type = mysqli_real_escape_string($link, $in['data']['resource_type']);
 
     $where = " WHERE Recipient = '".$loginID."' ";
-    if($isAdmin) $where = " WHERE Recipient IN ['".$loginID."','".$ADMIN_SUBSCRIBER_ID."'] ";
+    if($isAdmin) $where = " WHERE Recipient IN ('".$loginID."','".$ADMIN_SUBSCRIBER_ID."') ";
 
     $sql = "UPDATE MessageThreadNotification SET NewMessageCount = 0 ".$where." AND ResourceID = '".$resource_id."' AND ResourceType = '".$resource_type."'";
 
