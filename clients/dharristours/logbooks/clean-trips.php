@@ -15,8 +15,8 @@
         $fieldsline = preg_replace_callback("/\s([a-z])/", function($matches) { return strtoupper($matches[1]); }, $fieldsline);
         $fieldsline = preg_replace("/\"/", "", $fieldsline);
 
-        $ourfields = preg_split("/,/", $fieldsline);
-
+        $ourfields = str_getcsv($fieldsline);
+       
         //array_pop($ourfields);
        /*
 Vehicle,Day,Start time,End time,Downtime,Duration,Standstill,Start odometer,End odometer,Distance,Driver,Start location,End location,Fuel consumption,Average fuel consumption,+/- Reference (absolute),+/- Refere
@@ -40,9 +40,12 @@ AverageFuelConsumption
 ReferenceAbsolute
 ReferenceRelative
 */
-    $ourfields = array( "Vehicle", "Day", "StartTime", "EndTime", "Downtime", "Duration", "Standstill", "StartOdometer", "EndOdometer", "Distance", "StartLocation", "EndLocation", "FuelConsumption", "AverageFuelConsumption", "ReferenceAbsolute", "ReferenceRelative");
+//    $ourfields = array( "Vehicle", "Day", "StartTime", "EndTime", "Downtime", "Duration", "Standstill", "StartOdometer", "EndOdometer", "Distance", "StartLocation", "EndLocation", "FuelConsumption", "AverageFuelConsumption", "ReferenceAbsolute", "ReferenceRelative");
 
         foreach ($lines as $line) {
+            $newparts = str_getcsv($line);
+            print_r($newparts);
+            /*
             $parts = preg_split("/,/", $line);
             $tail = array_splice($parts, -4, 4);
             $head = array_splice($parts, 0, 10);
@@ -51,27 +54,18 @@ ReferenceRelative
             $newparts = array_merge($head, $mids, $tail);
             $newparts[10] = preg_replace("/,\"/", "", $newparts[10]);
             $newparts[11] = preg_replace("/\"/", "", $newparts[11]);
+            */
 
-$obj = new stdClass();
-
+            $obj = new stdClass();
             for ($i=0; $i<count($newparts); $i++) {
                 $obj->{$ourfields[$i]} = preg_replace("/\"$/", "", $newparts[$i]);
            }
            $obj->StartLocation = $newparts[10];
            $obj->EndLocation = $newparts[11];
-           //$obj->Duration = explodeTime($obj->Duration); //sprintf("%0.1f", (($obj->Duration / 1000) / 60));
-           // $obj->Standstill = explodeTime($obj->Standstill); //sprintf("%0.1f", (($obj->Standstill / 1000) / 60) );
-           // $obj->Downtime = explodeTime($obj->Downtime); //sprintf("%0.1f", (($obj->Downtime / 1000) / 60) / 60);
-            
-           //$obj->StartTime = date("g:ia", $obj->StartTime / 1000);
-           //$obj->EndTime = date("g:ia", $obj->EndTime / 1000);
-           
            $obj->Vehicle = trim(preg_replace("/\–.*/", '', $obj->Vehicle));
            $obj->Day = date("Y-m-d", strtotime($obj->Day));
-           $out[] = $obj;
+           if ($obj->Vehicle !="") $out[] = $obj;
         }
-        
-
     }
     
     foreach ($out as $rec) {
@@ -81,7 +75,7 @@ $obj = new stdClass();
             $f[] = '`'.$key.'`';
             $d[] = "'" . preg_replace("/\'/", "\\'", $val) . "'";
         }
-        $sql = "INSERT INTO TripReport (" . implode(",", $f) . ") VALUES (" . implode(",", $d) .");";
+        $sql = "REPLACE INTO TripReport (" . implode(",", $f) . ") VALUES (" . implode(",", $d) .");";
         print $sql."\n";
     }
 
