@@ -1,1 +1,0 @@
-curl 'https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf62481189071ea9104ad6a88e51717cb62e65&text=Alameda%20Elks&boundary.rect.min_lon=-123.122168&boundary.rect.min_lat=36.951885&boundary.rect.max_lon=-120.362573&boundary.rect.max_lat=38.381473'
