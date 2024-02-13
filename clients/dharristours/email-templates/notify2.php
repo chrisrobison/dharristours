@@ -1,7 +1,7 @@
 #!/usr/local/bin/php
 <?php
    
-   $env = "prod";  // Change this to 'prod' for production environment or 'dev' from dev env
+   $myenv = "prod";  // Change this to 'prod' for production environment or 'dev' from dev env
    
    $conf['dev'] = array("root"=>"/simple.dev", 
                         "host"=>"dharristours.dev.sscsf.com",
@@ -11,11 +11,11 @@
                          "host"=>"dharristours.simpsf.com",
                          "db"=>"SS_DHarrisTours");
    
-   require($conf[$env]["root"] . "/lib/boss_class.php");
+   require($conf[$myenv]["root"] . "/lib/boss_class.php");
    
    chdir("/simple/clients/dharristours/email-templates");
 
-   $boss = new boss($conf[$env]["host"]);
+   $boss = new boss($conf[$myenv]["host"]);
 
    $records = $boss->get("DailyJobMail");
    $cnt = count($records);
@@ -46,13 +46,13 @@
       $cmd = "/usr/sbin/sendmail -t -f$from -F".escapeshellarg($FROM);
       // $sm = popen($cmd, 'w');
       
-      file_put_contents($conf[$env]["root"]."/spool/".uniqid().".eml", $email);
+      file_put_contents($conf[$myenv]["root"]."/spool/".uniqid().".eml", $email);
 
       if ($sm) {
          fputs($sm, $email);
          pclose($sm);
       }
       print $cmd."\n".$email."\n\n----\n";
-      file_put_contents($conf[$env]["root"] . "/log/notify.log", $cmd."\n".$email."\n", FILE_APPEND);
+      file_put_contents($conf[$myenv]["root"] . "/log/notify.log", $cmd."\n".$email."\n", FILE_APPEND);
    }
 ?>

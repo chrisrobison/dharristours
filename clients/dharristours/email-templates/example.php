@@ -12,7 +12,7 @@
     require($conf[$env]["root"] . "/lib/boss_class.php");
     
     $in = $_REQUEST;
-    $boss = new boss($conf[$env]["host"]);
+    $boss = new boss("dharristours.simpsf.com");
     
     $records = $boss->get("Request", $in['id']);
     $cnt = count($records);
@@ -24,33 +24,31 @@
          $bus = $boss->get("Business", $obj->BusinessID);
          $obj->Business = $bus[0]->Business;
       }
-
-      if ($obj->RateID) {
-         $bus = $boss->get("Rate", $obj->RateID);
-         $obj->Rate = $bus[0]->Rate;
-         $rates = $boss->getObject("Rates", "RateID={$obj->RateID}");
-         print_r($rates);
-      }
-
-    /* $obj = new stdClass();
-
-     $obj->Business = "ABC School District";
-     $obj->Name = "Jane Customer";
-     $obj->Email = "jcustomer@example.com";
-     $obj->Phone = "(415) 555-1212";
-     $obj->Pax = "32";
-     $obj->Date = "06/15/2023";
-     $obj->Start = "09:00:00";
-     $obj->End = "12:00:00";
-     $obj->Pickup = "El Dorado Elementary|70 Delta Street|San Francisco, CA 94134";
-     $obj->Destination = "Six Flags Discovery Kingdom|1001 Fairgrounds Dr|Vallejo, CA 94589";
-     $obj->RoundTrip = 1;
-     $obj->ADA = 1;
-     $obj->Shuttle = 1;
-     $obj->Text = 1;
-     $obj->RequestID = 1234;
-     $obj->Price = "1200.00";
-     */
+     
+    $oneway = ($obj->RoundTrip == 1) ? "display:none;" : "";
+   
+    $obj->QuoteTable = '<tr><th style="text-align:center;">Bus #</th><th>Bus Size</th><th style="'.$oneway.'">One Way</th><th>Overtime/hr</th><th>1<sup>st</sup> 4 hours</th></tr>';
+      if ($obj->RatesIDs) {
+        $total = 0;
+        $totpax = 0;
+        $totot = 0;
+        $totow = 0;
+        $rids = preg_split("/\,/", $obj->RatesIDs);
+        foreach ($rids as $idx=>$rid) {
+            $rate = $boss->getObject("Rates", $rid);
+// <th>Bus #</th><th>Bus Size</th><th>1st 4hr</th><th>Overtime/hr</th><th>One Way</th>
+            $obj->QuoteTable .= "<tr><td style='text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>".($idx + 1)."</td><td style='text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>".$rate->Pax." Passengers</td><td style='text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;{$oneway}'>$".$rate->OneWay."</td><td style='text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>$".$rate->Overtime."</td><td style='text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>$".$rate->FirstFour."</td></tr>";
+            $totpax += $rate->Pax;
+            $totot += $rate->Overtime;
+            $total += $rate->FirstFour;
+            $totow += $rate->OneWay;
+        }
+        $obj->QuoteTable .= "<tr><td style='text-align:center;background:#fff;color:#000;border-top:2px solid #000;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>Total</td><td style='border-top:2px solid #000;text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>".$totpax." Capacity</td><td style='border-top:2px solid #000;text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;{$oneway}'>$".$totow."</td><td style='border-top:2px solid #000;text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>$".$totot."/hr</td><td style='border-top:2px solid #000;text-align:center;background:#fff;border-bottom:1px solid #ccc;border-right:1px solid #ccc;'>$".$total."</td></tr>";
+    $obj->OvertimeTotal = $totot;
+    }
+    $dh = ($obj->DriverHours - 4);
+    $obj->HoursEstimate = $dh + 4;
+    $obj->DriverHoursTotal = $dh * $totot;
      $tpl = "quote.html";
 
      if (array_key_exists('t', $in)) {
@@ -65,7 +63,9 @@
      }
 
      $msg = file_get_contents($tpl);
+     $obj->zquery = base64_encode("id=".$obj->RequestID);
 
+     
      $msg = preg_replace_callback("/\{\{([^\}]+)\}\}/", function ($matches) use ($obj) {
           if (($matches[1] == "Start") || ($matches[1] == "End")) {
                 $obj->{$matches[1]} = date("H:ia", strtotime($obj->{$matches[1]}));

