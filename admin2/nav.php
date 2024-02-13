@@ -1,9 +1,9 @@
 <?php
 //   include("navbar.php");
 ?><!-- Main Sidebar Container -->
+<a style="float:right;color:#333;padding-right:1rem;padding-top:1rem;" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 <aside id='mainNav' class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
-<!--a style="float:right;color:#eee;padding-right:1rem;padding-top:1rem;" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a-->
 <a href="index3.html" class="brand-link">
   <img src="/img/bus-white.png"
        alt="Logo"
@@ -47,7 +47,10 @@
          $modules[$idx]->Processes = $arr;
 
          $target = ($mod->Target) ? " target='".$mod->Target."'" : "";
-         $ico = ($mod->Icon) ? "<i class='nav-icon fa fa-" . $mod->Icon ."'></i>  &nbsp; " : "";
+         $ico = ($mod->Icon) ? "<i class='nav-icon " . $mod->Icon ."'></i>  &nbsp; " : "";
+         if ($mod->ClassName) {
+            //$ico .= "<i class='simpleIcon {$mod->ClassName}'></i>";
+         }
          if (!$first) {
             $first = 1;
             $xtra = " menu-open";
