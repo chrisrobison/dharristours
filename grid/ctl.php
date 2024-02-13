@@ -19,7 +19,10 @@
    
    if (($in['x'] == "save") || ($in['x'] == "new")) {
       $form = array();
-      if (array_key_exists('data', $_POST)) {
+      if (array_key_exists('json2', $in)) {
+         $json = file_get_contents("php://input");
+         $form = json_decode($json);
+      } else if (array_key_exists('data', $_POST)) {
          $form = $_POST['data'];
       } else if (array_key_exists('data', $_GET)) {
          $form = $_GET['data'];
@@ -303,6 +306,8 @@
          } else if ($_FILES['importFile']['size']) {
             $in['data'] = file_get_contents($_FILES['importFile']['tmp_name']);
          }
+         $in['data'] = preg_replace("/^\W*/", "", $in['data']);
+
          file_put_contents($upload, $in['data']);
          $importObj = $boss->parseImport($in['rsc'], $in['data']);
          
