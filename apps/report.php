@@ -16,7 +16,7 @@
       <link rel='stylesheet' type='text/css' href='/lib/css/core.css' />
       <link rel='stylesheet' type='text/css' href='/lib/css/default.css' />
       <link rel='stylesheet' type='text/css' href='/lib/css/ui.css' />
-      <link rel='stylesheet' type='text/css' href='/lib/css/print2.css?ver=1.3' media='print' />
+      <link rel='stylesheet' type='text/css' href='/lib/css/print2.css?ver=1.3' />
    </head>
    <body>
       <div class='report' style='margin: 2em;'>
