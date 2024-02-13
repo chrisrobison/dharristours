@@ -223,7 +223,11 @@ function sql_quote($str, $quote="'", $null=false) {
 
    $func = function_exists("mysql_real_escape_string") ? "mysql_real_escape_string" : "addslashes";
 
-   return($quote . $func($str) . $quote);
+    if (is_string($str)) {
+        return($quote . $func($str) . $quote);
+    } else {
+        return $str;
+    }
 }
 #@ _QUOTE_
 
