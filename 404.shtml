@@ -1,114 +1,316 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
     <meta charset="utf-8">
-    <title>404 Page Not Found</title>
-    <style media="screen">
-      html,body{
-        margin: 0;
-        padding: 0;
-      }
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * { box-sizing: border-box; }
+        @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+/*Variables*/
+.left-section .inner-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-      canvas{
-        display: block;
-      }
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Fira Sans", sans-serif;
+  color: #f5f6fa;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#0C0E10, #446182);
+}
+.background .ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25vh;
+  background: #0C0E10;
+}
+@media (max-width: 770px) {
+  .background .ground {
+    height: 0vh;
+  }
+}
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 85%;
+  height: 100vh;
+  padding-bottom: 25vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+@media (max-width: 770px) {
+  .container {
+    flex-direction: column;
+    padding-bottom: 0vh;
+  }
+}
+
+.left-section, .right-section {
+  position: relative;
+}
+
+.left-section {
+  width: 40%;
+}
+@media (max-width: 770px) {
+  .left-section {
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
+}
+@media (max-width: 770px) {
+  .left-section .inner-content {
+    position: relative;
+    padding: 1rem 0;
+  }
+}
+
+.heading {
+  text-align: center;
+  font-size: 9em;
+  line-height: 1.3em;
+  margin: 2rem 0 0.5rem 0;
+  padding: 0;
+  text-shadow: 0 0 1rem #fefefe;
+}
+@media (max-width: 770px) {
+  .heading {
+    font-size: 7em;
+    line-height: 1.15;
+    margin: 0;
+  }
+}
+
+.subheading {
+  text-align: center;
+  max-width: 480px;
+  font-size: 1.5em;
+  line-height: 1.15em;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+@media (max-width: 770px) {
+  .subheading {
+    font-size: 1.3em;
+    line-height: 1.15;
+    max-width: 100%;
+  }
+}
+
+.right-section {
+  width: 50%;
+}
+@media (max-width: 770px) {
+  .right-section {
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.svgimg {
+  position: absolute;
+  bottom: 0;
+  padding-top: 10vh;
+  padding-left: 1vh;
+  max-width: 100%;
+  max-height: 100%;
+}
+@media (max-width: 770px) {
+  .svgimg {
+    padding: 0;
+  }
+}
+.svgimg .bench-legs {
+  fill: #0C0E10;
+}
+.svgimg .top-bench, .svgimg .bottom-bench {
+  stroke: #0C0E1066;
+  stroke-width: 1px;
+/*  fill: #5B3E2B; */
+    fill: url(#wood);
+}
+.svgimg .bottom-bench path:nth-child(1) {
+    fill: url(#wood);
+    filter: brightness(0.5);
+  /* fill: #432d20; */
+}
+.svgimg .lamp-details {
+  fill: #202425;
+}
+.svgimg .lamp-pole {
+  fill: url(#steel); /* #202425; */
+}
+
+.svgimg .lamp-accent {
+  fill: #2c3133;
+}
+.svgimg .lamp-bottom {
+  fill: url(#grad1); /* linear-gradient(#202425, #0C0E10); */
+}
+.svgimg .lamp-light {
+  fill: #EFEFEF;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 1rem #fefefe;
+  }
+  50% {
+    text-shadow: 0 0 1.85rem #ededed;
+  }
+  100% {
+    text-shadow: 0 0 1rem #fefefe;
+  }
+}
     </style>
-  </head>
-  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<main>
+<div class="background">
+        <div class="ground"></div>
+</div>
+<div class="container">
+        <div class="left-section">
+                <div class="inner-content">
+                        <h1 class="heading">404</h1>
+                        <p class="subheading">Looks like the page you were looking for is no longer here.</p>
+                </div>
+        </div>
+        <div class="right-section">
+                <svg class="svgimg" xmlns="http://www.w3.org/2000/svg" viewBox="51.5 -15.288 385 505.565">
+          <defs>
+            <linearGradient id="grad1" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#000" />
+              <stop offset="40%" stop-color="#555" />
+              <stop offset="100%" stop-color="#000" />
+            </linearGradient>
+            <linearGradient id="steel" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#000" />
+              <stop offset="40%" stop-color="#999" />
+              <stop offset="100%" stop-color="#000" />
+            </linearGradient>
+            <pattern id="wood" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image href="data:image/jpeg;base64,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" x="0" y="0" width="100" height="100" />
+          </pattern>
+        </defs>
+      <g class="bench-legs">
+        <path d="M202.778,391.666h11.111v98.611h-11.111V391.666z M370.833,390.277h11.111v100h-11.111V390.277z M183.333,456.944h11.111
+        v33.333h-11.111V456.944z M393.056,456.944h11.111v33.333h-11.111V456.944z" />
+      </g>
+      <g class="top-bench">
+        <path d="M396.527,397.917c0,1.534-1.243,2.777-2.777,2.777H190.972c-1.534,0-2.778-1.243-2.778-2.777v-8.333
+        c0-1.535,1.244-2.778,2.778-2.778H393.75c1.534,0,2.777,1.243,2.777,2.778V397.917z M400.694,414.583
+          c0,1.534-1.243,2.778-2.777,2.778H188.194c-1.534,0-2.778-1.244-2.778-2.778v-8.333c0-1.534,1.244-2.777,2.778-2.777h209.723
+          c1.534,0,2.777,1.243,2.777,2.777V414.583z M403.473,431.25c0,1.534-1.244,2.777-2.778,2.777H184.028
+          c-1.534,0-2.778-1.243-2.778-2.777v-8.333c0-1.534,1.244-2.778,2.778-2.778h216.667c1.534,0,2.778,1.244,2.778,2.778V431.25z"
+          />
+        </g>
+        <g class="bottom-bench">
+          <path d="M417.361,459.027c0,0.769-1.244,1.39-2.778,1.39H170.139c-1.533,0-2.777-0.621-2.777-1.39v-4.86
+          c0-0.769,1.244-0.694,2.777-0.694h244.444c1.534,0,2.778-0.074,2.778,0.694V459.027z" />
+          <path d="M185.417,443.75H400c0,0,18.143,9.721,17.361,10.417l-250-0.696C167.303,451.65,185.417,443.75,185.417,443.75z" />
+        </g>
+        <g id="lamp">
+          <path class="lamp-pole" d="M125.694,421.997c0,1.257-0.73,3.697-1.633,3.697H113.44c-0.903,0-1.633-2.44-1.633-3.697V84.917 c0-1.257,0.73-2.278,1.633-2.278h10.621c0.903,0,1.633,1.02,1.633,2.278V421.997z" />
+          <path class="lamp-accent" d="M128.472,93.75c0,1.534-1.244,2.778-2.778,2.778h-13.889c-1.534,0-2.778-1.244-2.778-2.778V79.861 c0-1.534,1.244-2.778,2.778-2.778h13.889c1.534,0,2.778,1.244,2.778,2.778V93.75z" />
 
-    <script type="text/javascript">
-      var canvas = document.createElement('canvas');
-      var height = canvas.height = window.innerHeight;
-      var width = canvas.width = window.innerWidth;
-      var ctx = canvas.getContext('2d');
-      document.body.appendChild(canvas);
+          <circle class="lamp-light" cx="119.676" cy="44.22" r="40.51" />
+          <path class="lamp-details" d="M149.306,71.528c0,3.242-13.37,13.889-29.861,13.889S89.583,75.232,89.583,71.528c0-4.166,13.369-13.889,29.861-13.889 S149.306,67.362,149.306,71.528z"/>
+          <radialGradient class="light-gradient" id="SVGID_1_" cx="119.676" cy="44.22" r="65" gradientUnits="userSpaceOnUse">
+            <stop  offset="0%" style="stop-color:#FFFFFF; stop-opacity: 1"/>
+            <stop  offset="50%" style="stop-color:#EDEDED; stop-opacity: 0.5">
+              <animate attributeName="stop-opacity" values="0.0; 0.5; 0.0" dur="5000ms" repeatCount="indefinite"></animate>
+            </stop>
+            <stop  offset="100%" style="stop-color:#EDEDED; stop-opacity: 0"/>
+          </radialGradient>
+          <circle class="lamp-light__glow" fill="url(#SVGID_1_)" cx="119.676" cy="44.22" r="65"/>
+          <path class="lamp-bottom" d="M135.417,487.781c0,1.378-1.244,2.496-2.778,2.496H106.25c-1.534,0-2.778-1.118-2.778-2.496v-74.869
+          c0-1.378,1.244-2.495,2.778-2.495h26.389c1.534,0,2.778,1.117,2.778,2.495V487.781z" />
+        </g>
+      </svg>
+        </div>
+</div>
+</main>
+<script>
+const $ = str => document.querySelector(str);
+const $$ = str => document.querySelectorAll(str);
 
-      function random(min,max)
-      {
-          return Math.random()*(max-min+1)+min;
-      }
+(function() {
+    const app = {
+        data: {},
+        state: {
+            loaded: false
+        },
+        init: function() {
+            app.state.loaded = true;
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
 
-      function range_map(value,in_min, in_max, out_min, out_max) {
-        return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-      }
-
-      var word_arr = [];
-      var txt_min_size = 5;
-      var txt_max_size = 25;
-      var keypress = false;
-      var acclerate = 2;
-      for (var i = 0; i < 25; i++) {
-        word_arr.push({
-          x : random(0,width),
-          y : random(0,height),
-          text : '404',
-          size : random(txt_min_size,txt_max_size)
-        });
-
-        word_arr.push({
-          x : random(0,width),
-          y : random(0,height),
-          text : 'page',
-          size : random(txt_min_size,txt_max_size)
-        });
-
-
-        word_arr.push({
-          x : random(0,width),
-          y : random(0,height),
-          text : 'not found',
-          size : random(txt_min_size,txt_max_size)
-        });
-
-        word_arr.push({
-          x : random(0,width),
-          y : random(0,height),
-          text : '404',
-          size : Math.floor(random(txt_min_size,txt_max_size))
-        });
-      }
-
-      function render()
-      {
-        ctx.fillStyle = "rgba(0,0,0,1)";
-        ctx.fillRect(0,0,width,height);
-
-        ctx.fillStyle = "#fff";
-        for (var i = 0; i < word_arr.length; i++) {
-          ctx.font = word_arr[i].size+"px sans-serif";
-          var w = ctx.measureText(word_arr[i].text);
-          ctx.fillText(word_arr[i].text,word_arr[i].x,word_arr[i].y);
-
-          if(keypress)
-          {
-            word_arr[i].x += range_map(word_arr[i].size,txt_min_size,txt_max_size,2,4) * acclerate;
-          }
-          else {
-            word_arr[i].x += range_map(word_arr[i].size,txt_min_size,txt_max_size,2,3);
-          }
-
-          if(word_arr[i].x >= width)
-          {
-            word_arr[i].x = -w.width*2;
-            word_arr[i].y = random(0,height);
-            word_arr[i].size =  Math.floor(random(txt_min_size,txt_max_size));
-
-          }
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
         }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
 
-        ctx.fill();
-
-        requestAnimationFrame(render);
-      }
-
-      render();
-
-      window.addEventListener('keydown',function(){
-        keypress = true;
-      },true);
-      window.addEventListener('keyup',function(){
-        keypress = false;
-      },true);
-    </script>
-  </body>
 </html>
-
