@@ -35,6 +35,14 @@ if ($_REQUEST['logout']) {
 } else if (isset($_REQUEST['submitted'])) {
 	if ($in['email'] && $in['password']) {
 		if ($boss->utility->login($boss, $_REQUEST)) {
+         if (array_key_exists("goto", $in)) {
+            if (array_key_exists('Login', $_SESSION)) {
+               $_SESSION['Login']->StartURL = $in['goto'];
+            }
+            $url = $in['goto'];
+         } else if ($_SESSION['Login']->StartURL) {
+            $url = $_SESSION['Login']->StartURL;
+         }
          setcookie("email", $in['email']);
          setcookie("name", $_SESSION['FirstName'] . ' ' . $_SESSION['LastName']);
          header("Location: $url");
@@ -142,6 +150,12 @@ if ($_REQUEST['logout']) {
                .newlabel { text-align: left; width: auto; padding-top: 0; padding-right: 0; }         
                .loginRow3 { display: flex; flex-direction: column; }
             }
+            select {
+               font-size: 16px;
+               border: 0;
+               height: 2.4rem;
+               width: 22rem;
+            }
       </style>
       <link rel='stylesheet' type='text/css' href='<?php print $boss->app->Assets . '/' . $boss->app->CSS; ?>' />
    </head>
@@ -163,7 +177,15 @@ if ($_REQUEST['logout']) {
                         <div class='newlabel'>Password</div>
                         <input name="password" type="password" size="30" value="" class='fieldLabel' style='text-align:left;' autocomplete="no" />
                      </div>
-                     <div class='loginRow3'>
+                     <div class='loginRow'>
+                        <div class='newlabel'>Go To</div>
+                        <select id="goto" name="goto">
+                           <option value="/apps/"<?php print ($_SESSION['Login']->StartURL=="/apps/") ? " SELECTED" : ""; ?>>Workspace</option>
+                           <option value="/admin2/"<?php print ($_SESSION['Login']->StartURL=="/admin2/") ? " SELECTED" : ""; ?>>Workspace, New UI (Beta)</option>
+                           <option value="/portal/"<?php print ($_SESSION['Login']->StartURL=="/portal/") ? " SELECTED" : ""; ?>>Customer Portal</option>
+                        </select>
+                     </div>
+                      <div class='loginRow3'>
                         <span><input name="remember" type="checkbox"  checked="checked" value="true" /> Remember me</span>
                         <input name="login" type="submit" id="login" value="Login" class='ui-state-default simpleButton' />
                      </div>
