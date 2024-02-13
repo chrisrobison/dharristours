@@ -414,6 +414,7 @@
    <div class='formrow'><span class='label'>Search Fields</span><input type='text' size='25' name='SearchFields' id='SearchFields' value='<?php print $current->SearchFields; ?>' class='data' /></div>
    <div class='formrow'><span class='chkbox'><input type='hidden' name='NoTrack' id='NoTrack' value='<?php print $current->NoTrack; ?>'><input type='checkbox' name='checkNoTrack' id='checkNoTrack' class='check' value='1' <?php print ($current->NoTrack) ? "CHECKED='checked'" : ''; ?> onchange="$('#NoTrack').val(this.checked?1:0)" /> NoTrack</span>
       <span class='chkbox'><input type='hidden' name='IsNew' id='IsNew' value='<?php print $current->IsNew; ?>'><input type='checkbox' name='checkIsNew' id='checkIsNew' class='check' value='1' <?php print ($current->IsNew) ? "CHECKED='checked'" : ''; ?> onchange="$('#IsNew').val(this.checked?1:0)" /> Is New</span>
+      <span class='chkbox'><input type='hidden' name='NoFramed' id='NoFramed' value='<?php print $current->NoFramed; ?>'><input type='checkbox' name='checkNoFramed' id='checkNoFramed' class='check' value='1' <?php print ($current->NoFramed) ? "CHECKED='checked'" : ''; ?> onchange="$('#NoFramed').val(this.checked?1:0)" /> No Frame</span>
    </div>
 <br/><br/><br/> <br/>
 <br clear="both">
