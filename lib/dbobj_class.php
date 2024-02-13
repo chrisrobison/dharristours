@@ -727,8 +727,12 @@ class dbobj extends dbd_mysql {
       return $results;
    }
 
-   function getClamped($local, $localId, $remote) {
-      $sql = "SELECT * FROM Clamp WHERE Local=".$this->sql_quote($local)." AND LocalID=".$this->sql_quote($localId)." AND Remote=".$this->sql_quote($remote)." AND Remote!=0";
+   function getClamped($local, $localId, $remote="") {
+      $sql = "SELECT * FROM Clamp WHERE Local=".$this->sql_quote($local)." AND LocalID=".$this->sql_quote($localId);
+      if ($remote) {
+         $sql .= " AND Remote=".$this->sql_quote($remote);
+      }
+      $sql .= " AND Remote!=0";
       
       $this->execute($sql);
       
