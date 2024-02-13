@@ -1,0 +1,200 @@
+#rateTable {
+    background: #fff;
+    text-align: center;
+}
+#rateTable {
+    width: 100%; 
+    border-collapse: collapse;
+}
+
+#rateTable td, #rateTable th {
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+#rateTable th {
+    background: #222;
+    color:#fff;
+}
+.genSelect {
+    width: 30rem;
+}
+.arrows button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  font-size: 3vw;
+}
+
+.arrows {
+  align-items: center;
+  display: flex;
+}
+
+.arrow {
+  position: relative;
+}
+.arrow + .arrow {
+  margin-left: 1vw;
+}
+
+.arrow-link {
+  align-items: center;
+  background-color: #999;
+  border-bottom: 4px solid #666;
+  border-top: 4px solid #666;
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  line-height: 1.45;
+  padding-left: 40px;
+  position: relative;
+  width: 7vw;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000;
+  font-size: 1.2vw;
+}
+.step {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  top: -8px; left: 30px;
+  font-size: 2em;
+}
+.arrow-is-active .arrow-link {
+  background-color: #b00;
+  border-bottom-color: #700;
+  border-top-color: #700;
+  font-weight: bold;
+  color:#fff;
+}
+.arrow-is-complete .arrow-link {
+  background-color: #0b0;
+  border-bottom-color: #060;
+  border-top-color: #060;
+}
+
+.arrow-head {
+  background-color: #999;
+  backface-visibility: hidden;
+  border-radius: 6px 0px 6px 0px;
+  border-top: 4px solid #666;
+  border-right: 4px solid #666;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  height: 51px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateX(50%) translateY(-50%) rotate(45deg);
+  width: 51px;
+}
+.arrow-is-active .arrow-head {
+  background-color: #b00;
+  border-top-color: #700;
+  border-right-color: #700;
+}
+.arrow-is-complete .arrow-head {
+  background-color: #0b0;
+  border-top-color: #060;
+  border-right-color: #060;
+}
+
+.arrow-tail {
+  background-color: white;
+  border-radius: 6px 0px 6px 0px;
+  border-top: 4px solid #666;
+  border-right: 4px solid #666;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  height: 51px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  width: 51px;
+}
+.arrow-is-active .arrow-tail {
+  border-top-color: #600;
+  border-right-color: #600;
+}
+.arrow-is-complete .arrow-tail {
+  border-top-color: #060;
+  border-right-color: #060;
+}
+
+.arrow:first-of-type {
+  border-left: 4px solid #060;
+}
+.arrow:first-of-type.arrow-is-active,
+.arrow-is-active .arrow:first-of-type {
+  border-left-color: #060;
+}
+.arrow:first-of-type.arrow-is-complete,
+.arrow-is-complete .arrow:first-of-type {
+  border-left-color: #0b0;
+}
+.arrow:first-of-type .arrow-link {
+  padding-left: 20px;
+}
+
+.arrow-1 {
+  z-index: 5;
+}
+.arrow-2 {
+  z-index: 4;
+}
+.arrow-3 {
+  z-index: 3;
+}
+.arrow-4 {
+  z-index: 2;
+}
+.arrow-5 {
+  z-index: 1;
+}
+.buttonBar button {
+    padding: 0.5rem 0px;
+    /* background: #fff; */
+    border: 1px solid #0003;
+    margin-top: 0.25rem;
+    width: 10vw;
+    background: #39e;
+    color: #fff;
+    text-shadow: 1px 1px 0px #0009;
+    box-shadow: 0 7px #039;
+    border-radius: 5px;
+    font-size: 1.1vw;
+    transition: all 100ms linear;
+}
+.buttonBar button:hover {
+    transform: scale(1.1);
+}
+.buttonBar button:active {
+    position: relative;
+    top: 4px;
+    box-shadow: 0 3px #039;
+}
+.svg-inline--fa {
+    filter: drop-shadow(1px 1px 0px #0009);
+}
+.buttonBar {
+display:flex;
+justify-content: space-around;
+}
+.arrows {
+    box-sizing: border-box;
+}
+.arrow-1 .step {
+    left: 12px;
+}
+#simpleForm input.boxValue, #simpleForm textarea.textBox {
+    width: 30em;
+}
+
