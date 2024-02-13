@@ -21,12 +21,16 @@
     $buses = array();
     $busesObj = $boss->getObject("Bus");
     foreach ($busesObj->Bus as $bus) {
-       $buses[$bus->BusID] = $bus->BusNumber; 
+        if (isset($bus) && isset($bus->BusNumber)) {
+           $buses[$bus->BusID] = $bus->BusNumber; 
+           $showbus[$bus->BusNumber] = 1;
+        }
     }
 
-    foreach ($jobs->Job as $idx=>$job) {
+    /* foreach ($jobs->Job as $idx=>$job) {
         $showbus[$buses[$job->BusID]] = 1;
     }
+    */
 ?>
 <!DOCTYPE html>
 <html>
@@ -214,29 +218,61 @@ L.Marker.rotatedMarker= L.Marker.extend({
         init: function() {
             app.map = L.map('map').setView([37.81, -122.29], 11);
             let osmmap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
-            let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] });
-            app.state.basemaps = { "OpenStreetMap": osmmap, "GoogleMaps": googleHybrid };
-            app.layerControl = L.control.layers(app.state.basemaps).addTo(app.map);
+            let googleHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] });
+            let googleTraffic = L.tileLayer('https://mts0.google.com/vt/lyrs=h,traffic&x={x}&y={y}&z={z}&style=3',{ maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3'] });
+            var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community' });
+            var Thunderforest_MobileAtlas = L.tileLayer('https://tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png?apikey=9ec2826e615f4f09999da5f2e730dd4a', { attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', apikey: '<your apikey>', maxZoom: 22 });
+            var Stadia_StamenToner = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.{ext}', { minZoom: 0, maxZoom: 20, attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', ext: 'png' });
+            var Stadia_StamenTonerLite = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}', { minZoom: 0, maxZoom: 20, attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', ext: 'png' });
+            var Thunderforest_Neighbourhood = L.tileLayer('https://{s}.tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey={apikey}', { attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', apikey: '<your apikey>', maxZoom: 22 });
+            var Jawg_Streets = L.tileLayer('https://{s}.tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token={accessToken}', { attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', minZoom: 0, maxZoom: 22, subdomains: 'abcd', accessToken: 'Vru1sLuBpYOtgy2Oh2T5HeEXGAZPHqMtRnAIikfkCzGxbXalYgqIFvNi0BZ54K1H' });
+            var Jawg_Sunny = L.tileLayer('https://{s}.tile.jawg.io/jawg-sunny/{z}/{x}/{y}{r}.png?access-token={accessToken}', { attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', minZoom: 0, maxZoom: 22, subdomains: 'abcd', accessToken: 'Vru1sLuBpYOtgy2Oh2T5HeEXGAZPHqMtRnAIikfkCzGxbXalYgqIFvNi0BZ54K1H' });
+            var Jawg_Dark = L.tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', { attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', minZoom: 0, maxZoom: 22, subdomains: 'abcd', accessToken: 'Vru1sLuBpYOtgy2Oh2T5HeEXGAZPHqMtRnAIikfkCzGxbXalYgqIFvNi0BZ54K1H' });
+            var Jawg_Matrix = L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}', { attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', minZoom: 0, maxZoom: 22, subdomains: 'abcd', accessToken: 'Vru1sLuBpYOtgy2Oh2T5HeEXGAZPHqMtRnAIikfkCzGxbXalYgqIFvNi0BZ54K1H' });
+            var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC', maxZoom: 16 });
+            var USGS_USImagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', { maxZoom: 20, attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>' });
 
-            app.getCurrentPositions();
+            app.state.basemaps = { 
+                "OpenStreetMap": osmmap, 
+                "USGS Imagery": USGS_USImagery,
+                "GoogleMaps": googleHybrid, 
+                "ESRI World": Esri_WorldImagery, 
+                "Mobile Atlas": Thunderforest_MobileAtlas,
+                "Stadia Toner": Stadia_StamenToner,
+                "Stadia Toner Lite": Stadia_StamenTonerLite,
+                "Neighborhood": Thunderforest_Neighbourhood,
+                "Jawg Streets": Jawg_Streets,
+                "Jawg Sunny": Jawg_Sunny,
+                "Jawg Dark": Jawg_Dark,
+                "Jawg Matrix": Jawg_Matrix,
+                "NatGeo World": Esri_NatGeoWorldMap
+            };
+            app.layerControl = L.control.layers(app.state.basemaps, { "Traffic": googleTraffic }).addTo(app.map);
+
+            app.getCurrentPositions(1);
             
-            app.map.addLayer(osmmap);
+            app.map.addLayer(googleHybrid);
+            app.map.addLayer(googleTraffic);
+            app.getTraffic();
+
             app.state.loaded = true;
         },
         makeIcon: function(label) {
-            return new L.DivIcon({
+            let num = label.replace(/\D*/g, '');
+            let bussize = num[0] + '' + num[1];
+
+            let newicon = new L.DivIcon({
                 className: 'mymarker',
                 html: `<img style='width:25px' class='busIcon' src='/portal/assets/buses/busicon.php?bus=${label.replace(/\D/,'')}'>`,
                 iconUrl: '/portal/assets/bus4.png',
-                iconSize: L.point(50, 150), 
+                iconSize: L.point(50, 100 + ((bussize - 25) * 2)), 
                 popupAnchor: [0, -37]
             });
-
+            return newicon;
         },
         state: {
             loaded: false,
             markers: [],
-            buses: [],
             icons: [],
             area: {},
             buses: [],
@@ -275,15 +311,21 @@ if ($results = mysqli_query($link, $sql)) {
         },
         getLastHeadings: function() {
             app.state.headings = {};
+            app.state.prevHeadings = {};
             app.data.history.forEach(item=>{ 
                 item.forEach( bus=>{
                     if (bus.course) {
                         if (!app.state.headings[bus.objectname]) {
                             app.state.headings[bus.objectname] = {msgid:0,heading:0};
+                            app.state.prevHeadings[bus.objectname] = {msgid:0,heading:0};
                         }
                         if (app.state.headings[bus.objectname].msgid < bus.msgid) {
                             app.state.headings[bus.objectname].msgid = bus.msgid;
                             app.state.headings[bus.objectname].heading = bus.course;
+                        }
+                        if (app.state.prevHeadings[bus.objectname].msgid > bus.msgid) {
+
+                            app.state.prevHeadings[bus.objectname].msgid = bus.msgid;
                         }
                     }    
                 });
@@ -334,7 +376,7 @@ if ($results = mysqli_query($link, $sql)) {
                 setTimeout(app.stepHistory, 1000);
             }
         },
-        update: function(data) {
+        update: function(data, zoom=0) {
             if (app.state.markerClusterGroup) {
                 app.map.removeLayer(app.state.markerClusterGroup);
             }
@@ -371,7 +413,10 @@ if ($results = mysqli_query($link, $sql)) {
                         item.course = app.state.headings[item.objectname].heading;
                     }
                     tmpmark = L.marker([item.latitude_mdeg / 1000000, item.longitude_mdeg / 1000000], {icon: app.makeIcon('#' + item.objectname), rotationAngle: item.course, rotationOrigin: "center center" } );
-                    app.layerControl.addOverlay(tmpmark, 'Bus #' + item.objectname);
+                    if (zoom) {
+                        // app.layerControl.addOverlay(tmpmark, 'Bus #' + item.objectname);
+                        
+                    }
                     //tmpmark.setIconAngle(item.course);
     
                     app.getBusDetails(item.objectname, item.postext, tmpmark, item);
@@ -382,9 +427,9 @@ if ($results = mysqli_query($link, $sql)) {
                     app.state.markers.push(tmpmark);
                 }
             });
-            //app.state.area.addTo(app.map);
+//            app.state.area.addTo(app.map);
             app.map.addLayer(app.state.markerClusterGroup);
-            app.map.fitBounds(app.state.area.getBounds());
+            if (zoom) app.map.fitBounds(app.state.area.getBounds());
             setTimeout(app.getCurrentPositions, 60000);
         },
         getBusDetails: function(bus, addr, marker, rec) {
@@ -394,7 +439,10 @@ if ($results = mysqli_query($link, $sql)) {
               if (out && out[0] && out[0].Driver) {
                   html += " - " + out[0].Driver;
               }
-              html += "</h2><div style='float:right;'>" + rec.pos_time + "</div><div>" +  addr + "</div>\n";
+              let dparts = rec.pos_time.split(/\D/);
+
+              let newtime = dparts[1] + '/' + dparts[0] + '/' + dparts[2] + ' ' + dparts[3] + ':' + dparts[4];
+              html += "</h2><div style='float:right;'>" + newtime + "</div><div>" +  addr + "</div>\n";
               if (out.length) {
                  html += "<table class='details'>";
                  html += "<tr><th>Job ID</th><th>Job</th><th>Driver</th><th>Locations</th></tr>";
@@ -444,7 +492,7 @@ if ($results = mysqli_query($link, $sql)) {
 
             return bearing;
         },
-        getCurrentPositions: function() {
+        getCurrentPositions: function(zoom=0) {
             Promise.all([
                 fetch("/where/last.json"),
                 fetch("/where/latest.json")
@@ -459,10 +507,80 @@ if ($results = mysqli_query($link, $sql)) {
                 }).then(data=>{
                     app.state.last = data[0];
                     app.state.latest = data[1];
-                    app.update(data[1]);
+                    app.update(data[1], zoom);
 
                 });
+        },
+        icons: {
+            CONSTRUCTION: L.icon({
+                iconUrl: '/portal/assets/img/construction.svg',
+                shadowUrl: '/portal/assets/img/construction_shadow.svg',
+                iconSize:     [18, 20], // size of the icon
+                shadowSize:   [20, 22], // size of the shadow
+                iconAnchor:   [9, 10], // point of the icon which will correspond to marker's location
+                shadowAnchor: [9, 10],  // the same for the shadow
+                popupAnchor:  [-3, -10]
+            }),
+            INCIDENT: L.icon({
+                iconUrl: '/portal/assets/img/accident.svg',
+                shadowUrl: '/portal/assets/img/accident_shadow.svg',
+                iconSize:     [32, 32], // size of the icon
+                shadowSize:   [34, 34], // size of the shadow
+                iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
+                shadowAnchor: [16, 16],  // the same for the shadow
+                popupAnchor:  [-3, -10]
+            }),
+            SPECIAL_EVENT: L.icon({
+                iconUrl: '/portal/assets/img/event.png',
+                shadowUrl: '/portal/assets/img/event-shadow.png',
+                iconSize:     [38, 95], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+                shadowAnchor: [4, 62],  // the same for the shadow
+                popupAnchor:  [-3, -76]
+            }),
+            WEATHER_CONDITION: L.icon({
+                iconUrl: '/portal/assets/img/weather_condition.png',
+                shadowUrl: '/portal/assets/img/weather_condition_shadow.png',
+                iconSize:     [36, 36], // size of the icon
+                shadowSize:   [54, 36], // size of the shadow
+                iconAnchor:   [18, 36], // point of the icon which will correspond to marker's location
+                shadowAnchor: [18, 36],  // the same for the shadow
+                popupAnchor:  [-3, -40]
+            }),
+            ROAD_CONDITION: L.icon({
+                iconUrl: '/portal/assets/img/roadclosed.png',
+                shadowUrl: '/portal/assets/img/roadclosed-shadow.png',
+                iconSize:     [32, 30], // size of the icon
+                shadowSize:   [51, 30], // size of the shadow
+                iconAnchor:   [16, 30], // point of the icon which will correspond to marker's location
+                shadowAnchor: [4, 30],  // the same for the shadow
+                popupAnchor:  [-3, -32]
+            })
+
+
+        },
+        getTraffic() {
+            fetch("https://api.511.org/traffic/events?api_key=e799a7c4-4076-43b6-afab-59cb04c2ab62&format=json").then(r=>r.json()).then(data=>{
+                app.traffic = data;
+
+                console.log("traffic data");
+                console.dir(data);
+
+                if (data.events) {
+                    let tmpmark, tarr = [];
+                    data.events.forEach(item=>{
+                        tmpmark = L.marker([item.geography.coordinates[1], item.geography.coordinates[0]], { icon: app.icons[item.event_type] }).bindPopup(`<h2>${item.event_type}</h2><p>${item.headline}</p><hr><div style='display:flex;align-items:space-between;justify-content:space-between;'><span style='font-size:10px;'>${item.updated}</span></div>`);
+                        tarr.push(tmpmark);
+                    });
+                    let group = L.layerGroup(tarr);
+                    app.state.trafficLayer["alerts"] = group;
+                    app.layerControl.addOverlay(group, "511 Alerts");
+                    app.map.addLayer(group);
+                }
+            });
         }
+        
     }
     window.app = app;
     app.init();
