@@ -7,6 +7,7 @@
     margin:4px;
     outline: 2px dotted #333;
     background-color: transparent;
+    position: relative;
  }
  .simpleIconWhite { background-image:url(/lib/css/icons48-white.png); }
  .simpleIconBlack { background-image:url(/lib/css/icons48-black.png); }
