@@ -72,7 +72,7 @@
                     "icon": "fas fa-money-bill-1-wave"
                 },
                 {
-                    "title": "Invoice Archive",
+                    "title": "Past Invoice",
                     "link": "/portal/account/invoices.php?x=all",
                     "icon": "fas fa-vault"
                 }

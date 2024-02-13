@@ -148,7 +148,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Trip Details [<?php print $current->JobID; ?>]</h1>
+                            <h1>Trip Details [<?php print $current->JobID; ?>] $<?php print $current->QuoteAmount; ?></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -269,7 +269,7 @@
                         <!-- /.card -->
                     </div>
                     <div class="col-md-6">
-                        <div class="card card-secondary">
+                        <!--div class="card card-secondary">
                             <div class="card-header">
                                 <h3 class="card-title">Notes</h3>
 
@@ -288,7 +288,7 @@
                                 </div>
                             </div>
                             <!-- /.card-body -->
-                        </div>
+                        </div-->
                         <!-- /.card -->
 <?php
     $todaysJobs = $boss->getObject("Job", "BusinessID='{$busID}' and (JobID='{$in['id']}' OR ParentID='{$in['id']}') and JobCancelled=0");

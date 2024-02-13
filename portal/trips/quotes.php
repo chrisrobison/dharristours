@@ -74,10 +74,11 @@
                       <th>Origin</th>
                       <th>Destination</th>
                       <th>Pax</th>
-                      <!--th>Pickup</th>
-                      <th>Return</th-->
+                      <th>Pickup</th>
+                      <th>Return</th>
                       <th>Round Trip</th>
                       <th>ADA</th>
+                      <th>Quote</th>
                   </tr>
               </thead>
               <tbody>
@@ -92,24 +93,24 @@
     <td><a>{{Pickup}}</a></td>
     <td><a>{{Destination}}</a></td>
     <td>{{Pax}}</td>
-    <!--td>{{Start}}</td>
-    <td>{{End}}</td-->
+    <td>{{Start}}</td>
+    <td>{{End}}</td>
     <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="RoundTrip"{{RoundTrip}}></td>
     <td style="text-align:center;"><input type='checkbox' data-id="{{RequestID}}" data-field="ADA"{{ADA}}></td>
-
+    <td>{{QuoteAmount}}</td>
     <td class="project-actions text-right">
       <a class="btn btn-primary btn-sm" onclick="parent.$('.content-wrapper').IFrame('createTab', 'Quote {{RequestID}}', '/portal/trips/view-quote.php?id={{RequestID}}', 'view-quote', true); return false;" href="view-quote.php?id={{RequestID}}"><i class="fas fa-folder"></i> View</a>
     </td>
 </tr>
 EOT;
 
-    $results = $boss->getObject("Request", "Completed!=1 AND BusinessID='{$busID}' ORDER BY RequestDate DESC");
+    $results = $boss->getObject("Request", "QuoteCancelled!=1 AND Completed!=1 AND BusinessID='{$busID}' ORDER BY RequestDate DESC");
    
     $cnt = count($results->Request);
     $out = "";
     for ($i=0; $i<$cnt; $i++) {
         $item = $results->Request[$i];
-
+        $item->QuoteAmount = sprintf("$%'%.2f", $item->QuoteAmount);
         if ($item) {
             $start = date("g:ia", strtotime($item->Start));
             $end = date("g:ia", strtotime($item->End));
