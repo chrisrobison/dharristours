@@ -863,6 +863,11 @@ class boss {
                }
                $arr = array();
                for ($c=0; $c < $num; $c++) {
+                  if (array_key_exists($fields[$c], $dbfields)) {
+                     if ((preg_match("/date/i", $dbfields[$fields[$c]])) || (preg_match("/date/i", $fields[$c]))) {
+                        $vals[$c] = date("Y-m-d", strtotime($vals[$c]));
+                     }
+                  }
                   $arr[$rsc]['new1'][$fields[$c]] = $vals[$c];
                }
                $ids[] = $lastids = $this->storeObject($arr);
@@ -877,23 +882,45 @@ class boss {
       global $in;
       $dataarr = preg_split("/(\r\n|\r|\n)/s", $datatxt);
       $fieldstxt = array_shift($dataarr);
-      $fields = preg_split("/[\t\|]/", $fieldstxt);
+      $fieldstxt = trim($fieldstxt, "\xEF\xBB\xBF");
+      $fields = preg_split("/[\t\|\,]/", $fieldstxt);
       
       $new = 1;
+      $out = new stdClass();
       $out->$rsc = array();
       foreach ($dataarr as $row) {
          if (preg_match("/\w/", $row)) {
-            $vals = preg_split("/[\t\|]/", $row);
+            $valsCSV = str_getcsv($row);
+            $ccnt = (isset($valsCSV)) ? count($valsCSV) : 0;
+            $valsTAB = preg_split("/[\t\|]/", $row);
+            $tcnt = (isset($valsTAB)) ? count($valsTAB) : 0;
+
+            if ($ccnt >= $tcnt) {
+               $vals = $valsCSV;
+            } else {
+               $vals = $valsTAB;
+            }
+
+//            $vals = preg_split("/[\t\|]/", $row);
             $rec = array();
             if (count($vals)>1) {
                foreach ($fields as $idx=>$field) {
                   if (preg_match("/\w/", $vals[$idx])) {
-                     $rec[$field] = $vals[$idx];
+                     if (preg_match("/date/i", $field)) {
+                        $rec[$field] = date("Y-m-d", strtotime($vals[$idx]));
+                     } else if (preg_match("/^(Start|End)$/", $field)) {
+                        $rec[$field] = date("H:i:s", strtotime($vals[$idx]));
+                     } else {
+                        $rec[$field] = $vals[$idx];
+                     }
                   }
                }
                // $rec = array_combine($fields, $vals);
                $id = $rec[$rsc.'ID'];
-               if (!$rec[$rsc.'ID']) $id = 'new'.$new++; // $rec[$rsc.'ID'] = 'new'.$new++;
+               if (!$rec[$rsc.'ID'] || ($rec[$rsc.'ID'] == "new")) {
+                  $rec[$rsc.'ID'] = 'new'.$new;
+                  $id = 'new'.$new++; // $rec[$rsc.'ID'] = 'new'.$new++;
+               }
                $out->{$rsc}[$id] = $rec;
             }
          }
@@ -1069,21 +1096,26 @@ class boss {
          if ($fields[$key]->Type=="tinyint") {
             $field->formatter = "checkbox";
             $field->edittype = "checkbox";
+            $field->editoptions = new stdClass();
             $field->editoptions->value = "true:false";
             $field->align = 'center';
          } else if ($fields[$key]->Type=="text") {
             $field->edittype = "textarea";
+            $field->editoptions = new stdClass();
             $field->editoptions->rows = "4";
             $field->editoptions->cols = "30";
          } else if ($fields[$key]->Type=="int") {
+            $field->editrules = new stdClass();
             $field->editrules->integer = true;
             $field->align = 'right';
             $field->width = 30;
             $field->formatter = 'integer';
+            $field->formatoptions = new stdClass();
             $field->formatoptions->thousandsSeparator = '';
          } else if ($fields[$key]->Type=="decimal") {
             $field->align = 'right';
             $field->formatter = 'number';
+            $field->formatoptions = new stdClass();
             $field->formatoptions->thousandsSeparator = '';
             $l = preg_split("/,\s*/", $fields[$key]->Length);
             $field->formatoptions->decimalPlaces = ($l[1]) ? $l[1] : '2';
@@ -1091,11 +1123,14 @@ class boss {
 //            $field->editrules->date = true;
 //            $field->formatter = 'date';
          } else if ($fields[$key]->Type=="time") {
+            $field->editrules = new stdClass();
             $field->editrules->time = true;
             $field->formatter = 'date';
+            $field->formatoptions = new stdClass();
             $field->formatoptions->srcformat = "H:i:s";
             $field->formatoptions->newformat = "h:i a";
          } else {
+            $field->editoptions = new stdClass();
             $field->editoptions->size = 25;
             $field->editoptions->maxlength = $fields[$key]->Length;
          }
@@ -1119,6 +1154,7 @@ class boss {
    
       $grid->colNames = $colnames;
       $grid->colModel = $colmodel;
+      $grid->jsonReader = new stdClass();
       $grid->jsonReader->repeatitems = false;
       $grid->jsonReader->id = $process->Process . "ID"; // "0"; 
       $grid->rowList = array(10,50,100,500,1000,5000,10000);
