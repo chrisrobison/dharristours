@@ -18,6 +18,7 @@
          <div class='contentField'><span class='fieldLabel'>Balance</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][Balance]' id='Balance' value='<?php print $current->Balance; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Check Num</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][CheckNum]' id='CheckNum' value='<?php print $current->CheckNum; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Check Date</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][CheckDate]' id='CheckDate' value='<?php print $current->CheckDate; ?>' size='50' class='boxValue' /></div>
+          <div class='contentField'><label>Business</label><?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Job[".$current->InvoiceID."][BusinessID]");?></div>
       </span>
    </div>
       <div class='contentField'><span class='fieldLabel'>Private Notes</span><textarea name='Invoice[<?php print $current->InvoiceID; ?>][Notes]' id='Notes' class='textBox' style='width:41em;height=5em;'><?php print $current->Notes; ?></textarea></div>

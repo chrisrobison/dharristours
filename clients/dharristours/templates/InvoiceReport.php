@@ -23,11 +23,22 @@
    }
    /* END NOAUTH SECTION */
    $in['Resource'] = "Invoice";
+
+   if (!$in['ID']) {
+      print "<h1>No Invoice.</h1>";
+      exit;
+   }
    $current = $boss->getObject($in['Resource'], $in['ID']);
-   $job = $boss->getObjectRelated('Job',$current->JobID,false);
-   $trip = $boss->getObjectRelated('Trip','JobID = '.$current->JobID.' ',false);
-   $business = $boss->getObjectRelated('Business',$job->BusinessID,false);
-   $bus = $boss->getObjectRelated('Bus',$job->BusID,false);
+   if ($current && $current->JobID) {
+      $job = $boss->getObjectRelated('Job',$current->JobID,false);
+   }
+   //$trip = $boss->getObjectRelated('Trip','JobID = '.$current->JobID.' ',false);
+   if ($job && $job->BusinessID) {
+      $business = $boss->getObjectRelated('Business',$job->BusinessID,false);
+   }
+   if ($job && $job->BusID) {
+      $bus = $boss->getObjectRelated('Bus',$job->BusID,false);
+   }
 //   print "var data = ".json_encode($current).";\n";
 //print_r($trip->Trip[0]->TripID);
 ?>
@@ -38,7 +49,6 @@
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:100,400,700,900|Source+Sans+Pro&display=swap');
    body { font-size:14pt;color:black;font-family:"Roboto",sans-serif; padding:0; margin:0;}
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; }
