@@ -115,14 +115,14 @@ function getMessages() {
 
 function postData(url, data, callback) {
 
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: data,
-      success: function(msg) {
-        callback(msg)
-      }
-    });
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: data,
+    success: function(msg) {
+      callback(msg)
+    }
+  });
 
 }
 
@@ -140,7 +140,8 @@ const formatTitle = (firstName, lastName, login, email) =>
         : login || email
 const formatTime = time => time //todo - format time - JJ
 const formatImg = img => img || '/portal/assets/img/person.png'
-const PostTemplate = ({ id, content, time, img, title, unread }) => `
+const PostTemplate = ({ id, content, time, img, title, unread }) =>
+    !content ? '' : `
   <div class="post read-status ${unread ? 'unread' : 'read' } marked">
     <div class="user-block">
       <img class="img-circle img-bordered-sm" src="${img}" alt="user image">

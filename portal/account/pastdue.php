@@ -115,7 +115,6 @@
     $lastmonth = date("Y-m-d", strtotime("30 days ago"));
     $lastyear = date("Y-m-d", strtotime("January 1"));
     $cond = "Balance>0 and InvoiceDate<'{$lastmonth}' and InvoiceDate>'{$lastyear}' ORDER BY InvoiceDate ASC"; // LIMIT ".($curpage * $perpage) .", {$perpage}";
-    print "<h1>$cond</h1>";
     $invoices = $boss->getObjectRelated("Invoice", "Balance>0 and InvoiceDate<'{$lastmonth}' and InvoiceDate>'{$lastyear}' ORDER BY InvoiceDate ASC"); // LIMIT ".($curpage * $perpage) .", {$perpage};");
     //$sql = "SELECT * FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID AND Job.JobDate<now() $xtra ORDER BY InvoiceDate DESC LIMIT ".($curpage * 10).", 10 ;";
     //$results = mysqli_query($link, $sql);

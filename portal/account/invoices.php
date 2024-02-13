@@ -155,10 +155,18 @@
                   </thead>
                   <tbody>
 <?php
-    $sql = "SELECT * FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID AND Job.JobDate<now() $xtra ORDER BY InvoiceDate DESC LIMIT ".($curpage * 10).", 10 ;";
+    $yearstart = date("Y-01-01");
+
+//    $sql = "SELECT * from Job WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND JobDate<now() AND JobDate>'$yearstart'";
+    $sql = "SELECT *, Invoice.InvoiceID as InvoiceID FROM Invoice, Job  WHERE Job.JobCancelled=0 AND Job.BusinessID='$busID' AND Invoice.JobID=Job.JobID AND Job.JobDate<now() $xtra ORDER BY InvoiceDate DESC LIMIT ".($curpage * 10).", 10 ;";
     $results = mysqli_query($link, $sql);
 for ($i=0; $i<10; $i++) {
    if ( $row = mysqli_fetch_object($results)) {
+   print "<!-- \n";
+   print_r($row);
+   $test = $boss->getObjectRelated("Job", $row->JobID);
+   print_r($test);
+   print "-->\n";
         if ($row->PaidAmt == $row->InvoiceAmt) {
             $paid = "<span class='badge bg-success'>PAID</span>";
         } else {
@@ -166,9 +174,8 @@ for ($i=0; $i<10; $i++) {
         }
         $url = "/files/templates/print/InvoiceReport.php?z=".base64_encode("ID=".$row->InvoiceID);
         print "<tr><td class='tableTitle' colspan='5'>{$row->Job}</td></tr><tr class='secondLine'><td></td><td>".date("M j", strtotime($row->InvoiceDate))."</td><td>\$".round($row->Balance)."</td><td style='width:4rem'>$paid</td>";
-        print "<td style='width:4rem'><a target='_blank' onclick=\"parent.$('.content-wrapper').IFrame('createTab', 'Invoice {$row->InvoiceID}', '$url', 'invoice_{$row->InvoiceID}', true); return false;\" ";
+        print "<td style='width:2rem'><a target='_blank' onclick=\"parent.$('.content-wrapper').IFrame('createTab', 'Invoice {$row->InvoiceID}', '$url', 'invoice_{$row->InvoiceID}', true); return false;\" ";
         print "href='{$url}'><i class='fa-solid fa-eye'></i></a></td></tr>";
-//        print "<tr><td colspan='4'>{$row->Job}</td></tr>";
     }
 }
 ?>
