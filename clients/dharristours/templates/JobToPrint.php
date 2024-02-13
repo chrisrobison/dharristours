@@ -84,7 +84,7 @@
       <title></title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
       <style>
-         body { margin:0;padding:0;font-size:14px;font-family:"Open Sans",sans-serif; }
+         body { margin:0;padding:0;font-size:18px;font-family:"Open Sans",sans-serif; }
 	.flex-container {
   	display: flex;
   	flex-direction: column;
@@ -98,33 +98,43 @@
          a:active { color:#e00;display:inline-block;top:2px; }
          #main { margin:1em; }
          #toolbar { position:absolute; float:top; top:0px; left:0px; width:100%; height:3em; background-color:#000; color:#fff; font-size:1.3em; padding:.5em 0; }
-         #viewWrap { position:absolute; top:5.25em; left:0px; width:100%; bottom:0px; right:0px; }
+         #viewWrap { background: #fff;position:absolute; top:6.25rem; left:0px; width:100%; bottom:0px; right:0px; }
          button,input,select,option { font-family: "Open Sans",sans-serif; font-size:1em; }
          th.field { white-space: nowrap; }
    .alertText {
        background: rgb(153, 0, 0);
        color: rgb(255, 255, 255);
     }
+    label {
+      width: 6rem;
+      text-align:right;
+      display: inline-block;
+   }
       </style>
    </head>
    <body>
      <div  class="flex-container">
       <section class="content">
          <form method='post'>
-            <span style='float:left;padding:0 .125em;'><label>Job ID: </label><span class='val'>
-               <input type='text' id="joblist" style='width:5em' value='<?php print $in['ID']; ?>'><button id='lookup'>Lookup</button> <span class='val'><?php print $job['Job']; ?></span>
-               </span></span>
+            <span style='float:left;padding:0 .125em;'><label>Job ID: </label>
+               <span class='val'>
+                  <input type='text' id="joblist" style='width:5em' value='<?php print $in['ID']; ?>'><button id='lookup'>Lookup</button> <span class='val'><?php print $job['Job']; ?></span>
+               </span>
+            </span>
                <span id='emailWrap' style='float:right;'<?php if (!$InvID) print " disabled='true'"; ?>>
                   <!-- Email fields -->
                   <input type='hidden' id='x' name='x' value=''>
                   <input type='hidden' id='Subject' name='Subject' value='[Invoice] <?php print $current->Job; ?>'>
                   <input type='hidden' id='Url' name='Url' value='<?=$static ?>'>
+                  <input type='hidden' id='InvoiceID' name='InvoiceID' value='<?=$current->related_Invoice[0]->InvoiceID ?>'>
                   <input type='hidden' id='Cc' name='Cc' value='juanaharrisdht@att.net'> 
-                  <span>Email to: <input type='text' name='To' id='To' style='width:15em;' value='<?php print $business->Email; ?>'>
-                     <button class='sendmsg'>Send</button></span>
+                  <span>Email to: <input type="text" id="To" name="To" style='width:15em;' value="<?php print $business->BillEmail; ?>">
+                     <button class='sendpdf'>Send PDF</button>
+                     <button class='sendmsg'>Send Link</button>
+                  </span>
                </span>
             <div style='clear:left'>
-               Doc: 
+               <label>Document: </label>
                <select id='what' style='width:10em'>
                   <option value=''>--Select Document--</option>
                   <option <?php if (!$InvID) print " disabled='true'"; ?> value='InvoiceReport'>Invoice</option>
@@ -134,16 +144,16 @@
                </select>
                <button class='view' style='margin-right:2em;'>View</button>
                
-               <span style='padding-left:1em;'>
+                     </div>
+            <span style='padding-left:1em;'>
                   <span style='padding:0 2em;'><label>Invoice: </label><span class='val'><?php print $current->related_Invoice[0]->InvoiceID; ?></span> </span>
                   <button class='geninvoice'><?php print ($InvID) ? "Update" : "Create"; ?> Invoice</button>
                   <button class='print'>Print</button>
                   <button class='print sendmsg'>Print &amp; Email</button>
                   <button id='mkpdf'>Make PDF</button>
                </span>
-            </div>
          </form>
-      </div>
+</div>
       </section>
       <div id='viewWrap'>
          <iframe id='viewer' width='100%' height='100%'></iframe>
@@ -194,7 +204,7 @@
          $("#lookup").click(function(e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $("#joblist").val()); });
 
          $("#what").change(function(e) {
-            var curdoc = $(this).val();
+            var curdoc = $(this).val() || "InvoiceReport";
             $("#Url").val("https://" + location.host + "/files/templates/" + simple.options[curdoc].href);
             $("#Subject").val('[' + curdoc + '] ' + simple.current['Job']);
             $("#To").val(simple.options[curdoc].email);
@@ -218,6 +228,18 @@
             if (confirm("Email URL " + $("#Url").val() + " to " + $("#To").val() + "?")) {
                var frm = $("form").serialize();
                $.post("/emailurl.php", frm, function(data) {
+                  //alert("Email sent to " + $("#To").val() + " for URL " + $("#Url").val());
+               });
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+         });
+
+         $("button.sendpdf").click(function(e) {
+            if (confirm("Email URL " + $("#InvoiceID").val() + ".pdf to " + $("#To").val() + "?")) {
+               var frm = $("form").serialize();
+               $.post("/emailpdf.php", frm, function(data) {
                   //alert("Email sent to " + $("#To").val() + " for URL " + $("#Url").val());
                });
             }

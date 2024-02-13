@@ -1,0 +1,25 @@
+<svg viewBox="0.176 0 199.825 272.794" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <filter id="filter-0" primitiveUnits="objectBoundingBox" bx:pinned="true">
+      <feGaussianBlur result="gaussian-blur-0" in="none" stdDeviation="0.04"></feGaussianBlur>
+    </filter>
+    <filter id="filter-1" primitiveUnits="objectBoundingBox" bx:pinned="true">
+      <feDropShadow result="drop-shadow-0" in="none"></feDropShadow>
+    </filter>
+  </defs>
+  <g transform="matrix(1.000001, 0, 0, 1, 4.00038, 4)">
+    <g>
+      <path d="M 5.087 0 L 113.985 0 L 180 68.246 L 180 231.094 C 180 233.845 180 246.075 165.108 246.075 L 0.195 246.094 L 0.195 4.981 C 0.195 2.23 2.385 0 5.087 0 Z" style="stroke: rgb(0, 0, 0); fill: rgba(212, 212, 212, 0); stroke-width: 7px;"></path>
+      <path d="M 115.848 3.166 L 177.524 65.808 L 115.469 65.934 L 115.848 3.166 Z" style="stroke: rgb(0, 0, 0); fill: rgba(193, 193, 193, 0); stroke-width: 6px;"></path>
+      <text style="font-family: &quot;Microsoft Sans Serif&quot;; font-size: 115.336px; line-height: 184.537px; white-space: pre;" transform="matrix(1.499731, 0, 0, 1.421936, -0.431824, -74.778605)" x="20.426" y="197.355">$</text>
+      <rect x="29.144" y="42.781" width="48.547" height="5.389" style="stroke-width: 0.639; stroke: rgb(0, 0, 0);"></rect>
+      <rect x="29.144" y="30.578" width="48.547" height="5.389" style="stroke-width: 0.639; stroke: rgb(0, 0, 0);"></rect>
+      <rect x="29.144" y="56.435" width="48.547" height="5.389" style="stroke-width: 0.639; stroke: rgb(0, 0, 0);"></rect>
+    </g>
+  </g>
+  <g transform="matrix(0.07634, 0, 0, 0.077425, 108.392726, 179.88439)" style="">
+    <defs></defs>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0;" cx="670.8" cy="670.798" rx="529.2" ry="529.2"></ellipse>
+    <path d="M 600.229 345.236 H 732.781 V 610.341 H 997.885 V 742.893 H 732.781 V 1007.997 H 600.229 V 742.893 H 335.124 V 610.341 H 600.229 Z" style="stroke: rgb(0, 0, 0); stroke-width: 24.8936px; fill: rgb(255, 255, 255);" bx:shape="cross 335.124 345.236 662.761 662.761 132.552 132.552 0.5 1@14247447"></path>
+  </g>
+</svg>

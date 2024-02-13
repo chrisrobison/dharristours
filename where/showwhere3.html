@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Realtime Bus Locations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      h2 {
+         padding-bottom:0px;
+         margin-bottom:.25em;
+         margin-top:.125em;
+      }
+      .labels { 
+         background-color:#ffffff;
+         padding:.25em;
+         display:inline-block;
+         border:.5em solid yellow;
+      }
+      .time {
+         text-align:right;
+      }
+      .locations {
+         border-collapse: collapse;
+         border:0px;
+         width:100%;
+      }
+       .details {
+         border-collapse: collapse;
+         border:1px solid #ccc;
+         width:100%;
+      }
+      td, th {
+         padding:.5em;
+
+      }
+      th {
+         background-color:#000099;
+         color:#ffffff;
+         font-weight:bold;
+         white-space: nowrap;
+      }
+      .subtable {
+         margin:0px;
+         padding:0px;
+         font-size:.8em;
+      }
+      .subtable th {
+         text-align:right;
+         width:4em;
+      }
+    </style>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+   <script defer src="/where/init-firebase.js"></script>  
+   <!--script defer src="/where/markerclustererplus.min.js"></script-->  
+   <script defer src="/where/showwhere3.js"> </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <!--script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFP8KaKNAWOcD0iXL40U5VaKU0ZhY-oCA&callback=initMap"> </script-->
+  </body>
+</html>
+

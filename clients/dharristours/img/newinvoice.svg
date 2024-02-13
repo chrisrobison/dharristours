@@ -1,0 +1,32 @@
+<svg viewBox="0.176 0 199.825 272.794" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <filter id="filter-0" primitiveUnits="objectBoundingBox" bx:pinned="true">
+      <feGaussianBlur result="gaussian-blur-0" in="none" stdDeviation="0.04"></feGaussianBlur>
+    </filter>
+    <filter id="filter-1" primitiveUnits="objectBoundingBox" bx:pinned="true">
+      <feDropShadow result="drop-shadow-0" in="none"></feDropShadow>
+    </filter>
+  </defs>
+  <g transform="matrix(1.000001, 0, 0, 1, -0.000075, 0)">
+    <g>
+      <path d="M 5.087 0 L 113.985 0 L 180 68.246 L 180 231.094 C 180 233.845 180 246.075 165.108 246.075 L 15.376 246.075 C -1 246.075 0.195 233.845 0.195 231.094 L 0.195 4.981 C 0.195 2.23 2.385 0 5.087 0 Z" style="stroke: rgb(0, 0, 0); stroke-width: 0.987; fill: rgb(212, 212, 212);"></path>
+      <path d="M 114.04 9.424 L 180 71.188 L 113.635 71.313 L 114.04 9.424 Z" style="stroke: rgb(0, 0, 0); stroke-width: 1.033; fill-opacity: 0.44;" filter="url(#filter-0)"></path>
+      <path d="M 114.04 0 L 180 67.11 L 113.635 67.245 L 114.04 0 Z" style="stroke: rgb(0, 0, 0); fill: rgb(193, 193, 193);"></path>
+      <text style="font-family: &quot;Franklin Gothic&quot;; font-size: 120px; white-space: pre;" x="20.426" y="197.355" transform="matrix(1.499731, 0, 0, 1.421936, 9.792484, -72.006068)">$</text>
+      <rect x="30.422" y="62.885" width="48.547" height="8.428" style="stroke: rgb(0, 0, 0); fill: rgb(1, 1, 1);"></rect>
+      <rect x="29.813" y="44.027" width="48.547" height="8.428" style="fill: rgb(118, 118, 118); stroke: rgb(78, 78, 78);"></rect>
+      <rect x="29.62" y="26.729" width="48.547" height="8.428" style="stroke: rgb(0, 0, 0); fill: rgb(1, 1, 1);"></rect>
+    </g>
+  </g>
+  <g transform="matrix(0.065495, 0, 0, 0.065495, 121.406948, 194.200049)" style="">
+    <defs></defs>
+    <ellipse style="fill: rgb(38, 101, 172); stroke: rgb(255, 255, 255); stroke-width: 62.2339px;" cx="599.999" cy="599.997" rx="600.001" ry="600.001"></ellipse>
+    <g style="visibility: hidden;">
+      <title>Eye</title>
+      <path d="M 0 0 L 1200 0 L 1200 1200 L 0 1200 L 0 0 Z" style="fill: none;"></path>
+      <path d="M 605.041 834.379 C 480.451 834.379 379.452 736.678 379.452 616.158 C 379.452 495.639 480.451 397.938 605.041 397.938 C 729.631 397.938 830.632 495.639 830.632 616.158 C 830.632 736.678 729.631 834.379 605.041 834.379 M 91 616.996 C 660.238 1206.506 1108.932 616.996 1108.932 616.996 C 613.36 21.006 91 616.996 91 616.996" style="fill: rgb(35, 31, 32); fill-opacity: 1;"></path>
+      <path d="M 607.003 494.77 C 537.342 494.77 480.869 549.85 480.869 617.795 C 480.869 685.739 537.342 740.819 607.003 740.819 C 676.665 740.819 733.137 685.739 733.137 617.795 C 733.137 549.85 676.665 494.77 607.003 494.77" style="fill: rgb(35, 31, 32); fill-opacity: 1;"></path>
+    </g>
+    <path d="M 546.286 271.064 H 678.838 V 536.169 H 943.942 V 668.721 H 678.838 V 933.825 H 546.286 V 668.721 H 281.181 V 536.169 H 546.286 Z" style="stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255); stroke-width: 24.8936px;" bx:shape="cross 281.181 271.064 662.761 662.761 132.552 132.552 0.5 1@19740137"></path>
+  </g>
+</svg>

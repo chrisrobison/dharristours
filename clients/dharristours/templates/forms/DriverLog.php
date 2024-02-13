@@ -450,6 +450,8 @@
                     <tr>
                         <td class='field'>Spot:</td>
                         <td class='value'>15 minutes prior to start</td>
+                   </tr>
+                   <tr>
                         <td class='field'>Contact:</td>
                         <td class='value'>
                             <?php print $current->ContactName; ?>

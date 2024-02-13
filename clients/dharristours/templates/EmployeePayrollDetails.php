@@ -65,7 +65,6 @@
 
 
       var timeDiff = diff(valuestart,valuestop);
-      alert(timeDiff);
       $("#TotalHours").val(timeDiff);
    }
 
@@ -73,19 +72,30 @@
       startTime = startTime.split(":");
       endTime = endTime.split(":");
 
+      var breaktime = $("#Break").val() * 1000 * 60 * 60;
       var startDate = new Date(0, 0, 0, startTime[0], startTime[1], 0);
       var endDate = new Date(0, 0, 0, endTime[0], endTime[1], 0);
+      var difference = endDate.getTime() - startDate.getTime()-breaktime;
+      var Hours = Math.floor((difference) / 1000 / 60 / 60);
 
-      var difference = endDate.getTime() - startDate.getTime();
-      var Hours = Math.floor(difference / 1000 / 60 / 60);
-
+      if (difference > 28800000 && $("#Overtime").val()==1)
+         {
+            $("#RegularHours").val(8);
+            $("#OvertimeHours").val(((difference-28800000) / 1000 / 60 / 60).toFixed(2));
+         }
+      else
+         {
+            $("#OvertimeHours").val(0);
+            $("#RegularHours").val((difference / 1000 / 60 / 60).toFixed(2));
+         }
       difference -= Hours * 1000 * 60 * 60;
       var Minutes = Math.floor(difference / 1000 / 60);
-
+      
+      
       if (Hours < 0)
       Hours = Hours + 24;
 
-   return Hours + ":" +  Minutes;
+   return Hours + " hr : " +  Minutes + " mins";
    }
 
 </script>
@@ -94,16 +104,20 @@
    <div class='formHeading'>EmployeePayrollDetails ID: <?php print $current->EmployeePayrollDetailsID; ?></div>
    <div class='fieldcontainer'>
       <div class='fieldcolumn fieldfloater'>
-         <div class='contentField'><label>Employee </label><?php $boss->db->addResource("Employee");$arr = $boss->db->Employee->getlist();print $boss->utility->buildSelect($arr, $current->EmployeeID, "EmployeeID", "Employee", "EmployeePayrollDetails[$current->EmployeePayrollDetailsID][EmployeeID]")."</div>";?>
+         <div class='contentField'><label>Employee </label>
+         <?php $boss->db->addResource("Employee");$arr = $boss->db->Employee->getlist("Active=1");print $boss->utility->buildSelect($arr, $current->EmployeeID, "EmployeeID", "Employee", "EmployeePayrollDetails[$current->EmployeePayrollDetailsID][EmployeeID]")."</div>";?>
          <div class='contentField'><label for="EmployeePayrollDetails">Payroll Type</label>
             <select name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][EmployeePayrollDetails]' id='EmployeePayrollDetails' >
                 <option value="Driving" <?php if($current->EmployeePayrollDetails == 'Driving'): ?> selected="selected"<?php endif; ?>>Driving</option>
                 <option value="Office" <?php if($current->EmployeePayrollDetails == 'Office'): ?> selected="selected"<?php endif; ?>>Office</option>
                 <option value="Mechanic" <?php if($current->EmployeePayrollDetails == 'Mechanic'): ?> selected="selected"<?php endif; ?>>Mechanic</option>
                 <option value="Cleaning" <?php if($current->EmployeePayrollDetails == 'Cleaning'): ?> selected="selected"<?php endif; ?>>Cleaning</option>
+                <option value="Sick" <?php if($current->EmployeePayrollDetails == 'Sick'): ?> selected="selected"<?php endif; ?>>Sick</option>
+                <option value="Training" <?php if($current->EmployeePayrollDetails == 'Training'): ?> selected="selected"<?php endif; ?>>Training</option>
                 <option value="Other" <?php if($current->EmployeePayrollDetails == 'Other'): ?> selected="selected"<?php endif; ?>>Other</option>
+                <option value="Bonus" <?php if($current->EmployeePayrollDetails == 'Bonus'): ?> selected="selected"<?php endif; ?>>Bonus</option>
             </select></div>           
-         <div class='contentField'><label>Description</label><input type='text' dbtype='varchar(200)' placeholder"Job IDs, or Vehicles" name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][Description]' id='Description' value='<?php print $current->Description; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><label>Description</label><input type='text' dbtype='varchar(200)' placeholder="Comma Separate Job IDs, or Buses" name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][Description]' id='Description' value='<?php print $current->Description; ?>' size='50' class='boxValue' /></div>
 <?php print $current->Notes; ?>
          <div class='contentField'><label>Payroll Date</label><input type='text' dbtype='date' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][PayrollDate]' id='PayrollDate' value='<?php print $current->PayrollDate; ?>' size='25' class='boxValue date' /></div>
          <div class='contentField'><label>Start Time</label>
@@ -193,10 +207,13 @@
                 <input type="hidden" rel="data" onchange='doModify($(this))' id='EndTime' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][EndTime]' value='<?php print $current->EndTime; ?>'></input>
     </div>
 
-         <div class='contentField'><label>Total Hours</label><input type='text' dbtype='varchar(200)' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][TotalHours]' id='TotalHours' value='<?php print $current->TotalHours; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><label>Overtime</label><select dbtype='tinyint(1)' onchange='getTotalHours()' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][Overtime]' id='Overtime'><option value='0'>No</option><option value='1'>Yes</option><?php print $current->Overtime; ?></select></div>
    </div>
       <div class='fieldcolumn'>
-         <div class='contentField'><label>Overtime</label><select dbtype='tinyint(1)' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][Overtime]' id='Overtime'><option value='0'>No</option><option value='1'>Yes</option><?php print $current->Overtime; ?></select></div>
+         <div class='contentField'><label>Break Time</label><input type='text' onchange="getTotalHours()" dbtype='varchar(200)' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][Break]' id='Break' value='<?php print $current->Break; ?>' size='50' class='boxValue' /></div>
+         <div class='contentField'><label>Total Hours</label><input type='text' dbtype='varchar(200)' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][TotalHours]' id='TotalHours' value='<?php print $current->TotalHours; ?>' size='50' disabled class='boxValue disabled' /></div>
+         <div class='contentField'><label>Regular Hours</label><input type='text' dbtype='varchar(200)' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][RegularHours]' id='RegularHours' value='<?php print $current->RegularHours; ?>' size='50' disabled class='boxValue disabled' /></div>
+         <div class='contentField'><label>Overtime Hours</label><input type='text' dbtype='varchar(200)' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][OvertimeHours]' id='OvertimeHours' value='<?php print $current->OvertimeHours; ?>' size='50' disabled class='boxValue disabled' /></div>
 </div>
          <div class='contentField' style='clear:left'><label>Notes</label><textarea dbtype='text' name='EmployeePayrollDetails[<?php print $current->EmployeePayrollDetailsID; ?>][Notes]' id='Notes' style='width:48em;' class='textBox'></textarea></div></div>
 </div>

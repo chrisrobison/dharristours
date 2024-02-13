@@ -34,8 +34,8 @@
       document.querySelector("#EmployeeID").selectedIndex = 0;
       document.querySelector("#ParentID").value = parentID;
       let jobtitle = document.querySelector("#Job").value;   
-      document.querySelector("#Job").value = "Bus for "+jobtitle + " ["+parentID+"]";
-      document.querySelector("#ParentTitle").innerHTML = "Bus for "+jobtitle + " ["+parentID+"]";
+      document.querySelector("#Job").value = jobtitle + " ["+parentID+"]";
+      document.querySelector("#ParentTitle").innerHTML = jobtitle + " ["+parentID+"]";
    return false;
    }
 </script>
@@ -89,7 +89,7 @@
                <div class='contentField'>
                   <label>Parent</label>
                   <span id="ParentTitle"></span>
-                  <input type='hidden' name='Job[<?php print $current->JobID; ?>][ParentID]' id='ParentID' value='<?php print $current->ParentID; ?>' size='100' style='width:25em;' class='boxValue' /> 
+                  <input type='text' name='Job[<?php print $current->JobID; ?>][ParentID]' id='ParentID' value='<?php print $current->ParentID; ?>' size='100' style='width:25em;' class='boxValue' /> 
                </div>
             <div class='contentField'>
 	         	       	  <a href="#"  onclick="getEstPrice()" class='simpleButton'><span class="ui-icon ui-icon-calculator"></span>Estimate Price</a><span id='estPrice' class="ui-widget-content"></span>
@@ -104,6 +104,25 @@
                </div>
             <div class='contentField'><label>*Start Time</label>
                <select id='Pickup_hour' onchange="updateTime('Pickup');">
+               <?php
+               /*
+                  $ttimes = preg_split("/:/", $current->Pickup);
+                  $ttimes[0] = preg_replace("/^0/", '', $ttimes[0]);
+                  if ($ttime[0] == 0) {
+                     $ttime[0] = 12;
+                  }
+                  if ($ttime[0] > 12) {
+                     $xm = "PM";
+                     $ttimes = $ttime - 12;
+                  } else {
+                     $xm = "AM";
+                  }
+                  for ($i=0; $i<12; $i++) {
+                     $sel = ($ttimes[0] == $i) ? " SELECTED" : "";
+                     print "<option value='".sprintf("%02d", $i)."'>".$i."</option>";
+                  }
+                  */
+                  ?>
                   <option value='00'>12</option>
                   <option value='01'>01</option>
                   <option value='02'>02</option>
@@ -162,14 +181,14 @@
                   <input type="hidden" rel="data" onchange='doModify($(this))' id='DropOffTime' name='Job[<?php print $current->JobID; ?>][DropOffTime]' value='<?php print $current->DropOffTime; ?>'></input>
                </span>
                <div class='contentField'>
-                  <label>Num Pax</label><input type='text' name='Job[<?php print $current->JobID; ?>][NumberOfItems]' id='NumberOfItems' value='<?php print $current->NumberOfItems; ?>' size='11' class='boxValue' style='width:6em' />
-                  <label style='width:6.5em'>Est. Hours</label><input type='text' name='Job[<?php print $current->JobID; ?>][EstDuration]' id='EstDuration' value='<?php print $current->EstDuration; ?>' size='25' class='boxValue' style='width:6em;' />
-               <label>Est. Miles</label><input type='text' name='Job[<?php print $current->JobID; ?>][EstDistance]' id='EstDistance' value='<?php print $current->EstDistance; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label>Num Pax</label> <input type='text' name='Job[<?php print $current->JobID; ?>][NumberOfItems]' id='NumberOfItems' value='<?php print $current->NumberOfItems; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label style='width:6.5em'>Est. Hours</label> <input type='text' name='Job[<?php print $current->JobID; ?>][EstDuration]' id='EstDuration' value='<?php print $current->EstDuration; ?>' size='25' class='boxValue' style='width:6em;' />
+               <label>Est. Miles</label> <input type='text' name='Job[<?php print $current->JobID; ?>][EstDistance]' id='EstDistance' value='<?php print $current->EstDistance; ?>' size='11' class='boxValue' style='width:6em' />
                </div>
                <div class='contentField'>
-                  <label>Actual Pax</label><input type='text' name='Job[<?php print $current->JobID; ?>][ActualPax]' id='ActualPax' value='<?php print $current->ActualPax; ?>' size='11' class='boxValue' style='width:6em' />
-                  <label style='width:6.5em'>Actual Hours</label><input type='text' name='Job[<?php print $current->JobID; ?>][Hours]' id='Hours' value='<?php print $current->Hours; ?>' size='25' class='boxValue' style='width:6em;' />
-               <label>Actual Miles</label><input type='text' name='Job[<?php print $current->JobID; ?>][TotalMileage]' id='TotalMileage' value='<?php print $current->TotalMileage; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label>Actual Pax</label> <input type='text' name='Job[<?php print $current->JobID; ?>][ActualPax]' id='ActualPax' value='<?php print $current->ActualPax; ?>' size='11' class='boxValue' style='width:6em' />
+                  <label style='width:6.5em'>Actual Hours</label> <input type='text' name='Job[<?php print $current->JobID; ?>][Hours]' id='Hours' value='<?php print $current->Hours; ?>' size='25' class='boxValue' style='width:6em;' />
+               <label>Actual Miles</label> <input type='text' name='Job[<?php print $current->JobID; ?>][TotalMileage]' id='TotalMileage' value='<?php print $current->TotalMileage; ?>' size='11' class='boxValue' style='width:6em' />
                </div>
                 <div class='contentField'>
                   <label>Business</label>
@@ -182,7 +201,7 @@
                   <input type='text' name='Job[<?php print $current->JobID; ?>][Description]' id='Description' value='<?php print $current->Description; ?>' size='50' style='width:15em;' class='boxValue' />
                </div>
                <div class='contentField'>
-                  <label>Cust PO</label><input type='text' name='Job[<?php print $current->JobID; ?>][BusinessLocation]' id='BusinessLocation' value='<?php print $current->BusinessLocation; ?>' size='25' class='boxValue' style='width:8em;' />
+                  <label>Customer PO</label> <input type='text' name='Job[<?php print $current->JobID; ?>][BusinessLocation]' id='BusinessLocation' value='<?php print $current->BusinessLocation; ?>' size='25' class='boxValue' style='width:8em;' />
                   <label>Color</label><input type='color' default='#00ee33' name='Job[<?php print $current->JobID; ?>][Color]' id='Color' value='<?php print $current->Color; ?>' />
                </div>
          </fieldset>
@@ -249,18 +268,22 @@
          </fieldset>
    <fieldset class='jobstatus' title="Status">
     <legend>Request Status</legend>
+    <div class='contentField'>
                   <input type='checkbox' id='JobCompleted' name='Job[<?php print $current->JobID; ?>][JobCompleted]' dbtype='tinyint(4)' value='1'<?php if ($current->JobCompleted) { print " CHECKED"; } ?>>
     <span>Driver Completed Trip</span>
     <input type='checkbox' id='JobCancelled' name='Job[<?php print $current->JobID; ?>][JobCancelled]' dbtype='tinyint(4)' value='1'<?php if ($current->JobCancelled) { print " CHECKED"; } ?>>
     <span>Job Cancelled</span>
+    </div>
 </fieldset>
 <fieldset class='jobstatus' title="Invoice Status">
     <legend>Billing Status</legend>
+    <div class='contentField'>
     	<input type='checkbox' id='NoInvoice' name='Job[<?php print $current->JobID; ?>][NoInvoice]' dbtype='tinyint(4)' value='1'<?php if ($current->NoInvoice) { print " CHECKED"; } ?>>
     	<span>No Invoice</span>
 
     	<input type='checkbox' id='AdditionalBus' name='Job[<?php print $current->JobID; ?>][AdditionalBus]' dbtype='tinyint(4)' value='1'<?php if ($current->AdditionalBus) { print " CHECKED"; } ?> >
     	<span>Bus X of Many</span>
+   </div>
     <div class='contentField'>
     	<input type='checkbox' id='InvoiceSatisfied' name='Job[<?php print $current->JobID; ?>][InvoiceSatisfied]' dbtype='tinyint(4)' value='1'<?php if ($current->InvoiceSatisfied) { print " CHECKED"; } ?>>
     	<span>Invoice Satisfied</span>
@@ -275,7 +298,7 @@
       <span class='fieldcolumn'>
          <fieldset class='jobstatus' title="JobInfo">
             <legend>Job Details</legend>
-	    <div class='contentField' onchange='doSchoolAddress()'><label>School</label><?php $boss->db->addResource("School");$arr = $boss->db->School->getlist();print $boss->utility->buildSelect($arr, $current->SchoolID, "SchoolID", "School", "Job[".$current->JobID."][SchoolID]");?></div>
+	    <div class='contentField' onchange='doSchoolAddress()'><label>School</label> <?php $boss->db->addResource("School");$arr = $boss->db->School->getlist();print $boss->utility->buildSelect($arr, $current->SchoolID, "SchoolID", "School", "Job[".$current->JobID."][SchoolID]");?></div>
 	    <div class='contentField'><label>School Address</label><span id='schoolAddress' class="ui-widget-content"></span></div>
 	       <div class='contentField'>
 	          <label>From Yard</label>
@@ -285,12 +308,12 @@
 	          </select>
 	       </div>
 	<div class='contentField'>
-               <label>Directions</label><a id='directionsPU' name='directionsPU' target='_blank'>View Full Route</a>
+               <label>Directions</label> <a id='directionsPU' name='directionsPU' target='_blank'>View Full Route</a>
 
                <span id='travelStartTime'></span> 
         </div>
-	    <div class='contentField'><label>* Pickup </label><input type='text' name='Job[<?php print $current->JobID; ?>][PickupLocation]' id='PickupLocation' value='<?php print $current->PickupLocation; ?>' size='50' class='boxValue'  /></div>
-            <div class='contentField'><label>Drop</label><input type='text' name='Job[<?php print $current->JobID; ?>][DropOffLocation]' id='DropOffLocation' value='<?php print $current->DropOffLocation; ?>' size='50' class='boxValue'  /></div>
+	    <div class='contentField'><label>* Pickup </label> <input type='text' name='Job[<?php print $current->JobID; ?>][PickupLocation]' id='PickupLocation' value='<?php print $current->PickupLocation; ?>' size='50' class='boxValue'  /></div>
+            <div class='contentField'><label>Drop</label> <input type='text' name='Job[<?php print $current->JobID; ?>][DropOffLocation]' id='DropOffLocation' value='<?php print $current->DropOffLocation; ?>' size='50' class='boxValue'  /></div>
               <div class='contentField'>
 	         <label>Final Drop</label>
 	         <input type='text' name='Job[<?php print $current->JobID; ?>][FinalDropOffLocation]' id='FinalDropOffLocation' value='<?php print $current->FinalDropOffLocation; ?>' size='50' class='boxValue' />
@@ -318,7 +341,7 @@
                </div>
                <div class='contentField'>
                <label>Response</label>
-                  <span id='Notify-Response' style='display:inline-block;white-space:normal;max-width:2em;'></span>
+                  <span id='Notify-Response' style='display:inline-block;white-space:normal;width:20rem;background-color:#ccc;height:2rem;'></span>
                </div>
                <div class='contentField'>
                   <label>Bus</label>

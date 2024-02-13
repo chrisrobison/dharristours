@@ -1,3 +1,13 @@
+ <script type='text/javascript'>
+   function updateBalance() {
+       var balance = $("#Balance").val();
+       var invoiceAmt = $("#InvoiceAmt").val();
+       // Patrick Peterson was here 11-7-2023. I LOVE YOU EVE!!!!!!!!!!!!!
+       var paidAmt = $("#PaidAmt").val();
+       $("#Balance").val(invoiceAmt - paidAmt);
+   }
+
+ </script>
 <div class='tableGroup'>
    <div class='formHeading'> Invoice ID: <?php print $current->InvoiceID; ?></div>
    <span id="customButtons">
@@ -11,12 +21,13 @@
          <div class='contentField'><span class='fieldLabel'>For: </span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][Invoice]' id='Invoice' value='<?php print $current->Invoice; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Invoice Date</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][InvoiceDate]' id='InvoiceDate' value='<?php print $current->InvoiceDate; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Invoice Amt</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][InvoiceAmt]' id='InvoiceAmt' value='<?php print $current->InvoiceAmt; ?>' size='25' class='boxValue' style='width:15em;' /></div>
+          <div class='contentField'><label>Business</label><?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Job[".$current->InvoiceID."][BusinessID]");?></div>
       </span>
       <span class='fieldcolumn'>
          <div class='contentField'><span class='fieldLabel'>Billable Hours</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][BillableHours]' id='BillableHours' value='<?php print $current->BillableHours; ?>' size='25' class='boxValue' style='width:15em;' /></div>
          <div class='contentField'><span class='fieldLabel'>Gas</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][Gas]' id='Gas' value='<?php print $current->Gas; ?>' size='25' class='boxValue' style='width:15em;' /></div>
          <div class='contentField'><span class='fieldLabel'>Misc</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][MiscCost]' id='MiscCost' value='<?php print $current->MiscCost; ?>' size='25' class='boxValue'  style='width:15em;'/></div>
-         <div class='contentField'><span class='fieldLabel'>Paid Amt</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][PaidAmt]' id='PaidAmt' value='<?php print $current->PaidAmt; ?>' size='25' class='boxValue'  style='width:15em;'/></div>
+         <div class='contentField'><span class='fieldLabel'>Paid Amt</span><input type='text' onchange="updateBalance();" name='Invoice[<?php print $current->InvoiceID; ?>][PaidAmt]' id='PaidAmt' value='<?php print $current->PaidAmt; ?>' size='25' class='boxValue'  style='width:15em;'/></div>
          <div class='contentField'><span class='fieldLabel'>Balance</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][Balance]' id='Balance' value='<?php print $current->Balance; ?>' size='25' class='boxValue'  style='width:15em;'/></div>
          <div class='contentField'><span class='fieldLabel'>Check Num</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][CheckNum]' id='CheckNum' value='<?php print $current->CheckNum; ?>' size='50' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Check Date</span><input type='text' name='Invoice[<?php print $current->InvoiceID; ?>][CheckDate]' id='CheckDate' value='<?php print $current->CheckDate; ?>' size='50' class='boxValue' /></div>

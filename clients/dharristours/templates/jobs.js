@@ -191,42 +191,47 @@ $('input[type="text"]').keypress(function (e) {
 		   if (pax == 0 || pax == null) {
 			var est4p = "0"; 
 			var est1p = "0";
-		   } else if (pax > 0 && pax < 29) {
-			if (roundtrip == 1) {
-			var est4p = data["Cost28FirstFour"];
-			}
-			else {
-			var est4p = data["Cost28OneWay"];
-			}
-			var est1p = data["Cost28OT"];
-		    } else if (pax > 28 && pax < 33) {
-			if (roundtrip == 1) {
-			var est4p = data["Cost32FirstFour"];
-			}
-			else {
-			var est4p = data["Cost32OneWay"];
-			}
-			var est1p = data["Cost32OT"];
-		    } else if (pax > 32 && pax < 39) {
-			if (roundtrip == 1) {
-			var est4p = data["Cost38FirstFour"];
-			}
-			else {
-			var est4p = data["Cost38OneWay"];
-			}
-			var est1p = data["Cost38OT"];
-		    } else if (pax > 38 && pax < 46) {
-			if (roundtrip == 1) {
-			var est4p = data["Cost45FirstFour"];
-			}
-			else {
-			var est4p = data["Cost45OneWay"];
-			}
-			var est1p = data["Cost45OT"];
-		    } else if (pax > 45 && pax < 56) {
-			var est4p = data["Cost55FirstFour"];
-			var est1p = data["Cost55OT"];
-		   }
+		   } 
+           else if (pax > 0 && pax < 29) {
+		    	if (roundtrip == 1) {
+			        var est4p = data["Cost28FirstFour"];
+			    }
+			    else {
+			        var est4p = data["Cost28OneWay"];
+			    }
+			    var est1p = data["Cost28OT"];
+		    } 
+            else if (pax > 28 && pax < 33) {
+			    if (roundtrip == 1) {
+			        var est4p = data["Cost32FirstFour"];
+			    }
+			    else {
+			        var est4p = data["Cost32OneWay"];
+			    }
+			    var est1p = data["Cost32OT"];
+		    } 
+            else if (pax > 32 && pax < 39) {
+			    if (roundtrip == 1) {
+			        var est4p = data["Cost38FirstFour"];
+			    }
+			    else {
+			        var est4p = data["Cost38OneWay"];
+			    }
+			    var est1p = data["Cost38OT"];
+		    } 
+            else if (pax > 38 && pax < 44) {
+			    if (roundtrip == 1) {
+			        var est4p = data["Cost45FirstFour"];
+			    }
+			    else {
+			        var est4p = data["Cost45OneWay"];
+			    }
+			    var est1p = data["Cost45OT"];
+		    } 
+            else if (pax > 44 && pax < 57) {
+			    var est4p = data["Cost55FirstFour"];
+			    var est1p = data["Cost55OT"];
+		    }
 		    var estp = (parseFloat(est4p) + (parseFloat(est1p)*(parseFloat(hrs)-4.0)));
                      $("#estPrice").html(parseFloat(estp).toFixed(2));
                   }

@@ -327,7 +327,7 @@ aria.GridCombobox.prototype.focusCell = function (rowIndex, colIndex) {
 
 var aria = aria || {};
 
-var FRUITS_AND_VEGGIES = [
+var SEARCH_LIST = [
   ['Apple', 'Fruit'],
   ['Artichoke', 'Vegetable'],
   ['Asparagus', 'Vegetable'],
@@ -393,13 +393,13 @@ var FRUITS_AND_VEGGIES = [
   ['Zucchini', 'Vegetable'],
 ];
 
-function searchVeggies(searchString) {
+function searchItems(searchString) {
   var results = [];
 
-  for (var i = 0; i < FRUITS_AND_VEGGIES.length; i++) {
-    var veggie = FRUITS_AND_VEGGIES[i][0].toLowerCase();
+  for (var i = 0; i < SEARCH_LIST.length; i++) {
+    var veggie = SEARCH_LIST[i][0].toLowerCase();
     if (veggie.indexOf(searchString.toLowerCase()) === 0) {
-      results.push(FRUITS_AND_VEGGIES[i]);
+      results.push(SEARCH_LIST[i]);
     }
   }
 
@@ -414,7 +414,7 @@ window.addEventListener('load', function () {
   new aria.GridCombobox(
     document.getElementById('ex1-input'),
     document.getElementById('ex1-grid'),
-    searchVeggies
+    searchItems
   );
 });
 'use strict';
@@ -548,3 +548,4 @@ aria.Utils.bindMethods = function (object /* , ...methodNames */) {
     object[method] = object[method].bind(object);
   });
 };
+

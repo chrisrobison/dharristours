@@ -157,7 +157,8 @@ function upMod(who) {
          <div class='contentField'><span class='fieldLabel'>Email</span><input autocomplete='off' type='text' name='Login[<?php print $current->LoginID; ?>][Email]' id='Email' value='<?php print $current->Email; ?>' size='30' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Password</span><input autocomplete='off' type='password' name='Login[<?php print $current->LoginID; ?>][Passwd]' onblur='this.value = (this.value.length<40) ? SHA1(this.value) : this.value;' id='Passwd' value='<?php print $current->Passwd; ?>' size='30' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Phone</span><input type='text' name='Login[<?php print $current->LoginID; ?>][Phone]' id='Phone' value='<?php print $current->Phone; ?>' size='25' class='boxValue' /></div>
-         <div class='contentField'><span class='fieldLabel'>Home</span><input type='text' name='Login[<?php print $current->LoginID; ?>][HomePhone]' id='HomePhone' value='<?php print $current->HomePhone; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>Home Phone</span><input type='text' name='Login[<?php print $current->LoginID; ?>][HomePhone]' id='HomePhone' value='<?php print $current->HomePhone; ?>' size='25' class='boxValue' /></div>
+         <div class='contentField'><span class='fieldLabel'>SMS Email</span><input autocomplete='off' type='text' name='Login[<?php print $current->LoginID; ?>][EmailSMS]' id='EmailSMS' value='<?php print $current->EmailSMS; ?>' size='30' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Login</span><input type='text' name='Login[<?php print $current->LoginID; ?>][Login]' id='Login' value='<?php print $current->Login; ?>' size='15' style='width:15em;' class='boxValue' /> [optional]</div>
          <?php
             if ($_SESSION['Login']->Admin) {
@@ -180,6 +181,7 @@ function upMod(who) {
          </div>
          <div class='contentField'><span class='fieldLabel'>Module Access</span><input type='text' name='Login[<?php print $current->LoginID; ?>][Access]' id='Access' value='<?php print $current->Access; ?>' size='25' class='boxValue' /></div>
          <div class='contentField'><span class='fieldLabel'>Process Access</span><input type='text' name='Login[<?php print $current->LoginID; ?>][ProcessAccess]' id='ProcessAccess' value='<?php print $current->ProcessAccess; ?>' size='25' class='boxValue' /></div>
+        <div class='contentField'><label>Business </label><?php $boss->db->addResource("Business");$arr = $boss->db->Business->getlist();print $boss->utility->buildSelect($arr, $current->BusinessID, "BusinessID", "Business", "Request[$current->RequestID][BusinessID]")."</div>";?></div>
          <div class='contentField'><span class='fieldLabel'>Business IDs</span><input type='text' name='Login[<?php print $current->LoginID; ?>][BusinessIDs]' id='BusinessIDs' value='<?php print $current->BusinessIDs; ?>' size='25' class='boxValue' />
             <?php 
             // add dialog for list of businesses and their ids for assigning

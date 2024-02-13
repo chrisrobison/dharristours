@@ -399,7 +399,8 @@
             <div id='ticket'>
                 <div style="padding:4px; position:relative;text-align:center;">
                   <h2 class='center'>
-                     DRIVER TRIP
+                           <?php print $driver->Employee; ?> 
+                     <b><?php print $driver->Cell; ?></b>
                      <?php ($current->WheelChair == 1) ? print "<span class='alertText'>WHEELCHAIR!</span>"  : print ""; ?>
                      <?php ($current->Shuttle) ? print "<span class='alertText'>SHUTTLE</span>"  : print ""; ?>
                   </h2>
@@ -418,38 +419,37 @@
                 <table id='ticket_table'>
                     <tr>
                         <td class='field' style="width:10%;">Job:</td>
-                        <td class='value' style="width:90%;">
+                        <td class='value' style="width:83%;">
                             <?php print $current->Job; ?>
                         </td>
+                        <td  style="width:7%; border: 1px solid;"><b>Actual</b></td>
                     </tr>
                     <tr>
                         <td class='field'>Spot:</td>
-                        <td class='value'>15 minutes prior to start</td>
-
+                        <td class='value'><?php print  date('g:ia', strtotime("-15 minutes", strtotime($current->PickupTime)));  ?>
+                        <span style="float:right;">Time You Arrived:</span></td>
+                        <td  style="border: 1px solid; float:middle;">_____:_____</td>
                      </tr>
-                     <tr>
-                        <td class='field'>Contact:</td>
-                        <td class='value'>
-                        </td>
-                    </tr>
 
                     <tr>
                         <td class='field'>Start:</td>
                         <td class='value'>
-                            <?php  if (is_null($current->OnSpotTime) || $current->OnSpotTime =='') {print date("g:ia", strtotime($current->PickupTime));} else { print date("g:ia", strtotime($current->OnSpotTime)); } ?>
-                        </td>
+                            <?php  print date("g:ia", strtotime($current->PickupTime));  ?>
+                        <span style="float:right;">Time You Departed:</span></td>
+                        <td  style="border: 1px solid; float:middle;">_____:_____</td>
                     </tr>
                     <tr>
                         <td class='field'>End Time:</td>
                         <td class='value'>
                             <?php print date("g:ia", strtotime($current->DropOffTime)); ?>
-                        </td>
-                    </tr>
+                        <span style="float:right;">Final Drop Off Time:</span></td>
+                        <td  style="border: 1px solid; float:middle;">_____:_____</td>
 
                     <tr>
                         <td class='field'>1st Stop:</td>
                         <td class='value'>
-                            <?php print $current->PickupLocation; ?><br /></td>
+                            <?php print $current->PickupLocation; ?></td>
+                        <td  style="border: 1px solid; float:middle;">PAX:_____</td>
                     </tr>
                     <tr>
                         <td colspan="3"><br /></td>
@@ -474,45 +474,23 @@
                     <tr>
                         <td class='field'>Additional:</td>
                         <td class='value' colspan='3'>
-                            <?php print $current->SpecialInstructions; ?><br /><br /></td>
+                            <p><?php print $current->SpecialInstructions; ?></p><br /></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
                 </table>
             </div>
-            <br />
-            <table width="100%">
-                <tr>
-                    <th width=70% colspan=2>PLEASE CONFIRM/EXCHANGE CONTACT INFO: <b></th>
-                    <th> </th>
-                    <th rowspan="3"><div style="height:5em;width:15em;padding-left:0.5em;box-sizing:border-box;border:1px solid #000;">Overtime</div></th>
-                </tr>    
-                <tr>
-                    <th>
-                           Driver:<b> <?php print $driver->Employee; ?></b> 
-                     </th>
-                    <th>
-                     <b><?php print $driver->Cell; ?></b>
-                    </th>
-                </tr>
-                <tr>
-                  <td>
-                       Contact: <span style="border-bottom: 1px solid #0006;margin-right:1em; width: 10em;display:inline-block;"><?php print ($current->ContactName) ? $current->ContactName : $business->AttnTo;; ?> </span></td>
-                  <td>
-                     PH: <span style="border-bottom: 1px solid #0006;margin-right:1em; width: 10em;display:inline-block;"><?php print $current->ContactPhone ? $current->ContactPhone : $business->Phone; ?> </span>
-                  </td>
-                </tr>
-            </table>
-           <br />
+            <br /><b>GET INFO FROM CHAPERONE'S:</b>
+          <br />
             <table id='sigs'>
-                <tr>
-                    <th width=25%>Spot Time</th>
-                    <th width=25%>PAX</th>
-                    <th width=25%>End Time</th>
-                    <th width=25%>Signature</th>
+               <tr>
+                    <th width=25%>Name</th>
+                    <th width=25%>Phone</th>
+                    <th width=25%>Re-Board Time</th>
+                    <th width=25%></th>
                 </tr>
-                <tr><td><br></td><td><br></td><td><br></td><td><br><br></td></tr>
+                <tr><td><br><br></td><td><br><br></td><td><br><br></td><td><br><br></td></tr>
                 <tr>
                     <th width=25%>Yard Depart</th>
                     <th width=25%>Yard Return</th>

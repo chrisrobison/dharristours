@@ -14,21 +14,19 @@ $(function() {
     });
 
     $("#estPrice").html("");
-    $("#estPrice").draggable({
-        helper: "clone"
-    });
-    $("#QuoteAmount").droppable({
-        accept: ".ui-widget-content",
-        drop: function(event, ui) {
-            var estp = ui.draggable.text(); //clone();
-            $(this)
-                .append(estp)
-                .html(estp)
-                .val(estp)
-            doModify($(this));
-        }
-    });
-
+    if ($("#estPrice").draggable) {
+      $("#estPrice").draggable({ helper: "clone" });
+      $("#QuoteAmount").droppable({
+           accept: ".ui-widget-content",
+           drop: function(event, ui) {
+               var estp = ui.draggable.text(); //clone();
+               $(this)
+                   .append(estp)
+                   .html(estp)
+                   .val(estp)
+               doModify($(this));
+           }
+       });
     $("#schoolAddress").draggable({
         helper: "clone"
     });
@@ -70,6 +68,7 @@ $(function() {
             doModify($(this));
         }
     });
+   }
 
 
     $(".calcDistance").click(function(e) {
@@ -147,6 +146,7 @@ $(function() {
                 $("#Job").val(reasonCancelled + str1 + $("#Job").val());
                 $("#BusinessLocation").val("Cancelled! $" + $('#QuoteAmount').val());
                 $("#QuoteAmount").val("0");
+                $("#BusinessID").val("332");
                 $("#EmployeeID").val("38");
                 //         $("#NumberOfItems").val("0");
                 $('#mygrid').setCell(simpleConfig.rowid, "Stat", 'Cancelled', 'modified'); //added
@@ -224,16 +224,16 @@ function getEstPrice(obj) {
         $("#priceChart").html("");
         var id = $("#BusinessID").val();
         var paxTotal = $("#NumberOfItems").val();
-        var extraBusCount = Math.floor(paxTotal / 45);
-        var pax = (paxTotal % 45);
+        var extraBusCount = Math.floor(paxTotal / 56);
+        var pax = (paxTotal % 56);
 
         var roundtrip = $("#RoundTrip").val(); // === 0) ? -50 : 0 ; // $50 discount for One Way
         var shuttle = $("#Shuttle").is(":checked") * 100 * (extraBusCount + 1);
         var discount = 0;
         var wheelchair = $("#WheelChair").is(":checked") * 100;
         var cargo = $("#Cargo").is(":checked") * 100 * (extraBusCount + 1);
-        const priceSheetFourHr = [675, 800, 850, 900, 1250];
-        const priceSheetAddHr = [100, 110, 110, 120, 150];
+        const priceSheetFourHr = [750, 800, 850, 900, 1250];
+        const priceSheetAddHr = [175, 180, 185, 195, 200];
         // var roundtrip =   $("#RoundTrip").is(":checked");
         var hrs = ($("#Hours").val() < 4) ? 4 : $("#Hours").val();
         var overrideCost;
@@ -257,9 +257,9 @@ function getEstPrice(obj) {
                         if (data) {
                             overrideCost = data["CostOverrideDefault"];
                             if (roundtrip == 0 && extraBusCount == 0) {
-                                discount = 50;
+                                discount = 25;
                             }
-                            if (overrideCost == 1) {
+                            if (overrideCost == 1 && data["Cost28FirstFour"] != "0") {
                                 priceSheetFourHr[0] = data["Cost28FirstFour"], priceSheetFourHr[1] = data["Cost32FirstFour"], priceSheetFourHr[2] = data["Cost38FirstFour"], priceSheetFourHr[3] = data["Cost45FirstFour"], priceSheetFourHr[4] = data["Cost55FirstFour"];
                                 priceSheetAddHr[0] = data["Cost28OT"], priceSheetAddHr[1] = data["Cost32OT"], priceSheetAddHr[2] = data["Cost38OT"], priceSheetAddHr[3] = data["Cost45OT"], priceSheetAddHr[4] = data["Cost55OT"];
                                 cssColor = {
@@ -292,12 +292,12 @@ function getEstPrice(obj) {
                             descText = hrs + " hr: ";
                             // add the cost for each 45 pax bus
                             for (let i = 0; i < extraBusCount; i++) {
-                                estp += getEstPricePerBus(4, hrs, priceSheetFourHr, priceSheetAddHr);
+                                estp += getEstPricePerBus(5, hrs, priceSheetFourHr, priceSheetAddHr);
 
                             }
                             if (extraBusCount > 0) {
 
-                                descText += extraBusCount + " * 44 pax $" + priceSheetFourHr[3] + "/$" + priceSheetAddHr[3] + " = $" + estp + " ";
+                                descText += extraBusCount + " * 56 pax $" + priceSheetFourHr[4] + "/$" + priceSheetAddHr[4] + " = $" + estp + " ";
                             }
                             var pax_idx = 0;
                             if (pax >= 1 && pax <= 28) {
@@ -309,10 +309,10 @@ function getEstPrice(obj) {
                             if (pax >= 37 && pax <= 39) {
                                 pax_idx = 3;
                             }
-                            if (pax >= 40 && pax <= 45) {
+                            if (pax >= 40 && pax <= 44) {
                                 pax_idx = 4;
                             }
-                            if (pax >= 46 && pax <= 70) {
+                            if (pax >= 45 && pax <= 56) {
                                 pax_idx = 5;
                             }
                             //            console.log(pax_idx);
@@ -825,7 +825,7 @@ function updateTime(who, doend) {
         console.dir(simpleConfig);
     }
 
-    $('#mygrid').setCell(simpleConfig.rowid, who + "Time", $("#" + who + "Time").val(), 'modified');
+    if ($('#mygrid')[0]) $('#mygrid').setCell(simpleConfig.rowid, who + "Time", $("#" + who + "Time").val(), 'modified');
 
     if (doend) {
         var dhr12 = $("#DropOff_hour").val().replace(/^0/, ''),
@@ -884,6 +884,18 @@ function getTime(who) {
     return out;
 }
 
+function setTime(who, time) {
+   let stime = time.split(/:/);
+   let hr = stime[0].replace(/^0/,'');
+   let xm = (hr > 12) ? '12' : '0';
+   hr = (hr > 12) ? hr - 12 : hr;
+   hr = (hr < 10) ? '0' + hr : hr;
+
+   jQuery(`#${who}_hour`).val(hr);
+   console.log(`set ${who}_hour to ${hr}`);
+   jQuery(`#${who}_minute`).val(stime[1].replace(/^0/, ''));
+   jQuery(`#${who}_meridian`).val(xm);
+}
 function updateTimeDiffinHours(who, mytime) {
     var pickup = getTime("Pickup"),
         dropoff = getTime("DropOff");
@@ -920,7 +932,7 @@ function updateTimeDiffinHours(who, mytime) {
         }
     }
 
-    $('#mygrid').setCell(simpleConfig.rowid, "Hours", $("#Hours").val(), 'modified');
+    if ($('#mygrid')[0]) $('#mygrid').setCell(simpleConfig.rowid, "Hours", $("#Hours").val(), 'modified');
 }
 
 function handleEndTime() {
