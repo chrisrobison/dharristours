@@ -1,0 +1,208 @@
+@font-face {
+    font-family: 'Cedarville Cursive';
+    src: url('fonts/Cedarville-Cursive.eot');
+    src: url('fonts/Cedarville-Cursive.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Cedarville-Cursive.woff2') format('woff2'),
+        url('fonts/Cedarville-Cursive.woff') format('woff'),
+        url('fonts/Cedarville-Cursive.ttf') format('truetype'),
+        url('fonts/Cedarville-Cursive.svg#Cedarville-Cursive') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Dawning of a New Day';
+    src: url('fonts/DawningofaNewDay.eot');
+    src: url('fonts/DawningofaNewDay.eot?#iefix') format('embedded-opentype'),
+        url('fonts/DawningofaNewDay.woff2') format('woff2'),
+        url('fonts/DawningofaNewDay.woff') format('woff'),
+        url('fonts/DawningofaNewDay.ttf') format('truetype'),
+        url('fonts/DawningofaNewDay.svg#DawningofaNewDay') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fasthand';
+    src: url('fonts/Fasthand-Regular.eot');
+    src: url('fonts/Fasthand-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Fasthand-Regular.woff2') format('woff2'),
+        url('fonts/Fasthand-Regular.woff') format('woff'),
+        url('fonts/Fasthand-Regular.ttf') format('truetype'),
+        url('fonts/Fasthand-Regular.svg#Fasthand-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Give You Glory';
+    src: url('fonts/GiveYouGlory.eot');
+    src: url('fonts/GiveYouGlory.eot?#iefix') format('embedded-opentype'),
+        url('fonts/GiveYouGlory.woff2') format('woff2'),
+        url('fonts/GiveYouGlory.woff') format('woff'),
+        url('fonts/GiveYouGlory.ttf') format('truetype'),
+        url('fonts/GiveYouGlory.svg#GiveYouGlory') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Grape Nuts';
+    src: url('fonts/GrapeNuts-Regular.eot');
+    src: url('fonts/GrapeNuts-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/GrapeNuts-Regular.woff2') format('woff2'),
+        url('fonts/GrapeNuts-Regular.woff') format('woff'),
+        url('fonts/GrapeNuts-Regular.ttf') format('truetype'),
+        url('fonts/GrapeNuts-Regular.svg#GrapeNuts-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Herr Von Muellerhoff';
+    src: url('fonts/HerrVonMuellerhoff-Regular.eot');
+    src: url('fonts/HerrVonMuellerhoff-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/HerrVonMuellerhoff-Regular.woff2') format('woff2'),
+        url('fonts/HerrVonMuellerhoff-Regular.woff') format('woff'),
+        url('fonts/HerrVonMuellerhoff-Regular.ttf') format('truetype'),
+        url('fonts/HerrVonMuellerhoff-Regular.svg#HerrVonMuellerhoff-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Homemade Apple';
+    src: url('fonts/HomemadeApple-Regular.eot');
+    src: url('fonts/HomemadeApple-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/HomemadeApple-Regular.woff2') format('woff2'),
+        url('fonts/HomemadeApple-Regular.woff') format('woff'),
+        url('fonts/HomemadeApple-Regular.ttf') format('truetype'),
+        url('fonts/HomemadeApple-Regular.svg#HomemadeApple-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'La Belle Aurore';
+    src: url('fonts/LaBelleAurore.eot');
+    src: url('fonts/LaBelleAurore.eot?#iefix') format('embedded-opentype'),
+        url('fonts/LaBelleAurore.woff2') format('woff2'),
+        url('fonts/LaBelleAurore.woff') format('woff'),
+        url('fonts/LaBelleAurore.ttf') format('truetype'),
+        url('fonts/LaBelleAurore.svg#LaBelleAurore') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kristi';
+    src: url('fonts/Kristi-Regular.eot');
+    src: url('fonts/Kristi-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Kristi-Regular.woff2') format('woff2'),
+        url('fonts/Kristi-Regular.woff') format('woff'),
+        url('fonts/Kristi-Regular.ttf') format('truetype'),
+        url('fonts/Kristi-Regular.svg#Kristi-Regular') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Over the Rainbow';
+    src: url('fonts/OvertheRainbow.eot');
+    src: url('fonts/OvertheRainbow.eot?#iefix') format('embedded-opentype'),
+        url('fonts/OvertheRainbow.woff2') format('woff2'),
+        url('fonts/OvertheRainbow.woff') format('woff'),
+        url('fonts/OvertheRainbow.ttf') format('truetype'),
+        url('fonts/OvertheRainbow.svg#OvertheRainbow') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Hurricane';
+    src: url('fonts/Hurricane-Regular.eot');
+    src: url('fonts/Hurricane-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Hurricane-Regular.woff2') format('woff2'),
+        url('fonts/Hurricane-Regular.woff') format('woff'),
+        url('fonts/Hurricane-Regular.ttf') format('truetype'),
+        url('fonts/Hurricane-Regular.svg#Hurricane-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kolker Brush';
+    src: url('fonts/KolkerBrush-Regular.eot');
+    src: url('fonts/KolkerBrush-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/KolkerBrush-Regular.woff2') format('woff2'),
+        url('fonts/KolkerBrush-Regular.woff') format('woff'),
+        url('fonts/KolkerBrush-Regular.ttf') format('truetype'),
+        url('fonts/KolkerBrush-Regular.svg#KolkerBrush-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Send Flowers';
+    src: url('fonts/SendFlowers-Regular.eot');
+    src: url('fonts/SendFlowers-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/SendFlowers-Regular.woff2') format('woff2'),
+        url('fonts/SendFlowers-Regular.woff') format('woff'),
+        url('fonts/SendFlowers-Regular.ttf') format('truetype'),
+        url('fonts/SendFlowers-Regular.svg#SendFlowers-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Square Peg';
+    src: url('fonts/SquarePeg-Regular.eot');
+    src: url('fonts/SquarePeg-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/SquarePeg-Regular.woff2') format('woff2'),
+        url('fonts/SquarePeg-Regular.woff') format('woff'),
+        url('fonts/SquarePeg-Regular.ttf') format('truetype'),
+        url('fonts/SquarePeg-Regular.svg#SquarePeg-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Whisper';
+    src: url('fonts/Whisper-Regular.eot');
+    src: url('fonts/Whisper-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Whisper-Regular.woff2') format('woff2'),
+        url('fonts/Whisper-Regular.woff') format('woff'),
+        url('fonts/Whisper-Regular.ttf') format('truetype'),
+        url('fonts/Whisper-Regular.svg#Whisper-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'WindSong';
+    src: url('fonts/WindSong-Medium.eot');
+    src: url('fonts/WindSong-Medium.eot?#iefix') format('embedded-opentype'),
+        url('fonts/WindSong-Medium.woff2') format('woff2'),
+        url('fonts/WindSong-Medium.woff') format('woff'),
+        url('fonts/WindSong-Medium.ttf') format('truetype'),
+        url('fonts/WindSong-Medium.svg#WindSong-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+

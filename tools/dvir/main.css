@@ -1,5 +1,5 @@
-body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size:18px; margin:0;padding:0; background-color:#e3e3e3;}
-#report { width:8.5in; height:14in; display:block; margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-bottom:2in; margin-top:.5em; box-shadow:.5em .5em .5em rgba(0,0,0,.3); text-align:center;padding-top:0px;}
+body { font-family: "Helvetica Neue", "Helvetica", sans-serif; font-size:18px; margin:0;padding:0; background-color:#fff;}
+#report { display:flex; width:100vw;justify-content:space-evenly;margin-left:auto; margin-right:auto; padding:.5in; background-color:#fff; margin-top:.5em; text-align:center;padding-top:0px;}
 H1, H2, H3 { margin:0; padding:0; text-transform: uppercase; }
 H3 { font-weight: normal; margin:0; padding:0; color:#666; font-size:.8em;}
 .longinput { width: 6in; border-bottom: 2px solid #666; border-top:0; border-left:0; border-right:0;}
@@ -299,4 +299,253 @@ padding-left: .5em;
     transition:all 200ms ease-in;
     width:32px;
 }
+.sigform {
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.sigform > div {
+   margin: 0 1rem;
+}
+.sigform input {
+   height: 6rem;
+   font-weight: 400;
+
+}
+.underline {
+   border: 0;
+   border-bottom: 3px solid #000;
+   font-family: "Homemade Apple", "La Belle Aurore", "Over the Rainbow", cursive;
+   font-size: 28px;
+   font-weight:300;
+}
+#report {
+    flex-direction: row;
+}
+
+.print #report {
+   flex-direction:column;
+   width: 8in;
+}
+.print .footer {
+   display: flex;
+   justify-content: center;
+}
+.print #btns {
+display: none;
+}
+.print .top {
+    height: auto;
+}
+.print .sigform {
+justify-content: flex-start;
+}
+.dawning, .font_0 { font-family: "Dawning of a New Day", cursive; font-weight: 900 !important; font-size:44px !important; }
+.apple, .font_1 { font-family: "Homemade Apple", cursive; }
+.belle, .font_2 { font-family: "La Belle Aurore", cursive; font-size: 42px !important;  }
+.rainbow, .font_3 { font-family: "Over the Rainbow", cursive; font-size: 40px !important; }
+.font_4  { font-family: 'Cedarville Cursive', cursive; font-size: 38px !important; }
+.font_5 { font-family: 'Fasthand',cursive; font-size: 48px !important;}
+.font_6 { font-family: 'Give You Glory', cursive; font-size: 46px !important; }
+.font_7 { font-family: 'Grape Nuts'; font-size: 46px !important; }
+.font_8 { font-family: 'Herr Von Muellerhoff'; font-size: 52px !important; }
+.font_9 { font-family: 'Kristi'; font-size: 54px !important; }
+.font_10 { font-family: 'Hurricane'; font-size: 52px !important; }
+.font_11 { font-family: 'Kolker Brush'; font-size: 54px !important; }
+.font_12 { font-family: 'Send Flowers'; font-size: 42px !important; }
+.font_13 { font-family: 'Square Peg'; font-size: 52px !important; }
+.font_14 { font-family: 'Whisper'; font-size: 48px !important;}
+.font_15 { font-family: 'WindSong'; font-size: 36px; }
+#SignatureDate {
+    width: 5em;
+}
+
+.preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 60rem;
+    height: 75rem;
+    border: 2rem solid #05c;
+    left: calc(40vw - 60rem);
+    top: 0vh;
+    box-shadow: 0.25rem 1rem 1rem #0006;
+    background:#ccc;
+}
+#preview img {
+    border-top: 1rem solid #fff;
+    border-bottom: 2rem solid #fff;
+    width: 35rem;
+}
+#preview.zoom img.previewImage {
+    width: 816px;
+    height: 1043px;
+    
+}
+.preview .click-button, #submitButton, #makePDF {
+  height: 4rem;
+  width: 15rem;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius: 1rem;
+  display: block;
+}
+/* .preview .click-button:before, #submitButton:before {
+  content: "";
+  height: 3.5rem;
+width: 15rem;
+  border: 4px solid #04f;
+  display: block;
+  border-radius: 1rem;
+  position: relative;
+  top: -0.5rem;
+  left: -0.5rem;
+  opacity: 0.9;
+  visibility: hidden;
+}
+.preview .click-button:hover:before, #submitButton:hover:before {
+  visibility: visible;
+  transform: scale(1.4);
+  opacity: 0;
+  transition: all ease-out 0.4s;
+}
+*/
+#btns {
+display: flex;
+}
+.preview .popup {
+  width: 56rem;
+    display:flex;
+flex-direction: column;
+align-items:center;
+  background-color: #fff;
+  border-radius: 6px;
+  position: absolute;
+  padding: 1rem 1px;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  margin: 0 auto;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all ease-out 0.3s;
+}
+.preview.open .popup {
+  visibility: visible;
+  transform: scale(1);
+  transition: all ease-out 0.3s;
+}
+.preview .popup .logo {
+  height: 50px;
+  display:flex;
+  width: 56rem;
+  align-content: flex-start;
+  font-size:38px;
+  justify-items:center;
+justify-content:center;
+  margin: 0 auto 0px;
+}
+.preview .info {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.preview .popup h1,
+.preview .popup p,
+.preview .popup .logo,
+.preview .popup .btn {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all ease-out 0.5s;
+}
+.preview.open .popup h1,
+.preview.open .popup p,
+.preview.open .popup .logo,
+.preview.open .popup .btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all ease-out 0.5s;
+  transition-delay: 0.5s;
+}
+.preview.open .popup .logo {
+  transition-delay: 0.2s;
+}
+.preview.open .popup h1 {
+  transition-delay: 0.4s;
+}
+.preview.open .popup p {
+  transition-delay: 0.6s;
+}
+.preview.open .popup .btn {
+  transition-delay: 0.8s;
+}
+.preview .popup h1 {
+  color: #655f5f;
+  margin-bottom: 20px;
+}
+.preview .popup p {
+  color: #909090;
+  line-height: 22px;
+  padding: 0 20px;
+}
+.preview .btn {
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 6px;
+  background-color: #03A9F4;
+  display: inline-block;
+  margin-top: 20px;
+}
+div#preview {
+width:40rem;
+height:50rem;
+overflow:scroll;
+cursor:zoom-in;
+display:inline-block;
+background:#fff;
+border: 3px inset;
+}
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0);
+  transition:
+    display 0.7s allow-discrete,
+    overlay 0.7s allow-discrete,
+    background-color 0.7s;
+  /* Equivalent to
+  transition: all 0.7s allow-discrete; */
+}
+
+dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 0.5);
+}
+dialog[open] {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/*   Closed state of the dialog   */
+dialog {
+  opacity: 0;
+  transform: scaleY(0);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out,
+    overlay 0.7s ease-out allow-discrete,
+    display 0.7s ease-out allow-discrete;
+  /* Equivalent to
+  transition: all 0.7s allow-discrete; */
+}
+
+/*   Before-open state  */
+/* Needs to be after the previous dialog[open] rule to take effect,
+    as the specificity is the same */
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
 

@@ -1,5 +1,7 @@
 <?php
+   require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
    include($_SERVER['DOCUMENT_ROOT'] . "/.env");
+   session_start();
 
    $in = $_REQUEST;
    
@@ -18,6 +20,9 @@
    switch($in['type']) {
       case "events":
          $out = getEvents($link, $in);
+         break;
+      case "account":
+         $out = getAccount($link, $_SESSION);
          break;
       case "event":
       case "job":
@@ -50,6 +55,9 @@
       case "resources":
       case "buses":
          $out = getResources($link, $in);
+         break;
+      case "logReport":
+         $out = logReport($link, $in);
          break;
    }
    header("Content-type: application/json; charset=utf-8");
@@ -115,6 +123,16 @@
       return $out;
    }
    
+   function getAccount($link, $userObj) {
+      if ($userObj) {
+         $out = $userObj;
+      } else {
+         $out = [];
+      }
+      
+      return $out;
+   }
+
    function getEvent($link, $id) {
       $sql = "SELECT * from Job where JobID='".$id."'";
 
@@ -341,4 +359,39 @@
       return $out;
    }
 
+function logReport($link, $in) {
+    global $link;
+    global $in;
+
+    $keys = array('DVIR', 'Date', 'ReportDate', 'ReportTime', 'BusID', 'BusNum', 'Summary', 'EmployeeID', 'Signature', 'Notes', 'Driver','Carrier', 'Odometer', 'Vehicle', 'Address', 'SignatureDate', 'LastModifiedBy', 'Created' );
+    $in['Created'] = date("Y-m-d H:i:s");
+    $in['LastModifiedBy'] = $_SESSION['email'];
+    $in['SignatureDate'] = date("Y-m-d", strtotime($in['SignatureDate']));
+    $in['DVIR'] = "DVIR for Bus " . $in['BusNum'] . " on "  . date("m/d/Y"). ' by ' .$_SESSION['FirstName'] . ' ' . $_SESSION['LastName'];
+    $sql = "INSERT INTO DVIR (".implode($keys, ', ').") VALUES (";
+    $vals = array();
+
+    for ($i=0; $i<count($keys); $i++) {
+        $vals[] = "'".mysqli_real_escape_string($link, $in[$keys[$i]])."'";   
+    }
+    $sql .= implode($vals, ",") . ")";
+    $results = mysqli_query($link, $sql);
+    $newid = mysqli_insert_id($link);
+    
+    if ($newid) {
+        // Save generated log report image
+        move_uploaded_file($_FILES['ReportImage']['tmp_name'], "/simple/clients/dharristours/dvir/dvir_$newid.png");
+        
+        // Update new record with location of report image file
+        $upd = "UPDATE DVIR set ReportFile='/files/dvir/dvir_$newid.png' where DVIRID=$newid";
+        mysqli_query($link, $upd);
+
+        // Grab our new record to return to user
+        $sql = "SELECT * from DVIR WHERE DVIRID=$newid";
+        $results = mysqli_query($link, $sql);
+        $out = array();
+        $out[] = $results->fetch_assoc();
+    }
+   return $out;
+}
 ?>
