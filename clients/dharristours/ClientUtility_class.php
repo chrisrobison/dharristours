@@ -61,7 +61,7 @@ class ClientUtility extends utility {
       $now = date("Y-m-d h:i:s");
       file_put_contents("/tmp/simpledb.log", $now . "\t" . $sql."\n", FILE_APPEND);
 
-      $job = $boss->getObjectRelated('EmployeePayroll', $sql,false);
+      $job = $boss->getObjectRelated('EmployeePayrollDetails', $sql,false);
 /*      for ($i=0; $i<count($job->Job['_ids']); $i++) {
          unset($job->Job[$i]->Notes);
          unset($job->Job[$i]->QuoteAmount);
@@ -74,8 +74,8 @@ class ClientUtility extends utility {
          unset($job->Job[$i]->Business);
          unset($job->Job[$i]->Bus);
       }*/
-      $job->EmployeePayroll['_rows'] = $job->rows;
-      return ($tbl) ? $this->buildTable($job->EmployeePayroll, $_REQUEST['ProcessID'], $_REQUEST['Resource'], array_keys((array)$job->EmployeePayroll[0])) : $job->EmployeePayroll;
+      $job->EmployeePayrollDetails['_rows'] = $job->rows;
+      return ($tbl) ? $this->buildTable($job->EmployeePayrollDetails, $_REQUEST['ProcessID'], $_REQUEST['Resource'], array_keys((array)$job->EmployeePayrollDetails[0])) : $job->EmployeePayrollDetails;
    }
 
   function filterEmployeeJob($tbl=true) {
