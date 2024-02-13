@@ -27,7 +27,6 @@
          #main { padding:1em; }
          ul.nav {
             margin-left:2em;
-            width:20em;
             float:left;
          }
          ul.nav li { margin-top: 1em; margin-bottom: 1em; }

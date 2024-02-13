@@ -139,7 +139,7 @@
       jQuery(function($) {
          $("a[rel='logout']").click(function(e) { top.location.href = "/login.php?logout=true"; });
          $("a[rel='nav']").live('click', function(event) { 
-               loadUrl($(this).attr('href'), $(this).attr('title'), $(this).attr('target'), event.shiftKey, $(this).data('module'));
+               loadUrl($(this).attr('href'), $(this).attr('title'), $(this).attr('target'), event.shiftKey, $(this).data('module'), '', $(this)[0].parentElement.id);
                event.preventDefault(); event.stopPropagation(); return false;
          });
          
