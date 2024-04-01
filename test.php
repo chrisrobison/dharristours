@@ -3,11 +3,9 @@
 
    $boss = new boss("dharristours.simpsf.com");
 
-   $boss->db->addResource("Job");
-   $results = $boss->getObjectRelated("Login", 51, "all");
-print_r($results);
-print_r($boss->db);
+    $data = file_get_contents("SFUSD_Sports_NovDec.txt");
+    $obj = $boss->parseImport("Request", $data);
+print_r($obj);
 
-   print_r($boss->db->dbobj->fields);
 
 ?>
