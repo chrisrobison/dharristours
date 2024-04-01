@@ -313,22 +313,24 @@ if ($results = mysqli_query($link, $sql)) {
             app.state.headings = {};
             app.state.prevHeadings = {};
             app.data.history.forEach(item=>{ 
-                item.forEach( bus=>{
-                    if (bus.course) {
-                        if (!app.state.headings[bus.objectname]) {
-                            app.state.headings[bus.objectname] = {msgid:0,heading:0};
-                            app.state.prevHeadings[bus.objectname] = {msgid:0,heading:0};
-                        }
-                        if (app.state.headings[bus.objectname].msgid < bus.msgid) {
-                            app.state.headings[bus.objectname].msgid = bus.msgid;
-                            app.state.headings[bus.objectname].heading = bus.course;
-                        }
-                        if (app.state.prevHeadings[bus.objectname].msgid > bus.msgid) {
+                if (item && !item.errorCode) {
+                    item.forEach( bus=>{
+                        if (bus.course) {
+                            if (!app.state.headings[bus.objectname]) {
+                                app.state.headings[bus.objectname] = {msgid:0,heading:0};
+                                app.state.prevHeadings[bus.objectname] = {msgid:0,heading:0};
+                            }
+                            if (app.state.headings[bus.objectname].msgid < bus.msgid) {
+                                app.state.headings[bus.objectname].msgid = bus.msgid;
+                                app.state.headings[bus.objectname].heading = bus.course;
+                            }
+                            if (app.state.prevHeadings[bus.objectname].msgid > bus.msgid) {
 
-                            app.state.prevHeadings[bus.objectname].msgid = bus.msgid;
-                        }
-                    }    
-                });
+                                app.state.prevHeadings[bus.objectname].msgid = bus.msgid;
+                            }
+                        }    
+                    });
+               }
             }); 
         },
         getParams: function() {
@@ -522,7 +524,7 @@ if ($results = mysqli_query($link, $sql)) {
                 popupAnchor:  [-3, -10]
             }),
             INCIDENT: L.icon({
-                iconUrl: '/portal/assets/img/accident.svg',
+                iconUrl: '/portal/assets/img/accident2.svg',
                 shadowUrl: '/portal/assets/img/accident_shadow.svg',
                 iconSize:     [32, 32], // size of the icon
                 shadowSize:   [34, 34], // size of the shadow
