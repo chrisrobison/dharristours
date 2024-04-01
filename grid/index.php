@@ -27,28 +27,30 @@
 ?>
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta http-equiv="X-UA-Compatible" content="chrome=1">
-      <title>Simple Software: <?php print $boss->app->App; ?> Data Tool</title>
-      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="/lib/js/ui.multiselect.js"></script>
-      <script type="text/javascript" src="/lib/js/i18n/grid.locale-en.js"></script>
-      <script type="text/javascript" src="/lib/js/jquery.jqGrid.min.js"></script>
-      <script type="text/javascript" src="/lib/js/jquery.printElement.min.js"></script>
-      <script type="text/javascript" src="/lib/js/json2.js"></script>
-      <script type="text/javascript" src="/lib/js/store.js"></script>
-      <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-      <link href="/lib/css/ui.jqgrid.css" type="text/css" rel="stylesheet" />
-      <link href="/lib/css/ui.multiselect.css" type="text/css" rel="stylesheet" />
-      <link href="/lib/css/Aristo/jquery-ui-1.8.5.custom.css" type="text/css" rel="stylesheet" />
-      <link href="/lib/css/core.css?ver=4.02" type="text/css" rel="stylesheet" />
-      <link href="/lib/css/print.css" type="text/css" rel="stylesheet" media="print" />
-      <link href="/lib/css/bus-loader.css" type="text/css" rel="stylesheet" />
-      <link href="<?php print $boss->app->Assets . '/' . $boss->app->CSS; ?>" type="text/css" rel="stylesheet" />
-    </head>
-   <body>
-      <!--[if IE]>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Simple Software: <?php print $boss->app->App; ?> Data Tool</title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/lib/js/ui.multiselect.js"></script>
+    <script type="text/javascript" src="/lib/js/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript" src="/lib/js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="/lib/js/jquery.printElement.min.js"></script>
+    <script type="text/javascript" src="/lib/js/json2.js"></script>
+    <script type="text/javascript" src="/lib/js/store.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+    <link href="/lib/css/ui.jqgrid.css" type="text/css" rel="stylesheet" />
+    <link href="/lib/css/ui.multiselect.css" type="text/css" rel="stylesheet" />
+    <link href="/lib/css/Aristo/jquery-ui-1.8.5.custom.css" type="text/css" rel="stylesheet" />
+    <link href="/lib/css/core.css?ver=4.02" type="text/css" rel="stylesheet" />
+    <link href="/lib/css/print.css" type="text/css" rel="stylesheet" media="print" />
+    <link href="/lib/css/bus-loader.css" type="text/css" rel="stylesheet" />
+    <link href="<?php print $boss->app->Assets . '/' . $boss->app->CSS; ?>" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--[if IE]>
        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
        <style>
         .chromeFrameInstallDefaultStyle {
@@ -59,20 +61,20 @@
        <div id="prompt">
          <h1>This application requires installation of the Google chrome frame plugin.</h1>
         <!-- if IE without GCF, prompt goes here -->
-       </div>
-       <script>
-        // The conditional ensures that this code will only execute in IE,
-        // Therefore we can use the IE-specific attachEvent without worry
-        if (window['attachEvent']) {
-           window.attachEvent("onload", function() {
-              CFInstall.check({
-                 mode: "inline", // the default
-                 node: "prompt"
-              });
-           });
-        }
-       </script>
-     <![endif]-->
+    </div>
+    <script>
+    // The conditional ensures that this code will only execute in IE,
+    // Therefore we can use the IE-specific attachEvent without worry
+    if (window['attachEvent']) {
+        window.attachEvent("onload", function() {
+            CFInstall.check({
+                mode: "inline", // the default
+                node: "prompt"
+            });
+        });
+    }
+    </script>
+    <![endif]-->
      <div id='main' class='grid'>
         <div class='modal-overlay' id='modal-busy'>
            <div class="ball"></div>
@@ -211,7 +213,8 @@
          id: null,
          grids: [],
          userEmail: "<?php print $_SESSION['Email']; ?>",
-         init: "<?php print ($in['do']) ? $in['do'] : $process->JS; ?>"
+         init: "<?php print ($in['do']) ? $in['do'] : $process->JS; ?>",
+         _cache:{}
       };
       toggleSearch();
    </script>
