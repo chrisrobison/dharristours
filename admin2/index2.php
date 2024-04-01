@@ -30,7 +30,7 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="/portal/assets/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/lib/css/bus-loader.css">
-    <link rel="stylesheet" href="/lib/css/icons48.css">
+    <link rel="stylesheet" href="icons24.css">
     <link rel="stylesheet" href="/portal/assets/css/notifications.css">
     <style>
     body {
@@ -81,34 +81,6 @@
         box-shadow: -2px 0px 2px #0003;
         z-index: 999;
     }
-    .user {
-      background:#ccc;
-      color:#000;
-		font-weight:bold;
-		font-family:'Lexend',sans-serif;
-		padding:0;
-		display:flex;
-		width:2em;
-		height:2em;
-		border-radius:50%;
-		align-items:center;
-		justify-content:center;
-		margin-right:0.5rem;
-		
-    }
-    a.nav-link {
-      height: 2rem;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-   .nav-sidebar .nav-treeview > .nav-item > .nav-link > i.nav-icon.simpleIcon {
-      height: 48px;
-      width: 48px;
-    }
-    a.nav-link.active > i {
-        filter: invert(1);
-    }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
@@ -121,13 +93,10 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/grid/?pid=216" class="nav-link">Jobs</a>
+                    <a href="/portal/" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/portal/?pid=243" class="nav-link">Invoices</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/portal/showwhere.php" class="nav-link">Live Map</a>
+                    <a href="/portal/contact.html" class="nav-link">Contact</a>
                 </li>
             </ul>
 
@@ -205,7 +174,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/admin2/" class="brand-link">
+            <a href="/portal/" class="brand-link">
                 <img src="/clients/dharristours/img/bus-logo.png" alt="D Harris Tours" class="brand-image" style="opacity: .8;filter:invert(1);">
                 <span class="brand-text font-weight-light">D Harris Tours</span>
 
@@ -216,7 +185,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="flex-direction:column;">
                     <div style="display:flex;flex-direction:row;">
-                        <div class="user">
+                        <div class="user" style="background:#ccc;color:#000;font-weight:bold;font-family:'Lexend',sans-serif;padding:0;display:flex;width:2em;height:2em;border-radius:50%;align-items:center;justify-content:center;margin-right:0.5rem;">
                         <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
                        <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
                         </div>
@@ -331,6 +300,7 @@
     <script src="main.js"></script>
     <script src="/portal/assets/js/pages/notifications.js"></script>
     <script>
+        app.init(app.getNav);
             document.querySelector("#overlay").style.display = "block";
             setTimeout(function() { document.querySelector("#overlay").style.display = "none"; }, 3000);
     </script>

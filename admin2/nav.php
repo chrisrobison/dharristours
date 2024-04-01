@@ -59,7 +59,7 @@
             $xtra = "";
             $xtra2 = "";
          }
-         print '<li class="nav-itm has-treeview'.$xtra.'"><a href="/apps/module.php?mid=' . $mod->ModuleID . '" class="nav-link'.$xtra2.'">'.$ico.' <p> ' . $mod->Module . ' </p></a>';
+         print '<li class="nav-item has-treeview'.$xtra.'"><a href="/apps/module.php?mid=' . $mod->ModuleID . '" class="nav-link'.$xtra2.'">'.$ico.' <p> ' . $mod->Module . ' </p></a>';
 
          print "\t<ul id='mid_" . $mod->ModuleID . "' class='nav nav-treeview' >\n";
          //print "<h3><a rel='nav'$target href='".$mod->URL."'>".$mod->Module."</a></h3>\n<div>\n";
