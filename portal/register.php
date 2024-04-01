@@ -1,10 +1,12 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/.env');
+    include($_SERVER['DOCUMENT_ROOT'] . '/lib/boss_class.php');
 
     $in = $_REQUEST;
     $out = array();
     $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
-    
+    $boss = new boss("dharristours.simpsf.com");
+
     //session_start();
 
     /* check connection */
@@ -20,6 +22,7 @@
         
         $rec = mysqli_fetch_assoc($results);
         print "<p>Login already exists. <a href='/login.php?url=/portal/'>Login here</a> or use a different email address.</p>";
+        exit();
     }
 
     if ($in['type']) {
@@ -34,16 +37,18 @@
 
         }
 
-        file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
+        file_put_contents("/simple/log/register.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
         
         header("Content-type: application/json; charset=utf-8");
         print json_encode($out);
     }
 
     function registerCustomer($link, $in) {
+        global $boss;
         $out = new stdClass();
         $out->status = "ok";
 
+        $shortlogin = mysqli_real_escape_string($link, preg_replace("/\@.*/", '', $in['data']['Login']['new1']['Email']));
 
         $keys = array("Email","FirstName","LastName","Passwd","Phone");
         $vals = array();
@@ -57,9 +62,8 @@
             }
             array_push($vals, $val);
         }
-
-        array_push($keys, 'Login');
-        array_push($vals, mysqli_real_escape_string($link, $in['data']['Login']['new1']['Email']));
+        array_push($keys, "Login");
+        array_push($vals, $shortlogin);
         array_push($keys, 'InitialProcess');
         array_push($vals, 216);
         array_push($keys, 'Access');
@@ -70,11 +74,39 @@
 
         $sql = "INSERT INTO Login (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
         $results = mysqli_query($link, $sql);
-        if(!$results){
+        
+        if (!$results){
             $out->status = "error";
-            $out->e = mysqli_error($link);
+            $out->error = mysqli_error($link);
+        }
+
+        $new = new stdClass();
+        $new->Business = $in['data']['Login']['new1']['Business'];
+        $new->Individual = 1;
+        $new->Contact = $in['data']['Login']['new1']['LastName'].', '.$in['data']['Login']['new1']['FirstName'];
+        $new->Phone = $in['data']['Login']['new1']['Phone'];
+        $new->Email = $in['data']['Login']['new1']['Email'];
+        $obj = new stdClass();
+        $obj->Business = ['new1'=>$new];
+
+        $business_ids = $boss->storeObject($obj);
+
+        $new = new stdClass();
+        $new->FirstName = $in['data']['Login']['new1']['FirstName'];
+        $new->LastName = $in['data']['Login']['new1']['LastName'];
+        $new->Phone = $in['data']['Login']['new1']['Phone'];
+        $new->Email = $in['data']['Login']['new1']['Email'];
+
+        $obj = new stdClass();
+        $obj->Person = ['new1'=>$new];
+
+        $person_ids = $boss->storeObject($obj);
+        
+        if (isset($business_ids[0]) && isset($person_ids[0])) {
 
         }
+        $out->status = 'ok';
+
         return $out;
     }
 
@@ -82,22 +114,20 @@
         $email = mysqli_real_escape_string($link, $in['Login']['new1']['Email']);
 
         if($email == ''){
-            print 'false';
-            exit();
+            return false;
         }
 
         $sql = "SELECT * FROM Login WHERE Email = '" . $email . "';";
         $results = mysqli_query($link, $sql);
-
+        $out = false;
         if(!$results){
-            print 'false';
-            exit();
-        }
+            $out = false;
+        } 
 
         if(mysqli_num_rows($results) > 0) print 'false';
-        else print 'true';
+        else $out = true;
 
-        exit();
+        return $out;
     }
 
     function quote($str, $link) {
