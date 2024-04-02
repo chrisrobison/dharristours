@@ -41,6 +41,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
    <style type="text/css">
    body { 
       /* background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0); */
+      background: #666;
       font-size:20px;color:black;font-family:"Helvetica Neue",Verdana,sans-serif; 
       background-color:#fff;
    }
@@ -208,7 +209,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
                </tr>
                <tr>
                   <td class='field'>Amount:</td>
-                  <td class='value' colspan='3'>$<?php print sprintf("%.02f", $job->QuoteAmount); ?><br /><br /></td>
+                  <td class='value' colspan='3'>$<?php print number_format($job->QuoteAmount, 2); ?><br /><br /></td>
                </tr>
             </table>
          </div>
@@ -228,7 +229,7 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
       </tr>
       <tr>
       <td style="font-size:.8rem;">
-            <?php ($job->QuoteOnly) ? print "This quote IS NOT a guarantee of service and may be cancelled by D Harris Tours. Reservations are based on first come, first service. Please confirm this quote as soon as possible to ensure a reservation!"  : print "Cancellation Policy: a charge of $650 per bus if service not cancelled 7 days prior to spot time. Full charge if not cancelled 72 hours prior except for sports tournaments. No charge for cancellation due to weather if notified by 4pm the day prior to the trip. This confirmation IS a guarantee of service."; ?>
+            <?php ($job->QuoteOnly) ? print "This quote IS NOT a guarantee of service and may be cancelled by D Harris Tours. Reservations are based on first come, first serve basis. Please confirm this quote as soon as possible to ensure a reservation!"  : print "Cancellation Policy: a charge of $650 per bus if service not cancelled 7 days prior to spot time. Full charge if not cancelled 72 hours prior except for sports tournaments. No charge for cancellation due to weather if notified by 4pm the day prior to the trip. This confirmation IS a guarantee of service."; ?>
       </td>
       </tr>
 
