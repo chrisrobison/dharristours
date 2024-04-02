@@ -389,7 +389,7 @@ console.dir(stops);
                         out += " SELECTED";
                     }
                     out += ">Depart By</option></select>";
-                    out += `<input type='time' id='Stop${i+1}' value='${time.time}' size='20' style='width:10rem;' class='boxValue stop' onchange='setStops()' /></div>`;
+                    out += `<input type='time' id='Stop${i+1}Time' value='${time.time}' size='20' style='width:10rem;' class='boxValue stop' onchange='setStops()' /></div>`;
                 }
             });
         }
