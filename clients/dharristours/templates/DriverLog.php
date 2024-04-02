@@ -415,6 +415,17 @@
                }
             ?>
                     </div>
+            <div>
+            <?php  
+               if (is_null($current->DepartYardTime) || $current->DepartYardTime =='') {
+                        print "";
+               } else {
+                  print "<b>Yard Depart Time: ";
+                  print $current->DepartYardTime;
+                  print "</b>";
+               }
+            ?>
+            </div>
                 </div>
                 <table id='ticket_table'>
                     <tr>
