@@ -1,11 +1,13 @@
 <?php
-   include("lib/boss_class.php");
+   include("/simple/lib/boss_class.php");
 
    $boss = new boss("dharristours.simpsf.com");
 
-    $data = file_get_contents("SFUSD_Sports_NovDec.txt");
-    $obj = $boss->parseImport("Request", $data);
+    $first = "2024-01-01";
+    $last = "2024-04-01";
+   //$obj = $boss->getObjectRelated("Job", "JobDate>='{$first}' AND JobDate<='{$last}'");
+   $obj = $boss->getObjectRelated("Job", 33046);
 print_r($obj);
+$then = date("Y-m-d", strtotime("2 weeks"));
+print $then."\n";
 
-
-?>
