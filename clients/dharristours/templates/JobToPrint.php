@@ -1,312 +1,598 @@
 <?php
-   require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
+require_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/auth.php");
 
-   /** 
-    * JobToPrint.php
-    *
-    * Tool to view and email invoices, driver logs, confirmations, and sub logs
-    * 
-    * The following options may be passed via query string parameters:
-    *
-    *    ID [int]          - JobID to work with (REQUIRED)
-    *    create [0|1]      - Generate static invoice file
-    *    force  [0|1]      - Force saving of invoice file, even if one exists
-    *
-    **/
-   if ($in['z']) {
-      $qs = base64_decode($in['z']);
-      
-      $qs = preg_replace("/#.*/", "", $qs);
-      $parts = explode('&', $qs);
-      $cnt = count($parts);
+/** 
+ * JobToPrint.php
+ *
+ * Tool to view and email invoices, driver logs, confirmations, and sub logs
+ * 
+ * The following options may be passed via query string parameters:
+ *
+ *    ID [int]          - JobID to work with (REQUIRED)
+ *    create [0|1]      - Generate static invoice file
+ *    force  [0|1]      - Force saving of invoice file, even if one exists
+ *
+ **/
+if ($in['z']) {
+   $qs = base64_decode($in['z']);
 
-      for ($i=0; $i < $cnt; $i++) {
-          list($key, $val) = preg_split("/=/", $parts[$i]);
-          $in[urldecode($key)] = urldecode($val);
-      }
+   $qs = preg_replace("/#.*/", "", $qs);
+   $parts = explode('&', $qs);
+   $cnt = count($parts);
+
+   for ($i = 0; $i < $cnt; $i++) {
+      list($key, $val) = preg_split("/=/", $parts[$i]);
+      $in[urldecode($key)] = urldecode($val);
    }
-   $arrContextOptions=array(
-    "ssl"=>array(
-        "verify_peer"=>false,
-        "verify_peer_name"=>false,
-      )
-   );  
+}
+$arrContextOptions = array(
+   "ssl" => array(
+      "verify_peer" => false,
+      "verify_peer_name" => false,
+   )
+);
 
-   $in['Resource'] = "Job";
-   $in['ID'] = $in['ID'] ? $in['ID'] : 0;
- 
-   if ($in['ID']) {
-      $boss->addResource("Job");
-      $boss->db->Job->execute("SELECT JobID, Job from Job where JobID='{$in['ID']}'"); // ((JobDate > CURDATE()) or (JobDate < (CURDATE() + INTERVAL 2 MONTH))) or JobID not in (select JobID from Invoice) OR (JobID='{$in['ID']}') order by LastModified desc");
-
-      $job = mysql_fetch_assoc($boss->db->Job->result); 
-
-      if ($in['x'] == "create") {
-         // Call a stored procedure passing in the ID of the record just created
-         $boss->db->Job->execute("CALL JobToInvoice({$in['ID']},'{$_SESSION['Login']->Email}',@InvoiceID)");//QuoteToJob($id,$_SESSION['Login']->Email,$results['JobID']);
+$in['Resource'] = "Job";
+$in['ID'] = $in['ID'] ? $in['ID'] : 0;
+$boss->addResource("Job");
+if ($in['x'] == "massinvoice") {
+   $out = array("results" => array(), "_ids" => array());
+   if (isset ($in['JobIDs'])) {
+      $ids = json_decode($in['JobIDs']);
+      foreach ($ids as $id) {
+         $boss->db->Job->execute("CALL JobToInvoice({$id}, '{$_SESSION['Login']->Email}', @InvoiceID)");
          $boss->db->Job->execute("SELECT @InvoiceID");
-      }
+         $rec = $boss->getObjectRelated('Job', $id);
+         $invID = $rec->related_Invoice[0]->InvoiceID;
+         $parent_id = $rec->related_Invoice[0]->InvoiceParentID;
 
-      $record = $current = $boss->getObjectRelated('Job', $in['ID']);
-      $business = $boss->getObjectRelated("Business", $current->BusinessID);
-      if ($current->EmployeeID) $employee = $boss->getObjectRelated("Employee", $current->EmployeeID);
+         if ($invID) {
+            $obj = new stdClass();
+            $obj->JobID = $id;
+            $obj->InvoiceID = $invID;
+            $obj->InvoiceParentID = $parent_id;
 
-      $InvID = $current->related_Invoice[0]->InvoiceID;
-      
-      $base = (($_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
-      $url =  $base . '/files/templates/print/InvoiceReport.php?ID='.$InvID; 
-      $file = $InvID.'.html';
+            $out["_ids"][] = $obj;
+         }
+         $base = (($_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
+         $url = $base . '/files/templates/print/InvoiceReport.php?ID=' . $invID;
+         $file = $invID . '.html';
 
-      if ($in['x'] == "create") {
          $invoice = file_get_contents($url, false, stream_context_create($arrContextOptions));
-         $path = $_SERVER['DOCUMENT_ROOT'] . $boss->app->Assets .'/invoices/';
+         $path = $_SERVER['DOCUMENT_ROOT'] . $boss->app->Assets . '/invoices/';
          $save = $path . $file;
          $cnt = 0;
          while (file_exists($save)) {
             ++$cnt;
-            $file = $InvID . '-' . $cnt . '.html';
+            $file = $invID . '-' . $cnt . '.html';
             $save = $path . $file;
-            
+
          }
 
          if (!file_exists($save) || $in['force']) {
             file_put_contents($save, $invoice);
+            $out["results"][] = "Invoice generated for Invoice ID {$id} [$save]";
+
+         }
+
+      }
+   }
+   header("Content-Type: application/json");
+   print json_encode($out);
+   exit;
+}
+
+if ($in['ID']) {
+   $boss->db->Job->execute("SELECT JobID, Job from Job where JobID='{$in['ID']}'"); // ((JobDate > CURDATE()) or (JobDate < (CURDATE() + INTERVAL 2 MONTH))) or JobID not in (select JobID from Invoice) OR (JobID='{$in['ID']}') order by LastModified desc");
+   $job = mysql_fetch_assoc($boss->db->Job->result);
+   if ($in['x'] == "create") {
+      // Call a stored procedure passing in the ID of the record just created
+      $boss->db->Job->execute("CALL JobToInvoice({$in['ID']},'{$_SESSION['Login']->Email}',@InvoiceID)");//QuoteToJob($id,$_SESSION['Login']->Email,$results['JobID']);
+      $boss->db->Job->execute("SELECT @InvoiceID");
+
+   }
+
+   $record = $current = $boss->getObjectRelated('Job', $in['ID']);
+   $business = $boss->getObjectRelated("Business", $current->BusinessID);
+   if ($current->EmployeeID)
+      $employee = $boss->getObjectRelated("Employee", $current->EmployeeID);
+
+   $InvID = $current->related_Invoice[0]->InvoiceID;
+   $parent_id = $current->related_Invoice[0]->InvoiceParentID;
+
+   $base = (($_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
+   $url = $base . '/files/templates/print/InvoiceReport.php?ID=' . $InvID;
+   $file = $InvID . '.html';
+
+   if ($in['x'] == "create") {
+      $invoice = file_get_contents($url, false, stream_context_create($arrContextOptions));
+      $path = $_SERVER['DOCUMENT_ROOT'] . $boss->app->Assets . '/invoices/';
+      $save = $path . $file;
+      $cnt = 0;
+      if (file_exists($save)) {
+         if (!is_link($save) && (!file_exists($path . $InvID . '-1.html'))) {
+            $new = $path . $InvID . '-1.html';
+            rename($save, $new);
+            symlink($new, $save);
+            $save = $new;
+         }
+   
+         while (file_exists($save)) {
+            ++$cnt;
+            $file = $InvID . '-' . $cnt . '.html';
+            $save = $path . $file;
+         }
+         if (is_link($path . $InvID . '.html')) {
+            unlink($path . $InvID . '.html');
+            symlink($save, $path . $InvID . '.html');
          }
       }
 
-      $static = $base . '/files/invoices/?z=' . base64_encode("ID=" . $InvID);
+      if (!file_exists($save) || $in['force']) {
+         file_put_contents($save, $invoice);
+      }
    }
+
+   $static = $base . '/files/invoices/' . $InvID . '.html';
+}
 ?>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="utf-8">
-      <title></title>
-      <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-      <style>
-         body { margin:0;padding:0;font-size:18px;font-family:"Open Sans",sans-serif; }
-	.flex-container {
-  	display: flex;
-  	flex-direction: column;
-  	min-height: 100vh;
-	}
-	section.content {  flex: 1; background-color:#3F51B5; color:#fff; padding:.5em .5em;}
-         h1, h2, h3, h4, h5 { font-family: "Open Sans","Helvetica Neue", Optima, Verdana, sans-serif; }
-         a { text-decoration:none;color:#00c; }
-         a:hover { text-decoration:underline; }
-         a:visited { color:#006; }
-         a:active { color:#e00;display:inline-block;top:2px; }
-         #main { margin:1em; }
-         #toolbar { position:absolute; float:top; top:0px; left:0px; width:100%; height:3em; background-color:#000; color:#fff; font-size:1.3em; padding:.5em 0; }
-         #viewWrap { background: #fff;position:absolute; top:6.25rem; left:0px; width:100%; bottom:0px; right:0px; }
-         button,input,select,option { font-family: "Open Sans",sans-serif; font-size:1em; }
-         th.field { white-space: nowrap; }
-   .alertText {
-       background: rgb(153, 0, 0);
-       color: rgb(255, 255, 255);
-    }
-    label {
-      width: 6rem;
-      text-align:right;
-      display: inline-block;
-   }
-      </style>
-   </head>
-   <body>
-     <div  class="flex-container">
+
+<head>
+   <meta charset="utf-8">
+   <title></title>
+   <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+   <style>
+      body {
+         margin: 0;
+         padding: 0;
+         font-size: 18px;
+         font-family: "Open Sans", sans-serif;
+      }
+
+      .flex-container {
+         display: flex;
+         flex-direction: column;
+         min-height: 100vh;
+      }
+
+      section.content {
+         flex: 1;
+         background-color: #3F51B5;
+         color: #fff;
+         padding: .5em .5em;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+         font-family: "Open Sans", "Helvetica Neue", Optima, Verdana, sans-serif;
+      }
+
+      a {
+         text-decoration: none;
+         color: #00c;
+      }
+
+      a:hover {
+         text-decoration: underline;
+      }
+
+      a:visited {
+         color: #006;
+      }
+
+      a:active {
+         color: #e00;
+         display: inline-block;
+         top: 2px;
+      }
+
+      #main {
+         margin: 1em;
+      }
+
+      #toolbar {
+         position: absolute;
+         float: top;
+         top: 0px;
+         left: 0px;
+         width: 100%;
+         height: 3em;
+         background-color: #000;
+         color: #fff;
+         font-size: 1.3em;
+         padding: .5em 0;
+      }
+
+      #viewWrap {
+         background: #fff;
+         position: absolute;
+         top: 6.25rem;
+         left: 0px;
+         width: 100%;
+         bottom: 0px;
+         right: 0px;
+      }
+
+      button,
+      input,
+      select,
+      option {
+         font-family: "Open Sans", sans-serif;
+         font-size: 1em;
+      }
+
+      th.field {
+         white-space: nowrap;
+      }
+
+      .alertText {
+         background: rgb(153, 0, 0);
+         color: rgb(255, 255, 255);
+      }
+
+      label {
+         width: 9rem;
+         text-align: right;
+         display: inline-block;
+      }
+      .invoice-icon {
+         display: inline-block;
+            height: 1rem;
+            width: 1rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 0px 0px;
+            content: " ";
+      }
+      button {
+         color: #333;
+      }
+   </style>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+   <div class="flex-container">
       <section class="content">
          <form method='post'>
             <span style='float:left;padding:0 .125em;'><label>Job ID: </label>
                <span class='val'>
-                  <input type='text' id="joblist" style='width:5em' value='<?php print $in['ID']; ?>'><button id='lookup'>Lookup</button> <span class='val'><?php print $job['Job']; ?></span>
-               </span>
-            </span>
-               <span id='emailWrap' style='float:right;'<?php if (!$InvID) print " disabled='true'"; ?>>
-                  <!-- Email fields -->
-                  <input type='hidden' id='x' name='x' value=''>
-                  <input type='hidden' id='Subject' name='Subject' value='[Invoice] <?php print $current->Job; ?>'>
-                  <input type='hidden' id='Url' name='Url' value='<?=$static ?>'>
-                  <input type='hidden' id='InvoiceID' name='InvoiceID' value='<?=$current->related_Invoice[0]->InvoiceID ?>'>
-                  <input type='hidden' id='Cc' name='Cc' value='juanaharrisdht@att.net'> 
-                  <span>Email to: <input type="text" id="To" name="To" style='width:15em;' value="<?php print $business->BillEmail; ?>">
-                     <button class='sendpdf'>Send PDF</button>
-                     <button class='sendmsg'>Send Link</button>
+                  <input type='text' id="ID" style='width:5em' value='<?php print $in['ID']; ?>'><button onclick="location.href='/files/templates/JobToPrint.php?ID='+document.querySelector('#ID').value;return false;" id='lookup'>Lookup</button> <span id='job-title' class='val'>
+                     <?php print $job['Job']; ?>
                   </span>
                </span>
+            </span>
+            <span id='emailWrap' style='float:right;' <?php if (!$InvID)
+               print " disabled='true'"; ?>>
+               <!-- Email fields -->
+               <input type='hidden' id='x' name='x' value=''>
+               <input type='hidden' id='Subject' name='Subject' value='[Invoice] <?php print $current->Job; ?>'>
+               <input type='hidden' id='Url' name='Url' value='<?= $static ?>'>
+               <input type='hidden' id='InvoiceID' name='InvoiceID'
+                  value='<?= $current->related_Invoice[0]->InvoiceID ?>'>
+               <input type='hidden' id='InvoiceParentID' name='InvoiceParentID'
+                  value='<?= $current->related_Invoice[0]->InvoiceParentID ?>'>
+               <input type='hidden' id='Cc' name='Cc' value='juanaharrisdht@att.net'>
+               <span>Send to: <input type="text" autocomplete="off" id="To" name="To" style='width:15em;'
+                     value="<?php 
+                     print (isset($business->BillEmail)) ? $business->BillEmail : $business->Email; ?>">
+                  <button class='sendpdf'><i class="fa-solid fa-file-pdf"></i> Email PDF</button>
+                  <button class='sendmsg'>Email Link</button>
+               </span>
+            </span>
             <div style='clear:left'>
                <label>Document: </label>
-               <select id='what' style='width:10em'>
+               <select id='what' name="what" style='width:10em'>
                   <option value=''>--Select Document--</option>
-                  <option <?php if (!$InvID) print " disabled='true'"; ?> value='InvoiceReport'>Invoice</option>
+                  <option <?php if (!$parent_id)
+                     print " disabled='true'"; ?> value='MasterInvoice'>Master Invoice [
+                     <?= $parent_id ?>]
+                  </option>
+                  <option <?php if (!$InvID)
+                     print " disabled='true'"; ?> value='InvoiceReport'>Invoice [
+                     <?= $InvID ?>]
+                  </option>
                   <option value='DriverLog'>Driver Trip</option>
                   <option value='Confirmation'>Confirmation</option>
                   <option value='DriverLogExternal'>Subcontractor Log</option>
                </select>
                <button class='view' style='margin-right:2em;'>View</button>
-               
-                     </div>
+
+            </div>
             <span style='padding-left:1em;'>
-                  <span style='padding:0 2em;'><label>Invoice: </label><span class='val'><?php print $current->related_Invoice[0]->InvoiceID; ?></span> </span>
-                  <button class='geninvoice'><?php print ($InvID) ? "Update" : "Create"; ?> Invoice</button>
-                  <button class='print'>Print</button>
-                  <button class='print sendmsg'>Print &amp; Email</button>
-                  <button id='mkpdf'>Make PDF</button>
+               <span style='padding:0 2em;'><label id="doctype">
+                     <?php
+
+                     ?>Invoice:
+                  </label> <span id="docval" class='val'>
+                     <?php print $current->related_Invoice[0]->InvoiceID; ?>
+                  </span> 
                </span>
+               <button class='geninvoice'>
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                  <?php print ($InvID) ? "Update" : "Create"; ?> Invoice
+               </button>
+               <button class='print'><i class="fa-solid fa-print"></i> Print</button>
+               <button class='print sendmsg'>Print &amp; Email</button>
+               <button id='mkpdf'><i class="fa-solid fa-file-pdf"></i> Make PDF</button>
+            </span>
          </form>
-</div>
-      </section>
-      <div id='viewWrap'>
-         <iframe id='viewer' width='100%' height='100%'></iframe>
-      </div>
-   </body>
-   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-   <script type='text/javascript'>
-      var simple = {};
-      $(document).ready(function() {
-         simple = {
-            current: <?php 
-            if ($current) {
-               print json_encode($current); 
-            } else {
-               print "{JobID: ''}";
-            }
-            ?>,
-            <?php if ($employee) print "employee: " . json_encode($employee) .",\n"; ?>
-            <?php if ($business) print "business: " . json_encode($business) .",\n"; ?>
+   </div>
+   </section>
+   <div id='viewWrap'>
+      <iframe id='viewer' width='100%' height='100%'></iframe>
+   </div>
+</body>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type='text/javascript'>
+   var session = <?php print json_encode($_SESSION); ?>;
+   var simple = {};
+   $(document).ready(function () {
+      simple = {
+         current: <?php
+         if ($current) {
+            print json_encode($current);
+         } else {
+            print "{JobID: ''}";
+         }
+         ?>,
+         <?php if ($employee)
+            print "employee: " . json_encode($employee) . ",\n"; ?>
+            <?php if ($business)
+               print "business: " . json_encode($business) . ",\n"; ?>
             InvoiceID: "<?php print $InvID; ?>",
-            InvoiceUrl: "<?=$static?>"
-         };
-         simple.options = {
-               InvoiceReport: {
-                  href: "InvoiceReport.php?z=" + btoa("ID=" + simple.InvoiceID),
-                  email: (simple.business) ? simple.business.Email : ""
-               },
-               Confirmation: {
-                  href: "Confirmation.php?z=" + btoa("ID=" + simple.current.JobID),
-                  email: (simple.business) ? simple.business.Email : ""
-               },
-               DriverLog: {
-                  href: "DriverLog.php?z=" + btoa("ID=" + simple.current.JobID),
-                  email: (simple.employee) ? simple.employee.Email : ""
-               },
-               DriverLogExternal: {
-                  href: "DriverLogExternal.php?z=" + btoa("ID=" + simple.current.JobID),
-                  email: (simple.employee) ? simple.employee.Email : ""
-               }
-         };
-         
-
-         $("form").submit(function(e) {
-            
-         });
-         
-         $("#joblist").change(function(e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $(this).val()); });
-         $("#lookup").click(function(e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $("#joblist").val()); });
-
-         $("#what").change(function(e) {
-            var curdoc = $(this).val() || "InvoiceReport";
-            $("#Url").val("https://" + location.host + "/files/templates/" + simple.options[curdoc].href);
-            $("#Subject").val('[' + curdoc + '] ' + simple.current['Job']);
-            $("#To").val(simple.options[curdoc].email);
-            localStorage.setItem('curdoc', curdoc);
-            window.location.hash = "#" + curdoc;
-            viewDoc(curdoc);
-         });
-         
-         $("#mkpdf").click(function(e) {
-            makePDF($("#what").val());
-            e.stopPropagation();
-            e.preventDefault();
-            return false;
-         });
-
-         $("button.geninvoice").click(function(e) {
-            $("#x").val("create");
-         });
-         
-         $("button.sendmsg").click(function(e) {
-            if (confirm("Email URL " + $("#Url").val() + " to " + $("#To").val() + "?")) {
-               var frm = $("form").serialize();
-               $.post("/emailurl.php", frm, function(data) {
-                  //alert("Email sent to " + $("#To").val() + " for URL " + $("#Url").val());
-               });
-            }
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-         });
-
-         $("button.sendpdf").click(function(e) {
-            if (confirm("Email URL " + $("#InvoiceID").val() + ".pdf to " + $("#To").val() + "?")) {
-               var frm = $("form").serialize();
-               $.post("/emailpdf.php", frm, function(data) {
-                  //alert("Email sent to " + $("#To").val() + " for URL " + $("#Url").val());
-               });
-            }
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-         });
-
-         $("button.view").click(function(e) {
-            viewDoc();
-            e.stopPropagation();
-            e.preventDefault();
-            return false;
-         });
-
-         $("button.print").click(function(e) {
-            $("#viewer")[0].contentWindow.print(); 
-
-            e.stopPropagation();
-            e.preventDefault();
-            return false;
-         });
-         
-         if (location.hash) {
-            var curdoc = location.hash.replace(/#/, '');
-            localStorage.setItem('curdoc', curdoc);
-            $("#what").val(curdoc).change();
+         InvoiceParentID: "<?php print $parent_id; ?>",
+         InvoiceUrl: "<?= $static ?>",
+         Url: "<?= $url ?>"
+      };
+      simple.options = {
+         MasterInvoice: {
+            href: "InvoiceMaster.php?z=" + btoa("ID=" + simple.InvoiceParentID),
+            email: (simple.business && simple.business.BillEmail) ? simple.business.BillEmail : simple.business.Email
+         },
+         InvoiceReport: {
+            href: "InvoiceReport.php?z=" + btoa("ID=" + simple.InvoiceID),
+            email: (simple.business && simple.business.BillEmail) ? simple.business.BillEmail : simple.business.Email
+         },
+         Confirmation: {
+            href: "Confirmation.php?z=" + btoa("ID=" + simple.current.JobID),
+            email: (simple.business && simple.business.BillEmail) ? simple.business.BillEmail : simple.business.Email
+         },
+         DriverLog: {
+            href: "DriverLog.php?z=" + btoa("ID=" + simple.current.JobID),
+            email: (simple.employee) ? simple.employee.Email : ""
+         },
+         DriverLogExternal: {
+            href: "DriverLogExternal.php?z=" + btoa("ID=" + simple.current.JobID),
+            email: (simple.employee) ? simple.employee.Email : ""
          }
+      };
 
-         var chkdoc = localStorage.getItem('curdoc');
-         if (chkdoc) {
-            $("#what").val(chkdoc);
-            viewDoc(chkdoc);
-         }
-         
-         function makePDF(what) {
-            if (!what) {
-               what = $("#what").val();
-            } 
-            var id;
-            
-            if (what == "InvoiceReport") {
-               id = "<?=$InvID?>";
-            } else {
-               id = "<?=$in['ID']?>";
-            }
-            var query = "saveto=invoices/&ID="+id+"&url="  + document.location.origin + "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
-            url = "/tools/mkpdf/?" + query;
-            console.log("pdf url: " + url);
-            $("#viewer").attr("src", url);
-            return false;
-         }
 
-         function viewDoc(what) {
-            if (!what) {
-               what = $("#what").val();
-            } 
-            var id;
-            
-            if (what == "InvoiceReport") {
-               id = "<?=$InvID?>";
-            } else {
-               id = "<?=$in['ID']?>";
-            }
-            url = "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
-            $("#viewer").attr("src", url);
-         }
+      $("form").submit(function (e) {
+         e.preventDefault();
+         e.stopPropagation();
+         return false;
       });
-   </script>
+
+      $("#ID").change(function (e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $("#ID").val()); });
+      $("#lookup").click(function (e) { document.location.href = "/files/templates/JobToPrint.php?z=" + btoa("ID=" + $("#ID").val()); });
+
+      $("#what").change(function (e) {
+         var curdoc = $(this).val() || "InvoiceReport";
+         $("#Url").val("https://" + location.host + "/files/templates/" + simple.options[curdoc].href);
+         $("#Subject").val('[' + curdoc + '] ' + simple.current['Job']);
+         $("#To").val(simple.options[curdoc].email);
+         localStorage.setItem('curdoc', curdoc);
+         window.location.hash = "#" + curdoc;
+         viewDoc(curdoc);
+      });
+
+      $("#mkpdf").click(function (e) {
+         makePDF($("#what").val());
+         e.stopPropagation();
+         e.preventDefault();
+         return false;
+      });
+
+      $("button.geninvoice").click(function (e) {
+         $("#x").val("create");
+         var frm = $("form").serialize();
+         $.post("/files/templates/JobToPrint.php?ID=" + $("#ID").val(), frm, function (data) {
+            console.log("geninvoice results");
+            console.dir(data);
+            let ty = (simple.InvoiceID) ? "UPDATED " : "CREATED ";
+
+            alert("Invoice " + ty + "for [" + $("#ID").val() + "] " + document.querySelector("#job-title").innerHTML + ".");
+            let what = $("#what").value;
+            let conf = simple.options[what];
+
+            document.location.reload();
+         })
+      });
+
+      $("button.sendmsg").click(function (e) {
+         if (confirm("Email URL " + $("#Url").val() + " to " + $("#To").val() + "?")) {
+            var frm = $("form").serialize();
+            $.post("/emailurl.php", frm, function (data) {
+               //alert("Email sent to " + $("#To").val() + " for URL " + $("#Url").val());
+            });
+         }
+         e.preventDefault();
+         e.stopPropagation();
+         return false;
+      });
+
+      $("button.sendpdf").click(function (e) {
+         let doc = document.querySelector("#what").value;
+         switch (doc) {
+            case "InvoiceReport":
+               genPDF("InvoiceReport", $("#InvoiceID").val());
+               if (confirm("Email INVOICE " + $("#InvoiceID").val() + ".pdf to " + $("#To").val() + "?")) {
+                  var frm = $("form").serialize();
+                  console.dir(frm);
+                  fetch("/emailpdf.php", {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                     },
+                     redirect: "follow",
+                     body: frm
+                  }).then(r => r.json()).then(data => {
+                     console.log(`sendpdf fetch complete`);
+                     console.dir(data);
+
+                     alert("Email sent to " + $("#To").val() + " and Invoice ID " + $("#InvoiceID").val() + " marked as sent.");
+                     markInvoiceSent($("#InvoiceID").val());
+
+                  });
+               }
+               break;
+            case "MasterInvoice":
+               genPDF("MasterInvoice", $("#InvoiceParentID").val());
+               if (confirm("Email MASTER INVOICE M" + $("#InvoiceParentID").val() + ".pdf to " + $("#To").val() + "?")) {
+                  var frm = $("form").serialize();
+                  console.dir(frm);
+                  fetch("/emailpdf.php", {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                     },
+                     redirect: "follow",
+                     body: frm
+                  }).then(r => r.json()).then(data => {
+                     console.log(`sendpdf fetch complete`);
+                     console.dir(data);
+
+                     alert(`Master Invoice ID ${$('#InvoiceParentID').val()} emailed to ${$("#To").val()}`);
+
+                  });
+               }
+                break;
+ 
+         }
+         e.preventDefault();
+         e.stopPropagation();
+         return false;
+      });
+
+      $("button.view").click(function (e) {
+         viewDoc();
+         e.stopPropagation();
+         e.preventDefault();
+         return false;
+      });
+
+      $("button.print").click(function (e) {
+         $("#viewer")[0].contentWindow.print();
+
+         e.stopPropagation();
+         e.preventDefault();
+         return false;
+      });
+
+      if (location.hash) {
+         var curdoc = location.hash.replace(/#/, '');
+         localStorage.setItem('curdoc', curdoc);
+         $("#what").val(curdoc).change();
+      }
+
+      var chkdoc = localStorage.getItem('curdoc');
+      if (chkdoc) {
+         $("#what").val(chkdoc);
+         viewDoc(chkdoc);
+      }
+      function genPDF(what = "invoice", id) {
+         if (id) {
+            let query = "saveto=invoices/&ID=" + id + "&url=" + document.location.origin + "/files/invoices/" + id + ".html";
+            let url = `/tools/mkpdf/?${query}`;
+            fetch(url).then(r => r.text()).then(text => {
+               console.log("genPDF results");
+               console.dir(text);
+            });
+         }
+      }
+      function makePDF(what, id) {
+         if (!what) {
+            what = $("#what").val();
+         }
+
+         if (!id && what == "InvoiceReport") {
+            id = "<?= $InvID ?>";
+         } else if (!id) {
+            id = "<?= $in['ID'] ?>";
+         }
+
+         var query = "saveto=invoices/&ID=" + id + "&url=" + document.location.origin + "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
+         url = "/tools/mkpdf/?" + query;
+         console.log("pdf url: " + url);
+         $("#viewer").attr("src", url);
+         return false;
+      }
+
+      function viewDoc(what) {
+         if (!what) {
+            what = $("#what").val();
+         }
+         var id;
+
+         if (what == "InvoiceReport") {
+            document.querySelector("#doctype").innerHTML = "Invoice: ";
+            document.querySelector("#docval").innerHTML = "<?= $InvID ?>";
+            id = "<?= $InvID ?>";
+         } else if (what == "MasterInvoice") {
+            document.querySelector("#doctype").innerHTML = "Master Invoice: ";
+            document.querySelector("#docval").innerHTML = "<?= $parent_id ?>";
+
+            id = "<?= $parent_id ?>";
+         } else {
+            document.querySelector("#doctype").innerHTML = what;
+            document.querySelector("#docval").innerHTML = "<?= $in['ID'] ?>";
+            id = "<?= $in['ID'] ?>";
+         }
+         //url = "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
+         url = "/files/templates/" + what + ".php?ID=" + id;
+         $("#viewer").attr("src", url);
+
+      }
+
+      async function markMasterInvoiceSent(id) {
+         const raw = await fetch(`/api.php?rsc=Invoice&id=${id}`);
+         const json = await raw.json();
+         const now = new Date();
+         let out = { "InvoiceParent": [{ InvoiceParentID: `${id}`, InvoiceSent: 1, Notes: `${json.Notes}\nPDF of Master Invoice #${id} emailed by ${session.Login.Email} on ${now.toLocaleDateString()} ${now.toLocaleTimeString()}` }] };
+
+         let qs = encodeURIComponent(JSON.stringify(out));
+         let url = `/grid/ctl.php?x=save&rsc=InvoiceParent&ID=${id}&InvoiceParentID=${id}&json=${qs}`;
+         console.log(`url: ${url}`);
+         fetch(url).then(r => r.json()).then(data => {
+            console.log("success markMasterInvoiceSent");
+            console.dir(data);
+         });
+
+      }
+      async function markInvoiceSent(id) {
+         const raw = await fetch(`/api.php?rsc=Invoice&id=${id}`);
+         const json = await raw.json();
+         const now = new Date();
+         let out = { "Invoice": [{ InvoiceID: `${id}`, InvoiceSent: 1, Notes: `${json.Notes}\nInvoice PDF emailed by ${session.Login.Email} on ${now.toLocaleDateString()} ${now.toLocaleTimeString()}` }] };
+
+         let qs = encodeURIComponent(JSON.stringify(out));
+         let url = `/grid/ctl.php?x=save&rsc=Invoice&ID=${id}&InvoiceID=${id}&json=${qs}`;
+         console.log(`url: ${url}`);
+         fetch(url).then(r => r.json()).then(data => {
+            console.log("success markinvoicesent");
+            console.dir(data);
+         });
+
+      }
+   });
+</script>
+
 </html>
