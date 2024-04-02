@@ -36,12 +36,16 @@ if ($_REQUEST['logout']) {
 	if ($in['email'] && $in['password']) {
 		if ($boss->utility->login($boss, $_REQUEST)) {
          if (array_key_exists("goto", $in)) {
-            if (array_key_exists('Login', $_SESSION)) {
+            if (array_key_exists("savedest", $in) && array_key_exists('Login', $_SESSION)) {
                $_SESSION['Login']->StartURL = $in['goto'];
+               setcookie("StartURL", $in['goto'], time() + 88473600);   // Set to 1024 days in the future
+               $_COOKIE['StartURL'] = $in['goto'];
             }
             $url = $in['goto'];
          } else if ($_SESSION['Login']->StartURL) {
             $url = $_SESSION['Login']->StartURL;
+         } else if (array_key_exists('url', $in)) {
+            $url = $in['url'];
          }
          setcookie("email", $in['email']);
          setcookie("name", $_SESSION['FirstName'] . ' ' . $_SESSION['LastName']);
@@ -180,14 +184,26 @@ if ($_REQUEST['logout']) {
                      <div class='loginRow'>
                         <div class='newlabel'>Go To</div>
                         <select id="goto" name="goto">
-                           <option value="/apps/"<?php print ($_SESSION['Login']->StartURL=="/apps/") ? " SELECTED" : ""; ?>>Workspace</option>
-                           <option value="/admin2/"<?php print ($_SESSION['Login']->StartURL=="/admin2/") ? " SELECTED" : ""; ?>>Workspace, New UI (Beta)</option>
-                           <option value="/portal/"<?php print ($_SESSION['Login']->StartURL=="/portal/") ? " SELECTED" : ""; ?>>Customer Portal</option>
+                        <?php 
+$sel = false;
+if (array_key_exists("url", $in)) {
+$sel = true;
+   print <<<EOT
+<option value="{$in['url']}" SELECTED>My Destination [{$in['url']}]</option>
+EOT;
+}
+?>
+                           <option value="/apps/"<?php print ((($_COOKIE['StartURL'] == "/apps/") || ($_SESSION['Login']->StartURL=="/apps/")) && $sel!==true) ? " SELECTED" : ""; ?>>Workspace</option>
+                           <option value="/admin2/"<?php print ((($_COOKIE['StartURL'] == "/admin2/") || ($_SESSION['Login']->StartURL=="/admin2/")) && ($sel !== true)) ? " SELECTED" : ""; ?>>Workspace, New UI (Beta)</option>
+                           <option value="/portal/"<?php print ((($_COOKIE['StartURL'] == "/portal/") || ($_SESSION['Login']->StartURL=="/portal/")) && ($sel !== true)) ? " SELECTED" : ""; ?>>Customer Portal</option>
                         </select>
                      </div>
-                      <div class='loginRow3'>
-                        <span><input name="remember" type="checkbox"  checked="checked" value="true" /> Remember me</span>
-                        <input name="login" type="submit" id="login" value="Login" class='ui-state-default simpleButton' />
+                      <div class='loginRow3' style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;text-align:left;font-size:0.9em;padding-left:2rem;">
+                        <div style="display:flex;flex-direction:column;">
+                           <span><input name="remember" type="checkbox"  checked="checked" value="true" /> Remember me</span>
+                           <span> <input name="savedest" type="checkbox" value="true" /> Save as Default</span>
+                        </div>
+                        <input name="login" type="submit" id="login" value="Login" style="margin:1rem" class='ui-state-default simpleButton' />
                      </div>
                      <div class='loginRow ctl'>
                       <a id="forgot" href="#ForgotPassword" style='display:inline-block;margin-top:1em;color:#0033aa;'>Forgot your password?</a>
