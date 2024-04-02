@@ -169,7 +169,7 @@
   <body>
     <div id="map"></div>
     <form onsubmit="return false;">
-    <input type="range" id="history" name="history" min="0" max="100" onchange="app.showHistory(this.value)" /><button style='font-size:1.1em' class='control' onclick='return app.playHistory(event)'>▸</button><button class='control' onclick='return app.stopHistory(event)'>◼</button><span id="currentTime"></span>
+    <input type="range" id="history" name="history" min="0" max="100" onchange="app.showHistory(this.value)" /><button style='font-size:1.1em' class='control' onclick='return app.playHistory(event)'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></button><button class='control' onclick='return app.stopHistory(event)'>◼</button><span id="currentTime"></span>
     </form>
 <script>
 (function() {
@@ -498,7 +498,7 @@ if ($results = mysqli_query($link, $sql)) {
                 popupAnchor:  [-3, -10]
             }),
             INCIDENT: L.icon({
-                iconUrl: '/portal/assets/img/accident.svg',
+                iconUrl: '/portal/assets/img/accident2.svg',
                 shadowUrl: '/portal/assets/img/accident_shadow.svg',
                 iconSize:     [32, 32], // size of the icon
                 shadowSize:   [34, 34], // size of the shadow
@@ -534,6 +534,18 @@ if ($results = mysqli_query($link, $sql)) {
                 popupAnchor:  [-3, -32]
             })
 
+
+        },
+        makeIcon(iconUrl, shadowUrl, iconSize, shadowSize, iconAnchor, shadowAnchor, popupAnchor) {
+            return L.icon({
+                iconUrl: iconUrl,
+                shadowUrl: shadowUrl,
+                iconSize:     iconSize, // size of the icon
+                shadowSize:   shadowSize, // size of the shadow
+                iconAnchor:   iconAnchor, // point of the icon which will correspond to marker's location
+                shadowAnchor: shadowAnchor,  // the same for the shadow
+                popupAnchor: popupAnchor
+            });
 
         },
         getTraffic() {
