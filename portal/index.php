@@ -217,7 +217,7 @@
                                 if ($_SESSION['Login']->Admin == 1) {
                                     $sql = "";
                                 } else {
-                                    $sql = "BusinessID='" . implode("' OR BusinessID='", $bids) . "'";
+                                    $sql = "BusinessID='" . implode("' OR BusinessID='", $bids) . "' ORDER BY Business";
                                 }
                                print '<label for="Business">Business</label><br><select id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
                                 $businesses = $boss->get("Business", "$sql");
