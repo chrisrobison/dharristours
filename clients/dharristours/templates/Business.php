@@ -62,6 +62,7 @@
          <div class='contentField'><label>Rate </label><?php $boss->db->addResource("Rate");$arr = $boss->db->Rate->getlist();print $boss->utility->buildSelect($arr, $current->RateID, "RateID", "Rate", "Business[$current->BusinessID][RateID]")."</div>";?>
          <div class='contentField'><label>Notifications</label><select dbtype='tinyint(1)' name='Business[<?php print $current->BusinessID; ?>][Notifications]' id='Notifications'><option value='0'>No</option><option value='1'>Yes</option><?php print $current->Notifications; ?></select></div>
 <?php print $current->Notes; ?>
+         <div class='contentField'><label>PORequired</label><select dbtype='tinyint(4)' name='Business[<?php print $current->BusinessID; ?>][PORequired]' id='PORequired'><option value='0'>No</option><option value='1'>Yes</option><?php print $current->PORequired; ?></select></div>
 </div>
          <div class='contentField' style='clear:left'><label>Notes</label><textarea dbtype='text' name='Business[<?php print $current->BusinessID; ?>][Notes]' id='Notes' style='width:48em;' class='textBox'></textarea></div></div>
 </div>
