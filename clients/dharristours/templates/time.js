@@ -82,10 +82,19 @@ $(function() {
     $('input[type="checkbox"]').change(function() {
         this.value = (Number(this.checked));
     });
+    /*
+    document.querySelector("#EmployeeID").addEventListener("input", function(evt) { 
 
-    $("#EmployeeID").change(function(e) {
-        var emp = getEmployee($(this).val(), updateNotifyPhone, e.isTrigger);
-    });
+        let emp = document.querySelector("#EmployeeID").value;
+        if (emp) {
+            fetch("/api.php?rsc=Employee&id="+emp).then(r=>r.json()).then(data=>{
+                
+            
+            });
+        }
+    })
+    */
+    // $("#EmployeeID").change(function(e) { var emp = getEmployee($(this).val(), updateNotifyPhone, e.isTrigger); });
     $('input[type="text"]').keypress(function(e) {
         if (e.which !== 0 && e.charCode !== 0) { // only characters
             var c = String.fromCharCode(e.keyCode | e.charCode);
@@ -197,20 +206,14 @@ function mySave() {
     doSave();
 }
 
-function getEmployee(id, callback, isTrigger) {
+async function getEmployee(id, callback, isTrigger) {
     var emp, now = new Date();
-    $.get("ctl.php?_cache=" + now.getTime(), {
-        x: "related",
-        id: id,
-        rsc: "Employee"
-    }, function(data) {
-        simpleConfig.current['related_Employee'] = [data];
-        //console.dir(data);
-        if (data && callback) {
-            if (!isTrigger) callback.call(this, data);
-        }
-    });
-    return emp;
+    let req = await fetch(`/api.php?rsc=Employee&id=${id}&_cache=${now.getTime}`);
+    let data = await r.json();
+    if (data && callback) {
+        if (!isTrigger) callback.call(this, data);
+    }
+    return data;
 }
 
 //function removeBilling() {
@@ -620,21 +623,31 @@ function doSchoolAddress(obj) {
     $("#schoolAddress").html("");
     var id = $("#SchoolID").val();
     if (id != 0) {
-        var url;
-        if (!obj) {
-            url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI(id);
-        } else {
-            url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI($("#SchoolID").val());
-        }
-        fetch(url).then(resp => resp.json()).then(data => {
-            try {
-                if (data) {
-                    $("#schoolAddress").html(data["StreetAbr"] + ", " + data["City"] + ", " + data["School"] + " " + data["Phone"]);
-                }
-            } catch (err) {
-                console.log(`Error [doSchoolAddress]: ${err}`);
-            }
-        });
+      if (!simpleConfig._cache['School']) simpleConfig._cache['School'] = [];
+      if (!simpleConfig._cache['School'][id]) {
+           var url;
+           if (!obj) {
+               url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI(id);
+           } else {
+               url = "/grid/ctl.php?x=related&Resource=School&id=" + encodeURI($("#SchoolID").val());
+           }
+           fetch(url).then(resp => resp.json()).then(data => {
+               try {
+                   if (data) {
+                     simpleConfig._cache['School'][id] = data;
+                       $("#schoolAddress").html(data["StreetAbr"] + ", " + data["City"] + ", " + data["School"] + " " + data["Phone"]);
+                   }
+               } catch (err) {
+                   console.log(`Error [doSchoolAddress]: ${err}`);
+               }
+           });
+      } else {
+         let data = simpleConfig._cache['School'][id];
+          if (data) {
+              $("#schoolAddress").html(data["StreetAbr"] + ", " + data["City"] + ", " + data["School"] + " " + data["Phone"]);
+          }
+
+      }
         return false;
     }
 }
@@ -671,6 +684,8 @@ function realUpAll(id) {
     $("#estPrice").val("");
     $("#estPrice").css("background-color: none");
 
+    /*
+    
     if (simpleConfig.record && simpleConfig.record.PickupTime) {
         var stimes = getTimes(simpleConfig.record["PickupTime"]);
         $("#Pickup_hour").val(stimes[0]);
@@ -684,7 +699,7 @@ function realUpAll(id) {
         $("#DropOff_minute").val(etimes[1]);
         $("#DropOff_meridian").val(etimes[2]);
     }
-
+    */
     handleEndTime();
     if (simpleConfig.current['JobDate'] && simpleConfig.current['EmployeeID'] && simpleConfig.current['PickupLocation'] && simpleConfig.current['PickupTime'] && simpleConfig.current['BusID']) {
         $("#doNotify").removeAttr("disabled");
@@ -795,6 +810,7 @@ function setTime(who, time) {
 }
 
 function doTime(who) {
+    return;
     var hr12 = $("#" + who + "_hour").val().replace(/^0/, ''),
         mins = $("#" + who + "_minute").val(),
         merid = $("#" + who + "_meridian").val(),
@@ -808,6 +824,7 @@ function doTime(who) {
 }
 
 function updateTime(who, doend) {
+    return;
     var hr12 = $("#" + who + "_hour").val().replace(/^0/, ''),
         mins = $("#" + who + "_minute").val(),
         merid = $("#" + who + "_meridian").val(),
@@ -896,34 +913,30 @@ function setTime(who, time) {
    jQuery(`#${who}_minute`).val(stime[1].replace(/^0/, ''));
    jQuery(`#${who}_meridian`).val(xm);
 }
+
 function updateTimeDiffinHours(who, mytime) {
-    var pickup = getTime("Pickup"),
-        dropoff = getTime("DropOff");
+    let pickup, dropoff, jobdate, pdate, ptime, ddate, dtime, diff;
 
+    pickup = document.querySelector("#PickupTime").value;
+    dropoff = document.querySelector("#DropOffTime").value;
+    jobdate = document.querySelector("#JobDate").value;
 
-    var starthr = jQuery("#Pickup_hour").val().replace(/^0/, '');
-    var startmin = jQuery("#Pickup_minute").val().replace(/^0/, '');
-    var startmer = jQuery("#Pickup_meridian").val();
+    pdate = new Date(jobdate + ' ' + pickup);
+    if (pdate) ptime = pdate.getTime();
 
-    var endhr = jQuery("#DropOff_hour").val().replace(/^0/, '');
-    var endmin = jQuery("#DropOff_minute").val().replace(/^0/, '');
-    var endmer = jQuery("#DropOff_meridian").val();
-
-    starthr = parseInt(starthr) + parseInt(startmer);
-    var starthrmin = starthr * 60 + parseInt(startmin);
-    endhr = parseInt(endhr) + parseInt(endmer);
-    var endhrmin = endhr * 60 + parseInt(endmin);
-
-
+    ddate = new Date(jobdate + ' ' + dropoff);
+    if (ddate) dtime = ddate.getTime();
+    
     var rt = $("#RoundTrip").val(); //added
 
-    if (((rt == "0") || (rt == "false"))) //added && (jQuery("#Hours").val() == "4" )
-    { //added
-        if ((parseInt(endhrmin) - parseInt(starthrmin)) < 160) {
-            jQuery("#Hours").val(2.75); //added
-        } else {
-            jQuery("#Hours").val((parseInt(endhrmin) - parseInt(starthrmin)) / 60);
-        }
+    if (ptime && dtime) {
+        diff = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(((((dtime - ptime) / 1000) / 60) / 60));
+
+        let starthrmin = (ptime / 1000) / 60, endhrmin = (dtime / 1000) / 60;
+    } 
+    
+    if (((rt == "0") || (rt == "false"))) { 
+        jQuery("#Hours").val(2.75); //added
     } else { //added
         if ((parseInt(endhrmin) - parseInt(starthrmin)) < 240) {
             jQuery("#Hours").val(4);
@@ -1090,7 +1103,7 @@ function doNotify_old(whom, why) {
     }
 }
 
-function createNotify() {
+async function createNotify() {
     // pmp should we test for this?     if (simpleConfig.current['related_Notify'] && simpleConfig.current['related_Notify'].length) {
     var teetime = formatTime($("#PickupTime").val()),
         obj = {},
@@ -1099,7 +1112,7 @@ function createNotify() {
         return false;
     } else {
         if (!simpleConfig.current['related_Employee']) {
-            getEmployee(simpleConfig.current['EmployeeID'], createNotify, false);
+            emp = await getEmployee(simpleConfig.current['EmployeeID'], createNotify, false);
             return false;
         } else {
             emp = simpleConfig.current['related_Employee'][0];
