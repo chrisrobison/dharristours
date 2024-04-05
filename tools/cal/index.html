@@ -297,13 +297,13 @@ thead {
    });
 
    dp.on('select', (_, dp) => {
-         console.log("SELECTED", dp.state.selectedDate);
+//         console.log("SELECTED", dp.state.selectedDate);
          calendar.gotoDate(dp.state.selectedDate);
       }
    );
 
    dp.on('statechange', (_, picker) => { 
-      console.log("statechange");
+      //console.log("statechange");
    } );
    var calendar, calendarEl;
    fetch("api.php?type=drivers").then(resp=>resp.json()).then(data=>{
@@ -350,8 +350,8 @@ thead {
             url: "api.php?type=events"
          },
          eventDrop: function(info) {
-            console.log(">>>Event drop");
-            console.dir(info);
+            //console.log(">>>Event drop");
+            //console.dir(info);
             
             let upd = [];
 
@@ -383,8 +383,8 @@ thead {
             */
             
             if (Object.keys(upd).length) {
-               console.log(`New data:`);
-               console.dir(upd);
+               //console.log(`New data:`);
+               //console.dir(upd);
                let confirmation = `Update Job[${info.event.id}] with:\n`;
                let items = Object.keys(upd);
                items.forEach(idx=>{
@@ -401,8 +401,8 @@ thead {
          },
 
          eventSourceSuccess: function(content, xhr) {
-           console.log("eventSourceSuccess");
-           console.dir(content);
+           //console.log("eventSourceSuccess");
+           //console.dir(content);
            
            const jobs = document.querySelector("#joblist");
            let html = `<table class='jobs'><thead><tr><th>Job</th><th>Start</th><th>End</th><th>Link</th></tr></thead><tbody>`;
@@ -428,25 +428,25 @@ thead {
            return content.eventArray;
          },
          select: function(arg) {
-           console.log(
+           /*console.log(
              'select',
              arg.startStr,
              arg.endStr,
              arg.resource ? arg.resource.id : '(no resource)'
-           );
+           );*/
            modal(arg.start, arg.end, arg.resource);
          },
          dateClick: function(arg) {
-           console.log(
+           /*console.log(
              'dateClick',
              arg.date,
              arg.resource ? arg.resource.id : '(no resource)'
-           );
+           );*/
          },
          datesRender: function(arg) {
             dp.setState({"selectedDate": new Date(arg.view.currentStart.getTime())})
-            console.log("datesRender");
-            console.dir(arg);
+            //console.log("datesRender");
+            //console.dir(arg);
          }
     });
 
@@ -462,7 +462,7 @@ thead {
       let min = mydate.getMinutes();
       min = (min < 10) ? "0" + min : min;
       
-      console.log(`cleanMilitaryTime: ${hr}:${min}:00`);
+      //console.log(`cleanMilitaryTime: ${hr}:${min}:00`);
       return `${hr}:${min}:00`;
    }
 
@@ -508,7 +508,7 @@ thead {
       
       makeRequest('GET', 'api.php?type=event&id='+who, function (err, datums) {
         myevent = JSON.parse(datums);
-        console.dir(myevent);
+        //console.dir(myevent);
 
         var out = `<table id='jobdetail'>
          <tr>
@@ -538,12 +538,12 @@ thead {
         app.getRoute(myevent.PickupLocation, myevent.DropOffLocation);
 
         if (err) { throw err; }
-        console.log(datums);
+        //console.log(datums);
       }); 
    }
 
    function updateData(items, id) {
-      console.log(`update: ${id} ${items}`);
+      //console.log(`update: ${id} ${items}`);
       if (items && id) {
          let url = `api.php?id=${id}&`;
          let keys = Object.keys(items);
@@ -552,21 +552,21 @@ thead {
             url += key + '=' + items[key] + '&';
          });
          url += 'type=update';
-         console.log(url);
+         //console.log(url);
          fetch(url).then(resp=>resp.json()).then(data=>{
-            console.dir(data);
+            //console.dir(data);
             calendar.refetchEvents();
          });
       }
    }
 
    function updateColor(newcolor, id) {
-      console.log(`updateColor: ${newcolor} [${id}] `);
+      //console.log(`updateColor: ${newcolor} [${id}] `);
       if (color && id) {
          let url = `api.php?id=${id}&type=updateColor&color=${encodeURIComponent(newcolor)}`;
-         console.log(url);
+         //console.log(url);
          fetch(url).then(response=>response.json()).then(data=>{
-            console.dir(data);
+            //console.dir(data);
             calendar.refetchEvents();
          });
       }
@@ -661,12 +661,12 @@ function makeSettingsDropdown(resources) {
        // list.innerHTML = html;
        // el.appendChild(list);
        el.innerHTML = btn + html;
-       console.log("makeSettingsDropdown");
-       console.log(el.innerHTML);
-       console.dir(el);
+       //console.log("makeSettingsDropdown");
+       //console.log(el.innerHTML);
+       //console.dir(el);
        toolbar.appendChild(el);
        document.querySelector("#settingButton")?.addEventListener('click', function(e) {
-         console.log("settingButton", e);
+         //console.log("settingButton", e);
          document.querySelector(".dropdown-menu").classList.toggle('dropdown-open');
        });
        document.querySelector(".showbus_checkbox")?.addEventListener('click', function(e) {
@@ -683,11 +683,11 @@ function updateResources() {
       let key = parseInt(idx);
       let item = showbuses[key];
       if (item) {
-         console.log(`Showing bus ${key} : ${item}`);
+         //console.log(`Showing bus ${key} : ${item}`);
          document.querySelector(`#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div.fc-content-skeleton > table > tbody > tr > td:nth-child(${key+2})`).style.display = "table-cell";
          document.querySelector(`#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th:nth-child(${key+2})`).style.display = "table-cell";
       } else {
-         console.log(`Hiding bus ${key} : ${item}`);
+         //console.log(`Hiding bus ${key} : ${item}`);
          document.querySelector(`#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div.fc-content-skeleton > table > tbody > tr > td:nth-child(${key+2})`).style.display = "none";
          document.querySelector(`#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th:nth-child(${key+2})`).style.display = "none";
 
@@ -732,8 +732,8 @@ function init() {
 
       loadSettings();
       makeSettingsDropdown(buses);
-      console.log("Buses:");
-      console.dir(mybuses);
+      //console.log("Buses:");
+      //console.dir(mybuses);
    });
    
    // Fetch driver data and store for later use
@@ -742,8 +742,8 @@ function init() {
       for (var i=0; i<drivers.length; i++){
          mydrivers[drivers[i].EmployeeID] = drivers[i];
       }
-      console.log("Drivers:");
-      console.dir(mydrivers);
+      //console.log("Drivers:");
+      //console.dir(mydrivers);
    });
 
    makeTabs(".tabs");
@@ -791,8 +791,8 @@ function makeReservation() {
 
    const out = { "customer": customer, "date": window.reservation.date, "pickup": pickup, "dropoff": dropoff, "from": window.reservation.from, "to": window.reservation.to, "pax": pax };
    fetch("api.php?type=reserve&data=" + encodeURIComponent(JSON.stringify(out))).then((response) => { return response.json(); }).then((data) => {
-      console.log("from fetch in makeReservation");
-      console.dir(data);
+      //console.log("from fetch in makeReservation");
+      //console.dir(data);
       closeDialog();
       
       var alert = document.createElement('div');
@@ -821,7 +821,7 @@ function modal(from, to, rsc) {
 
    var toString = fullFormatTime(to);
 
-   console.log(`model: from=${fromString} to=${toString}`);
+   //console.log(`model: from=${fromString} to=${toString}`);
    window.reservation = { "date": from.toLocaleDateString(), "from": from, "to": to };
 
    var oform = `<div id='dialog'>
@@ -869,8 +869,8 @@ function modal(from, to, rsc) {
 }
 
 function handleForm(obj) {
-   console.log("handleForm");
-   console.dir(obj);
+   //console.log("handleForm");
+   //console.dir(obj);
 }
 
 function pickSuggestion(txt, who) {
@@ -891,7 +891,7 @@ window.dialogState = {
 };
 
 function doSuggestions(who, evt) {
-   console.dir(evt);
+   //console.dir(evt);
    var txt = document.querySelector("#"+who).value;
    if (evt.key.length===1) {
       txt += evt.key;
