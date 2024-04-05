@@ -19,6 +19,7 @@
    
     // $tally will capture totals
    $tally = array("day"=>array(), "quarter"=>array(), "month"=>array(), "year"=>array(), "week"=>array());
+   $balance = array("day"=>array(), "quarter"=>array(), "month"=>array(), "year"=>array(), "week"=>array());
    
    if ($results) {
       while ($row = $results->fetch_assoc()) {
@@ -32,20 +33,24 @@
             }
 
             $tally[$key][$val] = (!array_key_exists($val, $tally[$key])) ? (int)ceil($row['InvoiceAmt']) : (int)$tally[$key][$val] + (int)ceil($row['InvoiceAmt']); 
+            $balance[$key][$val] = (!array_key_exists($val, $balance[$key])) ? (int)ceil($row['Balance']) : (int)$balance[$key][$val] + (int)ceil($row['Balance']); 
          }
       }
    }
    foreach ($slices as $key=>$slice) {
       ksort($tally[$key], SORT_NATURAL);
+      ksort($balance[$key], SORT_NATURAL);
    }
   
    // Preformat data for use with chartjs (array of objects with x/y keys)
-   $out = array();
-
+   $out = array("revenue"=>array(), "balance"=>array(), "adjusted"=>array());
+   
    foreach ($slices as $key=>$slice) {
       $out[$key] = array();
       foreach ($tally[$key] as $date=>$amt) {
-         $out[$key][] = array("x"=>$date, "y"=>$amt);
+         $out['revenue'][$key][] = array("x"=>$date, "y"=>$amt);
+         $out['adjusted'][$key][] = array("x"=>$date, "y"=>$amt-$balance[$key][$date]);
+         $out['balance'][$key][] = array("x"=>$date, "y"=>$balance[$key][$date]);
       }
    }
    header("Content-type: application/json; charset=utf-8");

@@ -114,22 +114,40 @@ const $$ = (str) => document.querySelectorAll(str);
          const range = $("#range").options[$("#range").selectedIndex].text;
          console.log(`Range: ${range} Count: ${count}`);
          const data = {
-           datasets: [{
+           datasets: [
+                      {
+             label: 'Oustanding Balance',
+             //backgroundColor: 'rgb(255, 99, 132)',
+             //borderColor: 'rgb(255, 99, 132)',
+             backgroundColor: 'rgb(255, 32, 28)',
+             borderColor: 'rgb(200, 200, 0)',
+             color: '#fff',
+             data: app.state.data.balance[range].slice(-count)
+           },
+           {
              label: 'D Harris Tours Revenue',
              //backgroundColor: 'rgb(255, 99, 132)',
              //borderColor: 'rgb(255, 99, 132)',
              backgroundColor: 'rgb(0, 32, 128)',
              borderColor: 'rgb(0, 0, 32)',
              color: '#fff',
-             data: app.state.data[range].slice(-count)
-           }]
-         };
+             data: app.state.data.adjusted[range].slice(-count)
+           }
+
+           ] };
          const config = {
            type: $("#type").value,
            data: data,
            options: {
              color: 'rgb(250, 250, 255)',
-
+             scales: {
+               x: {
+                  stacked: true
+               },
+               y: {
+                  stacked: true
+               }
+            }
            }
          };
          Chart.defaults.color = '#fff';
