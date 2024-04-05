@@ -40,7 +40,7 @@
             font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
             margin: 0;
             padding: 0;
-            font-size: 14px;
+            font-size: 18px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -80,7 +80,10 @@
 <body>
 <main>
 <img src="/files/img/logo2.png">
-<h1>Your trip has been confirmed</h1>
+<h1>Your quote approval has been received. </h1>
+<h2>Check your email for details about your request.</h2>
+<hr>
+<p style="font-size: 1.5em;"><em>PLEASE NOTE:</em> All jobs require payment information for a credit card, purchase order or check, 7 days before the scheduled trip date in order for a reservation to be confirmed. You can view and update the details of your trip request by visiting the D Harris Tours Customer Portal at <a href="https://dharristours.simpsf.com/portal/trips/view-quote.php?id=<?php print $id; ?>" target="_blank">https://dharristours.simpsf.com/portal/trips/view-quote.php?id=<?php print $id; ?></a></p>
 <a href="https://dharristours.simpsf.com/portal/">Click here to go to D Harris Tours Customer Portal</a>
 </main>
 <script>
