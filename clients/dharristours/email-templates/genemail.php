@@ -1,17 +1,18 @@
 <?php
-    $env = "prod";  // Change this to 'prod' for production environment or 'dev' from dev env
+    $ctx = "prod";  // Change this to 'prod' for production environment or 'dev' from dev env
     
-    $conf['dev'] = array("root"=>"/simple.dev", 
+    $conf = [];
+    $conf['dev'] = ["root"=>"/simple.dev", 
                         "host"=>"dharristours.dev.sscsf.com",
-                        "db"=>"SS_DHarrisTours");
+                        "db"=>"SS_DHarrisTours"];
 
-    $conf['prod'] = array("root"=>"/simple",
+    $conf['prod'] = ["root"=>"/simple",
                          "host"=>"dharristours.simpsf.com",
-                         "db"=>"SS_DHarrisTours");
+                         "db"=>"SS_DHarrisTours"];
     
-    require($conf[$env]["root"] . "/lib/boss_class.php");
+    require($conf[$ctx]["root"] . "/lib/boss_class.php");
 
-    $boss = new boss($conf[$env]["host"]);
+    $boss = new boss($conf[$ctx]["host"]);
     $in = $_REQUEST;
     
     $records = $boss->get("DailyJobMail");
