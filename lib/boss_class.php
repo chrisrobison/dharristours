@@ -664,8 +664,8 @@ class boss {
 
                   // Clamp record to parent if parent specified
                   if ((isset($parent)) && ($parentID))  {
-                     $this->clampRecord($parent, $parentID, $tbl, $newID, $_REQUEST['pid']);
-                     $this->clampRecord($tbl, $newID, $parent, $parentID, $_REQUEST['pid']);
+                     $this->clampRecord($parent, $parentID, $tbl, $newID, true, "", $_REQUEST['pid']);
+                     $this->clampRecord($tbl, $newID, $parent, $parentID, true, "", $_REQUEST['pid']);
                   }
                }
             }
