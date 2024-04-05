@@ -68,8 +68,9 @@ print json_encode($out);
 
 exit;
 
-function initMessage() {
+function initMessage($url) {
     $uid = uniqid();
+    global $in;
 
     file_put_contents("/simple/log/emailpdf.log", date("Y-m-d H:i:s").": Sending $url to {$in['To']}\n", FILE_APPEND);
 
@@ -95,7 +96,7 @@ function makeMasterInvoiceEmail() {
         }
     }
 
-    $uid = initMessage();
+    $uid = initMessage($url);
 
     $cmd = "echo 'Your latest D Harris Tours consolidated invoice is attached.' | mail -F -a ".escapeshellarg($url)." -s 'D Harris Tours Master Invoice #{$in['InvoiceParentID']}' -r 'D Harris Tours <support@dharristours.com>' -b 'sales@dharristours.com' {$in['To']}";
     $result = `$cmd`;
@@ -136,7 +137,7 @@ function makeInvoiceEmail() {
         }
     }
 
-    $uid = initMessage();
+    $uid = initMessage($url);
 
     $cmd = "echo 'Your latest D Harris Tours invoice is attached.' | mail -F -a ".escapeshellarg($url)." -s 'D Harris Tours Invoice #{$in['InvoiceID']}' -r 'D Harris Tours <support@dharristours.com>' -b 'sales@dharristours.com' {$in['To']}";
     $result = `$cmd`;
