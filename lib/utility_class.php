@@ -608,8 +608,11 @@ class Utility {
                         $_SESSION['Login'] = $user;
                         $_SESSION['Admin'] = true;
                     }
-                    $business = $boss->getObject("Business", $user->BusinessID);
-                    $_SESSION['Business'] = $business;
+                    
+                    if (isset($user->BusinessID)) {
+                        $business = $boss->getObject("Business", $user->BusinessID);
+                        $_SESSION['Business'] = $business;
+                    }
                     $_SESSION['LoginID'] = $user->LoginID;
                     $_SESSION['UserID'] = $user->LoginID;
                     $_SESSION['BusinessID'] = $user->BusinessID;
@@ -743,9 +746,9 @@ class Utility {
         unset($_SESSION['Name']);
         unset($_SESSION['Email']);
 
-        if ($_SESSION['UserID']) {
-            $upd = array('LoginID'=>$_SESSION['UserID'], 'LoggedIn'=>'0');
-            $obj->Login->update($_SESSION['UserID'], $upd);
+        if ($_SESSION['LoginID']) {
+            $upd = array('LoginID'=>$_SESSION['LoginID'], 'LoggedIn'=>'0');
+            $obj->Login->update($_SESSION['LoginID'], $upd);
             
         }
         session_unset();	
