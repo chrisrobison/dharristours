@@ -1,3 +1,5 @@
+@media print {
+
 BODY {
    font-size: 12px;
    margin: 0px;
@@ -95,8 +97,6 @@ INPUT:focus {
    position: relative;
    width: 30em;
    height: 25em;
-   overflow: scroll;
-   overflow: -moz-scrollbars-vertical;
    border: 2px inset #c0c0c0;
    padding: 0px 1em;
    line-height: 1.2em;
@@ -433,7 +433,6 @@ SELECT {
 .listItemRow {
    height: 1em;
    white-space: nowrap;
-   overflow: hidden;
 }
 
 #oviewTable {
@@ -441,8 +440,6 @@ SELECT {
    top: 0px;
    /* bottom: 0px; */
    right: 0px;
-   overflow: scroll;
-   overflow: -moz-scrollbars-vertical;
    left: 0px;
    background-color: #ffffff;
    border-bottom: 1px solid #a0a0a0;
@@ -450,7 +447,6 @@ SELECT {
 
 #fakeTable {
    width: 98%;
-   overflow: hidden;
 }
 .fakeTable {
    width: 98%;
@@ -471,9 +467,6 @@ SELECT {
    position: relative;
    height: 100px;
    width: 100%;
-   overflow: auto;
-   overflow-x: auto;
-   overflow-y: auto;
 }
 
 .cvs0 {
@@ -573,8 +566,6 @@ table.report tr th, .headRow {
    right: 0px;
    bottom: 0px;
    /* height: 100%; */
-   overflow: auto;
-   overflow-y: auto;
 }
 
 #main {
@@ -584,10 +575,7 @@ table.report tr th, .headRow {
    right: 0px;
    bottom: 0px;
    padding: 0px;
-   overflow: hidden;
    /* 
-   overflow: scroll;
-   overflow: -moz-scrollbars-vertical;
    */
 }
 
@@ -614,9 +602,6 @@ table.report tr th, .headRow {
    position: relative;
    height: 10em;
    max-height: 15em;
-   overflow: auto;
-   overflow-y: auto;
-   overflow: -moz-scrollbars-vertical;
    border: 1px solid #606060;
    margin: 0px;
    padding: 0px;
@@ -945,8 +930,6 @@ left: 0px;
 right:0px;
 bottom:0px;
 border:1px solid #a0a0a0;
-overflow: scroll;
-overflow: -moz-scrollbars-vertical;
 top: 65%;
 }
 
@@ -1067,7 +1050,6 @@ padding-top:10px;
    background-color: #ffffff;
 }
 .ProcessTissue {
-   overflow: hidden;
 }
 .mediumWidthSelect{
    width: 9em;
@@ -1146,8 +1128,6 @@ padding-top:10px;
    width: 20em;
    top: 0px;
    left: 300px;
-   overflow: -moz-scrollbars-vertical;
-   overflow: auto;
    background-color: #ccffcc;
 }
 
@@ -1158,7 +1138,6 @@ padding-top:10px;
    right: 0px;
    top: 0px;
    width: 500px;
-   overflow: -moz-scrollbar-vertical;
    background-color: #ffffaa;
 }
 
@@ -1173,7 +1152,6 @@ padding-top:10px;
    z-index: 3000;
    display: none;
    -moz-opacity: .70;
-   filter: progid: DXImageTransform.Microsoft.Alpha(opacity=70);
 }
 
 #newrecord {
@@ -1457,10 +1435,6 @@ TD.asset {
    bottom: 0px;
    right: 0px;
    border-top: 1px solid #000000;
-   overflow: scroll;
-   overflow-y: scroll;
-   overflow-x: hidden;
-   overflow: -moz-scrollbars-vertical;
    font-family: "Helvetica Neue",Optima, "Gill Sans", "Gill Sans MT", Verdana, Helvetica, sans-serif;
    font-size: 11px;
 }
@@ -1498,10 +1472,6 @@ IMG.thumb {
    bottom: 200px;
    right: 0px;
    border-top: 1px solid #000000;
-   overflow: scroll;
-   overflow-y: scroll;
-   overflow-x: hidden;
-   overflow: -moz-scrollbars-vertical;
    font-family: "Helvetica Neue",Optima, "Gill Sans", "Gill Sans MT", Verdana, Helvetica, sans-serif;
    font-size: 11px;
 }
@@ -2061,7 +2031,6 @@ A#titlebarAnchor:hover {
    bottom: 0px;
    left: 0px;
    right: 0px;
-   overflow: hidden;
 }
 
 #moduleThing {
@@ -2081,7 +2050,6 @@ A#titlebarAnchor:hover {
    border-bottom: 1px solid #000000;
    border-top: 1px solid #a0a0a0;
    white-space: nowrap;
-   overflow: auto;
 }
 
 #process {
@@ -2170,7 +2138,6 @@ A#titlebarAnchor:hover {
    border-top: 1px solid #a0a0a0;
    right: 0px;
    left: 0px;
-   overflow: hidden;
 }
 
 #flowchart {
@@ -2438,7 +2405,6 @@ A#titlebarAnchor:hover {
    border-bottom: 1px outset #909090;
    background-image: url("/img/process_title.png"); 
    cursor: pointer;
-   overflow: hidden;
 }
 
 H1 {
@@ -2562,7 +2528,7 @@ H1 {
    top: 30px;
 }
 .rtop,.artop{display:block}
-.rtop *,.artop *{display:block;height:1px;overflow:hidden;font-size:1px}
+.rtop *,.artop *{display:block;height:1px;font-size:1px}
 .artop *{border-style: solid;border-width:0 1px}
 .r1,.rl1,.re1,.rel1{margin-left:5px}
 .r1,.rr1,.re1,.rer1{margin-right:5px}
@@ -2596,7 +2562,7 @@ H1 {
       background-color:#dddddd;
       font-size:1.3em;
    }
-   #formContainer { background-color:#ffffff; overflow-y:visible;overflow-x:visible;width:7.5in;margin:0 auto;height:auto !important; overflow-y:visible;position:relative;float:none !important; } 
+   #formContainer { background-color:#ffffff; width:7.5in;margin:0 auto;height:auto !important; position:relative;float:none !important; } 
    .fieldcontainer { white-space:normal; }
    .fieldfloater { float:none;display:block; }
    .fieldcolumn { display:block;float:none;}
@@ -2615,7 +2581,7 @@ H1 {
    .contentField { clear:left;float:none;display:block;}
    #toolbar,#gbox_mygrid { display: none; }
    #showNotes, textarea, input, .boxValue { border:medium none; padding:.5em .5em .5em 2em; font-family:"Times New Roman",Times,Georgia,serif;font-size:14pt; }
-   #main { position:static; overflow:visible; }
+   #main { position:static; }
    #main a:link:after, #main a:visited:after { content: " [" attr(href) "] "; font-size: 90%; }
    table.related tbody { border: 1px solid #333; }
    table.related th { font-size: 12pt; background-color:#000;color:#fff; }
@@ -2641,4 +2607,5 @@ H1 {
    p, h2, h3 { orphans: 3; widows: 3; }
    h2, h3 { page-break-after: avoid; }
 
+}
 }

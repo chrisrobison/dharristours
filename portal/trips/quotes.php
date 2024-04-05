@@ -110,8 +110,8 @@ EOT;
     $out = "";
     for ($i=0; $i<$cnt; $i++) {
         $item = $results->Request[$i];
-        $item->QuoteAmount = sprintf("$%'%.2f", $item->QuoteAmount);
         if ($item) {
+            $item->QuoteAmount = sprintf("$%'%.2f", $item->QuoteAmount);
             $start = date("g:ia", strtotime($item->Start));
             $end = date("g:ia", strtotime($item->End));
             $item->Start = $start;

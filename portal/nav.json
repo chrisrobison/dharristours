@@ -64,7 +64,8 @@
                 {
                     "title": "Make Payment",
                     "link": "/portal/payments/?x=due",
-                    "icon": "fas fa-credit-card"
+                    "icon": "fas fa-credit-card",
+                    "require": "admin"
                 },
                 {
                     "title": "Unpaid Invoices",
@@ -72,7 +73,7 @@
                     "icon": "fas fa-money-bill-1-wave"
                 },
                 {
-                    "title": "Past Invoice",
+                    "title": "Past Invoices",
                     "link": "/portal/account/invoices.php?x=all",
                     "icon": "fas fa-vault"
                 }

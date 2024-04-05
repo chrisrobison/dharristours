@@ -44,7 +44,7 @@
             let haschild, toggle = '', arrow = `<i class="right fas fa-angle-left"></i>`;
             let mopen = 0;
 
-            arr.forEach(item => {
+            for (const item of arr) {
                 if (!item['hidden']) {
                     haschild = item.hasOwnProperty("_children");
                     toggle = (haschild) ? arrow : "";
@@ -57,7 +57,7 @@
                     out += "</li>";
                     mopen = 0;
                 }
-            });
+            }
             out += (noul) ? "" : "</ul>";
             return out;
         },

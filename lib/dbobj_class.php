@@ -271,8 +271,8 @@ class dbobj extends dbd_mysql {
                }
             }
          }
-         $query = "insert ignore into $table (".join(",", $flds).") values (".join(",", $vals).")";
-         file_put_contents("/tmp/dbobj.log", date("Y-m-d H:i:s\t").$query."\n", FILE_APPEND);
+         $query = "INSERT IGNORE INTO $table (".join(",", $flds).") VALUES (".join(",", $vals).")";
+         file_put_contents("/simple/log/boss-updates.log", "-- " . date("Y-m-d H:i:s\n").$query.";\n", FILE_APPEND);
          if ($in['debug']) print $query."\n";
       }
       
@@ -516,7 +516,7 @@ class dbobj extends dbd_mysql {
                if ($cond && $query) $query .= ' AND '.$cond;
                
                if ($in['debug']) print "update query: $query\n";
-               file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log/boss-updates.log", $query."\n", FILE_APPEND);
+               file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/log/boss-updates.log", "-- ".date("Y-m-d h:i:s") . "\n" .$query.";\n", FILE_APPEND);
                
                file_put_contents("/tmp/dbobj.log", date("Y-m-d H:i:s\t").$query."\n", FILE_APPEND);
                $check = parent::execute($query);

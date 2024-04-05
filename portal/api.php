@@ -1,5 +1,5 @@
 <?php
-    include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/.env');
+    include('/simple/.env');
     include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/lib/auth.php');
 
     $in = $_REQUEST;
@@ -41,7 +41,7 @@
                 $out = getEvent($link, $in['id']);
                 break;
             case "drivers":
-                $out = getDrivers($link, $in);
+                $out = getDrivers($link);
                 break;
             case "buses":
                 $out = getBuses($link, $in);
@@ -50,7 +50,7 @@
                 $out = getJobs($link, $in);
                 break;
             case "resources":
-                $out = getResources($link, $in);
+                $out = getResources($link);
                 break;
             case "suggestion":
                 $out = getSuggestions($link, $in);
@@ -79,14 +79,96 @@
             case "saveLogin":
                 $out = saveLogin($link, $in);
                 break;
+            // sumInvoices expects an InvoiceParentID and returns a summary of that Master invoice 
+            // and its children
+            case "sumInvoices":
+                $out = sumInvoices($link, $in);
+                break;
+            case "getJob":
+                $out = getJob($link, $in);
+                break;
+            case "getMasterInvoice":
+                $out = getMasterInvoice($link, $in);
+                break;
+            case "getInvoices":
+                $out = getInvoices($link, $in);
+                break;
+            case "undo":
+                $out = doUndo();
+                break;
+            case "redo":
+                $out = doRedo();
+                break;
+            case "listJobs":
+                $out = listJobs($link, $in);
+                break;
+            case "getBusinessJobs":
+                $out = getBusinessJobs($link, $in);
+                break;
         }
 
-        file_put_contents("/tmp/calapi.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
+        file_put_contents("/tmp/portal-api.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
         
         header("Content-type: application/json; charset=utf-8");
         print json_encode($out);
     }
     
+    function getJob($link, $in) {
+        $cond = array();
+        if (isset($in['cond'])) {
+            $cond[] = $in['cond'];
+        }
+        if (isset($in['id'])) {
+            $cond[] = "JobID='".$in['id']."'";
+        }
+        $where = (count($cond)) ? " WHERE " .join(" AND ", $cond) : '';
+        $sql = "SELECT * from Job $where";
+        $results = mysqli_query($link, $sql);
+        
+        if ($results) {
+            $out = $results->fetch_assoc();
+        }
+        
+        return $out;
+    }
+
+    function getMasterInvoice($link, $in) {
+        global $boss;
+        $out = $boss->getObjectRelated("InvoiceParent", $in['id']);
+       
+        return $out;
+    }
+
+    function getInvoices($link, $in) {
+        $cond = (array_key_exists('cond', $in)) ? 'AND ' . $in['cond'] : '';
+            
+        $sql = "SELECT * from Invoice where InvoiceDate>'2023-01-01' $cond";
+        $results = mysqli_query($link, $sql);
+        
+        if ($results) {
+            while ($row = $results->fetch_assoc()) {
+                $out[] = $row;
+            }
+        }
+        
+        return $out;
+    }
+
+    function sumInvoices($link, $in) {
+        $out = new stdClass();
+        $sql = "SELECT InvoiceParent.Date AS date, COUNT(InvoiceID) AS count, SUM(Invoice.Balance) AS total, SUM(Invoice.InvoiceSent) AS Sent, InvoiceParent.InvoiceSent as InvoiceSent FROM InvoiceParent, Invoice WHERE Invoice.InvoiceParentID=InvoiceParent.InvoiceParentID AND InvoiceParent.InvoiceParentID=".$in['pid'];
+        $results = mysqli_query($link, $sql);
+
+        if ($results) {
+            $out = $results->fetch_object();
+            if (!isset($out->date)) $out->date = date("Y-m-d");
+            if (!isset($out->total)) $out->total = 0;
+            if (!isset($out->Sent)) $out->Sent = 0;
+            if (!isset($out->InvoiceSent)) $out->InvoiceSent = 0;
+        } 
+        return $out;
+    }
+
     function saveProfile($link, $in, $busID) {
         $upd = array();
         $json = json_decode($in['profile']);
@@ -118,7 +200,7 @@
         $sql = "UPDATE Login set ".join(", ", $upd)." WHERE LoginID='{$_SESSION['LoginID']}';";
 print $sql;
         file_put_contents("/tmp/geocode.log", $sql."\n", FILE_APPEND);
-        $results = mysqli_query($sql);
+        $results = mysqli_query($link, $sql);
         
         $out = new stdClass();
         if (mysqli_affected_rows($link)) {
@@ -169,8 +251,10 @@ print $sql;
         return $new;
     }
 
-    function doLogin($link, $in) {
+    function doLogin($link, $in, $url="/apps/") {
         global $_REQUEST;
+        global $boss;
+
         if (array_key_exists("email", $in) && array_key_exists("passwd", $in)) {
            if (isset($_REQUEST['submitted'])) {
                 if ($in['email'] && $in['password']) {
@@ -186,12 +270,13 @@ print $sql;
             }
  
         }
+        return $_SESSION['Login'];
     }
 
     function saveRouteMap($link, $in) {
         $out = new stdClass();
         if ((array_key_exists("routeMap", $in)) && (array_key_exists("JobID", $in))) {
-            $sql = "UPDATE Job set RouteMap='".mysqli_real_escape_string($link, $in['routeMap'])."' WHERE JobID='".mysqli_real_escape_string($in['JobID'])."'";
+            $sql = "UPDATE Job set RouteMap='".mysqli_real_escape_string($link, $in['routeMap'])."' WHERE JobID='".mysqli_real_escape_string($link, $in['JobID'])."'";
             $results = mysqli_query($link, $sql);
             if ($results) {
                 $out->status = "ok";
@@ -359,7 +444,7 @@ print $sql;
         $out = array();
 
         if ($results) {
-          while ($row = $results->fetch_object) {
+          while ($row = mysqli_fetch_object($results)) {
                 $out[] = $row;
           }
         }
@@ -403,9 +488,37 @@ print $sql;
             $sql .= " WHERE BusID={$in['BusID']}";
         }
         $results = mysqli_query($link, $sql);
-
+        $out = array();
+        while ($row = mysqli_fetch_assoc($results)) {
+            $out[] = $row;
+        }
+        return $out;
     }
 
+    function listJobs($link, $in) {
+        global $boss;
+        $sql = "SELECT JobID, Job, JobDate, QuoteAmount, InvoiceID, JobCancelled, Status, NoInvoice, InvoiceSatisfied, BusinessID, ContactName, ContactPhone, ContactEmail, EmployeeID, BusID FROM Job";
+        if (isset($in['cond'])) {
+            $sql .= " WHERE " . $in['cond'];
+        } else {
+            $start = date("Y-m-d", strtotime("2 weeks ago"));
+            $end = date("Y-m-d", strtotime("2 weeks") );
+            $sql .= " WHERE JobDate>'$start' AND JobDate<'$end'";
+        }
+        $results = mysqli_query($link, $sql);
+
+        $out = array();
+        if ($results) {
+            while ($row = mysqli_fetch_object($results)) {
+                $hack = $boss->getObjectRelated("Job", $row->JobID);
+                if (isset($hack->related_Invoice)){
+                    $row->related_Invoice = $hack->related_Invoice;
+                }
+                $out[] = $row;
+            }
+        }
+        return $out;
+    }
     function getJobs($link, $in) {
         $out = array(); $cnt = 0;
     
@@ -436,12 +549,8 @@ print $sql;
             $obj->end = date("c", strtotime($row['JobDate'].' '.$row['DropOffTime']));
             $obj->resourceId = $row['BusNumber'];
 
-	 $obj->color = $colors[$cnt];
             $obj->url = "/grid/view.php?rsc=Job&pid=335&id={$row['JobID']}";
             $cnt++;
-	 if ($cnt > count($colors)) {
-	 	$cnt = 0;
-	}
             array_push($out, $obj);
         }
 
@@ -609,10 +718,91 @@ print $sql;
             array_push($vals, $in['data']['Login']['new1'][$key]);
         }
         $sql = "INSERT INTO (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
-        $results = mysqli_query($sql);
+        $results = mysqli_query($link, $sql);
         $out = new stdClass();
         $out->status = "ok";
         if(!$results){ $out->e = 1; }
         return $out;
     }   
-?>
+    function doUndo() {
+        global $in;
+        global $link;
+        global $boss;
+
+        $out = new stdClass();
+        
+        if (isset($in['id'])) {
+            $rec = $boss->getObject("History", $in['id']);
+
+            if (isset($rec) && isset($rec->Undo)) {
+                
+                $results = mysqli_query($link, $rec->Undo);
+                
+                $out->status = ($results) ? "ok" : "error";
+                $out->sql = $rec->Undo;
+                $out->error = mysqli_error($link);
+            }
+        } else {
+            $out->status = "error";
+            $out->error = "Missing id for History record";
+        }
+        
+        return $out;
+
+    }
+
+    function doRedo() {
+        global $in;
+        global $link;
+        global $boss;
+
+        $out = new stdClass();
+        if (isset($in['id'])) {
+            $rec = $boss->getObject("History", $in['id']);
+
+            if (isset($rec) && isset($rec->Redo)) {
+                
+                $results = mysqli_query($link, $rec->Redo);
+                
+                $out->status = ($results) ? "ok" : "error";
+            }
+        }
+        return $out;
+
+    }
+    function getBusinessJobs($link, $in) {
+
+        global $boss;
+        $cond = ['NoInvoice=0'];
+        if (isset($in['bid'])) {
+            $cond[] = "BusinessID='{$in['bid']}'";
+        }
+        if (isset($in['start'])) {
+            $cond[] = "JobDate>'{$in['start']}'";
+        }
+        if (isset($in['end'])) {
+            $cond[] = "JobDate<'{$in['end']}'";
+        }
+        $sql = implode(" AND ", $cond);
+
+        $obj = $boss->getObjectRelated("Job", implode(" AND ", $cond));
+        $out = [];
+        foreach ($obj->Job as $k => $v) {
+            if ($k != "_ids") {
+                $new = new stdClass();
+                $new->JobID = $v->JobID;
+                $new->Job = $v->Job;
+                $new->BusinessID = $v->BusinessID;
+                $new->InvoiceID = $v->InvoiceID;
+                $new->QuoteAmount = $v->QuoteAmount;
+                $new->EmployeeID = $v->EmployeeID;
+                $new->JobDate = $v->JobDate;
+                $new->ContactName = $v->ContactName;
+                $new->ContactPhone = $v->ContactPhone;
+                $new->ContactEmail = $v->ContactEmail;
+                $new->related_Invoice = $v->related_Invoice;
+                $out[] = $new;
+            }
+        }
+        return $out;
+    }
