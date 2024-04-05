@@ -15,13 +15,20 @@
          exit();
     }
 
+    // First, check if email already exists in Login table
     $sql = "SELECT * FROM Login WHERE Email='". $in['data']['Login']['new1']['Email']."'";
     $results = mysqli_query($link, $sql);
     
+    // Exit with message if exists
     if ($results && mysqli_num_rows($results)) {
-        
         $rec = mysqli_fetch_assoc($results);
-        print "<p>Login already exists. <a href='/login.php?url=/portal/'>Login here</a> or use a different email address.</p>";
+        header("Content-Type: application/json");
+        $out = new stdClass();
+        $out->status = "error";
+        $out->msg = "<p>Login already exists. <a href='/login.php?url=/portal/'>Login here</a> or use a different email address.</p>";
+
+        print json_encode($out);
+
         exit();
     }
 
@@ -47,7 +54,42 @@
         global $boss;
         $out = new stdClass();
         $out->status = "ok";
+        
+        $info = $in['data']['Login']['new1'];
+       
+        $new = new stdClass();
+        $new->Business = $info['Business'];
+        $new->Individual = 1;
+        $new->Contact = $info['LastName'].', '.$info['FirstName'];
+        $new->Phone = $info['Phone'];
+        $new->Email = $info['Email'];
+        $obj = new stdClass();
+        $obj->Business = ['new1'=>$new];
 
+        $business_ids = $boss->storeObject($obj);
+
+        $new = new stdClass();
+        $new->FirstName = $info['FirstName'];
+        $new->LastName = $info['LastName'];
+        $new->Phone = $info['Phone'];
+        $new->Email = $info['Email'];
+
+        $obj = new stdClass();
+        $obj->Person = ['new1'=>$new];
+
+        $person_ids = $boss->storeObject($obj);
+        
+        if (isset($person_ids)) {
+            $p = array_values($person_ids);
+            $person_id = $p[0];
+            $out->PersonID = $person_id;
+        }
+        
+        if (isset($business_ids)) {
+            $b = array_values($business_ids);
+            $business_id = $b[0];
+            $out->BusinessID = $business_id;
+        }
         $shortlogin = mysqli_real_escape_string($link, preg_replace("/\@.*/", '', $in['data']['Login']['new1']['Email']));
 
         $keys = array("Email","FirstName","LastName","Passwd","Phone");
@@ -70,7 +112,14 @@
         array_push($vals, 8);
         array_push($keys, 'ProcessAccess');
         array_push($vals, 1);
-
+        array_push($keys, "BusinessID");
+        array_push($vals, $business_id);
+        array_push($keys, "BusinessIDs");
+        array_push($vals, $business_id);
+        array_push($keys, "PersonID");
+        array_push($vals, $person_id);
+        array_push($keys, "StartURL");
+        array_push($vals, "/portal/");
 
         $sql = "INSERT INTO Login (`" . implode('`,`', $keys)."`) values ('".join("','", $vals)."');";
         $results = mysqli_query($link, $sql);
@@ -79,33 +128,25 @@
             $out->status = "error";
             $out->error = mysqli_error($link);
         }
-
-        $new = new stdClass();
-        $new->Business = $in['data']['Login']['new1']['Business'];
-        $new->Individual = 1;
-        $new->Contact = $in['data']['Login']['new1']['LastName'].', '.$in['data']['Login']['new1']['FirstName'];
-        $new->Phone = $in['data']['Login']['new1']['Phone'];
-        $new->Email = $in['data']['Login']['new1']['Email'];
-        $obj = new stdClass();
-        $obj->Business = ['new1'=>$new];
-
-        $business_ids = $boss->storeObject($obj);
-
-        $new = new stdClass();
-        $new->FirstName = $in['data']['Login']['new1']['FirstName'];
-        $new->LastName = $in['data']['Login']['new1']['LastName'];
-        $new->Phone = $in['data']['Login']['new1']['Phone'];
-        $new->Email = $in['data']['Login']['new1']['Email'];
-
-        $obj = new stdClass();
-        $obj->Person = ['new1'=>$new];
-
-        $person_ids = $boss->storeObject($obj);
         
-        if (isset($business_ids[0]) && isset($person_ids[0])) {
-
-        }
+       
         $out->status = 'ok';
+        $out->LoginID = mysqli_insert_id($link);
+        
+        $boss->clampRecord("Login", $out->LoginID, "Person", $out->PersonID, true, "default", 0);
+        
+        if (isset($out->BusinessID)) {
+            $boss->clampRecord("Login", $out->LoginID, "Business", $out->BusinessID, true, "default", 0);
+            if (isset($out->PersonID)) {
+                $boss->clampRecord("Person", $out->PersonID, "Business", $out->BusinessID, true, "default", 0);
+                mysqli_query($link, "UPDATE Business set LoginID='{$out->LoginID}' WHERE BusinessID='{$out->BusinessID}'");
+            }
+        }
+
+        $out->results = [];
+        $out->results["Login"] = $boss->getObjectRelated("Login", $out->LoginID);
+        $out->results["Business"] = $boss->getObjectRelated("Business", $out->BusinessID);
+        $out->results["Person"] = $boss->getObjectRelated("Person", $out->PersonID);
 
         return $out;
     }
@@ -133,4 +174,3 @@
     function quote($str, $link) {
         return "'" . mysqli_real_escape_string($link, $str) . "'";
     }
-?>
