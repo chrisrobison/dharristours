@@ -22,11 +22,29 @@
       }
    }
    if ($in['saveto']) {
-      $save = $boss->docroot . '/' . $in['saveto'] . $in['ID'] . '.pdf';
+      $m = "";
+      if (isset($in['type'])) {
+         if ($in['type'] == "MasterInvoice") {
+            $m = "M";
+         } else if ($in['type'] == "Confirmation") {
+            $m = "C";
+         }
+      }
+      $save = $boss->docroot . '/' . $in['saveto'] . $m . $in['ID'] . '.pdf';
    }
+   $url = [];
+   if (isset($in['pages'])) {
+      $pages = preg_split("/,/", $in['pages']);
+      foreach ($pages as $page) {
+         $url[] = escapeshellarg("https://dharristours.simpsf.com/files/templates/InvoiceReport.php?ID=".$page);
+      }
+   }
+   $in['url'] = escapeshellarg($in['url']);
 
-   $cmd = "/usr/local/bin/wkhtmltopdf -L 5mm -R 5mm -T 5mm -B 5mm -s Letter " . $in['url'] . " $save";
+   $cmd = "/usr/local/bin/wkhtmltopdf  --print-media-type -L 5mm -R 5mm -T 5mm -B 5mm -s Letter " . $in['url'] . " " . join(" ", $url)." $save";
+
    $results = `$cmd`;
+   file_put_contents("/tmp/mkpdf.log", "---------------------\n". $cmd."\n". $results."\n-------------------\n", FILE_APPEND);
 ?>
 <!doctype html>
 <html>
@@ -50,8 +68,16 @@
 <body>
 
 <?php
-   $link = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/files/" . $in['saveto'] . $in['ID'] . '.pdf';
-   print "<div class='result'><h1>Created Invoice " .$in['ID'].".pdf</h1>";
+      $m = "";
+      if (isset($in['type'])) {
+         if ($in['type'] == "MasterInvoice") {
+            $m = "M";
+         } else if ($in['type'] == "Confirmation") {
+            $m = "C";
+         }
+      }
+    $link = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/files/" . $in['saveto'] . $m . $in['ID'] . '.pdf';
+   print "<div class='result'><h1>Created  {$in['type']} ".$m .$in['ID'].".pdf</h1>";
    print "<a class='icon' href='$link'><img src='/tools/mkpdf/view.png' height='100' width='100' border='0' alt='View'></a>";
 //   print "&nbsp;|&nbsp;";
    print "<a class='icon' download href='$link'><img src='/tools/mkpdf/download.png' height='100' width='100' border='0' alt='Download'></a>";
