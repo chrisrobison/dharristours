@@ -35,7 +35,7 @@ class obj {
      *        new 'dbd_*_class.php' classes to handle the actual low-level data exchanges.
      *        Client code only uses the API exposed in dbobj_class.php so modifications 
      *        to the backend should not break existing client apps so long as the 
-     *        dbobj interface is not modified.  dbobj_class.php will need to updated to
+     *        dbobj interface is not modified.  dbobj_class.php will need to be updated to
      *        not build SQL queries but to instead call on a yet-to-be-defined set of classes
      *        that generate the appropriate data and structures for interacting with 
      *        the current data source type (eg: ldap vs sql) [should/could this be handled in

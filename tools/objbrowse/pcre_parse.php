@@ -38,5 +38,3 @@ fclose($fp);
 $songs=parse_via_pcre($contents);
 usort($songs, "cmp");
 echo array_to_table($songs, $to_display);
-
-?>

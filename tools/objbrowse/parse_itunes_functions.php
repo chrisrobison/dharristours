@@ -39,5 +39,3 @@ function array_to_table($array, $printable)
   $str .= "</table>";
   return $str;
 } 
-
-?>
