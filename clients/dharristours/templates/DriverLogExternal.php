@@ -101,8 +101,6 @@
    </div>
     <div id='top_header'>
        <div>Driver Name: <b><?php print $driver->Employee; ?></b><br />Job Number: <b> <?php print $job->JobID; ?></b></div>
-       <div>Date: <b><?php print date("m/d/Y", strtotime($job->JobDate)); ?></b>
-         <br />Start: <b><?php print date("h:ia", strtotime($job->PickupTime)); ?></b></div>
    </div>
    <div class="Part">
       <table id="header" style='clear:left'>

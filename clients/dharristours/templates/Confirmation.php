@@ -97,8 +97,16 @@ $driver = $boss->getObjectRelated('Employee',$current->EmployeeID,false);
        background: rgb(153, 0, 0);
        color: rgb(255, 255, 255);
     }
+    @media print {
+      body {
+         background: #fff;
+      }
+      #main {
+         border: none;
+      }
+    }
    </style>
-   <link rel="stylesheet" type="text/css" media="print" href="print.css" />
+   <!--link rel="stylesheet" type="text/css" media="print" href="print.css" /-->
 
    <title>Confirmation</title>
 </head>

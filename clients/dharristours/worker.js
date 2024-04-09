@@ -1,6 +1,12 @@
 let worker = {
+    idb: {
+        version: 1,
+        db: {},
+        stores: []
+    },
     init() {
         self.addEventListener("message", (evt) => worker.handleMessage(evt), false);
+        worker.db = indexedDB.open('simple', 1)
     },
     async handleMessage(evt) {
         let obj = evt.data;
@@ -49,33 +55,41 @@ let worker = {
         console.dir(out);
         
 //        localStorage.setItem("jobs", JSON.stringify(out));
+        let ver = 1; // new Date().toISOString().substring(0, 16).replace(/\D/g,'');
+
+//        worker.importIDB('simple', `jobs_${sdate}-${edate}`, ver, out.results, 'JobID');
         return out;
     },
-    doSort(arr, sortKey, desc) {
+    doSort(data, sortKey, desc) {
         
     },
-    importIDB(dname, sname, arr) { 
+    importIDB(dbName, storeName, version, data, key) { 
       return new Promise(function(resolve) {
         
-        let r = window.indexedDB.open(dname);
+        let dbOpenRequest = indexedDB.open(dbName, version);
 
-        r.onupgradeneeded = () => {
-          var store = r.result.createObjectStore(sname, {keyPath: "name"});
+        dbOpenRequest.onupgradeneeded = (evt) => {
+            if (!dbOpenRequest.objectStoreNames.contains(storeName)) {
+                worker.idb.stores[storeName] = r.result.createObjectStore(storeName, {keyPath: key});
+
+            }
         };
 
-        r.onsuccess = () => {
-            let tactn = r.result.transaction(sname, "readwrite");
-            let store = tactn.objectStore(sname);
-            for (let obj of arr) {
+        dbOpenRequest.onsuccess = (evt) => {
+            let tactn = r.result.transaction(storeName, "readwrite");
+            let store = tactn.objectStore(storeName);
+            for (let obj of data) {
               store.put(obj);
             }
             resolve(r.result);
         };
 
-        r.onerror = (e) => {
+        dbOpenRequest.onerror = (e) => {
             alert("Error accessing IndexedDB: " + e.target.errorCode)
         }    
       });
+      worker.db = dbOpenRequest.result;
+
     }
  };
 

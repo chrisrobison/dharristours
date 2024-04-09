@@ -10,7 +10,7 @@
 
    $in = $_REQUEST;
    
-   if ($in['z']) {
+   if (isset($in['z'])) {
       $qs = base64_decode($in['z']);
 
       $parts = explode('&', $qs);
@@ -21,10 +21,12 @@
           $in[urldecode($key)] = preg_replace("/\#.*/", '', urldecode($val));
       }
    }
+   if (isset($in['id'])) $in['ID'] = $in['id'];
+
    /* END NOAUTH SECTION */
    $in['Resource'] = "Invoice";
 
-   if (!$in['ID']) {
+   if (!isset($in['ID'])) {
       print "<h1>No Invoice.</h1>";
       exit;
    }
@@ -365,41 +367,44 @@
         padding: .25em;
     }
 
-    ul.disclaimer li > b {
+    ul.disclaimer li>b {
         white-space: nowrap;
         text-align: right;
     }
+
     ul.disclaimer li {
         display: flex;
     }
+
     ul.disclaimer {
         display: flex;
         flex-direction: column;
     }
-    ul.disclaimer > li > b {
+
+    ul.disclaimer>li>b {
         display: inline-block;
         width: 12rem;
         text-align: right;
     }
+
     @media print {
-      body { 
-         background-color:#fff;
-      }
-      .paid {
-        display: none;
-      }
-      .due {
-        display: none;
-      }
+        body {
+            background-color: #fff;
+        }
+
+        .paid {
+            display: none;
+        }
+
+        .due {
+            display: none;
+        }
 
     }
+
     /*]]>*/
     </style>
-    <!--link rel="stylesheet" type="text/css" media="print" href="print.css" /-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Invoice</title>
+    <title>D Harris Tours - Payment Receipt for <?=$in['id']?></title>
 </head>
 
 <body>
@@ -447,31 +452,24 @@
             <br />
             <div class='date'>
                 <div id='ticket'>
-                    <div style="padding:4px;font-size:1.5em">
-                        <h2 class=''><?php print $business->Business; ?></h2>
-                        <?php
-               if (($business->AttnTo != ".") && ($business->AttnTo!="")) {
-            ?><div class="date"><input type="text" value="<?php print $business->AttnTo; ?>"
-                                style='width:30em; border: none;font-size:1.2em;' /></div>
-                        <?php
-               }
-               if (($business->Address1 != ".") && ($business->Address1!="")) {
-            ?>
-                        <!--div class="date"><input type="text" value="<?php print $business->Address1; ?>" style='width:30em; text-align:center; border: none;font-size:1.2em;'/></div-->
-                        <?php
-               }
-               if (($business->Address2 != ".") && ($business->Address2!="")) {
-            ?>
-                        <!--div class="date"><input type="text" value="<?php print $business->Address2; ?>" style='width:30em; text-align:center; border: none;font-size:1.2em;'/></div-->
-                        <?php
-               }
-            ?>
-                        <div class="date"><input type="text"
-                                value="<?php print $business->Address1 . ", " . $business->City; ?>, <?php print $business->State; ?>. <?php print $business->Zip; ?>"
-                                style='width:30em; border: none;font-size:1.2em;' /></div>
-                        <div class="date"><input type="text"
-                                value="Voice: <?php print $business->Phone; ?> <?php print $business->Fax ? 'Fax: ' .$business->Fax : ''; ?>"
-                                style='width:30em; border: none;font-size:1.2em;' /></div>
+                    <div style="padding:4px;font-size:1.5em;display:flex;">
+                        <div>
+                            <h2 class=''><?php print $business->Business; ?></h2>
+                            <div class="date"><input type="text" value="<?php print $business->AttnTo; ?>" style='width:30em; border: none;font-size:1.2em;' /></div>
+                        </div>
+                        <div>
+                            <div class="date"><input type="text" value="<?php 
+                                $addr = "";
+                                if (isset($business->Address1) && preg_match("/\W/", $business->Address1)) {
+                                    $addr = $business->Address1 . ', ';
+                                }
+                                $city = " ";
+                                if (isset($business->City)) {
+                                    $city = $business->City .' ';
+                                }
+                                print $addr . $city . $business->State . ' ' . $business->Zip; ?>" style='width:30em; border: none;font-size:1.2em;' /></div>
+                            <div class="date"><input type="text" value="Voice: <?php print $business->Phone; ?> <?php print $business->Fax ? 'Fax: ' .$business->Fax : ''; ?>" style='width:30em; border: none;font-size:1.2em;' /></div>
+                        </div>
                     </div>
                     <br />
                     <table id='ticket_table'>
@@ -500,8 +498,8 @@
                         </tr>
                     </table>
                     <div style='font-size:2em;padding-left:1em;'>Trip Details</div>
-                    <hr style="height:1px;margin:1em 9em;" />
-                    <table class='trips' style="margin-top:.5em;width:5in;margin-left:auto;margin-right:auto;">
+                    <hr style="height:1px;margin:1em 2em;border:0;background:#0006;" />
+                    <table class='trips' style="margin-top:.5em;margin-left:auto;margin-right:auto;">
                         <tr>
                             <td class='field'>From:</td>
                             <td colspan='3' class='value'>
@@ -524,7 +522,9 @@
                         </tr>
                         <?php } ?>
                     </table>
-                    <hr style="height:1px;margin:1em 9em;" />
+                    <br>
+                    <div style='font-size:2em;padding-left:1em;'>Payment Details</div>
+                    <hr style="height:1px;margin:1em 2em;border:0;background:#0006;" />
                     <table class='trips' style='width:6in;margin-top:.5em;'>
                         <tr>
                             <td></td>
@@ -636,40 +636,52 @@
                                 $<?php print number_format($current->Balance, 2); ?></td>
                         </tr>
                         <tr>
-                           <td colspan="4">
-                              <hr>
-                              <table class="disclaimer" style="font-size:10px;width:100%;border-collapse:collapse;">
-                                 <tr>
-                                    <td style="vertical-align:top;white-space:nowrap;"><b>Cancellation Policy</b></td><td><span>There is a cancellation charge of $650 per bus if your confirmed reservation is not cancelled 7 days prior to spot time. Full charge if not cancelled 72 hours prior except for sports tournaments. There is no charge for cancellation due to weather if notified by 4pm the day prior to the confirmed trip.</span></td>
-                                 </tr>
-                                 <tr>
-                                    <td style="vertical-align:top;"><b>Late Payment</b></td><td><span>10% monthly fee will be added to any invoice 30 days past due.</td>
-                                 </tr>
-                              </table>
-                           </td>
+                            <td colspan="4">
+                                <hr>
+                                <table class="disclaimer" style="font-size:10px;width:100%;border-collapse:collapse;">
+                                    <tr>
+                                        <td style="vertical-align:top;white-space:nowrap;"><b>Cancellation Policy</b>
+                                        </td>
+                                        <td><span>There is a cancellation charge of $650 per bus if your confirmed
+                                                reservation is not cancelled 7 days prior to spot time. Full charge if
+                                                not cancelled 72 hours prior except for sports tournaments. There is no
+                                                charge for cancellation due to weather if notified by 4pm the day prior
+                                                to the confirmed trip.</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align:top;"><b>Late Payment</b></td>
+                                        <td><span>10% monthly fee will be added to any invoice 30 days past due.</td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                     </table>
                 </div>
-            <h2 style='text-align:center;margin-top:1rem;'>Thank you for your business!</h2>
+                <h2 style='text-align:center;margin-top:1rem;'>Thank you for your business!</h2>
             </div>
         </div>
     </div>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
-      integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<svg xmlns="http://www.w3.org/2000/svg">   
-  <filter style="color-interpolation-filters:sRGB;" id="spatter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
-    <feTurbulence type="fractalNoise" baseFrequency="24.1722 18.2119" numOctaves="5" seed="60" result="turbulence" id="feTurbulence111"></feTurbulence>
-    <feComposite in="SourceGraphic" in2="turbulence" operator="in" result="composite1" id="feComposite111"></feComposite>
-    <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 3.86 -1 " result="color" id="feColorMatrix111" in="composite1"></feColorMatrix>
-    <feFlood flood-color="rgb(255,255,255)" result="flood" id="feFlood111" style="flood-opacity: 0;"></feFlood>
-    <feMerge result="merge" id="feMerge112">
-      <feMergeNode in="flood" id="feMergeNode111"></feMergeNode>
-      <feMergeNode in="color" id="feMergeNode112"></feMergeNode>
-    </feMerge>
-    <feComposite in2="SourceGraphic" operator="in" result="composite2" id="feComposite112" in="merge"></feComposite>
-  </filter>
-</svg>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+        integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <filter style="color-interpolation-filters:sRGB;" id="spatter" x="-20%" y="-20%" width="140%" height="140%"
+            filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+            <feTurbulence type="fractalNoise" baseFrequency="24.1722 18.2119" numOctaves="5" seed="60"
+                result="turbulence" id="feTurbulence111"></feTurbulence>
+            <feComposite in="SourceGraphic" in2="turbulence" operator="in" result="composite1" id="feComposite111">
+            </feComposite>
+            <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 3.86 -1 " result="color" id="feColorMatrix111"
+                in="composite1"></feColorMatrix>
+            <feFlood flood-color="rgb(255,255,255)" result="flood" id="feFlood111" style="flood-opacity: 0;"></feFlood>
+            <feMerge result="merge" id="feMerge112">
+                <feMergeNode in="flood" id="feMergeNode111"></feMergeNode>
+                <feMergeNode in="color" id="feMergeNode112"></feMergeNode>
+            </feMerge>
+            <feComposite in2="SourceGraphic" operator="in" result="composite2" id="feComposite112" in="merge">
+            </feComposite>
+        </filter>
+    </svg>
 </body>
 
 </html>

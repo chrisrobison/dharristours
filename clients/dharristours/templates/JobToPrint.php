@@ -1,6 +1,6 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . "/lib/auth.php");
-
+$boss = new boss($_SERVER['SERVER_NAME']);
 /** 
  * JobToPrint.php
  *
@@ -71,7 +71,9 @@ if ($in['x'] == "massinvoice") {
 
          if (!file_exists($save) || $in['force']) {
             file_put_contents($save, $invoice);
-            $out["results"][] = "Invoice generated for Invoice ID {$id} [$save]";
+            $showname = preg_replace("|/home/cdr/simple/clients/dharristours/|", '/files/', $save);
+
+            $out["results"][] = "Invoice generated for Invoice ID {$id} [$showname]";
 
          }
 
@@ -267,17 +269,16 @@ if ($in['ID']) {
                   </span>
                </span>
             </span>
-            <span id='emailWrap' style='float:right;' <?php if (!$InvID)
-               print " disabled='true'"; ?>>
+            <span id='emailWrap' style='float:right;' <?php if (!$InvID) print " disabled='true'"; ?>>
                <!-- Email fields -->
                <input type='hidden' id='x' name='x' value=''>
                <input type='hidden' id='Subject' name='Subject' value='[Invoice] <?php print $current->Job; ?>'>
                <input type='hidden' id='Url' name='Url' value='<?= $static ?>'>
                <input type='hidden' id='InvoiceID' name='InvoiceID'
                   value='<?= $current->related_Invoice[0]->InvoiceID ?>'>
-               <input type='hidden' id='InvoiceParentID' name='InvoiceParentID'
-                  value='<?= $current->related_Invoice[0]->InvoiceParentID ?>'>
+               <input type='hidden' id='InvoiceParentID' name='InvoiceParentID' value='<?= $current->related_Invoice[0]->InvoiceParentID ?>'>
                <input type='hidden' id='Cc' name='Cc' value='juanaharrisdht@att.net'>
+               <input type='hidden' id='type' name='type' value=''>
                <span>Send to: <input type="text" autocomplete="off" id="To" name="To" style='width:15em;'
                      value="<?php 
                      print (isset($business->BillEmail)) ? $business->BillEmail : $business->Email; ?>">
@@ -289,14 +290,8 @@ if ($in['ID']) {
                <label>Document: </label>
                <select id='what' name="what" style='width:10em'>
                   <option value=''>--Select Document--</option>
-                  <option <?php if (!$parent_id)
-                     print " disabled='true'"; ?> value='MasterInvoice'>Master Invoice [
-                     <?= $parent_id ?>]
-                  </option>
-                  <option <?php if (!$InvID)
-                     print " disabled='true'"; ?> value='InvoiceReport'>Invoice [
-                     <?= $InvID ?>]
-                  </option>
+                  <option data-id='<?= $parent_id ?>' data-type='MasterInvoice' <?php if (!$parent_id) print " disabled='true'"; ?> value='MasterInvoice'>Master Invoice [ <?= $parent_id ?>] </option>
+                  <option data-id='<?= $InvID ?>' data-type='InvoiceReport' <?php if (!$InvID) print " disabled='true'"; ?> value='InvoiceReport'>Invoice [ <?= $InvID ?>] </option>
                   <option value='DriverLog'>Driver Trip</option>
                   <option value='Confirmation'>Confirmation</option>
                   <option value='DriverLogExternal'>Subcontractor Log</option>
@@ -329,6 +324,7 @@ if ($in['ID']) {
    </div>
 </body>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type='text/javascript'>
    var session = <?php print json_encode($_SESSION); ?>;
@@ -353,7 +349,7 @@ if ($in['ID']) {
       };
       simple.options = {
          MasterInvoice: {
-            href: "InvoiceMaster.php?z=" + btoa("ID=" + simple.InvoiceParentID),
+            href: "MasterInvoice.php?z=" + btoa("ID=" + simple.InvoiceParentID),
             email: (simple.business && simple.business.BillEmail) ? simple.business.BillEmail : simple.business.Email
          },
          InvoiceReport: {
@@ -395,7 +391,16 @@ if ($in['ID']) {
       });
 
       $("#mkpdf").click(function (e) {
-         makePDF($("#what").val());
+         let what = document.querySelector("#what").value;
+         let id;
+
+         if (what === "MasterInvoice") {
+            genPDF("MasterInvoice", $("#InvoiceParentID").val());
+         } else if (what === "InvoiceReport") {
+            genPDF("InvoiceReport", $("#ID").val());
+         } else {
+            genPDF(what, document.querySelector("#ID").value);
+         }
          e.stopPropagation();
          e.preventDefault();
          return false;
@@ -410,7 +415,7 @@ if ($in['ID']) {
             let ty = (simple.InvoiceID) ? "UPDATED " : "CREATED ";
 
             alert("Invoice " + ty + "for [" + $("#ID").val() + "] " + document.querySelector("#job-title").innerHTML + ".");
-            let what = $("#what").value;
+            let what = document.querySelector("#what").value;
             let conf = simple.options[what];
 
             document.location.reload();
@@ -434,6 +439,7 @@ if ($in['ID']) {
          switch (doc) {
             case "InvoiceReport":
                genPDF("InvoiceReport", $("#InvoiceID").val());
+               document.querySelector("#type").value = "InvoiceReport";
                if (confirm("Email INVOICE " + $("#InvoiceID").val() + ".pdf to " + $("#To").val() + "?")) {
                   var frm = $("form").serialize();
                   console.dir(frm);
@@ -455,6 +461,7 @@ if ($in['ID']) {
                }
                break;
             case "MasterInvoice":
+               document.querySelector("#type").value = "MasterInvoice";
                genPDF("MasterInvoice", $("#InvoiceParentID").val());
                if (confirm("Email MASTER INVOICE M" + $("#InvoiceParentID").val() + ".pdf to " + $("#To").val() + "?")) {
                   var frm = $("form").serialize();
@@ -490,7 +497,7 @@ if ($in['ID']) {
       });
 
       $("button.print").click(function (e) {
-         $("#viewer")[0].contentWindow.print();
+         document.querySelector("#viewer").contentWindow.print();
 
          e.stopPropagation();
          e.preventDefault();
@@ -508,14 +515,56 @@ if ($in['ID']) {
          $("#what").val(chkdoc);
          viewDoc(chkdoc);
       }
-      function genPDF(what = "invoice", id) {
+      async function genPDF(what = "InvoiceReport", id) {
          if (id) {
-            let query = "saveto=invoices/&ID=" + id + "&url=" + document.location.origin + "/files/invoices/" + id + ".html";
+            let query, arg;
+            switch (what) {
+
+               case "MasterInvoice":
+                  let resp = await fetch(`/portal/api.php?type=getMasterInvoice&id=${id}`);
+                  let json = await resp.json();
+
+                  let invoice_ids = json.InvoiceIDs.split(/,/);
+                  console.log(`Job IDs: ${json.JobIDs}  InvoiceIDs: ${json.InvoiceIDs}        `);
+                  arg = document.location.origin + "/files/templates/MasterInvoice.php?ID=" + id;
+                  arg = encodeURIComponent(arg);
+                  query = "type=MasterInvoice&saveto=invoices/&ID=" + id + "&url=" + arg +"&pages=" + invoice_ids.join(',');
+                  
+                  break;
+               case "InvoiceReport":
+                  arg = document.location.origin + "/files/templates/InvoiceReport.php?ID=" + simple.InvoiceID;
+                  arg = encodeURIComponent(arg);
+                  query = "type=InvoiceReport&saveto=invoices/&ID=" + simple.InvoiceID + "&url=" + arg;
+                  
+                  break;
+               case "Confirmation":
+                  arg = document.location.origin + "/files/templates/Confirmation.php?ID=" + document.querySelector("#ID").value;
+                  arg = encodeURIComponent(arg);
+                  query = "type=Confirmation&saveto=invoices/&ID=" + id + "&url=" + arg;
+                  
+                  break;
+               case "DriverLog":
+                  arg = document.location.origin + "/files/templates/DriverLog.php?ID=" + document.querySelector("#ID").value;
+                  arg = encodeURIComponent(arg);
+                  query = "type=DriverLog&saveto=invoices/DL&ID=" + id + "&url=" + arg;
+
+                  break;
+            }
             let url = `/tools/mkpdf/?${query}`;
+            console.log("Generating PDF with following url: "+url);
+            document.querySelector("#viewer").src = url;
+
+            /* 
             fetch(url).then(r => r.text()).then(text => {
                console.log("genPDF results");
-               console.dir(text);
+               // console.dir(text);
+               document.querySelector("#viewer").src = "about:blank";
+               let viewer = document.querySelector("#viewer").contentWindow.document;
+               viewer.open();
+               viewer.write(text);
+               viewer.close();
             });
+            */      
          }
       }
       function makePDF(what, id) {
@@ -528,7 +577,7 @@ if ($in['ID']) {
          } else if (!id) {
             id = "<?= $in['ID'] ?>";
          }
-
+         
          var query = "saveto=invoices/&ID=" + id + "&url=" + document.location.origin + "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
          url = "/tools/mkpdf/?" + query;
          console.log("pdf url: " + url);
@@ -581,7 +630,12 @@ if ($in['ID']) {
          const raw = await fetch(`/api.php?rsc=Invoice&id=${id}`);
          const json = await raw.json();
          const now = new Date();
-         let out = { "Invoice": [{ InvoiceID: `${id}`, InvoiceSent: 1, Notes: `${json.Notes}\nInvoice PDF emailed by ${session.Login.Email} on ${now.toLocaleDateString()} ${now.toLocaleTimeString()}` }] };
+         const mofmt = new Intl.DateTimeFormat("en-US", { month: "2-digit" });
+         const dayfmt = new Intl.DateTimeFormat("en-US", { day: "2-digit" });
+         const timefmt = new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+         
+         let senton = now.getFullYear + '-' + mofmt.format(now) + '-' + dayfmt.format(now) + ' ' + timefmt.format(now);
+         let out = { "Invoice": [{ InvoiceID: `${id}`, InvoiceSent: 1, SentOn: senton, SentTo: document.querySelector("#To").value, Notes: `${json.Notes}\nInvoice PDF emailed by ${session.Login.Email} on ${now.toLocaleDateString()} ${now.toLocaleTimeString()}` }] };
 
          let qs = encodeURIComponent(JSON.stringify(out));
          let url = `/grid/ctl.php?x=save&rsc=Invoice&ID=${id}&InvoiceID=${id}&json=${qs}`;

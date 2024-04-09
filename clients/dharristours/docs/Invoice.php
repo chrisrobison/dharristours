@@ -10,7 +10,7 @@
 
    $in = $_REQUEST;
    
-   if ($in['z']) {
+   if (isset($in['z'])) {
       $qs = base64_decode($in['z']);
 
       $parts = explode('&', $qs);
@@ -21,10 +21,12 @@
           $in[urldecode($key)] = preg_replace("/\#.*/", '', urldecode($val));
       }
    }
+   if (isset($in['id'])) $in['ID'] = $in['id'];
+
    /* END NOAUTH SECTION */
    $in['Resource'] = "Invoice";
 
-   if (!$in['ID']) {
+   if (!isset($in['ID'])) {
       print "<h1>No Invoice.</h1>";
       exit;
    }

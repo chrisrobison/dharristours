@@ -122,9 +122,57 @@
     main { height: 100%; }
     .date class { height: 100%; }
     #ticket { height: 100%; }
+    .due {
+        padding: 0.25rem 1rem;
+        border: 0.5rem solid #c00;
+        color: #c00;
+        border-style: double;
+        transform: rotate(-22deg) scale(1.5);
+        font-size: 32px;
+        left: 10vw;
+        bottom: 1rem;
+        text-align: center;
+        font-weight: 900;
+        display: inline-block;
+        position: absolute;
+        opacity: 0.8;
+        border-radius: 1rem;
+        filter: url("#spatter");
+    }
+
+    .paid {
+        padding: 0.25rem 1rem;
+        border: 0.5rem solid #c00;
+        color: #039;
+        border-style: double;
+        transform: rotate(-22deg) scale(1.5);
+        font-size: 32px;
+        left: 10vw;
+        bottom: 1rem;
+        text-align: center;
+        font-weight: 900;
+        display: inline-block;
+        position: absolute;
+        opacity: 0.8;
+        border-radius: 1rem;
+        filter: url("#spatter");
+    }
+
+    @media print {
+        body {
+            background:#fff;
+        }
+         .paid {
+            display: none;
+       }
+       .due {
+         display: none;
+       }
+    }
+
    /*]]>*/
    </style>
-   <link rel="stylesheet" type="text/css" media="print" href="print.css" />
+   <!--link rel="stylesheet" type="text/css" media="print" href="print.css" /-->
 
    <title>Invoice</title>
 </head>

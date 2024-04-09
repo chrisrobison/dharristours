@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Courier New", "Courier", serif;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color:#000;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 0vh;
+        }
+
+        main {
+            background-color: #000;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            width: 8.5in;
+            height: 11in;
+            background: #fff;
+            padding: 0.5in 0.5in;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<main>
+<h2>D Harris Tours</h2>
+<p>2294 Vista del Rio St<br>
+Crockett, CA 94525<br>
+juanaharrisdht@att.net<br>
+(415) 902-8542</p>
+
+<p>April 5, 2024</p>
+
+<h3>RE: Proof of Employment for James Mejia</h3>
+<p>To Whom It May Concern,</p>
+<p>This letter is to confirm that James Mejia is currently employed with D Harris Tours as a Driver. He commenced his employment on February 26, 2024.</p>
+
+<h3>Details of Employment:</h3>
+<ul>
+    <li><strong>Position:</strong> Driver </li>
+    <li><strong>Start Date:</strong> February 26, 2024 </li>
+    <li><strong>Hourly Rate:</strong> $30.00</li>
+    <li><strong>Employment Status:</strong> Active</li>
+</ul>
+<p>James Mejia's responsibilities include operating vehicles for the purposes of tours and student transportation in accordance with our company's safety protocols and operational guidelines.</p>
+<p>For any verification or inquiries regarding this employment, please contact our office directly.</p>
+<p>Sincerely,</p>
+<p>Patrick Peterson <br>Operations Manager<br>D Harris Tours</p></main>
+<script>
+const $ = str => document.querySelector(str);
+const $$ = str => document.querySelectorAll(str);
+
+(function() {
+    const app = {
+        data: {},
+        state: {
+            loaded: false
+        },
+        init: function() {
+            app.state.loaded = true;
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
+
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
+
+</html>

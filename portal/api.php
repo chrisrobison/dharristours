@@ -105,7 +105,11 @@
             case "getBusinessJobs":
                 $out = getBusinessJobs($link, $in);
                 break;
-        }
+            case "makePayment":
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
+                $out = makePayment($link, $data);
+            }
 
         file_put_contents("/tmp/portal-api.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
         
@@ -134,7 +138,10 @@
 
     function getMasterInvoice($link, $in) {
         global $boss;
-        $out = $boss->getObjectRelated("InvoiceParent", $in['id']);
+        $out = [];
+        if (isset($in['id'])) {
+            $out = $boss->getObject("InvoiceParent", $in['id']);
+        }
        
         return $out;
     }
@@ -156,6 +163,18 @@
 
     function sumInvoices($link, $in) {
         $out = new stdClass();
+        $sql = "SELECT * from Invoice WHERE InvoiceParentID='{$in['pid']}'";
+        $results = mysqli_query($link, $sql);
+        $invoices = [];
+        $unpaid = [];
+        while ($row = mysqli_fetch_object($results)) {
+            $invoices[] = $row;
+            if ($row->Balance > 0) {
+                $unpaid[] = $row;
+            }
+        }
+        mysqli_free_result($results);
+
         $sql = "SELECT InvoiceParent.Date AS date, COUNT(InvoiceID) AS count, SUM(Invoice.Balance) AS total, SUM(Invoice.InvoiceSent) AS Sent, InvoiceParent.InvoiceSent as InvoiceSent FROM InvoiceParent, Invoice WHERE Invoice.InvoiceParentID=InvoiceParent.InvoiceParentID AND InvoiceParent.InvoiceParentID=".$in['pid'];
         $results = mysqli_query($link, $sql);
 
@@ -165,6 +184,8 @@
             if (!isset($out->total)) $out->total = 0;
             if (!isset($out->Sent)) $out->Sent = 0;
             if (!isset($out->InvoiceSent)) $out->InvoiceSent = 0;
+            $out->outstanding = count($unpaid);
+            $out->paid = count($invoices) - count($unpaid);
         } 
         return $out;
     }
@@ -770,6 +791,7 @@ print $sql;
         return $out;
 
     }
+
     function getBusinessJobs($link, $in) {
 
         global $boss;
@@ -804,5 +826,39 @@ print $sql;
                 $out[] = $new;
             }
         }
+        return $out;
+    }
+    function makePayment($link, $data) {
+        global $in;
+        global $boss;
+
+        $results = $boss->storeObject($data);
+        $payids = array_values($results);
+        $payid = $payids[0];
+
+        if (isset($data->Payment->new1->InvoiceIDs)) {
+            $ids = preg_split("/\,/", $data->Payment->new1->InvoiceIDs);
+            if ($ids) {
+                foreach ($ids as $id) {
+                    $boss->clampRecord('Payment', $payid, 'Invoice', $id);
+                }
+            }
+        }
+        
+        if (isset($data->Payment->new1->JobIDs)) {
+            $ids = preg_split("/\,/", $data->Payment->new1->JobIDs);
+            if ($ids) {
+                foreach ($ids as $id) {
+                    $boss->clampRecord('Payment', $payid, 'Job', $id);
+                }
+            }
+        }
+
+        if (isset($data->Payment->new1->BusinessID)) {
+            $boss->clampRecord('Payment', $payid, 'Business', $data->Payment->new1->BusinessID);
+        }
+
+        $out = new stdClass();
+        $out->results = $results;
         return $out;
     }

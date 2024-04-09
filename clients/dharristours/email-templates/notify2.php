@@ -22,11 +22,13 @@
 
    for ($i=0; $i<$cnt; $i++) {
       $job = $records[$i];
-      $job->BCC .= ",cdr@netoasis.net";
+      $job->BCC = (($job->BCC) ? $job->BCC . ", " : "" ) . "cdr@netoasis.net, juanaharrisdht@att.net";
 
       if ($job->Email == "juana") {
          $job->Email = "juanaharrisdht@att.net";
       }
+      $job->Email = preg_replace("/juanaharrisdht@att.net,\s*/", "", $job->Email);
+
       $subject = escapeshellarg($job->Subject);
       $content = `./htmlmail.sh -s '{$job->Subject}' -t '{$job->Email}' -f 'Simple Software Notification <notify@simpsf.com>' https://dharristours.simpsf.com/files/email-templates/genemail.php?idx=$i`;
       //$content = `./htmlmail.sh -s {$subject} -t 'cdr@netoasis.net' -f 'Simple Software Notification <notify@simpsf.com>' https://dharristours.simpsf.com/files/email-templates/genemail.php?idx=$i`;
