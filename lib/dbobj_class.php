@@ -263,9 +263,9 @@ class dbobj extends dbd_mysql {
                   }
                } else if (isset($value)) {
                   $flds[] = '`'.$field.'`';
-		  if ($value == "NULL") {
-		     array_push($val, $value);
-		  } else {
+                  if ($value == "NULL") {
+                     array_push($vals, $value);
+                  } else {
                      array_push($vals, $this->sql_quote($value));
                   }
                }
