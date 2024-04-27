@@ -36,7 +36,7 @@
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   body { background-color: filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0'); background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#b0b0b0)); background: -moz-linear-gradient(top,  #f0f0f0,  #b0b0b0);font-size:20px;color:black;font-family:"Helvetica Neue",Verdana,sans-serif; }
+   body { background: #666; font-size:20px;color:black;font-family:"Helvetica Neue",Verdana,sans-serif; }
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; font-size:1em }
    H1 { text-align:justify; margin:0;text-indent:0px; }
@@ -85,9 +85,12 @@
    .foot { position:absolute; bottom:1em; font-size:.7em; }
    .table th { text-align:right; font-weight:bold; background-color:#ddd; padding:.25em; }
    .table td { border-bottom:1px solid #ccc; padding:.25em; font-size:.9em; }
+   @media print {
+    body { background: #fff; margin:0; padding: 0;}
+   }
    /*]]>*/
    </style>
-   <link rel="stylesheet" type="text/css" media="print" href="print.css" />
+   <!--link rel="stylesheet" type="text/css" media="print" href="print.css" /-->
 
    <title>Driver Log Sheet</title>
 </head>
@@ -111,10 +114,10 @@
 	    <td>juanaharrisdht@att.net</td>
 	 </tr>
          <tr>
-            <td>415-902-8542</td><td>PO Box 5961</td><td>TCP 017270-B</td>
+            <td>415-902-8542</td><td>PO Box 430</td><td>TCP 017270-B</td>
          </tr>
          <tr>
-            <td>800-853-4006 FAX</td><td>Vallejo CA 94591</td><td>CA 273437</td>
+            <td>800-853-4006 FAX</td><td>Crockett CA 94525</td><td>CA 273437</td>
          </tr>
       </table>
       <div id='ticket'style='padding:0px;margin-top:1em;' >
