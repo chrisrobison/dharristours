@@ -195,7 +195,7 @@
     }
 
     #header {
-        width: 5in;
+        width: 6in;
         height: .6in;
     }
 
@@ -434,7 +434,7 @@
                     <td class='header' colspan='3'>Voice: (415) 902-8542 / Fax: (800) 853-4006</td>
                 </tr>
                 <tr>
-                    <td class='header' colspan='2'>PO Box 5961, Vallejo, CA 94591</td>
+                    <td class='header' colspan='2'>PO Box 430, Crockett, CA 94525<b style="color:red"> New Address</b></td>
                     <td class='header'>TCP 017270-B</td>
                 </tr>
                 <tr>
@@ -597,9 +597,9 @@
                                     style='width:4in;height:fit-content;border:0px;'><?php print preg_replace("/\-\-.*/", "", preg_replace("/[,]/", "<br>\n", $current->Description)); ?></textarea>
                                 <?php 
                                 if ($current->Balance == 0) { 
-                                    print "<div class='paid'>PAID</div>"; 
+                                    print "<div class='paid' style='transform: rotate(" . rand(-40, 40) . "deg) scale(1.5);'>PAID</div>"; 
                                 } else {
-                                    print "<div class='due'> - DUE - </div>";
+                                    print "<div class='due' style='transform: rotate(" . rand(-40, 40) . "deg) scale(1.5);'> - DUE - </div>"; 
                                 } 
                                 ?>
                             </td>
