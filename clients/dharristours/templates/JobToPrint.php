@@ -384,7 +384,28 @@ if ($in['ID']) {
          var curdoc = $(this).val() || "InvoiceReport";
          $("#Url").val("https://" + location.host + "/files/templates/" + simple.options[curdoc].href);
          $("#Subject").val('[' + curdoc + '] ' + simple.current['Job']);
-         $("#To").val(simple.options[curdoc].email);
+
+         let m;
+         
+         let sendto = [ simple.options[curdoc].email.replace(/\s/g, '') ];
+         if (simple.current.sendInvoiceTo) {
+            sendto.push(simple.current.sendInvoiceTo);
+         }
+         if (simple.current.SpecialInstructions && (m = simple.current.SpecialInstructions.match(/(\S*@\S*)/))) {
+            if (!sendto.includes(m[1])) sendto.push(m[1]);
+         }
+
+         if (simple.current.Description && (m = simple.current.Description.match(/(\S*@\S*)/))) {
+            if (!sendto.includes(m[1])) sendto.push(m[1]);
+         }
+
+         if (m = simple.current.ContactEmail.match(/(\S*\@\S*)/)) {
+            if (!sendto.includes(simple.current.ContactEmail.replace(/\s*/g,''))) {
+               sendto.push(simple.current.ContactEmail);
+            }
+         }
+         $("#To").val(sendto.join(","));
+
          localStorage.setItem('curdoc', curdoc);
          window.location.hash = "#" + curdoc;
          viewDoc(curdoc);
@@ -483,7 +504,51 @@ if ($in['ID']) {
                }
                 break;
  
-         }
+            case "DriverLog":
+               document.querySelector("#type").value = "DriverLog";
+               genPDF("DriverLog", $("#ID").val());
+               if (confirm("Email Driver Log: DL" + $("#ID").val() + ".pdf to " + $("#To").val() + "?")) {
+                  var frm = $("form").serialize();
+                  console.dir(frm);
+                  fetch("/emailpdf.php", {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                     },
+                     redirect: "follow",
+                     body: frm
+                  }).then(r => r.json()).then(data => {
+                     console.log(`sendpdf fetch complete`);
+                     console.dir(data);
+
+                     // alert(`Driver Log: DL${$('#ID').val()}.pdf emailed to ${$("#To").val()}`);
+
+                  });
+               }
+                break;
+             case "DriverLogExternal":
+               document.querySelector("#type").value = "DriverLogExternal";
+               genPDF("DriverLogExternal", $("#ID").val());
+               if (confirm("Email 'Contractor Driver Log': CL" + $("#ID").val() + ".pdf to " + $("#To").val() + "?")) {
+                  var frm = $("form").serialize();
+                  console.dir(frm);
+                  fetch("/emailpdf.php", {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                     },
+                     redirect: "follow",
+                     body: frm
+                  }).then(r => r.json()).then(data => {
+                     console.log(`sendpdf fetch complete`);
+                     console.dir(data);
+
+                     // alert(`Driver Log: DL${$('#ID').val()}.pdf emailed to ${$("#To").val()}`);
+
+                  });
+               }
+                break;
+          }
          e.preventDefault();
          e.stopPropagation();
          return false;
@@ -518,6 +583,7 @@ if ($in['ID']) {
       async function genPDF(what = "InvoiceReport", id) {
          if (id) {
             let query, arg;
+
             switch (what) {
 
                case "MasterInvoice":
@@ -540,14 +606,19 @@ if ($in['ID']) {
                case "Confirmation":
                   arg = document.location.origin + "/files/templates/Confirmation.php?ID=" + document.querySelector("#ID").value;
                   arg = encodeURIComponent(arg);
-                  query = "type=Confirmation&saveto=invoices/&ID=" + id + "&url=" + arg;
+                  query = "type=Confirmation&saveto=confirmations/&ID=" + id + "&url=" + arg;
                   
                   break;
                case "DriverLog":
                   arg = document.location.origin + "/files/templates/DriverLog.php?ID=" + document.querySelector("#ID").value;
                   arg = encodeURIComponent(arg);
-                  query = "type=DriverLog&saveto=invoices/DL&ID=" + id + "&url=" + arg;
+                  query = "type=DriverLog&saveto=driver-logs/DL&ID=" + id + "&url=" + arg;
 
+                  break;
+               case "DriverLogExternal":
+                  arg = document.location.origin + "/files/templates/" + simple.options.DriverLogExternal.href;
+                  arg =encodeURIComponent(arg);
+                  query = "type=DriverLogExternal&saveto=driver-logs/DL&ID=" + id + "&url=" + arg;
                   break;
             }
             let url = `/tools/mkpdf/?${query}`;
@@ -567,23 +638,6 @@ if ($in['ID']) {
             */      
          }
       }
-      function makePDF(what, id) {
-         if (!what) {
-            what = $("#what").val();
-         }
-
-         if (!id && what == "InvoiceReport") {
-            id = "<?= $InvID ?>";
-         } else if (!id) {
-            id = "<?= $in['ID'] ?>";
-         }
-         
-         var query = "saveto=invoices/&ID=" + id + "&url=" + document.location.origin + "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
-         url = "/tools/mkpdf/?" + query;
-         console.log("pdf url: " + url);
-         $("#viewer").attr("src", url);
-         return false;
-      }
 
       function viewDoc(what) {
          if (!what) {
@@ -592,21 +646,22 @@ if ($in['ID']) {
          var id;
 
          if (what == "InvoiceReport") {
-            document.querySelector("#doctype").innerHTML = "Invoice: ";
+            document.querySelector("#doctype").innerHTML = "Invoice: &nbsp;";
             document.querySelector("#docval").innerHTML = "<?= $InvID ?>";
             id = "<?= $InvID ?>";
          } else if (what == "MasterInvoice") {
-            document.querySelector("#doctype").innerHTML = "Master Invoice: ";
+            document.querySelector("#doctype").innerHTML = "Master Invoice: &nbsp;";
             document.querySelector("#docval").innerHTML = "<?= $parent_id ?>";
 
             id = "<?= $parent_id ?>";
          } else {
-            document.querySelector("#doctype").innerHTML = what;
+            document.querySelector("#doctype").innerHTML = what + ': &nbsp;';
             document.querySelector("#docval").innerHTML = "<?= $in['ID'] ?>";
             id = "<?= $in['ID'] ?>";
          }
          //url = "/files/templates/" + what + ".php?z=" + btoa("ID=" + id);
-         url = "/files/templates/" + what + ".php?ID=" + id;
+         //url = "/files/templates/" + what + ".php?ID=" + id;
+         url = "/files/templates/" + simple.options[what].href;
          $("#viewer").attr("src", url);
 
       }
@@ -634,8 +689,23 @@ if ($in['ID']) {
          const dayfmt = new Intl.DateTimeFormat("en-US", { day: "2-digit" });
          const timefmt = new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
          
-         let senton = now.getFullYear + '-' + mofmt.format(now) + '-' + dayfmt.format(now) + ' ' + timefmt.format(now);
-         let out = { "Invoice": [{ InvoiceID: `${id}`, InvoiceSent: 1, SentOn: senton, SentTo: document.querySelector("#To").value, Notes: `${json.Notes}\nInvoice PDF emailed by ${session.Login.Email} on ${now.toLocaleDateString()} ${now.toLocaleTimeString()}` }] };
+         let senton = now.getFullYear() + '-' + mofmt.format(now) + '-' + dayfmt.format(now) + ' ' + timefmt.format(now);
+         let out = { 
+            "Invoice": [
+               { 
+                  InvoiceID: `${id}`,
+                  InvoiceSent: 1,
+                  SentOn: senton,
+                  SentTo: document.querySelector("#To").value,
+                  Notes: `${json.Notes}\nInvoice PDF emailed to ${document.querySelector("#To").value} by ${session.Login.Email} on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}` }
+            ]
+/*            "Sent": {
+               "new1": {
+                  Sent: 
+               }
+            }
+*/            
+         };
 
          let qs = encodeURIComponent(JSON.stringify(out));
          let url = `/grid/ctl.php?x=save&rsc=Invoice&ID=${id}&InvoiceID=${id}&json=${qs}`;
