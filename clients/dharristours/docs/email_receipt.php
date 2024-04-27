@@ -4,10 +4,15 @@ include("/simple/lib/boss_class.php");
 $boss = new boss("dharristours.simpsf.com");
 
 $in = $_REQUEST;
-$in['pid'] = 5;
 
-if (isset($in['pid'])) {
+if (isset($in['pid']) && ($in['pid'] != 0)) {
     $payment = $boss->getObjectRelated("Payment", $in['pid']);
+}
+if (isset($in['id']) && ($in['id'] != 0)) {
+    $job = $boss->getObjectRelated("Job", $in['id']);
+    if (isset($job) && isset($job->related_Invoice)) {
+        $invoice = $job->related_Invoice[0];
+    }
 }
 /*
 InvoiceID JobID Name Email Phone Date JobDate PaymentDate Business QuoteAmount Amount Balance ADA RoundTrip Pax Shuttle Text
@@ -22,7 +27,7 @@ $out->Phone = $business->Phone;
 $out->PaymentDate = $payment->PaymentDate;
 $out->Business = $business->Business;
 $out->InvoiceIDs = preg_replace("/,/", ', ', $payment->InvoiceIDs);
-$out->Amount = $payment->Amount;
+$out->Amount = ($payment->Amount) ? $payment->Amount : $invoice->PaidAmt;
 $out->ADA = '';
 $out->RoundTrip = '';
 $out->Pax = '';
@@ -55,6 +60,7 @@ $rowtpl = <<<EOT
     <td class="tbl-label" style="text-align:right;vertical-align:top;padding:0.5em;background-color:#fff;border-left:1px solid #0003;border-bottom:1px solid #0003;">\${{Balance}}</td>
 </tr>
 EOT;
+
     $totpaid = 0; $totdue = 0; $totbal = 0;
     foreach ($payment->related_Invoice as $inv) {
         $job = $boss->getObject("Job", $inv->JobID);
