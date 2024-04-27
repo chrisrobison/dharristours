@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * { padding: 0; margin: 0; box-sizing: border-box; }
+        body {
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color:#222;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #eee;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+        }
+        input, select {
+            font-size: 20px;
+            font-weight: 300;
+            font-family: "Lexend", "Helvetica", sans-serif;
+        }
+        label {
+            font-size: 20px;
+            margin-right: 0.5rem;
+            margin-left: 1rem;
+        }
+        header form {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: #046;
+            padding: 1rem;
+            width: 100vw;
+        }
+        button {
+            padding: 0.25rem 1rem;
+            font-size: 24px;
+            border-radius: 1rem;
+        }
+        #tripreport {
+            background-color:#fff;
+            font-size: 18px;
+            color: #000;
+            width: 100vw;
+        }
+
+        #tripreport th {
+            background-color:#000;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 300;
+            padding: 0.25rem 0.5rem;
+        }
+        #tripreport td {
+            font-size: 16px;
+            font-weight: 300;
+            vertical-align: top;
+        }
+        .StartTime, .EndTime, .Downtime, .Duration, .Standstill, .DrivingTime {
+            text-align: center;
+        }
+        .Day { white-space: nowrap; }
+        #tripreport td {
+            padding-bottom: 1rem;
+            padding-right: 1rem;
+        }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<header>
+    <form onsubmit="return false" style="display:flex;width:100vw;justify-content:space-between;">
+        <div><h1>Trip Report Viewer</h1></div>
+        <div><label for="date">Report Date</label><input onchange="app.doTripReport()" type="date" name="date" id="date"></div>
+        <div>
+            <label for="vehicle">Vehicle</label>
+            <select name="vehicle" id="vehicle" onchange="app.doTripReport()">
+                
+            </select>
+
+        </div>
+        <div>
+            <button onclick="app.doTripReport(); return false">Go</button>
+        </div>
+    </form>
+</header>
+<main>
+<div style="display:flex; justify-content:space-evenly;width:100%;background:#00283b;">
+    <h1 id="tripvehicle"></h1>
+    <h1 id="tripdate"></h1>
+</div>
+<table id="tripreport"></table>
+</main>
+<script>
+const $ = str => document.querySelector(str);
+const $$ = str => document.querySelectorAll(str);
+
+(function() {
+    const app = {
+        data: {},
+        state: {
+            loaded: false
+        },
+        async init() {
+            let now = new Date();
+            
+            let vehicles = await app.getTripVehicles();
+            
+            let qp = location.search.replace(/^\?/, '').split(/&/);
+            let query = {};
+            qp.forEach(item=>{
+                let p = item.split(/=/);
+                query[p[0]] = p[1];
+            });
+            
+            for (let i=0; i<vehicles.Vehicles.length; i++) {
+                let bus = vehicles.Vehicles[i];
+
+                let el = document.createElement("option");
+                el.value = bus;
+                el.text = `Bus #${bus}`;
+
+                $("#vehicle").append(el);
+            }
+            
+
+            if (query['date']) $("#date").value = query['date'];
+            if (query['bus']) $("#vehicle").value = query['bus'];
+            
+            if (!query['date']) {
+                let ms = new Date().getTime();
+                let yesterday = new Date(ms - 86400000);
+                $("#date").value = yesterday.toISOString().substring(0, 10);
+            }
+            app.doTripReport();
+            app.state.loaded = true;
+        },
+        async getTripVehicles() {
+            
+            let raw = await fetch(`/portal/api.php?type=tripVehicles`);
+            let obj = await raw.json();
+
+            app.data.vehicles = obj.Vehicles;
+
+            return obj;
+        },
+        async  getTripReports(day, vehicle="4602") {
+            if (!day) {
+                day = new Date().toISOString.substring(0, 10);
+            }
+
+            let raw = await fetch(`/portal/api.php?type=tripReports&day=${day}&vehicle=${vehicle}`);
+            let obj = await raw.json();
+
+            app.data.reports = obj.TripReports;
+            console.log("Got Trip Reports:");
+            console.dir(obj);
+            return obj.TripReports;
+        },
+        ms2time(ms) {
+            let out;
+            if (ms) {
+                let sec = Math.floor(ms / 1000);
+                let min = Math.floor(sec / 60);
+                let hr = Math.floor(min / 60);
+
+                min = min - (hr * 60);
+                
+                if (hr < 10) { hr = '0' + hr; }
+                if (min < 10) { min = '0' + min; }
+
+                out = `${hr}:${min}`;
+            }
+            return out;
+        },
+        async doTripReport() {
+            let day = $("#date").value;
+            let bus = $("#vehicle").value;
+            
+            $("#tripvehicle").innerHTML = `Bus #${bus}`;
+            $("#tripdate").innerHTML = day;
+
+            let trips = await app.getTripReports(day, bus);
+            let timekeys = [ 'StartTime', 'EndTime', 'Downtime', 'Duration', 'Standstill', 'DrivingTime' ];            
+            let keys = [ 'StartLocation', 'EndLocation', 'Distance', 'StartTime', 'EndTime', 'Duration', 'Standstill', 'DrivingTime' ];
+            
+            let out = "<thead><tr>";
+            keys.forEach(key=>{
+                let showkey = key.replace(/([a-z])([A-Z])/g, "$1 $2");
+                out += `<th>${showkey}</th>`;
+            });
+            out += "</tr></thead><tbody>";
+console.dir(trips);
+            if (trips) {
+                for (let i=0; i<trips.length; i++) {
+                    let trip = trips[i];
+
+                    if (!trip.StartLocation.match(/odometer corrected/i)) {
+                        out += "<tr>";
+
+                        keys.forEach(key=>{
+                            let val = trip[key];
+                            if (timekeys.includes(key)) {
+                                val = app.ms2time(val); //Math.floor((((val / 1000) / 60) / 60) * 10) / 10;
+                            }
+                            if (key === "Vehicle") {
+                                val = bus;
+                            }
+                            if ((key == "StartLocation") || (key == "EndLocation")) {
+                                val = val.replace(/,\s*US$/, '').replace(/,/g, "<br>\n");
+                            }
+
+                            if ((key == "StartTime") || (key == "EndTime")) {
+                                let tp = val.split(/\:/);
+                                let xm = "am";
+                                if (tp && (tp[0] > 12)) {
+                                    tp[0] -= 12;
+                                    xm = "pm";
+                                }
+                                val = tp.join(":") + xm;
+                            }
+                            out += `<td class='${key}'>${val}</td>`;
+                        });
+                        out += "</tr>";
+                    }
+                }
+            }
+            out += "</tbody>";
+            
+            let report = document.createElement("table");
+
+            
+            report.className = "report";
+            report.innerHTML = out;
+            console.log(out);
+            $("#tripreport").innerHTML = out;
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
+
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
+
+</html>
