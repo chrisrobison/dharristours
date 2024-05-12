@@ -11,9 +11,13 @@
         $sql = "select * from Address where FullAddress like '%{$in['q']}%' LIMIT 10;";
         $results = mysqli_query($link, $sql);
         $records = array();
+        $seen = array();
 
         while ($row = mysqli_fetch_object($results)) {
-            $out .= '<li role="option" data-autocomplete-value="'.$row->FullAddress.'" data-coord="['.$row->Longitude.','.$row->Latitude.']">'.$row->FullAddress.'</li>';
+            if (!isset($seen[$row->FullAddress])) {
+                $out .= '<li role="option" data-autocomplete-value="'.$row->FullAddress.'" data-coord="['.$row->Longitude.','.$row->Latitude.']">'.$row->FullAddress.'</li>';
+            }
+            $seen[$row->FullAddress] = $row->Longitude.':'.$row->Latitude;
         }
         print $out;
         
@@ -23,7 +27,10 @@
         $records = array();
 
         while ($row = mysqli_fetch_object($results)) {
-            $out .= '<li role="option" data-autocomplete-value="'.$row->FullAddress.'" data-coord="['.$row->Longitude.','.$row->Latitude.']">'.$row->FullAddress.'</li>';
+            if (!isset($seen[$row->FullAddress])) {
+                $out .= '<li role="option" data-autocomplete-value="'.$row->FullAddress.'" data-coord="['.$row->Longitude.','.$row->Latitude.']">'.$row->FullAddress.'</li>';
+            }
+            $seen[$row->FullAddress] = $row->Longitude.':'.$row->Latitude;
         }
         print $out;
         

@@ -64,6 +64,9 @@
     }
     .main-footer {
     }
+    div#switcher {
+        transition: all 500ms linear;
+    }
 
     .navbar-nav[role=tablist] .nav-item {
         border-right: 1px solid #0006;
@@ -79,6 +82,18 @@
         top: 5px;
         box-shadow: -2px 0px 2px #0003;
         z-index: 999;
+    }
+    .switchtoggle {
+        display: inline-block;
+        transform: rotate(-90deg);
+        transition: all 300ms linear;
+    }
+    .switched {
+        display: inline-block;
+        transform: rotate(0deg);
+    }
+    div#switcher.hideswitcher {
+        display: none;
     }
     </style>
 </head>
@@ -183,18 +198,23 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="flex-direction:column;">
-                    <div style="display:flex;flex-direction:row;">
-                        <div class="user" style="background:#ccc;color:#000;font-weight:bold;font-family:'Lexend',sans-serif;padding:0;display:flex;width:2em;height:2em;border-radius:50%;align-items:center;justify-content:center;margin-right:0.5rem;">
-                        <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
-                       <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
+                    <div style="display:flex;flex-direction:row;justify-content:space-between;">
+                        <div style="display:flex;">
+                            <div class="user" style="background:#ccc;color:#000;font-weight:bold;font-family:'Lexend',sans-serif;padding:0;display:flex;width:2em;height:2em;border-radius:50%;align-items:center;justify-content:center;margin-right:0.5rem;">
+                            <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
+                           <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
+                            </div>
+                            <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
                         </div>
-                        <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
+                        <div>
+                            <a href="#" class="switchtoggle" onclick="document.querySelector('#switcher').classList.toggle('hideswitcher');this.classList.toggle('switched'); return false;"><i class="right fas fa-angle-left"></i></a>
+                        </div>
                     </div>
-                    <div class="info">
+                    <div id="switcher" class="info">
                         <?php
                             if ($_SESSION['Login']->Admin == 1) {
                                print '<label for="SwitchUser">Switch Login</label><br><select id="SwitchUser" onchange="app.switchUser(event, this.options[this.selectedIndex].value)">';
-                               $logins = $boss->get("Login", "Active=1");
+                               $logins = $boss->get("Login", "Active=1 ORDER BY LastName, FirstName");
                                foreach ($logins as $login) {
                                     $sel = ($_SESSION['Login']->LoginID == $login->LoginID) ? " SELECTED" : "";
 

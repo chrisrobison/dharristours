@@ -196,9 +196,12 @@
             for (let i=0; i<addrs.length; i++) {
                 let addr = addrs[i];
                 let wpcoord = await app.geocodeAddress(addr);
-                let mrk = L.marker([wpcoord['latitude'], wpcoord['longitude']]);
-                mrks.addLayer(mrk);
-                if (wpcoord) coord.push([wpcoord["longitude"], wpcoord["latitude"]]);
+                if (wpcoord) {
+                    let mrk = L.marker([wpcoord['latitude'], wpcoord['longitude']]);
+
+                    mrks.addLayer(mrk);
+                    coord.push([wpcoord["longitude"], wpcoord["latitude"]]);
+                }
 
             }
             let myobj = { coordinates: coord };
@@ -367,7 +370,6 @@ el.appendChild(ac);
             
             req.Destination = wps.join("|");
             req.Return = app.data.stops.FinalDropOff.address;
-            req.Request = "Quote request for " + app.data.session.Business.Business;
             req.Start = document.querySelector("#Start").value;
             req.End = document.querySelector("#End").value;
             req.RoundTrip = (document.querySelector("#input_RoundTrip").checked) ? true : false;
@@ -377,6 +379,8 @@ el.appendChild(ac);
             req.Pax = document.querySelector("#Passengers").value;
             req.Date = document.querySelector("#Date").value;
             req.Notes = document.querySelector("#Notes").value;
+
+            req.Request = `Quote ${req.Pax} PAX, ${req.Date} for ${app.data.session.Business.Business} (${app.data.session['Login'].Email})`;
             req.BusinessID = app.data.session["BusinessID"];
             req.Times = JSON.stringify(times);
 
@@ -385,7 +389,7 @@ el.appendChild(ac);
             req.Email = app.data.session['Login'].Email;
 
             app.postData("/portal/api.php?type=makeRequest", { data: req }).then(data=>{
-                if (data.newid) {
+                if (data.newid && parent.app && parent.app.loadTab) {
                     parent.app.loadTab(`/portal/trips/view-quote.php?id=${data.newid}`, `Quote ${data.newid}`, `quote${data.newid}`, true, event);;
                 }
             });;
@@ -675,7 +679,7 @@ el.appendChild(ac);
             tmpAddress = address.replace(/SF/g, "San Francisco");
             // tmpAddress = tmpAddress.replace(/\s*CA\s*/g, "");
             tmpAddress = tmpAddress.replace(/\(.*/, '');
-            let parts = tmpAddress.split(/,/);
+            let parts = tmpAddress.split(/,\s*/);
             console.log(`cleaning: ${tmpAddress}`);
             console.dir(parts);
             if (matches = address.match(/(\d+\s[^,]+),\s*([^,]+)/)) {
@@ -687,6 +691,7 @@ el.appendChild(ac);
                 }
 
                 cleanTxt = matches[1] + ', ' + city + ', CA';
+
                 return cleanTxt;
             }
             
@@ -734,6 +739,7 @@ el.appendChild(ac);
                     }
                 }
             }
+            if (!cleanTxt) cleanTxt = address;
             return cleanTxt;
         },
         geocodeAddress: async function(address) {

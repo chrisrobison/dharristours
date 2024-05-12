@@ -168,7 +168,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <form onsubmit="return false;">
+    <form onsubmit="return false;" style="display:flex;">
     <input type="range" id="history" name="history" min="0" max="100" onchange="app.showHistory(this.value)" /><button style='font-size:1.1em' class='control' onclick='return app.playHistory(event)'>▸</button><button class='control' onclick='return app.stopHistory(event)'>◼</button><span id="currentTime"></span>
     </form>
 <script>
@@ -526,15 +526,15 @@ if ($results = mysqli_query($link, $sql)) {
             INCIDENT: L.icon({
                 iconUrl: '/portal/assets/img/accident2.svg',
                 shadowUrl: '/portal/assets/img/accident_shadow.svg',
-                iconSize:     [32, 32], // size of the icon
-                shadowSize:   [34, 34], // size of the shadow
-                iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
-                shadowAnchor: [16, 16],  // the same for the shadow
+                iconSize:     [16, 16], // size of the icon
+                shadowSize:   [18, 18], // size of the shadow
+                iconAnchor:   [0, 16], // point of the icon which will correspond to marker's location
+                shadowAnchor: [0, 18],  // the same for the shadow
                 popupAnchor:  [-3, -10]
             }),
             SPECIAL_EVENT: L.icon({
-                iconUrl: '/portal/assets/img/event.png',
-                shadowUrl: '/portal/assets/img/event-shadow.png',
+                iconUrl: '/portal/assets/img/event.svg',
+                //shadowUrl: '/portal/assets/img/event-shadow.svg',
                 iconSize:     [38, 95], // size of the icon
                 shadowSize:   [50, 64], // size of the shadow
                 iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location

@@ -1,16 +1,16 @@
 <?php
 
-    include((($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/.env');
-
+    include((isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '/simple') . '/.env');
+    
     $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");
     $in = $_REQUEST;
     
     $abbrevMatch = array('/Street/', '/Avenue/', '/Road/', '/Highway/', '/Boulevard/', '/Court/', '/Circle/');
     $abbrevReplace = array('St', 'Ave', 'Rd', 'Hwy', 'Blvd', 'Ct', 'Cir');
     $in['addr'] = preg_replace($abbrevMatch, $abbrevReplace, $in['addr']);
-    $in['addr'] = preg_replace("/\s/", '%', $in['addr']);
+    $in['addr'] = "%" . preg_replace("/\s/", '%', $in['addr']) . "%";
     
-    $parts = preg_split("/\,/", $in['addr']);
+    $parts = preg_split("/[\,\s]+/", $in['addr']);
     
     $search = array();
     foreach ($parts as $idx=>$part) {
