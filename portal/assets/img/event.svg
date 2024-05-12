@@ -1,0 +1,43 @@
+<svg viewBox="0 0 123.099 159.999" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient id="a">
+      <stop stop-color="#909090" offset="0"></stop>
+      <stop stop-color="#c6c6c6" offset="1"></stop>
+    </linearGradient>
+    <linearGradient id="b">
+      <stop offset="0" style="stop-color: rgb(146, 0, 0);"></stop>
+      <stop offset="0.08" style="stop-color: rgb(255, 0, 0);"></stop>
+      <stop offset="0.13" style="stop-color: rgb(235, 11, 11);"></stop>
+      <stop offset="0.173" style="stop-color: rgb(211, 24, 24);"></stop>
+      <stop offset="0.538" style="stop-color: rgb(144, 1, 1);"></stop>
+      <stop offset="0.781" style="stop-color: rgb(255, 30, 30);"></stop>
+      <stop offset="1" style="stop-color: rgb(216, 23, 23);"></stop>
+    </linearGradient>
+    <linearGradient id="g" x1="256.9" x2="245.31" y1="392.52" y2="257.35" gradientTransform="matrix(.57075 .1435 -.026882 .017748 -123.79 -17.242)" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient>
+    <linearGradient id="f" x1="247.36" x2="255.99" y1="323.74" y2="323.62" gradientTransform="matrix(.58308 .30094 0 .65616 -136.66 -206.66)" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient>
+    <linearGradient id="e" x1="247.36" x2="255.99" y1="323.74" y2="323.62" gradientTransform="matrix(.28213 -.30096 0 .65616 -57.103 -55.865)" gradientUnits="userSpaceOnUse" xlink:href="#a"></linearGradient>
+    <linearGradient id="c" x1="5.7277" x2="78.561" y1="52.198" y2="52.714" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.789446, 0, 0, 1, 1.206051, 0)" xlink:href="#b"></linearGradient>
+    <filter id="drop-shadow-filter-0" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%" bx:preset="drop-shadow 1 6 5 2 0.5 rgba(0,0,0,0.3)">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur>
+      <feOffset dx="6" dy="5"></feOffset>
+      <feComponentTransfer result="offsetblur">
+        <feFuncA id="spread-ctrl" type="linear" slope="1"></feFuncA>
+      </feComponentTransfer>
+      <feFlood flood-color="rgba(0,0,0,0.3)"></feFlood>
+      <feComposite in2="offsetblur" operator="in"></feComposite>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="matrix(1.992618, 0, 0, 1.992618, -29.992259, -59.898008)">
+    <defs></defs>
+    <g transform="matrix(.87512 0 0 .87512 10.039 10.347)" style="filter: url(#drop-shadow-filter-0);">
+      <path d="m8.9466 22.526 6.1693 1.7557-3.0451 3.2504-5.458-3.0729 2.3339-1.9331z" fill="url(#g)" style=""></path>
+      <path d="m6.6033 24.45 6.0015 3.0976-0.35008 86.692-5.6514-2.8642v-86.925z" fill="url(#f)" style=""></path>
+      <path d="m12.218 27.355 2.904-3.0978v86.925l-2.904 3.0978v-86.925z" fill="url(#e)" style=""></path>
+      <path d="M 5.728 29.14 C 5.728 29.14 31.447 26.692 38.88 37.67 C 50.796 55.268 76.321 46.856 76.321 46.856 C 76.321 46.856 60.899 83.398 40.434 69.822 C 29.474 62.551 6.247 66.541 6.247 66.541 L 5.728 29.14 Z" fill="url(#c)" fill-rule="evenodd" style="stroke-width: 0.789;"></path>
+    </g>
+  </g>
+</svg>
