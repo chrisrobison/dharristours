@@ -29,7 +29,7 @@
                 $out = getBusinesses($link, $in);
                 break;
             case "business":
-                $out = getBusiness($link, $in);
+                $out = getBusiness($link, $in['id']);
                 break;
             case "login":
                 $out = doLogin($link, $in);
@@ -45,6 +45,9 @@
                 break;
             case "buses":
                 $out = getBuses($link, $in);
+                break;
+            case "bus":
+                $out = getBus($link, $in);
                 break;
             case "jobs":
                 $out = getJobs($link, $in);
@@ -63,6 +66,12 @@
                 break;
             case "updateColor":
                 $out = updateColor($link, $in);
+                break;
+            case "itenerary":
+                $out = getItenerary($link, $in);
+                break;
+            case "addresses":
+                $out = getAddresses($link, $in);
                 break;
             case "saveRouteMap":
                 $out = saveRouteMap($link, $in);
@@ -108,15 +117,79 @@
             case "makePayment":
                 $json = file_get_contents('php://input');
                 $data = json_decode($json, true);
+                file_put_contents("/tmp/makePayment.log", $json, FILE_APPEND);
+
                 $out = makePayment($link, $data);
+                break;
+            case "futureWork":
+                $out = sumFutureWork($link);
+                break;
+            case "tripReports":
+                $out = getTripReports($link, $in);
+                break;
+            case "tripVehicles":
+                $out = getTripReportVehicles($link, $in);
+                break;
+            case "saveOvertime":
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
+                file_put_contents("/tmp/saveovertime.log", $json, FILE_APPEND);
+                $out = saveOvertime($link, $data);
+
+                break;
             }
+            
 
         file_put_contents("/tmp/portal-api.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
         
         header("Content-type: application/json; charset=utf-8");
         print json_encode($out);
     }
-    
+   
+    function getTripReports($link, $in) {
+        $date = (isset($in['day'])) ? date("Y-m-d", strtotime($in['day'])) : date("Y-m-d");
+        
+        if (isset($in['vehicle'])) {
+            $cond = " AND Vehicle like '%{$in['vehicle']}%'";
+        }
+
+        $sql = "SELECT * FROM TripReport WHERE Day='{$date}'" . $cond;
+        $results = mysqli_query($link, $sql);
+
+        $out = new stdClass();
+        
+        if ($results) {
+            $arr = [];
+            while ($row = mysqli_fetch_object($results)) {
+                $arr[] = $row;
+            }
+            $out->TripReports = $arr;
+            $out->Status = "ok";
+        }
+        return $out;
+    }
+
+ 
+    function getTripReportVehicles($link, $in) {
+        $sql = "SELECT distinct(Vehicle) as Vehicle from TripReport";
+        $results = mysqli_query($link, $sql);
+
+        $out = new stdClass();
+        if ($results) {
+            $vehicles = [];
+            while ($row = mysqli_fetch_object($results)) {
+                if (isset($row->Vehicle)) {
+                    if (preg_match("/^(\d\d\d\d)/", $row->Vehicle, $m)) {
+                        $vehicles[] = $m[1];
+                    }
+                }
+            }
+            $out->Vehicles = $vehicles;
+            $out->Status = "ok";
+        }
+        return $out;
+    }
+
     function getJob($link, $in) {
         $cond = array();
         if (isset($in['cond'])) {
@@ -130,7 +203,8 @@
         $results = mysqli_query($link, $sql);
         
         if ($results) {
-            $out = $results->fetch_assoc();
+            $out = mysqli_fetch_object($results);
+           
         }
         
         return $out;
@@ -219,7 +293,7 @@
         }
 
         $sql = "UPDATE Login set ".join(", ", $upd)." WHERE LoginID='{$_SESSION['LoginID']}';";
-print $sql;
+
         file_put_contents("/tmp/geocode.log", $sql."\n", FILE_APPEND);
         $results = mysqli_query($link, $sql);
         
@@ -474,17 +548,18 @@ print $sql;
     }
         
     function getBusiness($link, $id) {
-        $sql = "SELECT * from Job where JobID='".$id."'";
+        global $in;
+        $out = new stdClass();
 
-        $results = mysqli_query($link, $sql);
-        
-        if ($results) {
-            $out = $results->fetch_assoc();
-            $out['PickupTime'] = date("g:ia", strtotime($out['PickupTime']));
-            $out['DropOffTime'] = date("g:ia", strtotime($out['DropOffTime']));
+        if (isset($id)) {
+            $sql = "SELECT * from Business where BusinessID='".$id."'";
+
+            $results = mysqli_query($link, $sql);
             
+            if ($results) {
+                $out = mysqli_fetch_object($results);
+            }
         }
-
         return $out;
     }
      function getEvent($link, $id) {
@@ -502,6 +577,33 @@ print $sql;
         return $out;
     }
     
+    function getBus($link, $in) {
+        $sql = "SELECT * FROM Bus";
+
+        if ($in['BusID']) {
+            $sql .= " WHERE BusID={$in['BusID']}";
+        }
+        $results = mysqli_query($link, $sql);
+        $out = mysqli_fetch_assoc($results);
+        
+        return $out;
+    }
+
+    
+    function getAddresses($link, $in) {
+        $sql = "select distinct(WebfleetAddress) as Address, WebfleetAddressID, Latitude, Longitude from WebfleetAddress";
+
+        if ($in['id']) {
+            $sql .= " WHERE WebfleetAddressID={$in['WebfleetAddressID']}";
+        }
+        $results = mysqli_query($link, $sql);
+        $out = array();
+        while ($row = mysqli_fetch_assoc($results)) {
+            $out[] = $row;
+        }
+        return $out;
+    }
+
     function getBuses($link, $in) {
         $sql = "SELECT BusID, Bus, Capacity, BusNumber, Capacity, InService from Bus";
 
@@ -559,7 +661,7 @@ print $sql;
         if (array_key_exists("bid", $in)) {
           $bid = $in['bid'];
         }
-        $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions FROM Job where JobDate>='{$first}' AND JobDate<='{$last}' AND JobCancelled=0 AND BusinessID={$bid}";
+        $sql = "SELECT JobID, Job.Job as Job, Job.JobDate as JobDate, Job.BusID as BusID, PickupTime, DropOffTime, PickupLocation, DropOffLocation, NumberOfItems, Job.BusID as BusID, SpecialInstructions FROM Job where JobDate>='{$first}' AND JobDate<='{$last}' AND JobCancelled=0 AND BusinessID={$bid}";
         $results = mysqli_query($link, $sql);
         
         while ($row = $results->fetch_assoc()) {
@@ -795,7 +897,7 @@ print $sql;
     function getBusinessJobs($link, $in) {
 
         global $boss;
-        $cond = ['NoInvoice=0'];
+//        $cond = ['NoInvoice=0'];
         if (isset($in['bid'])) {
             $cond[] = "BusinessID='{$in['bid']}'";
         }
@@ -828,37 +930,97 @@ print $sql;
         }
         return $out;
     }
+    function logit($method, $msg) {
+        $now = date("Y-m-D H:i:s");
+        file_put_contents("/tmp/api.log", $now . "\t$method\t$msg\n", FILE_APPEND);
+    }
+
     function makePayment($link, $data) {
         global $in;
         global $boss;
 
         $results = $boss->storeObject($data);
-        $payids = array_values($results);
-        $payid = $payids[0];
+        if ($results) {
+            $payids = array_values($results);
+            $payid = $payids[0];
+        }
+logit('makePayment', "Added Payment {$payid}");
 
         if (isset($data->Payment->new1->InvoiceIDs)) {
-            $ids = preg_split("/\,/", $data->Payment->new1->InvoiceIDs);
+            if (is_array($data->Payment->new1->InvoiceIDs)) {
+                $ids = $data->Payment->new1->InvoiceIDs;
+            } else {
+                $ids = preg_split("/\,/", $data->Payment->new1->InvoiceIDs);
+            }
             if ($ids) {
                 foreach ($ids as $id) {
+                    logit('makePayment', "Clamping Payment $payid to Invoice $id");
                     $boss->clampRecord('Payment', $payid, 'Invoice', $id);
                 }
             }
         }
         
         if (isset($data->Payment->new1->JobIDs)) {
-            $ids = preg_split("/\,/", $data->Payment->new1->JobIDs);
+            if (is_array($data->Payment->new1->JobIDs)) {
+                $ids = $data->Payment->new1->JobIDs;
+            } else {
+                $ids = preg_split("/\,/", $data->Payment->new1->JobIDs);
+            }
+
             if ($ids) {
                 foreach ($ids as $id) {
+                    logit('makePayment', "Clamping Payment $payid to Job $id");
                     $boss->clampRecord('Payment', $payid, 'Job', $id);
                 }
             }
         }
 
         if (isset($data->Payment->new1->BusinessID)) {
+            logit('makePayment', "Clamping Payment $payid to Business {$data->Payment->new1->BusinessID}");
             $boss->clampRecord('Payment', $payid, 'Business', $data->Payment->new1->BusinessID);
         }
 
         $out = new stdClass();
         $out->results = $results;
+        $out->status = "ok";
+        return $out;
+    }
+    function sumFutureWork($link) {
+        $future = date("Y-m-d", strtotime("2 years"));
+        $sql = "SELECT SUM(QuoteAmount) AS Amount, COUNT(QuoteAmount) AS Jobs FROM Job WHERE JobCancelled=0 AND NoInvoice=0 AND JobDate>now() AND JobDate<'{$future}'";
+        $results = mysqli_query($link, $sql);
+
+        $out = mysqli_fetch_object($results);
+        $out->Amount = sprintf("%.02f", $out->Amount);
+        return $out;
+    }
+
+    function getItenerary($link, $in) {
+        global $boss;
+        $cond = "";
+
+        if (isset($in['EmployeeID'])) {
+            $cond .= "EmployeeID='{$in['EmployeeID']}'";
+        }
+        
+        if (isset($in['Date'])) {
+            $cond .= " AND JobDate='{$in['Date']}'";
+        }
+        $obj = $boss->getObjectRelated("Job", $cond);
+        $out = [];
+
+        if (isset($obj->Job)) {
+            foreach ($obj->Job as $job) {
+                if (isset($job->JobID)) {
+                    $new = new stdClass();
+                    $new->JobID = $job->JobID;
+
+                    $pickup = strtotime($job->JobDate . ' ' . $job->PickupTime);
+                    $dropoff = strtotime($job->JobDate . ' ' . $job->DropOffTime);
+                    
+                    $new->PickupTime = date("h:i", $pickup);
+                }
+            }
+        }
         return $out;
     }
