@@ -7,7 +7,11 @@ if (isset($in['pid'])) {
     $in['rsc'] = $process->Resource;
 }
 
-if (isset($in['rsc'])) {
+if (isset($in['rel']) && isset($in['rsc']) && isset($in['id']) && ($in['id'] !== "0")) {
+    $results = $boss->getObjectRelated($in['rsc'], $in['id']);
+    $clamp = $boss->db->{$in['rsc']}->getClamped($in['rsc'], $in['id']);
+    $results->clamped = $clamp;
+} else if (isset($in['rsc'])) {
     $results = $boss->getObject($in['rsc'], $in['id']);
 }
 
