@@ -109,6 +109,22 @@
     a.nav-link.active > i {
         filter: invert(1);
     }
+    div#switcher {
+        transition: all 500ms linear;
+    }
+
+    div#switcher.hideswitcher {
+        display: none;
+    }
+    .switchtoggle {
+        display: inline-block;
+        transform: rotate(-90deg);
+        transition: all 300ms linear;
+    }
+    .switched {
+        display: inline-block;
+        transform: rotate(0deg);
+    }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
@@ -216,25 +232,30 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="flex-direction:column;">
-                    <div style="display:flex;flex-direction:row;">
-                        <div class="user">
-                        <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
-                       <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
+                    <div style="display:flex;flex-direction:row;justify-content:space-around;">
+                        <div style="display:flex;">
+                            <div class="user">
+                            <!--img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"-->
+                           <?php print $_SESSION['Login']->FirstName[0] . $_SESSION['Login']->LastName[0]; ?> 
+                            </div>
+                            <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
                         </div>
-                        <a href="#" class="d-block"><?php print $_SESSION['Login']->FirstName." ".$_SESSION['Login']->LastName; ?></a>
+                        <div>
+                            <a href="#" class="switchtoggle switched" onclick="document.querySelector('#switcher').classList.toggle('hideswitcher');this.classList.toggle('switched'); return false;"><i class="right fas fa-angle-left"></i></a>
+                        </div>
                     </div>
-                    <div class="info">
+                    <div id="switcher" class="info hideswitcher">
                         <?php
                             if ($_SESSION['Login']->Admin == 1) {
-                               print '<label for="SwitchUser">Switch Login</label><br><select id="SwitchUser" onchange="app.switchUser(event, this.options[this.selectedIndex].value)">';
-                               $logins = $boss->get("Login", "Active=1");
+                               print '<label for="SwitchUser">Switch Login</label><br><select style="width:13rem;" id="SwitchUser" onchange="app.switchUser(event, this.options[this.selectedIndex].value)">';
+                               $logins = $boss->get("Login", "Active=1 ORDER BY FirstName, LastName");
                                foreach ($logins as $login) {
                                     $sel = ($_SESSION['Login']->LoginID == $login->LoginID) ? " SELECTED" : "";
 
-                                    print "<option value='{$login->Email}'$sel>{$login->LastName}, {$login->FirstName}</option>\n";
+                                    print "<option value='{$login->Email}'$sel>{$login->FirstName} {$login->LastName}</option>\n";
                                }
                                print "</select><br>";
-                               print '<label for="Business">Business</label><br><select id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
+                               print '<label for="Business">Business</label><br><select style="width:13rem;" id="Business" onchange="app.override(this.options[this.selectedIndex].value)">';
                                 
                                 $businesses = $boss->get("Business", "1=1  ORDER BY Business");
                                 foreach ($businesses as $business) {
