@@ -1,13 +1,14 @@
 <?php
    require_once(($_SERVER['DOCUMENT_ROOT']?$_SERVER['DOCUMENT_ROOT']: '../..').'/lib/auth.php');
    require_once("dbtool_class.php");
-
+   include("/simple/.env");
    $obj = $boss->db;
    $obj->addResource('Login');
    
    if (($in['x'] == 'add') || ($in['fieldName'] == 'new')) {
       $query = "alter table ".mysql_real_escape_string($in['tableName'])." add `".mysql_real_escape_string($in['colname'])."` ".mysql_real_escape_string($in['coltype']);
       if ($in['colattr']) $query .= "(".mysql_real_escape_string($in['colattr']).")";
+      $query .= " NOT NULL";
       print "<!-- $query -->\n";
       $obj->Login->execute($query);
    } elseif ($in['x'] == 'delete') {
@@ -17,6 +18,7 @@
    } elseif ($in['x'] == 'update') {
       $query = "alter table ".mysql_real_escape_string($in['tableName'])." change `".mysql_real_escape_string($in['fieldName'])."` `".mysql_real_escape_string($in['colname'])."` ".mysql_real_escape_string($in['coltype']);
       if ($in['colattr']) $query .= "(".mysql_real_escape_string($in['colattr']).")";
+      $query .= " NOT NULL";
       print "<!-- $query -->\n";
       $obj->Login->execute($query);
    } elseif ($in['x'] == 'truncate') {
@@ -41,7 +43,8 @@
          $sql = preg_replace("/".$in['tableName']."/", $in['newName'], $row["Create Table"]);
          $temp = tempnam("/var/tmp", "simple_");
          file_put_contents($temp, $sql);
-         $cmd = "cat $temp | /usr/local/bin/mysql -upimp -ppimpin {$boss->app->DB}";
+         $env->db->pass = escapeshellarg($env->db->pass);
+         $cmd = "cat $temp | /usr/local/bin/mysql -u{$env->db->user} -p{$env->db->pass} {$boss->app->DB}";
          $results = `$cmd`;
          print $results;
          print "<script>if (top.updateStatus) top.updateStatus('$cmd');window.location.reload();</script>";
@@ -58,13 +61,13 @@
       $tbl = $in['newtable'];
       $query = <<<EOT
 CREATE TABLE {$tbl} (
-{$tbl}ID INT(15) NOT NULL auto_increment,
-{$tbl} VARCHAR(100) NOT NULL default '',
-Description VARCHAR(200) NOT NULL default '',
-Created TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
-CreatedBy varchar(100) DEFAULT NULL,
+{$tbl}ID INT(15) NOT NULL AUTO_INCREMENT,
+{$tbl} VARCHAR(150) NOT NULL DEFAULT '',
+Description VARCHAR(500) NOT NULL DEFAULT '',
+Created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CreatedBy VARCHAR(100) NOT NULL DEFAULT '',
 LastModified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
-LastModifiedBy varchar(100) DEFAULT NULL,
+LastModifiedBy VARCHAR(100) NOT NULL DEFAULT '',
 Notes TEXT,
 PRIMARY KEY  ({$tbl}ID)
 ) ENGINE=InnoDB
