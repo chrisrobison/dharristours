@@ -167,53 +167,7 @@ function updateHours() {
                 </div>
                 <div class='contentField'><label>*Start Time</label>
                     <input type="time" name="Job[<?php print $current->JobID; ?>][PickupTime]" id="PickupTime" value="<?php print $current->PickupTime; ?>" class="boxValue" style="width:7rem;" oninput="updateHours()" />
-                    <!--select id='Pickup_hour' onchange="updateTime('Pickup');">
-                        <?php
-               /*
-                  $ttimes = preg_split("/:/", $current->Pickup);
-                  $ttimes[0] = preg_replace("/^0/", '', $ttimes[0]);
-                  if ($ttime[0] == 0) {
-                     $ttime[0] = 12;
-                  }
-                  if ($ttime[0] > 12) {
-                     $xm = "PM";
-                     $ttimes = $ttime - 12;
-                  } else {
-                     $xm = "AM";
-                  }
-                  for ($i=0; $i<12; $i++) {
-                     $sel = ($ttimes[0] == $i) ? " SELECTED" : "";
-                     print "<option value='".sprintf("%02d", $i)."'>".$i."</option>";
-                  }
-                  */
-                  ?>
-                        <option value='00'>12</option>
-                        <option value='01'>01</option>
-                        <option value='02'>02</option>
-                        <option value='03'>03</option>
-                        <option value='04'>04</option>
-                        <option value='05'>05</option>
-                        <option value='06'>06</option>
-                        <option value='07'>07</option>
-                        <option value='08'>08</option>
-                        <option value='09'>09</option>
-                        <option value='10'>10</option>
-                        <option value='11'>11</option>
-                    </select> :
-                    <select id='Pickup_minute' onchange="updateTime('Pickup');">
-                        <option value='00'>00</option>
-                        <option value='15'>15</option>
-                        <option value='30'>30</option>
-                        <option value='45'>45</option>
-                    </select>
-                    <select id='Pickup_meridian' onchange="updateTime('Pickup');">
-                        <option value='0'>am</option>
-                        <option value='12'>pm</option>
-                    </select>
-                    <input type="hidden" rel="data" onchange='doModify($(this))' id='PickupTime'
-                        name='Job[<?php print $current->JobID; ?>][PickupTime]'
-                        value='<?php print $current->PickupTime; ?>'></input-->
-                    <span>Round Trip</span>
+                   <span>Round Trip</span>
                     <select id='RoundTrip' name='Job[<?php print $current->JobID; ?>][RoundTrip]' dbtype='tinyint(1)'
                         rel='RoundTrip' onchange="return showEnd(this.value)">
                         <option value="1" selected>Yes</option>
@@ -222,33 +176,6 @@ function updateHours() {
                 </div>
                 <span class='contentField' id='endspan'><label>End Time</label>
                     <input type="time" name="Job[<?php print $current->JobID; ?>][DropOffTime]" id="DropOffTime" value="<?php print $current->DropOffTime; ?>" class="boxValue" style="width:7rem;" oninput="updateHours()" />
-                    <!--select id='DropOff_hour' onchange="updateTime('DropOff');">
-                        <option value='00'>12</option>
-                        <option value='01'>01</option>
-                        <option value='02'>02</option>
-                        <option value='03'>03</option>
-                        <option value='04'>04</option>
-                        <option value='05'>05</option>
-                        <option value='06'>06</option>
-                        <option value='07'>07</option>
-                        <option value='08'>08</option>
-                        <option value='09'>09</option>
-                        <option value='10'>10</option>
-                        <option value='11'>11</option>
-                    </select> :
-                    <select id='DropOff_minute' onchange="updateTime('DropOff');">
-                        <option value='00'>00</option>
-                        <option value='15'>15</option>
-                        <option value='30'>30</option>
-                        <option value='45'>45</option>
-                    </select>
-                    <select id='DropOff_meridian' onchange="updateTime('DropOff');">
-                        <option value='0'>am</option>
-                        <option value='12'>pm</option>
-                    </select>
-                    <input type="hidden" rel="data" onchange='doModify($(this))' id='DropOffTime'
-                        name='Job[<?php print $current->JobID; ?>][DropOffTime]'
-                        value='<?php print $current->DropOffTime; ?>'></input-->
                 </span>
                 <div class='contentField'>
                     <label>Num Pax</label> <input type='text' name='Job[<?php print $current->JobID; ?>][NumberOfItems]'
@@ -281,8 +208,11 @@ function updateHours() {
                 </div>
                 <div class='contentField'>
                     <label>Description</label>
-                    <input type='text' name='Job[<?php print $current->JobID; ?>][Description]' id='Description'
-                        value='<?php print $current->Description; ?>' size='50' style='width:15em;' class='boxValue' />
+                    <input type='text' name='Job[<?php print $current->JobID; ?>][Description]' id='Description' value='<?php print $current->Description; ?>' size='50' style='width:15em;' class='boxValue' />
+                </div>
+                <div class='contentField'>
+                    <label>Send Invoice To</label>
+                    <input type='text' name='Job[<?php print $current->JobID; ?>][SendInvoiceTo]' id='SendInvoiceTo' value='<?php print $current->SendInvoiceTo; ?>' size='50' style='width:15em;' class='boxValue' />
                 </div>
                 <div class='contentField'>
                     <label>Customer PO</label> <input type='text'
@@ -307,35 +237,7 @@ function updateHours() {
                     ]
                 </div>
                 <div class='contentField'><label>Notify at</label>
-                    <!--
-                  <select id='Notify-When_hour' onchange="updateTime('Notify-When');">
-                     <option value='00'>12</option>
-                     <option value='01'>01</option>
-                     <option value='02'>02</option>
-                     <option value='03'>03</option>
-                     <option value='04'>04</option>
-                     <option value='05'>05</option>
-                     <option value='06'>06</option>
-                     <option value='07'>07</option>
-                     <option value='08'>08</option>
-                     <option value='09'>09</option>
-                     <option value='10'>10</option>
-                     <option value='11'>11</option>
-                  </select> :
-                  <select id='Notify-When_minute' onchange="updateTime('Notify-When');">
-                     <option value='01'>00</option>
-                     <option value='15'>15</option>
-                     <option value='30'>30</option>
-                     <option value='45'>45</option>
-                  </select>
-                  <select id='Notify-When_meridian' onchange="updateTime('Notify-When');">
-                     <option value='0'>am</option>
-                     <option value='12'>pm</option>
-                  </select>
-                  -->
                     <span id="Notify-When"></span>
-                    <!--input type="hidden" rel="data" onchange='doModify($(this))' id='Notify-When' name='Job[<?php print $current->JobID; ?>][Notify][new1][When]' value='08:00:00'></input-->
-                    <!--input type="hidden" rel="data" onchange='doModify($(this))' id='Notify-NotifyID' name='Job[<?php print $current->JobID; ?>][Notify][new1][NotifyID]' value=''></input-->
                 </div>
                 <div class='contentField'><label>Recipient</label>
                     <span id='Notify-Name'></span>
@@ -351,11 +253,9 @@ function updateHours() {
                 </div>
                 <div class='contentField'><label>Message</label>
                     <span id='Notify-Notify' style='display:inline-block;white-space:normal;max-width:20em;'></span>
-                    <!--textarea id='Notify-Notify' name='Job[<?php print $current->JobID; ?>][Notify][new1][Notify]' class='boxValue' style='width:25em; height:5em;'></textarea-->
                 </div>
                 <div class='contentField'><label>Response</label>
                     <span id='Notify-Response' style='display:inline-block;white-space:normal;max-width:20em;'></span>
-                    <!--textarea id='Notify-Notify' name='Job[<?php print $current->JobID; ?>][Notify][new1][Notify]' class='boxValue' style='width:25em; height:5em;'></textarea-->
                 </div>
             </fieldset>
             <fieldset class='jobstatus' title="Status">

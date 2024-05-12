@@ -1,4 +1,4 @@
-<?php 
+<?php
    // require_once($_SERVER['DOCUMENT_ROOT']."/lib/auth.php");
    /* START NEW SECTION */
    require_once($_SERVER['DOCUMENT_ROOT']."/lib/boss_class.php");
@@ -492,14 +492,14 @@
                     </tr>
                 </table>
             </div>
-            <br /><b>GET INFO FROM CHAPERONE'S:</b>
+            <br />CONTACT INFO:<b> <?php print $current->ContactName; ?> <?php print $current->ContactPhone; ?></b>
           <br />
             <table id='sigs'>
                <tr>
                     <th width=25%>Name</th>
                     <th width=25%>Phone</th>
                     <th width=25%>Re-Board Time</th>
-                    <th width=25%></th>
+                    <th width=25%>Signature</th>
                 </tr>
                 <tr><td><br><br></td><td><br><br></td><td><br><br></td><td><br><br></td></tr>
                 <tr>
@@ -509,6 +509,11 @@
                     <th width=25%>Hours Driving</th>
                 </tr>
                 <tr><td><br><br></td><td><br><br></td><td><br><br></td><td><br><br></td></tr>
+                <!--tr>
+                    <th colspan="2">Onsite Contact</th>
+                    <th colspan="2">Phone</th>
+                </tr>
+                <tr><td colspan="2"><br><br></td><td colspan="2"><br><br></td></tr-->
             </table>
             <table style="width:7.25in;margin:0.5em 0px;display:none;">
                 <tr>

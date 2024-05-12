@@ -98,7 +98,7 @@
 
     input,
     select {
-        background-color: #eee;
+        background-color: #fff;
     }
 
     input:focus {
@@ -183,7 +183,7 @@
 
     .scrollWrap {
         width: 100%;
-        height: 76vh;
+        height: 69vh;
         overflow-y: scroll;
         overflow-x: auto;
         position: relative;
@@ -269,7 +269,7 @@
 
     .toolbar {
         background-color: #223;
-        width: 100vw;
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -333,6 +333,16 @@
         width: 2rem;
     }
 
+    .helper td:nth-child(1),
+    .helper th:nth-child(1) {
+        width: unset;
+    }
+
+    .helper td {
+        padding: 4px 4px 4px 1rem;
+        border: 0;
+    }
+
     dialog#email-dialog {
         width: 40vw;
         padding: 0;
@@ -340,7 +350,7 @@
         background: #eee;
     }
 
-     dialog#payment {
+    dialog#payment {
         width: 40vw;
         padding: 0;
         font-size: 18px;
@@ -348,27 +358,58 @@
     }
 
     dialog label {
-        width: 8rem;
+        width: 12rem;
         text-align: right;
     }
+
+    dialog#payment label {
+        width: 12rem;
+        padding-right: 0.5rem;
+    }
+
+    dialog#payment input,
+    dialog#payment select,
+    dialog#payment textarea {
+        width: 15rem;
+    }
+
     dialog#email-dialog label {
         width: 7rem;
         padding-right: 1rem;
     }
-    dialog#email-dialog select, dialog#email-dialog input {
+
+    button.helper {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        height: 8rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        background: #eee;
+        border: 0;
+    }
+
+    dialog#email-dialog select,
+    dialog#email-dialog input {
         width: 23rem;
     }
-    dialog#email-dialog textarea, #email-dialog input {
+
+    dialog#email-dialog textarea,
+    #email-dialog input {
         font-weight: 300;
     }
-    textarea::placeholder, input::placeholder {
+
+    textarea::placeholder,
+    input::placeholder {
         color: #ccc;
         font-style: italic;
     }
+
     .dialog-foot {
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
         padding: 0.5rem 1rem;
     }
@@ -392,12 +433,15 @@
         padding: 1rem;
         color: #222;
     }
+
     .dialog-body input {
         background-color: #fff;
     }
+
     .dialog-body label {
         color: #222;
     }
+
     dialog>header a {
         color: #ff0;
         text-decoration: none;
@@ -506,6 +550,7 @@
         transition: all 200ms linear;
         transform: rotate(180deg);
     }
+
     .progresswrap {
         width: 500px;
         height: 3rem;
@@ -515,6 +560,7 @@
         align-items: center;
         justify-content: flex-start;
     }
+
     .progressbar {
         display: inline-block;
         height: 2rem;
@@ -522,40 +568,113 @@
         background-color: #069;
         animation: 9s linear 0s infinite running progress;
     }
+
     @keyframes progress {
-        0% { width: 0px;}
-        10% { width: 150px;}
-        25% { width: 200px;}
-        50% { width: 300px;}
-        60% { width: 320px;}
-        82% { width: 400px;}
-        95% { width: 470px;}
-        100% { width: 500px; }
+        0% {
+            width: 0px;
+        }
+
+        10% {
+            width: 150px;
+        }
+
+        25% {
+            width: 200px;
+        }
+
+        50% {
+            width: 300px;
+        }
+
+        60% {
+            width: 320px;
+        }
+
+        82% {
+            width: 400px;
+        }
+
+        95% {
+            width: 470px;
+        }
+
+        100% {
+            width: 500px;
+        }
     }
+
+    .helper-form-row {
+        display: flex;
+
+    }
+
+    .helper-form-row td {}
+
+    label.ulabel {
+        width: 5rem;
+    }
+
     /* HTML: <div class="loader"></div> */
     .loading {
-        position: absolute;
+        position: relative;
         left: 4px;
         bottom: 4px;
-        height: 40px;
-        width: 40px;
+        height: 3rem;
+        width: 3rem;
         aspect-ratio: 1;
         border-radius: 50%;
         padding: 6px;
         background:
-        conic-gradient(from 135deg at top,currentColor 90deg, #0000 0) 0 calc(50% - 4px)/17px 8.5px,
-        radial-gradient(farthest-side at bottom left,#0000 calc(100% - 4px),currentColor calc(100% - 3px) 99%,#0000) top right/50%  50% content-box content-box,
-        radial-gradient(farthest-side at top        ,#0000 calc(100% - 4px),currentColor calc(100% - 3px) 99%,#0000) bottom   /100% 50% content-box content-box;
+            conic-gradient(from 135deg at top, currentColor 90deg, #0000 0) 0 calc(50% - 4px)/17px 8.5px,
+            radial-gradient(farthest-side at bottom left, #0000 calc(100% - 4px), currentColor calc(100% - 3px) 99%, #0000) top right/50% 50% content-box content-box,
+            radial-gradient(farthest-side at top, #0000 calc(100% - 4px), currentColor calc(100% - 3px) 99%, #0000) bottom /100% 50% content-box content-box;
         background-repeat: no-repeat;
+        border: 0px;
     }
+
     .loading.run {
         animation: l11 1s infinite linear;
     }
-    @keyframes l11{ 
-      100%{transform: rotate(1turn)}
+
+    @keyframes l11 {
+        100% {
+            transform: rotate(1turn)
+        }
     }
+
     #pay-business {
         padding-left: 1em;
+    }
+
+    .helper-wrap {
+        display: flex;
+        overflow: hidden;
+        height: fit-content;
+        transition: all 250ms linear;
+    }
+
+    #jobs {
+        cursor: default;
+    }
+
+    .helper label {
+        color: #000;
+        width: 5rem;
+        padding-right: 0.5rem;
+    }
+
+    .helper td {
+        padding: 0;
+    }
+
+    footer {
+        height: 8vh;
+    }
+
+    footer>div {
+        padding-left: 1rem;
+        height: 8vh;
+        border-right: 1px solid #0006;
     }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
@@ -691,7 +810,7 @@ if (array_key_exists("start", $in)) {
 }
                         ?> onchange="app.filterDates()" />
                                             -
-                                            <input type="date" title="Show only jobs completed after this date"
+                                            <input type="date" title="Show only jobs completed before this date"
                                                 id="enddate" placeholder="Select End Date" <?php
 if (array_key_exists("end", $in)) {
     print "value='" . $in['end']. "' ";
@@ -700,7 +819,7 @@ if (array_key_exists("end", $in)) {
 }
 
                         ?> onchange="app.filterDates()" />
-                                        <button onclick="app.filterDates();return false;">Go</button>
+                                            <button onclick="app.filterDates();return false;">Go</button>
                                         </div>
                                         <div style="margin-right: 1rem;display:inline-block;">
                                             <label title="Limit the maximum number of records viewed per page"
@@ -762,30 +881,54 @@ if (array_key_exists("end", $in)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
-                                    <div class="scrollWrap">
+                                    <div class="scrollWrap" style="height:69vh">
                                         <table class="table" id="jobs">
                                             <thead>
                                                 <tr onclick="app.doSort(event)">
                                                     <th><input type='checkbox' id='all-jobs' oninput="app.checkAll()">
                                                     </th>
-                                                    <th data-name="InvoiceID" data-type="numeric"><span data-name="InvoiceID" class="sorticon"></span> InvID</th>
-                                                    <th data-name="JobID" data-type="numeric"><span data-name="JobID" class="sorticon"></span> JobID</th>
-                                                    <th data-name="Business" data-type="business"><span data-name="Business" class="sorticon"></span> Business</th>
-                                                    <th data-name="Job"><span data-name="Job" class="sorticon"></span> Job</th>
-                                                    <th class="sort sort0" data-name="JobDate" data-type="date"><span data-name="JobDate" class="sorticon"></span> Date</th>
-                                                    <th data-name="Balance" data-type="numeric"><span data-name="Balance" class="sorticon"></span> Balance</th>
-                                                    <th data-name="Status"><span data-name="Status" data-type="string" class="sorticon"></span> Status</th>
+                                                    <th data-name="InvoiceID" data-type="numeric"><span
+                                                            data-name="InvoiceID" class="sorticon"></span> InvID</th>
+                                                    <th data-name="JobID" data-type="numeric"><span data-name="JobID"
+                                                            class="sorticon"></span> JobID</th>
+                                                    <th data-name="Business" data-type="business"><span
+                                                            data-name="Business" class="sorticon"></span> Business</th>
+                                                    <th data-name="Job"><span data-name="Job" class="sorticon"></span>
+                                                        Job</th>
+                                                    <th class="sort sort0" data-name="JobDate" data-type="date"><span
+                                                            data-name="JobDate" class="sorticon"></span> Date</th>
+                                                    <th data-name="Balance" data-type="numeric"><span
+                                                            data-name="Balance" class="sorticon"></span> Balance</th>
+                                                    <th data-name="Status"><span data-name="Status" data-type="string"
+                                                            class="sorticon"></span> Status</th>
                                                     <th></th>
                                                 </tr>
                                                 <tr id="searchbar">
-                                                    <th><a href="#" onclick="app.toggleSearch(true);return false;">x</a></th>
-                                                    <th class="searchField"><input type="text" class="InvoiceID" id="search-InvoiceID" width="5" style="width:3rem;" data-field="InvoiceID" oninput="app.filter(event, 'InvoiceID')"></th>
-                                                    <th class="searchField"><input type="text" class="InvoiceID" id="search-JobID" width="5" style="width:3rem;" data-field="JobID" oninput="app.filter(event, 'JobID')"></th>
-                                                    <th class="searchField"><input type="text" class="search-Business" id="search-Business" data-field="Business" oninput="app.filter(event, 'Business')"></th>
-                                                    <th class="searchField"><input type="text" class="search-Job" id="search-Job" data-field="Job" oninput="app.filter(event, 'Job')"></th>
-                                                    <th class="searchField"><input type="text" class="search-JobDate" id="search-JobDate" style="width:4rem;" data-field="JobDate" oninput="app.filter(event, 'JobDate')"></th>
-                                                    <th class="searchField"><input type="text" class="search-Balance" id="search-Balance" style="width:4rem;" data-field="Balance" oninput="app.filter(event, 'Balance')"></th>
-                                                    <th class="searchField"><input type="text" class="search-Status" id="search-Status" style="width:4rem;" data-field="Status" oninput="app.filter(event, 'Status')"></th>
+                                                    <th><a href="#" onclick="app.toggleSearch(true);return false;">x</a>
+                                                    </th>
+                                                    <th class="searchField"><input type="text" class="InvoiceID"
+                                                            id="search-InvoiceID" width="5" style="width:3rem;"
+                                                            data-field="InvoiceID"
+                                                            oninput="app.filter(event, 'InvoiceID')"></th>
+                                                    <th class="searchField"><input type="text" class="InvoiceID"
+                                                            id="search-JobID" width="5" style="width:3rem;"
+                                                            data-field="JobID" oninput="app.filter(event, 'JobID')">
+                                                    </th>
+                                                    <th class="searchField"><input type="text" class="search-Business"
+                                                            id="search-Business" data-field="Business"
+                                                            oninput="app.filter(event, 'Business')"></th>
+                                                    <th class="searchField"><input type="text" class="search-Job"
+                                                            id="search-Job" data-field="Job"
+                                                            oninput="app.filter(event, 'Job')"></th>
+                                                    <th class="searchField"><input type="text" class="search-JobDate"
+                                                            id="search-JobDate" style="width:4rem;" data-field="JobDate"
+                                                            oninput="app.filter(event, 'JobDate')"></th>
+                                                    <th class="searchField"><input type="text" class="search-Balance"
+                                                            id="search-Balance" style="width:4rem;" data-field="Balance"
+                                                            oninput="app.filter(event, 'Balance')"></th>
+                                                    <th class="searchField"><input type="text" class="search-Status"
+                                                            id="search-Status" style="width:4rem;" data-field="Status"
+                                                            oninput="app.filter(event, 'Status')"></th>
                                                     <th data-field=""></th>
                                                 </tr>
                                             </thead>
@@ -809,7 +952,10 @@ if (array_key_exists("end", $in)) {
         </div>
         <!-- /.content-wrapper -->
         <dialog id="email-dialog">
-            <header><span>Send Email</span><a style="display:flex;align-items:center;justify-content:center;padding-bottom:3px;background:#eee;color:#000;border-radius:50%;height:1rem;width:1rem;" class='close-btn' href="#" onclick="document.querySelector('#email-dialog').close();return false;">⨯</a></header>
+            <header><span>Send Email</span><a
+                    style="display:flex;align-items:center;justify-content:center;padding-bottom:3px;background:#eee;color:#000;border-radius:50%;height:1rem;width:1rem;"
+                    class='close-btn' href="#"
+                    onclick="document.querySelector('#email-dialog').close();return false;">⨯</a></header>
             <div class="dialog-body">
                 <form method="dialog">
                     <div class="form-row" style="display:flex;justify-content:space-around;">
@@ -818,25 +964,43 @@ if (array_key_exists("end", $in)) {
                     </div>
                     <div class="form-row">for &nbsp; <span id="email-business"></span></div>
                     <hr>
-                    <div class="form-row"><label for="email-document">Document</label> 
-                        <select style="background-color:#fff;" id="email-document" name="email-document">
-                            <option value="invoice">Invoice</option>
-                            <option value="receipt">Payment Receipt</option>
-                            <option value="reminder30">30-Day Reminder</option>
-                            <option value="reminder60">60-Day Reminder</option>
-                            <option value="reminder90">90-Day Reminder</option>
-                            <option value="collections">Collections Notification</option>
-                        </select>
+                    <div class="form-row">
+                        <div>
+                            <label for="email-document">Document</label>
+                            <select style="background-color:#fff;width:13rem;" id="email-document"
+                                name="email-document">
+                                <option value="invoice">Invoice</option>
+                                <option id="email-doc-option-master" value="master">Master Invoice</option>
+                                <option id="email-doc-option-receipt" value="receipt">Payment Receipt</option>
+                                <option value="reminder30">30-Day Reminder</option>
+                                <option value="reminder60">60-Day Reminder</option>
+                                <option value="reminder90">90-Day Reminder</option>
+                                <option value="collections">Collections Notification</option>
+                            </select>
+                        </div>
+                        <div>
+                            <a href="#"
+                                onclick="app.previewEmail(document.querySelector('#email-document').value); return false;"><i
+                                    class="fa-solid fa-eye"></i> Preview <i
+                                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
                     </div>
-                    <div class="form-row"><label for="email-to">Send to</label> <input type="text" id="email-to" name="email-to" placeholder="Email Recipient" ></div>
-                    <div class="form-row"><label for="email-msg">Message</label> <textarea id="email-msg" name="email-msg" placeholder="A note to send along with the document" style="width:23rem;height:5rem;"></textarea></div>
+                    <div class="form-row"><label for="email-to">Send to</label> <input type="text" id="email-to"
+                            name="email-to" placeholder="Email Recipient"></div>
+                    <div class="form-row"><label for="email-msg">Message</label> <textarea id="email-msg"
+                            name="email-msg" placeholder="A note to send along with the document"
+                            style="width:23rem;height:5rem;"></textarea></div>
                 </form>
             </div>
             <div class="dialog-foot">
-                <div><button onclick="app.previewMessage()"><i class="fa-solid fa-eye"></i> Preview Message</button></div>
+                <div><button
+                        onclick="app.previewEmail(document.querySelector('#email-document').value); return false;"><i
+                            class="fa-solid fa-eye"></i> Preview Message</button></div>
                 <div>
-                    <button onclick="document.querySelector('#email-dialog').close();return false;">Cancel</button>&nbsp;
-                    <button onclick="app.sendEmail();document.querySelector('#email-dialog').close();return false;">Send Email</button>
+                    <button
+                        onclick="document.querySelector('#email-dialog').close();return false;">Cancel</button>&nbsp;
+                    <button onclick="app.sendEmail();document.querySelector('#email-dialog').close();return false;">Send
+                        Email</button>
                 </div>
             </div>
         </dialog>
@@ -846,12 +1010,27 @@ if (array_key_exists("end", $in)) {
             <div class="dialog-body">
                 <form method="dialog">
                     <div class="form-row">Receive payment from: <span id="pay-business">BUSINESS</span></div>
-                    <div class="form-row">for Job ID[s]: <span id="pay-ids"></span></div>
-                    <div class="form-row">Total for Jobs: <span id="pay-amount"></span></div>
-                    <div class='form-row'><label for="amount">Payment Amount $</label><input type="number" step="0.01" id="amount" name="amount" placeholder="0.00"></div>
-                    <div class='form-row'><label for="checknum">Check / PO # </label><input type="text" id="checknum" name="checknum" ></div>
-                    <div class='form-row'><label for="checkdate">Check / PO Date </label><input type="text" id="checkdate" name="checkdate" ></div>
-                    <div class='form-row'><label for="Notes">Notes &nbsp;</label><textarea id="Notes" name="Notes"></textarea></div>
+                    <div class="form-row">For Jobs: &nbsp; <span id="pay-ids"></span></div>
+                    <div class="form-row">Total for Jobs: &nbsp; <span id="pay-amount"></span></div>
+                    <hr>
+                    <div class="form-row">
+                        <label for="pay-type">Payment Type</label>
+                        <select id="pay-type" name="pay-type" onchange="app.switchPayType();">
+                            <option value="check" SELECTED>Check</option>
+                            <option value="po">Purchase Order</option>
+                            <option value="cc">Credit Card</option>
+                        </select>
+                    </div>
+                    <div class='form-row'><label for="amount">Payment Amount $</label><input type="number" step="0.01"
+                            id="amount" name="amount" placeholder="0.00"></div>
+                    <div class='form-row'><label for="checknum" id="checknum-label">Check # </label><input type="text"
+                            id="checknum" name="checknum"></div>
+                    <div class='form-row'><label for="checkdate" id="checkdate-label">Check Date </label><input
+                            type="text" id="checkdate" name="checkdate"></div>
+                    <div class='form-row' id="cc-ccv" style="display:none;"><label for="ccv"
+                            id="ccv-label">CCV</label><input type="text" id="ccv" name="ccv"></div>
+                    <div class='form-row'><label for="Notes">Notes </label><textarea id="Notes" name="Notes"></textarea>
+                    </div>
                 </form>
             </div>
             <div class="dialog-foot">
@@ -860,16 +1039,39 @@ if (array_key_exists("end", $in)) {
                     Payment</button>
             </div>
         </dialog>
-        <footer class="main-footer" style="display:flex;justify-content:flex-end;align-items:center;height:6vh;">
+        <footer class="main-footer" style="display:flex;justify-content:flex-end;align-items:center;height:8vh;">
             <div class="loading run"></div>
-            
-            <label id="quotesumlabel" style="width:fit-content;color:#333;padding:0;margin:0">Quoted Total:</label>
-            <div id="quotesumtotal"
-                style="width:10rem;display:inline-block;font-size:20px;color:#c00;text-align:center;padding:0.25rem;">
+            <div>
+                <label id="futurejobslabel" style="width:fit-content;color:#333;padding:0;margin:0">Future Jobs</label>
+                <div id="futurejobstotal"
+                    style="width:10rem;display:inline-block;font-size:20px;color:#090;text-align:left;padding:0.25rem;">
+                </div>
             </div>
-            <label id="sumlabel" style="width:fit-content;color:#333;padding:0;margin:0">Total Outstanding for Current View:</label>
-            <div id="sumtotal"
-                style="width:10rem;display:inline-block;font-size:20px;color:#c00;text-align:center;padding:0.25rem;">
+            <div>
+                <label id="futureworklabel" style="width:fit-content;color:#333;padding:0;margin:0">Future Work
+                    Total</label>
+                <div id="futureworktotal"
+                    style="width:10rem;display:inline-block;font-size:20px;color:#090;text-align:left;padding:0.25rem;">
+                </div>
+            </div>
+            <div>
+                <label id="quotesumlabel" style="width:fit-content;color:#333;padding:0;margin:0">Quoted Total:</label>
+                <div id="quotesumtotal"
+                    style="width:10rem;display:inline-block;font-size:20px;color:#c00;text-align:left;padding:0.25rem;">
+                </div>
+            </div>
+            <div>
+                <label id="paidlabel" style="width:fit-content;color:#333;padding:0;margin:0">Total Paid:</label>
+                <div id="paidtotal"
+                    style="width:10rem;display:inline-block;font-size:20px;color:#0c0;text-align:left;padding:0.25rem;">
+                </div>
+            </div>
+            <div>
+                <label id="sumlabel" style="width:fit-content;color:#333;padding:0;margin:0">total outstanding for
+                    current view:</label>
+                <div id="sumtotal"
+                    style="width:10rem;display:inline-block;font-size:20px;color:#c00;text-align:left;padding:0.25rem;">
+                </div>
             </div>
         </footer>
 
@@ -884,7 +1086,9 @@ if (array_key_exists("end", $in)) {
         <h2>D Harris Tours</h2>
         <div class="loader"></div>
         <h2>Loading...<span id="loading"></span></h2>
-        <div class="progresswrap"><div class="progressbar"></div></div>
+        <div class="progresswrap">
+            <div class="progressbar"></div>
+        </div>
     </div>
     <!-- jQuery -->
     <script src="/portal/assets/jquery/jquery.min.js"></script>
@@ -893,16 +1097,16 @@ if (array_key_exists("end", $in)) {
     <script src="/portal/assets/js/adminlte.min.js"></script>
     <script src="/lib/js/dom-to-image-more.min.js"></script>
     <script>
-        allbusiness = <?php print json_encode($allbusiness); ?>;
+    allbusiness = <?php print json_encode($allbusiness); ?>;
     </script>
     <script src="/lib/js/billing.js"></script>
     <script>
-        app.state.email = '<?= $_SESSION['Email'] ?>';
-        app.state.name = '<?php print $_SESSION['LastName'].', '. $_SESSION['FirstName'] ?>';
+    app.state.email = '<?= $_SESSION['Email'] ?>';
+    app.state.name = '<?php print $_SESSION['LastName'].', '. $_SESSION['FirstName'] ?>';
 
-        app.allbusiness = allbusiness;
-        app.businessID = '<?php print $busID; ?>';
-        app.businessName = '<?php print $mybusiness->Business; ?>';
+    app.allbusiness = allbusiness;
+    app.businessID = '<?php print $busID; ?>';
+    app.businessName = '<?php print $mybusiness->Business; ?>';
     </script>
 </body>
 

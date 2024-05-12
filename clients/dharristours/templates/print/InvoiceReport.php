@@ -118,7 +118,7 @@
             <td class='header'>Voice: (415) 902-8542 / Fax: (800) 853-4006</td>
          </tr>
          <tr>
-            <td class='header'>PO Box 5961, Vallejo, CA 94591</td>
+            <td class='header'>PO Box 430, Crockett, CA 94525 <span style="color:#000;font-weight:300;font-size:2.5rem;position:relative;top:0.25rem;">☜</span> <span style="color:#c00;font-weight:bold;font-size:1.2rem"> New Address!</span></td>
          </tr>
          <tr>
             <td class='header'>juanaharrisdht@att.net</td>
@@ -244,7 +244,10 @@
             <tr>
                <td>Notes:</td>
                <td class='field'>Overtime Charge:</td>
-               <td class='value'>$<?php if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?></td>
+               <td class='value'>$<?php 
+                    print $current->OvertimeAmt;
+               //if ($current->InvoiceAmt==$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} 
+               ?></td>
                <td></td>
 	    </tr>
             <tr>
@@ -262,7 +265,7 @@
             <tr>
                <td></td>
                <td class='field' style='font-weight: bold; font-size:12pt'>Invoice Amount:</td>
-               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {print $job->QuoteAmount;} print $current->InvoiceAmt; ?></td>
+               <td class='value' colspan='3'  style='font-weight: bold; font-size:12pt'>$<?php if ($current->InvoiceAmt==0) {print $job->QuoteAmount;} print $current->InvoiceAmt + $current->OvertimeAmt + $current->Gas; ?></td>
             </tr>
             <tr>
                <td></td>

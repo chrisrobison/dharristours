@@ -605,7 +605,7 @@
                             </td>
                             <td class='field'>Overtime Charge:</td>
                             <td class='value right'>
-                                $<?php if ($current->InvoiceAmt<=$job->QuoteAmount) {print "0.00";} else { print $current->InvoiceAmt-$job->QuoteAmount-$current->Gas-$current->MiscCost;} ?>
+                            $<?php print $current->OvertimeAmt;?>
                             </td>
                         </tr>
                         <tr>
@@ -633,7 +633,7 @@
                             <td class='field' style='white-space:nowrap;font-weight: bold; font-size:12pt'>Balance DUE:
                             </td>
                             <td class='value right' style='font-weight: bold; font-size:12pt'>
-                                $<?php print number_format($current->Balance, 2); ?></td>
+                                $<?php print number_format($current->Balance + $current->OvertimeAmt + $current->Gas, 2); ?></td>
                         </tr>
                         <tr>
                            <td colspan="4">

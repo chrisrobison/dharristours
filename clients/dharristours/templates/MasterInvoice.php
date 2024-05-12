@@ -37,8 +37,7 @@
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
    <style type="text/css">
 /*<![CDATA[*/
-   @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Roboto:100,400,700,900|Source+Sans+Pro&display=swap');
-   body { background: #666; font-size:14pt;color:black;font-family:"Roboto",sans-serif; padding:0; margin:0;}
+   body { background: #666; font-size:14pt;color:black;font-family:"Arial","Helvetica",sans-serif; padding:0; margin:0;}
    IMG { margin:0 0 -4px 0; }
    DIV[class="Part"] { margin:0;text-indent:0; }
    H1 { text-align:justify; margin:0;text-indent:0px; }

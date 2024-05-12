@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * { padding: 0; margin: 0; box-sizing: border-box; }
+        body {
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color:#000;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #eee;
+            height: 10vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 1rem;
+        }
+
+        label {
+            padding-right: 1rem;
+        }
+
+        input, select, textarea, button {
+            font-size: 22px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 0.25em 1em;
+            border-radius: 1rem;
+        }
+
+        main {
+            background-color: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            width: 100vw;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100.044 99.683' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3C/defs%3E%3Crect x='0.294' y='0.201' width='99.75' height='99.482' style='stroke-width: 1.159; fill: rgb(255, 255, 255);'%3E%3C/rect%3E%3Cpath style='fill: none; stroke: rgb(151, 217, 241); stroke-width: 3.66;' d='M 0 97.798 L 98.149 97.798 L 98.149 0'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 20px 19px;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+        }
+
+        .node {
+            border: 2px solid #900;
+            width: 15rem;
+            height: 10rem;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            resize: both;
+            overflow: hidden;
+            position: absolute;
+            user-select: none;
+            transition: all 0ms linear;
+            z-index: 99;
+            transform-origin: 0 0;
+        }
+        .body {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            padding: 4px 0.5em;
+            
+        }
+        .head {
+            height: 2.5em;
+            background: #069;
+            color: #fff;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0.5em;
+            cursor: default;
+        }
+        h2 {
+            font-weight: 300;
+            font-size: 18px;
+        }
+        .dragging {
+            box-shadow: 0.5rem 0.5rem 0.5rem #0004;
+        }
+        .edge {
+            display: inline-block;
+            position: absolute;
+            height: 3px;
+            width: 3px;
+            background-color: #c00;
+            color: #fff;
+            z-index: 10;
+            transform-origin: 0 0;
+        }
+        .Bus {
+            width: 150px;
+            height: 75px;
+        }
+        .Employee {
+            width: 150px;
+            height: 75px;
+
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<header>
+    <label for="id">Job ID</label><input type="text" id="id" name="id" size="10" onchange="app.getJob()"> <button onclick="app.getJob(); return false;">Go</button>
+</header>
+<main>
+
+</main>
+<script>
+(function() {
+    const $ = str => document.querySelector(str);
+    const $$ = str => document.querySelectorAll(str);
+
+    const app = {
+        config: {
+            Bus: {
+                title: "Bus",
+            }, 
+            Job: {
+                body: "<h1>{{Job}}</h1><hr>{{JobDate}}<br><ul><li>Pickup: {{PickupLocation}}</li><li>Dropoff: {{DropOffLocation}}</li></ul>"
+            }
+        },
+        data: {},
+        state: {
+            loaded: false,
+            zIndex: 100
+        },
+        init: function() {
+            document.addEventListener("mousedown", app.mouseDown);
+            $("#id").focus();
+            app.state.loaded = true;
+        },
+        mouseDown(evt) {
+            let head = evt.target.closest(".head");
+            if (head) {
+                let tgt = evt.target.closest(".node");
+                
+                if (tgt) {
+                    tgt.style.zIndex = app.state.zIndex + 1;
+                    app.state.zIndex++;
+                    tgt.classList.add('dragging');
+                    app.state.dragging = tgt;
+                    app.state.dragclick = {x: evt.x, y: evt.y }
+                    app.state.dragstart = tgt.getBoundingClientRect(); 
+                    app.state.dragcurrent = tgt.getBoundingClientRect(); 
+                    document.addEventListener("mouseup", app.mouseUp);
+                    document.addEventListener("mousemove", app.mouseMove);
+            console.log("mouseDown");
+            console.dir(evt);
+                }
+            }
+        },
+        mouseMove(evt) {
+            console.log("mouseMove");
+            console.dir(evt);
+            app.state.dragcurrent.x += evt.movementX;
+            app.state.dragcurrent.y += evt.movementY;
+            
+            let dx = evt.x - app.state.dragclick.x;
+            let dy = evt.y - app.state.dragclick.y;
+            let newx = app.state.dragstart.x + dx;
+            let newy = app.state.dragstart.y + dy;
+            app.state.dragging.style.top = newy + 'px'; // app.state.dragstart.y + 'px';
+            app.state.dragging.style.left = newx + 'px'; // app.state.dragstart.x + 'px';
+            app.updateEdges();
+        },
+        mouseUp(evt) {
+            app.state.dragging.classList.remove('dragging');
+            
+            document.removeEventListener("mousemove", app.mouseMove);
+            document.removeEventListener("mouseup", app.mouseUp);
+            app.state.dragging = '';
+            app.state.dragstart = '' 
+
+            console.dir(evt);
+        },
+        drawEdge(node1, node2) {
+            if (typeof(node1)==="string") node1 = $(`.${node1}`);
+            if (typeof(node2)==="string") node2 = $(`.${node2}`);
+
+            // Get coordinates
+            let el1 = node1.getBoundingClientRect();
+            let el2 = node2.getBoundingClientRect();
+
+            // Calculate center of each node
+            let x1 = el1.left + (el1.width / 2);
+            let y1 = el1.top + (el1.height / 2);
+            
+            let x2 = el2.left + (el2.width / 2);
+            let y2 = el2.top + (el2.height / 2);
+
+            // Calculate the length of line between the two points
+            
+            let length = Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+            // Get the angle of that same line
+            let angle = Math.atan2((x2 - x1), (y2 - y1));
+            
+            // Finally, create edge element and apply our calculations
+            let edge = $(`#${node1.nname}_${node2.nname}`);
+            if (!edge) {
+                edge = app.newEdge(node1, node2);
+            }
+            edge.style.top = y1 + 'px';
+            edge.style.left = x1 + 'px';
+            edge.style.height = length + 'px';
+            edge.style.rotate = -angle + 'rad';
+
+            return edge;
+        },
+        newEdge(node1, node2) {
+            let edge = document.createElement("div");
+            edge.id = `${node1.nname}_${node2.nname}`;
+            edge.title = `${node1.nname}_${node2.nname}`;
+            edge.className = `edge ${node1.nname}_${node2.nname}`;
+            //edge.innerHTML = edge.id;
+            $("main").append(edge);
+            app.edges[`${node1.nname}_${node2.nname}`] = edge;
+            return edge;
+        },
+        updateEdges() {
+            let keys = Object.keys(app.edges);
+
+            for (let key of keys) {
+                let names = key.split(/_/);
+                app.drawEdge(names[0], names[1]);
+            }
+        },
+        async getJob() {
+            let id = $("#id").value;
+            if (id) {
+                app.job = app.Job = await app.fetchJob(id);
+
+                let associates = ['Business', 'Employee', 'Request', 'Bus', 'Invoice'];
+
+                for (let assoc of associates) {
+                    if (app.job[`${assoc}ID`] && (app.job[`${assoc}ID`] != '0')) {
+                        app.job[assoc] = await app.fetchRecord(assoc, app.job[`${assoc}ID`]);
+                        console.log(`${assoc} ${app.job[assoc + 'ID']}`);
+                        console.dir(app.job[assoc]);
+                    }
+                }
+                console.log(`Job ID [${id}]`);
+                app.renderGraph();
+            }
+        },
+        makeNode(rsc, id, title) {
+            let el = document.createElement("div");
+            el.id = rsc + '_' + id;
+            el.className = "node " + rsc;
+            el.nname = rsc;
+            let body = title;
+
+            if (app.config[rsc]) {
+                if (!title && app.config[rsc]?.title) {
+                    title = app.config[rsc].title;
+                }
+                if (app.config[rsc].body) {
+                    body = app.config[rsc].body.replaceAll(/\{\{(\w+)\}\}/g, function(mall, m) {
+                        return app[rsc][m] || '';
+                    });
+                }
+            }
+            el.innerHTML = `<div class='head'><h2>${rsc}</h2><h2 style='color:#fff8;'>[${id}]</h2></div><div class='body'>${body}</div>`;
+            
+            return el;
+        },
+        nodes: {
+        },
+        edges: {
+        },
+        renderGraph() {
+            app.nodes.Job = app.makeNode('Job', app.job.JobID, app.job.Job);
+            if (app.job.Business && app.job.Business != '0') app.nodes.Business = app.makeNode('Business', app.job.Business.BusinessID, app.job.Business.Business);
+            if (app.job.Bus && app.job.Bus.BusID) app.nodes.Bus = app.makeNode('Bus', app.job.Bus.BusID, app.job.Bus.Bus);
+
+            if (app.job.related_Invoice) app.job.Invoice = app.job.related_Invoice[0];
+            if (app.job.Invoice && app.job.Invoice.InvoiceID) app.nodes.Invoice = app.makeNode('Invoice', app.job.Invoice.InvoiceID, app.job.Invoice.Invoice);
+            if (app.job.Employee && app.job.Employee.EmployeeID) app.nodes.Employee = app.makeNode('Employee', app.job.Employee.EmployeeID, app.job.Employee.Employee);
+            if (app.job.Request && app.job.Request.RequestID) app.nodes.Request = app.makeNode('Request', app.job.Request.RequestID, app.job.Request.Request);
+            
+            let nodenames = app.nodenames = ['Job','Business','Bus','Invoice','Employee','Request'];
+            let edges = [['Job', 'Business'],['Job', 'Bus'], ['Job', 'Invoice'], ['Job', 'Employee'], ['Job', 'Request']];
+            $("main").innerHTML = "";
+            let curleft = 100;
+            let calcleft = (window.innerWidth / 2) - (((nodenames.length - 2) * 250) / 2);
+            for (let nodename of nodenames) {
+                if (app.nodes[nodename]) {
+                    if (nodename == "Job") {
+                        app.nodes[nodename].style.left = ((window.innerWidth / 2) - 150) + 'px';
+                        app.nodes[nodename].style.top = '90px';
+                    } else {
+                        app.nodes[nodename].style.left = calcleft + 'px';
+                        calcleft += 250;
+                    }
+                    if (app.nodes[nodename].className) $("main").append(app.nodes[nodename]);
+                }
+            }
+            for (let edge of edges) {
+                if (app.nodes[edge[0]] && app.nodes[edge[1]]) {
+                    app.drawEdge(edge[0], edge[1]);
+                }
+            }
+        },
+        async fetchRecord(rsc="Job", id="33333") {
+            let out = [];
+            console.log(`fetchRecord(${rsc}, ${id})`);
+
+            if (id && id!='0') {
+                let resp = await fetch(`/api.php?rsc=${rsc}&id=${id}&rel=1`);
+                out = await resp.json();
+                
+                console.log("results");
+                console.dir(out);
+            } else {
+                console.log("not retrieving id '0'");
+            }
+            return out;
+        },
+        async fetchJob(id) {
+            let resp = await fetch(`/api.php?rsc=Job&id=${id}&rel=1`);
+            let obj = await resp.json();
+
+            console.log(`fetchJob(${id}) results`);
+            console.dir(obj);
+            
+            return obj;
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
+
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
+
+</html>

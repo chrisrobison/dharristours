@@ -310,7 +310,7 @@ if ($in['ID']) {
                </span>
                <button class='geninvoice'>
                   <i class="fa-solid fa-file-invoice-dollar"></i>
-                  <?php print ($InvID) ? "Update" : "Create"; ?> Invoice
+                  <span id="curdoc"></span>
                </button>
                <button class='print'><i class="fa-solid fa-print"></i> Print</button>
                <button class='print sendmsg'>Print &amp; Email</button>
@@ -382,8 +382,9 @@ if ($in['ID']) {
 
       $("#what").change(function (e) {
          var curdoc = $(this).val() || "InvoiceReport";
+         let showdoc = curdoc.replace(/([a-z])([A-Z])/g, "$1 $2");
          $("#Url").val("https://" + location.host + "/files/templates/" + simple.options[curdoc].href);
-         $("#Subject").val('[' + curdoc + '] ' + simple.current['Job']);
+         $("#Subject").val('[' + showdoc + '] ' + simple.current['Job']);
 
          let m;
          
@@ -404,6 +405,7 @@ if ($in['ID']) {
                sendto.push(simple.current.ContactEmail);
             }
          }
+         document.querySelector("#curdoc").innerHTML = "Update " + showdoc;
          $("#To").val(sendto.join(","));
 
          localStorage.setItem('curdoc', curdoc);
@@ -419,6 +421,8 @@ if ($in['ID']) {
             genPDF("MasterInvoice", $("#InvoiceParentID").val());
          } else if (what === "InvoiceReport") {
             genPDF("InvoiceReport", $("#ID").val());
+         } else if (what === "Confirmation") {
+            genPDF("Confirmation", $("#ID").val());
          } else {
             genPDF(what, document.querySelector("#ID").value);
          }
@@ -504,7 +508,29 @@ if ($in['ID']) {
                }
                 break;
  
-            case "DriverLog":
+            case "Confirmation":
+               document.querySelector("#type").value = "Confirmation";
+               genPDF("Confirmation", $("#ID").val());
+               if (confirm("Confirmation: Send " + $("#ID").val() + "C.pdf to " + $("#To").val() + "?")) {
+                  var frm = $("form").serialize();
+                  console.dir(frm);
+                  fetch(`/emailpdf.php?ID=${document.querySelector('#ID').value}`, {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                     },
+                     redirect: "follow",
+                     body: frm
+                  }).then(r => r.json()).then(data => {
+                     console.log(`sendpdf fetch complete`);
+                     console.dir(data);
+
+                     alert(`Confirmation: DL${$('#ID').val()}.pdf emailed to ${$("#To").val()}`);
+
+                  });
+               }
+                break;
+             case "DriverLog":
                document.querySelector("#type").value = "DriverLog";
                genPDF("DriverLog", $("#ID").val());
                if (confirm("Email Driver Log: DL" + $("#ID").val() + ".pdf to " + $("#To").val() + "?")) {
@@ -529,7 +555,7 @@ if ($in['ID']) {
              case "DriverLogExternal":
                document.querySelector("#type").value = "DriverLogExternal";
                genPDF("DriverLogExternal", $("#ID").val());
-               if (confirm("Email 'Contractor Driver Log': CL" + $("#ID").val() + ".pdf to " + $("#To").val() + "?")) {
+               if (confirm("Email 'Contractor Driver Log': " + $("#ID").val() + "-CL.pdf to " + $("#To").val() + "?")) {
                   var frm = $("form").serialize();
                   console.dir(frm);
                   fetch("/emailpdf.php", {
@@ -645,6 +671,7 @@ if ($in['ID']) {
          }
          var id;
 
+         let showdoc = curdoc.replace(/([a-z])([A-Z])/g, "$1 $2");
          if (what == "InvoiceReport") {
             document.querySelector("#doctype").innerHTML = "Invoice: &nbsp;";
             document.querySelector("#docval").innerHTML = "<?= $InvID ?>";
@@ -655,7 +682,7 @@ if ($in['ID']) {
 
             id = "<?= $parent_id ?>";
          } else {
-            document.querySelector("#doctype").innerHTML = what + ': &nbsp;';
+            document.querySelector("#doctype").innerHTML = showdoc + ': &nbsp;';
             document.querySelector("#docval").innerHTML = "<?= $in['ID'] ?>";
             id = "<?= $in['ID'] ?>";
          }

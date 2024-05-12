@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * { box-sizing: border-box; padding: 0; margin: 0; }
+        body {
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 0vh;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            padding: 1rem;
+        }
+        h1, h2, h3, h4 { margin-bottom: 0.5rem; }
+        h3 { margin-left: 1rem; }
+        p {
+            margin: 0rem 1rem 1rem 1rem;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<main>
+<h1 id="master-invoices">Master Invoices</h1>
+<h2 id="consolidated-invoice-delivery">Consolidated Invoice Delivery</h2>
+<p>Master Invoices are simply a group of invoices that belong to the same customer. Many of D Harris Tours customers have multiple trips per day. If invoicing is completed once a month or even (optimistically) once a week, these customers can end up receiving dozens if not hundreds of invoice emails at the same time.</p>
+<p>Master Invoices help solve this problem. They consolidate a group of invoices to be sent to the customer. It is somewhat like a phone bill: a cover summary page and then pages and pages of call details. It is important to note that a Master Invoice is not an actual invoice; It is simply a summary of invoices. Each invoice still stands alone and must be paid in full.</p>
+<p>This document will describe the process of creating and sending a Master Invoice to a customer using the new <a href="https://dharristours.simpsf.com/files/templates/Billing.php">Master Billing Tool</a></p>
+<h2 id="master-billing-tool">Master Billing Tool</h2>
+<h3 id="requirements">Requirements</h3>
+<p>The Master Billing Tool is located at <a href="https://dharristours.simpsf.com/files/templates/Billing.php">https://dharristours.simpsf.com/files/templates/Billing.php</a> and requires you to be logged in and authenticated to the Simple Software System. You must have admin access configured for your account in order to access the tool.</p>
+</main>
+<script>
+const $ = str => document.querySelector(str);
+const $$ = str => document.querySelectorAll(str);
+
+(function() {
+    const app = {
+        data: {},
+        state: {
+            loaded: false
+        },
+        init: function() {
+            app.state.loaded = true;
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
+
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
+
+</html>

@@ -46,12 +46,44 @@
             flex-direction: row;
             white-space: nowrap;
         }
+        #buses {
+            font-size: 18px;
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            background-color:#fff;
+            padding:0;
+        }
+        .bus {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 576 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3C/defs%3E%3Crect x='112.713' y='75.165' width='351.675' height='193.52' rx='5' ry='5' style='stroke: rgb(0, 0, 0); stroke-width: 0px; fill-opacity: 0.39; fill: rgb(170, 245, 255);'%3E%3C/rect%3E%3Crect x='198.079' y='27.08' width='172.972' height='48.085' rx='5' ry='5' style='stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(205, 7, 7);'%3E%3C/rect%3E%3Cpath d='M 288 0 C 422.4 0 512 35.2 512 80 L 512 96 L 512 128 C 529.7 128 544 142.3 544 160 L 544 224 C 544 241.7 529.7 256 512 256 L 512 416 C 512 433.7 497.7 448 480 448 L 480 490 C 480 507.7 475.7 512 458 512 L 406 512 C 388.3 512 384 507.7 384 490 L 384 448 L 192 448 L 192 490 C 192 507.7 187.7 512 170 512 L 118 512 C 100.3 512 96 507.7 96 490 L 96 448 C 78.3 448 64 433.7 64 416 L 64 256 C 46.3 256 32 241.7 32 224 L 32 160 C 32 142.3 46.3 128 64 128 L 64 96 L 64 80 C 64 35.2 153.6 0 288 0 Z M 128 120 L 128 246 C 128 263.7 132.3 268 150 268 L 304 268 L 304 98 L 150 98 C 132.3 98 128 102.3 128 120 Z M 304 268 L 426 268 C 443.7 268 448 263.7 448 246 L 448 120 C 448 102.3 443.7 98 426 98 L 304 98 L 304 268 Z M 144 380 C 168.634 380 184.03 353.333 171.713 332 C 165.997 322.099 155.432 316 144 316 C 119.366 316 103.97 342.667 116.287 364 C 122.003 373.901 132.568 380 144 380 Z M 432 380 C 456.634 380 472.03 353.333 459.713 332 C 453.997 322.099 443.432 316 432 316 C 407.366 316 391.97 342.667 404.287 364 C 410.003 373.901 420.568 380 432 380 Z M 364 50 C 364 41.2 356.8 34 348 34 L 228 34 C 219.2 34 212 41.2 212 50 C 212 58.8 219.2 66 228 66 L 348 66 C 356.8 66 364 58.8 364 50 Z'%3E%3C/path%3E%3Cpath style='stroke: rgb(0, 0, 0); stroke-width: 0; fill: rgb(255, 255, 255); visibility: hidden;' d='M 143.335 371.574 C 143.335 371.574 139.439 404.479 180.854 404.432 C 206.564 404.987 232.742 405.051 286.818 404.848 C 336.74 404.662 374.876 403.879 400.552 403.531 C 441.79 398.617 432.423 371.574 432.423 371.574 L 143.335 371.574 Z'%3E%3C/path%3E%3Ccircle style='fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-width: 0px;' cx='144.631' cy='347.482' r='31.918'%3E%3C/circle%3E%3Ccircle style='fill: rgb(255, 255, 255); stroke: rgb(0, 0, 0); stroke-width: 0px;' cx='432.47' cy='347.482' r='31.918'%3E%3C/circle%3E%3C/svg%3E");
+            display: inline-block;
+            height: 1em;
+            width: 1em;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position:relative;
+            top:2px;
+            left: -4px;
+        }
+        #buses li { 
+            margin:0;
+            display: flex;
+            align-items: center;
+            height: 2rem;
+            border-bottom: 1px solid #0003;
+            padding: 0.5rem 1rem;
+        }
+        #ctl {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <main>
+<form id="ctl" onsubmit="return false">
 
+</form>
 </main>
 <script>
 const $ = str => document.querySelector(str);
@@ -59,17 +91,84 @@ const $$ = str => document.querySelectorAll(str);
 
 (function() {
     const app = {
+        current: {},
         data: {},
         state: {
             loaded: false
         },
         init: function() {
-            fetch("wf.php").then(r=>r.json()).then(data=>{
-                app.data = data;
-                app.state.loaded = true;
-                app.renderEvents(data);
-            });
+            app.getVehicles();
+            app.getReportList();
+        },
+        async getReportList() {
+            let r = await fetch("wf.php?x=getReportList");
+            let data = await r.json();
+            if (data) {
+                app.data.reports = data;
+                data.sort((a,b)=>{ 
+                    if (a.objectname < b.objectname) {
+                        return -1;
+                    } else if (a.objectname > b.objectname) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+                let reports = document.createElement("ul");
+                reports.id = "reports";
+                reports.addEventListener("click", app.getReport);
 
+                for (const bus of data) {
+                    let opt = document.createElement("li");
+                    let i = document.createElement("i");
+                    i.className = "bus";
+                    opt.append(i);
+                    opt.dataset.uid = bus.objectuid;
+                    opt.dataset.name = bus.objectname;
+                    opt.innerHTML += " #" + bus.objectname;
+                    reports.append(opt);
+                }
+                $("#ctl").append(reports);
+            }
+        },
+        async getVehicles() {
+            let r = await fetch("wf.php?x=showVehicleReport");
+            let data = await r.json();
+            if (data) {
+                app.data.vehicles = data;
+                data.sort((a,b)=>{ 
+                    if (a.objectname < b.objectname) {
+                        return -1;
+                    } else if (a.objectname > b.objectname) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+                let buses = document.createElement("ul");
+                buses.id = "buses";
+                buses.addEventListener("click", app.changeBus);
+
+                for (const bus of data) {
+                    let opt = document.createElement("li");
+                    let i = document.createElement("i");
+                    i.className = "bus";
+                    opt.append(i);
+                    opt.dataset.uid = bus.objectuid;
+                    opt.dataset.name = bus.objectname;
+                    opt.innerHTML += " #" + bus.objectname;
+                    buses.append(opt);
+                }
+                $("#ctl").append(buses);
+            }
+        },
+        changeBus(evt) {
+            let tgt = evt.target;
+            let bus = tgt.dataset.uid;
+            let busname = tgt.dataset.name;
+
+            console.log(`Switch buses to ${busname} [${bus}]`);
+            app.current.bus = bus;
         },
         renderEvents(data) {
             let fields = Object.keys(data[0]);
