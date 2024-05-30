@@ -5,6 +5,11 @@
       $module = $boss->getObject("Module", $in['mid']);
       $acc = ($_SESSION['Login']->ProcessPref) ? " & ".$_SESSION['Login']->ProcessPref : "";
       $processes = $boss->getObject("Process", "ModuleID=" . $boss->q($in['mid']) . " AND ParentID=0 AND (Access & {$_SESSION['ProcessAccess']}{$acc}) ORDER BY Sequence");
+
+      if ($module->URL) {
+         header("Location: {$module->URL}");
+         exit;
+      }
    }
 ?>
 <!DOCTYPE html> 
