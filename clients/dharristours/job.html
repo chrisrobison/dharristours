@@ -97,7 +97,7 @@
             height: 100%;
             flex-direction: column;
             padding: 4px 0.5em;
-            
+            overflow: auto;
         }
         .head {
             height: 2.5em;
@@ -108,6 +108,10 @@
             justify-content: space-between;
             padding: 4px 0.5em;
             cursor: default;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
         }
         h2 {
             font-weight: 300;
@@ -135,6 +139,13 @@
             height: 75px;
 
         }
+        .itinerary th, .itinerary td {
+            vertical-align: top;
+        }
+        .Job {
+            width: 40em;
+            height: 10em;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
@@ -156,7 +167,7 @@
                 title: "Bus",
             }, 
             Job: {
-                body: "<h1>{{Job}}</h1><hr>{{JobDate}}<br><ul><li>Pickup: {{PickupLocation}}</li><li>Dropoff: {{DropOffLocation}}</li></ul>"
+                body: "<h1>{{Job}}</h1><hr>{{JobDate}}<br><table class='itinerary'><tr><th>Pickup</th><td>{{PickupLocation}}</td><td>{{PickupTime}}</td></tr><tr><th>Dropoff</th><td>{{DropOffLocation}}</td><td></td></tr><tr><th>Final</th><td>{{FinalDropOffLocation}}</td><td>{{DropOffTime}}</td></tr></table>"
             }
         },
         data: {},
@@ -273,11 +284,14 @@
 
                 for (let assoc of associates) {
                     if (app.job[`${assoc}ID`] && (app.job[`${assoc}ID`] != '0')) {
-                        app.job[assoc] = await app.fetchRecord(assoc, app.job[`${assoc}ID`]);
+                        app.job[assoc] = await app.fetchRecord(assoc, app.job[`${assoc}ID`], `${assoc}ID`);
                         console.log(`${assoc} ${app.job[assoc + 'ID']}`);
                         console.dir(app.job[assoc]);
                     }
                 }
+                let trip = await app.fetchRecord('Trip', id, 'JobID');
+                if (trip) app.job.Trip = trip;
+
                 console.log(`Job ID [${id}]`);
                 app.renderGraph();
             }
@@ -317,7 +331,7 @@
             if (app.job.Employee && app.job.Employee.EmployeeID) app.nodes.Employee = app.makeNode('Employee', app.job.Employee.EmployeeID, app.job.Employee.Employee);
             if (app.job.Request && app.job.Request.RequestID) app.nodes.Request = app.makeNode('Request', app.job.Request.RequestID, app.job.Request.Request);
             
-            let nodenames = app.nodenames = ['Job','Business','Bus','Invoice','Employee','Request'];
+            let nodenames = app.nodenames = ['Job','Business','Bus','Invoice','Employee','Request','Trip'];
             let edges = [['Job', 'Business'],['Job', 'Bus'], ['Job', 'Invoice'], ['Job', 'Employee'], ['Job', 'Request']];
             $("main").innerHTML = "";
             let curleft = 100;
@@ -340,12 +354,12 @@
                 }
             }
         },
-        async fetchRecord(rsc="Job", id="33333") {
+        async fetchRecord(rsc="Job", id="33333", key="JobID") {
             let out = [];
-            console.log(`fetchRecord(${rsc}, ${id})`);
+            console.log(`fetchRecord(${rsc}, ${key}=${id})`);
 
             if (id && id!='0') {
-                let resp = await fetch(`/api.php?rsc=${rsc}&id=${id}&rel=1`);
+                let resp = await fetch(`/api.php?rsc=${rsc}&id=${id}&key=${key}&rel=1`);
                 out = await resp.json();
                 
                 console.log("results");
