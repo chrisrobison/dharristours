@@ -132,12 +132,12 @@
       if ($in['start']) {
          $first = date("Y-m-d", strtotime($in['start']));
       } else {
-         $first = date("Y-m-d", strtotime('last week'));
+         $first = date("Y-m-d", strtotime('today'));
       }
       if ($in['end']) {
          $last = date("Y-m-d", strtotime($in['end']));
       } else {
-         $last = date("Y-m-d", strtotime('next week'));
+         $last = date("Y-m-d", strtotime('today'));
       }
       
       // Grab list of buses
@@ -169,7 +169,7 @@
             
             if ((array_key_exists("driver", $in)) && (array_key_exists("bus", $in))) {
                $bus = (!is_null($buses[$row['BusID']])) ? $buses[$row['BusID']] : "Special";
-               $obj->resourceIds = array($row['EmployeeID'], $bus);;
+               $obj->resourceIds = array($row['EmployeeID'], $bus);
             } else if ((array_key_exists("driver", $in)) && (!array_key_exists("bus", $in))) {
                $obj->resourceId = $row['EmployeeID']; 
             } else {
@@ -228,13 +228,17 @@
    }
    
    function getBuses($link, $in) {
-      $sql = "SELECT BusID, Bus, Capacity, BusNumber, Capacity, InService from Bus";
+        $sql = "SELECT BusID, Bus, Capacity, BusNumber, Capacity, InService from Bus";
 
-      if ($in['BusID']) {
-         $sql .= " WHERE BusID={$in['BusID']}";
-      }
-      $results = mysqli_query($link, $sql);
-
+        if ($in['BusID']) {
+            $sql .= " WHERE BusID={$in['BusID']}";
+        }
+        $results = mysqli_query($link, $sql);
+        $out = [];
+        while ($row = mysqli_fetch_object($results)) {
+            $out[] = $row;
+        }
+        return $out;
    }
 
    function getJobs($link, $in) {
@@ -296,18 +300,20 @@
 
    function getDriverResources($link) {
       $out = array(); $cnt = 0;
-      $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY LastName");
+      $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY FirstName");
       
       while ($row = $results->fetch_assoc()) {
          $obj = new stdClass();
          $obj->id = $row['EmployeeID'];
-         $obj->driverID = $row['EmployeeID'];
-         $obj->title = $row['LastName'] . ', ' . $row['FirstName'];
+         $obj->EmployeeID = $row['EmployeeID'];
+         $obj->first_name = $row['FirstName'];
+         $obj->last_name = $row['LastName'];
+         $obj->phone = $row['Phone'];
+         $obj->cell = $row['Cell'];
+         $obj->email = $row['Email'];
+         $obj->title = $row['FirstName'] . ' ' . $row['LastName'];
 
-         if (!$obj->capacity || $obj->capacity == "null") {
-            $obj->capacity = $row['BusNumber'] ? substr($row['BusNumber'], 0, 2) : 0;
-         }
-         $obj->type = "bus";
+         $obj->type = "driver";
          
          array_push($out, $obj);
       }
@@ -385,17 +391,19 @@
 
       array_push($out, $obj);
 
-      $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY LastName");
-      
-      while ($row = $results->fetch_assoc()) {
-         $obj = new stdClass();
-         $obj->id = $row['EmployeeID'];
-         $obj->EmployeeID = $row['EmployeeID'];
-         $obj->title = $row['LastName'] . ', ' . substr($row['FirstName'], 0, 1);
-         $obj->capacity = 0;
-         $obj->type = "driver";
-         
-         array_push($out, $obj);
+      if (!isset($in['drivers']) || ($in['drivers'] != 0)) {
+          $results = mysqli_query($link, "SELECT * FROM Employee WHERE Active=1 AND Driver=1 ORDER BY FirstName");
+          
+          while ($row = $results->fetch_assoc()) {
+             $obj = new stdClass();
+             $obj->id = $row['EmployeeID'];
+             $obj->EmployeeID = $row['EmployeeID'];
+             $obj->title = $row['FirstName'] . ' ' . $row['LastName'];
+             $obj->capacity = 0;
+             $obj->type = "driver";
+             
+             array_push($out, $obj);
+          }
       }
       usort($out, "cmp");
 
