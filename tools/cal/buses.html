@@ -14,6 +14,13 @@
 <script src='/lib/js/tiny-date-picker.min.js'></script>
 <script src='fc/lib/main.js'></script>
 <style>
+* { box-sizing: border-box; padding: 0; margin:0; }
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
 .center {
    text-align: center;
 }
@@ -110,7 +117,7 @@ main {
 }
 .left {
   height: 100vh;
-  display: flex;
+  display: none;
 }
 .right {
    display: flex;
@@ -234,7 +241,8 @@ main {
    <div id='loader' class='loader'>Loading...</div>
 </div>
 <script>
-   var dp = TinyDatePicker('#tinycal', { 
+/*
+var dp = TinyDatePicker('#tinycal', { 
       format(date) {
          return date.toLocaleDateString();
       },
@@ -255,6 +263,7 @@ main {
    dp.on('statechange', (_, picker) => { 
       console.log("statechange");
    } );
+   */
    var calendar, calendar2, calendarEl, calendarEl2;;
 
    function doCalendar(buses) {
@@ -272,18 +281,16 @@ main {
          headerToolbar: {
            left: 'prev,next today',
            center: 'title',
-           right: 'resourceTimelineDay,resourceTimelineTwoDay,resourceTimelineWeek,resourceTimelineMonth,resourceTimelineYear'
+           right: 'resourceTimelineDay,resourceTimelineMonth'
          },
          loading: function(isLoading) {
             if (isLoading) {
                document.querySelector("#loaderWrap").style.display = "block";
             } else {
                document.querySelector("#loaderWrap").style.display = "none";
-               let topCal = document.querySelector("#calendar > div.fc-view-harness.fc-view-harness-passive > div > table > tbody > tr > td:nth-child(3) > div > div");
-               let btmCal = document.querySelector("#calendar2 > div > div > table > tbody > tr > td:nth-child(3) > div > div");
-               topCal.onscroll = function(evt) {
-                  btmCal.scrollLeft = this.scrollLeft;
-               };
+               // let topCal = document.querySelector("#calendar > div.fc-view-harness.fc-view-harness-passive > div > table > tbody > tr > td:nth-child(3) > div > div");
+               // let btmCal = document.querySelector("#calendar2 > div > div > table > tbody > tr > td:nth-child(3) > div > div");
+               // topCal.onscroll = function(evt) { btmCal.scrollLeft = this.scrollLeft; };
             }
          },
          lazyFetching: false,
@@ -294,24 +301,9 @@ main {
              type: 'resourceTimeline',
              duration: { days: 1 },
              buttonText: '1 day',
-           },
-            resourceTimelineTwoDay: {
-             type: 'resourceTimeline',
-             duration: { days: 2 },
-             buttonText: '2 days',
-           },
-           resourceTimelineWeek: {
-             type: 'resourceTimeline',
-             duration: { days: 7 },
-             buttonText: 'Week'
            }
-         },
+        },
          resourceAreaWidth: "15em",
-         resourceGroupField: "type",
-         resourceGroupLabelContent: function(arg) {
-            console.log("resourceGroupLabelContent")
-            console.dir(arg);
-         },
          resourceAreaColumns: [
             {
                headerContent: "Resource",
@@ -325,9 +317,9 @@ main {
          allDaySlot: false,
          // resourceAreaHeaderContent: 'Buses',
          resourceAreaHeaderClassNames: [ 'center' ],
-         resources: (buses) ? buses : "api.php?type=allresources",
+         resources: (buses) ? buses : "api.php?type=allresources&drivers=0",
          events: {
-            url: "api.php?type=events&driver=1&bus=1"
+            url: "api.php?type=events&bus=1&driver=0"
          },
          eventSourceSuccess: function(content, xhr) {
            console.log("eventSourceSuccess");
@@ -634,10 +626,10 @@ var buses, myevent, drivers, mybuses = {}, mydrivers = {};
 function init() {
 
    // Fetch vehicle(resources) data and store for later use
-   makeRequest('GET', 'api.php?type=allresources', function (err, data) {
+   makeRequest('GET', 'api.php?type=allresources&drivers=0', function (err, data) {
       buses = JSON.parse(data);
       for (var i=0; i<buses.length; i++){
-         mybuses[buses[i].busID] = buses[i];
+         mybuses[buses[i].BusID] = buses[i];
       }
       //makeSettingsDropdown(buses);
       console.log("Buses:");
@@ -645,19 +637,9 @@ function init() {
       doCalendar(buses);
    });
    
-   /* makeRequest('GET', 'api.php?type=driverresources', function (err, data) {
-      drivers = JSON.parse(data);
-      for (var i=0; i<drivers.length; i++){
-         mydrivers[drivers[i].id] = drivers[i];
-      }
-      //makeSettingsDropdown(drivers);
-      console.log("Drivers:");
-      console.dir(mydrivers);
-      doCalendar2(drivers);
-   });
-   */
- 
+
    // Fetch driver data and store for later use
+   /*
    makeRequest('GET', 'api.php?type=drivers', function (err, data) {
       drivers = JSON.parse(data);
       for (var i=0; i<drivers.length; i++){
@@ -666,7 +648,7 @@ function init() {
       console.log("Drivers:");
       console.dir(mydrivers);
    });
-
+   */
    makeTabs(".tabs");
 
 }

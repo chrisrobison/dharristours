@@ -14,6 +14,13 @@
 <script src='/lib/js/tiny-date-picker.min.js'></script>
 <script src='fc/lib/main.js'></script>
 <style>
+* { box-sizing: border-box; padding: 0; margin:0; }
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
 .center {
    text-align: center;
 }
@@ -110,7 +117,7 @@ main {
 }
 .left {
   height: 100vh;
-  display: flex;
+    width: 300px;
 }
 .right {
    display: flex;
@@ -209,13 +216,25 @@ main {
     height: 5em;
   }
 }
-
+#joblist .jobs tr td {
+    border-bottom: 1px solid #0009;
+    border-right: 1px solid #0009;
+    vertical-align: top;
+    font-size: 12px;
+}
+#joblist .jobs tr:nth-child(2n) td {
+    background-color: #0002;
+}
+.timeval {
+    text-align: right;
+}
 </style>
 </head>
 <body>
 <main>
    <div class='left'>
       <div id='tinycal'></div>
+     <div id='joblist'> </div>
    </div>
    <div class='right'>
       <div id='calendar'></div>
@@ -225,7 +244,6 @@ main {
            <li><a href="#detail" class='detail'>Details</a></li> 
          </ul>
 
-         <div id='joblist'> </div>
          <div id='detail'> </div>
       </div>
    </div>
@@ -234,7 +252,8 @@ main {
    <div id='loader' class='loader'>Loading...</div>
 </div>
 <script>
-   var dp = TinyDatePicker('#tinycal', { 
+/*
+var dp = TinyDatePicker('#tinycal', { 
       format(date) {
          return date.toLocaleDateString();
       },
@@ -255,6 +274,7 @@ main {
    dp.on('statechange', (_, picker) => { 
       console.log("statechange");
    } );
+   */
    var calendar, calendar2, calendarEl, calendarEl2;;
 
    function doCalendar(buses) {
@@ -272,18 +292,16 @@ main {
          headerToolbar: {
            left: 'prev,next today',
            center: 'title',
-           right: 'resourceTimelineDay,resourceTimelineTwoDay,resourceTimelineWeek,resourceTimelineMonth,resourceTimelineYear'
+           right: 'resourceTimelineDay,resourceTimelineMonth'
          },
          loading: function(isLoading) {
             if (isLoading) {
                document.querySelector("#loaderWrap").style.display = "block";
             } else {
                document.querySelector("#loaderWrap").style.display = "none";
-               let topCal = document.querySelector("#calendar > div.fc-view-harness.fc-view-harness-passive > div > table > tbody > tr > td:nth-child(3) > div > div");
-               let btmCal = document.querySelector("#calendar2 > div > div > table > tbody > tr > td:nth-child(3) > div > div");
-               topCal.onscroll = function(evt) {
-                  btmCal.scrollLeft = this.scrollLeft;
-               };
+               // let topCal = document.querySelector("#calendar > div.fc-view-harness.fc-view-harness-passive > div > table > tbody > tr > td:nth-child(3) > div > div");
+               // let btmCal = document.querySelector("#calendar2 > div > div > table > tbody > tr > td:nth-child(3) > div > div");
+               // topCal.onscroll = function(evt) { btmCal.scrollLeft = this.scrollLeft; };
             }
          },
          lazyFetching: false,
@@ -294,18 +312,8 @@ main {
              type: 'resourceTimeline',
              duration: { days: 1 },
              buttonText: '1 day',
-           },
-            resourceTimelineTwoDay: {
-             type: 'resourceTimeline',
-             duration: { days: 2 },
-             buttonText: '2 days',
-           },
-           resourceTimelineWeek: {
-             type: 'resourceTimeline',
-             duration: { days: 7 },
-             buttonText: 'Week'
            }
-         },
+        },
          resourceAreaWidth: "15em",
          resourceGroupField: "type",
          resourceGroupLabelContent: function(arg) {
@@ -314,7 +322,7 @@ main {
          },
          resourceAreaColumns: [
             {
-               headerContent: "Resource",
+               headerContent: "Drivers",
                field: "title"
             }
          ],
@@ -325,21 +333,21 @@ main {
          allDaySlot: false,
          // resourceAreaHeaderContent: 'Buses',
          resourceAreaHeaderClassNames: [ 'center' ],
-         resources: (buses) ? buses : "api.php?type=allresources",
+         resources: (buses) ? buses : "api.php?type=driverresources",
          events: {
-            url: "api.php?type=events&driver=1&bus=1"
+            url: "api.php?type=events&driver=1"
          },
          eventSourceSuccess: function(content, xhr) {
            console.log("eventSourceSuccess");
            console.dir(content);
            
-           let html = `<table class='jobs'><thead><tr><th>Job</th><th>Date</th><th>Start</th><th>End</th><th>Link</th></tr></thead><tbody>`;
+           let html = `<table class='jobs'><thead><tr><th>Job</th><th>Start/End</th></tr></thead><tbody>`;
            let sel = calendar.getDate(), rowclass='';
            
            let selStart = calendar.view.currentStart.getTime(); // (new Date(calendar.getDate().toISOString().substr(0,10)).getTime()); 
            let selEnd = calendar.view.currentEnd.getTime(); 
-
-           for (let i in content) { 
+            
+            for (let i in content) {
               id = (new Date(content[i].start).getTime());
               if ((id > selStart) && (id < selEnd)) {
                   rowclass = "";
@@ -349,8 +357,9 @@ main {
                   } else {
                      rowclass = "";
                   }
+                  content[i].title = content[i].title.replace(/\(/, "<br>(");
                   html += `<tr>
-                     <td class='${rowclass}'>${content[i].title}</td><td class='${rowclass}'>${content[i].date}</td><td class='${rowclass}'>${cleanTime(content[i].start)}</td><td class='${rowclass}'>${cleanTime(content[i].end)}</td><td><a target='_blank' href="${content[i].url}">&#128279;</a></td></tr>`;
+                     <td class='${rowclass}'>${content[i].title}</td><td class='${rowclass} timeval'>${cleanTime(content[i].start)}<br>${cleanTime(content[i].end)}</td></tr>`;
               }
            }
            html += "</tbody></table><div id='filler'></div>";
@@ -442,7 +451,7 @@ main {
          resourceAreaHeaderClassNames: [ 'center' ],
          resources: (drivers) ? drivers : "api.php?type=driverresources",
          events: {
-            url: "api.php?type=events&driver=1&bus=1"
+            url: "api.php?type=events&driver=1"
          },
          eventSourceSuccess: function(content, xhr) {
            console.log("eventSourceSuccess");
@@ -475,6 +484,59 @@ main {
 
     calendar2.render();
 
+   }
+   
+   function doCalendar3(jobs) {
+      
+      calendar3 = new FullCalendar.Calendar(document.querySelector("#tinycal"), {
+         initialView: 'listDay',
+         height: "auto",
+         selectable: true,
+        customButtons: {
+            addJob: {
+                text: "+",
+                click: function() {
+                    modal(new Date(), new Date(), '');
+                }
+            }
+        },
+        headerToolbar: {
+            start: 'title',
+            center: '',
+            end: 'addJob'
+        },
+         lazyFetching: false,
+         //eventMaxStack: 1,
+         expandRows: true,
+         titleFormat: {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        },
+         listDayFormat: {
+            weekday: 'long'
+         },
+         views: {
+           listDay: {
+             type: 'listDay',
+             duration: { days: 1 },
+             buttonText: '1 day',
+           },
+            listWeek: {
+             type: 'listWeek',
+             duration: { days: 7 },
+             buttonText: 'Week',
+           },
+           listMonth: {
+             type: 'listMonth',
+             duration: { days: 31 },
+             buttonText: 'Month'
+           }
+         },
+         eventMaxStack: 2,
+         timeZone: "local",
+         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+      });
    }
 
    function cleanTime(date) {
@@ -630,21 +692,27 @@ function makeSettingsDropdown(resources) {
 
 }
 
-var buses, myevent, drivers, mybuses = {}, mydrivers = {};
+var buses, myevents, myevent, drivers, mybuses = {}, mydrivers = {};
 function init() {
 
    // Fetch vehicle(resources) data and store for later use
-   makeRequest('GET', 'api.php?type=allresources', function (err, data) {
-      buses = JSON.parse(data);
-      for (var i=0; i<buses.length; i++){
-         mybuses[buses[i].busID] = buses[i];
+   makeRequest('GET', 'api.php?type=driverresources', function (err, data) {
+      drivers = JSON.parse(data);
+      for (var i=0; i<drivers.length; i++){
+         mydrivers[drivers[i].EmployeeID] = drivers[i];
       }
       //makeSettingsDropdown(buses);
-      console.log("Buses:");
-      console.dir(mybuses);
-      doCalendar(buses);
+      console.log("Drivers:");
+      console.dir(mydrivers);
+      doCalendar(drivers);
    });
-   
+   let now = formatDate(new Date());
+
+   fetch(`api.php?type=events&start=${now}&end=${now}`).then(r=>r.json()).then(data=>{
+        myevents = data;
+        doCalendar3(data);
+    });
+    
    /* makeRequest('GET', 'api.php?type=driverresources', function (err, data) {
       drivers = JSON.parse(data);
       for (var i=0; i<drivers.length; i++){
@@ -670,6 +738,21 @@ function init() {
    makeTabs(".tabs");
 
 }
+
+function formatDate(date) {
+  let m = date.getMonth() + 1;
+  if (m < 10) {
+     m = "0" + m.toString();
+  }
+  let d = date.getDate();
+  if (d < 10) {
+     d = "0" + d.toString();
+  }
+  let yr = date.getFullYear();
+  return `${yr}-${m}-${d}`;
+}
+
+
 function formatTime(d) {
 
    var hr = parseInt(d.toISOString().substr(11,2));
@@ -743,7 +826,6 @@ function modal(from, to, rsc) {
 
    overlay.innerHTML = oform;
    document.body.append(overlay); 
-*/   
    const customer = document.querySelector('#customer');
    const pickup = document.querySelector('#pickup');
    const dropoff = document.querySelector('#dropoff');
@@ -757,6 +839,7 @@ function modal(from, to, rsc) {
    dropoff.addEventListener("keydown", event => { doSuggestions('dropoff', event); });
    //dlgform.addEventListener("submit", event => { makeReservation(event, customer.value, pickup.value, dropoff.value, frel.value, toel.value, pax.value); });
    customer.focus();
+*/   
 }
 
 function handleForm(obj) {
