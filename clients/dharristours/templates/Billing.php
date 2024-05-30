@@ -125,6 +125,7 @@
         flex-direction: column;
         align-items: flex-end;
         width: 98.4vw;
+        z-index: 99999;
     }
 
     button.close {
