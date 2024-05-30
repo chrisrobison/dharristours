@@ -92,12 +92,13 @@ function showVehicleReportExtern() {
 
 function showTracks($object="") {
     global $in;
+    global $env;
     $obj = new stdClass();
     $obj->action = "showTripReportExtern";
     $obj->range_pattern = $range;
     
     $url = makeUrl($obj);
-    $oldurl = "https://csv.webfleet.com/extern?account=harris-tours&username=cdr&password=Simple1%21&apikey=2b6c8db8-071f-44c0-988f-d82718b1be29&lang=en&action=showTripReportExtern&range_pattern={$range}&outputformat=json";
+    $oldurl = "https://csv.webfleet.com/extern?account={$env->account}&username={$env->username}&password={$env->password}&apikey={$env->apikey}&lang={$env->lang}&action=showTripReportExtern&range_pattern={$range}&outputformat=json";
     print $url."<br>\n".$oldurl."<br>\n";
     $results = file_get_contents($url);
     $obj = json_decode($results);

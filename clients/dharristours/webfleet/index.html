@@ -125,7 +125,7 @@ const $$ = str => document.querySelectorAll(str);
                     opt.append(i);
                     opt.dataset.uid = bus.objectuid;
                     opt.dataset.name = bus.objectname;
-                    opt.innerHTML += " #" + bus.objectname;
+                    opt.innerHTML += bus.reportname;
                     reports.append(opt);
                 }
                 $("#ctl").append(reports);
