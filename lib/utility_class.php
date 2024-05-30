@@ -38,7 +38,7 @@ class Utility {
                 
                 foreach ($fields as $field) {
                     if ($in[$field]!="" && ($field != $rsc."ID")) {
-                        $searchArr[] = $field." like '%".$boss->_quote($in[$field], '')."%'";
+                        $searchArr[] = "`" . $field."` like '%".$boss->_quote($in[$field], '')."%'";
                         $in['searchField'] = $field;
                         $in['searchString'] = $in[$field];
                     } else if ($in[$field] && ($field == $rsc."ID")) {
@@ -559,7 +559,7 @@ class Utility {
     function login($boss, $data) {
         $obj = $boss->db;
         $obj->addResource('Login');
-        $daystoexpire = ($data['remember']) ? 7 : 2;
+        $daystoexpire = ($data['remember']) ? 7 : 3;
         $expireTime = 60 * 60 * 24 * $daystoexpire; // 2 days
         session_set_cookie_params($expireTime);
         
