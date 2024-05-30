@@ -30,7 +30,7 @@
             $m = "C";
          }
       }
-      $save = $boss->docroot . '/' . $in['saveto'] . $m . $in['ID'] . '.pdf';
+      $save = $boss->docroot . '/' . $in['saveto'] . $in['ID'] . $m . '.pdf';
    }
    $url = [];
    if (isset($in['pages'])) {
@@ -41,7 +41,7 @@
    }
    $in['url'] = escapeshellarg($in['url']);
 
-   $cmd = "/usr/local/bin/wkhtmltopdf  --print-media-type -L 5mm -R 5mm -T 5mm -B 5mm -s Letter " . $in['url'] . " " . join(" ", $url)." $save";
+   $cmd = "/usr/local/bin/wkhtmltopdf -q --print-media-type -L 5mm -R 5mm -T 5mm -B 5mm -s Letter " . $in['url'] . " " . join(" ", $url)." $save";
 
    $results = `$cmd`;
    file_put_contents("/tmp/mkpdf.log", "---------------------\n". $cmd."\n". $results."\n-------------------\n", FILE_APPEND);
@@ -76,8 +76,8 @@
             $m = "C";
          }
       }
-    $link = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/files/" . $in['saveto'] . $m . $in['ID'] . '.pdf';
-   print "<div class='result'><h1>Created  {$in['type']} ".$m .$in['ID'].".pdf</h1>";
+    $link = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/files/" . $in['saveto'] .  $in['ID'] . $m .'.pdf';
+   print "<div class='result'><h1>Created  {$in['type']} ".$in['ID'].$m.".pdf</h1>";
    print "<a class='icon' href='$link'><img src='/tools/mkpdf/view.png' height='100' width='100' border='0' alt='View'></a>";
 //   print "&nbsp;|&nbsp;";
    print "<a class='icon' download href='$link'><img src='/tools/mkpdf/download.png' height='100' width='100' border='0' alt='Download'></a>";
