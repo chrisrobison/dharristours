@@ -647,7 +647,7 @@ class boss {
             if ($ids) {
                
                foreach ($ids as $ididx=>$newID) {
-                  if ((!$in[$tbl.'ID'] || (preg_match("/^new/i", $in[$tbl.'ID']))) && $newID) $in[$tbl.'ID'] = $newID;
+                  if ((!isset($in[$tbl.'ID']) || (preg_match("/^new/i", $in[$tbl.'ID']))) && $newID) $in[$tbl.'ID'] = $newID;
                   if (($tbl!='Track') && (!$in['ID'] || (preg_match("/^new/i", $in['ID']))) && $newID) $in['ID'] = $newID;
                   
                   if ($data[$tbl][$newID]) {
