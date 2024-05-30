@@ -75,13 +75,20 @@
                 $tots->total = 0;
                 $tots->date = $job->JobDate;
                 $onduty = 0;
-
+                
+                $tmp = new stdClass();
+                $tmp->total = 0;
+                $tmp->onduty = 0;
+                $tmp->date = $job->JobDate;
+                
                 foreach ($trips->TripReport as $trip) {
                     if ($trip->TripReportID) {
-                        $tots->driving += ceil(($trip->Duration / 1000) / 60);
-                        $tots->total += ceil(($trip->Duration / 1000) / 60);
+                        $tmp->total += $trip->Duration;
+                        $tmp->driving += $trip->DrivingTime;
+                        $tots->driving += $trip->Duration;
+                        $tots->total += $trip->Duration;
+                        $tmp->onduty += $trip->Standstill + $trip->Downtime;
                         if ($onduty==0) {
-                            $tots->offduty += ceil(($trip->StartTime / 1000) / 60);
                             $tots->total += ceil(($trip->StartTime / 1000) / 60);
                             $onduty = 1;
                         } else {
@@ -91,21 +98,29 @@
                         $lastend = floor(($trip->EndTime / 1000) / 60);
                     }
                 }
+                $tmp->offduty = sprintf("%.2f", (((86400000 - $tmp->driving - $tmp->onduty)/1000)/60)/60);
+                $tmp->driving = sprintf("%.2f", (($tmp->driving/ 1000)/60)/60);
+                $tmp->onduty = sprintf("%.2f", (($tmp->onduty / 1000)/60)/60);
+                $tmp->sleeper = "0.00";
+                $tmp->total = "24.0";
+
                 $tots->offduty += (1440 - $lastend); // log as offduty from end of last job to end of day
                 $tots->total += (1440 - $lastend);
 
-                $tots->driving = sprintf("%.2f", round15($tots->driving / 60, 0));
-                $tots->onduty = sprintf("%.2f", round15($tots->onduty / 60, 1));
-                $tots->sleeper = sprintf("%.2f", round15($tots->sleeper / 60, 1));
+                $tots->driving = sprintf("%.2f", ($tots->driving / 60));
+                $tots->onduty = sprintf("%.2f", ($tots->onduty / 60));
+                $tots->sleeper = sprintf("%.2f", ($tots->sleeper / 60));
                 $tots->offduty = sprintf("%.2f", (24 - ($tots->driving + $tots->onduty)));
                 $tots->total = sprintf("%.2f", 24);
-                $obj->hours = $tots;
+                $obj->hours = $tmp;
+                if ($trip->Day=="2024-02-15") {
+                }
             }
-            //$obj->trips = $trips;
             $all[$obj->date] = $obj;
         }
     }
     function round15($hrs, $down=0) {
+        return sprintf("%.2f", $hrs);
         $hrs = $hrs * 4;
         $hrs = ($down) ? floor($hrs) : ceil($hrs);
         return $hrs / 4;
@@ -227,6 +242,13 @@ header {
     text-decoration:none;
 
 }
+tr td.over {
+        background-color: #c003;
+}
+tr td.ok {
+        background-color: #0c03;
+
+}
 #hours-of-service {
     font-family: 'Inconsolata', monospace;
     font-size: 16px;
@@ -257,8 +279,7 @@ h2 {
 }
 .hoursWrap {
    display: inline-block;
-   overflow: scroll;
-   width: 48rem;
+   overflow: auto;
 }
 header a:hover {
     color: #fff;
@@ -417,16 +438,17 @@ EOT;
         $day = $all[$jobdate];
     //foreach ($all as $jobdate=>$day) {
         if ($day && !array_key_exists($day->date.':'.$day->busnum, $seen) && ($day->hours->offduty && $day->hours->total)) {
+            $xtra = ($day->hours->driving > 10) ? "over" : "ok";
             $out = "";
             $out .= "<tr><td class='left'>".date("m/d", strtotime($day->date))."</td>";
             $out .= "<td>".$day->hours->offduty."</td>";
             $out .= "<td>".$day->hours->sleeper."</td>";
-            $out .= "<td>".$day->hours->driving."</td>";
+            $out .= "<td class='$xtra'>".$day->hours->driving."</td>";
             $out .= "<td>".$day->hours->onduty."</td>";
             $out .= "<td>".$day->hours->total."</td>";
             $mydate = date("Y-m-d", strtotime($day->date));
             $url = "/tools/dlog/dlog.php?driver=".$driver->EmployeeID."&date=".date("Y-m-d", strtotime($day->date));
-            $out .= "<td class='details'><a target='_blank' onclick=\"return parent.loadUrl('{$url}','HoS: {$driver->LastName} {$day->date}')\" href='{$url}'><span class='linktext'>Details</span> <span class='link'></span></a></td></tr>";
+            $out .= "<td class='details'><a target='_blank' onclick=\"return app.viewDetail('{$url}', '{$day->date}');\" href='{$url}'><span class='linktext'>Details</span> <span class='link'></span></a></td></tr>";
             print $out."\n";
             $seen[$day->date.':'.$day->busnum] = 1;
         } else {
@@ -511,6 +533,14 @@ EOT;
 
          document.querySelector("#logviewer").src = url;
          return false;
+        },
+        viewDetail(url, txt) {
+            if (parent && parent.loadUrl) {
+                parent.loadUrl(url,`HoS: {$driver->LastName} {$day->date}`);
+            } else {
+                location.href = url;
+            }
+            return false;
         },
         changeDate: function() {
             let moEl = document.querySelector("#month");

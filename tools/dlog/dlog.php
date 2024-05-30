@@ -404,9 +404,6 @@
                 dtfirst = 0;
          
             trips["trips"].forEach((trip, tidx)=>{
-/*  Rounds down to nearest quarter hour */
-//                trip.StartTime = (Math.floor((trip.StartTime / 1000) / (15 * 60)) * (15 * 60)) * 1000;
-//                trip.EndTime = (Math.floor((trip.EndTime / 1000) / (15 * 60)) * (15 * 60)) * 1000;
 
                startHour = (((trip.StartTime / 1000) / 60) / 60);
                endHour = (((trip.EndTime / 1000) / 60) / 60);
