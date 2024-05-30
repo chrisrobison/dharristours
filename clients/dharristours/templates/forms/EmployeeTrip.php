@@ -5,14 +5,14 @@ function upAll(id) {
       $("#YardEnd_hour").val(yetimes[0]);
       $("#YardEnd_minute").val(yetimes[1]);
 
-      var stimes1 = getTimes(simpleConfig.record["JobStartTime"]);
+/*      var stimes1 = getTimes(simpleConfig.record["JobStartTime"]);
       $("#JobStart_hour").val(stimes1[0]);
       $("#JobStart_minute").val(stimes1[1]);
-
-      var etimes1 = getTimes(simpleConfig.record["JobEndTime"]);
+*/
+/*      var etimes1 = getTimes(simpleConfig.record["JobEndTime"]);
       $("#JobEnd_hour").val(etimes1[0]);
       $("#JobEnd_minute").val(etimes1[1]);
-
+*/
       var stimes2 = getTimes(simpleConfig.record["YardStartTime"]);
       $("#YardStart_hour").val(stimes2[0]);
       $("#YardStart_minute").val(stimes2[1]);
@@ -46,7 +46,7 @@ function upAll(id) {
       $("#YardEnd_hour").val("");
       $("#YardEnd_minute").val("");
 
-
+      /*
       $("#JobStartTime").val("");
       $("#JobStart_hour").val("");
       $("#JobStart_minute").val("");
@@ -54,14 +54,29 @@ function upAll(id) {
       $("#JobEndTime").val("");
       $("#JobEnd_hour").val("");
       $("#JobEnd_minute").val("");
-
+      */
+     document.querySelector("#JobStartTime").value = "00:00:00";
+     document.querySelector("#JobEndTime").value = "00:00:00";
       $("#JobArrivalTime").val("");
       $("#JobArrival_hour").val("");
       $("#JobArrival_minute").val("");
 
       $("#Trip").focus();
    }
+   function updateBillable() {
+      let start = document.querySelector("#JobStartTime").value;
+      let end = document.querySelector("#JobEndTime").value;
+      
+      let sdate = new Date(`1970-10-15 ${start}`);
+      let edate = new Date(`1970-10-15 ${end}`);
+      let delta = edate.getTime() - sdate.getTime();
 
+      delta = (((delta / 1000) / 60) / 60);
+      delta = Math.floor(delta * 100) / 100;
+
+      console.log(`${delta}`);
+      document.querySelector("#TotalHoursWorked").value = delta + " hrs";
+   }
     function updateTime(who) {
        var hr24 = $("#" + who + "_hour").val(),
           mins = $("#" + who + "_minute").val();
@@ -96,7 +111,8 @@ function upAll(id) {
              <legend>Total Billable Hours: <input type='text' dbtype='text' name='Trip[<?php print $current->TripID; ?>][TotalHoursWorked]' id='TotalHoursWorked' value='' size='5' disabled='disabled' /></legend>
          <div class='contentField'><label>Overtime</label><select dbtype='tinyint(4)' name='Trip[<?php print $current->TripID; ?>][Overtime]' id='Overtime'><option value='0'>No</option><option value='1' selected>Yes</option></select></div>
         <div class='contentField'><label>Job Start Time</label>
-               <select id='JobStart_hour' onchange="updateTime('JobStart');">
+              <input type="time" name="Trip[<?php print $current->TripID; ?>][JobStartTime]" id="JobStartTime" oninput="updateBillable();doModify($(this));"/>
+              <!-- <select id='JobStart_hour' onchange="updateTime('JobStart');">
                   <option value='00'>00</option>
                   <option value='01'>01</option>
                   <option value='02'>02</option>
@@ -137,9 +153,12 @@ function upAll(id) {
                   <option value='55'>55</option>
                </select>
                <input type="hidden" rel="data" onchange='doModify($(this))' id='JobStartTime' name='Trip[<?php print $current->TripID; ?>][JobStartTime]' value='<?php print $current->JobStartTime; ?>'></input>
+   -->
 	</div>
          <div class='contentField'><label>Job End Time</label>
-               <select id='JobEnd_hour' onchange="updateTime('JobEnd');">
+              <input type="time" name="Trip[<?php print $current->TripID; ?>][JobEndTime]" id="JobEndTime" oninput="updateBillable();doModify($(this));"/>
+               <!-- 
+                  <select id='JobEnd_hour' onchange="updateTime('JobEnd');">
                   <option value='00'>00</option>
                   <option value='01'>01</option>
                   <option value='02'>02</option>
@@ -180,6 +199,7 @@ function upAll(id) {
                   <option value='55'>55</option>
                </select>
                <input type="hidden" rel="data" onchange='doModify($(this))' id='JobEndTime' name='Trip[<?php print $current->TripID; ?>][JobEndTime]' value='<?php print $current->JobEndTime; ?>'></input>
+   -->
 	</div>
    </fieldset>
 	<div class='contentField'><input type='text' dbtype='text' name='Trip[<?php print $current->TripID; ?>][TotalHoursWorked]' id='TotalHoursWorked' value='' size='25' disabled='disabled' /></div>

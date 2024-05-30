@@ -605,7 +605,13 @@
                             </td>
                             <td class='field'>Overtime Charge:</td>
                             <td class='value right'>
-                            $<?php print $current->OvertimeAmt;?>
+                            $<?php 
+                             if ($current->InvoiceAmt == 0) {
+                                print '';
+                             } else {
+                                 print $current->InvoiceAmt - $job->QuoteAmount;
+                            }
+                                 ?>
                             </td>
                         </tr>
                         <tr>

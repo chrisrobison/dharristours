@@ -362,11 +362,11 @@ if ($in['ID']) {
          },
          DriverLog: {
             href: "DriverLog.php?z=" + btoa("ID=" + simple.current.JobID),
-            email: (simple.employee) ? simple.employee.Email : ""
+            email: (simple.employee && simple.employee.Email) ? simple.employee.Email : ""
          },
          DriverLogExternal: {
             href: "DriverLogExternal.php?z=" + btoa("ID=" + simple.current.JobID),
-            email: (simple.employee) ? simple.employee.Email : ""
+            email: (simple.employee && simple.employee.Email) ? simple.employee.Email : ""
          }
       };
 
