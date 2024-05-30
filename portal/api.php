@@ -124,6 +124,9 @@
             case "futureWork":
                 $out = sumFutureWork($link);
                 break;
+            case "employeeReport":
+                $out = employeeReport($link);
+                break;
             case "tripReports":
                 $out = getTripReports($link, $in);
                 break;
@@ -137,7 +140,13 @@
                 $out = saveOvertime($link, $data);
 
                 break;
-            }
+            case "gps":
+                $out = getGPS($link, $in);
+                break;
+            case "gpsSimple":
+                $out = getGPSSimple($link, $in);
+                break;
+        }
             
 
         file_put_contents("/tmp/portal-api.log", date("Y-m-d H:i:s") . ":" . $in['type'] . ": " . json_encode($in) . " : " .json_encode($out)."\n", FILE_APPEND);
@@ -145,7 +154,137 @@
         header("Content-type: application/json; charset=utf-8");
         print json_encode($out);
     }
-   
+    
+    function getGPSSimple($link, $in) {
+        $date = (isset($in['date'])) ? date("Y-m-d", strtotime($in['date'])) : date("Y-m-d");
+        $vehicle = (isset($in['bus'])) ? $in['bus'] : "";
+
+        $sql = "SELECT * FROM WebfleetBus where LastModified > '{$date} 00:00:00' AND LastModified < '{$date} 23:59:59'";
+        $results = mysqli_query($link, $sql);
+
+        $out = [];
+        if ($results) {
+            $last = new stdClass();
+            $last->lat = 0;
+            $last->lon = 0;
+
+            while ($row = mysqli_fetch_object($results)) {
+                $obj = json_decode($row->JSON);
+                foreach ($obj as $bus) {
+                    if (($vehicle == "") || ($bus->objectname == $vehicle)) {
+                        $tparts = preg_split("/\D/", $bus->msgtime);
+                        $day = array_shift($tparts);
+                        $mo = array_shift($tparts);
+                        $yr = array_shift($tparts);
+                        $hr = array_shift($tparts);
+                        $min = array_shift($tparts);
+                        $time = strtotime("{$yr}-{$mo}-{$day} $hr:$min:00");
+                        
+                        $gps = new stdClass();
+                        $gps->lat = $bus->latitude_mdeg;
+                        $gps->lon = $bus->longitude_mdeg;
+                        $gps->objectuid = $bus->objectuid;
+                        $gps->address = $bus->postext;
+                        $gps->time = $time;
+                        $gps->date = $bus->msgtime;
+                        
+                        if (($last->lat != round($gps->lat / 1000)) && ($last->lon != round($gps->lon / 1000))) {
+                            $gps = [$bus->latitude_mdeg / 1000000, $bus->longitude_mdeg / 1000000 ];
+                            $out[] = $gps;
+                        }
+                       
+                        $last->lat = round($gps->lat / 1000);
+                        $last->lon = round($gps->lon / 1000);
+                    }
+                }
+            }
+        }
+        return $out;
+    }
+    function getGPS($link, $in) {
+        $date = (isset($in['date'])) ? date("Y-m-d", strtotime($in['date'])) : date("Y-m-d");
+        $vehicle = (isset($in['bus'])) ? $in['bus'] : "";
+
+        $sql = "SELECT * FROM WebfleetBus where LastModified > '{$date} 00:00:00' AND LastModified < '{$date} 23:59:59'";
+        $results = mysqli_query($link, $sql);
+
+        $out = [];
+        if ($results) {
+            $last = new stdClass();
+            $last->lat = 0;
+            $last->lon = 0;
+
+            while ($row = mysqli_fetch_object($results)) {
+                $obj = json_decode($row->JSON);
+                foreach ($obj as $bus) {
+                    if (($vehicle == "") || ($bus->objectname == $vehicle)) {
+                        $tparts = preg_split("/\D/", $bus->msgtime);
+                        $day = array_shift($tparts);
+                        $mo = array_shift($tparts);
+                        $yr = array_shift($tparts);
+                        $hr = array_shift($tparts);
+                        $min = array_shift($tparts);
+                        $time = strtotime("{$yr}-{$mo}-{$day} $hr:$min:00");
+                        
+                        $gps = new stdClass();
+                        $gps->lat = $bus->latitude_mdeg;
+                        $gps->lon = $bus->longitude_mdeg;
+                        $gps->objectuid = $bus->objectuid;
+                        $gps->address = $bus->postext;
+                        $gps->time = $time;
+                        $gps->date = $bus->msgtime;
+                        
+                        if (($last->lat != round($gps->lat / 1000)) && ($last->lon != round($gps->lon / 1000))) {
+                            $out[] = $gps;
+                        }
+                       
+                        $last->lat = round($gps->lat / 1000);
+                        $last->lon = round($gps->lon / 1000);
+                    }
+                }
+            }
+        }
+        return $out;
+    }
+
+    function employeeReport($link) {
+        global $in;
+        global $boss;
+        $date = (isset($in['date'])) ? date("Y-m-d", strtotime($in['date'])) : date("Y-m-d");
+
+        $out = [];
+        $jobs = $boss->getObjectRelated("Job", "JobDate='{$date}' AND JobCancelled=0");
+        foreach ($jobs->Job as $job) {
+            if (isset($job->JobID) && ($job->BusID!="22")) {
+                $obj = new stdClass();
+                $obj->JobID = $job->JobID;
+                $obj->EmployeeID = $job->EmployeeID;
+                $obj->BusID = $job->BusID;
+                
+                $obj->Job = $job;
+                if ($job->EmployeeID) {
+                    $obj->Employee = $boss->getObject("Employee", $job->EmployeeID);
+                }
+                if ($job->BusID) {
+                    $obj->Bus = $boss->getObject("Bus", $job->BusID);
+                }
+
+                $cond = " AND Vehicle like '%{$obj->Bus->BusNumber}%'";
+                $sql = "SELECT * FROM TripReport WHERE Day='{$date}'" . $cond;
+                $results = mysqli_query($link, $sql);
+
+                if ($results) {
+                    $arr = [];
+                    while ($row = mysqli_fetch_object($results)) {
+                        $arr[] = $row;
+                    }
+                    $obj->TripReport = $arr;
+                }
+                $out[] = $obj;
+            }
+        } 
+        return $out;
+    }
     function getTripReports($link, $in) {
         $date = (isset($in['day'])) ? date("Y-m-d", strtotime($in['day'])) : date("Y-m-d");
         
@@ -177,10 +316,16 @@
         $out = new stdClass();
         if ($results) {
             $vehicles = [];
+            $seen = [];
             while ($row = mysqli_fetch_object($results)) {
                 if (isset($row->Vehicle)) {
-                    if (preg_match("/^(\d\d\d\d)/", $row->Vehicle, $m)) {
-                        $vehicles[] = $m[1];
+                    if (!preg_match("/outofservice/", $row->Vehicle)) {
+                        if (preg_match("/^(\d\d\d\d)/", $row->Vehicle, $m)) {
+                            if (!isset($seen[$m[1]])) {
+                                $vehicles[] = $m[1];
+                                $seen[$m[1]] = $m[1];
+                            }
+                        }
                     }
                 }
             }
