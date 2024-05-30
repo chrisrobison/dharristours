@@ -43,14 +43,7 @@
         if ($tot > 0) {
             $uid = uniqid();
             $txt = "Transportation Services";
-            // $li = join(",", $lineitems);
-
-            // Quick pay / 1 item version
-            // $json_results = `curl -s https://connect.squareupsandbox.com/v2/online-checkout/payment-links -X POST -H 'Square-Version: 2023-08-16' -H 'Authorization: Bearer EAAAED7CKByFBqyR1MXInO4l-iPbZc0H9bfgX-xpRgs9WQzRbWAKA_OJywV-XwIM' -H 'Content-Type: application/json' -d '{ "idempotency_key": "{$uid}", "quick_pay": { "name": "{$txt}", "price_money": { "amount": $tot, "currency": "USD" }, "location_id": "LVR1SE093GTP9" } }'`;
             
-            // Quick pay with Line items (uses ad hoc order items; can use square catalog)
-            //$json_results = `curl -s https://connect.squareupsandbox.com/v2/online-checkout/payment-links -X POST -H 'Square-Version: 2023-08-16' -H 'Authorization: Bearer EAAAED7CKByFBqyR1MXInO4l-iPbZc0H9bfgX-xpRgs9WQzRbWAKA_OJywV-XwIM' -H 'Content-Type: application/json' -d '{ "idempotency_key": "{$uid}", "order": { "location_id": "LVR1SE093GTP9", "line_items": [ {$li} ] }, "pre_populated_data": { "buyer_address": { "address_line_1": "{$_SESSION['Business']->Address1}", "country": "US", "administrative_district_level_1": "{$_SESSION['Business']->State}", "locality": "{$_SESSION['Business']->City}", "postal_code": "{$_SESSION['Business']->Zip}" }, "buyer_email": "{$_SESSION['Email']}", "buyer_phone_number": "{$_SESSION['Login']->Phone}" } }'`;
-
             $obj = new stdClass();
             $obj->idempotency_key = $uid;
             $obj->order = new stdClass();

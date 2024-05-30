@@ -14,7 +14,7 @@
  * Class to handle low-level interaction with mysql database[s]
  * @package dbobj
  */
-class dbd_mysql {
+class dbd_mysqli {
 #@ _OUTLINE_1_
 /**#@+
  * @access public
@@ -46,7 +46,7 @@ class dbd_mysql {
  * Object contructor
  *
  */
-function dbd_mysql() {
+function dbd_mysqli() {
 //   $this->connect();
 }
 /**
@@ -89,7 +89,7 @@ function error($msg) {
  * disabled.
  *
  */
-function &connect($forcedb='', $dbuser='', $dbpass='', $dbhost='localhost') {
+function connect($forcedb='', $dbuser='', $dbpass='', $dbhost='localhost') {
 #@ _CONNECT_
    global $dbhost;
    global $dbuser;

@@ -1,5 +1,13 @@
 #!/usr/local/bin/php
 <?php
+/**
+ * uppay.php    -   Update Payment table with historic data available from Invoice
+ *
+ *                  This script looks for any Invoice records that have a value in CheckNum
+ *                  and no existing Payment record and adds a new Payment record for that PAID Invoice.
+ *                  
+ *                  This should only be run once unless you know what you're doing.
+ **/
 
 include('/simple/.env');
 $link = mysqli_connect($env->db->host, $env->db->user, $env->db->pass, "SS_DHarrisTours");

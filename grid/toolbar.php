@@ -29,7 +29,7 @@ if ($process->NoTrack) $trackstyle = 'display:none;';
       }
       if ($btn & 1) {
          $copystyle = (($btn & 1) && ($_REQUEST[$rsc.'ID'] || $_REQUEST['ID'])) ? 'display:block;' : 'display:none;';
-         print "<a id='CopyButton' title='Copy entry' class='simpleButton' style='$copystyle'><span class='ui-icon ui-icon-copy'> </span>Copy</a>";
+//         print "<a id='CopyButton' title='Copy entry' class='simpleButton' style='$copystyle'><span class='ui-icon ui-icon-copy'> </span>Copy</a>";
       }
 
       if ($btn & 2) {

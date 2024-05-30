@@ -8,7 +8,16 @@ if (isset($in['pid'])) {
 }
 
 if (isset($in['rel']) && isset($in['rsc']) && isset($in['id']) && ($in['id'] !== "0")) {
-    $results = $boss->getObjectRelated($in['rsc'], $in['id']);
+    $cond = $in['id'];
+    if (isset($in['key'])) {
+        $key = $in['key'];
+        if ($in['rsc'].'ID' == $key) {
+            $cond = $in['id'];
+        } else {
+            $cond = $in['key'] ."='".$in['id']."'";
+        }
+    } 
+    $results = $boss->getObjectRelated($in['rsc'], $cond);
     $clamp = $boss->db->{$in['rsc']}->getClamped($in['rsc'], $in['id']);
     $results->clamped = $clamp;
 } else if (isset($in['rsc'])) {
