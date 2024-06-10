@@ -145,6 +145,7 @@
         .Job {
             width: 40em;
             height: 10em;
+            left: 5rem;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -330,7 +331,16 @@
             if (app.job.Invoice && app.job.Invoice.InvoiceID) app.nodes.Invoice = app.makeNode('Invoice', app.job.Invoice.InvoiceID, app.job.Invoice.Invoice);
             if (app.job.Employee && app.job.Employee.EmployeeID) app.nodes.Employee = app.makeNode('Employee', app.job.Employee.EmployeeID, app.job.Employee.Employee);
             if (app.job.Request && app.job.Request.RequestID) app.nodes.Request = app.makeNode('Request', app.job.Request.RequestID, app.job.Request.Request);
-            
+            if (app.job.Trip) {
+                if (app.job.Trip.TripID) {
+                    app.nodes.Trip = app.makeNode('Trip', app.job.Trip.TripID, app.job.Trip.Trip);
+                } else {
+                    app.nodes.Trips = [];
+                    for (let trip of app.job.Trip) {
+                        app.nodes.Trips.push(app.makeNode('Trip', app.job.Trip.TripID, app.job.Trip.Trip));
+                    }
+                }
+            }
             let nodenames = app.nodenames = ['Job','Business','Bus','Invoice','Employee','Request','Trip'];
             let edges = [['Job', 'Business'],['Job', 'Bus'], ['Job', 'Invoice'], ['Job', 'Employee'], ['Job', 'Request']];
             $("main").innerHTML = "";
