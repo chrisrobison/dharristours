@@ -27,4 +27,5 @@ tools/dlog/tiny-date-picker/
 EPSCAN/
 clients/dharristours/webfleet/cache/
 clients/dharristours/confirmations/
+clients/dharristours/driver-logs/
 nohup.out
