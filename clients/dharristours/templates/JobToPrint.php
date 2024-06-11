@@ -333,7 +333,7 @@ if ($in['ID']) {
       simple = {
          current: <?php
          if ($current) {
-            print json_encode($current);
+            print json_encode($current, JSON_INVALID_UTF8_IGNORE | JSON_PARTIAL_OUTPUT_ON_ERROR);
          } else {
             print "{JobID: ''}";
          }
@@ -670,8 +670,8 @@ if ($in['ID']) {
             what = $("#what").val();
          }
          var id;
-
-         let showdoc = curdoc.replace(/([a-z])([A-Z])/g, "$1 $2");
+      
+         let showdoc = what.replace(/([a-z])([A-Z])/g, "$1 $2");
          if (what == "InvoiceReport") {
             document.querySelector("#doctype").innerHTML = "Invoice: &nbsp;";
             document.querySelector("#docval").innerHTML = "<?= $InvID ?>";
