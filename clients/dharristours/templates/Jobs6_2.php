@@ -6,6 +6,7 @@ var jobdateset = false;
 
 setTimeout(checkJobDate, 3000);
 
+
 function checkJobDate() {
     if (jobdateset) {
         return true;
