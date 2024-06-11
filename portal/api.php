@@ -464,6 +464,8 @@
             $keys = array();
             $vals = array();
             $in->data->RequestDate = date("Y-m-d h:i:s");
+            $in->data->Created = date("Y-m-d h:i:s");
+            $in->data->CreatedBy = "cdr@netoasis.net";
 
             foreach ($in->data as $key=>$val) {
                 $out->{$key} = $val;
@@ -477,15 +479,22 @@
         } else {
             $new->status = "error";
             $new->error = "Invalid request data.";
+            logit("makeRequest", "Error creating request: Invalid incoming request data");
             return $new;
         }
         if ($result) {
             $newid = mysqli_insert_id($link);
             $new->status = "ok";
             $new->newid = $newid;
+
+            $cmd = "/simple/clients/dharristours/email-templates/htmlmail.sh -f 'D Harris Tours Website <no_reply@dharristours.com>' -t 'dharristoursrelay@gmail.com,juanaharrisdht@att.net' -b 'cdr@netoasis.net' -s 'New Inquiry from {$in->data->Name} for {$in->data->Date}' 'https://dharristours.simpsf.com/files/emails/Request.php?id={$newid}'";
+            $result = `$cmd`;
+            logit("makeRequest", "send notification email command:\n\t$cmd\n");
+            
         } else {
             $new->status = "error";
             $new->error = "Error creating request";
+            logit("makeRequest", "Error creating request");
         }
         
         return $new;
