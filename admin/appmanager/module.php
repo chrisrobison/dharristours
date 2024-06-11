@@ -32,10 +32,11 @@
 
                break;
             case 'delete':
+            case 'delete'.$in['rsc']:
                if ($in[$in['rsc'].'ID']) {
                   $data->remove($in[$in['rsc'].'ID']);
                
-                  // $js .= "alert('Successfully removed record ID ".$in[$in['rsc'].'ID']." from the ".$in['rsc']." table.');\n";
+                  $js .= "alert('Successfully removed record ID ".$in[$in['rsc'].'ID']." from the ".$in['rsc']." table.');\n";
                   $js .= "parent.doRefresh('".$in['rsc']."');\n";
                
                }
