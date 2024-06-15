@@ -537,7 +537,8 @@ console.dir(tots);
                 app.ctx.fillStyle = "#00c";
                 app.ctx.textAlign = "center";
                 // let tot = Math.round(tots[wstxt] / 6) / 10;
-                let tot = ((Math.round((tots[wstxt] * 60) / (15 * 60)) * (15 * 60)) / 60) / 60;
+               //let tot = ((Math.round((tots[wstxt] * 60) / (15 * 60)) * (15 * 60)) / 60) / 60;
+               let tot = Math.floor((tots[wstxt] / 60) * 100) / 100;
                if (k != 4) app.ctx.fillText(tot, 1440 + 115 + 40 + (Math.floor(Math.random() * 10) - 5), (k * 50) + 70);
                timeTotal += tots[wstxt] / 60;
 
