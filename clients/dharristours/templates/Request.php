@@ -235,7 +235,7 @@ function updateTimes() {
         updateStops();
     }
 }
-function createJob(evt) {
+async function createJob(evt) {
     evt.stopPropagation();
     evt.preventDefault();
 
@@ -248,11 +248,25 @@ function createJob(evt) {
     }
     rec.QuoteTotal = document.querySelector("#QuoteTotal").value;
     rec.QuoteAmount = document.querySelector("#QuoteAmount").value;
+    let business = await getBusiness(rec.BusinessID);
+    let start = "", dest = "", m;
+    if (m = rec.Pickup.match(/\((.+?)\)/)) {
+        start = m[1];
+    } else if (m = rec.Pickup.match(/,(.+?),?\s?CA/)) {
+        start = m[1];
+    }
+
+    if (m = rec.Destination.match(/\((.+?)\)/)) {
+        dest = m[1];
+    } else if (m = rec.Destination.match(/,(.+?),?\s?CA/)) {
+        dest = m[1];
+    }
+    let hours = ($("#DriverHours").value / 100) || 4;
 
     let newjob = { 
         Job: { 
             new1: {
-                Job: rec.Request,
+                Job: business.Business + ' - ' + rec.Name + ' / ' + start + '(' + dest + ')',
                 JobDate: rec.Date,
                 BusinessID: rec.BusinessID,
                 RequestID: rec.RequestID,
@@ -265,7 +279,7 @@ function createJob(evt) {
                 FinalDropOffLocation: rec.Return,
                 PickupTime: rec.Start,
                 EstDuration: rec.DriverHours,
-                Hours: rec.DriverHours,
+                Hours: hours,
                 DropOffTime: rec.End,
                 NumberOfItems: rec.Pax,
                 SpecialInstructions: rec.Notes,
@@ -277,7 +291,8 @@ function createJob(evt) {
                 Fuel: rec.Fuel,
                 Mileage: rec.Mileage,
                 QuoteTotal: rec.QuoteTotal,
-                QuoteLocked: rec.QuoteLocked
+                QuoteLocked: rec.QuoteLocked,
+                Quote: 1
             }
         }
     };
@@ -293,7 +308,14 @@ function createJob(evt) {
     });
     return false;
 }
-
+async function getBusiness(id) {
+    let out = {};
+    if (id) {
+        let resp = await fetch(`/api.php?rsc=Business&id=${id}`);
+        out = await resp.json();
+    }
+    return out;
+}
 function confirmQuote(evt) {
     evt.preventDefault();
     evt.stopPropagation();
@@ -477,9 +499,19 @@ function updateDestination() {
                 rids.push(currates[currates.length-1].RatesID);
             }
         }
-        let start = document.querySelector("#Start").value;
-        let end = document.querySelector("#End").value;
+        let start = document.querySelector("#Start").valueAsNumber;
+        let end = document.querySelector("#End").valueAsNumber;
         
+        // If end time is between midnite and 4am they most likely meant 'PM' and not 'AM'
+        // Since we've never had a dropoff between 12am and 4am in 23 years I'm adjusting
+        // dropoff times to be PM if it falls between 12-4am AND is less than the start time
+        if ((end < start) && (end < 14400000)) {
+            end += 43200000;
+        }
+        let duration = (end - start) / 1000;
+        
+        /*
+        let stime = new Date(start)
         let sparts = start.split(/:/);
         let eparts = end.split(/:/);
         
@@ -496,7 +528,8 @@ function updateDestination() {
         let endsec = edate.getTime() / 1000;
 
         let duration = endsec - startsec;
-    
+        */ 
+
         let dhrs = (~~(duration / 36) / 100);
         let dmins = ~~(duration - (dhrs * 3600) / 60);
         
