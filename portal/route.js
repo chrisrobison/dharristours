@@ -475,42 +475,39 @@ el.appendChild(ac);
 
             request.send();  
         },
-        getGeoJSON2: function(orig, dest, mapidx) {
+        async getGeoJSON2(orig, dest, mapidx) {
             let tgtmap = document.querySelector(`map${mapidx}`);
 
-            fetch(`/portal/directions.php?start=${orig}&end=${dest}`).then(r=>r.json()).then(data=>{
-                if (app.maps && app.maps[mapidx]) {
-                    L.geoJSON(data).addTo(app.maps[mapidx]);
-                    console.log("directions:");
-                    console.dir(data);
-                    let bounds = [[data.bbox[3], data.bbox[2]], [data.bbox[1], data.bbox[0]]];
-                    app.maps[mapidx].fitBounds(bounds, {padding: [50, 50]} );
+            let resp = await fetch(`/portal/directions.php?start=${orig}&end=${dest}`);
+            let data = await resp.json();
+            if (app.maps && app.maps[mapidx]) {
+                L.geoJSON(data).addTo(app.maps[mapidx]);
+                console.log("directions:");
+                console.dir(data);
+                let bounds = [[data.bbox[3], data.bbox[2]], [data.bbox[1], data.bbox[0]]];
+                app.maps[mapidx].fitBounds(bounds, {padding: [50, 50]} );
 
-                    document.querySelector(`#distance${mapidx}`).innerHTML = Math.round(data.features[0].properties.summary.distance * 0.000621371) + " miles";
+                document.querySelector(`#distance${mapidx}`).innerHTML = Math.round(data.features[0].properties.summary.distance * 0.000621371) + " miles";
 
-                    let dur = data.features[0].properties.summary.duration;
-                    let hr = 0, min = Math.ceil(dur / 60);
-                    if (min > 60) {
-                        hr = Math.floor(min / 60);
-                        min = (min - (hr * 60));
-                    } else {
-                        hr = 0;
-                        min = Math.floor(dur / 60);
-                    }
-                    if (min < 10) {
-                        min = '0' + min;
-                    }
-                    if (hr < 10) {
-                        hr = '0' + hr;
-                    }
-                    document.querySelector(`#duration${mapidx}`).innerHTML = `${hr}:${min}`;
-                    document.querySelector(`#overlay${mapidx}`).style.display = "none";
+                let dur = data.features[0].properties.summary.duration;
+                let hr = 0, min = Math.ceil(dur / 60);
+                if (min > 60) {
+                    hr = Math.floor(min / 60);
+                    min = (min - (hr * 60));
+                } else {
+                    hr = 0;
+                    min = Math.floor(dur / 60);
                 }
-                 
-            }).catch(error=>{
-                console.log(error); 
-                document.querySelectorAll(".overlay").forEach(el=>el.style.display="none");
-            });
+                if (min < 10) {
+                    min = '0' + min;
+                }
+                if (hr < 10) {
+                    hr = '0' + hr;
+                }
+                document.querySelector(`#duration${mapidx}`).innerHTML = `${hr}:${min}`;
+                document.querySelector(`#overlay${mapidx}`).style.display = "none";
+            }
+             
         },
         makeStaticMap: function() {
             domtoimage.toPng(document.querySelector("#map")).then((dataUrl) => {
@@ -633,7 +630,7 @@ el.appendChild(ac);
             address = await app.cleanAddress(address);
             let g = app.geocodeAddress(address);
         },
-        getRoute: async function(address1="", address2="", mapidx=0) {
+        async getRoute(address1="", address2="", mapidx=0) {
             if (!address1 || !address2) {
                 return false;
             }
@@ -659,17 +656,12 @@ el.appendChild(ac);
             document.querySelector(`#pickup${mapidx}`).innerHTML = address1;
             document.querySelector(`#destination${mapidx}`).innerHTML = address2;
 
-            let g1 = app.geocodeAddress(address1);// .then(coord=>{ app.data.origin = coord; console.log("geocode1"); console.dir(coord); });
-            let g2 = app.geocodeAddress(address2);// .then(coord=>{ app.data.dest = coord; console.log("geocode2"); console.dir(coord); });
-            Promise.all([ g1, g2]).then((values) => {
-                if (values && values.length > 1) {
-                    // let orig = [values[0].latitude, values[0].longitude];
+            let g1 = await app.geocodeAddress(address1);// .then(coord=>{ app.data.origin = coord; console.log("geocode1"); console.dir(coord); });
+            let g2 = await app.geocodeAddress(address2);// .then(coord=>{ app.data.dest = coord; console.log("geocode2"); console.dir(coord); });
 
-                    if (values[1] && values[0]) {
-                        app.getGeoJSON2([values[0].longitude, values[0].latitude], [values[1].longitude, values[1].latitude], mapidx);
-                    }
-                }
-            });
+            if (g1 && g2) {
+                await app.getGeoJSON2([g1.longitude, g1.latitude], [g2.longitude, g2.latitude], mapidx);
+            }
 
             return false;
         },
@@ -742,7 +734,7 @@ el.appendChild(ac);
             if (!cleanTxt) cleanTxt = address;
             return cleanTxt;
         },
-        geocodeAddress: async function(address) {
+        async geocodeAddress(address) {
             const apiUrl = `/portal/geocode.php?addr=${address}`;
             // const apiUrl = `https://api.openrouteservice.org/geocode/search?api_key=${app.config.apiKey}&text=${address}`;
 
