@@ -61,7 +61,7 @@ $trackstyle = 'display:none;';
          <ul>
             <li id='menuSearch'><span class='ui-icon ui-icon-search'> </span> Search</li>
             <li class='divider'><hr /></li>
-            <?php if (($btn & 1) || !$process) { ?>
+            <?php if (($btn & 128) || !$process) { ?>
             <li id='menuCopy'><span class='ui-icon ui-icon-copy'> </span> Copy</li>
             <?php } ?>
             <li class='divider'><hr /></li>
