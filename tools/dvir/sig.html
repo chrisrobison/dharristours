@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: "Lexend", "Helvetica Neue", "Helvetica", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color:#000;
+        }
+
+        header {
+            background-color: #999;
+            color: #eee;
+            height: 0vh;
+        }
+
+        main {
+            background-color: #000;
+            color: #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #666;
+            color: #eee;
+            height: 0vh;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+        }
+        .btn {
+            font-size: 24px;
+            background-color: #555;
+            color: #cef;
+            text-decoration: none;
+            height: 3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px outset #999;
+            padding: 0 2em;
+        }
+        .toolbar {
+            display: flex;
+            width: 100vw;
+            background: #aaa;
+            justify-content: space-between;
+        }
+
+        i.delete {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 576 512' xmlns='http://www.w3.org/2000/svg' xmlns:bx='https://boxy-svg.com'%3E%3Cdefs%3E%3C/defs%3E%3Cpath d='M576 128c0-35.3-28.7-64-64-64H205.3c-17 0-33.3 6.7-45.3 18.7L9.4 233.4c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6L160 429.3c12 12 28.3 18.7 45.3 18.7H512c35.3 0 64-28.7 64-64V128zM271 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z' style='fill: rgb(204, 204, 204); stroke: rgb(255, 255, 255); stroke-width: 18px; stroke-linejoin: bevel;'%3E%3C/path%3E%3Cpath d='M 469.189 215.442 H 542.203 V 303.021 H 636.081 V 371.136 H 542.203 V 458.715 H 469.189 V 371.136 H 375.311 V 303.021 H 469.189 Z' style='fill: rgb(255, 0, 0); stroke: rgb(255, 255, 255); stroke-width: 12.056; transform-box: fill-box; transform-origin: 50%25 50%25;' transform='matrix(0.707107, 0.707107, -0.707107, 0.707107, -154.864027, -82.874346)' bx:shape='cross 375.311 215.442 260.77 243.273 68.115 73.014 0.5 1@5ae2d1cd'%3E%3C/path%3E%3C/svg%3E");
+
+            background-size: contain;
+            display: inline-block;
+            font-size: 24px;
+            height: 3em;
+            width: 3em;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<main>
+<canvas id="sig" height="300" width="100%"></canvas>
+<div class="toolbar">
+    <a href="#" class='btn' onclick="app.clearSig(); return false;"><i class="delete"></i> Clear Signature</a>
+    <a href="#" class='btn' onclick="app.sendSig(); return false;">Sign Document</a>
+</div>
+</main>
+<script>
+const $ = str => document.querySelector(str);
+const $$ = str => document.querySelectorAll(str);
+
+(function() {
+    const app = {
+        data: {},
+        state: {
+            loaded: false
+        },
+        async init() {
+            await app.clearSig();
+            app.state.loaded = true;
+        },
+        async clearSig() {
+            let cookies = await app.parseCookies();
+
+            let name = cookies.name || "Sign Here";
+
+            app.canvas = document.querySelector("#sig");
+            app.canvas.height = 300;
+            app.canvas.width = window.innerWidth;
+    
+            app.ctx = app.canvas.getContext("2d");
+            app.ctx.fillStyle = "#fff";
+            app.ctx.fillRect(0, 0, window.innerWidth, 300);
+            app.ctx.font = "96px sans-serif";
+            app.ctx.fillStyle = "#f00";
+            app.ctx.fillText("x", 10, 250);
+
+            app.ctx.strokeStyle = "#000";
+            app.ctx.beginPath();
+            app.ctx.moveTo(50, 260);
+            app.ctx.lineTo(window.innerWidth - 50, 260);
+            app.ctx.lineWidth = 5;
+            app.ctx.stroke();
+            
+            app.ctx.font = "32px sans-serif";
+            app.ctx.fillStyle = "#999";
+
+            app.ctx.fillText(name, 100, 290);
+            app.ctx.beginPath();
+
+            app.ctx.fillStyle = "#009";
+            app.ctx.strokeStyle = "#00f";
+            
+            app.canvas.addEventListener("mousedown", app.doDown);
+            app.canvas.addEventListener("touchstart", app.doDown);
+        },
+        doDown(evt) {
+        console.dir(evt);
+            app.canvas.addEventListener("mousemove", app.doMove);
+            app.canvas.addEventListener("mouseup", app.doUp);
+            app.canvas.addEventListener("touchmove", app.doMove);
+            app.canvas.addEventListener("touchend", app.doUp);
+
+            if (evt.touches) {
+                app.ctx.moveTo(evt.touches[0].clientX, evt.touches[0].clientY);
+                app.ctx.arc(evt.touches[0].clientX, evt.touches[0].clientY, 1, 0, 2 * Math.PI);
+                app.ctx.fillStyle = "#00c";
+                app.ctx.fill();
+                app.state.lastPos = [evt.touches[0].clientX, evt.touches[0].clientY];
+            } else {
+                app.ctx.moveTo(evt.x, evt.y);
+                app.ctx.arc(evt.x, evt.y, 1, 0, 2 * Math.PI);
+                app.ctx.lineTo(evt.x, evt.y);
+                app.ctx.stroke();
+                app.state.lastPos = [evt.x, evt.y];
+            } 
+        },
+        doMove(evt) {
+            app.ctx.moveTo(app.state.lastPos[0], app.state.lastPos[1]);
+            
+            if (evt.changedTouches) {
+                app.ctx.lineTo(evt.changedTouches[0].clientX, evt.changedTouches[0].clientY);
+                app.state.lastPos = [evt.changedTouches[0].clientX, evt.changedTouches[0].clientY];
+            } else {
+                app.ctx.lineTo(evt.x, evt.y);
+                app.state.lastPos = [evt.x, evt.y];
+            }
+            app.ctx.lineWidth = 5;
+            app.ctx.stroke();
+            evt.preventDefault();
+            evt.stopPropagation();
+            return false;
+        },
+        doUp(evt) {
+            app.canvas.removeEventListener("mousemove", app.doMove);
+            app.canvas.removeEventListener("mouseup", app.doUp);
+            app.canvas.removeEventListener("touchmove", app.doMove);
+            app.canvas.removeEventListener("touchend", app.doUp);
+        },
+        fetch: function(url, callback) {
+            fetch(url).then(response=>response.json()).then(data=>{
+                app.data = data;
+                app.state.loaded = true;
+                if (callback && typeof(callback) === "function") {
+                    callback(data);
+                }
+            });
+        },
+        async parseCookies() {
+            let allcookies = await window.cookieStore.getAll();
+            let out = {};
+            for (const cookie of allcookies) {
+                out[cookie.name] = decodeURIComponent(cookie.value.replace(/\+/g, ' '));
+            }
+            return out;
+        },
+        display: function(data, tgt) {
+            let out = "<table><thead><tr>";
+            const keys = Object.keys(data[0]);
+            if (keys) {
+                keys.forEach(key => {
+                    out += `<th>${key}</th>`;
+                });
+            }
+            out += "</tr></thead><tbody>";
+            data.forEach(item=>{
+                out += `<tr>`;
+                keys.forEach(key => {
+                    out += `<td>${item[i]}</td>`;
+                });
+                out += `</tr>`;
+            });
+            out += "</tbody></table>";
+
+            if (tgt) {
+                tgt.innerHTML = out;
+            }
+            return out;
+        }
+    }
+    window.app = app;
+    app.init();
+})();
+</script>
+</body>
+
+</html>

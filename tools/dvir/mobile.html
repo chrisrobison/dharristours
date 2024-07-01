@@ -19,12 +19,9 @@
         }
 
         .checkbox {
-            height: 1.25rem;
-            width: 1.25rem;
         }
 
-        #checklist tr {
-            line-height: 1;
+        #checklist {
         }
 
         body,
@@ -71,8 +68,9 @@
             background: #fff;
         }
 
-        input {
+        input,select,textarea {
             font-size: 20px;
+            font-family: "Courier New", serif;
             font-weight: 900;
             color: #00a;
         }
@@ -83,29 +81,75 @@
             border-bottom: 2px solid #000;
         }
 
-        .checkbox.checked:before {
-            font-size: 3rem;
-            font-weight: 900;
-            top: -1.8rem;
-            left: -5px;
-            color: #f00 !important;
-        }
+.checkbox.checked:before {
+    font-size: 3em;
+    font-weight: 900;
+    top: -1em;
+    left: 0;
+    color: #f00 !important;
+    height: 6em;
+    width:0;
+    transition:all 1000ms ease-in;
+}
+.checkbox.checked.ticked:before {
+    transition:all 1000ms ease-in;
+    width:6em;
+}
 
         .top {
-            height: 50vh;
+            height: fit-content;
         }
 
         #report {
             box-shadow: none;
+            display:flex;
+            flex-direction: column;
         }
 
         #perf {
             overflow: hidden;
             left: 0px;
         }
+        .form-border {
+            border-top:0;border-left:0;border-right:0;border-bottom:2px solid #666;
+        }
+        #mid.header > div {
+            display: flex;
+            font-size: 20px;
+        }
+        #mid.header > div > label {
+            width: 10rem;
+        }
+        #bus {
+            width: 80vw;
+        }
         @media only screen and (max-width: 600px) {
             body {
                 font-size: 18px;
+            }
+            .header th {
+                display: none;
+            }
+            .shortinput {
+                width: 80vw;
+            }
+            #checklist {
+                font-size: 24px;
+                line-height: 2;
+            }
+            .btns {
+
+            }
+            .preview .click-button, #submitButton, #makePDF {
+                margin: 0 auto;
+                cursor: pointer;
+                display: block;
+                height: 4em;
+                font-weight: 600;
+                padding: 0.25em 1em;
+                text-transform: uppercase;
+                width: 100vw;
+                border-radius: 0;
             }
         }
     </style>
@@ -119,35 +163,31 @@
     <div id="content-wrapper">
         <div id='report' style="display:flex;">
             <div class="top">
-                <h1>Driver's Vehicle Inspection Report</h1>
-                <h3>As required by D.O.T. Federal Motor Carrier Safety Regulations</h3>
-                <table class='header'>
-                    <tr>
-                        <th>Carrier:</th>
-                        <td><input type='text' id='carrier' class='shortinput' value='D Harris Tours, Inc.'></td>
-                        <th>Driver:</th>
-                        <td><input type='text' id='driver' class='shortinput'></td>
-                    </tr>
-                    <tr>
-                        <th>Address:</th>
-                        <td colspan='3'><input type='text' id='address' class='longinput' value='153 Utah St, South San Francisco, CA'></td>
-                    </tr>
-                    <tr>
-                        <th>Date:</th>
-                        <td><input type='text' id='ReportDate' class='shortinput'></td>
-                        <th>Time:</th>
-                        <td><input type='text' id='ReportTime' class='shortinput'></td>
-                    </tr>
-                </table>
-                <table id='mid' class='header'>
-                    <tr>
-                        <th style='white-space:nowrap;'>Bus:</th>
-                        <td><select id='buses'></select><span id="busnum"></span></td>
-                        <th>Odometer:</th>
-                        <td><input type='text' id='odometer' class='shortinput' style='width:1.5in;'></td>
-                        <th>Fuel:</th>
-                        <td>
-                            <input type='range' min='0' max='100' step='10' list='steplist' id='fuel' class='shortinput' style='width:1.5in;'>
+                <h1>DVIR</h1>
+                <h3>As required by D.O.T. Regulations</h3>
+                <div class='header'>
+                    <div><input type='text' id='carrier' class='shortinput' value='D Harris Tours, Inc.'></div>
+                    <div><input type='text' id='driver' class='shortinput'></div>
+                    <div colspan='3'><textarea style='width:80vw;border-top:0;border-left:0;border-right:0;border-bottom:2px solid #666;' type='text' id='address'>153 Utah St,
+South San Francisco, CA</textarea></div>
+                    <div style="display:flex;">
+                        <div><input type='text' id='ReportDate' class='reallyshortinput form-border'></div>
+                        <div><input type='text' id='ReportTime' class='reallyshortinput form-border'></div>
+                    </div>
+                </div>
+                <div id='mid' class='header'>
+                    <div>
+                        <label style='white-space:nowrap;'>Bus:</label>
+                        <span><select id='buses'></select><span id="busnum"></span></span>
+                    </div>
+                    <div>
+                        <label>Odometer:</label>
+                        <span><input type='text' id='odometer' class='shortinput' style='width:1.5in;' placeholder='Odometer' /></span>
+                    </div>
+                    <div>
+                        <label>Fuel:</label>
+                        <span>
+                            <input type='range' min='0' max='100' step='10' list='steplist' id='fuel' class='shortinput' style='width:50vw;' />
                             <datalist id='steplist'>
                                 <option>0</option>
                                 <option>10</option>
@@ -161,102 +201,70 @@
                                 <option>90</option>
                                 <option>100</option>
                             </datalist>
-                        </td>
-                    </tr>
-                </table>
-                <table id='checklist'>
-                    <tr>
-                        <td><span class='checkbox' id='air_compressor'></span> Air Compressor</td>
-                        <td><span class='checkbox' id='front_axle'></span> Front Axle</td>
-                        <td><span class='checkbox' id='safety_equip'></span> Safety Equipment</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='air_lines'></span> Air Lines</td>
-                        <td><span class='checkbox' id='fuel_tanks'></span> Fuel Tanks</td>
-                        <td class='indent'><span class='checkbox' id='fire_extinguisher'></span> Fire Extinguisher</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='battery'></span> Battery</td>
-                        <td><span class='checkbox' id='horn'></span> Horn</td>
-                        <td class='indent'><span class='checkbox' id='flasg_flares_fuses'></span> Flags/Flares/Fuses</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='belts_hoses'></span> Belts and Hoses</td>
-                        <td><span class='checkbox' id='lights'></span> Lights</td>
-                        <td class='indent'><span class='checkbox' id='reflective_triangles'></span> Reflective Triangles</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='body'></span> Body</td>
-                        <td class='indent'><span class='checkbox' id='head_stop'></span> Head/Stop</td>
-                        <td class='indent'><span class='checkbox' id='spare_bulb_fuses'></span> Spare Bulb and Fuses</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='brake_accessories'></span> Brake Accessories</td>
-                        <td class='indent'><span class='checkbox' id='tail_dash'></span> Tail / Dash</td>
-                        <td class='indent'><span class='checkbox' id='spare_seal_beam'></span> Spare Seal Beam</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='brakes_parking'></span> Brakes, Parking</td>
-                        <td class='indent'><span class='checkbox' id='turn_indicators'></span> Turn Indicators</td>
-                        <td><span class='checkbox' id='starter'></span> Starter</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='brakes_service'></span> Brakes, Service</td>
-                        <td class='indent'><span class='checkbox' id='clearance_marker'></span> Clearance / Marker</td>
-                        <td><span class='checkbox' id='steering'></span> Steering</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='clutch'></span> Clutch</td>
-                        <td><span class='checkbox' id='mirrors'></span> Mirrors</td>
-                        <td><span class='checkbox' id='suspension_system'></span> Suspension System</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='defroster_heater'></span> Defroster / Heater</td>
-                        <td><span class='checkbox' id='muffler'></span> Muffler</td>
-                        <td><span class='checkbox' id='tires'></span> Tires</td>
-                    </tr>
-                    <tr>
-                        <td><span class='checkbox' id='drive_line'></span> Drive Line</td>
-                        <td><span class='checkbox' id='oil_pressure'></span> Oil Pressure</td>
-                        <td><span class='checkbox' id='transmission'></span> Transmission</td>
-                    </tr>
-
-                    <tr>
-                        <td><span class='checkbox' id='engine'></span> Engine</td>
-                        <td><span class='checkbox' id='radiator'></span> Radiator</td>
-                        <td><span class='checkbox' id='rear_end'></span> Rear End</td>
-                    </tr>
-
-                    <tr>
-                        <td><span class='checkbox' id='exhaust'></span> Exhaust</td>
-                        <td><span class='checkbox' id='reflectors'></span> Reflectors</td>
-                        <td><span class='checkbox' id='wheels_rims'></span> Wheels &amp; Rims</td>
-                    </tr>
-
-                    <tr>
-                        <td><span class='checkbox' id='fluid_levels'></span> Fluid Levels</td>
-                        <td><span class='checkbox' id='windows'></span> Windows</td>
-                        <td><span class='checkbox' id='windshield_wipers'></span> Windshield Wipers</td>
-                    </tr>
-
-                    <tr>
-                        <td><span class='checkbox' id='frame_assembly'></span> Frame &amp; Assembly</td>
-                        <td></td>
-                        <td><span class='checkbox' id='other'></span> Other</td>
-                    </tr>
-                </table>
+                        </span>
+                    </div>
+                </div>
+                <div id='checklist'>
+                        <div><span class='checkbox' id='air_compressor'></span> Air Compressor</div>
+                        <div><span class='checkbox' id='air_lines'></span> Air Lines</div>
+                        <div><span class='checkbox' id='battery'></span> Battery</div>
+                        <div><span class='checkbox' id='belts_hoses'></span> Belts and Hoses</div>
+                        <div><span class='checkbox' id='body'></span> Body</div>
+                        <div><span class='checkbox' id='brake_accessories'></span> Brake Accessories</div>
+                        <div><span class='checkbox' id='brakes_parking'></span> Brakes, Parking</div>
+                        <div><span class='checkbox' id='brakes_service'></span> Brakes, Service</div>
+                        <div><span class='checkbox' id='clutch'></span> Clutch</div>
+                        <div><span class='checkbox' id='defroster_heater'></span> Defroster / Heater</div>
+                        <div><span class='checkbox' id='drive_line'></span> Drive Line</div>
+                        <div><span class='checkbox' id='engine'></span> Engine</div>
+                        <div><span class='checkbox' id='exhaust'></span> Exhaust</div>
+                        <div><span class='checkbox' id='fluid_levels'></span> Fluid Levels</div>
+                        <div><span class='checkbox' id='frame_assembly'></span> Frame &amp; Assembly</div>
+                        <div><span class='checkbox' id='front_axle'></span> Front Axle</div>
+                        <div><span class='checkbox' id='fuel_tanks'></span> Fuel Tanks</div>
+                        <div><span class='checkbox' id='horn'></span> Horn</div>
+                        <div><span class='checkbox' id='lights'></span> Lights
+                            <div class='indent'><span class='checkbox' id='head_stop'></span> Head/Stop</div>
+                            <div class='indent'><span class='checkbox' id='tail_dash'></span> Tail / Dash</div>
+                            <div class='indent'><span class='checkbox' id='turn_indicators'></span> Turn Indicators</div>
+                            <div class='indent'><span class='checkbox' id='clearance_marker'></span> Clearance / Marker</div>
+                        </div>
+                        <div><span class='checkbox' id='mirrors'></span> Mirrors</div>
+                        <div><span class='checkbox' id='muffler'></span> Muffler</div>
+                        <div><span class='checkbox' id='oil_pressure'></span> Oil Pressure</div>
+                        <div><span class='checkbox' id='radiator'></span> Radiator</div>
+                        <div><span class='checkbox' id='reflectors'></span> Reflectors</div>
+                        <div><span class='checkbox' id='windows'></span> Windows</div>
+                        <div><span class='checkbox' id='safety_equip'></span> Safety Equipment
+                            <div class='indent'><span class='checkbox' id='fire_extinguisher'></span> Fire Extinguisher</div>
+                            <div class='indent'><span class='checkbox' id='flasg_flares_fuses'></span> Flags/Flares/Fuses</div>
+                            <div class='indent'><span class='checkbox' id='reflective_triangles'></span> Reflective Triangles</div>
+                            <div class='indent'><span class='checkbox' id='spare_bulb_fuses'></span> Spare Bulb and Fuses</div>
+                            <div class='indent'><span class='checkbox' id='spare_seal_beam'></span> Spare Seal Beam</div>
+                        </div>
+                        <div><span class='checkbox' id='starter'></span> Starter</div>
+                        <div><span class='checkbox' id='steering'></span> Steering</div>
+                        <div><span class='checkbox' id='suspension_system'></span> Suspension System</div>
+                        <div><span class='checkbox' id='tires'></span> Tires</div>
+                        <div><span class='checkbox' id='transmission'></span> Transmission</div>
+                        <div><span class='checkbox' id='rear_end'></span> Rear End</div>
+                        <div><span class='checkbox' id='wheels_rims'></span> Wheels &amp; Rims</div>
+                        <div><span class='checkbox' id='windshield_wipers'></span> Windshield Wipers</div>
+                        <div><span class='checkbox' id='other'></span> Other</div>
+                </div>
             </div>
             <div class='footer'>
+                <h2>Damage</h2>
                 <canvas id='bus' width='2000' height='1545'></canvas>
                 <div id='notes'>
-                    <h2>Notes:</h2>
+                    <h2>Notes</h2>
                     <div style='display:inline-block; border:1px solid #ddd; height:2.5in; width:3.25in;'><textarea id='note'></textarea></div>
                 </div>
             </div>
         </div>
-        <div class="sigform">
-            <div style="display:flex;align-items:flex-end;"><label for='sig'><a href="#" id="sigEgg">SIGNATURE</a></label><input type='text' class='dawning' id='sig' name='sig' width='40' /></div>
-            <div style="display:flex;align-items:flex-end;"><label for="SignatureDate">DATE</label><input class="underline" type="text" id="SignatureDate" name="SignatureDate"><span id='ShowSignatureDate'></span></div>
+        <div class="sigform" style="flex-direction:column;">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;margin-bottom:1em;"><label for='sig'><a href="#" id="sigEgg">SIGNATURE</a></label><input type='text' class='dawning' id='sig' name='sig' style='width:80vw;' /></div>
+            <div style="display:flex;align-items;flex-direction:column;flex-start;margin-bottom:1em;"><label for="SignatureDate">DATE</label><input class="underline" type="text" id="SignatureDate" name="SignatureDate"><span id='ShowSignatureDate' style='width:80vw;'></span></div>
             <div id='btns'><button id="submitButton">Submit Report</button><button id="makePDF">Preview Report</button></div>
         </div>
     </div>

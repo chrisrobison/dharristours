@@ -6,11 +6,12 @@ H3 { font-weight: normal; margin:0; padding:0; color:#666; font-size:.8em;}
 .shortinput { width: 2.71in; border-bottom: 2px solid #666; border-top:0; border-left:0; border-right:0;}
 h2 { font-weight:400; }
 th { text-align: right; text-transform:uppercase; font-weight: normal; }
+.reallyshortinput {
+    width: 14rem;
+}
 .header {
    text-align:left; 
-   line-height:2em; 
    margin-top:1em; 
-   width:7.5in; 
    margin-left:auto;
    margin-right:auto;
 }
@@ -27,8 +28,6 @@ th { text-align: right; text-transform:uppercase; font-weight: normal; }
 #mid th { font-size:1.2em; font-weight:500; }
 #mid .shortinput { width: 2.4in; }
 #checklist {
-   width:7.5in;
-   line-height:1.25em;
    text-align:left;
    margin:1em auto;
    font-size:16px;
@@ -256,17 +255,15 @@ padding-left: .5em;
     color: #66f;
 }
 #perf {
-    font-size: 40px;
+    font-size: 3rem;
     margin: 0px;
     padding: 0px;
-    width:20em;
     color: #ccc;
     text-shadow: -1px -2px 2px rgba(0,0,0,.8);
     border-bottom: 2px dashed #0002;
     position:relative;
     left:-1em;
     margin-bottom: .25em;
-    line-height:1;
 
 }
 .checkbox {
@@ -278,7 +275,6 @@ padding-left: .5em;
     border-radius:4px;
     content:"";
     position:relative;
-    line-height:1;
     float:left;
     top:-.5em;
     left:-.5em;
@@ -358,7 +354,7 @@ justify-content: flex-start;
 .font_14 { font-family: 'Whisper'; font-size: 48px !important;}
 .font_15 { font-family: 'WindSong'; font-size: 36px; }
 #SignatureDate {
-    width: 5em;
+    width: 6em;
 }
 
 .preview {
@@ -487,7 +483,6 @@ justify-content:center;
 }
 .preview .popup p {
   color: #909090;
-  line-height: 22px;
   padding: 0 20px;
 }
 .preview .btn {
