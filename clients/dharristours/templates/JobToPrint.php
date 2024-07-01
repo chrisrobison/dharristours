@@ -310,7 +310,7 @@ if ($in['ID']) {
                </span>
                <button class='geninvoice'>
                   <i class="fa-solid fa-file-invoice-dollar"></i>
-                  <span id="curdoc"></span>
+                  <span id="curdoc">Create Invoice</span>
                </button>
                <button class='print'><i class="fa-solid fa-print"></i> Print</button>
                <button class='print sendmsg'>Print &amp; Email</button>
@@ -405,7 +405,8 @@ if ($in['ID']) {
                sendto.push(simple.current.ContactEmail);
             }
          }
-         document.querySelector("#curdoc").innerHTML = "Update " + showdoc;
+         showdoc = showdoc.replace(/\sReport/, '');
+         document.querySelector("#curdoc").innerHTML = "Make " + showdoc;
          $("#To").val(sendto.join(","));
 
          localStorage.setItem('curdoc', curdoc);
@@ -595,17 +596,15 @@ if ($in['ID']) {
          return false;
       });
 
+      var chkdoc = localStorage.getItem('curdoc');
       if (location.hash) {
          var curdoc = location.hash.replace(/#/, '');
          localStorage.setItem('curdoc', curdoc);
          $("#what").val(curdoc).change();
-      }
-
-      var chkdoc = localStorage.getItem('curdoc');
-      if (chkdoc) {
+      } else if (chkdoc) {
          $("#what").val(chkdoc);
          viewDoc(chkdoc);
-      }
+      } 
       async function genPDF(what = "InvoiceReport", id) {
          if (id) {
             let query, arg;
