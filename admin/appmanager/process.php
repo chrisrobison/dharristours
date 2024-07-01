@@ -355,14 +355,15 @@
          <legend>Buttons <span id='btncnt' style='color:#ddd'>[<?php print $current->Buttons; ?>]</span></legend>
 <?php  
    $btns = array();
-   $btns["1"] = "New / Copy";
+   $btns["1"] = "New";
    $btns["2"] = "Save";
    $btns["4"] = "Delete";
    $btns["8"] = "Print";
    $btns["16"] = "Import";
    $btns["32"] = "Export";
    $btns["64"] = "Relate";
- 
+   $btns["128"] = "Copy";
+
    foreach ($btns as $bit=>$txt) {
       $chk = (($current->Buttons & $bit) || ($in['x']=='new')) ? "checked='checked'" : '';
       print "<span class='chkopt'><input class='btnbox' type='checkbox' onchange='calcButtons()' value='$bit' id='bit_$bit' $chk> $txt</span>\n";
